@@ -3203,7 +3203,7 @@ function initDraggableMarquee() {
     const tl = horizontalLoop(texts, {
       repeat: -1,
       speed: speed,
-      draggable: true,
+      draggable: index === 0, // Only first marquee (index 0) is draggable
       reversed: false,
       paddingRight: paddingRight
     });
