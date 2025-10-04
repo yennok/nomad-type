@@ -222,7 +222,7 @@
     /* ====== SCROLL BUTTONS ====== */
     .scroll-buttons-section {
       margin: 0 auto 4rem auto;
-      padding: 60px 90px 0;
+      padding: 60px 20px 0;
       border-top: 1px solid black;
       border-bottom: 1px solid black;
     }
@@ -279,24 +279,26 @@
     }
 
     .scroll-btn {
-      font-family: "Safra Sans", sans-serif;
+      font-family: "Safra Mono", monospace;
       font-size: 14px;
       font-weight: 400;
-      padding: 12px 0;
-      border: none;
+      padding: 7px 10px;
+      border: 1px solid #000;
+      background: transparent;
+      color: #000;
       cursor: pointer;
       transition: all 0.3s ease;
+      text-decoration: none;
       border-radius: 4px;
       width: 100%;
       text-align: center;
-      display: block;
+      display: inline-block;
       box-sizing: border-box;
       min-width: 0;
       max-width: none;
       transform-origin: center;
       transform: scale(1);
-      line-height: 1;
-      padding-top: 2px;
+      line-height: 17px;
     }
 
     .scroll-btn.btn-primary {
@@ -306,14 +308,21 @@
     }
 
     .scroll-btn.btn-secondary {
-      background: #fff;
+      background: transparent;
       color: #000;
       border: 1px solid #000;
     }
 
     .scroll-btn:hover {
-      background: #ff0000 !important;
-      color: #fff !important;
+      background: red;
+      color: #fff;
+      border: 1px solid red;
+    }
+
+    .scroll-btn.btn-primary:hover {
+      background: red;
+      color: #fff;
+      border: 1px solid red;
     }
 
     /* Large state when scrolled */
@@ -335,6 +344,21 @@
       transform: scale(1);
       transform-origin: center;
       line-height: 1;
+    }
+
+    /* Prevent scroll buttons from enlarging on mobile */
+    @media (max-width: 768px) {
+      .scroll-buttons.large {
+        height: 200px;
+      }
+      
+      .scroll-buttons.large .scroll-btn {
+        font-size: 14px;
+        padding: 12px 0;
+        min-width: auto;
+        height: auto;
+        border-radius: 0;
+      }
     }
 
 
@@ -1283,7 +1307,7 @@
     /* Responsive adjustments for font intro */
     @media (max-width: 768px) {
       .intro-content {
-        padding: 0 20px;
+        padding: 0;
       }
       
       .intro-grid {
@@ -1308,6 +1332,11 @@
         margin-right: -20px;
       }
       
+      .multilingual-marquee.image-marquee {
+        margin-left: -20px;
+        margin-right: -20px;
+      }
+      
       .marquee-text {
         font-size: 80px;
         margin-right: 15px;
@@ -1316,7 +1345,7 @@
 
     @media (max-width: 480px) {
       .intro-content {
-        padding: 0 10px;
+        padding: 0;
       }
       
       .intro-text-column p {
@@ -1324,8 +1353,13 @@
       }
       
       .multilingual-marquee {
-        margin-left: -10px;
-        margin-right: -10px;
+        margin-left: -20px;
+        margin-right: -20px;
+      }
+      
+      .multilingual-marquee.image-marquee {
+        margin-left: 0;
+        margin-right: 0;
       }
       
       .marquee-text {
@@ -1640,7 +1674,7 @@
 
     @media (max-width: 768px) {
       .in-use-section, .specimen-section {
-        padding: 0 20px;
+        padding: 0;
       }
       
       .in-use-grid {
@@ -1688,6 +1722,82 @@
         gap: 8px; 
       }
       .btn { padding: 7px 10px; font-size: 14px; line-height: 17px; }
+    }
+
+    /* ====== FOOTER RESPONSIVE STYLES ====== */
+    @media (max-width: 768px) {
+      .footer-content-section {
+        padding: 20px;
+      }
+      
+      .footer-content-wrapper {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      .footer-column h3 {
+        font-size: 28px;
+      }
+      
+      .footer-column p {
+        font-size: 16px;
+      }
+      
+      .footer-nav {
+        padding: 20px;
+      }
+      
+      .footer-nav-wrapper {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+      }
+      
+      .footer-linkedin-btn {
+        margin-left: 0;
+        align-self: flex-start;
+      }
+      
+      .footer {
+        padding: 20px;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer-content-section {
+        padding: 20px;
+      }
+      
+      .footer-column h3 {
+        font-size: 24px;
+      }
+      
+      .footer-column p {
+        font-size: 15px;
+      }
+      
+      .footer-nav {
+        padding: 20px;
+      }
+      
+      .footer-nav-link {
+        font-size: 16px;
+      }
+      
+      .footer {
+        padding: 20px;
+      }
+      
+      .footer-left,
+      .footer-right {
+        font-size: 13px;
+      }
     }
   </style>
 </head>
