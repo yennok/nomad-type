@@ -1,0 +1,6 @@
+<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 30C11.0457 30 20 38.9543 20 50V30H0Z" fill="white"/>
+<rect width="30" height="30" transform="matrix(-1 0 0 1 50 0)" fill="white"/>
+<rect width="30" height="20" transform="matrix(-1 0 0 1 50 30)" fill="white"/>
+<rect width="20" height="30" transform="matrix(-1 0 0 1 20 0)" fill="white"/>
+</svg>

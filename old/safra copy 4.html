@@ -1,0 +1,2966 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Safra - Multi Script Typeface</title>
+  <style>
+    :root { --cell-size: 60px; }
+
+    /* ====== FONT FILES ====== */
+    @font-face { font-family: "Sugar Serif"; font-weight: 400; font-style: normal; src: url("fonts/SugarSerif-Regular.woff2") format("woff2"); }
+    @font-face { font-family: "Sugar Sans";  font-weight: 400; font-style: normal; src: url("fonts/SugarSans-Regular.woff2") format("woff2"); }
+    @font-face { font-family: "Safra Sans";  font-weight: 400; font-style: normal; src: url("fonts/SafraSans-Regular.woff2") format("woff2"); }
+    @font-face { font-family: "Safra Sans";  font-weight: 700; font-style: normal; src: url("fonts/SafraSans-Bold.woff2") format("woff2"); }
+    @font-face { font-family: "Safra";       font-weight: 400; font-style: normal; src: url("fonts/Safra-Regular.woff2") format("woff2"); }
+    @font-face { font-family: "Safra";       font-weight: 700; font-style: normal; src: url("fonts/Safra-Bold.woff2") format("woff2"); }
+    @font-face { font-family: "Safra Mono";  font-weight: 400; font-style: normal; src: url("fonts/SafraMono-Mono.woff2") format("woff2"); }
+
+    /* ====== RESET, LAYOUT ====== */
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { margin: 0; padding: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; color: #000; -webkit-font-smoothing: antialiased; }
+
+    /* ====== COVER HEADER ====== */
+    .cover-header { 
+      height: calc(100vh - 120px); 
+      background: #ff0000; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center; 
+      align-items: center; 
+      position: relative; 
+      margin: 30px; 
+      border-radius: 20px; 
+      overflow: hidden; 
+    }
+
+    .parallax-content { 
+      position: relative; 
+      z-index: 2; 
+      transform: translateZ(0); 
+      will-change: transform; 
+    }
+
+    .cover-title { 
+      text-align: center; 
+      margin-bottom: 60px; 
+    }
+
+    .cover-title .arabic { 
+      font-family: "Safra", serif; 
+      font-weight: 300; 
+      font-size: 150px; 
+      line-height: 1; 
+      margin-bottom: 0px; 
+      direction: rtl; 
+      transform: translateZ(0); 
+      will-change: transform; 
+    }
+
+    .cover-title .latin { 
+      font-family: "Safra", sans-serif; 
+      font-weight: 300; 
+      font-size: 150px; 
+      line-height: 1; 
+      margin-bottom: -10px; 
+      transform: translateZ(0); 
+      will-change: transform; 
+      font-kerning: auto;
+      letter-spacing:-4px;
+    }
+
+    .cover-title .hebrew { 
+      font-family: "Safra", serif; 
+      font-weight: 300; 
+      font-size: 150px; 
+      line-height: 1; 
+      transform: translateZ(0); 
+      will-change: transform; 
+      font-kerning: auto;
+      letter-spacing:-7px;
+    }
+
+    .cover-buttons { 
+      position: absolute; 
+      bottom: 29px; 
+      right: 29px; 
+      display: flex; 
+      gap: 0.8rem; 
+      z-index: 1000; 
+      transition: none; 
+    }
+
+    .cover-buttons.sticky { 
+      position: fixed; 
+      top: 29px; 
+      bottom: auto; 
+      right: 29px; 
+    }
+
+    /* ====== INVERT TOGGLE BUTTON ====== */
+    .invert-toggle {
+      position: fixed;
+      top: 30px;
+      left: 30px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #000;
+      color: #fff;
+      border: 1px solid #000;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1001;
+      transition: all 0.3s ease;
+      padding: 0;
+    }
+
+    .invert-toggle:hover {
+      background: #333;
+      transform: scale(1.1);
+    }
+
+    .invert-toggle:active {
+      transform: scale(0.95);
+    }
+
+    .invert-toggle svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* ====== INVERTED STATE ====== */
+    body.inverted {
+      --bg-color: #000;
+      --text-color: #fff;
+      --border-color: #fff;
+      background: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    /* Invert all text and backgrounds */
+    body.inverted * {
+      background-color: var(--bg-color) !important;
+      color: var(--text-color) !important;
+      border-color: var(--border-color) !important;
+    }
+
+    /* Specific element adjustments for inverted state */
+    body.inverted .cover-header {
+      background: var(--bg-color) !important;
+    }
+
+    body.inverted .btn {
+      background: transparent !important;
+      color: var(--text-color) !important;
+      border-color: var(--border-color) !important;
+    }
+
+    body.inverted .btn:hover {
+      background: var(--text-color) !important;
+      color: var(--bg-color) !important;
+    }
+
+    body.inverted .btn-secondary.scrolled {
+      background: var(--text-color) !important;
+      color: var(--bg-color) !important;
+    }
+
+    body.inverted .icon-btn {
+      background: transparent !important;
+      border-color: var(--border-color) !important;
+    }
+
+    body.inverted .icon-btn.is-active {
+      background: var(--text-color) !important;
+      filter: invert(1);
+    }
+
+    body.inverted .invert-toggle {
+      background: var(--text-color) !important;
+      color: var(--bg-color) !important;
+      border-color: var(--text-color) !important;
+    }
+
+    body.inverted .invert-toggle:hover {
+      background: #ccc !important;
+    }
+
+    /* Invert sliders and form controls */
+    body.inverted input[type="range"] {
+      background: var(--bg-color) !important;
+      border-color: var(--border-color) !important;
+    }
+
+    body.inverted input[type="range"]::-webkit-slider-track {
+      background: var(--bg-color) !important;
+      border: 1px solid var(--border-color) !important;
+    }
+
+    body.inverted input[type="range"]::-webkit-slider-thumb {
+      background: var(--text-color) !important;
+      border: 1px solid var(--border-color) !important;
+    }
+
+    body.inverted input[type="range"]::-moz-range-track {
+      background: var(--bg-color) !important;
+      border: 1px solid var(--border-color) !important;
+    }
+
+    body.inverted input[type="range"]::-moz-range-thumb {
+      background: var(--text-color) !important;
+      border: 1px solid var(--border-color) !important;
+    }
+
+    /* Invert select dropdowns */
+    body.inverted select {
+      background: var(--bg-color) !important;
+      color: var(--text-color) !important;
+      border-color: var(--border-color) !important;
+    }
+
+    body.inverted select option {
+      background: var(--bg-color) !important;
+      color: var(--text-color) !important;
+    }
+
+    /* Invert icons (SVG) */
+    body.inverted .icon-btn {
+      filter: invert(1) !important;
+    }
+
+    body.inverted .icon-btn.is-active {
+      filter: invert(1) invert(1) !important; /* Double invert for active state */
+    }
+
+    /* Invert dropdown arrow */
+    body.inverted .font-select {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e") !important;
+    }
+
+    /* Invert form elements */
+    body.inverted .close-btn {
+      filter: invert(1) !important;
+    }
+
+    body.inverted .checkmark {
+      filter: invert(1) !important;
+    }
+
+    /* Preserve photos - no changes needed since we're not using filters */
+
+    /* ====== OVERLAY FORMS ====== */
+    .overlay {
+      position: fixed;
+      top: 0;
+      right: -33.33%;
+      width: 33.33%;
+      height: 100vh;
+      background: #fff;
+      z-index: 2000;
+      transition: right 0.6s ease-in-out;
+      overflow-y: auto;
+      border-left: 1px solid #000;
+    }
+
+    .overlay.active {
+      right: 0;
+    }
+
+    .overlay-content {
+      padding: 2rem 2rem 0 2rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      /*margin-bottom: 2rem;*/
+      height: calc(100vh - 2rem);
+    }
+
+    .trial-form {
+      margin-top: 0.4rem;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .trial-form .form-content {
+      flex: 1;
+    }
+
+    .form-header {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.4rem;
+      /*padding-bottom: 1rem;
+      border-bottom: 1px solid #000;*/
+    }
+
+    .form-header h2 {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0;
+      color: #000;
+    }
+
+    .form-header .hebrew {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .form-header .arabic {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: -1rem;
+      right: -1rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      width: 13px;
+      height: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url('assets/close.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .intro-text {
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      line-height: 1.4;
+      color: #000;
+      margin-bottom: 2rem;
+      margin-top: 0;
+    }
+
+    .trial-form, .buy-form {
+      margin-top: 0.4rem;
+    }
+
+    .form-group {
+      /*margin-bottom: 1.5rem;*/
+    }
+
+    .form-group label {
+      display: block;
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      font-weight: 400;
+      color: #000;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #000;
+      background: transparent;
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      line-height: 1.4;
+      color: #000;
+      padding: 0.9rem 0;
+      outline: none;
+    }
+
+    .form-group input::placeholder {
+      color: transparent;
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+    }
+
+    .form-group {
+      position: relative;
+    }
+
+    .form-group .placeholder-text {
+      position: absolute;
+      top: 48%;
+      left: 0;
+      transform: translateY(-48%);
+      pointer-events: none;
+      color: #000;
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+    }
+
+    .form-group .placeholder-text .asterisk {
+      color: #ff0000;
+    }
+
+    .form-group input:not(:placeholder-shown) + .placeholder-text {
+      opacity: 0;
+    }
+
+    .required {
+      color: #ff0000;
+      margin-left: 2px;
+    }
+
+    .form-group input:focus {
+      border-bottom-color: #ff0000;
+    }
+
+    .form-section {
+      /*margin-bottom: 2rem;*/
+    }
+
+    .form-section h3 {
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      font-weight: 400;
+      color: #000;
+      /*margin-bottom: 1rem;*/
+      margin-top:0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .collapsible-header {
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      font-weight: 400;
+      color: #000;
+      margin-bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      padding: 0.9rem 0;
+    }
+
+    .dropdown-icon {
+      width: 16px;
+      height: 16px;
+      background-image: url('assets/dropdown.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .collapsible-header.active .dropdown-icon {
+      transform: rotate(180deg);
+    }
+
+    .collapsible-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .collapsible-content.active {
+      max-height: 500px;
+    }
+
+    .form-section + .form-section {
+      border-top: 1px solid #000;
+      /*padding-top: 1rem;*/
+    }
+
+
+    .form-section.conditional-consent {
+      border-top: none;
+    }
+
+    /* Website field border */
+    #clientWebsite {
+      border-bottom: 1px solid #000;
+    }
+
+
+    .chevron {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .checkbox-group .checkbox-label:last-child {
+      margin-bottom: 0.9rem;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      line-height: 1.4;
+      color: #000;
+    }
+
+    .checkbox-label input[type="checkbox"] {
+      display: none;
+    }
+
+    .checkmark {
+      width: 16px;
+      height: 16px;
+      position: relative;
+      flex-shrink: 0;
+      background-image: url('assets/checkbox.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .checkbox-label input[type="checkbox"]:checked + .checkmark {
+      background-image: url('assets/checkbox-checked.svg');
+    }
+
+    .checkbox-label input[type="checkbox"][value="entire"]:checked + .checkmark {
+      background-image: url('assets/checkbox-all.svg');
+    }
+
+    /* ====== RADIO BUTTONS ====== */
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .radio-label {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      line-height: 1.4;
+      color: #000;
+    }
+
+    .radio-label input[type="radio"] {
+      display: none;
+    }
+
+    .radio-mark {
+      width: 16px;
+      height: 16px;
+      position: relative;
+      flex-shrink: 0;
+      background-image: url('assets/radio.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .radio-label input[type="radio"]:checked + .radio-mark {
+      background-image: url('assets/radio-checked.svg');
+    }
+
+    /* Override with red color for checked radio */
+    .radio-label input[type="radio"]:checked + .radio-mark::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff0000;
+    }
+
+    /* ====== CONDITIONAL FIELDS ====== */
+    .conditional-fields {
+      margin-top: 0.5rem;
+      /*padding-top: 0.5rem;*/
+      border-top: 1px solid #000;
+    }
+
+    .conditional-consent {
+      margin-top: 1rem;
+      border-top: none;
+    }
+
+  
+
+    
+
+    .consent {
+      align-items: flex-start;
+      margin: 2rem 0;
+    }
+
+    .consent .checkmark {
+      margin-top: 0.2rem;
+    }
+
+    .consent-text {
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      line-height: 1.4;
+      color: #000;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 7px 10px;
+      border: 1px solid #000;
+      background: #000;
+      color: #fff;
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      transition: background 0.2s ease;
+      border-radius: 4px;
+    }
+
+    .submit-btn:hover {
+      background: #ff0000;
+      border: 1px solid red;
+
+    }
+
+    .footer-text {
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      line-height: 1.4;
+      color: #000;
+      margin: 1rem 0 0 0;
+    }
+
+    /* Add extra margin below footer text on smaller window heights */
+    @media (max-height: 600px) {
+      .footer-text {
+        margin-bottom: 2rem;
+      }
+    }
+
+    @media (max-height: 500px) {
+      .footer-text {
+        margin-bottom: 3rem;
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .overlay {
+        width: 100%;
+        right: -100%;
+      }
+    }
+
+    .btn { 
+      padding: 7px 10px; 
+      border: 1px solid #000; 
+      background: transparent; 
+      font-family: "Safra Mono", monospace; 
+      font-size: 14px; 
+      font-weight: 400; 
+      cursor: pointer; 
+      transition: all 0.3s ease; 
+      text-decoration: none; 
+      color: #000; 
+      display: inline-block; 
+      border-radius: 4px; 
+      line-height: 17px;
+    }
+
+    .btn-primary { 
+      background: #000; 
+      color: #fff; 
+    }
+
+    .btn-secondary { 
+      background: transparent; 
+      color: #000; 
+    }
+
+    .btn-secondary.scrolled { 
+      background: #fff; 
+    }
+
+    .btn:hover { 
+      background: red; 
+      color: #fff; 
+      border: 1px solid red; 
+
+    }
+
+    .btn-primary:hover { 
+      background: red; 
+      color: #fff; 
+      border: 1px solid red; 
+    }
+
+    /* ====== CONTENT WRAPPER ====== */
+    .content-wrapper { 
+      background: #fff; 
+      padding: 90px; 
+    }
+
+    /* ====== FONT INTRO SECTION ====== */
+    .font-intro {
+      margin-bottom: 80px;
+    }
+
+    .intro-content {
+      max-width: none;
+      margin: 0;
+      /*padding: 0 90px;*/
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .intro-text-column p {
+      font-family: "Safra", serif;
+      font-size: 18px;
+      line-height: 1.6;
+      text-align: left;
+      margin: 0;
+    }
+
+    .technical-specs-column {
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .specs-list {
+      text-align: left;
+    }
+
+    .spec-line {
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .multilingual-marquee {
+      margin-top: 40px;
+      margin-left: -90px;
+      margin-right: -90px;
+    }
+
+    .marquee-container {
+      overflow: hidden;
+      background: #fff;
+      padding: 20px 0;
+    }
+
+    .marquee-content {
+      display: flex;
+      animation: marquee 35s linear infinite;
+      white-space: nowrap;
+      width: max-content;
+    }
+
+    .marquee-text {
+      font-size: 120px;
+      margin-right: 20px;
+      flex-shrink: 0;
+      letter-spacing:-3.5px;
+    }
+
+    .marquee-text.serif {
+      font-family: "Safra", serif;
+    }
+
+    .marquee-text.sans {
+      font-family: "Safra Sans", sans-serif;
+    }
+
+    .marquee-text.regular {
+      font-weight: 400;
+    }
+
+    .marquee-text.bold {
+      font-weight: 700;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Responsive adjustments for font intro */
+    @media (max-width: 768px) {
+      .intro-content {
+        padding: 0 20px;
+      }
+      
+      .intro-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      .intro-text-column p {
+        font-size: 16px;
+      }
+      
+      .technical-specs-column {
+        justify-content: flex-start;
+      }
+      
+      .specs-list {
+        text-align: left;
+      }
+      
+      .multilingual-marquee {
+        margin-left: -20px;
+        margin-right: -20px;
+      }
+      
+      .marquee-text {
+        font-size: 80px;
+        margin-right: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .intro-content {
+        padding: 0 10px;
+      }
+      
+      .intro-text-column p {
+        font-size: 15px;
+      }
+      
+      .multilingual-marquee {
+        margin-left: -10px;
+        margin-right: -10px;
+      }
+      
+      .marquee-text {
+        font-size: 60px;
+        margin-right: 12px;
+      }
+    }
+
+    /* ====== TYPE TESTER SECTIONS ====== */
+    .type-tester { margin: 0 auto 7rem auto; /*max-width: 1200px;*/ }
+
+    .controls { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.9rem 0; /*border-top: 1px solid #000; */ border-bottom: 1px solid #000; margin-bottom: 6rem; position: relative; z-index: 10; background: #fff; }
+
+    .sliders-wrapper { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+    label.label-custom { font-family: "Safra Mono"; font-size: 14px; letter-spacing: 0; }
+    input[type="range"] { -webkit-appearance: none; appearance: none; width: 140px; background: transparent; cursor: pointer; }
+    input[type="range"]::-webkit-slider-runnable-track { height: 1px; background: #000; }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%; background: #000; margin-top: -5.5px; }
+
+    .font-align-wrapper { display: flex; align-items: center; gap: 0.8rem; }
+    select.font-select { font-family: "Safra Mono"; font-size: 14px; border: 1px solid #000; padding: 7px 10px; appearance: none; background: url('assets/dropdown.svg') no-repeat right 0.5em center; background-size: 1em; min-width: 220px; line-height: 17px; width:100%;}
+
+    .align-buttons { display: flex; gap: 0rem; }
+    .icon-btn { width: 33px; height: 33px; border: 1px solid #000; background-color: #fff; cursor: pointer; background-repeat: no-repeat; background-position: center; background-size: 16px; padding: 0; line-height: 17px; margin-left: -1px; }
+    .icon-btn:first-child { margin-left: 0; }
+    .icon-btn.is-active {  
+      filter: invert(1); 
+      border: 1px solid white;
+    }
+    .align-left  { background-image: url('assets/align-left.svg'); }
+    .align-center{ background-image: url('assets/align-center.svg'); }
+    .align-right { background-image: url('assets/align-right.svg'); }
+
+    .type-area { width: 100%; border: none; outline: none; color: #000; display: block; white-space: pre-wrap; word-break: break-word; background: transparent; font-family: "Safra"; font-weight: 400; font-size: 40px; line-height: 1.6; letter-spacing: 0em; margin-bottom: 2rem; }
+    
+    /* Section 1 specific styling */
+    .type-tester:nth-child(2) .type-area {
+      font-size: 30px;
+      line-height: 1.2;
+    }
+    .type-area::selection { background: yellow; color: black; }
+
+    .column-count-1 { column-count: 1; column-gap: 2rem; }
+    .column-count-2 { column-count: 2; column-gap: 2rem; }
+    .column-count-3 { column-count: 3; column-gap: 2rem; }
+
+    @media (max-width: 900px) { .column-count-2, .column-count-3 { column-count: 1; } .controls { gap: 0.75rem; } }
+
+    /* ====== GLYPH GRID ====== */
+    .wrapper { display: flex; align-items: flex-start; gap: 40px; /*max-width: 1400px;*/ margin: 0 auto 8rem auto; }
+    .left-panel { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: min(calc(var(--cell-size) * 5), 100%); }
+    .preview-box { height: calc(var(--cell-size) * 5); aspect-ratio: 1 / 1; border: 1px solid #000; display: flex; align-items: center; justify-content: center; font-size: calc(var(--cell-size) * 3.3); font-family: "Safra"; overflow: hidden; width: 100%; border-radius: 15px; }
+    .controls-lite, .details { width: 100%; font-size: 14px; margin-top: 0.9rem; }
+    .details { font-family: "Safra Mono", monospace; font-size: 14px; line-height: 1.4; color: black; }
+
+    /* ====== CUSTOM DROPDOWN ====== */
+    .custom-select {
+      position: relative;
+      width: 100%;
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+    }
+
+    .select-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 10px;
+      border: 1px solid #000;
+      background: #fff;
+      cursor: pointer;
+      line-height: 17px;
+      min-height: 33px;
+      min-width: 220px;
+    }
+
+    .select-header:hover {
+      background: #f5f5f5;
+    }
+
+    .select-value {
+      flex: 1;
+    }
+
+    .select-arrow {
+      width: 1em;
+      height: 1em;
+      background: url('assets/dropdown.svg') no-repeat center;
+      background-size: contain;
+    }
+
+    .custom-select.open .select-arrow {
+      background: url('assets/dropdown.svg') no-repeat center;
+      background-size: contain;
+      transform: rotate(180deg);
+    }
+
+    .select-options {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border: 1px solid #000;
+      border-top: none;
+      z-index: 1000;
+      display: none;
+    }
+
+    .custom-select.open .select-options {
+      display: block;
+    }
+
+    .select-option {
+      padding: 7.5px 10px;
+      cursor: pointer;
+      /*border-bottom: 1px solid #000;*/
+      line-height: 17px;
+      transition: background 0.15s ease;
+    }
+
+    .select-option:last-child {
+      border-bottom: none;
+    }
+
+    .select-option:hover {
+      background: #000;
+      color: #fff;
+    }
+    .grid-container { flex: 1; display: flex; flex-direction: column; width: 100%; /*padding-left: 90px; padding-right: 90px;*/ }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--cell-size), 1fr)); border-left: 1px solid #000; border-top: 1px solid #000; width: 100%; }
+    .char-cell { aspect-ratio: 1 / 1; border-right: 1px solid #000; border-bottom: 1px solid #000; display: flex; align-items: center; justify-content: center; cursor: pointer; font-family: "Safra"; font-weight: 400; font-size: calc(var(--cell-size) * 0.53); line-height: 1; transition: background 0.15s ease; }
+    .char-cell:hover { background: #000; color: #fff; }
+
+    @media (max-width: 904px) { .wrapper { flex-direction: column; } .preview-box, .details { display: none; } }
+
+    /* ====== RESPONSIVE SECTION ====== */
+    .responsive-text {
+      transition: font-size 0.3s ease;
+      white-space: nowrap !important; /* Force single line initially */
+    }
+    
+    /* Ensure responsive section text starts as single line */
+    .responsive-section .type-area {
+      white-space: nowrap !important;
+    }
+
+    /* Responsive font sizes will be handled by JavaScript */
+
+    /* ====== IN USE & SPECIMEN SECTIONS ====== */
+    .in-use-section, .specimen-section {
+      margin: 0 auto 7rem auto;
+      /*adding: 0 90px;*/
+    }
+
+    .section-header {
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #000;
+      padding-bottom: 1rem;
+    }
+
+    .section-header h2 {
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      font-weight: 300;
+      margin: 0;
+  
+    }
+
+    .in-use-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .specimen-carousels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .specimen-carousel {
+      position: relative;
+    }
+
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0px;
+      background: #f5f5f5;
+      width: 100%;
+      aspect-ratio: 4/3; /* Default aspect ratio, will be adjusted by JavaScript */
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 2s ease-in-out; /* Left carousel: 2s */
+      height: 100%;
+    }
+
+    /* Right carousel has slower transition */
+    #carousel-b {
+      transition: transform 2.7s ease-in-out; /* Right carousel: 2.7s */
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      flex-shrink: 0;
+      height: 100%;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      margin: 0;
+      padding: 0;
+      border: none;
+      outline: none;
+      vertical-align: top;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+
+    .carousel-indicators {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .indicator {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: transparent;
+      border: 1px solid #000;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .indicator.active {
+      background: transparent;
+      border: 1px solid #000;
+    }
+
+    .indicator.active::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ff0000 !important;
+    }
+
+    .indicator:hover::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: black;
+    }
+
+    .in-use-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0px;
+      background: #f5f5f5;
+    }
+
+    .in-use-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .in-use-item:hover img {
+      transform: scale(1.02);
+    }
+
+    .photo-credit {
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      color: #000;
+      text-align: right;
+      margin-top: 1.5rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1200px) {
+      .in-use-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+      
+      .specimen-carousels {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .in-use-section, .specimen-section {
+        padding: 0 20px;
+      }
+      
+      .in-use-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      
+      .specimen-carousels {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .section-header {
+        margin-bottom: 2rem;
+      }
+    }
+
+    /* ====== RESPONSIVE COVER HEADER ====== */
+    @media (max-width: 768px) {
+      .cover-header { 
+        margin: 20px; 
+        height: calc(100vh - 40px); 
+        border-radius: 12px; 
+      }
+      .cover-title .arabic, .cover-title .latin, .cover-title .hebrew { font-size: 72px; }
+      .cover-buttons { 
+        bottom: 29px; 
+        right: 29px; 
+        gap: 12px; 
+      }
+      .content-wrapper { padding: 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .cover-header { 
+        margin: 10px; 
+        height: calc(100vh - 20px); 
+        border-radius: 8px; 
+      }
+      .cover-title .arabic, .cover-title .latin, .cover-title .hebrew { font-size: 48px; }
+      .cover-buttons { 
+        bottom: 29px; 
+        right: 29px; 
+        flex-direction: column; 
+        gap: 8px; 
+      }
+      .btn { padding: 7px 10px; font-size: 14px; line-height: 17px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====== COVER HEADER ====== -->
+  <header class="cover-header">
+    <div class="parallax-content">
+      <div class="cover-title">
+        <div class="arabic">سفرا</div>
+        <div class="latin">Safra</div>
+        <div class="hebrew">ספרא</div>
+      </div>
+    </div>
+  </header>
+  
+    <!-- ====== STICKY BUTTONS ====== -->
+    <div class="cover-buttons">
+      <button class="btn btn-primary" id="trialBtn">Download Trial</button>
+      <button class="btn btn-secondary" id="buyBtn">Buy Now</button>
+    </div>
+
+    <!-- ====== INVERT BUTTON ====== -->
+    <!--<button class="invert-toggle" id="invertToggle" aria-label="Toggle invert colors">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+      </svg>
+    </button>
+  -->
+  <!-- ====== MAIN CONTENT ====== -->
+  <main class="content-wrapper">
+
+  <!-- ====== FONT INTRO SECTION ====== -->
+  <section class="font-intro">
+    <div class="intro-content">
+      <div class="intro-grid">
+        <div class="intro-text-column">
+          <p>Safra ספרא سفرا is a trilingual typeface family comprising both serif and sans styles. Designed with a contemporary, low-contrast approach, it supports Hebrew, Arabic, and Latin scripts with clear and consistent typesetting across languages. Balancing structural differences while preserving the distinct voice of each script, it enables multilingual communication without forcing uniformity. The design functions as a bridge between writing systems, maintaining typographic integrity and visual harmony. Suitable for both extended reading and display use in cultural, educational, and public contexts.</p>
+        </div>
+        
+        <div class="technical-specs-column">
+          <div class="specs-list">
+            <div class="spec-line">Typeface: Safra</div>
+            <div class="spec-line">Designed by: Safra Team</div>
+            <div class="spec-line">Team: Hugues Gentile, Fanny Hamelin, Fadhl Haqq, Léon Hugues, Jean-Baptiste Morizot, Luke Prowse, Florian Runge, Jolana Sýkorová</div>
+            <div class="spec-line">Additional Engineering: Igino Marini</div>
+            <div class="spec-line">Year: 2024</div>
+            <div class="spec-line">Languages: Supporting 305 latin based languages</div>
+            <div class="spec-line">Formats: TTF, WOFF2 (Autohinted)</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="multilingual-marquee">
+        <div class="marquee-container">
+          <div class="marquee-content">
+            <span class="marquee-text serif regular">Regular רגולר عادي</span>
+            <span class="marquee-text serif bold">Bold בולד عريض</span>
+            <span class="marquee-text sans regular">Sans Regular סנס רגולר سانس عادي</span>
+            <span class="marquee-text sans bold">Sans Bold סנס בולד سانس عريض</span>
+            <span class="marquee-text serif regular">Regular רגולר عادي</span>
+            <span class="marquee-text serif bold">Bold בולד عريض</span>
+            <span class="marquee-text sans regular">Sans Regular סנס רגולר سانس عادي</span>
+            <span class="marquee-text sans bold">Sans Bold סנס בולד سانس عريض</span>
+            
+                      </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === Section 1, multi column text, Serif === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-1">Size</label>
+        <input class="size" id="size-1" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-1">Leading</label>
+        <input class="leading" id="leading-1" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-1">Letter Spacing</label>
+        <input class="spacing" id="spacing-1" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="1">
+            <div class="select-header">
+              <span class="select-value">Safra Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+              <div class="select-option" data-value="Sugar Serif Regular">Sugar Serif Regular</div>
+              <div class="select-option" data-value="Sugar Sans Regular">Sugar Sans Regular</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular" selected>Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular">Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+            <option value="Sugar Serif Regular">Sugar Serif Regular</option>
+            <option value="Sugar Sans Regular">Sugar Sans Regular</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-3" contenteditable="true" dir="ltr" style="font-family: Safra; font-weight: 400;">Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer...
+    </div>
+  </section>
+
+  <!-- === Section 2, large multilingual headline, Sans Bold, centered === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-2">Size</label>
+        <input class="size" id="size-2" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-2">Leading</label>
+        <input class="leading" id="leading-2" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-2">Letter Spacing</label>
+        <input class="spacing" id="spacing-2" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="2">
+            <div class="select-header">
+              <span class="select-value">Safra Sans Bold</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular">Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular">Safra Sans Regular</option>
+            <option value="Safra Sans Bold" selected>Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1" contenteditable="true" dir="rtl" style="font-family: 'Safra Sans'; font-weight: 700; font-size: 244px; line-height: 1; letter-spacing: -0.07em; text-align: center;">שלום مرحبا Hello</div>
+  </section>
+
+  <!-- === Section 3, two columns, Sans Regular, long text === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-3">Size</label>
+        <input class="size" id="size-3" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-3">Leading</label>
+        <input class="leading" id="leading-3" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-3">Letter Spacing</label>
+        <input class="spacing" id="spacing-3" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="3">
+            <div class="select-header">
+              <span class="select-value">Safra Sans Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular">Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular" selected>Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left is-active"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-2" contenteditable="true" dir="ltr" style="font-family: 'Safra Sans'; font-weight: 400; font-size: 18px; line-height: 1.5; letter-spacing: 0.01em;">Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer, songwriter, and actress. Known for her image reinventions and versatility across the entertainment industry, she is an influential figure in popular music. With estimated sales of 124 million records, she is one of the best selling music artists of all time. Publications such as Billboard and Rolling Stone have ranked her among the greatest artists in history.
+
+After signing with Interscope Records in 2007, Gaga achieved global recognition with her debut album, The Fame, 2008, and its reissue, The Fame Monster, 2009. The project scored a string of successful singles, including "Just Dance", "Poker Face", "Bad Romance", "Telephone", and "Alejandro". Her second full length album, Born This Way, 2011, explored electronic rock and techno pop and sold more than one million copies first week. Following her electronic dance music influenced third album, Artpop, 2013, she pursued jazz on Cheek to Cheek, 2014, with Tony Bennett, and delved into soft rock on Joanne, 2016.
+
+Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2015 to 2016, A Star Is Born, 2018, and House of Gucci, 2021. Her contributions to the A Star Is Born soundtrack, which spawned the chart topping single "Shallow", made her the first woman to win an Academy, BAFTA, Golden Globe, and Grammy Award in one year. Gaga returned to dance pop with Chromatica, 2020, then Love for Sale, 2021.
+    </div>
+  </section>
+
+  <!-- === Section 4, responsive sans (duplicate of section 2) === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-4">Size</label>
+        <input class="size" id="size-4" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-4">Leading</label>
+        <input class="leading" id="leading-4" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-4">Letter Spacing</label>
+        <input class="spacing" id="spacing-4" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="4">
+            <div class="select-header">
+              <span class="select-value">Safra Sans Bold</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular">Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular">Safra Sans Regular</option>
+            <option value="Safra Sans Bold" selected>Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+     <div class="type-area column-count-1 responsive-text" contenteditable="true" dir="rtl" style="font-family: 'Safra Sans'; font-weight: 700; font-size: 244px; line-height: 1; letter-spacing: -0.07em; text-align: center; white-space: nowrap;">שלום مرحبا Hello</div>
+  </section>
+
+  <!-- ===== GLYPH GRID VIEWER ===== -->
+  <div class="wrapper" id="fontWrapper">
+    <div class="left-panel">
+      <div class="preview-box" id="preview" style="font-family: Safra; font-weight: 400;">!</div>
+      <div class="controls-lite">
+        <div class="font-wrapper">
+          <div class="custom-select" id="weight-select">
+            <div class="select-header">
+              <span class="select-value">Safra Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+              <div class="select-option" data-value="Sugar Serif Regular">Sugar Serif Regular</div>
+              <div class="select-option" data-value="Sugar Sans Regular">Sugar Sans Regular</div>
+            </div>
+          </div>
+          <!-- Hidden original select for functionality -->
+          <select id="weight" style="display: none;">
+            <option value="Safra Regular" selected>Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular">Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+            <option value="Sugar Serif Regular">Sugar Serif Regular</option>
+            <option value="Sugar Sans Regular">Sugar Sans Regular</option>
+          </select>
+        </div>
+      </div>
+      <div class="details" id="details">Unicode decimal: 33<br>Unicode hex: 0021<br>HTML entity: !</div>
+    </div>
+    <div class="grid-container">
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+
+  <!-- ===== IN USE SECTION ===== -->
+  <section class="in-use-section">
+    <div class="section-header">
+      <h2>Safra ספרא سفرا in Use</h2>
+    </div>
+    <div class="in-use-grid">
+      <div class="in-use-item">
+        <img src="photos/safra/safra in use 1.jpg" alt="Safra typeface in use - application 1" />
+      </div>
+      <div class="in-use-item">
+        <img src="photos/safra/safra in use 2.jpg" alt="Safra typeface in use - application 2" />
+      </div>
+      <div class="in-use-item">
+        <img src="photos/safra/safra in use 3.jpg" alt="Safra typeface in use - application 3" />
+      </div>
+    </div>
+    <div class="photo-credit">
+      Photos by Visvaldas Morkevicius
+    </div>
+  </section>
+
+  <!-- ===== SPECIMEN SECTION ===== -->
+  <section class="specimen-section">
+    <div class="section-header">
+      <h2>Specimen</h2>
+    </div>
+    <div class="specimen-carousels">
+      <!-- Left Carousel -->
+      <div class="specimen-carousel">
+        <div class="carousel-container">
+          <div class="carousel-track" id="carousel-a">
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a1.jpg" alt="Safra specimen A1" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a2.jpg" alt="Safra specimen A2" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a3.jpg" alt="Safra specimen A3" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a4.jpg" alt="Safra specimen A4" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a5.jpg" alt="Safra specimen A5" />
+            </div>
+            <!-- Duplicate all slides for infinite loop -->
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a1.jpg" alt="Safra specimen A1" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a2.jpg" alt="Safra specimen A2" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a3.jpg" alt="Safra specimen A3" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a4.jpg" alt="Safra specimen A4" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a5.jpg" alt="Safra specimen A5" />
+            </div>
+          </div>
+        </div>
+        <div class="carousel-indicators" id="indicators-a">
+          <span class="indicator active" data-slide="0"></span>
+          <span class="indicator" data-slide="1"></span>
+          <span class="indicator" data-slide="2"></span>
+          <span class="indicator" data-slide="3"></span>
+          <span class="indicator" data-slide="4"></span>
+        </div>
+      </div>
+
+      <!-- Right Carousel -->
+      <div class="specimen-carousel">
+        <div class="carousel-container">
+          <div class="carousel-track" id="carousel-b">
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b1.jpg" alt="Safra specimen B1" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b2.jpg" alt="Safra specimen B2" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b3.jpg" alt="Safra specimen B3" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b4.jpg" alt="Safra specimen B4" />
+            </div>
+            <!-- Duplicate all slides for infinite loop -->
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b1.jpg" alt="Safra specimen B1" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b2.jpg" alt="Safra specimen B2" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b3.jpg" alt="Safra specimen B3" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b4.jpg" alt="Safra specimen B4" />
+            </div>
+          </div>
+        </div>
+        <div class="carousel-indicators" id="indicators-b">
+          <span class="indicator active" data-slide="0"></span>
+          <span class="indicator" data-slide="1"></span>
+          <span class="indicator" data-slide="2"></span>
+          <span class="indicator" data-slide="3"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DATA MAPS ===== -->
+  <script type="application/json" id="fontMap">{
+    "Safra Regular": { "family": "Safra", "weight": 400 },
+    "Safra Bold": { "family": "Safra", "weight": 700 },
+    "Safra Sans Regular": { "family": "Safra Sans", "weight": 400 },
+    "Safra Sans Bold": { "family": "Safra Sans", "weight": 700 },
+    "Sugar Serif Regular": { "family": "Sugar Serif", "weight": 400 },
+    "Sugar Sans Regular": { "family": "Sugar Sans", "weight": 400 }
+  }</script>
+
+  <script type="application/json" id="glyphMap">{
+    "default": "!\"#$%&'()*+,-./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+    "Safra2": "0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_{|}~ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzאבגדהוזחטסעפצקרשתابتثجحخدذرزسشصضطظعغفقكلمنهويﺍﺎﺄﺃﺈﺍبﺏﺑﺒتﺕﺗﺘثﺙﺛﺜجﺝﺟﺠحﺡﺣﺤخﺥﺧﺨدﺩﺪذﺫﺬرﺭﺮزﺯﺰسﺱﺳﺴشﺵﺷﺸصﺹﺻﺼضﺽﺿﺾطﻁﻃﻄظﻅﻇﻈعﻉﻋﻌغﻍﻏﻐفﻑﻓﻔقﻕﻗﻘكﻙﻛﻜلﻝﻟﻠمﻡﻣﻤنﻥﻧﻨهﻩﻫﻬوﻭﻮيﻱﻳﻴ"
+  }</script>
+
+  <!-- ===== SCRIPT ===== -->
+  <!-- GSAP for advanced marquee functionality -->
+  <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3/dist/Draggable.min.js"></script>
+  <script src="https://assets.codepen.io/16327/InertiaPlugin.min.js"></script>
+  
+  <script>
+    function updateFontTargets(targets, family, weight) {
+      targets.forEach(el => { el.style.fontFamily = family; el.style.fontWeight = String(weight); });
+    }
+
+    function initTypingControls() {
+      const fontMap = JSON.parse(document.getElementById('fontMap').textContent);
+      document.querySelectorAll('.type-tester').forEach(section => {
+        const textArea = section.querySelector('.type-area');
+        const size = section.querySelector('.size');
+        const leading = section.querySelector('.leading');
+        const spacing = section.querySelector('.spacing');
+        const select = section.querySelector('.font-select');
+        const alignWrap = section.querySelector('.align-buttons');
+
+        if (!textArea) return;
+
+        // Init from computed styles
+        const cs = getComputedStyle(textArea);
+        size.value = parseFloat(cs.fontSize) || 40;
+        leading.value = (parseFloat(cs.lineHeight) / parseFloat(cs.fontSize) || 1.2).toFixed(2);
+        const ls = parseFloat(cs.letterSpacing);
+        spacing.value = isNaN(ls) ? 0 : (ls / parseFloat(cs.fontSize)).toFixed(2);
+
+        // Sliders
+        size.addEventListener('input', () => { textArea.style.fontSize = size.value + 'px'; });
+        leading.addEventListener('input', () => { textArea.style.lineHeight = leading.value; });
+        spacing.addEventListener('input', () => { textArea.style.letterSpacing = spacing.value + 'em'; });
+
+        // Font selector, apply both family and weight
+        const applySelect = () => {
+          const cfg = fontMap[select.value] || { family: 'sans-serif', weight: 400 };
+          textArea.style.fontFamily = cfg.family;
+          textArea.style.fontWeight = String(cfg.weight);
+        };
+        select.addEventListener('change', applySelect);
+        applySelect();
+
+        // Align buttons, delegation
+        if (alignWrap) {
+          alignWrap.addEventListener('click', e => {
+            const btn = e.target.closest('.icon-btn');
+            if (!btn) return;
+            textArea.style.textAlign = btn.dataset.align || 'left';
+            alignWrap.querySelectorAll('.icon-btn').forEach(b => b.classList.toggle('is-active', b === btn));
+          });
+        }
+
+        // Direction auto detect on input
+        const rtlRegex = /[\u0590-\u08FF]/; // Hebrew and Arabic ranges
+        const updateDir = () => {
+          const t = textArea.innerText.trim();
+          const first = t.charAt(0);
+          const dir = rtlRegex.test(first) ? 'rtl' : 'ltr';
+          textArea.setAttribute('dir', dir);
+        };
+        textArea.addEventListener('input', updateDir);
+        updateDir();
+      });
+    }
+
+    function initGlyphGrid() {
+      const grid = document.getElementById('grid');
+      const preview = document.getElementById('preview');
+      const details = document.getElementById('details');
+      const weightSel = document.getElementById('weight');
+      const fontMap = JSON.parse(document.getElementById('fontMap').textContent);
+      const glyphMap = JSON.parse(document.getElementById('glyphMap').textContent);
+
+      const key = 'Safra2';
+      const chars = [...(glyphMap[key] || glyphMap.default || '')];
+      grid.innerHTML = '';
+
+      chars.forEach(ch => {
+        const cell = document.createElement('div');
+        cell.className = 'char-cell';
+        cell.textContent = ch;
+        cell.addEventListener('mouseover', () => {
+          if (preview) preview.textContent = ch;
+          if (details) {
+            const code = ch.codePointAt(0);
+            details.innerHTML = `Unicode decimal: ${code}<br>Unicode hex: ${code.toString(16).toUpperCase().padStart(4,'0')}<br>HTML entity: &#x${code.toString(16).toUpperCase()};`;
+          }
+        });
+        grid.appendChild(cell);
+      });
+
+      const apply = () => {
+        const cfg = fontMap[weightSel.value] || { family: 'sans-serif', weight: 400 };
+        updateFontTargets(document.querySelectorAll('.char-cell'), cfg.family, cfg.weight);
+        if (preview) { preview.style.fontFamily = cfg.family; preview.style.fontWeight = String(cfg.weight); }
+      };
+      
+      // Expose changeWeight function globally for custom dropdown
+      window.changeWeight = (value) => {
+        weightSel.value = value;
+        apply();
+      };
+      
+      weightSel.addEventListener('change', apply);
+      apply();
+    }
+
+    function adjustPreviewHeight() {
+  const sampleCell = document.querySelector('.char-cell');
+  const preview = document.getElementById('preview');
+  const leftPanel = document.querySelector('.left-panel');
+  if (!sampleCell || !preview || !leftPanel) return;
+
+  const cellHeight = sampleCell.offsetHeight;
+  const width = window.innerWidth;
+  let cellCount, panelWidth;
+
+  if (width <= 600) {
+    cellCount = 6;
+    preview.style.width = '100%';
+    leftPanel.style.width = '100%';
+    const previewWidth = leftPanel.offsetWidth;
+    const cellSize = previewWidth / cellCount;
+    preview.style.height = `${cellSize * cellCount}px`;
+  } else {
+    cellCount = width <= 984 ? 3 : width <= 1305 ? 4 : 5;
+    panelWidth = cellHeight * cellCount;
+    preview.style.width = `${panelWidth}px`;
+    preview.style.height = `${cellHeight * cellCount}px`;
+    leftPanel.style.width = `${panelWidth}px`;
+  }
+}
+
+function initParallax() {
+  const arabicText = document.querySelector('.cover-title .arabic');
+  const latinText = document.querySelector('.cover-title .latin');
+  const hebrewText = document.querySelector('.cover-title .hebrew');
+  const secondaryBtn = document.querySelector('.btn-secondary');
+  const coverHeader = document.querySelector('.cover-header');
+  const buttons = document.querySelector('.cover-buttons');
+  
+  if (!arabicText || !latinText || !hebrewText || !secondaryBtn || !coverHeader || !buttons) return;
+
+  function updateParallax() {
+    const scrolled = window.pageYOffset;
+    
+    // Different parallax rates for each line - more prominent effect
+    const arabicRate = scrolled * -0.6;
+    const latinRate = scrolled * -0.4;
+    const hebrewRate = scrolled * -0.2;
+    
+    // Each text line moves at different speeds for dynamic effect
+    arabicText.style.transform = `translateY(${arabicRate}px)`;
+    latinText.style.transform = `translateY(${latinRate}px)`;
+    hebrewText.style.transform = `translateY(${hebrewRate}px)`;
+    
+    // Add white background to secondary button when scrolled past cover
+    const coverBottom = coverHeader.offsetTop + coverHeader.offsetHeight;
+    if (scrolled > coverBottom) {
+      secondaryBtn.classList.add('scrolled');
+    } else {
+      secondaryBtn.classList.remove('scrolled');
+    }
+    
+    // Simple sticky behavior: when buttons reach 29px from top, make them sticky
+    const buttonsRect = buttons.getBoundingClientRect();
+    const headerRect = coverHeader.getBoundingClientRect();
+    
+    // Check if header is visible (gray area appears)
+    const headerIsVisible = headerRect.bottom > 0; // Any part of header is visible
+    
+    // Debug logging
+    console.log('Header debug:', {
+      headerTop: headerRect.top,
+      headerIsVisible: headerIsVisible,
+      buttonsSticky: buttons.classList.contains('sticky'),
+      buttonTop: buttonsRect.top
+    });
+    
+    if (buttonsRect.top <= 29 && !headerIsVisible) {
+      // Buttons reached 29px from top AND header is not visible, make them sticky
+      buttons.classList.add('sticky');
+    } else {
+      // Buttons are above 29px OR header is visible, remove sticky
+      buttons.classList.remove('sticky');
+    }
+  }
+
+  // Throttle scroll events for better performance
+  let ticking = false;
+  function requestTick() {
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  }
+
+  function handleScroll() {
+    ticking = false;
+    requestTick();
+  }
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  
+  // Initial call
+  updateParallax();
+}
+
+// ====== AUTO-FIT SYSTEM ======
+// Reusable auto-fit functionality for any section
+
+class AutoFitManager {
+  constructor() {
+    this.sections = new Map();
+    this.resizeTimeout = null;
+    this.initGlobalListeners();
+  }
+
+  // Initialize a section with auto-fit
+  initSection(sectionElement, options = {}) {
+    const config = {
+      minFontSize: 40,
+      maxFontSize: 512,
+      baseFontSize: 244,
+      baseWidth: 1920,
+      autoFitOnResize: true,
+      autoFitOnFontChange: true,
+      disableOnUserInput: true,
+      ...options
+    };
+
+    const textArea = sectionElement.querySelector('.type-area');
+    const sizeSlider = sectionElement.querySelector('.size');
+    const fontSelect = sectionElement.querySelector('.font-select');
+
+    if (!textArea || !sizeSlider) {
+      console.warn('Auto-fit: Missing required elements (textArea or sizeSlider)');
+      return;
+    }
+
+    const sectionData = {
+      element: sectionElement,
+      textArea,
+      sizeSlider,
+      fontSelect,
+      config,
+      originalText: textArea.textContent || textArea.innerText,
+      autoFitEnabled: true,
+      userHasTyped: false,
+      sliderBeingSetProgrammatically: false
+    };
+
+    this.sections.set(sectionElement, sectionData);
+    this.setupSectionListeners(sectionData);
+    this.updateSectionSize(sectionData);
+
+    console.log('Auto-fit initialized for section:', sectionElement.className);
+  }
+
+  // Calculate optimal font size to fit text in one line
+  calculateFittingSize(sectionData) {
+    const { textArea, config } = sectionData;
+    
+    // Get available width - account for grid padding and margins
+    const containerWidth = textArea.offsetWidth;
+    const computedStyle = getComputedStyle(textArea);
+    const paddingLeft = parseFloat(computedStyle.paddingLeft) || 0;
+    const paddingRight = parseFloat(computedStyle.paddingRight) || 0;
+    
+    // Account for content wrapper padding (90px on each side)
+    const contentWrapper = document.querySelector('.content-wrapper');
+    const wrapperPadding = contentWrapper ? 
+      (parseFloat(getComputedStyle(contentWrapper).paddingLeft) || 0) + 
+      (parseFloat(getComputedStyle(contentWrapper).paddingRight) || 0) : 0;
+    
+    // Add a small buffer to ensure text stays within bounds
+    const buffer = 20; // 20px buffer
+    const availableWidth = containerWidth - paddingLeft - paddingRight - wrapperPadding - buffer;
+
+    console.log('Width calculation:', {
+      containerWidth,
+      paddingLeft,
+      paddingRight,
+      wrapperPadding,
+      buffer,
+      availableWidth
+    });
+
+    const text = textArea.textContent || textArea.innerText;
+    if (!text || !availableWidth) return config.baseFontSize;
+
+    // Create measurement element
+    const tempElement = document.createElement('span');
+    tempElement.style.cssText = `
+      position: absolute;
+      visibility: hidden;
+      white-space: nowrap;
+      font-family: ${computedStyle.fontFamily};
+      font-weight: ${computedStyle.fontWeight};
+      letter-spacing: ${computedStyle.letterSpacing};
+      font-size: 100px;
+    `;
+    tempElement.textContent = text;
+    document.body.appendChild(tempElement);
+
+    // Calculate ratio and fitting size
+    const textWidthAt100px = tempElement.offsetWidth;
+    const ratio = textWidthAt100px / 100;
+    const fittingSize = Math.floor(availableWidth / ratio);
+    const clampedSize = Math.max(config.minFontSize, Math.min(config.maxFontSize, fittingSize));
+
+    // Binary search for precision
+    let minSize = Math.max(config.minFontSize, clampedSize - 20);
+    let maxSize = Math.min(config.maxFontSize, clampedSize + 20);
+    let bestSize = clampedSize;
+
+    for (let i = 0; i < 10; i++) {
+      if (maxSize - minSize <= 1) break;
+
+      const testSize = Math.floor((minSize + maxSize) / 2);
+      tempElement.style.fontSize = testSize + 'px';
+
+      if (tempElement.offsetWidth <= availableWidth) {
+        bestSize = testSize;
+        minSize = testSize;
+      } else {
+        maxSize = testSize;
+      }
+    }
+
+    document.body.removeChild(tempElement);
+    return bestSize;
+  }
+
+  // Calculate responsive font size based on viewport width
+  calculateResponsiveSize(sectionData) {
+    const { config } = sectionData;
+    const currentWidth = window.innerWidth;
+    const scaleFactor = Math.max(0.2, Math.min(1.0, currentWidth / config.baseWidth));
+    return Math.max(config.minFontSize, Math.round(config.baseFontSize * scaleFactor));
+  }
+
+  // Update section font size and slider
+  updateSectionSize(sectionData, useFitting = true) {
+    const { textArea, sizeSlider, config, autoFitEnabled, userHasTyped } = sectionData;
+
+    if (!autoFitEnabled || userHasTyped) return;
+
+    const newSize = useFitting ? 
+      this.calculateFittingSize(sectionData) : 
+      this.calculateResponsiveSize(sectionData);
+
+    textArea.style.fontSize = newSize + 'px';
+    
+    // Update slider without triggering manual mode
+    sectionData.sliderBeingSetProgrammatically = true;
+    sizeSlider.value = newSize;
+    sectionData.sliderBeingSetProgrammatically = false;
+  }
+
+  // Setup event listeners for a section
+  setupSectionListeners(sectionData) {
+    const { textArea, sizeSlider, fontSelect, config } = sectionData;
+
+    // Text input detection
+    if (config.disableOnUserInput) {
+      textArea.addEventListener('input', () => this.checkTextChange(sectionData));
+      textArea.addEventListener('paste', () => {
+        setTimeout(() => this.checkTextChange(sectionData), 10);
+      });
+    }
+
+    // Slider interaction detection
+    sizeSlider.addEventListener('mousedown', () => {
+      if (sectionData.autoFitEnabled && !sectionData.userHasTyped) {
+        sectionData.autoFitEnabled = false;
+        console.log('Auto-fit disabled: User started adjusting slider');
+      }
+    });
+
+    sizeSlider.addEventListener('input', () => {
+      if (!sectionData.sliderBeingSetProgrammatically && 
+          sectionData.autoFitEnabled && !sectionData.userHasTyped) {
+        sectionData.autoFitEnabled = false;
+        console.log('Auto-fit disabled: User adjusted slider');
+      }
+      textArea.style.fontSize = sizeSlider.value + 'px';
+    });
+
+    // Font change detection
+    if (fontSelect && config.autoFitOnFontChange) {
+      fontSelect.addEventListener('change', () => {
+        setTimeout(() => this.updateSectionSize(sectionData), 10);
+        setTimeout(() => this.updateSectionSize(sectionData), 100);
+        setTimeout(() => this.updateSectionSize(sectionData), 300);
+      });
+    }
+
+    // Style change detection
+    const observer = new MutationObserver(() => {
+      setTimeout(() => this.updateSectionSize(sectionData), 50);
+    });
+
+    observer.observe(textArea, {
+      attributes: true,
+      attributeFilter: ['style', 'class']
+    });
+  }
+
+  // Check if text has changed from original
+  checkTextChange(sectionData) {
+    const { textArea, originalText } = sectionData;
+    const currentText = textArea.textContent || textArea.innerText;
+    const hasChanged = currentText !== originalText;
+
+    if (hasChanged && !sectionData.userHasTyped) {
+      sectionData.userHasTyped = true;
+      sectionData.autoFitEnabled = false;
+      console.log('Auto-fit disabled: User typed new text');
+    } else if (!hasChanged && sectionData.userHasTyped) {
+      sectionData.userHasTyped = false;
+      sectionData.autoFitEnabled = true;
+      console.log('Auto-fit re-enabled: Text restored to original');
+    }
+  }
+
+  // Global resize handler
+  initGlobalListeners() {
+    window.addEventListener('resize', () => {
+      clearTimeout(this.resizeTimeout);
+      this.resizeTimeout = setTimeout(() => {
+        this.sections.forEach((sectionData) => {
+          if (sectionData.config.autoFitOnResize) {
+            this.updateSectionSize(sectionData);
+          }
+        });
+      }, 16);
+    });
+  }
+
+  // Public methods for manual control
+  enableAutoFit(sectionElement) {
+    const sectionData = this.sections.get(sectionElement);
+    if (sectionData) {
+      sectionData.autoFitEnabled = true;
+      sectionData.userHasTyped = false;
+      this.updateSectionSize(sectionData);
+    }
+  }
+
+  disableAutoFit(sectionElement) {
+    const sectionData = this.sections.get(sectionElement);
+    if (sectionData) {
+      sectionData.autoFitEnabled = false;
+    }
+  }
+
+  resetToOriginal(sectionElement) {
+    const sectionData = this.sections.get(sectionElement);
+    if (sectionData) {
+      sectionData.textArea.textContent = sectionData.originalText;
+      this.enableAutoFit(sectionElement);
+    }
+  }
+}
+
+// Global auto-fit manager instance
+const autoFitManager = new AutoFitManager();
+
+function initResponsiveSection() {
+  const responsiveSection = document.querySelector('.responsive-section');
+  if (!responsiveSection) {
+    console.log('Responsive section not found');
+    return;
+  }
+
+  // Initialize with auto-fit
+  autoFitManager.initSection(responsiveSection, {
+    minFontSize: 40,
+    maxFontSize: 244,
+    baseFontSize: 244,
+    baseWidth: 1920
+  });
+
+  // Force immediate auto-fit on page load (multiple attempts to catch it early)
+  setTimeout(() => {
+    const sectionData = autoFitManager.sections.get(responsiveSection);
+    if (sectionData) {
+      console.log('Immediate auto-fit on page load');
+      autoFitManager.updateSectionSize(sectionData);
+    }
+  }, 0);
+
+  setTimeout(() => {
+    const sectionData = autoFitManager.sections.get(responsiveSection);
+    if (sectionData) {
+      console.log('Delayed auto-fit on page load');
+      autoFitManager.updateSectionSize(sectionData);
+    }
+  }, 100);
+
+  setTimeout(() => {
+    const sectionData = autoFitManager.sections.get(responsiveSection);
+    if (sectionData) {
+      console.log('Final auto-fit on page load');
+      autoFitManager.updateSectionSize(sectionData);
+    }
+  }, 300);
+
+  // Add global functions for testing
+  window.testAutoFit = () => {
+    autoFitManager.updateSectionSize(autoFitManager.sections.get(responsiveSection));
+  };
+
+  window.resetAutoFit = () => {
+    autoFitManager.resetToOriginal(responsiveSection);
+  };
+
+  // Add carousel testing functions
+  window.testCarousel = (carouselId) => {
+    const track = document.getElementById(carouselId);
+    if (track) {
+      console.log(`Testing carousel ${carouselId}`);
+      track.style.transform = 'translateX(-100%)';
+      setTimeout(() => {
+        track.style.transform = 'translateX(0%)';
+      }, 1000);
+    }
+  };
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && e.key === 'F') {
+      e.preventDefault();
+      window.testAutoFit();
+    }
+    if (e.ctrlKey && e.shiftKey && e.key === 'R') {
+      e.preventDefault();
+      window.resetAutoFit();
+    }
+  });
+}
+
+// ====== CAROUSEL FUNCTIONALITY ======
+function initCarousels() {
+  const carousels = [
+    { 
+      track: 'carousel-a', 
+      indicators: 'indicators-a', 
+      totalSlides: 5,
+      interval: 7500, // 7.5 seconds for left carousel
+      delay: 2000 // 2 second delay for left carousel
+    },
+    { 
+      track: 'carousel-b', 
+      indicators: 'indicators-b', 
+      totalSlides: 4,
+      interval: 5500, // 5.5 seconds for right carousel
+      delay: 4500 // 4.5 second delay for right carousel
+    }
+  ];
+
+  carousels.forEach(carousel => {
+    const track = document.getElementById(carousel.track);
+    const indicators = document.getElementById(carousel.indicators);
+    const container = track.closest('.carousel-container');
+    
+    if (!track || !indicators || !container) return;
+
+    // Set aspect ratio and ensure all images are loaded before starting carousel
+    const allImages = track.querySelectorAll('img');
+    let loadedImages = 0;
+    let aspectRatioSet = false;
+    
+    function setAspectRatio(img) {
+      if (!aspectRatioSet && img.naturalWidth > 0 && img.naturalHeight > 0) {
+        const aspectRatio = img.naturalWidth / img.naturalHeight;
+        container.style.aspectRatio = `${aspectRatio}`;
+        console.log(`Carousel ${carousel.track}: Aspect ratio set to ${aspectRatio}`);
+        aspectRatioSet = true;
+      }
+    }
+    
+    allImages.forEach(img => {
+      if (img.complete && img.naturalWidth > 0) {
+        loadedImages++;
+        setAspectRatio(img);
+      } else {
+        img.onload = () => {
+          loadedImages++;
+          setAspectRatio(img);
+          if (loadedImages === allImages.length) {
+            console.log(`Carousel ${carousel.track}: All images loaded`);
+          }
+        };
+        img.onerror = () => {
+          loadedImages++;
+          console.warn(`Carousel ${carousel.track}: Image failed to load: ${img.src}`);
+          if (loadedImages === allImages.length) {
+            console.log(`Carousel ${carousel.track}: All images processed`);
+          }
+        };
+      }
+    });
+    
+    // Fallback: if no aspect ratio is set after 2 seconds, use default
+    setTimeout(() => {
+      if (!aspectRatioSet) {
+        container.style.aspectRatio = '4/3'; // Default fallback
+        console.log(`Carousel ${carousel.track}: Using default aspect ratio 4/3`);
+      }
+    }, 2000);
+
+    let currentSlide = 0;
+    let autoPlayInterval;
+
+    function updateCarousel() {
+      const translateX = -currentSlide * 100;
+      track.style.transform = `translateX(${translateX}%)`;
+      
+      // Update indicators (only show indicators for original slides)
+      const indicatorElements = indicators.querySelectorAll('.indicator');
+      const indicatorIndex = currentSlide % carousel.totalSlides;
+      indicatorElements.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === indicatorIndex);
+      });
+    }
+
+    function nextSlide() {
+      currentSlide++;
+      console.log(`Carousel ${carousel.track}: Moving to slide ${currentSlide}`);
+      
+      // When we reach the end of the original slides, jump to the duplicate set
+      if (currentSlide >= carousel.totalSlides) {
+        console.log(`Carousel ${carousel.track}: Reached end, jumping to duplicates`);
+        updateCarousel();
+        
+        // After transition completes, reset to beginning seamlessly
+        const transitionDuration = carousel.track === 'carousel-b' ? 2700 : 2000; // 2.7s for right, 2s for left
+        setTimeout(() => {
+          currentSlide = 0;
+          track.style.transition = 'none'; // Disable transition for instant jump
+          updateCarousel();
+          // Re-enable transition after a brief delay
+          setTimeout(() => {
+            const transitionSpeed = carousel.track === 'carousel-b' ? '2.7s' : '2s';
+            track.style.transition = `transform ${transitionSpeed} ease-in-out`;
+          }, 10);
+        }, transitionDuration); // Wait for the transition to complete
+      } else {
+        updateCarousel();
+      }
+    }
+
+    function goToSlide(slideIndex) {
+      currentSlide = slideIndex;
+      updateCarousel();
+    }
+
+    // Auto-play functionality
+    function startAutoPlay() {
+      autoPlayInterval = setInterval(nextSlide, carousel.interval);
+    }
+
+    function stopAutoPlay() {
+      clearInterval(autoPlayInterval);
+    }
+
+    // Indicator click handlers
+    const indicatorElements = indicators.querySelectorAll('.indicator');
+    indicatorElements.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        goToSlide(index);
+        stopAutoPlay();
+        startAutoPlay(); // Restart auto-play after manual interaction
+      });
+    });
+
+    // Pause on hover
+    const carouselContainer = track.closest('.carousel-container');
+    if (carouselContainer) {
+      carouselContainer.addEventListener('mouseenter', stopAutoPlay);
+      carouselContainer.addEventListener('mouseleave', startAutoPlay);
+    }
+
+    // Initialize
+    updateCarousel();
+    
+    // Start auto-play with delay for right carousel
+    if (carousel.delay > 0) {
+      setTimeout(() => {
+        console.log(`Starting carousel ${carousel.track} with ${carousel.interval}ms interval`);
+        startAutoPlay();
+      }, carousel.delay);
+    } else {
+      console.log(`Starting carousel ${carousel.track} with ${carousel.interval}ms interval`);
+      startAutoPlay();
+    }
+  });
+}
+
+// ====== INVERT TOGGLE FUNCTIONALITY ======
+function initInvertToggle() {
+  const invertToggle = document.getElementById('invertToggle');
+  const body = document.body;
+  
+  if (!invertToggle) return;
+  
+  // Check if inverted state is saved in localStorage
+  const isInverted = localStorage.getItem('safra-inverted') === 'true';
+  if (isInverted) {
+    body.classList.add('inverted');
+  }
+  
+  invertToggle.addEventListener('click', function() {
+    body.classList.toggle('inverted');
+    
+    // Save state to localStorage
+    const isCurrentlyInverted = body.classList.contains('inverted');
+    localStorage.setItem('safra-inverted', isCurrentlyInverted.toString());
+    
+    console.log('Invert toggle:', isCurrentlyInverted ? 'ON' : 'OFF');
+  });
+}
+
+// ====== CUSTOM DROPDOWN FUNCTIONALITY ======
+function initCustomDropdown() {
+  // Initialize all custom dropdowns
+  const customSelects = document.querySelectorAll('.custom-select');
+  
+  customSelects.forEach(customSelect => {
+    const selectHeader = customSelect.querySelector('.select-header');
+    const selectValue = customSelect.querySelector('.select-value');
+    const selectOptions = customSelect.querySelectorAll('.select-option');
+    const section = customSelect.getAttribute('data-section');
+
+    // Toggle dropdown
+    selectHeader.addEventListener('click', function(e) {
+      e.stopPropagation();
+      customSelect.classList.toggle('open');
+    });
+
+    // Handle option selection
+    selectOptions.forEach(option => {
+      option.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const value = this.getAttribute('data-value');
+        const text = this.textContent;
+        
+        // Update display value
+        selectValue.textContent = text;
+        
+        // Close dropdown
+        customSelect.classList.remove('open');
+        
+        // Find and trigger the corresponding hidden select
+        const hiddenSelect = customSelect.parentElement.querySelector('.font-select');
+        if (hiddenSelect) {
+          hiddenSelect.value = value;
+          hiddenSelect.dispatchEvent(new Event('change'));
+        }
+        
+        // Special handling for glyph grid
+        if (customSelect.id === 'weight-select') {
+          if (window.changeWeight) {
+            window.changeWeight(value);
+          }
+        }
+      });
+    });
+  });
+
+  // Close all dropdowns when clicking outside
+  document.addEventListener('click', function(e) {
+    customSelects.forEach(customSelect => {
+      if (!customSelect.contains(e.target)) {
+        customSelect.classList.remove('open');
+      }
+    });
+  });
+}
+
+// ====== OVERLAY FORMS FUNCTIONALITY ======
+function initOverlayForms() {
+  const trialBtn = document.getElementById('trialBtn');
+  const buyBtn = document.getElementById('buyBtn');
+  const trialOverlay = document.getElementById('trialOverlay');
+  const buyOverlay = document.getElementById('buyOverlay');
+  const closeTrial = document.getElementById('closeTrial');
+  const closeBuy = document.getElementById('closeBuy');
+
+  // Open trial form
+  if (trialBtn && trialOverlay) {
+    trialBtn.addEventListener('click', function() {
+      trialOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  }
+
+  // Open buy form
+  if (buyBtn && buyOverlay) {
+    buyBtn.addEventListener('click', function() {
+      buyOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  }
+
+  // Close trial form
+  if (closeTrial && trialOverlay) {
+    closeTrial.addEventListener('click', function() {
+      trialOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  }
+
+  // Close buy form
+  if (closeBuy && buyOverlay) {
+    closeBuy.addEventListener('click', function() {
+      buyOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  }
+
+  // Close overlays when clicking outside
+  document.addEventListener('click', function(e) {
+    if (trialOverlay && trialOverlay.classList.contains('active')) {
+      if (!trialOverlay.contains(e.target) && !trialBtn.contains(e.target)) {
+        trialOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+    
+    if (buyOverlay && buyOverlay.classList.contains('active')) {
+      if (!buyOverlay.contains(e.target) && !buyBtn.contains(e.target)) {
+        buyOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+  });
+
+  // Close overlays with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      if (trialOverlay && trialOverlay.classList.contains('active')) {
+        trialOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      if (buyOverlay && buyOverlay.classList.contains('active')) {
+        buyOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+  });
+
+  // Form submission handlers
+  const trialForm = document.querySelector('.trial-form');
+  const buyForm = document.querySelector('.buy-form');
+
+  if (trialForm) {
+    trialForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Handle trial form submission
+      console.log('Trial form submitted');
+      // You can add your form submission logic here
+    });
+  }
+
+  if (buyForm) {
+    buyForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Handle buy form submission
+      console.log('Buy form submitted');
+      // You can add your form submission logic here
+    });
+  }
+}
+
+// ====== COLLAPSIBLE SECTIONS ======
+function initCollapsibleSections() {
+  const collapsibleHeaders = document.querySelectorAll('.collapsible-header');
+  
+  collapsibleHeaders.forEach(header => {
+    header.addEventListener('click', function() {
+      const content = this.nextElementSibling;
+      const isActive = this.classList.contains('active');
+      
+      // Toggle active class on header
+      this.classList.toggle('active');
+      
+      // Toggle active class on content
+      content.classList.toggle('active');
+    });
+  });
+}
+
+// ====== CHECKBOX FUNCTIONALITY ======
+function initCheckboxLogic() {
+  // Find all family checkboxes in the buy form
+  const buyForm = document.querySelector('.buy-form');
+  if (!buyForm) return;
+
+  const fullFamilyCheckbox = buyForm.querySelector('input[name="family"][value="entire"]');
+  const individualCheckboxes = buyForm.querySelectorAll('input[name="family"]:not([value="entire"])');
+
+  if (!fullFamilyCheckbox || individualCheckboxes.length === 0) return;
+
+  // When "Full Family" is checked/unchecked, check/uncheck all individual options
+  fullFamilyCheckbox.addEventListener('change', function() {
+    individualCheckboxes.forEach(checkbox => {
+      checkbox.checked = this.checked;
+    });
+  });
+
+  // When any individual option is unchecked, uncheck "Full Family"
+  individualCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+      if (!this.checked) {
+        fullFamilyCheckbox.checked = false;
+      } else {
+        // If all individual options are checked, check "Full Family"
+        const allChecked = Array.from(individualCheckboxes).every(cb => cb.checked);
+        if (allChecked) {
+          fullFamilyCheckbox.checked = true;
+        }
+      }
+    });
+  });
+}
+
+// ====== TRIAL FORM CONDITIONAL LOGIC ======
+function initTrialFormLogic() {
+  const useTypeRadios = document.querySelectorAll('input[name="useType"]');
+  const clientFields = document.getElementById('clientFields');
+  const studentFields = document.getElementById('studentFields');
+  const clientConsent = document.getElementById('clientConsent');
+  const studentConsent = document.getElementById('studentConsent');
+
+  if (!useTypeRadios.length || !clientFields || !studentFields) return;
+
+  useTypeRadios.forEach(radio => {
+    radio.addEventListener('change', function() {
+      // Hide all conditional sections first
+      clientFields.style.display = 'none';
+      studentFields.style.display = 'none';
+      clientConsent.style.display = 'none';
+      studentConsent.style.display = 'none';
+
+      // Show relevant sections based on selection
+      if (this.value === 'client') {
+        clientFields.style.display = 'block';
+        clientConsent.style.display = 'block';
+      } else if (this.value === 'student') {
+        studentFields.style.display = 'block';
+        studentConsent.style.display = 'block';
+      }
+    });
+  });
+}
+
+// ====== GSAP DRAGGABLE MARQUEE ======
+function initDraggableMarquee() {
+  const marqueeContent = document.querySelector('.marquee-content');
+  if (!marqueeContent || typeof gsap === 'undefined') return;
+
+  const texts = marqueeContent.querySelectorAll('.marquee-text');
+  if (texts.length === 0) return;
+
+  // Create horizontal loop with GSAP
+  const tl = horizontalLoop(texts, {
+    repeat: -1,
+    speed: 0.1,
+    draggable: true,
+    reversed: false,
+    paddingRight: 20
+  });
+
+  // Add hover stop functionality
+  texts.forEach(text => {
+    text.addEventListener("mouseenter", () => {
+      gsap.to(tl, {timeScale: 0, overwrite: true, duration: 0.5});
+    });
+    text.addEventListener("mouseleave", () => {
+      gsap.to(tl, {timeScale: 1, overwrite: true, duration: 0.5});
+    });
+  });
+
+  // GSAP Horizontal Loop function (from CodePen example)
+  function horizontalLoop(items, config) {
+    items = gsap.utils.toArray(items);
+    config = config || {};
+    let tl = gsap.timeline({repeat: config.repeat, paused: config.paused, defaults: {ease: "none"}, onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)}),
+        length = items.length,
+        startX = items[0].offsetLeft,
+        times = [],
+        widths = [],
+        xPercents = [],
+        curIndex = 0,
+        pixelsPerSecond = (config.speed || 1) * 100,
+        snap = config.snap === false ? v => v : gsap.utils.snap(config.snap || 1),
+        populateWidths = () => items.forEach((el, i) => {
+          widths[i] = parseFloat(gsap.getProperty(el, "width", "px"));
+          xPercents[i] = snap(parseFloat(gsap.getProperty(el, "x", "px")) / widths[i] * 100 + gsap.getProperty(el, "xPercent"));
+        }),
+        getTotalWidth = () => items[length-1].offsetLeft + xPercents[length-1] / 100 * widths[length-1] - startX + items[length-1].offsetWidth * gsap.getProperty(items[length-1], "scaleX") + (parseFloat(config.paddingRight) || 0),
+        totalWidth, curX, distanceToStart, distanceToLoop, item, i;
+    
+    populateWidths();
+    gsap.set(items, {
+      xPercent: i => xPercents[i]
+    });
+    gsap.set(items, {x: 0});
+    totalWidth = getTotalWidth();
+    
+    for (i = 0; i < length; i++) {
+      item = items[i];
+      curX = xPercents[i] / 100 * widths[i];
+      distanceToStart = item.offsetLeft + curX - startX;
+      distanceToLoop = distanceToStart + widths[i] * gsap.getProperty(item, "scaleX");
+      tl.to(item, {xPercent: snap((curX - distanceToLoop) / widths[i] * 100), duration: distanceToLoop / pixelsPerSecond}, 0)
+        .fromTo(item, {xPercent: snap((curX - distanceToLoop + totalWidth) / widths[i] * 100)}, {xPercent: xPercents[i], duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond, immediateRender: false}, distanceToLoop / pixelsPerSecond)
+        .add("label" + i, distanceToStart / pixelsPerSecond);
+      times[i] = distanceToStart / pixelsPerSecond;
+    }
+    
+    function toIndex(index, vars) {
+      vars = vars || {};
+      (Math.abs(index - curIndex) > length / 2) && (index += index > curIndex ? -length : length);
+      let newIndex = gsap.utils.wrap(0, length, index),
+          time = times[newIndex];
+      if (time > tl.time() !== index > curIndex) {
+        vars.modifiers = {time: gsap.utils.wrap(0, tl.duration())};
+        time += tl.duration() * (index > curIndex ? 1 : -1);
+      }
+      curIndex = newIndex;
+      vars.overwrite = true;
+      return tl.tweenTo(time, vars);
+    }
+    
+    tl.next = vars => toIndex(curIndex+1, vars);
+    tl.previous = vars => toIndex(curIndex-1, vars);
+    tl.current = () => curIndex;
+    tl.toIndex = (index, vars) => toIndex(index, vars);
+    tl.updateIndex = () => curIndex = Math.round(tl.progress() * (items.length - 1));
+    tl.times = times;
+    tl.progress(1, true).progress(0, true);
+    
+    if (config.reversed) {
+      tl.vars.onReverseComplete();
+      tl.reverse();
+    }
+    
+    if (config.draggable && typeof(Draggable) === "function") {
+      let proxy = document.createElement("div"),
+          wrap = gsap.utils.wrap(0, 1),
+          ratio, startProgress, draggable, dragSnap, roundFactor,
+          align = () => tl.progress(wrap(startProgress + (draggable.startX - draggable.x) * ratio)),
+          syncIndex = () => tl.updateIndex();
+      
+      draggable = Draggable.create(proxy, {
+        trigger: items[0].parentNode,
+        type: "x",
+        onPress() {
+          startProgress = tl.progress();
+          tl.progress(0);
+          populateWidths();
+          totalWidth = getTotalWidth();
+          ratio = 1 / totalWidth;
+          dragSnap = totalWidth / items.length;
+          roundFactor = Math.pow(10, ((dragSnap + "").split(".")[1] || "").length);
+          tl.progress(startProgress);
+        },
+        onDrag: align,
+        onThrowUpdate: align,
+        inertia: true,
+        snap: value => {
+          let n = Math.round(parseFloat(value) / dragSnap) * dragSnap * roundFactor;
+          return (n - n % 1) / roundFactor;
+        },
+        onRelease: syncIndex,
+        onThrowComplete: () => gsap.set(proxy, {x: 0}) && syncIndex()
+      })[0];
+    }
+    
+    return tl;
+  }
+}
+
+function boot() { 
+  initTypingControls(); 
+  initGlyphGrid(); 
+  adjustPreviewHeight(); 
+  initParallax();
+  initResponsiveSection();
+  initCarousels();
+  initInvertToggle();
+  initCustomDropdown();
+  initOverlayForms();
+  initCollapsibleSections();
+  initCheckboxLogic();
+  initTrialFormLogic();
+  initDraggableMarquee();
+  
+  // Additional immediate auto-fit for responsive section
+  setTimeout(() => {
+    const responsiveSection = document.querySelector('.responsive-section');
+    if (responsiveSection) {
+      const textArea = responsiveSection.querySelector('.responsive-text');
+      if (textArea) {
+        // Force single line and trigger auto-fit
+        textArea.style.whiteSpace = 'nowrap';
+        
+        const sectionData = autoFitManager.sections.get(responsiveSection);
+        if (sectionData) {
+          console.log('Emergency auto-fit triggered');
+          autoFitManager.updateSectionSize(sectionData);
+        }
+      }
+    }
+  }, 50);
+}
+
+document.addEventListener('DOMContentLoaded', boot); 
+window.addEventListener('resize', () => {
+  adjustPreviewHeight();
+  // The responsive section resize is handled within initResponsiveSection
+});
+  </script>
+
+  </main>
+
+<!-- ====== OVERLAY FORMS ====== -->
+<!-- Trial Download Form -->
+<div class="overlay" id="trialOverlay">
+  <div class="overlay-content">
+    <div class="form-header">
+      <h2>Download  Safra ספרא سفرا</h2>
+      <button class="close-btn" id="closeTrial"></button>
+    </div>
+    
+    <form class="trial-form">
+      <div class="form-content">
+        <div class="form-group">
+          <input type="text" id="trialName" name="name" placeholder=" " required>
+          <div class="placeholder-text">Full Name<span class="asterisk">*</span></div>
+        </div>
+        
+        <div class="form-group">
+          <input type="email" id="trialEmail" name="email" placeholder=" " required>
+          <div class="placeholder-text">Email Address<span class="asterisk">*</span></div>
+        </div>
+
+        
+        <div class="form-section collapsible">
+          <h3 class="collapsible-header">
+            <span>Intended Use</span>
+            <span class="dropdown-icon"></span>
+          </h3>
+          <div class="collapsible-content">
+            <div class="radio-group">
+              <label class="radio-label">
+                <input type="radio" name="useType" value="client" required>
+                <span class="radio-mark"></span>
+                Client Project
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="useType" value="student" required>
+                <span class="radio-mark"></span>
+                Student Work
+              </label>
+            </div>
+
+            <!-- Client Project Fields -->
+            <div class="conditional-fields" id="clientFields" style="display: none;">
+              <div class="form-group">
+                <input type="text" id="clientCompany" name="clientCompany" placeholder=" ">
+                <div class="placeholder-text">Name of Company<span class="asterisk">*</span></div>
+              </div>
+              <div class="form-group">
+                <input type="text" id="clientName" name="clientName" placeholder=" ">
+                <div class="placeholder-text">Name of Client</div>
+              </div>
+              <div class="form-group">
+                <input type="url" id="clientWebsite" name="clientWebsite" placeholder=" ">
+                <div class="placeholder-text">Link to website</div>
+              </div>
+            </div>
+
+            <!-- Student Work Fields -->
+            <div class="conditional-fields" id="studentFields" style="display: none;">
+              <div class="form-group">
+                <input type="text" id="institutionName" name="institutionName" placeholder=" ">
+                <div class="placeholder-text">Name of Academic Institution<span class="asterisk">*</span></div>
+              </div>
+              <div class="form-group">
+                <input type="text" id="graduationYear" name="graduationYear" placeholder=" ">
+                <div class="placeholder-text">Year of Graduation<span class="asterisk">*</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Client Consent -->
+        <div class="form-section conditional-consent" id="clientConsent" style="display: none;">
+          <label class="checkbox-label consent">
+            <input type="checkbox" name="consent">
+            <span class="checkmark"></span>
+            <span class="consent-text">I confirm the fonts will only be used for mock-ups or sketches. Any commercial use requires a license via yennok.com.</span>
+          </label>
+        </div>
+
+        <!-- Student Consent -->
+        <div class="form-section conditional-consent" id="studentConsent" style="display: none;">
+          <label class="checkbox-label consent">
+            <input type="checkbox" name="consent">
+            <span class="checkmark"></span>
+            <span class="consent-text">I’ll only use the fonts for school projects. Any commercial use, even during my studies, requires a license from yennok.com.</span>
+          </label>
+        </div>
+        
+        <button type="submit" class="submit-btn">Submit</button>
+      </div>
+      
+      <p class="footer-text">By submitting, I agree to receive occasional updates about new releases (unsubscribe anytime).</p>
+    </form>
+  </div>
+</div>
+
+<!-- Buy Now Form -->
+<div class="overlay" id="buyOverlay">
+  <div class="overlay-content">
+    <div class="form-header">
+      <h2>Buy Safra <span class="hebrew">ספרא</span> <span class="arabic">سفرا</span></h2>
+      <button class="close-btn" id="closeBuy"></button>
+    </div>
+    
+    <p class="intro-text">Interested in using Safra for your project? Share your details and we'll be in touch soon.</p>
+    
+    <form class="buy-form">
+      <div class="form-group">
+        <input type="text" id="buyName" name="name" placeholder=" " required>
+        <div class="placeholder-text">Full Name<span class="asterisk">*</span></div>
+      </div>
+      
+      <div class="form-group">
+        <input type="text" id="buyCompany" name="company" placeholder=" " required>
+        <div class="placeholder-text">Company<span class="asterisk">*</span></div>
+      </div>
+      
+      <div class="form-group">
+        <input type="email" id="buyEmail" name="email" placeholder=" " required>
+        <div class="placeholder-text">Email Address<span class="asterisk">*</span></div>
+      </div>
+      
+      <div class="form-section collapsible">
+        <h3 class="collapsible-header">
+          <span>Select Fonts<span class="required">*</span></span>
+          <span class="dropdown-icon"></span>
+        </h3>
+        <div class="collapsible-content">
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" name="family" value="entire" checked>
+              <span class="checkmark"></span>
+              Full Family (4)
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="family" value="regular" checked>
+              <span class="checkmark"></span>
+              Safra Regular
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="family" value="bold" checked>
+              <span class="checkmark"></span>
+              Safra Bold
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="family" value="sans-regular" checked>
+              <span class="checkmark"></span>
+              Safra Sans Regular
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="family" value="sans-bold" checked>
+              <span class="checkmark"></span>
+              Safra Sans Bold
+            </label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-section collapsible">
+        <h3 class="collapsible-header">
+          <span>Intended Use<span class="required">*</span></span>
+          <span class="dropdown-icon"></span>
+        </h3>
+        <div class="collapsible-content">
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" name="use" value="desktop">
+              <span class="checkmark"></span>
+              Desktop
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="use" value="web">
+              <span class="checkmark"></span>
+              Web
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="use" value="app">
+              <span class="checkmark"></span>
+              App
+            </label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-section">
+        <label class="checkbox-label consent">
+          <input type="checkbox" name="consent">
+          <span class="checkmark"></span>
+          <span class="consent-text">I'm happy to be contacted about Safra licensing and to receive occasional updates. No spam – I can unsubscribe anytime.</span>
+        </label>
+      </div>
+      
+      <button type="submit" class="submit-btn">Send Request</button>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

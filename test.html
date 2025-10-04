@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Shapes Design</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            background: white;
+            overflow: hidden;
+        }
+
+        .top-section {
+            height: 50vh;
+            background: white;
+            position: relative;
+        }
+
+        .svg-shape {
+            position: absolute;
+            top: 0;
+        }
+
+        .svg-shape.left {
+            height: 50px;
+            width: 50px;
+            left: 0;
+            background-image: url('assets/top-left.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .svg-shape.center {
+            height: 30px;
+            width: calc(100vw - 100px);
+            left: 50px;
+            background-color: #0066cc;
+            background-image: url('assets/top-center.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .svg-shape.right {
+            height: 50px;
+            width: 50px;
+            right: 0;
+            background-image: url('assets/top-right.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .bottom-section {
+            height: 50vh;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-section">
+        <div class="svg-shape left"></div>
+        <div class="svg-shape center"></div>
+        <div class="svg-shape right"></div>
+    </div>
+    
+    <div class="bottom-section"></div>
+</body>
+</html>
