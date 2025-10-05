@@ -19,7 +19,7 @@
     /* ====== RESET, LAYOUT ====== */
     * { box-sizing: border-box; }
     html, body { height: 100%; }
-    body { margin: 0; padding: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; color: #000; -webkit-font-smoothing: antialiased; }
+    body { margin: 0; padding: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; color: #000; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
     /* ====== STICKY TOP SECTION ====== */
     .sticky-top-section {
@@ -222,7 +222,7 @@
     /* ====== SCROLL BUTTONS ====== */
     .scroll-buttons-section {
       margin: 0 auto 4rem auto;
-      padding: 60px 20px 0;
+      padding: 60px 90px 0;
       border-top: 1px solid black;
       border-bottom: 1px solid black;
     }
@@ -239,6 +239,7 @@
     .scroll-buttons-text {
       text-align: center;
       max-width: 930px;
+      width: 100%;
     }
 
     .scroll-buttons-title {
@@ -1166,6 +1167,9 @@
     .content-wrapper { 
       background: #fff; 
       padding: 90px; 
+      overflow-x: hidden;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     /* ====== FONT INTRO SECTION ====== */
@@ -1711,7 +1715,8 @@
         right: 36px; 
         gap: 18px; 
       }
-      .content-wrapper { padding: 18px; }
+      .content-wrapper { display:none;
+        padding: 18px; }
     }
 
     @media (max-width: 480px) {
@@ -1720,7 +1725,7 @@
         height: calc(100vh - 20px); 
         border-radius: 12px; 
       }
-      .cover-title .arabic, .cover-title .latin, .cover-title .hebrew { font-size: 48px; }
+      .cover-title .arabic, .cover-title .latin, .cover-title .hebrew { font-size: 78px; letter-spacing:-2px; }
       .cover-buttons { 
         bottom: 36px; 
         right: 36px; 
@@ -1745,7 +1750,7 @@
       .svg-shape.center {
         height: 18px;
         width: calc(100vw - 60px);
-        left:30px
+        left: 30px;
       }
     }
 
