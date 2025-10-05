@@ -1228,6 +1228,15 @@
       max-width: 100vw;
     }
 
+    @media (max-width: 768px) {
+      .marquee-container {
+        width: calc(100% + 40px);
+        max-width: calc(100vw + 40px);
+        margin-left: -20px;
+        margin-right: -20px;
+      }
+    }
+
     .marquee-content {
       display: flex;
       animation: marquee 35s linear infinite;
@@ -1715,7 +1724,7 @@
         right: 36px; 
         gap: 18px; 
       }
-      .content-wrapper { display:none;
+      .content-wrapper { /*display:none;*/
         padding: 18px; }
     }
 
@@ -2117,6 +2126,8 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
      <div class="type-area column-count-1 responsive-text" contenteditable="true" dir="rtl" style="font-family: 'Safra Sans'; font-weight: 700; font-size: 244px; line-height: 1; letter-spacing: -0.07em; text-align: center; white-space: nowrap;">שלום مرحبا Hello</div>
   </section>
 
+
+  
   <!-- ===== GLYPH GRID VIEWER ===== -->
   <div class="wrapper" id="fontWrapper">
     <div class="left-panel">
