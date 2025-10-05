@@ -348,16 +348,22 @@
 
     /* Prevent scroll buttons from enlarging on mobile */
     @media (max-width: 768px) {
+      .scroll-buttons {
+        gap: 18px;
+      }
+      
       .scroll-buttons.large {
         height: 200px;
       }
       
       .scroll-buttons.large .scroll-btn {
+        font-family: "Safra Mono", monospace;
         font-size: 14px;
-        padding: 12px 0;
+        padding: 7px 10px;
+        border: 1px solid #000;
+        border-radius: 4px;
         min-width: auto;
         height: auto;
-        border-radius: 0;
       }
     }
 
@@ -1316,7 +1322,7 @@
       }
       
       .intro-text-column p {
-        font-size: 16px;
+        font-size: 18px;
       }
       
       .technical-specs-column {
@@ -1349,7 +1355,7 @@
       }
       
       .intro-text-column p {
-        font-size: 15px;
+        font-size: 18px;
       }
       
       .multilingual-marquee {
@@ -1695,33 +1701,52 @@
     /* ====== RESPONSIVE COVER HEADER ====== */
     @media (max-width: 768px) {
       .cover-header { 
-        margin: 20px; 
+        margin: 18px; 
         height: calc(100vh - 40px); 
         border-radius: 12px; 
       }
       .cover-title .arabic, .cover-title .latin, .cover-title .hebrew { font-size: 72px; }
       .cover-buttons { 
-        bottom: 29px; 
-        right: 29px; 
-        gap: 12px; 
+        bottom: 36px; 
+        right: 36px; 
+        gap: 18px; 
       }
-      .content-wrapper { padding: 20px; }
+      .content-wrapper { padding: 18px; }
     }
 
     @media (max-width: 480px) {
       .cover-header { 
-        margin: 10px; 
+        margin: 18px; 
         height: calc(100vh - 20px); 
-        border-radius: 8px; 
+        border-radius: 12px; 
       }
       .cover-title .arabic, .cover-title .latin, .cover-title .hebrew { font-size: 48px; }
       .cover-buttons { 
-        bottom: 29px; 
-        right: 29px; 
-        flex-direction: column; 
-        gap: 8px; 
+        bottom: 36px; 
+        right: 36px; 
+        flex-direction: row; 
+        gap: 18px; 
       }
       .btn { padding: 7px 10px; font-size: 14px; line-height: 17px; }
+    }
+
+    /* ====== SVG SHAPES RESPONSIVE STYLES ====== */
+    @media (max-width: 768px) {
+      .svg-shape.left {
+        width: 30px;
+        height: 30px;
+      }
+      
+      .svg-shape.right {
+        width: 30px;
+        height: 30px;
+      }
+      
+      .svg-shape.center {
+        height: 18px;
+        width: calc(100vw - 60px);
+        left:30px
+      }
     }
 
     /* ====== FOOTER RESPONSIVE STYLES ====== */
