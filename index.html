@@ -6,6 +6,10 @@
   <title>Safra - Multi Script Typeface</title>
   <style>
     :root { --cell-size: 60px; }
+    
+    @media (max-width: 768px) {
+      :root { --cell-size: 50px; }
+    }
 
     /* ====== FONT FILES ====== */
     @font-face { font-family: "Sugar Serif"; font-weight: 400; font-style: normal; src: url("fonts/SugarSerif-Regular.woff2") format("woff2"); }
@@ -1243,6 +1247,12 @@
         margin-left: -20px;
         margin-right: -20px;
       }
+
+      .font-intro {
+      margin-bottom: 40px;
+    }
+
+
     }
 
     .marquee-content {
@@ -1340,6 +1350,7 @@
       .intro-grid {
         grid-template-columns: 1fr;
         gap: 40px;
+        margin-bottom:30px;
       }
       
       .intro-text-column p {
@@ -1357,6 +1368,7 @@
       .multilingual-marquee {
         margin-left: -20px;
         margin-right: -20px;
+        margin-top:0px;
       }
       
       .multilingual-marquee.image-marquee {
@@ -1438,6 +1450,10 @@
     /* ====== GLYPH GRID ====== */
     .wrapper { display: flex; align-items: flex-start; gap: 40px; /*max-width: 1400px;*/ margin: 0 auto 8rem auto; }
     .left-panel { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: min(calc(var(--cell-size) * 5), 100%); }
+    
+    @media (max-width: 768px) {
+      .left-panel { width: min(calc(var(--cell-size) * 6), 100%); }
+    }
     .preview-box { height: calc(var(--cell-size) * 5); aspect-ratio: 1 / 1; border: 1px solid #000; display: flex; align-items: center; justify-content: center; font-size: calc(var(--cell-size) * 3.3); font-family: "Safra"; overflow: hidden; width: 100%; border-radius: 15px; }
     .controls-lite, .details { width: 100%; font-size: 14px; margin-top: 0.9rem; }
     .details { font-family: "Safra Mono", monospace; font-size: 14px; line-height: 1.4; color: black; }
