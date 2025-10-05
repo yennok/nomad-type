@@ -21,6 +21,11 @@
     html, body { height: 100%; }
     body { margin: 0; padding: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; color: #000; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
+    /* CSS Custom Property for real viewport height */
+    :root {
+      --vh: 1vh;
+    }
+
     /* ====== STICKY TOP SECTION ====== */
     .sticky-top-section {
       height: 50px;
@@ -478,7 +483,8 @@
 
     /* ====== COVER HEADER ====== */
     .cover-header { 
-      height: calc(100vh - 120px); 
+      height: calc(100vh - 120px); /* Fallback for browsers that do not support Custom Properties */
+      height: calc(var(--vh, 1vh) * 100 - 120px); 
       background: #ff0000; 
       display: flex; 
       flex-direction: column; 
@@ -713,7 +719,8 @@
       top: 0;
       right: -34.2%;
       width: 34.2%;
-      height: 100vh;
+      height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+      height: calc(var(--vh, 1vh) * 100);
       background: #fff;
       z-index: 2000;
       transition: right 0.6s ease-in-out;
@@ -731,7 +738,8 @@
       display: flex;
       flex-direction: column;
       /*margin-bottom: 2rem;*/
-      height: calc(100vh - 2rem);
+      height: calc(100vh - 2rem); /* Fallback for browsers that do not support Custom Properties */
+      height: calc(var(--vh, 1vh) * 100 - 2rem);
     }
 
     .trial-form {
@@ -1715,7 +1723,8 @@
     @media (max-width: 768px) {
       .cover-header { 
         margin: 18px; 
-        height: calc(100vh - 40px); 
+        height: calc(100vh - 40px); /* Fallback for browsers that do not support Custom Properties */
+        height: calc(var(--vh, 1vh) * 100 - 40px); 
         border-radius: 12px; 
       }
       .cover-title .arabic, .cover-title .latin, .cover-title .hebrew { font-size: 72px; }
@@ -1731,7 +1740,8 @@
     @media (max-width: 480px) {
       .cover-header { 
         margin: 18px; 
-        height: calc(100vh - 20px); 
+        height: calc(100vh - 20px); /* Fallback for browsers that do not support Custom Properties */
+        height: calc(var(--vh, 1vh) * 100 - 20px); 
         border-radius: 12px; 
       }
       .cover-title .arabic, .cover-title .latin, .cover-title .hebrew { font-size: 78px; letter-spacing:-2px; }
@@ -3705,6 +3715,25 @@ document.addEventListener('DOMContentLoaded', boot);
 window.addEventListener('resize', () => {
   adjustPreviewHeight();
   // The responsive section resize is handled within initResponsiveSection
+});
+
+// ====== FIX MOBILE VIEWPORT HEIGHT ISSUE ======
+// Based on: https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
+function setViewportHeight() {
+  // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+  let vh = window.innerHeight * 0.01;
+  // Then we set the value in the --vh custom property to the root of the document
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+// Set initial viewport height
+setViewportHeight();
+
+// Update viewport height on resize (with throttling to avoid too many repaints)
+let resizeTimeout;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(setViewportHeight, 100);
 });
   </script>
 
