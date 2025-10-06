@@ -257,7 +257,7 @@
       font-weight: 700;
       color: #000;
       margin: 0 0 20px 0;
-      line-height: 1.4;
+      line-height: 1.6;
     }
 
     .scroll-buttons-description {
@@ -266,7 +266,7 @@
       font-weight: 400;
       color: #000;
       margin: 0;
-      line-height: 1.4;
+      line-height: 1.6;
     }
 
     .scroll-buttons-hebrew {
@@ -1132,6 +1132,23 @@
       }
     }
 
+    .scroll-buttons-section {
+      padding: 60px 18px 0;
+      margin: 0 auto 2rem auto;
+   
+    }
+
+
+    .scroll-buttons-content{
+      padding: 0;
+
+    }
+
+    .scroll-buttons{
+      padding: 60px 0;
+      height: auto;
+
+    }
     .btn { 
       padding: 7px 10px; 
       border: 1px solid #000; 
@@ -1251,7 +1268,7 @@
       }
 
       .font-intro {
-      margin-bottom: 40px;
+      margin-bottom: 60px;
     }
 
 
@@ -1376,6 +1393,7 @@
       .multilingual-marquee.image-marquee {
         margin-left: -20px;
         margin-right: -20px;
+        padding-bottom: 2rem;
       }
       
       .marquee-text {
@@ -1428,6 +1446,17 @@
       .font-align-wrapper {
         gap: 0.8em; /* Ensure gap is in em units */
       }
+
+      .type-tester { margin: 0 auto 5rem auto; /*max-width: 1200px;*/ }
+      .controls { 
+        border-top: 1px solid #000;
+        margin-bottom: 4rem; }
+
+        .select-header {
+        width: calc(100vw - 36px);
+        }
+
+       
       
       .font-wrapper,
       .font-select,
@@ -1493,11 +1522,14 @@
     @media (max-width: 900px) { .column-count-2, .column-count-3 { column-count: 1; } .controls { gap: 0.75rem; } }
 
     /* ====== GLYPH GRID ====== */
-    .wrapper { display: flex; align-items: flex-start; gap: 40px; /*max-width: 1400px;*/ margin: 150px auto 8rem auto; }
+    .wrapper { display: flex; align-items: flex-start; gap: 40px; /*max-width: 1400px;*/ margin: 150px auto 7rem auto; }
     .left-panel { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: min(calc(var(--cell-size) * 5), 100%); }
     
     @media (max-width: 768px) {
-      .left-panel { width: min(calc(var(--cell-size) * 6), 100%); }
+      .left-panel { width: min(calc(var(--cell-size) * 6), 100%);
+      
+      
+        border-top: 1px solid black;}
     }
     .preview-box { height: calc(var(--cell-size) * 5); aspect-ratio: 1 / 1; border: 1px solid #000; display: flex; align-items: center; justify-content: center; font-size: calc(var(--cell-size) * 3.3); font-family: "Safra"; overflow: hidden; width: 100%; border-radius: 15px; }
     .controls-lite, .details { width: 100%; font-size: 14px; margin-top: 0.9rem; }
@@ -1582,7 +1614,11 @@
     .char-cell { aspect-ratio: 1 / 1; border-right: 1px solid #000; border-bottom: 1px solid #000; display: flex; align-items: center; justify-content: center; cursor: pointer; font-family: "Safra"; font-weight: 400; font-size: calc(var(--cell-size) * 0.53); line-height: 1; transition: background 0.15s ease; }
     .char-cell:hover { background: #000; color: #fff; }
 
-    @media (max-width: 904px) { .wrapper { flex-direction: column; } .preview-box, .details { display: none; } }
+    @media (max-width: 904px) { .wrapper { flex-direction: column; 
+    
+      gap: 18px;
+      margin: 3rem auto 5rem auto;
+    } .preview-box, .details { display: none; } }
 
     /* ====== RESPONSIVE SECTION ====== */
     .responsive-text {
@@ -1598,6 +1634,18 @@
     /* Allow normal paragraph behavior when user has disabled auto-fit */
     .responsive-section .type-area[style*="white-space: normal"] {
       white-space: normal !important;
+    }
+    
+    /* Safari-specific text rendering fixes */
+    @media screen and (-webkit-min-device-pixel-ratio: 0) {
+      .responsive-section .type-area {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        font-kerning: normal;
+        font-variant-ligatures: normal;
+        -webkit-text-stroke: 0px transparent;
+      }
     }
 
     /* Responsive font sizes will be handled by JavaScript */
@@ -1825,7 +1873,7 @@
         gap: 18px; 
       }
       .content-wrapper { /*display:none;*/
-        padding: 18px; }
+        padding: 42px 18px 18px; }
     }
 
     @media (max-width: 480px) {
@@ -1867,7 +1915,8 @@
     /* ====== FOOTER RESPONSIVE STYLES ====== */
     @media (max-width: 768px) {
       .footer-content-section {
-        padding: 20px;
+        padding: 60px 18px 40px;
+
       }
       
       .footer-content-wrapper {
@@ -1880,7 +1929,7 @@
       }
       
       .footer-column p {
-        font-size: 16px;
+        font-size: 18px;
       }
       
       .footer-nav {
@@ -1899,7 +1948,7 @@
       }
       
       .footer {
-        padding: 20px;
+        padding: 18px;
       }
       
       .footer-content {
@@ -1907,11 +1956,18 @@
         gap: 15px;
         align-items: flex-start;
       }
+
+
+      .footer-right{
+        display: none;
+      }
+      
     }
 
     @media (max-width: 480px) {
       .footer-content-section {
-        padding: 20px;
+        
+        padding: 60px 18px 40px;
       }
       
       .footer-column h3 {
@@ -1927,16 +1983,20 @@
       }
       
       .footer-nav-link {
-        font-size: 16px;
+        font-size: 18px;
       }
       
       .footer {
-        padding: 20px;
+        padding: 18px;
       }
       
       .footer-left,
       .footer-right {
         font-size: 13px;
+      }
+
+      .footer-right{
+        display: none;
       }
     }
   </style>
@@ -2180,8 +2240,7 @@
 
 After signing with Interscope Records in 2007, Gaga achieved global recognition with her debut album, The Fame, 2008, and its reissue, The Fame Monster, 2009. The project scored a string of successful singles, including "Just Dance", "Poker Face", "Bad Romance", "Telephone", and "Alejandro". Her second full length album, Born This Way, 2011, explored electronic rock and techno pop and sold more than one million copies first week. Following her electronic dance music influenced third album, Artpop, 2013, she pursued jazz on Cheek to Cheek, 2014, with Tony Bennett, and delved into soft rock on Joanne, 2016.
 
-Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2015 to 2016, A Star Is Born, 2018, and House of Gucci, 2021. Her contributions to the A Star Is Born soundtrack, which spawned the chart topping single "Shallow", made her the first woman to win an Academy, BAFTA, Golden Globe, and Grammy Award in one year. Gaga returned to dance pop with Chromatica, 2020, then Love for Sale, 2021.
-    </div>
+Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2015 to 2016, A Star Is Born, 2018, and House of Gucci, 2021. Her contributions to the A Star Is Born soundtrack, which spawned the chart topping single "Shallow", made her the first woman to win an Academy, BAFTA, Golden Globe, and Grammy Award in one year. Gaga returned to dance pop with Chromatica, 2020, then Love for Sale, 2021.</div>
   </section>
 
   <!-- === Section 4, responsive sans (duplicate of section 2) === -->
@@ -2768,6 +2827,13 @@ class AutoFitManager {
       buffer = text.length < 10 ? 12 : 6;
     }
     
+    // Safari-specific adjustments - Safari renders text wider than Chrome
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    if (isSafari) {
+      // Add extra buffer for Safari to prevent overflow
+      buffer += text.length > 10 ? 20 : 10; // More buffer for longer text in Safari
+    }
+    
     const availableWidth = containerWidth - paddingLeft - paddingRight - buffer;
 
     console.log('Width calculation:', {
@@ -2778,12 +2844,14 @@ class AutoFitManager {
       availableWidth,
       textLength: text.length,
       screenWidth: screenWidth,
-      deviceType: screenWidth <= 768 ? 'mobile' : screenWidth <= 1024 ? 'tablet' : 'desktop'
+      deviceType: screenWidth <= 768 ? 'mobile' : screenWidth <= 1024 ? 'tablet' : 'desktop',
+      isSafari: isSafari,
+      browser: navigator.userAgent.includes('Safari') ? 'Safari' : 'Other'
     });
 
     if (!text || !availableWidth) return config.baseFontSize;
 
-    // Create measurement element
+    // Create measurement element - Safari-compatible
     const tempElement = document.createElement('span');
     tempElement.style.cssText = `
       position: absolute;
@@ -2793,6 +2861,12 @@ class AutoFitManager {
       font-weight: ${computedStyle.fontWeight};
       letter-spacing: ${computedStyle.letterSpacing};
       font-size: 100px;
+      line-height: ${computedStyle.lineHeight};
+      font-kerning: ${computedStyle.fontKerning};
+      font-variant-ligatures: ${computedStyle.fontVariantLigatures};
+      text-rendering: ${computedStyle.textRendering};
+      -webkit-font-smoothing: ${computedStyle.webkitFontSmoothing};
+      -webkit-text-stroke: ${computedStyle.webkitTextStroke};
     `;
     tempElement.textContent = text;
     document.body.appendChild(tempElement);
