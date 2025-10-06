@@ -230,7 +230,7 @@
 
     /* ====== SCROLL BUTTONS ====== */
     .scroll-buttons-section {
-      margin: 0 auto 4rem auto;
+      margin: 0 auto 6rem auto;
       padding: 60px 90px 0;
       border-top: 1px solid black;
       border-bottom: 1px solid black;
@@ -398,6 +398,7 @@
       color: #000;
       margin: 0 0 20px 0;
       line-height: 1.4;
+      letter-spacing: -0.02em;
     }
 
     .footer-column p {
@@ -1130,7 +1131,12 @@
         width: 100%;
         right: -100%;
       }
+
+      .scroll-buttons-content {
+      padding: 0;
+
     }
+
 
     .scroll-buttons-section {
       padding: 60px 18px 0;
@@ -1138,17 +1144,12 @@
    
     }
 
-
-    .scroll-buttons-content{
-      padding: 0;
-
     }
 
-    .scroll-buttons{
-      padding: 60px 0;
-      height: auto;
 
-    }
+    
+
+    
     .btn { 
       padding: 7px 10px; 
       border: 1px solid #000; 
@@ -1258,6 +1259,11 @@
       height:220px;
     }
 
+    .marquee-container.bottom {
+     
+      height:150px;
+    }
+
     @media (max-width: 768px) {
       .marquee-container {
         width: calc(100% + 40px);
@@ -1269,6 +1275,12 @@
 
       .font-intro {
       margin-bottom: 60px;
+    }
+
+    .scroll-buttons{
+      padding: 60px 0;
+      height: auto;
+
     }
 
 
@@ -4625,7 +4637,7 @@ document.addEventListener('DOMContentLoaded', setupLiveArabicUpdate);
 
   <!-- ====== MULTILINGUAL MARQUEE (BOTTOM) ====== -->
   <div class="multilingual-marquee image-marquee">
-    <div class="marquee-container">
+    <div class="marquee-container bottom">
       <div class="marquee-content">
         <span class="marquee-img">
           <a href="#" class="marquee-link">
@@ -4674,7 +4686,7 @@ document.addEventListener('DOMContentLoaded', setupLiveArabicUpdate);
       </div>
       <div class="footer-column">
         <h3>Collaborations</h3>
-        <p>We're always open to conversations with fellow type designers — whether it's about multilingual design, sharing questions, or exploring collaboration. Feel free to reach out at your@email.com.</p>
+        <p>We're always open to conversations with fellow type designers — whether it's about multilingual design, sharing questions, or exploring collaboration. Feel free to reach out at nir@yennok.com.</p>
       </div>
     </div>
   </section>
