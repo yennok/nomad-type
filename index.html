@@ -3745,11 +3745,32 @@ function setViewportHeight() {
 // Set initial viewport height
 setViewportHeight();
 
-// Update viewport height on resize (with throttling to avoid too many repaints)
-let resizeTimeout;
+// Store the initial height to detect significant changes
+let initialHeight = window.innerHeight;
+let lastHeight = window.innerHeight;
+
+// Update viewport height only on significant resize events (orientation change, major resize)
+// This prevents jumping when Safari address bar appears/disappears during scroll
 window.addEventListener('resize', () => {
-  clearTimeout(resizeTimeout);
-  resizeTimeout = setTimeout(setViewportHeight, 100);
+  const currentHeight = window.innerHeight;
+  const heightDifference = Math.abs(currentHeight - lastHeight);
+  
+  // Only update if the height change is significant (orientation change or major resize)
+  // This prevents updates when Safari address bar shows/hides during scroll
+  if (heightDifference > 100 || 
+      (window.innerWidth > window.innerHeight && lastHeight < window.innerHeight) || // Landscape
+      (window.innerWidth < window.innerHeight && lastHeight > window.innerHeight)) { // Portrait
+    setViewportHeight();
+    lastHeight = currentHeight;
+  }
+});
+
+// Also update on orientation change for better reliability
+window.addEventListener('orientationchange', () => {
+  setTimeout(() => {
+    setViewportHeight();
+    lastHeight = window.innerHeight;
+  }, 100);
 });
   </script>
 
