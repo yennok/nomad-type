@@ -1186,7 +1186,7 @@
 
     /* ====== FONT INTRO SECTION ====== */
     .font-intro {
-      margin-bottom: 80px;
+      margin-bottom: 50px;
     }
 
     .intro-content {
@@ -1238,6 +1238,7 @@
       background: #fff;
       width: 100%;
       max-width: 100vw;
+      height:220px;
     }
 
     @media (max-width: 768px) {
@@ -1266,7 +1267,7 @@
       font-size: 120px;
       margin-right: 60px;
       flex-shrink: 0;
-      letter-spacing:-3.5px;
+      letter-spacing:-2.5px;
     }
 
     .marquee-text:last-child {
@@ -1433,6 +1434,32 @@
     .align-right { background-image: url('assets/align-right.svg'); }
 
     .type-area { width: 100%; border: none; outline: none; color: #000; display: block; white-space: pre-wrap; word-break: break-word; background: transparent; font-family: "Safra"; font-weight: 400; font-size: 40px; line-height: 1.6; letter-spacing: 0em; margin-bottom: 2rem; }
+
+    /* Safari-specific fix: Remove letter-spacing for Arabic letters only in type tester */
+    @media screen and (-webkit-min-device-pixel-ratio: 0) {
+      .type-area {
+        /* Enable proper kerning for all text */
+        font-feature-settings: "kern" 1;
+        -webkit-font-feature-settings: "kern" 1;
+      }
+      
+      /* CSS class for Arabic characters with no letter-spacing - make it very specific */
+      .type-area .arabic-no-spacing,
+      .arabic-no-spacing {
+        letter-spacing: 0 !important;
+        -webkit-letter-spacing: 0 !important;
+        direction: rtl;
+        unicode-bidi: embed;
+      }
+      
+      /* Override any inline styles for Arabic spans */
+      .type-area span.arabic-no-spacing {
+        letter-spacing: 0 !important;
+        -webkit-letter-spacing: 0 !important;
+        direction: rtl;
+        unicode-bidi: embed;
+      }
+    }
     
     /* Section 1 specific styling */
     .type-tester:nth-child(2) .type-area {
@@ -1545,9 +1572,14 @@
       white-space: nowrap !important; /* Force single line initially */
     }
     
-    /* Ensure responsive section text starts as single line */
+    /* Ensure responsive section text starts on single line */
     .responsive-section .type-area {
       white-space: nowrap !important;
+    }
+    
+    /* Allow normal paragraph behavior when user has disabled auto-fit */
+    .responsive-section .type-area[style*="white-space: normal"] {
+      white-space: normal !important;
     }
 
     /* Responsive font sizes will be handled by JavaScript */
@@ -1595,6 +1627,11 @@
       background: #f5f5f5;
       width: 100%;
       aspect-ratio: 4/3; /* Default aspect ratio, will be adjusted by JavaScript */
+      /* Safari-specific fixes for image containment */
+      -webkit-backface-visibility: hidden;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      backface-visibility: hidden;
     }
 
     .carousel-track {
@@ -1611,7 +1648,10 @@
     .carousel-slide {
       min-width: 100%;
       flex-shrink: 0;
+      flex-grow: 0;
+      flex-basis: 100%;
       height: 100%;
+      overflow: hidden;
     }
 
     .carousel-slide img {
@@ -1627,6 +1667,23 @@
       vertical-align: top;
       image-rendering: -webkit-optimize-contrast;
       image-rendering: crisp-edges;
+      /* Safari-specific fixes for retina images */
+      -webkit-backface-visibility: hidden;
+      -webkit-transform: translateZ(0);
+      max-width: 100%;
+      max-height: 100%;
+      /* Force proper scaling and containment */
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      /* Additional Safari fixes */
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      /* Ensure image doesn't exceed container */
+      min-width: 0;
+      min-height: 0;
+      flex-shrink: 1;
     }
 
     .carousel-indicators {
@@ -2019,7 +2076,7 @@
   </section>
 
   <!-- === Section 2, large multilingual headline, Sans Bold, centered === -->
-  <section class="type-tester">
+  <section class="type-tester responsive-section">
     <div class="controls">
       <div class="sliders-wrapper">
         <label class="label-custom" for="size-2">Size</label>
@@ -2058,7 +2115,7 @@
       </div>
     </div>
 
-    <div class="type-area column-count-1" contenteditable="true" dir="rtl" style="font-family: 'Safra Sans'; font-weight: 700; font-size: 244px; line-height: 1; letter-spacing: -0.07em; text-align: center;">שלום مرحبا Hello</div>
+    <div class="type-area column-count-1 responsive-text" contenteditable="true" dir="rtl" style="font-family: 'Safra Sans'; font-weight: 700; font-size: 244px; line-height: 1; letter-spacing: -0.07em; text-align: center; white-space: nowrap;">Hello</div>
   </section>
 
   <!-- === Section 3, two columns, Sans Regular, long text === -->
@@ -2149,7 +2206,7 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
       </div>
     </div>
 
-     <div class="type-area column-count-1 responsive-text" contenteditable="true" dir="rtl" style="font-family: 'Safra Sans'; font-weight: 700; font-size: 244px; line-height: 1; letter-spacing: -0.07em; text-align: center; white-space: nowrap;">שלום مرحبا Hello</div>
+     <div class="type-area column-count-1 responsive-text" contenteditable="true" dir="rtl" style="font-family: 'Safra Sans'; font-weight: 700; font-size: 244px; line-height: 1; letter-spacing: -0.035em; text-align: center; white-space: nowrap;">שלום مرحبا Hello</div>
   </section>
 
 
@@ -2662,32 +2719,50 @@ class AutoFitManager {
   calculateFittingSize(sectionData) {
     const { textArea, config } = sectionData;
     
-    // Get available width - account for grid padding and margins
+    console.log('calculateFittingSize called for:', textArea?.textContent, 'in section:', sectionData.element);
+    
+    // Get the actual available width for the text - more accurate calculation
     const containerWidth = textArea.offsetWidth;
     const computedStyle = getComputedStyle(textArea);
     const paddingLeft = parseFloat(computedStyle.paddingLeft) || 0;
     const paddingRight = parseFloat(computedStyle.paddingRight) || 0;
     
-    // Account for content wrapper padding (90px on each side)
-    const contentWrapper = document.querySelector('.content-wrapper');
-    const wrapperPadding = contentWrapper ? 
-      (parseFloat(getComputedStyle(contentWrapper).paddingLeft) || 0) + 
-      (parseFloat(getComputedStyle(contentWrapper).paddingRight) || 0) : 0;
+    // Use almost all available width - very minimal buffer for maximum utilization
+    const text = textArea.textContent || textArea.innerText;
+    const screenWidth = window.innerWidth;
     
-    // Add a small buffer to ensure text stays within bounds
-    const buffer = 20; // 20px buffer
-    const availableWidth = containerWidth - paddingLeft - paddingRight - wrapperPadding - buffer;
+    // Smart buffer based on text length and screen size
+    let buffer;
+    if (screenWidth <= 768) {
+      // Mobile: very aggressive for short text, more conservative for long text
+      if (text.length <= 5) {
+        buffer = 2; // Short text like "Hello" - use almost all space
+      } else if (text.length <= 10) {
+        buffer = 8; // Medium text - moderate buffer
+      } else {
+        buffer = 15; // Long text like "שלום مرحبا Hello" - more conservative
+      }
+    } else if (screenWidth <= 1024) {
+      // Tablet: moderate buffer
+      buffer = text.length < 8 ? 8 : 5;
+    } else {
+      // Desktop: slightly more conservative
+      buffer = text.length < 10 ? 12 : 6;
+    }
+    
+    const availableWidth = containerWidth - paddingLeft - paddingRight - buffer;
 
     console.log('Width calculation:', {
       containerWidth,
       paddingLeft,
       paddingRight,
-      wrapperPadding,
       buffer,
-      availableWidth
+      availableWidth,
+      textLength: text.length,
+      screenWidth: screenWidth,
+      deviceType: screenWidth <= 768 ? 'mobile' : screenWidth <= 1024 ? 'tablet' : 'desktop'
     });
 
-    const text = textArea.textContent || textArea.innerText;
     if (!text || !availableWidth) return config.baseFontSize;
 
     // Create measurement element
@@ -2710,12 +2785,13 @@ class AutoFitManager {
     const fittingSize = Math.floor(availableWidth / ratio);
     const clampedSize = Math.max(config.minFontSize, Math.min(config.maxFontSize, fittingSize));
 
-    // Binary search for precision
-    let minSize = Math.max(config.minFontSize, clampedSize - 20);
-    let maxSize = Math.min(config.maxFontSize, clampedSize + 20);
+    // Binary search for precision - very aggressive range for better fitting
+    const searchRange = screenWidth <= 768 ? 100 : 50; // Larger search range on mobile
+    let minSize = Math.max(config.minFontSize, clampedSize - searchRange);
+    let maxSize = Math.min(config.maxFontSize, clampedSize + searchRange);
     let bestSize = clampedSize;
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 20; i++) { // More iterations for better precision
       if (maxSize - minSize <= 1) break;
 
       const testSize = Math.floor((minSize + maxSize) / 2);
@@ -2728,8 +2804,26 @@ class AutoFitManager {
         maxSize = testSize;
       }
     }
+    
+    // Final check: try one size larger to see if we can squeeze it in
+    if (bestSize < config.maxFontSize) {
+      tempElement.style.fontSize = (bestSize + 1) + 'px';
+      if (tempElement.offsetWidth <= availableWidth) {
+        bestSize = bestSize + 1;
+      }
+    }
 
     document.body.removeChild(tempElement);
+    
+    console.log('Font size calculation result:', {
+      text: text,
+      availableWidth: availableWidth,
+      fittingSize: fittingSize,
+      clampedSize: clampedSize,
+      bestSize: bestSize,
+      maxFontSize: config.maxFontSize
+    });
+    
     return bestSize;
   }
 
@@ -2761,7 +2855,7 @@ class AutoFitManager {
 
   // Setup event listeners for a section
   setupSectionListeners(sectionData) {
-    const { textArea, sizeSlider, fontSelect, config } = sectionData;
+    const { textArea, sizeSlider, fontSelect, config, element } = sectionData;
 
     // Text input detection
     if (config.disableOnUserInput) {
@@ -2771,24 +2865,92 @@ class AutoFitManager {
       });
     }
 
-    // Slider interaction detection
+    // Size slider - DISABLE auto-fit and single line when user adjusts
     sizeSlider.addEventListener('mousedown', () => {
       if (sectionData.autoFitEnabled && !sectionData.userHasTyped) {
         sectionData.autoFitEnabled = false;
-        console.log('Auto-fit disabled: User started adjusting slider');
+        // Allow normal paragraph behavior (multi-line)
+        textArea.style.whiteSpace = 'normal';
+        console.log('Auto-fit disabled: User started adjusting size');
       }
+      // Disable transition for immediate response
+      textArea.style.transition = 'none';
     });
-
     sizeSlider.addEventListener('input', () => {
-      if (!sectionData.sliderBeingSetProgrammatically && 
-          sectionData.autoFitEnabled && !sectionData.userHasTyped) {
-        sectionData.autoFitEnabled = false;
-        console.log('Auto-fit disabled: User adjusted slider');
+      if (!sectionData.sliderBeingSetProgrammatically) {
+        if (sectionData.autoFitEnabled && !sectionData.userHasTyped) {
+          sectionData.autoFitEnabled = false;
+          // Allow normal paragraph behavior (multi-line)
+          textArea.style.whiteSpace = 'normal';
+          console.log('Auto-fit disabled: User adjusted size');
+        }
+        textArea.style.fontSize = sizeSlider.value + 'px';
       }
-      textArea.style.fontSize = sizeSlider.value + 'px';
+    });
+    sizeSlider.addEventListener('mouseup', () => {
+      // Re-enable transition after user stops dragging
+      setTimeout(() => {
+        textArea.style.transition = '';
+      }, 100);
+    });
+    // Handle touch events for mobile
+    sizeSlider.addEventListener('touchstart', () => {
+      if (sectionData.autoFitEnabled && !sectionData.userHasTyped) {
+        sectionData.autoFitEnabled = false;
+        textArea.style.whiteSpace = 'normal';
+        console.log('Auto-fit disabled: User started adjusting size (touch)');
+      }
+      textArea.style.transition = 'none';
+    });
+    sizeSlider.addEventListener('touchend', () => {
+      setTimeout(() => {
+        textArea.style.transition = '';
+      }, 100);
     });
 
-    // Font change detection
+    // Line height slider - DISABLE auto-fit and single line when user adjusts
+    const leadingSlider = element.querySelector('.leading');
+    if (leadingSlider) {
+      leadingSlider.addEventListener('mousedown', () => {
+        if (sectionData.autoFitEnabled && !sectionData.userHasTyped) {
+          sectionData.autoFitEnabled = false;
+          // Allow normal paragraph behavior (multi-line)
+          textArea.style.whiteSpace = 'normal';
+          console.log('Auto-fit disabled: User started adjusting line height');
+        }
+      });
+      leadingSlider.addEventListener('input', () => {
+        if (sectionData.autoFitEnabled && !sectionData.userHasTyped) {
+          sectionData.autoFitEnabled = false;
+          // Allow normal paragraph behavior (multi-line)
+          textArea.style.whiteSpace = 'normal';
+          console.log('Auto-fit disabled: User adjusted line height');
+        }
+      });
+    }
+
+    // Letter spacing slider - DISABLE auto-fit and single line when user adjusts
+    const spacingSlider = element.querySelector('.spacing');
+    if (spacingSlider) {
+      spacingSlider.addEventListener('mousedown', () => {
+        if (sectionData.autoFitEnabled && !sectionData.userHasTyped) {
+          sectionData.autoFitEnabled = false;
+          // Allow normal paragraph behavior (multi-line)
+          textArea.style.whiteSpace = 'normal';
+          console.log('Auto-fit disabled: User started adjusting letter spacing');
+        }
+      });
+      spacingSlider.addEventListener('input', () => {
+        if (sectionData.autoFitEnabled && !sectionData.userHasTyped) {
+          sectionData.autoFitEnabled = false;
+          // Allow normal paragraph behavior (multi-line)
+          textArea.style.whiteSpace = 'normal';
+          console.log('Auto-fit disabled: User adjusted letter spacing');
+        }
+      });
+    }
+
+    // Font change detection - KEEP auto-fit enabled
     if (fontSelect && config.autoFitOnFontChange) {
       fontSelect.addEventListener('change', () => {
         setTimeout(() => this.updateSectionSize(sectionData), 10);
@@ -2796,6 +2958,23 @@ class AutoFitManager {
         setTimeout(() => this.updateSectionSize(sectionData), 300);
       });
     }
+
+    // Alignment buttons - DON'T disable auto-fit, just update alignment
+    const alignButtons = element.querySelectorAll('.align-left, .align-center, .align-right');
+    alignButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Update alignment without disabling auto-fit
+        const alignment = button.dataset.align;
+        textArea.style.textAlign = alignment;
+        
+        // Update active state
+        alignButtons.forEach(btn => btn.classList.remove('is-active'));
+        button.classList.add('is-active');
+        
+        // Recalculate size after alignment change
+        setTimeout(() => this.updateSectionSize(sectionData), 10);
+      });
+    });
 
     // Style change detection
     const observer = new MutationObserver(() => {
@@ -2817,10 +2996,14 @@ class AutoFitManager {
     if (hasChanged && !sectionData.userHasTyped) {
       sectionData.userHasTyped = true;
       sectionData.autoFitEnabled = false;
+      // Allow normal paragraph behavior (multi-line)
+      textArea.style.whiteSpace = 'normal';
       console.log('Auto-fit disabled: User typed new text');
     } else if (!hasChanged && sectionData.userHasTyped) {
       sectionData.userHasTyped = false;
       sectionData.autoFitEnabled = true;
+      // Restore single line behavior when auto-fit is re-enabled
+      textArea.style.whiteSpace = 'nowrap';
       console.log('Auto-fit re-enabled: Text restored to original');
     }
   }
@@ -2830,7 +3013,36 @@ class AutoFitManager {
     window.addEventListener('resize', () => {
       clearTimeout(this.resizeTimeout);
       this.resizeTimeout = setTimeout(() => {
+        // Update max font size for all sections based on new screen width and text length
+        const screenWidth = window.innerWidth;
+        
         this.sections.forEach((sectionData) => {
+          const text = sectionData.textArea.textContent || sectionData.textArea.innerText;
+          let responsiveMaxFontSize;
+          
+          if (screenWidth <= 768) {
+            // Mobile: adjust based on text length
+            if (text.length <= 5) {
+              // Short text like "Hello" - allow very large fonts
+              responsiveMaxFontSize = Math.min(400, Math.max(150, Math.floor(screenWidth * 0.35)));
+            } else if (text.length <= 10) {
+              // Medium text - moderate max size
+              responsiveMaxFontSize = Math.min(300, Math.max(120, Math.floor(screenWidth * 0.28)));
+            } else {
+              // Long text like "שלום مرحبا Hello" - more conservative
+              responsiveMaxFontSize = Math.min(200, Math.max(80, Math.floor(screenWidth * 0.20)));
+            }
+          } else if (screenWidth <= 1024) {
+            // Tablet: 30% of screen width
+            responsiveMaxFontSize = Math.min(450, Math.max(120, Math.floor(screenWidth * 0.30)));
+          } else {
+            // Desktop: 25% of screen width
+            responsiveMaxFontSize = Math.min(512, Math.max(100, Math.floor(screenWidth * 0.25)));
+          }
+          
+          // Update the config with new max font size
+          sectionData.config.maxFontSize = responsiveMaxFontSize;
+          
           if (sectionData.config.autoFitOnResize) {
             this.updateSectionSize(sectionData);
           }
@@ -2869,52 +3081,177 @@ class AutoFitManager {
 const autoFitManager = new AutoFitManager();
 
 function initResponsiveSection() {
-  const responsiveSection = document.querySelector('.responsive-section');
-  if (!responsiveSection) {
-    console.log('Responsive section not found');
+  const responsiveSections = document.querySelectorAll('.responsive-section');
+  if (responsiveSections.length === 0) {
+    console.log('No responsive sections found');
     return;
   }
 
-  // Initialize with auto-fit
-  autoFitManager.initSection(responsiveSection, {
-    minFontSize: 40,
-    maxFontSize: 244,
-    baseFontSize: 244,
-    baseWidth: 1920
+  // Initialize all responsive sections with auto-fit
+  responsiveSections.forEach((section, index) => {
+    console.log(`Initializing section ${index + 1}:`, section);
+    
+    const textArea = section.querySelector('.type-area');
+    const sizeSlider = section.querySelector('.size');
+    const fontSelect = section.querySelector('.font-select');
+    
+    console.log(`Section ${index + 1} elements:`, {
+      textArea: !!textArea,
+      sizeSlider: !!sizeSlider,
+      fontSelect: !!fontSelect,
+      textContent: textArea?.textContent
+    });
+    
+    // Calculate responsive max font size based on screen width and text length
+    const screenWidth = window.innerWidth;
+    const text = textArea.textContent || textArea.innerText;
+    let responsiveMaxFontSize;
+    
+    if (screenWidth <= 768) {
+      // Mobile: adjust based on text length
+      if (text.length <= 5) {
+        // Short text like "Hello" - allow very large fonts
+        responsiveMaxFontSize = Math.min(400, Math.max(150, Math.floor(screenWidth * 0.35)));
+      } else if (text.length <= 10) {
+        // Medium text - moderate max size
+        responsiveMaxFontSize = Math.min(300, Math.max(120, Math.floor(screenWidth * 0.28)));
+      } else {
+        // Long text like "שלום مرحبا Hello" - more conservative
+        responsiveMaxFontSize = Math.min(200, Math.max(80, Math.floor(screenWidth * 0.20)));
+      }
+    } else if (screenWidth <= 1024) {
+      // Tablet: 30% of screen width
+      responsiveMaxFontSize = Math.min(450, Math.max(120, Math.floor(screenWidth * 0.30)));
+    } else {
+      // Desktop: 25% of screen width
+      responsiveMaxFontSize = Math.min(512, Math.max(100, Math.floor(screenWidth * 0.25)));
+    }
+    
+    autoFitManager.initSection(section, {
+      minFontSize: 40,
+      maxFontSize: responsiveMaxFontSize,
+      baseFontSize: 244,
+      baseWidth: 1920,
+      autoFitOnResize: true,
+      autoFitOnFontChange: true,
+      disableOnUserInput: true
+    });
+
+    console.log(`Responsive section ${index + 1} initialized with maxFontSize: ${responsiveMaxFontSize}px (screen width: ${screenWidth}px)`);
+
+    // Force immediate auto-fit on page load (multiple attempts to catch it early)
+    setTimeout(() => {
+      const sectionData = autoFitManager.sections.get(section);
+      if (sectionData) {
+        console.log(`Immediate auto-fit on page load - Section ${index + 1}`);
+        autoFitManager.updateSectionSize(sectionData);
+      }
+    }, 0);
+
+    setTimeout(() => {
+      const sectionData = autoFitManager.sections.get(section);
+      if (sectionData) {
+        console.log(`Delayed auto-fit on page load - Section ${index + 1}`);
+        autoFitManager.updateSectionSize(sectionData);
+      }
+    }, 100);
+
+    setTimeout(() => {
+      const sectionData = autoFitManager.sections.get(section);
+      if (sectionData) {
+        console.log(`Final auto-fit on page load - Section ${index + 1}`);
+        autoFitManager.updateSectionSize(sectionData);
+      }
+    }, 300);
   });
-
-  // Force immediate auto-fit on page load (multiple attempts to catch it early)
-  setTimeout(() => {
-    const sectionData = autoFitManager.sections.get(responsiveSection);
-    if (sectionData) {
-      console.log('Immediate auto-fit on page load');
-      autoFitManager.updateSectionSize(sectionData);
-    }
-  }, 0);
-
-  setTimeout(() => {
-    const sectionData = autoFitManager.sections.get(responsiveSection);
-    if (sectionData) {
-      console.log('Delayed auto-fit on page load');
-      autoFitManager.updateSectionSize(sectionData);
-    }
-  }, 100);
-
-  setTimeout(() => {
-    const sectionData = autoFitManager.sections.get(responsiveSection);
-    if (sectionData) {
-      console.log('Final auto-fit on page load');
-      autoFitManager.updateSectionSize(sectionData);
-    }
-  }, 300);
 
   // Add global functions for testing
   window.testAutoFit = () => {
-    autoFitManager.updateSectionSize(autoFitManager.sections.get(responsiveSection));
+    responsiveSections.forEach(section => {
+      autoFitManager.updateSectionSize(autoFitManager.sections.get(section));
+    });
   };
 
   window.resetAutoFit = () => {
-    autoFitManager.resetToOriginal(responsiveSection);
+    responsiveSections.forEach(section => {
+      autoFitManager.resetToOriginal(section);
+    });
+  };
+
+  // Function to create a new responsive section
+  window.createResponsiveSection = (containerId = 'main-content') => {
+    const container = document.getElementById(containerId) || document.querySelector('.content-wrapper');
+    if (!container) {
+      console.error('Container not found');
+      return;
+    }
+
+    const sectionCount = document.querySelectorAll('.responsive-section').length + 1;
+    
+    const newSection = document.createElement('section');
+    newSection.className = 'type-tester responsive-section';
+    newSection.innerHTML = `
+      <div class="controls">
+        <div class="sliders-wrapper">
+          <label class="label-custom" for="size-${sectionCount}">Size</label>
+          <input class="size" id="size-${sectionCount}" type="range" min="16" max="512" />
+          <label class="label-custom" for="leading-${sectionCount}">Leading</label>
+          <input class="leading" id="leading-${sectionCount}" type="range" min="0.5" max="2" step="0.05" />
+          <label class="label-custom" for="spacing-${sectionCount}">Letter Spacing</label>
+          <input class="spacing" id="spacing-${sectionCount}" type="range" min="-0.1" max="0.1" step="0.01" />
+        </div>
+        <div class="font-align-wrapper">
+          <div class="font-wrapper">
+            <div class="custom-select font-select-custom" data-section="${sectionCount}">
+              <div class="select-header">
+                <span class="select-value">Safra Sans Bold</span>
+                <span class="select-arrow"></span>
+              </div>
+              <div class="select-options">
+                <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+                <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+                <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+                <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+              </div>
+            </div>
+            <select class="font-select" aria-label="Font and weight" style="display: none;">
+              <option value="Safra Regular">Safra Regular</option>
+              <option value="Safra Bold">Safra Bold</option>
+              <option value="Safra Sans Regular">Safra Sans Regular</option>
+              <option value="Safra Sans Bold" selected>Safra Sans Bold</option>
+            </select>
+          </div>
+          <div class="align-buttons" role="group" aria-label="Align">
+            <button class="icon-btn align-left" type="button" data-align="left" aria-label="Align left"></button>
+            <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+            <button class="icon-btn align-right" type="button" data-align="right" aria-label="Align right"></button>
+          </div>
+        </div>
+      </div>
+      <div class="type-area column-count-1 responsive-text" contenteditable="true" dir="rtl" style="font-family: 'Safra Sans'; font-weight: 700; font-size: 244px; line-height: 1; letter-spacing: -0.035em; text-align: center; white-space: nowrap;">שלום مرحبا Hello</div>
+    `;
+
+    // Insert before the last section (before footer or other content)
+    const lastSection = container.querySelector('section:last-of-type');
+    if (lastSection) {
+      container.insertBefore(newSection, lastSection);
+    } else {
+      container.appendChild(newSection);
+    }
+
+    // Initialize the new section
+    autoFitManager.initSection(newSection, {
+      minFontSize: 40,
+      maxFontSize: 244,
+      baseFontSize: 244,
+      baseWidth: 1920,
+      autoFitOnResize: true,
+      autoFitOnFontChange: true,
+      disableOnUserInput: true
+    });
+
+    console.log(`New responsive section ${sectionCount} created and initialized`);
+    return newSection;
   };
 
   // Add carousel testing functions
@@ -3772,6 +4109,209 @@ window.addEventListener('orientationchange', () => {
     lastHeight = window.innerHeight;
   }, 100);
 });
+
+// ====== ARABIC LETTER-SPACING FIX FOR SAFARI ======
+// Detect Arabic characters and wrap them in spans with no letter-spacing
+function isArabic(char) {
+  // Arabic Unicode ranges
+  const arabicRanges = [
+    [0x0600, 0x06FF], // Arabic
+    [0x0750, 0x077F], // Arabic Supplement
+    [0x08A0, 0x08FF], // Arabic Extended-A
+    [0xFB50, 0xFDFF], // Arabic Presentation Forms-A
+    [0xFE70, 0xFEFF], // Arabic Presentation Forms-B
+  ];
+  
+  const code = char.charCodeAt(0);
+  return arabicRanges.some(([start, end]) => code >= start && code <= end);
+}
+
+function wrapArabicCharacters() {
+  // Only apply on Safari
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  if (!isSafari) return;
+  
+  const typeAreas = document.querySelectorAll('.type-area');
+  
+  typeAreas.forEach(typeArea => {
+    // Check if this is the responsive section
+    const isResponsiveSection = typeArea.closest('.responsive-section');
+    
+    // Always process - don't skip based on flag for live updates
+    const text = typeArea.textContent;
+    let newHTML = '';
+    let currentArabicGroup = '';
+    let currentNonArabicGroup = '';
+    
+    for (let i = 0; i < text.length; i++) {
+      const char = text[i];
+      
+      if (isArabic(char)) {
+        // If we were building a non-Arabic group, flush it first
+        if (currentNonArabicGroup) {
+          newHTML += currentNonArabicGroup;
+          currentNonArabicGroup = '';
+        }
+        // Add to Arabic group
+        currentArabicGroup += char;
+      } else {
+        // If we were building an Arabic group, flush it first
+        if (currentArabicGroup) {
+          // For responsive section, use CSS class only (no inline styles)
+          // For other sections, use inline styles for stronger override
+          if (isResponsiveSection) {
+            newHTML += `<span class="arabic-no-spacing" dir="rtl">${currentArabicGroup}</span>`;
+          } else {
+            newHTML += `<span class="arabic-no-spacing" dir="rtl" style="letter-spacing: 0 !important; direction: rtl;">${currentArabicGroup}</span>`;
+          }
+          currentArabicGroup = '';
+        }
+        // Add to non-Arabic group
+        currentNonArabicGroup += char;
+      }
+    }
+    
+    // Flush any remaining groups
+    if (currentArabicGroup) {
+      if (isResponsiveSection) {
+        newHTML += `<span class="arabic-no-spacing" dir="rtl">${currentArabicGroup}</span>`;
+      } else {
+        newHTML += `<span class="arabic-no-spacing" dir="rtl" style="letter-spacing: 0 !important; direction: rtl;">${currentArabicGroup}</span>`;
+      }
+    }
+    if (currentNonArabicGroup) {
+      newHTML += currentNonArabicGroup;
+    }
+    
+    // Only update if content has changed
+    if (typeArea.innerHTML !== newHTML) {
+      // Store cursor position before updating
+      const selection = window.getSelection();
+      const range = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
+      let cursorOffset = 0;
+      let isInArabicContext = false;
+      
+      if (range && range.startContainer.nodeType === Node.TEXT_NODE) {
+        cursorOffset = range.startOffset;
+        // Check if cursor is in Arabic text
+        const textNode = range.startContainer;
+        const textBeforeCursor = textNode.textContent.substring(0, cursorOffset);
+        isInArabicContext = textBeforeCursor.split('').some(char => isArabic(char));
+      }
+      
+      typeArea.innerHTML = newHTML;
+      
+      // Simple cursor restoration - place at end if in Arabic context
+      if (range && isInArabicContext) {
+        setTimeout(() => {
+          try {
+            // Find the last text node in the element
+            const walker = document.createTreeWalker(
+              typeArea,
+              NodeFilter.SHOW_TEXT,
+              null,
+              false
+            );
+            
+            let lastTextNode = null;
+            while (walker.nextNode()) {
+              lastTextNode = walker.currentNode;
+            }
+            
+            if (lastTextNode) {
+              const newRange = document.createRange();
+              newRange.setStart(lastTextNode, lastTextNode.textContent.length);
+              newRange.setEnd(lastTextNode, lastTextNode.textContent.length);
+              
+              selection.removeAllRanges();
+              selection.addRange(newRange);
+              
+              // Ensure RTL direction
+              typeArea.style.direction = 'rtl';
+              typeArea.setAttribute('dir', 'rtl');
+            }
+          } catch (e) {
+            console.log('Cursor restoration failed:', e);
+          }
+        }, 10);
+      }
+      
+      // If this is the responsive section, trigger auto-fit recalculation
+      if (isResponsiveSection) {
+        const sectionData = autoFitManager?.sections?.get(typeArea.closest('.responsive-section'));
+        if (sectionData) {
+          // Small delay to ensure DOM is updated
+          setTimeout(() => {
+            autoFitManager.updateSectionSize(sectionData);
+          }, 50);
+        }
+      }
+    }
+  });
+}
+
+// Run on page load and when content changes
+document.addEventListener('DOMContentLoaded', wrapArabicCharacters);
+
+// Update Arabic character wrapping in real-time when user types
+function setupLiveArabicUpdate() {
+  const typeAreas = document.querySelectorAll('.type-area');
+  
+  typeAreas.forEach(typeArea => {
+    let isTyping = false;
+    let typingTimeout;
+    
+    // Listen for keydown to detect when user starts typing
+    typeArea.addEventListener('keydown', function() {
+      isTyping = true;
+      clearTimeout(typingTimeout);
+    });
+    
+    // Listen for input events but delay processing until user stops typing
+    typeArea.addEventListener('input', function() {
+      isTyping = true;
+      clearTimeout(typingTimeout);
+      
+      // Only process after user has stopped typing for a longer period
+      typingTimeout = setTimeout(() => {
+        isTyping = false;
+        wrapArabicCharacters();
+      }, 500); // Increased delay to avoid splitting words
+    });
+    
+    // Handle paste events immediately
+    typeArea.addEventListener('paste', function() {
+      clearTimeout(typingTimeout);
+      setTimeout(() => {
+        wrapArabicCharacters();
+      }, 100);
+    });
+    
+    // Also use MutationObserver but only when not actively typing
+    const observer = new MutationObserver(function(mutations) {
+      if (!isTyping) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'childList' || mutation.type === 'characterData') {
+            clearTimeout(typeArea.arabicUpdateTimeout);
+            typeArea.arabicUpdateTimeout = setTimeout(() => {
+              wrapArabicCharacters();
+            }, 100);
+          }
+        });
+      }
+    });
+    
+    // Start observing
+    observer.observe(typeArea, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
+  });
+}
+
+// Setup live updates when DOM is ready
+document.addEventListener('DOMContentLoaded', setupLiveArabicUpdate);
   </script>
 
   </main>
