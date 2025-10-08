@@ -4,8 +4,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Safra - Multi Script Typeface</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
   <style>
-    :root { --cell-size: 60px; }
+    :root { 
+      --cell-size: 60px;
+      --glyph-vertical-offset: -3px; /* Adjust this value to align glyphs vertically in grid cells (negative moves up, positive moves down) */
+      --preview-vertical-offset: -14px; /* Adjust this value to align glyphs vertically in preview box (independent from cells) */
+    }
     
     @media (max-width: 768px) {
       :root { --cell-size: 50px; }
@@ -380,7 +387,7 @@
 
     /* ====== FOOTER CONTENT SECTION ====== */
     .footer-content-section {
-      padding: 80px 90px;
+      padding: 80px 90px 295px;
       background: #fff;
     }
 
@@ -1464,7 +1471,7 @@
         border-top: 1px solid #000;
         margin-bottom: 4rem; }
 
-        .select-header {
+        .controls-lite .select-header {
         width: calc(100vw - 36px);
         }
 
@@ -1543,7 +1550,33 @@
       
         border-top: 1px solid black;}
     }
-    .preview-box { height: calc(var(--cell-size) * 5); aspect-ratio: 1 / 1; border: 1px solid #000; display: flex; align-items: center; justify-content: center; font-size: calc(var(--cell-size) * 3.3); font-family: "Safra"; overflow: hidden; width: 100%; border-radius: 15px; }
+    .preview-box { 
+      height: calc(var(--cell-size) * 5); 
+      aspect-ratio: 1 / 1; 
+      border: 1px solid #000; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      font-size: calc(var(--cell-size) * 3.3); 
+      font-family: "Safra"; 
+      overflow: hidden; 
+      width: 100%; 
+      border-radius: 15px;
+      color: transparent; /* Hide regular text content */
+    }
+    .preview-box::before {
+      content: attr(data-preview);
+      display: block;
+      transform: translateY(var(--preview-vertical-offset, 0));
+      color: #000; /* Show only the ::before content */
+    }
+    
+    @media (max-width: 1305px) {
+      .preview-box {
+        font-size: calc(var(--cell-size) * 2.7);
+      }
+    }
+    
     .controls-lite, .details { width: 100%; font-size: 14px; margin-top: 0.9rem; }
     .details { font-family: "Safra Mono", monospace; font-size: 14px; line-height: 1.4; color: black; }
 
@@ -1623,7 +1656,25 @@
     }
     .grid-container { flex: 1; display: flex; flex-direction: column; width: 100%; /*padding-left: 90px; padding-right: 90px;*/ }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--cell-size), 1fr)); border-left: 1px solid #000; border-top: 1px solid #000; width: 100%; }
-    .char-cell { aspect-ratio: 1 / 1; border-right: 1px solid #000; border-bottom: 1px solid #000; display: flex; align-items: center; justify-content: center; cursor: pointer; font-family: "Safra"; font-weight: 400; font-size: calc(var(--cell-size) * 0.53); line-height: 1; transition: background 0.15s ease; }
+    .char-cell { 
+      aspect-ratio: 1 / 1; 
+      border-right: 1px solid #000; 
+      border-bottom: 1px solid #000; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      cursor: pointer; 
+      font-family: "Safra"; 
+      font-weight: 400; 
+      font-size: calc(var(--cell-size) * 0.53); 
+      line-height: 1; 
+      transition: background 0.15s ease; 
+    }
+    .char-cell::before {
+      content: attr(data-char);
+      display: block;
+      transform: translateY(var(--glyph-vertical-offset, 0));
+    }
     .char-cell:hover { background: #000; color: #fff; }
 
     @media (max-width: 904px) { .wrapper { flex-direction: column; 
@@ -2161,8 +2212,7 @@
       </div>
     </div>
 
-    <div class="type-area column-count-3" contenteditable="true" dir="ltr" style="font-family: Safra; font-weight: 400;">Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer...
-    </div>
+    <div class="type-area column-count-3" contenteditable="true" dir="ltr" style="font-family: Safra; font-weight: 400;">Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer...</div>
   </section>
 
   <!-- === Section 2, large multilingual headline, Sans Bold, centered === -->
@@ -2303,7 +2353,7 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
   <!-- ===== GLYPH GRID VIEWER ===== -->
   <div class="wrapper" id="fontWrapper">
     <div class="left-panel">
-      <div class="preview-box" id="preview" style="font-family: Safra; font-weight: 400;">!</div>
+      <div class="preview-box" id="preview" style="font-family: Safra; font-weight: 400;" data-preview="!"></div>
       <div class="controls-lite">
         <div class="font-wrapper">
           <div class="custom-select" id="weight-select">
@@ -2550,9 +2600,9 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
       chars.forEach(ch => {
         const cell = document.createElement('div');
         cell.className = 'char-cell';
-        cell.textContent = ch;
+        cell.setAttribute('data-char', ch);
         cell.addEventListener('mouseover', () => {
-          if (preview) preview.textContent = ch;
+          if (preview) preview.setAttribute('data-preview', ch);
           if (details) {
             const code = ch.codePointAt(0);
             details.innerHTML = `Unicode decimal: ${code}<br>Unicode hex: ${code.toString(16).toUpperCase().padStart(4,'0')}<br>HTML entity: &#x${code.toString(16).toUpperCase()};`;
@@ -4715,6 +4765,51 @@ document.addEventListener('DOMContentLoaded', setupLiveArabicUpdate);
       </div>
     </div>
   </footer>
+
+  <!-- Animated Favicon Script -->
+  <script>
+    setTimeout(() => {
+      let favicon_video_image_counter = 0;
+      let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+      let favicon_video_images = [
+  "https://favicongenerator.s3.amazonaws.com/3129f51d17a5c.png","https://favicongenerator.s3.amazonaws.com/cd721e3e8a586.png","https://favicongenerator.s3.amazonaws.com/4af6e76d5ae4a.png","https://favicongenerator.s3.amazonaws.com/e76f98c1d6448.png","https://favicongenerator.s3.amazonaws.com/bc435c23b4eaf.png","https://favicongenerator.s3.amazonaws.com/c806c3265454f.png","https://favicongenerator.s3.amazonaws.com/e95b673a3d845.png","https://favicongenerator.s3.amazonaws.com/230b1204ad4d1.png","https://favicongenerator.s3.amazonaws.com/7fd4916b0902e.png","https://favicongenerator.s3.amazonaws.com/c9dddf2a04e46.png","https://favicongenerator.s3.amazonaws.com/a13c002e6a2ab.png","https://favicongenerator.s3.amazonaws.com/e8eddb001860b.png","https://favicongenerator.s3.amazonaws.com/13f85eb453429.png","https://favicongenerator.s3.amazonaws.com/ce45ac6aa0a8a.png","https://favicongenerator.s3.amazonaws.com/fb54d04dd298f.png","https://favicongenerator.s3.amazonaws.com/4c8400f32accc.png","https://favicongenerator.s3.amazonaws.com/a792f02084f6c.png","https://favicongenerator.s3.amazonaws.com/f30e5a3031be8.png","https://favicongenerator.s3.amazonaws.com/9249f78daaefd.png","https://favicongenerator.s3.amazonaws.com/8b5a05d43b31d.png","https://favicongenerator.s3.amazonaws.com/eab8ede756262.png","https://favicongenerator.s3.amazonaws.com/2ba370948350d.png","https://favicongenerator.s3.amazonaws.com/16b955af4550b.png","https://favicongenerator.s3.amazonaws.com/cb303dec540cb.png","https://favicongenerator.s3.amazonaws.com/f071825bf109d.png","https://favicongenerator.s3.amazonaws.com/3e83da0b84f04.png","https://favicongenerator.s3.amazonaws.com/435d711b5e9c7.png","https://favicongenerator.s3.amazonaws.com/7d8c3600a547d.png","https://favicongenerator.s3.amazonaws.com/076628736ee03.png","https://favicongenerator.s3.amazonaws.com/6674b4393d2e7.png","https://favicongenerator.s3.amazonaws.com/8c6eabdaf80e.png","https://favicongenerator.s3.amazonaws.com/93129cf211ec7.png","https://favicongenerator.s3.amazonaws.com/50ab769fae9c5.png","https://favicongenerator.s3.amazonaws.com/dbd67430dfff2.png","https://favicongenerator.s3.amazonaws.com/6306b1d0f7ede.png","https://favicongenerator.s3.amazonaws.com/c80c22e1b976e.png","https://favicongenerator.s3.amazonaws.com/c0ba6ed76150a.png","https://favicongenerator.s3.amazonaws.com/e15281d3c9931.png","https://favicongenerator.s3.amazonaws.com/274f3c0d4f878.png","https://favicongenerator.s3.amazonaws.com/78a9057d69b74.png","https://favicongenerator.s3.amazonaws.com/d6db49127abf1.png","https://favicongenerator.s3.amazonaws.com/ee5bae80536bc.png","https://favicongenerator.s3.amazonaws.com/2a7e9e25fccb9.png","https://favicongenerator.s3.amazonaws.com/dc7fbe30b5d91.png","https://favicongenerator.s3.amazonaws.com/7b936d1b246c7.png","https://favicongenerator.s3.amazonaws.com/2b1c4719e18fb.png","https://favicongenerator.s3.amazonaws.com/072fa8af4155c.png","https://favicongenerator.s3.amazonaws.com/3e7bca2490671.png","https://favicongenerator.s3.amazonaws.com/f75d559c12576.png","https://favicongenerator.s3.amazonaws.com/c2dccc17f46e.png","https://favicongenerator.s3.amazonaws.com/62ff58aefdb7a.png","https://favicongenerator.s3.amazonaws.com/12342f642fd7a.png","https://favicongenerator.s3.amazonaws.com/2ce950b8443e2.png","https://favicongenerator.s3.amazonaws.com/3676501156615.png","https://favicongenerator.s3.amazonaws.com/52ac9290673ef.png","https://favicongenerator.s3.amazonaws.com/c401b341b6877.png","https://favicongenerator.s3.amazonaws.com/5408ed854b0e6.png","https://favicongenerator.s3.amazonaws.com/c9417ab290d8c.png","https://favicongenerator.s3.amazonaws.com/605db5fa28d8b.png","https://favicongenerator.s3.amazonaws.com/dbcadae5ac827.png","https://favicongenerator.s3.amazonaws.com/89497c65bc9d.png","https://favicongenerator.s3.amazonaws.com/cba217324331a.png","https://favicongenerator.s3.amazonaws.com/04989a8ce7a13.png","https://favicongenerator.s3.amazonaws.com/9f6ff1daefbc2.png","https://favicongenerator.s3.amazonaws.com/35af62beb2069.png","https://favicongenerator.s3.amazonaws.com/03dcf5523866b.png","https://favicongenerator.s3.amazonaws.com/b598d707d6b7a.png","https://favicongenerator.s3.amazonaws.com/796a5d9e5c498.png","https://favicongenerator.s3.amazonaws.com/35c427f26d961.png","https://favicongenerator.s3.amazonaws.com/0177ba9bb3cd5.png","https://favicongenerator.s3.amazonaws.com/dda651d22badc.png","https://favicongenerator.s3.amazonaws.com/ab5e3aef1f7ff.png","https://favicongenerator.s3.amazonaws.com/1922e4dfb5696.png","https://favicongenerator.s3.amazonaws.com/c95b12f64f2bf.png","https://favicongenerator.s3.amazonaws.com/a59614ebdf159.png","https://favicongenerator.s3.amazonaws.com/dfdd396620126.png","https://favicongenerator.s3.amazonaws.com/af9153abb4866.png","https://favicongenerator.s3.amazonaws.com/21d342a33e20c.png","https://favicongenerator.s3.amazonaws.com/259e6557b866e.png","https://favicongenerator.s3.amazonaws.com/586c3cb84232c.png","https://favicongenerator.s3.amazonaws.com/26ea4ab6305b6.png","https://favicongenerator.s3.amazonaws.com/80f1a5fcefd97.png","https://favicongenerator.s3.amazonaws.com/aa8010193758f.png","https://favicongenerator.s3.amazonaws.com/c62ddfd8b8fe5.png","https://favicongenerator.s3.amazonaws.com/35d778b2f5022.png","https://favicongenerator.s3.amazonaws.com/629d6922cf6f7.png","https://favicongenerator.s3.amazonaws.com/35e86ac544a1d.png","https://favicongenerator.s3.amazonaws.com/77825641eefc2.png","https://favicongenerator.s3.amazonaws.com/0472d28c319e4.png","https://favicongenerator.s3.amazonaws.com/ca2bdb73b6cc8.png","https://favicongenerator.s3.amazonaws.com/8d4ac4862754c.png","https://favicongenerator.s3.amazonaws.com/e7d5b141691a4.png","https://favicongenerator.s3.amazonaws.com/a53ffd9f417a5.png","https://favicongenerator.s3.amazonaws.com/14aa02ac80de5.png","https://favicongenerator.s3.amazonaws.com/e21f4aa715dab.png","https://favicongenerator.s3.amazonaws.com/e393c22a4de28.png","https://favicongenerator.s3.amazonaws.com/69bff0d066f14.png","https://favicongenerator.s3.amazonaws.com/43db7d93ee14c.png","https://favicongenerator.s3.amazonaws.com/86859d59c20a7.png","https://favicongenerator.s3.amazonaws.com/059f6f8183db8.png","https://favicongenerator.s3.amazonaws.com/2016a34618202.png","https://favicongenerator.s3.amazonaws.com/91ee3568cfd6c.png","https://favicongenerator.s3.amazonaws.com/fd9d0e98cb80d.png"];
+      async function favicon_video_to_data_url(url, callback) {
+        let xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          let reader = new FileReader();
+          reader.onloadend = function () {
+            callback(reader.result);
+          };
+          reader.readAsDataURL(xhr.response);
+        };
+        xhr.open("GET", url);
+        xhr.responseType = "blob";
+        xhr.send();
+      }
+    
+      let favicon_video_loaded_images = [];
+    
+      favicon_video_images.map((url, idx) => {
+        favicon_video_to_data_url(url, function (dataUrl) {
+          favicon_video_loaded_images[idx] = dataUrl;
+        });
+      });
+    
+      setInterval(function () {
+        if(favicon_video_loaded_images[favicon_video_image_counter]) {
+          favicon_video_icon_tag.href = favicon_video_loaded_images[
+            favicon_video_image_counter
+          ].replace("application/octet-stream", "image/png");
+        }
+        if (
+          favicon_video_image_counter ==
+          favicon_video_loaded_images.length - 1
+        )
+          favicon_video_image_counter = 0;
+        else favicon_video_image_counter++;
+      }, 50);
+    }, 1500);
+  </script>
 
 </body>
 </html>
