@@ -1629,7 +1629,7 @@
     /* ====== TYPE TESTER SECTIONS ====== */
     .type-tester { margin: 0 auto 7rem auto; /*max-width: 1200px;*/ }
 
-    .controls { display: flex; flex-wrap: wrap-reverse; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.9rem 0; /*border-top: 1px solid #000; */ border-bottom: 1px solid #000; margin-bottom: 6rem; position: relative; z-index: 10; background: #fff; }
+    .controls { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.9rem 0; /*border-top: 1px solid #000; */ /*border-bottom: 1px solid #000; */margin-bottom: 6rem; position: relative; z-index: 10; background: #fff; }
 
     .sliders-wrapper { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
     label.label-custom { font-family: "Safra Mono"; font-size: 14px; letter-spacing: 0; }
@@ -1649,8 +1649,10 @@
       .type-tester { margin: 0 auto 5rem auto; /*max-width: 1200px;*/ }
       .controls { 
         /*border-top: 1px solid #000;*/
-        border-bottom:none;
-        margin-bottom: 4rem; }
+        margin-bottom: 4rem;
+        display: flex;
+        flex-direction: column-reverse;
+      }
 
         .controls-lite .select-header {
         width: calc(100vw - 36px);
@@ -1754,7 +1756,7 @@
       .left-panel { width: min(calc(var(--cell-size) * 6), 100%);
       
       
-        border-top: 1px solid black;}
+        /*border-top: 1px solid black;}*/
     }
     .preview-box { 
       height: calc(var(--cell-size) * 5); 
