@@ -333,9 +333,9 @@
     }
     
     .mobile-overlay .close-btn {
-      position: relative;
-      top: 0;
-      right: 0;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
       background: none;
       border: none;
       cursor: pointer;
@@ -4410,7 +4410,7 @@ function initMobileMenu() {
     display: none;
   `;
   
-  // Only show on mobile
+  // Show on mobile by default
   if (window.innerWidth <= 768) {
     duplicateCircle.style.display = 'block';
   }
