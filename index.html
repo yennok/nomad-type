@@ -215,6 +215,153 @@
       color: #000;
     }
 
+    /* Mobile sticky nav styles */
+    @media (max-width: 768px) {
+      .sticky-nav {
+        left: 36px !important;
+        right: auto !important;
+        top: 30px !important;
+        transition: none !important;
+      }
+      .nav-links {
+        display: none !important;
+      }
+      .nav-brand {
+        transition: none !important;
+      }
+      
+      /* Disable left sticky-green-circle on mobile */
+      .sticky-green-circle {
+        pointer-events: none !important;
+      }
+      
+      /* Duplicate sticky-green-circle on the right side for mobile */
+      .sticky-green-circle::after {
+        content: '';
+        position: fixed;
+        top: 28px;
+        right: 27px;
+        width: 36px;
+        height: 35px;
+        background: #fff;
+        border: 1px solid #000;
+        border-radius: 20px;
+        z-index: 1003;
+        display: block;
+        cursor: pointer;
+      }
+      
+      /* Add hamburger icon to the duplicate circle */
+      .sticky-green-circle::before {
+        content: '';
+        position: fixed;
+        top: 46.5px; /* 28px (top of circle) + 17.5px (half of 35px height) */
+        right: 10px; /* 27px (right of circle) + 18px (half of 36px width) */
+        transform: translate(-50%, -50%);
+        width: 36px;
+        height: 35px;
+        background-image: url('assets/hamburger.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 1;
+        z-index: 1004;
+        display: block;
+        pointer-events: none;
+      }
+    }
+
+    /* Mobile overlay menu */
+    .mobile-overlay {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100%;
+      background: #ff0000;
+      z-index: 1005;
+      transition: right 0.3s ease;
+    }
+    
+    .mobile-overlay.active {
+      right: 0;
+    }
+    
+    .mobile-overlay-content {
+      padding: 60px 30px 30px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    .mobile-menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 60px;
+    }
+    
+    .mobile-menu-header h2 {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #000;
+      margin: 0;
+    }
+    
+    .mobile-menu-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      flex: 1;
+    }
+    
+    .mobile-menu-link {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: #000;
+      text-decoration: none;
+    }
+    
+    .mobile-menu-footer p {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+    }
+    
+    .mobile-overlay .close-btn {
+      position: relative;
+      top: 0;
+      right: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      width: 13px;
+      height: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url('assets/close.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin-left: auto;
+    }
+    
+    /* Mobile carousel indicators */
+    .carousel-indicators {
+      justify-content: center !important;
+    }
+    
+    .indicator {
+      width: 10px !important;
+      height: 10px !important;
+    }
+
     .nav-links {
       display: flex;
       gap: 20px;
@@ -569,6 +716,30 @@
       top: 29px; 
       bottom: auto; 
       right: 29px; 
+    }
+
+    /* Mobile sticky buttons - always stick to bottom */
+    @media (max-width: 768px) {
+      .cover-buttons {
+        position: fixed !important;
+        bottom: 0 !important;
+        top: auto !important;
+        right: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        justify-content: center;
+        gap: 18px;
+        padding: 18px;
+        margin: 0;
+        background: #fff;
+        border-top: 1px solid #000;
+        transition: opacity 0.3s ease;
+        opacity: 1;
+      }
+      .cover-buttons .btn {
+        flex: 1;
+        max-width: none;
+      }
     }
 
     /* ====== INVERT TOGGLE BUTTON ====== */
@@ -1943,7 +2114,7 @@
       .cover-header { 
         margin: 18px; 
         height: calc(100vh - 20px); /* Fallback for browsers that do not support Custom Properties */
-        height: calc(var(--vh, 1vh) * 100 - 36px); 
+        height: calc(var(--vh, 1vh) * 100 - 106px); 
         border-radius: 12px; 
       }
       .cover-title .arabic, .cover-title .latin, .cover-title .hebrew { font-size: 78px; letter-spacing:-2px; }
@@ -2101,6 +2272,27 @@
     </div>
   </nav>
 
+  <!-- ====== MOBILE OVERLAY MENU ====== -->
+  <div class="mobile-overlay" id="mobileOverlay">
+    <div class="mobile-overlay-content">
+      <div class="mobile-menu-header">
+        <h2>Nomad Type</h2>
+        <button class="close-btn" id="closeMobileMenu"></button>
+      </div>
+      <nav class="mobile-menu-nav">
+        <a href="#fonts" class="mobile-menu-link">Typefaces</a>
+        <a href="#" class="mobile-menu-link">FAQ</a>
+        <a href="#" class="mobile-menu-link">Licensing</a>
+        <a href="#journal" class="mobile-menu-link">Journal</a>
+        <a href="#about" class="mobile-menu-link">About</a>
+        <a href="#" class="mobile-menu-link">Trial Fonts</a>
+      </nav>
+      <div class="mobile-menu-footer">
+        <p>© Nomad Type. All Rights Reserved 2025</p>
+      </div>
+    </div>
+  </div>
+
   <!-- ====== COVER HEADER ====== -->
   <header class="cover-header">
     <div class="parallax-content">
@@ -2205,7 +2397,7 @@
           </select>
         </div>
         <div class="align-buttons" role="group" aria-label="Align">
-          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-left is-active"   type="button" data-align="left" aria-label="Align left"></button>
           <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
           <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
         </div>
@@ -2686,6 +2878,23 @@ function initParallax() {
       secondaryBtn.classList.add('scrolled');
     } else {
       secondaryBtn.classList.remove('scrolled');
+    }
+    
+    // Mobile: Fade out sticky buttons after the specimen section
+    if (window.innerWidth <= 768) {
+      const specimenSection = document.querySelector('.specimen-section');
+      if (specimenSection) {
+        const sectionBottom = specimenSection.offsetTop + specimenSection.offsetHeight;
+        const scrollThreshold = sectionBottom + 0; // Start fading right after specimen section ends
+        
+        if (scrolled >= scrollThreshold) {
+          buttons.style.opacity = '0';
+          buttons.style.pointerEvents = 'none';
+        } else {
+          buttons.style.opacity = '1';
+          buttons.style.pointerEvents = 'auto';
+        }
+      }
     }
     
     // Simple sticky behavior: when buttons reach 29px from top, make them sticky
@@ -4178,6 +4387,64 @@ function initScrollButtonClicks() {
   });
 }
 
+// ====== MOBILE MENU ======
+function initMobileMenu() {
+  const stickyGreenCircle = document.querySelector('.sticky-green-circle');
+  const mobileOverlay = document.getElementById('mobileOverlay');
+  const closeBtn = document.getElementById('closeMobileMenu');
+  
+  if (!stickyGreenCircle || !mobileOverlay || !closeBtn) return;
+  
+  // Create a clickable area for the duplicate circle (::after pseudo-element)
+  const duplicateCircle = document.createElement('div');
+  duplicateCircle.style.cssText = `
+    position: fixed;
+    top: 28px;
+    right: 27px;
+    width: 36px;
+    height: 35px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1006;
+    display: none;
+  `;
+  
+  // Only show on mobile
+  if (window.innerWidth <= 768) {
+    duplicateCircle.style.display = 'block';
+  }
+  
+  document.body.appendChild(duplicateCircle);
+  
+  // Open menu
+  duplicateCircle.addEventListener('click', () => {
+    mobileOverlay.classList.add('active');
+  });
+  
+  // Close menu
+  closeBtn.addEventListener('click', () => {
+    mobileOverlay.classList.remove('active');
+  });
+  
+  // Close menu when clicking overlay background
+  mobileOverlay.addEventListener('click', (e) => {
+    if (e.target === mobileOverlay) {
+      mobileOverlay.classList.remove('active');
+    }
+  });
+  
+  // Handle window resize
+  window.addEventListener('resize', () => {
+    if (window.innerWidth <= 768) {
+      duplicateCircle.style.display = 'block';
+    } else {
+      duplicateCircle.style.display = 'none';
+      mobileOverlay.classList.remove('active');
+    }
+  });
+}
+
 function boot() { 
   initStickyNav();
   initScrollButtons();
@@ -4189,6 +4456,7 @@ function boot() {
   initResponsiveSection();
   initCarousels();
   initInvertToggle();
+  initMobileMenu();
   initCustomDropdown();
   initOverlayForms();
   initCollapsibleSections();
