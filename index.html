@@ -235,9 +235,8 @@
         pointer-events: none !important;
       }
       
-      /* Duplicate sticky-green-circle on the right side for mobile */
-      .sticky-green-circle::after {
-        content: '';
+      /* Independent right hamburger circle for mobile */
+      .mobile-hamburger-circle {
         position: fixed;
         top: 28px;
         right: 27px;
@@ -247,16 +246,15 @@
         border: 1px solid #000;
         border-radius: 20px;
         z-index: 1003;
-        display: block;
         cursor: pointer;
+        display: none;
       }
       
-      /* Add hamburger icon to the duplicate circle */
-      .sticky-green-circle::before {
+      .mobile-hamburger-circle::before {
         content: '';
-        position: fixed;
-        top: 46.5px; /* 28px (top of circle) + 17.5px (half of 35px height) */
-        right: 10px; /* 27px (right of circle) + 18px (half of 36px width) */
+        position: absolute;
+        top: 50%;
+        left: 50%;
         transform: translate(-50%, -50%);
         width: 36px;
         height: 35px;
@@ -264,10 +262,6 @@
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        opacity: 1;
-        z-index: 1004;
-        display: block;
-        pointer-events: none;
       }
     }
 
@@ -2271,6 +2265,9 @@
       <a href="#about" class="nav-link">About</a>
     </div>
   </nav>
+
+  <!-- ====== MOBILE HAMBURGER CIRCLE ====== -->
+  <div class="mobile-hamburger-circle" id="mobileHamburgerCircle"></div>
 
   <!-- ====== MOBILE OVERLAY MENU ====== -->
   <div class="mobile-overlay" id="mobileOverlay">
@@ -4389,36 +4386,27 @@ function initScrollButtonClicks() {
 
 // ====== MOBILE MENU ======
 function initMobileMenu() {
-  const stickyGreenCircle = document.querySelector('.sticky-green-circle');
+  const mobileHamburgerCircle = document.getElementById('mobileHamburgerCircle');
   const mobileOverlay = document.getElementById('mobileOverlay');
   const closeBtn = document.getElementById('closeMobileMenu');
   
-  if (!stickyGreenCircle || !mobileOverlay || !closeBtn) return;
+  if (!mobileHamburgerCircle || !mobileOverlay || !closeBtn) return;
   
-  // Create a clickable area for the duplicate circle (::after pseudo-element)
-  const duplicateCircle = document.createElement('div');
-  duplicateCircle.style.cssText = `
-    position: fixed;
-    top: 28px;
-    right: 27px;
-    width: 36px;
-    height: 35px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    z-index: 1006;
-    display: none;
-  `;
-  
-  // Show on mobile by default
-  if (window.innerWidth <= 768) {
-    duplicateCircle.style.display = 'block';
+  // Show/hide based on screen size
+  function updateVisibility() {
+    if (window.innerWidth <= 768) {
+      mobileHamburgerCircle.style.display = 'block';
+    } else {
+      mobileHamburgerCircle.style.display = 'none';
+      mobileOverlay.classList.remove('active');
+    }
   }
   
-  document.body.appendChild(duplicateCircle);
+  // Initial visibility check
+  updateVisibility();
   
   // Open menu
-  duplicateCircle.addEventListener('click', () => {
+  mobileHamburgerCircle.addEventListener('click', () => {
     mobileOverlay.classList.add('active');
   });
   
@@ -4435,14 +4423,7 @@ function initMobileMenu() {
   });
   
   // Handle window resize
-  window.addEventListener('resize', () => {
-    if (window.innerWidth <= 768) {
-      duplicateCircle.style.display = 'block';
-    } else {
-      duplicateCircle.style.display = 'none';
-      mobileOverlay.classList.remove('active');
-    }
-  });
+  window.addEventListener('resize', updateVisibility);
 }
 
 function boot() { 
