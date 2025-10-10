@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>Safra - Multi Script Typeface</title>
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
@@ -1754,7 +1754,7 @@
       .left-panel { width: min(calc(var(--cell-size) * 6), 100%);
       
       
-        border-top: 1px solid black;}
+       /* border-top: 1px solid black;*/}
     }
     .preview-box { 
       height: calc(var(--cell-size) * 5); 
@@ -2934,6 +2934,15 @@ function initParallax() {
       if (specimenSection) {
         const sectionBottom = specimenSection.offsetTop + specimenSection.offsetHeight;
         const scrollThreshold = sectionBottom + 0; // Start fading right after specimen section ends
+        
+        // Debug logging
+        console.log('Mobile buttons debug:', {
+          scrolled: scrolled,
+          sectionBottom: sectionBottom,
+          scrollThreshold: scrollThreshold,
+          shouldFadeOut: scrolled >= scrollThreshold,
+          buttonsOpacity: buttons.style.opacity
+        });
         
         if (scrolled >= scrollThreshold) {
           buttons.style.opacity = '0';
