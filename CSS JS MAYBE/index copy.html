@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>Safra - Multi Script Typeface</title>
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
@@ -1629,7 +1629,7 @@
     /* ====== TYPE TESTER SECTIONS ====== */
     .type-tester { margin: 0 auto 7rem auto; /*max-width: 1200px;*/ }
 
-    .controls { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.9rem 0; /*border-top: 1px solid #000; */ /*border-bottom: 1px solid #000; */margin-bottom: 6rem; position: relative; z-index: 10; background: #fff; }
+    .controls { display: flex; flex-wrap: wrap-reverse; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.9rem 0; /*border-top: 1px solid #000; */ border-bottom: 1px solid #000; margin-bottom: 6rem; position: relative; z-index: 10; background: #fff; }
 
     .sliders-wrapper { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
     label.label-custom { font-family: "Safra Mono"; font-size: 14px; letter-spacing: 0; }
@@ -1649,10 +1649,8 @@
       .type-tester { margin: 0 auto 5rem auto; /*max-width: 1200px;*/ }
       .controls { 
         /*border-top: 1px solid #000;*/
-        margin-bottom: 4rem;
-        display: flex;
-        flex-direction: column-reverse;
-      }
+        border-bottom:none;
+        margin-bottom: 4rem; }
 
         .controls-lite .select-header {
         width: calc(100vw - 36px);
@@ -1693,11 +1691,14 @@
         width: 20px;
         height: 20px;
         margin-top: -9.5px;
+        box-shadow: none;
+        -webkit-box-shadow: none;
       }
+      
     }
 
     .align-buttons { display: flex; gap: 0rem; }
-    .icon-btn { width: 33px; height: 33px; border: 1px solid #000; background-color: #fff; cursor: pointer; background-repeat: no-repeat; background-position: center; background-size: 16px; padding: 0; line-height: 17px; margin-left: -1px; }
+    .icon-btn { width: 33px; height: 33px; border: 1px solid #000; background-color: #fff; cursor: pointer; background-repeat: no-repeat; background-position: center; background-size: 16px; padding: 0; line-height: 17px; margin-left: -1px; touch-action: manipulation; }
     .icon-btn:first-child { margin-left: 0; }
     .icon-btn.is-active {  
       filter: invert(1); 
@@ -1740,6 +1741,13 @@
       font-size: 30px;
       line-height: 1.2;
     }
+    
+    /* Override for mobile */
+    @media (max-width: 768px) {
+      .type-tester:nth-child(2) .type-area {
+        font-size: 21px;
+      }
+    }
     .type-area::selection { background: yellow; color: black; }
 
     .column-count-1 { column-count: 1; column-gap: 2rem; }
@@ -1756,7 +1764,7 @@
       .left-panel { width: min(calc(var(--cell-size) * 6), 100%);
       
       
-        /*border-top: 1px solid black;}*/
+       /* border-top: 1px solid black;*/}
     }
     .preview-box { 
       height: calc(var(--cell-size) * 5); 
@@ -2936,6 +2944,15 @@ function initParallax() {
       if (specimenSection) {
         const sectionBottom = specimenSection.offsetTop + specimenSection.offsetHeight;
         const scrollThreshold = sectionBottom + 0; // Start fading right after specimen section ends
+        
+        // Debug logging
+        console.log('Mobile buttons debug:', {
+          scrolled: scrolled,
+          sectionBottom: sectionBottom,
+          scrollThreshold: scrollThreshold,
+          shouldFadeOut: scrolled >= scrollThreshold,
+          buttonsOpacity: buttons.style.opacity
+        });
         
         if (scrolled >= scrollThreshold) {
           buttons.style.opacity = '0';

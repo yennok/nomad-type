@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Safra - Multi Script Typeface</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="gsap-public/minified/gsap.min.js"></script>
+  <script src="gsap-public/minified/ScrollTrigger.min.js"></script>
+  <script src="gsap-public/minified/Draggable.min.js"></script>
+  <script src="gsap-public/minified/InertiaPlugin.min.js"></script>
+</head>
+<body>
+  <!-- ====== COVER HEADER ====== -->
+  <header class="cover-header">
+    <div class="overlay"></div>
+    <div class="overlay-content">
+      <div class="content-wrapper">
+        <div class="multilingual-text">
+          <div class="arabic-text">صفرا</div>
+          <div class="latin-text">Safra</div>
+          <div class="hebrew-text">צפרה</div>
+        </div>
+        <div class="cover-buttons">
+          <a href="#" class="btn btn-primary" id="trialBtn">Trial Fonts</a>
+          <a href="#" class="btn btn-secondary" id="buyBtn">Buy</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====== STICKY TOP SECTION ====== -->
+  <div class="sticky-top-section">
+    <div class="svg-shape left"></div>
+    <div class="svg-shape center"></div>
+    <div class="svg-shape right"></div>
+  </div>
+
+  <!-- ====== STICKY GREEN LINE ====== -->
+  <div class="sticky-green-line"></div>
+
+  <!-- ====== STICKY GREEN CIRCLE ====== -->
+  <div class="sticky-green-circle">
+    <div class="circle-hamburger"></div>
+  </div>
+
+  <!-- ====== STICKY NAVIGATION MENU ====== -->
+  <nav class="sticky-nav">
+    <div class="nav-brand">Nomad Type</div>
+    <div class="nav-links">
+      <a href="#fonts" class="nav-link">Typefaces</a>
+      <a href="#journal" class="nav-link">Journal</a>
+      <a href="#about" class="nav-link">About</a>
+    </div>
+  </nav>
+
+  <!-- ====== MOBILE HAMBURGER CIRCLE ====== -->
+  <div class="mobile-hamburger-circle" id="mobileHamburgerCircle"></div>
+
+  <!-- ====== MOBILE OVERLAY MENU ====== -->
+  <div class="mobile-overlay" id="mobileOverlay">
+    <div class="mobile-overlay-content">
+      <div class="mobile-menu-header">
+        <h2>Nomad Type</h2>
+        <button class="close-btn" id="closeMobileMenu"></button>
+      </div>
+            <nav class="mobile-menu-nav">
+              <a href="#fonts" class="mobile-menu-link">Typefaces</a>
+              <a href="#" class="mobile-menu-link">Licensing</a>
+              <a href="#about" class="mobile-menu-link">About</a>
+              <a href="#journal" class="mobile-menu-link">Journal</a>
+              <a href="#" class="mobile-menu-link">Trial Fonts</a>
+              <a href="#" class="mobile-menu-link">FAQ</a>
+            </nav>
+      <div class="mobile-menu-footer">
+        <p>© Nomad Type. All Rights Reserved 2025</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== MAIN CONTENT ====== -->
+  <main class="content-wrapper">
+    <!-- ====== INTRO SECTION ====== -->
+    <section class="intro-section">
+      <div class="intro-content">
+        <p>Safra is a multi-script typeface that harmonizes Arabic, Latin, and Hebrew scripts. Designed to bridge cultural and linguistic boundaries, Safra ensures consistent typographic rhythm across different writing systems.</p>
+      </div>
+    </section>
+
+    <!-- ====== IN USE SECTION ====== -->
+    <section class="in-use-section">
+      <h2>In Use</h2>
+      <div class="in-use-content">
+        <div class="image-grid">
+          <img src="photos/safra/1.jpg" alt="Safra in use" loading="lazy">
+          <img src="photos/safra/2.jpg" alt="Safra in use" loading="lazy">
+          <img src="photos/safra/3.jpg" alt="Safra in use" loading="lazy">
+          <img src="photos/safra/4.jpg" alt="Safra in use" loading="lazy">
+          <img src="photos/safra/5.jpg" alt="Safra in use" loading="lazy">
+          <img src="photos/safra/6.jpg" alt="Safra in use" loading="lazy">
+          <img src="photos/safra/7.jpg" alt="Safra in use" loading="lazy">
+          <img src="photos/safra/8.jpg" alt="Safra in use" loading="lazy">
+          <img src="photos/safra/9.jpg" alt="Safra in use" loading="lazy">
+          <img src="photos/safra/10.jpg" alt="Safra in use" loading="lazy">
+          <img src="photos/safra/11.jpg" alt="Safra in use" loading="lazy">
+          <img src="photos/safra/12.jpg" alt="Safra in use" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== TYPE TESTER SECTIONS ====== -->
+    <!-- === Section 1, multi column text, Serif === -->
+    <section class="type-tester">
+      <div class="controls">
+        <div class="sliders-wrapper">
+          <label class="label-custom" for="size-1">Size</label>
+          <input class="size" id="size-1" type="range" min="16" max="512" />
+          <label class="label-custom" for="leading-1">Leading</label>
+          <input class="leading" id="leading-1" type="range" min="0.5" max="2" step="0.05" />
+          <label class="label-custom" for="spacing-1">Letter Spacing</label>
+          <input class="spacing" id="spacing-1" type="range" min="-0.1" max="0.1" step="0.01" />
+        </div>
+        <div class="font-align-wrapper">
+          <div class="font-wrapper">
+            <select class="font-select" id="font-1">
+              <option value="Sugar Serif">Sugar Serif</option>
+              <option value="Sugar Sans">Sugar Sans</option>
+              <option value="Safra Sans">Safra Sans</option>
+              <option value="Safra">Safra</option>
+              <option value="Safra Mono">Safra Mono</option>
+            </select>
+          </div>
+          <div class="align-buttons">
+            <button class="icon-btn align-left" data-align="left" style="background-image: url('assets/align-left.svg');"></button>
+            <button class="icon-btn align-center is-active" data-align="center" style="background-image: url('assets/align-center.svg');"></button>
+            <button class="icon-btn align-right" data-align="right" style="background-image: url('assets/align-right.svg');"></button>
+          </div>
+        </div>
+      </div>
+      <div class="type-area" contenteditable="true" id="text-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+    </section>
+
+    <!-- === Section 2, large multilingual headline, Sans Bold, centered === -->
+    <section class="type-tester responsive-section">
+      <div class="controls">
+        <div class="sliders-wrapper">
+          <label class="label-custom" for="size-2">Size</label>
+          <input class="size" id="size-2" type="range" min="16" max="512" />
+          <label class="label-custom" for="leading-2">Leading</label>
+          <input class="leading" id="leading-2" type="range" min="0.5" max="2" step="0.05" />
+          <label class="label-custom" for="spacing-2">Letter Spacing</label>
+          <input class="spacing" id="spacing-2" type="range" min="-0.1" max="0.1" step="0.01" />
+        </div>
+        <div class="font-align-wrapper">
+          <div class="font-wrapper">
+            <select class="font-select" id="font-2">
+              <option value="Sugar Serif">Sugar Serif</option>
+              <option value="Sugar Sans">Sugar Sans</option>
+              <option value="Safra Sans" selected>Safra Sans</option>
+              <option value="Safra">Safra</option>
+              <option value="Safra Mono">Safra Mono</option>
+            </select>
+          </div>
+          <div class="align-buttons">
+            <button class="icon-btn align-left" data-align="left" style="background-image: url('assets/align-left.svg');"></button>
+            <button class="icon-btn align-center is-active" data-align="center" style="background-image: url('assets/align-center.svg');"></button>
+            <button class="icon-btn align-right" data-align="right" style="background-image: url('assets/align-right.svg');"></button>
+          </div>
+        </div>
+      </div>
+      <div class="type-area" contenteditable="true" id="text-2">صفرا Safra צפרה</div>
+    </section>
+
+    <!-- === Section 3, two columns, Sans Regular, long text === -->
+    <section class="type-tester">
+      <div class="controls">
+        <div class="sliders-wrapper">
+          <label class="label-custom" for="size-3">Size</label>
+          <input class="size" id="size-3" type="range" min="16" max="512" />
+          <label class="label-custom" for="leading-3">Leading</label>
+          <input class="leading" id="leading-3" type="range" min="0.5" max="2" step="0.05" />
+          <label class="label-custom" for="spacing-3">Letter Spacing</label>
+          <input class="spacing" id="spacing-3" type="range" min="-0.1" max="0.1" step="0.01" />
+        </div>
+        <div class="font-align-wrapper">
+          <div class="font-wrapper">
+            <select class="font-select" id="font-3">
+              <option value="Sugar Serif">Sugar Serif</option>
+              <option value="Sugar Sans">Sugar Sans</option>
+              <option value="Safra Sans" selected>Safra Sans</option>
+              <option value="Safra">Safra</option>
+              <option value="Safra Mono">Safra Mono</option>
+            </select>
+          </div>
+          <div class="align-buttons">
+            <button class="icon-btn align-left" data-align="left" style="background-image: url('assets/align-left.svg');"></button>
+            <button class="icon-btn align-center is-active" data-align="center" style="background-image: url('assets/align-center.svg');"></button>
+            <button class="icon-btn align-right" data-align="right" style="background-image: url('assets/align-right.svg');"></button>
+          </div>
+        </div>
+      </div>
+      <div class="type-area" contenteditable="true" id="text-3">The design process for Safra involved extensive research into the visual characteristics of Arabic, Latin, and Hebrew scripts. Each script has its own rhythm, proportions, and aesthetic qualities that needed to be harmonized while maintaining their individual character. The result is a typeface that feels native to all three writing systems, creating a seamless reading experience across different languages and cultures.</div>
+    </section>
+
+    <!-- === Section 4, responsive sans (duplicate of section 2) === -->
+    <section id="fonts" class="type-tester responsive-section">
+      <div class="controls">
+        <div class="sliders-wrapper">
+          <label class="label-custom" for="size-4">Size</label>
+          <input class="size" id="size-4" type="range" min="16" max="512" />
+          <label class="label-custom" for="leading-4">Leading</label>
+          <input class="leading" id="leading-4" type="range" min="0.5" max="2" step="0.05" />
+          <label class="label-custom" for="spacing-4">Letter Spacing</label>
+          <input class="spacing" id="spacing-4" type="range" min="-0.1" max="0.1" step="0.01" />
+        </div>
+        <div class="font-align-wrapper">
+          <div class="font-wrapper">
+            <select class="font-select" id="font-4">
+              <option value="Sugar Serif">Sugar Serif</option>
+              <option value="Sugar Sans">Sugar Sans</option>
+              <option value="Safra Sans" selected>Safra Sans</option>
+              <option value="Safra">Safra</option>
+              <option value="Safra Mono">Safra Mono</option>
+            </select>
+          </div>
+          <div class="align-buttons">
+            <button class="icon-btn align-left" data-align="left" style="background-image: url('assets/align-left.svg');"></button>
+            <button class="icon-btn align-center is-active" data-align="center" style="background-image: url('assets/align-center.svg');"></button>
+            <button class="icon-btn align-right" data-align="right" style="background-image: url('assets/align-right.svg');"></button>
+          </div>
+        </div>
+      </div>
+      <div class="type-area" contenteditable="true" id="text-4">صفرا Safra צפרה</div>
+    </section>
+
+    <!-- ====== SPECIMEN SECTION ====== -->
+    <section class="specimen-section">
+      <h2>Specimen</h2>
+      <div class="specimen-carousels">
+        <div class="specimen-carousel">
+          <div class="carousel-container">
+            <div class="carousel-slide active">
+              <img src="photos/safra/1.jpg" alt="Specimen 1" loading="lazy">
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/2.jpg" alt="Specimen 2" loading="lazy">
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/3.jpg" alt="Specimen 3" loading="lazy">
+            </div>
+          </div>
+          <div class="carousel-indicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+          </div>
+        </div>
+        <div class="specimen-carousel">
+          <div class="carousel-container">
+            <div class="carousel-slide active">
+              <img src="photos/safra/4.jpg" alt="Specimen 4" loading="lazy">
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/5.jpg" alt="Specimen 5" loading="lazy">
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/6.jpg" alt="Specimen 6" loading="lazy">
+            </div>
+          </div>
+          <div class="carousel-indicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== GLYPH GRID SECTION ====== -->
+    <section class="glyph-grid-section">
+      <div class="glyph-grid-container">
+        <div class="left-panel">
+          <div class="preview-box" data-preview="!"></div>
+          <div class="grid-container" id="glyphGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== SCROLL BUTTONS SECTION ====== -->
+    <section class="scroll-buttons-section">
+      <div class="scroll-buttons-text">
+        <h2>Ready to get started?</h2>
+        <p>Download trial fonts or purchase the complete family.</p>
+      </div>
+      <div class="scroll-buttons">
+        <button class="scroll-btn btn-primary" id="scrollTrialBtn">Trial Fonts</button>
+        <button class="scroll-btn btn-secondary" id="scrollBuyBtn">Buy</button>
+      </div>
+    </section>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="footer">
+      <div class="footer-content-section">
+        <div class="footer-content-wrapper">
+          <div class="footer-column">
+            <h3>Nomad Type</h3>
+            <p>We create typefaces that bridge cultures and languages, making typography accessible across different scripts and writing systems.</p>
+          </div>
+          <div class="footer-column">
+            <h3>Licensing</h3>
+            <p>Licensing should be straightforward. Download a free trial to test our fonts, and when it's time to publish, choose the license that fits your needs — desktop, web, or app. From students to studios, we keep it clear and fair so you can focus on your work.</p>
+          </div>
+          <div class="footer-column">
+            <h3>Collaborations</h3>
+            <p>We're always open to conversations with fellow type designers — whether it's about multilingual design, sharing questions, or exploring collaboration. Feel free to reach out at nir@yennok.com.</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-nav">
+        <div class="footer-nav-wrapper">
+          <a href="#" class="footer-nav-link">Typefaces</a>
+          <a href="#" class="footer-nav-link">FAQ</a>
+          <a href="#" class="footer-nav-link">Licensing</a>
+          <a href="#" class="footer-nav-link">Journal</a>
+          <a href="#" class="footer-nav-link">About</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ====== TRIAL OVERLAY ====== -->
+  <div class="overlay" id="trialOverlay">
+    <div class="overlay-content">
+      <button class="close-btn" id="closeTrialOverlay"></button>
+      <h2>Download Trial Fonts</h2>
+      <form id="trialForm">
+        <div class="form-group">
+          <label for="trialName">Name</label>
+          <input type="text" id="trialName" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="trialEmail">Email</label>
+          <input type="email" id="trialEmail" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="trialCompany">Company (Optional)</label>
+          <input type="text" id="trialCompany" name="company">
+        </div>
+        <div class="consent-group">
+          <label class="consent-label">
+            <input type="checkbox" name="consent">
+            <span class="checkmark"></span>
+            <span class="consent-text">I'm happy to be contacted about Safra licensing and to receive occasional updates. No spam – I can unsubscribe anytime.</span>
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Download Trial</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ====== BUY OVERLAY ====== -->
+  <div class="overlay" id="buyOverlay">
+    <div class="overlay-content">
+      <button class="close-btn" id="closeBuyOverlay"></button>
+      <h2>Purchase Fonts</h2>
+      <form id="buyForm">
+        <div class="form-group">
+          <label for="buyName">Name</label>
+          <input type="text" id="buyName" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="buyEmail">Email</label>
+          <input type="email" id="buyEmail" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="buyCompany">Company (Optional)</label>
+          <input type="text" id="buyCompany" name="company">
+        </div>
+        <div class="consent-group">
+          <label class="consent-label">
+            <input type="checkbox" name="consent">
+            <span class="checkmark"></span>
+            <span class="consent-text">I'm happy to be contacted about Safra licensing and to receive occasional updates. No spam – I can unsubscribe anytime.</span>
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Purchase</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
