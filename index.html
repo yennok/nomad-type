@@ -1691,11 +1691,13 @@
         width: 20px;
         height: 20px;
         margin-top: -9.5px;
+        box-shadow: none;
+        -webkit-box-shadow: none;
       }
     }
 
     .align-buttons { display: flex; gap: 0rem; }
-    .icon-btn { width: 33px; height: 33px; border: 1px solid #000; background-color: #fff; cursor: pointer; background-repeat: no-repeat; background-position: center; background-size: 16px; padding: 0; line-height: 17px; margin-left: -1px; }
+    .icon-btn { width: 33px; height: 33px; border: 1px solid #000; background-color: #fff; cursor: pointer; background-repeat: no-repeat; background-position: center; background-size: 16px; padding: 0; line-height: 17px; margin-left: -1px; touch-action: manipulation; }
     .icon-btn:first-child { margin-left: 0; }
     .icon-btn.is-active {  
       filter: invert(1); 
