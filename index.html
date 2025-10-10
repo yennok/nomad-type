@@ -1694,6 +1694,7 @@
         box-shadow: none;
         -webkit-box-shadow: none;
       }
+      
     }
 
     .align-buttons { display: flex; gap: 0rem; }
@@ -1739,6 +1740,13 @@
     .type-tester:nth-child(2) .type-area {
       font-size: 30px;
       line-height: 1.2;
+    }
+    
+    /* Override for mobile */
+    @media (max-width: 768px) {
+      .type-tester:nth-child(2) .type-area {
+        font-size: 21px;
+      }
     }
     .type-area::selection { background: yellow; color: black; }
 
