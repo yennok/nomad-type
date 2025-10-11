@@ -269,15 +269,17 @@
       height: 100%;
       background: #ff0000;
       z-index: 1005;
-      transition: right 0.6s ease-in-out;
+      border-left: 1px solid #000;
+      transition: right 0.6s ease-in-out, border-left-color 0.6s ease-in-out;
     }
     
     .mobile-overlay.active {
       right: 0;
+      border-left-color: transparent;
     }
     
     .mobile-overlay-content {
-      padding: 60px 0px 30px;
+      padding: 16px 0px 30px;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -288,7 +290,7 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 60px;
+      margin-bottom: 45px;
       padding-left: 18px;
     }
     
@@ -312,7 +314,7 @@
         font-weight: 400;
         color: #000;
         text-decoration: none;
-        padding: 30px 0 30px 18px;
+        padding: 24px 0 24px 18px;
         border-bottom: 1px solid #000;
       }
       
@@ -967,7 +969,7 @@
       position: absolute;
       /*top: -0.5rem;
       right: -0.8rem;*/
-      top: 0rem;
+      top: 4px;
       right: 0rem;
       background: none;
       border: none;
@@ -1329,9 +1331,20 @@
 
     /* Responsive adjustments */
     @media (max-width: 768px) {
+
+      .overlay-content {
+        padding: 18px 18px 0 18px;
+      } 
+
       .overlay {
         width: 100%;
         right: -100%;
+        border-left: 1px solid #000;
+        transition: right 0.6s ease-in-out, border-left 0.6s ease-in-out;
+      }
+      
+      .overlay.active {
+        border-left: 1px solid transparent;
       }
 
       .scroll-buttons-content {
@@ -1584,6 +1597,19 @@
       .intro-content {
         padding: 0;
       }
+
+      .marquee-img img {
+        height: 80px;
+    
+      }
+
+      .marquee-img  {
+        margin-right: 60px;
+      }
+
+      .marquee-container.bottom {
+        height: 110px;
+       }
       
       .intro-grid {
         grid-template-columns: 1fr;
@@ -2214,7 +2240,7 @@
     /* ====== FOOTER RESPONSIVE STYLES ====== */
     @media (max-width: 768px) {
       .footer-content-section {
-        padding: 90px 18px 180px;
+        padding: 90px 18px 260px;
       }
       
       .footer-content-wrapper {

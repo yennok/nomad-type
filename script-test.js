@@ -163,17 +163,17 @@ function initParallax() {
       secondaryBtn.classList.remove('scrolled');
     }
     
-    // Mobile: Fade out sticky buttons after the specimen section
+    // Mobile: Fade out sticky buttons before scroll-buttons-section appears
     if (window.innerWidth <= 768) {
-      const specimenSection = document.querySelector('.specimen-section');
-      if (specimenSection) {
-        const sectionBottom = specimenSection.offsetTop + specimenSection.offsetHeight;
-        const scrollThreshold = sectionBottom + 0; // Start fading right after specimen section ends
+      const scrollButtonsSection = document.querySelector('.scroll-buttons-section');
+      if (scrollButtonsSection) {
+        const sectionTop = scrollButtonsSection.offsetTop;
+        const scrollThreshold = sectionTop - 700; // Start fading 1000px before scroll-buttons-section appears
         
         // Debug logging
         // console.log('Mobile buttons debug:', {
         //   scrolled: scrolled,
-        //   sectionBottom: sectionBottom,
+        //   sectionTop: sectionTop,
         //   scrollThreshold: scrollThreshold,
         //   shouldFadeOut: scrolled >= scrollThreshold,
         //   buttonsOpacity: buttons.style.opacity
@@ -1783,9 +1783,15 @@ function initScrollButtons() {
       // 0-45% progress: small buttons
       // 45-80% progress: large buttons
       // 80-100% progress: small buttons
-      if (progress > 0.45 && progress <= 0.8) {
-        scrollButtons.classList.add('large');
+      // Don't add 'large' class on mobile
+      if (window.innerWidth > 768) {
+        if (progress > 0.45 && progress <= 0.8) {
+          scrollButtons.classList.add('large');
+        } else {
+          scrollButtons.classList.remove('large');
+        }
       } else {
+        // On mobile, always remove 'large' class
         scrollButtons.classList.remove('large');
       }
     }
@@ -2189,6 +2195,10 @@ function sendTrialEmail() {
   if (!consentCheckbox) {
     errorMsg.textContent = 'Please accept the consent agreement before submitting.';
     errorMsg.style.display = 'block';
+    // Scroll to error message on mobile
+    if (window.innerWidth <= 768) {
+      errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
     return;
   }
   
@@ -2265,6 +2275,10 @@ function sendBuyEmail() {
   if (selectedFontsCheckboxes.length === 0) {
     errorMsg.textContent = 'Please select at least one font.';
     errorMsg.style.display = 'block';
+    // Scroll to error message on mobile
+    if (window.innerWidth <= 768) {
+      errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
     return;
   }
   
@@ -2275,6 +2289,10 @@ function sendBuyEmail() {
   if (selectedUses.length === 0) {
     errorMsg.textContent = 'Please select at least one intended use.';
     errorMsg.style.display = 'block';
+    // Scroll to error message on mobile
+    if (window.innerWidth <= 768) {
+      errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
     return;
   }
   
@@ -2283,6 +2301,10 @@ function sendBuyEmail() {
   if (!consentCheckbox) {
     errorMsg.textContent = 'Please accept the consent agreement before submitting.';
     errorMsg.style.display = 'block';
+    // Scroll to error message on mobile
+    if (window.innerWidth <= 768) {
+      errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
     return;
   }
   
