@@ -1485,7 +1485,7 @@
         max-width: calc(100vw + 40px);
         margin-left: -20px;
         margin-right: -20px;
-        height:auto;
+        height:100px;
       }
 
       .font-intro {
@@ -1696,7 +1696,7 @@
       .controls { 
         /*border-top: 1px solid #000;*/
         border-bottom:none;
-        margin-bottom: 4rem; }
+        margin-bottom: 3rem; }
 
         .controls-lite .select-header {
         width: calc(100vw - 36px);
@@ -2296,7 +2296,7 @@
 
     @media (max-width: 480px) {
       .footer-content-section {
-        padding: 90px 18px 180px;
+        padding: 90px 18px 260px;
       }
       
       /* Hide Licensing and Collaborations sections on mobile */
