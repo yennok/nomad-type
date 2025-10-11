@@ -318,7 +318,7 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
   </section>
 
 
-  
+
   <!-- ===== GLYPH GRID VIEWER ===== -->
   <div class="wrapper" id="fontWrapper">
     <div class="left-panel">
@@ -492,6 +492,22 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
   <script src="gsap-public/minified/ScrollTrigger.min.js"></script>
   <script src="gsap-public/minified/Draggable.min.js"></script>
   <script src="gsap-public/minified/InertiaPlugin.min.js"></script>
+  
+    <!-- EmailJS -->
+    <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+(function(){
+  emailjs.init({
+    publicKey: "SY_sCUJHCR5MtWgI5",
+  });
+})();
+</script>
+
+    <!-- Nomad Type JS -->
+
+
   <script src="script-test.js"></script>
 
   </main>
@@ -505,7 +521,12 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
       <button class="close-btn" id="closeTrial"></button>
     </div>
     
-    <form class="trial-form">
+    <div class="success-message" id="trialSuccessMessage" style="display: none;">
+      <p class="success-text">Thank you! We'll send your trial fonts shortly.</p>
+      <button class="submit-btn" id="trialSuccessBtn">Continue to Website</button>
+    </div>
+    
+    <form class="trial-form" id="trialFormContent">
       <div class="form-content">
         <div class="form-group">
           <input type="text" id="trialName" name="name" placeholder=" " required>
@@ -520,18 +541,18 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
         
         <div class="form-section collapsible">
           <h3 class="collapsible-header">
-            <span>Intended Use</span>
+            <span>Intended Use<span class="asterisk">*</span></span>
             <span class="dropdown-icon"></span>
           </h3>
           <div class="collapsible-content">
             <div class="radio-group">
               <label class="radio-label">
-                <input type="radio" name="useType" value="client" required>
+                <input type="radio" name="useType" value="Client" required>
                 <span class="radio-mark"></span>
                 Client Project
               </label>
               <label class="radio-label">
-                <input type="radio" name="useType" value="student" required>
+                <input type="radio" name="useType" value="Student" required>
                 <span class="radio-mark"></span>
                 Student Work
               </label>
@@ -586,6 +607,7 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
         </div>
         
         <button type="submit" class="submit-btn">Submit</button>
+        <p class="form-error-message" id="trialError" style="display: none;"></p>
       </div>
       
       <p class="footer-text">By submitting, I agree to receive occasional updates about new releases (unsubscribe anytime).</p>
@@ -597,13 +619,18 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
 <div class="overlay" id="buyOverlay">
   <div class="overlay-content">
     <div class="form-header">
-      <h2>Buy Safra <span class="hebrew">ספרא</span> <span class="arabic">سفرا</span></h2>
+      <h2>Buy Safra ספרא سفرا</h2>
       <button class="close-btn" id="closeBuy"></button>
     </div>
     
-    <p class="intro-text">Interested in using Safra for your project? Share your details and we'll be in touch soon.</p>
+    <p class="intro-text" id="buyIntroText">Interested in using Safra for your project? Share your details and we'll be in touch soon.</p>
     
-    <form class="buy-form">
+    <div class="success-message" id="buySuccessMessage" style="display: none;">
+      <p class="success-text">Thank you for your interest! We'll contact you about licensing.</p>
+      <button class="submit-btn" id="buySuccessBtn">Continue to website</button>
+    </div>
+    
+    <form class="buy-form" id="buyFormContent">
       <div class="form-group">
         <input type="text" id="buyName" name="name" placeholder=" " required>
         <div class="placeholder-text">Full Name<span class="asterisk">*</span></div>
@@ -663,17 +690,17 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
         <div class="collapsible-content">
           <div class="checkbox-group">
             <label class="checkbox-label">
-              <input type="checkbox" name="use" value="desktop">
+              <input type="checkbox" name="use" value="Desktop">
               <span class="checkmark"></span>
               Desktop
             </label>
             <label class="checkbox-label">
-              <input type="checkbox" name="use" value="web">
+              <input type="checkbox" name="use" value="Web">
               <span class="checkmark"></span>
               Web
             </label>
             <label class="checkbox-label">
-              <input type="checkbox" name="use" value="app">
+              <input type="checkbox" name="use" value="App">
               <span class="checkmark"></span>
               App
             </label>
@@ -690,6 +717,7 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
       </div>
       
       <button type="submit" class="submit-btn">Send Request</button>
+      <p class="form-error-message" id="buyError" style="display: none;"></p>
     </form>
   </div>
 </div>

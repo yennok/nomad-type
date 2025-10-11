@@ -171,13 +171,13 @@ function initParallax() {
         const scrollThreshold = sectionBottom + 0; // Start fading right after specimen section ends
         
         // Debug logging
-        console.log('Mobile buttons debug:', {
-          scrolled: scrolled,
-          sectionBottom: sectionBottom,
-          scrollThreshold: scrollThreshold,
-          shouldFadeOut: scrolled >= scrollThreshold,
-          buttonsOpacity: buttons.style.opacity
-        });
+        // console.log('Mobile buttons debug:', {
+        //   scrolled: scrolled,
+        //   sectionBottom: sectionBottom,
+        //   scrollThreshold: scrollThreshold,
+        //   shouldFadeOut: scrolled >= scrollThreshold,
+        //   buttonsOpacity: buttons.style.opacity
+        // });
         
         if (scrolled >= scrollThreshold) {
           buttons.style.opacity = '0';
@@ -287,13 +287,13 @@ function initParallax() {
     const disappearThreshold = -(headerRect.height - 30);
     const greenLineRemoveThreshold = -(headerRect.height);
     const shouldTrigger = headerRect.top >= (disappearThreshold + 40);
-    console.log('Header debug:', {
-      headerTop: headerRect.top,
-      headerHeight: headerRect.height,
-      disappearThreshold: disappearThreshold,
-      triggerPoint: disappearThreshold + 40,
-      shouldTrigger: shouldTrigger
-    });
+    // console.log('Header debug:', {
+    //   headerTop: headerRect.top,
+    //   headerHeight: headerRect.height,
+    //   disappearThreshold: disappearThreshold,
+    //   triggerPoint: disappearThreshold + 40,
+    //   shouldTrigger: shouldTrigger
+    // });
     
     if (buttonsRect.top <= 29 && !headerIsVisible) {
       // Buttons reached 29px from top AND header is not visible, make them sticky
@@ -384,7 +384,7 @@ class AutoFitManager {
     this.setupSectionListeners(sectionData);
     this.updateSectionSize(sectionData);
 
-    console.log('Auto-fit initialized for section:', sectionElement.className);
+    // console.log('Auto-fit initialized for section:', sectionElement.className);
   }
 
   // Calculate optimal font size to fit text in one line
@@ -1235,6 +1235,19 @@ function initOverlayForms() {
     closeTrial.addEventListener('click', function() {
       trialOverlay.classList.remove('active');
       document.body.style.overflow = '';
+      
+      // Reset form after overlay closes
+      setTimeout(() => {
+        document.getElementById('trialFormContent').reset();
+        document.getElementById('trialFormContent').style.display = 'block';
+        document.getElementById('trialSuccessMessage').style.display = 'none';
+        
+        const submitBtn = document.querySelector('.trial-form button[type="submit"]');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit';
+        }
+      }, 600);
     });
   }
 
@@ -1243,6 +1256,69 @@ function initOverlayForms() {
     closeBuy.addEventListener('click', function() {
       buyOverlay.classList.remove('active');
       document.body.style.overflow = '';
+      
+      // Reset form after overlay closes
+      setTimeout(() => {
+        document.getElementById('buyFormContent').reset();
+        document.getElementById('buyIntroText').style.display = 'block';
+        document.getElementById('buyFormContent').style.display = 'block';
+        document.getElementById('buySuccessMessage').style.display = 'none';
+        
+        const submitBtn = document.querySelector('.buy-form button[type="submit"]');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send Request';
+        }
+      }, 600);
+    });
+  }
+  
+  // Handle "Continue to website" buttons
+  const trialSuccessBtn = document.getElementById('trialSuccessBtn');
+  const buySuccessBtn = document.getElementById('buySuccessBtn');
+  
+  if (trialSuccessBtn && trialOverlay) {
+    trialSuccessBtn.addEventListener('click', function() {
+      // Close overlay
+      trialOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+      
+      // Reset form and show it again after overlay animation completes
+      setTimeout(() => {
+        document.getElementById('trialFormContent').reset();
+        document.getElementById('trialFormContent').style.display = 'block';
+        document.getElementById('trialSuccessMessage').style.display = 'none';
+        
+        // Reset submit button
+        const submitBtn = document.querySelector('.trial-form button[type="submit"]');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit';
+        }
+      }, 600);
+    });
+  }
+  
+  if (buySuccessBtn && buyOverlay) {
+    buySuccessBtn.addEventListener('click', function() {
+      // Close overlay
+      buyOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+      
+      // Reset form and show it again after overlay animation completes
+      setTimeout(() => {
+        document.getElementById('buyFormContent').reset();
+        document.getElementById('buyIntroText').style.display = 'block';
+        document.getElementById('buyFormContent').style.display = 'block';
+        document.getElementById('buySuccessMessage').style.display = 'none';
+        
+        // Reset submit button
+        const submitBtn = document.querySelector('.buy-form button[type="submit"]');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send Request';
+        }
+      }, 600);
     });
   }
 
@@ -1253,6 +1329,19 @@ function initOverlayForms() {
       if (!trialOverlay.contains(e.target) && !trialBtn.contains(e.target) && !scrollTrialBtn.contains(e.target)) {
         trialOverlay.classList.remove('active');
         document.body.style.overflow = '';
+        
+        // Reset form after overlay closes
+        setTimeout(() => {
+          document.getElementById('trialFormContent').reset();
+          document.getElementById('trialFormContent').style.display = 'block';
+          document.getElementById('trialSuccessMessage').style.display = 'none';
+          
+          const submitBtn = document.querySelector('.trial-form button[type="submit"]');
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit';
+          }
+        }, 600);
       }
     }
     
@@ -1261,6 +1350,20 @@ function initOverlayForms() {
       if (!buyOverlay.contains(e.target) && !buyBtn.contains(e.target) && !scrollBuyBtn.contains(e.target)) {
         buyOverlay.classList.remove('active');
         document.body.style.overflow = '';
+        
+        // Reset form after overlay closes
+        setTimeout(() => {
+          document.getElementById('buyFormContent').reset();
+          document.getElementById('buyIntroText').style.display = 'block';
+          document.getElementById('buyFormContent').style.display = 'block';
+          document.getElementById('buySuccessMessage').style.display = 'none';
+          
+          const submitBtn = document.querySelector('.buy-form button[type="submit"]');
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Request';
+          }
+        }, 600);
       }
     }
   });
@@ -1271,10 +1374,37 @@ function initOverlayForms() {
       if (trialOverlay && trialOverlay.classList.contains('active')) {
         trialOverlay.classList.remove('active');
         document.body.style.overflow = '';
+        
+        // Reset form after overlay closes
+        setTimeout(() => {
+          document.getElementById('trialFormContent').reset();
+          document.getElementById('trialFormContent').style.display = 'block';
+          document.getElementById('trialSuccessMessage').style.display = 'none';
+          
+          const submitBtn = document.querySelector('.trial-form button[type="submit"]');
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit';
+          }
+        }, 600);
       }
       if (buyOverlay && buyOverlay.classList.contains('active')) {
         buyOverlay.classList.remove('active');
         document.body.style.overflow = '';
+        
+        // Reset form after overlay closes
+        setTimeout(() => {
+          document.getElementById('buyFormContent').reset();
+          document.getElementById('buyIntroText').style.display = 'block';
+          document.getElementById('buyFormContent').style.display = 'block';
+          document.getElementById('buySuccessMessage').style.display = 'none';
+          
+          const submitBtn = document.querySelector('.buy-form button[type="submit"]');
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Request';
+          }
+        }, 600);
       }
     }
   });
@@ -1286,18 +1416,14 @@ function initOverlayForms() {
   if (trialForm) {
     trialForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      // Handle trial form submission
-      console.log('Trial form submitted');
-      // You can add your form submission logic here
+      sendTrialEmail();
     });
   }
 
   if (buyForm) {
     buyForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      // Handle buy form submission
-      console.log('Buy form submitted');
-      // You can add your form submission logic here
+      sendBuyEmail();
     });
   }
 }
@@ -1373,10 +1499,10 @@ function initTrialFormLogic() {
       studentConsent.style.display = 'none';
 
       // Show relevant sections based on selection
-      if (this.value === 'client') {
+      if (this.value === 'Client') {
         clientFields.style.display = 'block';
         clientConsent.style.display = 'block';
-      } else if (this.value === 'student') {
+      } else if (this.value === 'Student') {
         studentFields.style.display = 'block';
         studentConsent.style.display = 'block';
       }
@@ -1437,7 +1563,7 @@ function initDraggableMarquee() {
           const lastXPercent = lastPositions[i].xPercent;
           const speed = Math.abs(currentXPercent - lastXPercent) / (timeDiff / 1000); // % per second
           
-          console.log(`Marquee ${index}, Span ${i}: Speed = ${speed.toFixed(2)}% per second, Position = ${currentXPercent.toFixed(2)}%`);
+          // console.log(`Marquee ${index}, Span ${i}: Speed = ${speed.toFixed(2)}% per second, Position = ${currentXPercent.toFixed(2)}%`);
           
           lastPositions[i] = {
             element: el,
@@ -1445,7 +1571,7 @@ function initDraggableMarquee() {
             timestamp: currentTime
           };
         });
-        console.log('---');
+        // console.log('---');
       }, 1000); // Check every second
     }
     
@@ -2042,3 +2168,183 @@ function setupLiveArabicUpdate() {
 
 // Setup live updates when DOM is ready
 document.addEventListener('DOMContentLoaded', setupLiveArabicUpdate);
+
+// ====== EMAILJS INITIALIZATION ======
+// Initialize EmailJS with your public key when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof emailjs !== 'undefined') {
+    emailjs.init('SY_sCUJHCR5MtWgI5'); // Replace with your actual public key from EmailJS dashboard
+  } else {
+    console.error('EmailJS library not loaded');
+  }
+});
+
+// ====== EMAILJS FUNCTIONS ======
+function sendTrialEmail() {
+  // Get error message element
+  const errorMsg = document.getElementById('trialError');
+  
+  // Check if consent is checked
+  const consentCheckbox = document.querySelector('.trial-form input[name="consent"]:checked');
+  if (!consentCheckbox) {
+    errorMsg.textContent = 'Please accept the consent agreement before submitting.';
+    errorMsg.style.display = 'block';
+    return;
+  }
+  
+  // Hide error message if it was showing
+  errorMsg.style.display = 'none';
+  
+  // Get submit button and show loading
+  const submitBtn = document.querySelector('.trial-form button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<span style="display: inline-block; animation: spin 1s linear infinite;">⏳</span> Sending...';
+  
+  // Get the use type (client or student)
+  const useType = document.querySelector('input[name="useType"]:checked')?.value;
+  
+  // Get detailed information based on use type
+  let company = '';
+  let clientName = '';
+  let clientWebsite = '';
+  let institutionName = '';
+  let graduationYear = '';
+  
+  if (useType === 'Client') {
+    company = document.getElementById('clientCompany')?.value || '';
+    clientName = document.getElementById('clientName')?.value || '';
+    clientWebsite = document.getElementById('clientWebsite')?.value || '';
+  } else if (useType === 'Student') {
+    institutionName = document.getElementById('institutionName')?.value || '';
+    graduationYear = document.getElementById('graduationYear')?.value || '';
+  }
+  
+  // Get font name from the form header (remove "Download " prefix)
+  const fontRequested = (document.querySelector('#trialOverlay .form-header h2')?.textContent?.trim() || 'Font Request').replace(/^Download\s+/i, '');
+  
+  const templateParams = {
+    from_name: document.getElementById('trialName').value,
+    from_email: document.getElementById('trialEmail').value,
+    font_requested: fontRequested,
+    use_type: useType,
+    // Client project details
+    company: company,
+    client_name: clientName,
+    client_website: clientWebsite,
+    // Student work details
+    institution_name: institutionName,
+    graduation_year: graduationYear,
+    // Consent
+    consent: document.querySelector('input[name="consent"]:checked') ? 'Yes' : 'No'
+  };
+
+  emailjs.send('service_fzf0ivr', 'template_7un2cmq', templateParams)
+    .then(function(response) {
+      console.log('SUCCESS!', response.status, response.text);
+      submitBtn.innerHTML = '✓ Sent!';
+      setTimeout(() => {
+        // Hide form and show success message
+        document.getElementById('trialFormContent').style.display = 'none';
+        document.getElementById('trialSuccessMessage').style.display = 'block';
+      }, 500);
+    }, function(error) {
+      console.log('FAILED...', error);
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+      alert('Sorry, there was an error. Please try again.');
+    });
+}
+
+function sendBuyEmail() {
+  // Get error message element
+  const errorMsg = document.getElementById('buyError');
+  
+  // Check if at least one font is selected
+  const selectedFontsCheckboxes = document.querySelectorAll('.buy-form input[name="family"]:checked');
+  if (selectedFontsCheckboxes.length === 0) {
+    errorMsg.textContent = 'Please select at least one font.';
+    errorMsg.style.display = 'block';
+    return;
+  }
+  
+  // Check if at least one intended use is selected
+  const selectedUses = document.querySelectorAll('.buy-form input[name="use"]:checked');
+  console.log('Selected uses count:', selectedUses.length);
+  console.log('Selected uses:', selectedUses);
+  if (selectedUses.length === 0) {
+    errorMsg.textContent = 'Please select at least one intended use.';
+    errorMsg.style.display = 'block';
+    return;
+  }
+  
+  // Check if consent is checked
+  const consentCheckbox = document.querySelector('.buy-form input[name="consent"]:checked');
+  if (!consentCheckbox) {
+    errorMsg.textContent = 'Please accept the consent agreement before submitting.';
+    errorMsg.style.display = 'block';
+    return;
+  }
+  
+  // Hide error message if it was showing
+  errorMsg.style.display = 'none';
+  
+  // Get submit button and show loading
+  const submitBtn = document.querySelector('.buy-form button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<span style="display: inline-block; animation: spin 1s linear infinite;">⏳</span> Sending...';
+  
+  // Get font name from the form header (remove "Buy " prefix)
+  const fontRequested = (document.querySelector('#buyOverlay .form-header h2')?.textContent?.trim() || 'Font Request').replace(/^Buy\s+/i, '');
+  
+  // Get selected fonts (excluding Full Family)
+  const selectedFonts = Array.from(document.querySelectorAll('.buy-form input[name="family"]:checked'))
+    .map(checkbox => {
+      // Get the label text content and extract just the font name
+      const label = checkbox.closest('label');
+      return label ? label.textContent.trim() : checkbox.value;
+    })
+    .filter(fontName => !fontName.includes('Full Family'))
+    .join(', ');
+  
+  // Check if Full Family is selected
+  const fullFamilySelected = Array.from(document.querySelectorAll('.buy-form input[name="family"]:checked'))
+    .some(checkbox => {
+      const label = checkbox.closest('label');
+      return label && label.textContent.includes('Full Family');
+    });
+  
+  // Get intended uses
+  const intendedUses = Array.from(document.querySelectorAll('.buy-form input[name="use"]:checked'))
+    .map(checkbox => checkbox.value)
+    .join(', ');
+  
+  const templateParams = {
+    from_name: document.getElementById('buyName').value,
+    from_email: document.getElementById('buyEmail').value,
+    company: document.getElementById('buyCompany').value,
+    font_requested: fontRequested,
+    selected_fonts: selectedFonts,
+    full_family: fullFamilySelected ? 'Yes' : 'No',
+    intended_use: intendedUses,
+    consent: document.querySelector('.buy-form input[name="consent"]:checked') ? 'Yes' : 'No'
+  };
+
+  emailjs.send('service_fzf0ivr', 'template_y27yzjn', templateParams)
+    .then(function(response) {
+      console.log('SUCCESS!', response.status, response.text);
+      submitBtn.innerHTML = '✓ Sent!';
+      setTimeout(() => {
+        // Hide intro text and form, show success message
+        document.getElementById('buyIntroText').style.display = 'none';
+        document.getElementById('buyFormContent').style.display = 'none';
+        document.getElementById('buySuccessMessage').style.display = 'block';
+      }, 500);
+    }, function(error) {
+      console.log('FAILED...', error);
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+      alert('Sorry, there was an error. Please try again.');
+    });
+}

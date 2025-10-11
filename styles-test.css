@@ -1047,6 +1047,10 @@
     .form-group .placeholder-text .asterisk {
       color: #ff0000;
     }
+    
+    .asterisk {
+      color: #ff0000;
+    }
 
     .form-group input:not(:placeholder-shown) + .placeholder-text {
       opacity: 0;
@@ -1279,6 +1283,27 @@
       background: #ff0000;
       border: 1px solid red;
 
+    }
+    
+    .form-error-message {
+      color: #ff0000;
+      font-size: 14px;
+      margin-top: 10px;
+      text-align: left;
+      font-family: "Safra Mono", monospace;
+    }
+    
+    .success-message {
+      text-align: left;
+      padding: 50px 0; 
+    }
+    
+    .success-text {
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      color: #000;
     }
 
     .footer-text {
@@ -1547,6 +1572,11 @@
     @keyframes marquee {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     /* Responsive adjustments for font intro */
