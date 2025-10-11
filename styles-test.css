@@ -1023,6 +1023,7 @@
       color: #000;
       padding: 0.9rem 0;
       outline: none;
+      border-radius: 0;
     }
 
     .form-group input::placeholder {

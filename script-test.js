@@ -1867,17 +1867,20 @@ function initMobileMenu() {
   // Open menu
   mobileHamburgerCircle.addEventListener('click', () => {
     mobileOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
   });
   
   // Close menu
   closeBtn.addEventListener('click', () => {
     mobileOverlay.classList.remove('active');
+    document.body.style.overflow = '';
   });
   
   // Close menu when clicking overlay background
   mobileOverlay.addEventListener('click', (e) => {
     if (e.target === mobileOverlay) {
       mobileOverlay.classList.remove('active');
+      document.body.style.overflow = '';
     }
   });
   
