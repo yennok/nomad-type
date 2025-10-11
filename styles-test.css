@@ -1324,7 +1324,7 @@
       font-size: 14px;
       line-height: 1.4;
       color: #000;
-      margin: 1rem 0 0 0;
+      /*margin: 1rem 0 0 0;*/
     }
 
     /* Add extra margin below footer text on smaller window heights */
@@ -1344,7 +1344,7 @@
     @media (max-width: 768px) {
 
       .overlay-content {
-        padding: 18px 18px 0px 18px;
+        padding: 18px 18px 18px 18px;
         height: 100vh;
         height: calc(var(--vh, 1vh) * 100);
       } 

@@ -1247,7 +1247,7 @@ function initOverlayForms() {
       // Reset form after overlay closes
       setTimeout(() => {
         document.getElementById('trialFormContent').reset();
-        document.getElementById('trialFormContent').style.display = 'block';
+        document.getElementById('trialFormContent').style.display = '';
         document.getElementById('trialSuccessMessage').style.display = 'none';
         
         const submitBtn = document.querySelector('.trial-form button[type="submit"]');
@@ -1268,8 +1268,8 @@ function initOverlayForms() {
       // Reset form after overlay closes
       setTimeout(() => {
         document.getElementById('buyFormContent').reset();
-        document.getElementById('buyIntroText').style.display = 'block';
-        document.getElementById('buyFormContent').style.display = 'block';
+        document.getElementById('buyIntroText').style.display = '';
+        document.getElementById('buyFormContent').style.display = '';
         document.getElementById('buySuccessMessage').style.display = 'none';
         
         const submitBtn = document.querySelector('.buy-form button[type="submit"]');
@@ -1294,7 +1294,7 @@ function initOverlayForms() {
       // Reset form and show it again after overlay animation completes
       setTimeout(() => {
         document.getElementById('trialFormContent').reset();
-        document.getElementById('trialFormContent').style.display = 'block';
+        document.getElementById('trialFormContent').style.display = '';
         document.getElementById('trialSuccessMessage').style.display = 'none';
         
         // Reset submit button
@@ -1316,8 +1316,8 @@ function initOverlayForms() {
       // Reset form and show it again after overlay animation completes
       setTimeout(() => {
         document.getElementById('buyFormContent').reset();
-        document.getElementById('buyIntroText').style.display = 'block';
-        document.getElementById('buyFormContent').style.display = 'block';
+        document.getElementById('buyIntroText').style.display = '';
+        document.getElementById('buyFormContent').style.display = '';
         document.getElementById('buySuccessMessage').style.display = 'none';
         
         // Reset submit button
@@ -1341,7 +1341,7 @@ function initOverlayForms() {
         // Reset form after overlay closes
         setTimeout(() => {
           document.getElementById('trialFormContent').reset();
-          document.getElementById('trialFormContent').style.display = 'block';
+          document.getElementById('trialFormContent').style.display = '';
           document.getElementById('trialSuccessMessage').style.display = 'none';
           
           const submitBtn = document.querySelector('.trial-form button[type="submit"]');
@@ -1362,8 +1362,8 @@ function initOverlayForms() {
         // Reset form after overlay closes
         setTimeout(() => {
           document.getElementById('buyFormContent').reset();
-          document.getElementById('buyIntroText').style.display = 'block';
-          document.getElementById('buyFormContent').style.display = 'block';
+          document.getElementById('buyIntroText').style.display = '';
+          document.getElementById('buyFormContent').style.display = '';
           document.getElementById('buySuccessMessage').style.display = 'none';
           
           const submitBtn = document.querySelector('.buy-form button[type="submit"]');
@@ -1386,7 +1386,7 @@ function initOverlayForms() {
         // Reset form after overlay closes
         setTimeout(() => {
           document.getElementById('trialFormContent').reset();
-          document.getElementById('trialFormContent').style.display = 'block';
+          document.getElementById('trialFormContent').style.display = '';
           document.getElementById('trialSuccessMessage').style.display = 'none';
           
           const submitBtn = document.querySelector('.trial-form button[type="submit"]');
@@ -1403,8 +1403,8 @@ function initOverlayForms() {
         // Reset form after overlay closes
         setTimeout(() => {
           document.getElementById('buyFormContent').reset();
-          document.getElementById('buyIntroText').style.display = 'block';
-          document.getElementById('buyFormContent').style.display = 'block';
+          document.getElementById('buyIntroText').style.display = '';
+          document.getElementById('buyFormContent').style.display = '';
           document.getElementById('buySuccessMessage').style.display = 'none';
           
           const submitBtn = document.querySelector('.buy-form button[type="submit"]');
