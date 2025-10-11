@@ -512,7 +512,15 @@
     @media (max-width: 768px) {
       .scroll-buttons {
         gap: 18px;
+        grid-template-columns: 1fr;
+
       }
+
+      .scroll-btn.btn {
+      padding: 20px 10px;
+      }
+
+      
       
       .scroll-buttons.large {
         height: 200px;
@@ -708,6 +716,7 @@
       gap: 0.8rem; 
       z-index: 1000; 
       transition: none; 
+      flex-direction: row-reverse;
     }
 
     .cover-buttons.sticky { 
