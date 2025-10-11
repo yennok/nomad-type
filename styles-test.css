@@ -1280,6 +1280,7 @@
       margin-bottom: 1rem;
       transition: background 0.2s ease;
       border-radius: 4px;
+      font-weight:normal;
     }
 
     .submit-btn:hover {
@@ -1334,7 +1335,9 @@
     @media (max-width: 768px) {
 
       .overlay-content {
-        padding: 18px 18px 0 18px;
+        padding: 18px 18px 0px 18px;
+        height: 100vh;
+        height: calc(var(--vh, 1vh) * 100);
       } 
 
       .overlay {

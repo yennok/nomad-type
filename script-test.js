@@ -1219,6 +1219,10 @@ function initOverlayForms() {
     trialBtn.addEventListener('click', function() {
       trialOverlay.classList.add('active');
       document.body.style.overflow = 'hidden';
+      // Recalculate viewport height for iOS Safari
+      if (window.innerWidth <= 768) {
+        setViewportHeight();
+      }
     });
   }
 
@@ -1227,6 +1231,10 @@ function initOverlayForms() {
     buyBtn.addEventListener('click', function() {
       buyOverlay.classList.add('active');
       document.body.style.overflow = 'hidden';
+      // Recalculate viewport height for iOS Safari
+      if (window.innerWidth <= 768) {
+        setViewportHeight();
+      }
     });
   }
 
@@ -1830,6 +1838,10 @@ function initScrollButtonClicks() {
       if (trialOverlay) {
         trialOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
+        // Recalculate viewport height for iOS Safari
+        if (window.innerWidth <= 768) {
+          setViewportHeight();
+        }
       }
     }
     
@@ -1838,6 +1850,10 @@ function initScrollButtonClicks() {
       if (buyOverlay) {
         buyOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
+        // Recalculate viewport height for iOS Safari
+        if (window.innerWidth <= 768) {
+          setViewportHeight();
+        }
       }
     }
   });
@@ -1868,6 +1884,10 @@ function initMobileMenu() {
   mobileHamburgerCircle.addEventListener('click', () => {
     mobileOverlay.classList.add('active');
     document.body.style.overflow = 'hidden';
+    // Recalculate viewport height for iOS Safari
+    if (window.innerWidth <= 768) {
+      setViewportHeight();
+    }
   });
   
   // Close menu
