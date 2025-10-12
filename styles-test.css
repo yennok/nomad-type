@@ -2,6 +2,20 @@
       --cell-size: 60px;
       --glyph-vertical-offset: -3px; /* Adjust this value to align glyphs vertically in grid cells (negative moves up, positive moves down) */
       --preview-vertical-offset: -14px; /* Adjust this value to align glyphs vertically in preview box (independent from cells) */
+      --primary-color: #ff0000; /* Default primary color - can be overridden per page */
+    }
+    
+    /* Page-specific color overrides */
+    body.safra-page {
+      --primary-color: #ff0000; /* Red for Safra */
+    }
+    
+    body.kilo-page {
+      --primary-color: #0066ff; /* Blue for KILO */
+    }
+    
+    body.sugar-page {
+      --primary-color: #ff6600; /* Orange for Sugar */
     }
     
     @media (max-width: 768px) {
@@ -154,7 +168,7 @@
       left: 35px;
       width: 36px;
       height: 35px;
-      background: #ff0000;
+      background: var(--primary-color);
       border-radius: 17.5px;
       padding: 0 0 0 36px;
       transition: width 0.3s ease, padding 0.3s ease, opacity 0s ease 0.3s;
@@ -267,7 +281,7 @@
       right: -100%;
       width: 100%;
       height: 100%;
-      background: #ff0000;
+      background: var(--primary-color);
       z-index: 1005;
       border-left: 1px solid #000;
       transition: right 0.6s ease-in-out, border-left-color 0.6s ease-in-out;
@@ -476,15 +490,15 @@
     }
 
     .scroll-btn:hover {
-      background: red;
+      background: var(--primary-color);
       color: #fff;
-      border: 1px solid red;
+      border: 1px solid var(--primary-color);
     }
 
     .scroll-btn.btn-primary:hover {
-      background: red;
+      background: var(--primary-color);
       color: #fff;
-      border: 1px solid red;
+      border: 1px solid var(--primary-color);
     }
 
     /* Large state when scrolled */
@@ -596,7 +610,7 @@
 
     .footer-nav-link:hover {
       opacity: 1;
-      color:red;
+      color: var(--primary-color);
     }
 
     .footer-linkedin-btn {
@@ -617,9 +631,9 @@
     }
 
     .footer-linkedin-btn:hover {
-      background: red;
+      background: var(--primary-color);
       color: #fff;
-      border: 1px solid red;
+      border: 1px solid var(--primary-color);
     }
 
     /* ====== FOOTER ====== */
@@ -651,7 +665,7 @@
     .cover-header { 
       height: calc(100vh - 120px); /* Fallback for browsers that do not support Custom Properties */
       height: calc(var(--vh, 1vh) * 100 - 120px); 
-      background: #ff0000; 
+      background: var(--primary-color); 
       display: flex; 
       flex-direction: column; 
       justify-content: center; 
@@ -1057,11 +1071,11 @@
     }
 
     .form-group .placeholder-text .asterisk {
-      color: #ff0000;
+      color: var(--primary-color);
     }
     
     .asterisk {
-      color: #ff0000;
+      color: var(--primary-color);
     }
 
     .form-group input:not(:placeholder-shown) + .placeholder-text {
@@ -1069,12 +1083,12 @@
     }
 
     .required {
-      color: #ff0000;
+      color: var(--primary-color);
       margin-left: 2px;
     }
 
     .form-group input:focus {
-      border-bottom-color: #ff0000;
+      border-bottom-color: var(--primary-color);
     }
 
     .form-section {
@@ -1242,7 +1256,7 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #ff0000;
+      background: var(--primary-color);
     }
 
     /* ====== CONDITIONAL FIELDS ====== */
@@ -1293,13 +1307,13 @@
     }
 
     .submit-btn:hover {
-      background: #ff0000;
-      border: 1px solid red;
+      background: var(--primary-color);
+      border: 1px solid var(--primary-color);
 
     }
     
     .form-error-message {
-      color: #ff0000;
+      color: var(--primary-color);
       font-size: 14px;
       margin-top: 10px;
       text-align: left;
@@ -1409,16 +1423,16 @@
     }
 
     .btn:hover { 
-      background: red; 
+      background: var(--primary-color); 
       color: #fff; 
-      border: 1px solid red; 
+      border: 1px solid var(--primary-color); 
 
     }
 
     .btn-primary:hover { 
-      background: red; 
+      background: var(--primary-color); 
       color: #fff; 
-      border: 1px solid red; 
+      border: 1px solid var(--primary-color); 
     }
 
     /* ====== CONTENT WRAPPER ====== */
@@ -2122,7 +2136,7 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: #ff0000 !important;
+      background: var(--primary-color) !important;
     }
 
     .indicator:hover::after {
@@ -2249,6 +2263,25 @@
         left: 30px;
       }
     }
+
+ /* ====== MEDIUM SCREEN RESPONSIVE STYLES ====== */
+/* @media (max-width: 1256px) {
+  .footer-content-section {
+    padding: 80px 45px 295px;
+  }
+  
+  .content-wrapper {
+    padding: 90px 45px;
+  }
+  
+  .footer-nav {
+    padding: 40px 45px;
+  }
+  
+  .footer {
+    padding: 40px 45px;
+  }
+}*/
 
     /* ====== FOOTER RESPONSIVE STYLES ====== */
     @media (max-width: 768px) {
