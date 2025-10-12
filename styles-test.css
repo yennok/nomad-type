@@ -15,7 +15,7 @@
     }
     
     body.sugar-page {
-      --primary-color: #ff6600; /* Orange for Sugar */
+      --primary-color: #FF6CF1; /* Orange for Sugar */
     }
     
     @media (max-width: 768px) {
@@ -396,10 +396,11 @@
 
     /* ====== SCROLL BUTTONS ====== */
     .scroll-buttons-section {
-      margin: 0 auto 6rem auto;
+     /* margin: 0 auto 6rem auto;*/
+     margin: 0 auto;
       padding: 60px 90px 0;
       border-top: 1px solid black;
-      border-bottom: 1px solid black;
+      /*border-bottom: 1px solid black;*/
     }
 
     .scroll-buttons-content {
@@ -1575,6 +1576,8 @@
       width: 100%;
       max-width: 100vw;
       margin-left: 0;
+      padding-top:6rem;
+      border-top: 1px solid #000;
     }
 
     .marquee-text.serif {
@@ -1663,11 +1666,16 @@
       }
       
       .multilingual-marquee.image-marquee {
-        margin-left: -20px;
+       /* margin-left: -20px;*/
+       margin-left:0;
         margin-right: -20px;
         padding-bottom: 1.2rem;
       }
       
+      .image-marquee {
+        padding-top:3rem;
+      }
+
       .marquee-text {
         font-size: 80px;
         margin-right: 15px;
