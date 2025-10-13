@@ -95,8 +95,14 @@ function loadFooter(fontName = 'Safra') {
       fontNameSpan.textContent = fontName;
     }
     
-    // Re-initialize marquee after loading
+    // Re-initialize marquee and carousel after loading
     setTimeout(() => {
+      // Re-initialize draggable marquee
+      if (typeof initDraggableMarquee === 'function') {
+        initDraggableMarquee();
+      }
+      
+      // Re-initialize regular marquee if needed
       if (typeof initMarquee === 'function') {
         initMarquee();
       }
