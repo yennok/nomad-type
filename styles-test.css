@@ -2,7 +2,7 @@
       --cell-size: 60px;
       --glyph-vertical-offset: -3px; /* Adjust this value to align glyphs vertically in grid cells (negative moves up, positive moves down) */
       --preview-vertical-offset: -14px; /* Adjust this value to align glyphs vertically in preview box (independent from cells) */
-      --primary-color: #ff0000; /* Default primary color - can be overridden per page */
+      --primary-color: white; /* Default primary color - can be overridden per page */
     }
     
     /* Page-specific color overrides */
@@ -23,7 +23,7 @@ body.homepage-page {
 }
 
 body {
-  background: #000; /* Black background */
+  background: white; /* Black background */
 }
     
     @media (max-width: 768px) {

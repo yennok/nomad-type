@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Font Collage</title>
+  <style>
+      
+      
+    /*  img {
+  mix-blend-mode: difference;
+}*/
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .wrapper {
+      position: relative;
+      width: calc(100vh * (16 / 9)); /* Keeps 16:9 ratio */
+      height: 100vh;
+      background-color: black;
+     /* background-image: url("bg.png");*/
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .font-link {
+      position: absolute;
+      display: block;
+      text-decoration: none;
+    }
+
+    .font-link img {
+      position: absolute;
+      display: block;
+      height: auto;
+      transition: opacity 0.3s ease;
+      top: 0;
+      left: 0;
+    }
+
+    .font-link .hover-img {
+      opacity: 0;
+    }
+
+    .font-link:hover .hover-img {
+      opacity: 1;
+    }
+
+    .font-link:hover img:not(.hover-img) {
+      opacity: 0;
+    }
+
+    /* Positions based on 1920×1080 reference (example approximations) */
+    .font-link.a1 { width: 13.4%;
+    top: 23.8%;
+    left: 17.8%; }
+    .font-link.a2 { width: 13.5%;
+    top: 10.9%;
+    left: 31.65%; }
+    .font-link.a3 { width: 12.25%;
+    top: 14.2%;
+    left: 45.6%; }
+    .font-link.a4 { width: 13.1%;
+    top: 8.4%;
+    left: 58.4%; }
+    .font-link.a5 { width: 10.16%; top: 16.1%; left: 72%; }
+    .font-link.a6 { width: 23.46%; top: 44.6%; left: 14.4%; }
+    .font-link.a7 { width: 19.6%; top: 44.8%; left: 38.4%; }
+    .font-link.a8 { width: 16.05%; top: 44.6%; left: 58.4%; }
+    .font-link.a9 { width: 10.55%; top: 44.6%; left: 75%; }
+    .font-link.a10 { width: 38.6%;
+    top: 59.2%;
+    left: 19.3%; }
+    .font-link.a11 { width: 20.1%;
+    top: 70.8%;
+    left: 37.8%; }
+
+    @media (max-aspect-ratio: 16/9) {
+      .wrapper {
+        width: 100vw;
+        height: calc(100vw * (9 / 16));
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        height: auto;
+        overflow-y: auto;
+      }
+
+      .wrapper {
+        width: 100vw;
+        height: auto;
+        background: none;
+      }
+
+      .collage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 2rem 0;
+      }
+
+      .font-link {
+        position: static;
+        width: 80%;
+        height: auto;
+      }
+
+      .font-link img {
+        position: static;
+        width: 100%;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="collage">
+      <a href="kaldanit.html" class="font-link">
+        <img src="assets/homepage/a1.png" class="a1" alt="Kaldanit" />
+        <img src="assets/homepage/a1-hover.png" class="a1 hover-img" alt="Kaldanit" />
+      </a>
+      
+      <a href="safra.html" class="font-link">
+        <img src="assets/homepage/a2.png" class="a2" alt="Safra" />
+        <img src="assets/homepage/a2-hover.png" class="a2 hover-img" alt="Safra" />
+      </a>
+      
+      <a href="kilo.html" class="font-link">
+        <img src="assets/homepage/a3.png" class="a3" alt="KILO" />
+        <img src="assets/homepage/a3-hover.png" class="a3 hover-img" alt="KILO" />
+      </a>
+      
+      <a href="spitz.html" class="font-link">
+        <img src="assets/homepage/a4.png" class="a4" alt="R. Spitz" />
+        <img src="assets/homepage/a4-hover.png" class="a4 hover-img" alt="R. Spitz" />
+      </a>
+      
+      <a href="disarre.html" class="font-link">
+        <img src="assets/homepage/a5.png" class="a5" alt="Disarre" />
+        <img src="assets/homepage/a5-hover.png" class="a5 hover-img" alt="Disarre" />
+      </a>
+      
+      <a href="safra.html" class="font-link">
+        <img src="assets/homepage/a6.png" class="a6" alt="Safra" />
+        <img src="assets/homepage/a6-hover.png" class="a6 hover-img" alt="Safra" />
+      </a>
+      
+      <a href="kilo.html" class="font-link">
+        <img src="assets/homepage/a7.png" class="a7" alt="KILO" />
+        <img src="assets/homepage/a7-hover.png" class="a7 hover-img" alt="KILO" />
+      </a>
+      
+      <a href="da.html" class="font-link">
+        <img src="assets/homepage/a8.png" class="a8" alt="Da" />
+        <img src="assets/homepage/a8-hover.png" class="a8 hover-img" alt="Da" />
+      </a>
+      
+      <a href="dear-ai.html" class="font-link">
+        <img src="assets/homepage/a9.png" class="a9" alt="Dear AI" />
+        <img src="assets/homepage/a9-hover.png" class="a9 hover-img" alt="Dear AI" />
+      </a>
+      
+      <a href="middle-east.html" class="font-link">
+        <img src="assets/homepage/a10.png" class="a10" alt="Middle East" />
+        <img src="assets/homepage/a10-hover.png" class="a10 hover-img" alt="Middle East" />
+      </a>
+      
+      <a href="sugar.html" class="font-link">
+        <img src="assets/homepage/a11.png" class="a11" alt="Sugar" />
+        <img src="assets/homepage/a11-hover.png" class="a11 hover-img" alt="Sugar" />
+      </a>
+    </div>
+  </div>
+</body>
+</html>
