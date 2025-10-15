@@ -87,6 +87,7 @@
 
 .nav-brand, .nav-link {
   color:white;
+  margin-top:28px;
 }
 
 .sticky-nav{
@@ -303,25 +304,29 @@ ease;
       .main-container {
         height: auto;
         min-height: 100vh;
+        overflow: visible;
       }
 
       .wrapper1 {
-        width: 100%;
+      width: 100%;
         height: auto;
         min-height: 100vh;
+        overflow: visible;
       }
 
       .collage {
         padding: 17.5rem 1rem 5rem;
         position: static;
+        overflow: visible;
       }
 
       /* Section 1: First 4 images - 2 column masonry */
       .collage-section-1 {
         columns: 2;
         column-gap: 18px;
-        margin-bottom: -28px;
-        padding-top: 10%;
+        margin-bottom: -2.5%;
+        padding-top: 30%;
+        overflow: visible;
       }
 
       /* Section 2: Next 2 images - full width */
@@ -341,8 +346,8 @@ ease;
         max-width: none;
         break-inside: avoid;
         margin-bottom: 18px;
-        display: block;
-      }
+      display: block;
+    }
 
       /* Full width for section 2 */
       .collage-section-2 a {
@@ -351,16 +356,24 @@ ease;
       }
 
       .collage img {
-        width: 100%;
+      width: 100%;
         height: auto;
-        display: block;
+      display: block;
         margin: 0 auto;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       }
 
       /* Offset Kaldanit and Safra */
+      .collage-section-1 .a1 {
+        padding-top: 25%;
+        margin-top: -25%;
+      position: relative;
+        z-index: 10;
+    }
+
       .collage-section-1 .a1 img {
         transform: translateY(-32%);
+      position: relative;
+        z-index: 10;
       }
       
       .collage-section-1 .a2 img {
@@ -377,6 +390,22 @@ ease;
         opacity: 1;
       }
 
+      /* Mobile Safari-specific fix for Kaldanit */
+      @supports (-webkit-touch-callout: none) {
+        .collage-section-1 {
+          margin-bottom: -10px !important;
+        }
+        
+        .collage-section-1 .a1 {
+          padding-top: 35%;
+          margin-top: -35%;
+        }
+        
+        .collage-section-1 .a1 img {
+          transform: translateY(-10%);
+        }
+      }
+
       .cover-buttons {
         display: none;
       }
@@ -385,7 +414,7 @@ ease;
         flex: 1;
         max-width: none;
       padding: 7px 10px;
-        font-size: 14px;
+      font-size: 14px;
       line-height: 17px;
         position: static;
       }
@@ -480,8 +509,8 @@ ease;
           <img src="assets/homepage/a11.png" alt="Middle East" />
           <img src="assets/homepage/a11-hover.png" class="hover" alt="Middle East Hover" />
         </a>
-      </div>
-
+        </div>
+        
       <!-- Section 2: Next 2 images - full width -->
       <div class="collage-section-2">
         <a href="yeffe.html" class="a6">
@@ -493,7 +522,7 @@ ease;
           <img src="assets/homepage/a7-hover.png" class="hover" alt="Kilo Hover" />
         </a>
       </div>
-
+      
       <!-- Section 3: Last 5 images - 2 column masonry -->
       <div class="collage-section-3">
         <a href="dear-ai.html" class="a9">
@@ -516,10 +545,10 @@ ease;
           <img src="assets/homepage/a10.png" alt="Sugar" />
           <img src="assets/homepage/a10-hover.png" class="hover" alt="Sugar Hover" />
         </a>
-      </div>
-    </div>
+                      </div>
         </div>
       </div>
+    </div>
       
   <!-- SCROLL BUTTONS SECTION (Mobile Only) -->
   <section class="scroll-buttons-section">
@@ -529,12 +558,12 @@ ease;
         <p class="scroll-buttons-description">
           Safra is a contemporary serif and sans typeface designed for multilingual use. It balances structural differences without erasing cultural identity, offering clarity and versatility for long reading and strong display typography alike.
         </p>
-                      </div>
-      
+    </div>
+
       <div class="scroll-buttons">
         <button class="btn btn-primary scroll-btn" id="scrollTrialBtn">Download Trial</button>
-      </div>
     </div>
+      </div>
   </section>
 
   <!-- FOOTER CONTAINER -->
