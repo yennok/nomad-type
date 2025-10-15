@@ -311,18 +311,27 @@ ease;
       }
 
       .collage {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 7.5rem;
-        padding: 17.5rem 0 5rem;
+        columns: 2;
+        column-gap: 1rem;
+        padding: 17.5rem 1rem 5rem;
         position: static;
       }
 
       .collage a {
         position: static !important;
-        width: 90% !important;
-        max-width: 400px;
+        width: 100% !important;
+        max-width: none;
+        display: inline-block;
+        break-inside: avoid;
+        margin-bottom: 1rem;
+      }
+
+      .collage img {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        border-radius: 8px;
       }
 
       /* Hide hover images on mobile */

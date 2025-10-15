@@ -321,8 +321,15 @@ ease;
 
       .collage a {
         position: static !important;
-        width: 90% !important;
+        width: 80% !important;
         max-width: 400px;
+      }
+
+      .collage img {
+        width: 80%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
       }
 
       /* Hide hover images on mobile */
@@ -550,23 +557,10 @@ ease;
         const middleOfScreen = windowHeight / 2;
         const scrollY = window.pageYOffset;
         
-        // If at the top of the page (not scrolled), show all regular images
-        if (scrollY < 50) {
-          collageLinks.forEach((link) => {
-            const regularImg = link.querySelector('img:not(.hover)');
-            if (regularImg) {
-              const className = link.className;
-              // All images show regular version at top
-              regularImg.src = `assets/homepage/${className}-mobile.png`;
-            }
-          });
-          return;
-        }
-        
         let activeLink = null;
         let closestDistance = Infinity;
 
-        // Find which image is closest to the middle of the screen
+        // Always find which image is closest to the middle of the screen
         collageLinks.forEach((link) => {
           const rect = link.getBoundingClientRect();
           const imageMiddle = rect.top + (rect.height / 2);
@@ -579,7 +573,12 @@ ease;
           }
         });
 
-        // Update all images
+        // If no image is in view, default to the first image
+        if (!activeLink) {
+          activeLink = collageLinks[0];
+        }
+
+        // Update all images - always have one in hover state
         collageLinks.forEach((link) => {
           const regularImg = link.querySelector('img:not(.hover)');
           if (regularImg) {

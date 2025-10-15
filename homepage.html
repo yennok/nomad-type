@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Nomad Type - Homepage</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link rel="stylesheet" href="styles-test.css">
+</head>
+<body class="homepage-page">
+
+  <!-- Header Container (will be populated by JavaScript) -->
+  <div id="header-container"></div>
+
+  <!-- ====== MAIN CONTENT ====== -->
+  <main class="content-wrapper homepage-content">
+    
+    <!-- ====== HOMEPAGE SPECIMENS GRID ====== -->
+    <section class="homepage-specimens">
+      <div class="specimens-grid">
+        
+        <!-- Kaldanit (Hebrew/Latin) - Top Left -->
+        <div class="specimen-block kaldanit-block">
+          <img src="assets/homepage/a1.png" alt="Kaldanit Typeface" class="specimen-image">
+      </div>
+      
+        <!-- Safra (Arabic/Latin/Hebrew) - Middle Left -->
+        <div class="specimen-block safra-block">
+          <img src="assets/homepage/a2.png" alt="Safra Typeface" class="specimen-image">
+        </div>
+
+        <!-- KILO Nutrition Label - Middle Center -->
+        <div class="specimen-block kilo-nutrition-block">
+          <img src="assets/homepage/a3.png" alt="KILO Nutrition Label" class="specimen-image">
+    </div>
+
+        <!-- R. Spitz Book Cover - Top Right -->
+        <div class="specimen-block spitz-block">
+          <img src="assets/homepage/a4.png" alt="R. Spitz Book Cover" class="specimen-image">
+    </div>
+
+        <!-- Disarre Future Book Cover - Far Right -->
+        <div class="specimen-block disarre-block">
+          <img src="assets/homepage/a5.png" alt="Disarre Future Book Cover" class="specimen-image">
+    </div>
+
+        <!-- Yeffe Nefesh (Hebrew) - Bottom Left -->
+        <div class="specimen-block yeffe-block">
+          <img src="assets/homepage/a6.png" alt="Yeffe Nefesh Typeface" class="specimen-image">
+        </div>
+
+        <!-- KILO Display - Bottom Middle -->
+        <div class="specimen-block kilo-display-block">
+          <img src="assets/homepage/a7.png" alt="KILO Display Typeface" class="specimen-image">
+        </div>
+        
+        <!-- Da Conversational - Bottom Middle Right -->
+        <div class="specimen-block da-block">
+          <img src="assets/homepage/a8.png" alt="Da Conversational Typeface" class="specimen-image">
+        </div>
+
+        <!-- Dear AI Letter - Bottom Far Right -->
+        <div class="specimen-block dear-ai-block">
+          <img src="assets/homepage/a9.png" alt="Dear AI Letter" class="specimen-image">
+        </div>
+        
+        <!-- Middle East (Arabic/Latin/Hebrew) - Bottom Center -->
+        <div class="specimen-block middle-east-block">
+          <img src="assets/homepage/a10.png" alt="Middle East Typeface" class="specimen-image">
+        </div>
+
+        <!-- Sugar Text - Additional -->
+        <div class="specimen-block sugar-text-block">
+          <img src="assets/homepage/a11.png" alt="Sugar Text Typeface" class="specimen-image">
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- ====== TRIAL FONTS BUTTON ====== -->
+    <div class="homepage-trial-button">
+      <button class="btn btn-primary trial-fonts-btn">Trial Fonts</button>
+    </div>
+    
+  </main>
+
+  <!-- Footer Container (will be populated by JavaScript) -->
+  <div id="footer-container"></div>
+
+  <!-- GSAP Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="gsap-public/esm/Draggable.js"></script>
+  <script src="gsap-public/esm/ScrollTrigger.js"></script>
+
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <!-- Load Homepage Header Component (No Cover Header) -->
+  <script src="homepage-header.js"></script>
+  <script>
+    // Load homepage header when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof loadHomepageHeader === 'function') {
+        loadHomepageHeader();
+      }
+    });
+  </script>
+
+  <!-- Load Homepage Footer Component (No Multilingual Marquee) -->
+  <script src="homepage-footer.js"></script>
+  <script>
+    // Load homepage footer when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof loadHomepageFooter === 'function') {
+        loadHomepageFooter();
+      }
+    });
+  </script>
+
+  <!-- Homepage Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize homepage interactions
+      initHomepageInteractions();
+    });
+
+    function initHomepageInteractions() {
+      // Add hover effects to specimen blocks
+      const specimenBlocks = document.querySelectorAll('.specimen-block');
+      
+      specimenBlocks.forEach(block => {
+        block.addEventListener('mouseenter', function() {
+          gsap.to(this, { scale: 1.05, duration: 0.3, ease: "power2.out" });
+        });
+        
+        block.addEventListener('mouseleave', function() {
+          gsap.to(this, { scale: 1, duration: 0.3, ease: "power2.out" });
+        });
+
+        // Add click interaction to navigate to specific font pages
+        block.addEventListener('click', function() {
+          const blockClass = this.className;
+          let targetPage = '';
+          
+          if (blockClass.includes('safra-block')) {
+            targetPage = 'index.html'; // Safra page
+          } else if (blockClass.includes('kilo')) {
+            targetPage = 'kilo.html'; // KILO page (when created)
+          } else if (blockClass.includes('yeffe-block')) {
+            targetPage = 'yeffe.html'; // Yeffe page (when created)
+          } else if (blockClass.includes('sugar')) {
+            targetPage = 'sugar.html'; // Sugar page (when created)
+          }
+          
+          if (targetPage) {
+            window.location.href = targetPage;
+          }
+        });
+      });
+
+      // Trial Fonts button functionality
+      const trialBtn = document.querySelector('.trial-fonts-btn');
+      if (trialBtn) {
+        trialBtn.addEventListener('click', function() {
+          // Could open a modal or redirect to a fonts overview page
+          window.location.href = '#fonts';
+        });
+      }
+
+      // Initialize ScrollTrigger for animations
+      if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.create({
+          trigger: '.homepage-specimens',
+          start: 'top 80%',
+          onEnter: () => {
+            gsap.from('.specimen-block', {
+              y: 50,
+              opacity: 0,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: "power2.out"
+            });
+          }
+        });
+      }
+    }
+  </script>
+
+</body>
+</html>
