@@ -311,10 +311,26 @@ ease;
       }
 
       .collage {
-        columns: 2;
-        column-gap: 18px;
         padding: 17.5rem 1rem 5rem;
         position: static;
+      }
+
+      /* Section 1: First 4 images - 2 column masonry */
+      .collage-section-1 {
+        columns: 2;
+        column-gap: 18px;
+        margin-bottom: -28px;
+      }
+
+      /* Section 2: Next 2 images - full width */
+      .collage-section-2 {
+        margin-bottom: 18px;
+      }
+
+      /* Section 3: Last 5 images - 2 column masonry */
+      .collage-section-3 {
+        columns: 2;
+        column-gap: 18px;
       }
 
       .collage a {
@@ -326,12 +342,27 @@ ease;
         display: block;
       }
 
+      /* Full width for section 2 */
+      .collage-section-2 a {
+        width: 100% !important;
+        margin-bottom: 18px;
+      }
+
       .collage img {
         width: 100%;
         height: auto;
         display: block;
         margin: 0 auto;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Offset Kaldanit and Safra */
+      .collage-section-1 .a1 img {
+        transform: translateY(-32%);
+      }
+      
+      .collage-section-1 .a2 img {
+        transform: translateY(-20%);
       }
 
       /* Hide hover images on mobile */
@@ -429,51 +460,62 @@ ease;
   <div class="main-container">
     <div class="wrapper1">
     <div class="collage">
-      <a href="safra.html" class="a1">
-        <img src="assets/homepage/a1.png" alt="Safra" />
-        <img src="assets/homepage/a1-hover.png" class="hover" alt="Safra Hover" />
-      </a>
-      <a href="font2.html" class="a2">
-        <img src="assets/homepage/a2.png" alt="Font 2" />
-        <img src="assets/homepage/a2-hover.png" class="hover" alt="Font 2 Hover" />
-      </a>
-      <a href="font3.html" class="a3">
-        <img src="assets/homepage/a3.png" alt="Font 3" />
-        <img src="assets/homepage/a3-hover.png" class="hover" alt="Font 3 Hover" />
-      </a>
-      <a href="font4.html" class="a4">
-        <img src="assets/homepage/a4.png" alt="Font 4" />
-        <img src="assets/homepage/a4-hover.png" class="hover" alt="Font 4 Hover" />
-      </a>
-      <a href="font5.html" class="a5">
-        <img src="assets/homepage/a5.png" alt="Font 5" />
-        <img src="assets/homepage/a5-hover.png" class="hover" alt="Font 5 Hover" />
-      </a>
-      <a href="font6.html" class="a6">
-        <img src="assets/homepage/a6.png" alt="Font 6" />
-        <img src="assets/homepage/a6-hover.png" class="hover" alt="Font 6 Hover" />
-      </a>
-      <a href="font7.html" class="a7">
-        <img src="assets/homepage/a7.png" alt="Font 7" />
-        <img src="assets/homepage/a7-hover.png" class="hover" alt="Font 7 Hover" />
-      </a>
-      <a href="font8.html" class="a8">
-        <img src="assets/homepage/a8.png" alt="Font 8" />
-        <img src="assets/homepage/a8-hover.png" class="hover" alt="Font 8 Hover" />
-      </a>
-      <a href="font9.html" class="a9">
-        <img src="assets/homepage/a9.png" alt="Font 9" />
-        <img src="assets/homepage/a9-hover.png" class="hover" alt="Font 9 Hover" />
-      </a>
-      <a href="font10.html" class="a10">
-        <img src="assets/homepage/a10.png" alt="Font 10" />
-        <img src="assets/homepage/a10-hover.png" class="hover" alt="Font 10 Hover" />
-      </a>
-      <a href="font11.html" class="a11">
-        <img src="assets/homepage/a11.png" alt="Font 11" />
-        <img src="assets/homepage/a11-hover.png" class="hover" alt="Font 11 Hover" />
-      </a>
-          </div>
+      <!-- Section 1: First 4 images - 2 column masonry -->
+      <div class="collage-section-1">
+        <a href="kaldanit.html" class="a1">
+          <img src="assets/homepage/a1.png" alt="Kaldanit" />
+          <img src="assets/homepage/a1-hover.png" class="hover" alt="Kaldanit Hover" />
+        </a>
+        <a href="safra.html" class="a2">
+          <img src="assets/homepage/a2.png" alt="Safra" />
+          <img src="assets/homepage/a2-hover.png" class="hover" alt="Safra Hover" />
+        </a>
+        <a href="kilo-text.html" class="a3">
+          <img src="assets/homepage/a3.png" alt="Kilo Text" />
+          <img src="assets/homepage/a3-hover.png" class="hover" alt="Kilo Text Hover" />
+        </a>
+        <a href="middle-east.html" class="a11">
+          <img src="assets/homepage/a11.png" alt="Middle East" />
+          <img src="assets/homepage/a11-hover.png" class="hover" alt="Middle East Hover" />
+        </a>
+      </div>
+
+      <!-- Section 2: Next 2 images - full width -->
+      <div class="collage-section-2">
+        <a href="yeffe.html" class="a6">
+          <img src="assets/homepage/a6.png" alt="Yeffe" />
+          <img src="assets/homepage/a6-hover.png" class="hover" alt="Yeffe Hover" />
+        </a>
+        <a href="kilo.html" class="a7">
+          <img src="assets/homepage/a7.png" alt="Kilo" />
+          <img src="assets/homepage/a7-hover.png" class="hover" alt="Kilo Hover" />
+        </a>
+      </div>
+
+      <!-- Section 3: Last 5 images - 2 column masonry -->
+      <div class="collage-section-3">
+        <a href="dear-ai.html" class="a9">
+          <img src="assets/homepage/a9.png" alt="Dear AI" />
+          <img src="assets/homepage/a9-hover.png" class="hover" alt="Dear AI Hover" />
+        </a>
+        <a href="bizarre.html" class="a5">
+          <img src="assets/homepage/a5.png" alt="Bizarre" />
+          <img src="assets/homepage/a5-hover.png" class="hover" alt="Bizarre Hover" />
+        </a>
+        <a href="werd.html" class="a8">
+          <img src="assets/homepage/a8.png" alt="Werd" />
+          <img src="assets/homepage/a8-hover.png" class="hover" alt="Werd Hover" />
+        </a>
+        <a href="spitz.html" class="a4">
+          <img src="assets/homepage/a4.png" alt="Spitz" />
+          <img src="assets/homepage/a4-hover.png" class="hover" alt="Spitz Hover" />
+        </a>
+        <a href="sugar.html" class="a10">
+          <img src="assets/homepage/a10.png" alt="Sugar" />
+          <img src="assets/homepage/a10-hover.png" class="hover" alt="Sugar Hover" />
+        </a>
+      </div>
+    </div>
         </div>
       </div>
       
