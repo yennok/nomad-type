@@ -7,7 +7,7 @@
     
     /* Page-specific color overrides */
     body.safra-page {
-      --primary-color: #ff0000; /* Red for Safra */
+      --primary-color: #FF4802; /* Red for Safra */
     }
     
     body.kilo-page {
@@ -1980,7 +1980,7 @@ body {
       display: block;
       transform: translateY(var(--glyph-vertical-offset, 0));
     }
-    .char-cell:hover { background: #000; color: #fff; }
+    .char-cell:hover { background: var(--primary-color); color: black; }
 
     @media (max-width: 904px) { .wrapper { flex-direction: column; 
     
