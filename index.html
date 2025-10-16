@@ -209,6 +209,16 @@ ease;
     }
 
     @media (max-width: 768px) {
+      /* Disable horizontal scrolling on mobile Safari */
+      body {
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      html {
+        overflow-x: hidden;
+      }
+      
       /* Show scroll buttons section on mobile */
       .scroll-buttons-section {
         display: block;
@@ -386,19 +396,12 @@ ease;
       }
 
       /* Mobile Safari-specific adjustments */
-      @supports (-webkit-touch-callout: none) {
+      /*@supports (-webkit-touch-callout: none) {
         .collage-section-1 {
           margin-bottom: -10px !important;
         }
         
-        .collage-section-1 .a1 {
-          /* Clean positioning */
-        }
-        
-        .collage-section-1 .a1 img {
-          /* Clean positioning */
-        }
-      }
+      }*/
 
       .cover-buttons {
         display: none;
