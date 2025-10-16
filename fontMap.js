@@ -1,5 +1,9 @@
 // Font mapping configuration
 const fontMap = {
+  "Kilo Text Regular": { 
+    "family": "Kilo Text", 
+    "weight": 400 
+  },
   "Safra Regular": { 
     "family": "Safra", 
     "weight": 400 

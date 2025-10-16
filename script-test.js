@@ -129,9 +129,7 @@
 }
 
 function initParallax() {
-  const arabicText = document.querySelector('.cover-title .arabic');
-  const latinText = document.querySelector('.cover-title .latin');
-  const hebrewText = document.querySelector('.cover-title .hebrew');
+  const coverTitle = document.querySelector('.cover-title');
   const secondaryBtn = document.querySelector('.btn-secondary');
   const coverHeader = document.querySelector('.cover-header');
   const buttons = document.querySelector('.cover-buttons');
@@ -140,20 +138,22 @@ function initParallax() {
   const stickyGreenCircle = document.querySelector('.sticky-green-circle');
   const stickyNav = document.querySelector('.sticky-nav');
   
-  if (!arabicText || !latinText || !hebrewText || !secondaryBtn || !coverHeader || !buttons) return;
+  // Only require essential elements
+  if (!secondaryBtn || !coverHeader || !buttons) return;
 
+  // Get all text elements dynamically
+  const textElements = coverTitle ? coverTitle.querySelectorAll('div') : [];
+  
   function updateParallax() {
     const scrolled = window.pageYOffset;
     
-    // Different parallax rates for each line - more prominent effect
-    const arabicRate = scrolled * -0.6;
-    const latinRate = scrolled * -0.4;
-    const hebrewRate = scrolled * -0.2;
-    
-    // Each text line moves at different speeds for dynamic effect
-    arabicText.style.transform = `translateY(${arabicRate}px)`;
-    latinText.style.transform = `translateY(${latinRate}px)`;
-    hebrewText.style.transform = `translateY(${hebrewRate}px)`;
+    // Apply parallax to each text element with different speeds
+    textElements.forEach((element, index) => {
+      // Calculate speed based on position: first element fastest, last element slowest
+      const speedMultiplier = -0.6 + (index * 0.2); // -0.6, -0.4, -0.2, 0, 0.2, etc.
+      const rate = scrolled * speedMultiplier;
+      element.style.transform = `translateY(${rate}px)`;
+    });
     
     // Add white background to secondary button when scrolled past cover
     const coverBottom = coverHeader.offsetTop + coverHeader.offsetHeight;

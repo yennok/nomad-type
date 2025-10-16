@@ -1087,6 +1087,28 @@ ease;
 
       // Initialize mobile tap functionality
       initMobileTap();
+
+      // Navigation links - force navigation
+      const navLinks = document.querySelectorAll('.nav-link, .menu-item');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          console.log('Navigation link clicked: ' + this.href + ' - ' + this.textContent);
+          if (this.href) {
+            window.location.href = this.href;
+          }
+        });
+      });
+
+      // Trial buttons - navigate to trial-fonts.html
+      const trialButtons = document.querySelectorAll('.sticky-trial-btn, .scroll-btn');
+      trialButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          console.log('Trial button clicked: ' + this.textContent);
+          window.location.href = 'trial-fonts.html';
+        });
+      });
 });
   </script>
 </body>

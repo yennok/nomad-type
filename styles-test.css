@@ -11,11 +11,105 @@
     }
     
     body.kilo-page {
-      --primary-color: #0066ff; /* Blue for KILO */
+      --primary-color: #EDE5D1; /* Cream for Kilo Text */
     }
     
     body.sugar-page {
       --primary-color: #FF6CF1; /* Orange for Sugar */
+    }
+
+    /* ====== TYPEFACE-SPECIFIC COVER TITLE STYLING ====== */
+    
+    /* Safra Page Styling - Position-Based */
+    body.safra-page .cover-title div:nth-child(1) {
+      font-family: "Safra", serif;
+      font-weight: 300;
+      color: black;
+      font-size: 150px; 
+      line-height: 1; 
+      margin-bottom: 0px; 
+      direction: rtl; 
+      transform: translateZ(0); 
+      will-change: transform; 
+    }
+    
+    body.safra-page .cover-title div:nth-child(2) {
+      font-family: "Safra", sans-serif;
+      font-weight: 300;
+      color: black;
+      font-size: 150px; 
+      line-height: 1; 
+      margin-bottom: -10px; 
+      transform: translateZ(0); 
+      will-change: transform; 
+      font-kerning: auto;
+      letter-spacing:-4px;
+    }
+    
+    body.safra-page .cover-title div:nth-child(3) {
+      font-family: "Safra", serif;
+      font-weight: 300;
+      color: black;
+      font-size: 150px; 
+      line-height: 1; 
+      transform: translateZ(0); 
+      will-change: transform; 
+      font-kerning: auto;
+      letter-spacing:-7px;
+    }
+    
+    /* Kilo Text Page Styling - Position-Based */
+    body.kilo-page .cover-title div:nth-child(1) {
+      font-family: "Kilo Text", serif;
+      font-weight: 400;
+      color: black;
+      letter-spacing: -2px;
+      font-size: 150px; 
+      line-height:170px;
+    }
+    
+    body.kilo-page .cover-title div:nth-child(2) {
+      font-family: "Kilo Text", serif;
+      font-weight: 400;
+      color: black;
+      letter-spacing: -2px;
+      font-size: 100px; 
+    }
+
+    body.kilo-page .cover-title div:nth-child(3) {
+      font-family: "Kilo Text", serif;
+      font-weight: 400;
+      color: black;
+      letter-spacing: -2px;
+      font-size: 50px; 
+    }
+
+    body.kilo-page .cover-title div:nth-child(4) {
+      font-family: "Kilo Text", serif;
+      font-weight: 400;
+      color: black;
+      letter-spacing: -2px;
+      font-size: 27px; 
+      line-height:45px;
+
+    }
+
+    body.kilo-page .cover-title div:nth-child(5) {
+      font-family: "Kilo Text", serif;
+      font-weight: 400;
+      color: black;
+      letter-spacing: 0px;
+      font-size: 15px; 
+      line-height:36px;
+
+    }
+
+
+    /* Sugar Page Styling - Position-Based */
+    body.sugar-page .cover-title div:nth-child(1) {
+      font-family: "Sugar Serif", serif;
+      font-weight: 400;
+      color: var(--primary-color);
     }
 
     /* Global link styling */
@@ -58,6 +152,7 @@ body {
     @font-face { font-family: "Safra";       font-weight: 400; font-style: normal; src: url("fonts/Safra-Regular.woff2") format("woff2"); }
     @font-face { font-family: "Safra";       font-weight: 700; font-style: normal; src: url("fonts/Safra-Bold.woff2") format("woff2"); }
     @font-face { font-family: "Safra Mono";  font-weight: 400; font-style: normal; src: url("fonts/SafraMono-Mono.woff2") format("woff2"); }
+    @font-face { font-family: "Kilo Text";   font-weight: 400; font-style: normal; src: url("fonts/Kilo-Text/KILOTextV5-Regular.woff2") format("woff2"); }
 
     /* ====== RESET, LAYOUT ====== */
     * { box-sizing: border-box; }
@@ -317,6 +412,7 @@ body {
     .mobile-overlay.active {
       right: 0;
       border-left-color: transparent;
+      border-left:none;
     }
     
     .mobile-overlay-content {
@@ -711,12 +807,17 @@ body {
       will-change: transform; 
     }
 
+    body.kilo-page .parallax-content { 
+
+    transform: translateY(30px);
+    }
+    
     .cover-title { 
       text-align: center; 
       margin-bottom: 60px; 
     }
 
-    .cover-title .arabic { 
+    /*.cover-title .arabic { 
       font-family: "Safra", serif; 
       font-weight: 300; 
       font-size: 150px; 
@@ -749,6 +850,7 @@ body {
       font-kerning: auto;
       letter-spacing:-7px;
     }
+      */
 
     .cover-buttons { 
       position: absolute; 
@@ -1615,6 +1717,10 @@ body {
       font-family: "Safra Sans", sans-serif;
     }
 
+    .marquee-text.kilo-text {
+      font-family: "Kilo Text", serif;
+    }
+
     .marquee-text.regular {
       font-weight: 400;
     }
@@ -1992,7 +2098,7 @@ body {
       font-weight: 400; 
       font-size: calc(var(--cell-size) * 0.53); 
       line-height: 1; 
-      transition: background 0.15s ease; 
+      /*transition: background 0.15s ease; */
     }
     .char-cell::before {
       content: attr(data-char);
@@ -2253,7 +2359,7 @@ body {
         height: calc(var(--vh, 1vh) * 100 - 40px); 
         border-radius: 12px; 
       }
-      .cover-title .arabic, .cover-title .latin, .cover-title .hebrew { font-size: 72px; }
+      body.safra-page .cover-title div:nth-child(1), body.safra-page .cover-title div:nth-child(2), body.safra-page .cover-title div:nth-child(3) { font-size: 78px; letter-spacing:-2px; }
       .cover-buttons { 
         bottom: 36px; 
         right: 36px; 
@@ -2270,7 +2376,7 @@ body {
         height: calc(var(--vh, 1vh) * 100 - 106px); 
         border-radius: 12px; 
       }
-      .cover-title .arabic, .cover-title .latin, .cover-title .hebrew { font-size: 78px; letter-spacing:-2px; }
+      body.safra-page .cover-title div:nth-child(1), body.safra-page .cover-title div:nth-child(2), body.safra-page .cover-title div:nth-child(3) { font-size: 78px; letter-spacing:-2px; }
       .cover-buttons { 
         bottom: 36px; 
         right: 36px; 

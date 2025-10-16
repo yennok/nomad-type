@@ -76,26 +76,16 @@ const headerHTML = `
 `;
 
 // Load header component
-function loadHeader(config = {}) {
+function loadHeader(titleHTML = '') {
   const headerContainer = document.getElementById('header-container');
   
   if (headerContainer) {
     headerContainer.innerHTML = headerHTML;
     
-    // Set the cover title based on configuration
+    // Set the cover title with pure HTML
     const coverTitleContainer = document.getElementById('coverTitleContainer');
-    if (coverTitleContainer && config.title) {
-      // Default order: Arabic, Latin, Hebrew
-      const order = config.titleOrder || ['arabic', 'latin', 'hebrew'];
-      
-      order.forEach(script => {
-        if (config.title[script]) {
-          const div = document.createElement('div');
-          div.className = script;
-          div.textContent = config.title[script];
-          coverTitleContainer.appendChild(div);
-        }
-      });
+    if (coverTitleContainer && titleHTML) {
+      coverTitleContainer.innerHTML = titleHTML;
     }
   }
 }
