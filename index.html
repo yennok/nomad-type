@@ -766,13 +766,14 @@ ease;
       // Initial parallax setup
       updateParallax();
 
-      // Calculate and set height for collage-section-1 on Safari
+      // Calculate and set height for collage sections on Safari
       function calculateCollageSectionHeight() {
         // Only run on mobile Safari
         if (window.innerWidth > 768) {
           return;
         }
 
+        // Calculate section-1 height (a1 + a2 + margin + padding)
         const section1 = document.querySelector('.collage-section-1');
         const a1Element = document.querySelector('.collage-section-1 .a1');
         const a2Element = document.querySelector('.collage-section-1 .a2');
@@ -805,7 +806,51 @@ ease;
             // Apply the calculated height
             section1.style.height = totalHeight + 'px';
             
-            console.log(`Calculated height: a1(${a1Height}px) + a2(${a2Height}px) + margin(${margin}px) + extraPadding(${extraPadding}px) = ${totalHeight}px`);
+            console.log(`Section-1 calculated height: a1(${a1Height}px) + a2(${a2Height}px) + margin(${margin}px) + extraPadding(${extraPadding}px) = ${totalHeight}px`);
+          });
+        }
+
+        // Calculate section-3 height (a9 + a5 + half of a4 + margins + padding)
+        const section3 = document.querySelector('.collage-section-3');
+        const a9Element = document.querySelector('.collage-section-3 .a9');
+        const a5Element = document.querySelector('.collage-section-3 .a5');
+        const a4Element = document.querySelector('.collage-section-3 .a4');
+        
+        if (section3 && a9Element && a5Element && a4Element) {
+          // Wait for images to load
+          const a9Img = a9Element.querySelector('img');
+          const a5Img = a5Element.querySelector('img');
+          const a4Img = a4Element.querySelector('img');
+          
+          Promise.all([
+            new Promise(resolve => {
+              if (a9Img.complete) resolve();
+              else a9Img.onload = resolve;
+            }),
+            new Promise(resolve => {
+              if (a5Img.complete) resolve();
+              else a5Img.onload = resolve;
+            }),
+            new Promise(resolve => {
+              if (a4Img.complete) resolve();
+              else a4Img.onload = resolve;
+            })
+          ]).then(() => {
+            // Get the actual rendered height of the elements (not just images)
+            const a9Height = a9Element.offsetHeight;
+            const a5Height = a5Element.offsetHeight;
+            const a4Height = a4Element.offsetHeight;
+            
+            const margin = 18; // 18px margin between images
+            const extraPadding = 18; // Additional 18px padding
+            
+            // Calculate total height: a9 + a5 + half of a4 + margins + padding
+            const totalHeight = a9Height + a5Height + (a4Height / 2) + margin + extraPadding;
+            
+            // Apply the calculated height
+            section3.style.height = totalHeight + 'px';
+            
+            console.log(`Section-3 calculated height: a9(${a9Height}px) + a5(${a5Height}px) + half a4(${a4Height/2}px) + margin(${margin}px) + extraPadding(${extraPadding}px) = ${totalHeight}px`);
           });
         }
       }
