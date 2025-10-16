@@ -59,12 +59,12 @@ const footerHTML = `
 <!-- ====== FOOTER NAVIGATION ====== -->
 <nav class="footer-nav">
   <div class="footer-nav-wrapper">
-    <a href="#" class="footer-nav-link">Typefaces</a>
-    <a href="#" class="footer-nav-link">FAQ</a>
-    <a href="#" class="footer-nav-link">Licensing</a>
-    <a href="#" class="footer-nav-link">Journal</a>
-    <a href="#" class="footer-nav-link">About</a>
-    <a href="#" class="footer-nav-link">Trial Fonts</a>
+    <a href="index.html" class="footer-nav-link">Typefaces</a>
+    <a href="faq.html" class="footer-nav-link">FAQ</a>
+    <a href="licensing.html" class="footer-nav-link">Licensing</a>
+    <a href="journal.html" class="footer-nav-link">Journal</a>
+    <a href="about.html" class="footer-nav-link">About</a>
+    <a href="trial-fonts.html" class="footer-nav-link">Trial Fonts</a>
     <a href="https://www.linkedin.com/in/yennok/" target="_blank" class="footer-linkedin-btn">Linkedin</a>
   </div>
 </nav>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About - Nomad Type</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  
+  <!-- Featured Image Meta Tags -->
+  <meta property="og:image" content="assets/featured_image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Nomad Type - About">
+  <meta name="twitter:image" content="assets/featured_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="Nomad Type - About">
+  <link rel="stylesheet" href="styles-test.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: black;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .main-container {
+      min-height: 100vh;
+      overflow: visible;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 0;
+    }
+
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+      color: white;
+    }
+
+    .about-title {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .about-text {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: white;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .about-text:last-child {
+      margin-bottom: 0;
+    }
+
+    .contact-info {
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid white;
+    }
+
+    .contact-info h3 {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .contact-info p {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: white;
+      line-height: 1.6;
+    }
+
+    .contact-info a {
+      color: white;
+      text-decoration: underline;
+    }
+
+    .contact-info a:hover {
+      text-decoration: none;
+    }
+
+    /* Footer Styles */
+    #footer-container {
+      border-top: 1px solid white;
+      background: black;
+    }
+
+    #footer-container .footer-content-section {
+      background: black;
+    }
+
+    #footer-container .footer-column h3 {
+      color: white;
+    }
+
+    #footer-container .footer-column p {
+      color: white;
+    }
+
+    #footer-container .footer-nav {
+      background: black;
+    }
+
+    #footer-container .footer-nav-link {
+      color: white;
+    }
+
+    #footer-container .footer-linkedin-btn {
+      color: white;
+      border: 1px solid white;
+      background: black;
+    }
+
+    #footer-container .footer-left {
+      color: white;
+    }
+
+    #footer-container .footer-right {
+      color: white;
+    }
+
+    .footer {
+      border-top: 1px solid white;
+    }
+
+    .footer-content-section {
+      height: calc(100vh - 214px);
+      min-height: 553px;
+    }
+
+    .nav-brand, .nav-link {
+      color: white;
+      margin-top: 28px;
+    }
+
+    .nav-brand a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .nav-brand a:hover {
+      text-decoration: none;
+    }
+
+    .sticky-nav {
+      position: relative;
+      height: 0;
+    }
+
+    .sticky-green-circle {
+      transition: opacity 0.5s ease !important;
+      opacity: 0 !important;
+    }
+
+    .sticky-green-circle.visible {
+      opacity: 1 !important;
+    }
+
+    /* Sticky Trial Fonts Button */
+    .sticky-trial-btn {
+      position: fixed;
+      top: 29px;
+      right: 29px;
+      z-index: 1000;
+      background: #fff;
+      color: #000;
+      border: 2px solid #000;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .sticky-trial-btn {
+      padding: 7px 10px;
+      border: 1px solid white;
+      background: black;
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      font-weight: 400;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: white;
+      display: inline-block;
+      border-radius: 4px;
+      line-height: 17px;
+    }
+
+    .sticky-trial-btn:hover {
+      background: white;
+      color: black;
+    }
+
+    @media (max-width: 768px) {
+      .about-title {
+        font-size: 32px;
+        margin-bottom: 30px;
+      }
+
+      .about-text {
+        font-size: 16px;
+      }
+
+      .contact-info h3 {
+        font-size: 20px;
+      }
+
+      .contact-info p {
+        font-size: 16px;
+      }
+
+      .main-container {
+        padding: 80px 0;
+      }
+
+      .about-content {
+        padding: 0 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="sticky-nav" style="transition: opacity 0.5s, top 0.3s; opacity: 1; top: 50px;">
+    <div class="nav-brand"><a href="index.html">Nomad Type</a></div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Typefaces</a>
+      <a href="journal.html" class="nav-link">Journal</a>
+      <a href="about.html" class="nav-link">About</a>
+    </div>
+  </nav>
+
+  <div class="sticky-green-circle" style="--menu-width: 319px; --menu-padding: 0 36px;">
+    <div class="circle-marquee">
+      <div class="circle-marquee-content" style="translate: none; rotate: none; scale: none; transform: translate3d(-16.625px, -1px, 0px);">Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type</div>
+    </div>
+    <div class="menu-background">
+      <div class="menu-items">
+        <a href="index.html" class="menu-item">Typefaces</a>
+        <a href="journal.html" class="menu-item">Journal</a>
+        <a href="about.html" class="menu-item">About</a>
+      </div>
+    </div>
+    <div class="circle-hamburger"></div>
+  </div>
+
+  <div class="mobile-hamburger-circle solid" id="mobileHamburgerCircle" style="display: block;"></div>
+
+  <!-- ====== MOBILE OVERLAY MENU ====== -->
+  <div class="mobile-overlay" id="mobileOverlay">
+    <div class="mobile-overlay-content">
+      <div class="mobile-menu-header">
+        <h2><a href="index.html">Nomad Type</a></h2>
+        <button class="close-btn" id="closeMobileMenu"></button>
+      </div>
+      <nav class="mobile-menu-nav">
+        <a href="index.html" class="mobile-menu-link">Typefaces</a>
+        <a href="licensing.html" class="mobile-menu-link">Licensing</a>
+        <a href="about.html" class="mobile-menu-link">About</a>
+        <a href="journal.html" class="mobile-menu-link">Journal</a>
+        <a href="trial-fonts.html" class="mobile-menu-link">Trial Fonts</a>
+        <a href="faq.html" class="mobile-menu-link">FAQ</a>
+      </nav>
+      <div class="mobile-menu-footer">
+        <p>© Nomad Type. All Rights Reserved 2025</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Trial Fonts Button -->
+  <div class="cover-buttons">
+    <button class="btn btn-primary sticky-trial-btn">Trial Fonts</button>
+  </div>
+
+  <div class="main-container">
+    <div class="about-content">
+      <h1 class="about-title">About Nomad Type</h1>
+      
+      <p class="about-text">
+        Nomad Type is an independent type foundry exploring multilingual design across Hebrew, Arabic, and Latin scripts. We create typefaces that balance cultural authenticity with contemporary use, bridging writing systems through research and craft.
+      </p>
+      
+      <p class="about-text">
+        Our work is driven by the belief that type design should respect the unique characteristics of each script while creating harmonious relationships between them. We approach multilingual typography not as a technical challenge, but as an opportunity to explore the rich cultural and historical contexts that shape how we communicate.
+      </p>
+      
+      <p class="about-text">
+        Each typeface we develop undergoes extensive research into the traditions and contemporary practices of the scripts involved. We work closely with native speakers and cultural experts to ensure our designs maintain authenticity while meeting the demands of modern typography.
+      </p>
+      
+      <p class="about-text">
+        From display fonts that make bold statements to text faces designed for extended reading, our collection reflects the diverse needs of today's multilingual communication landscape.
+      </p>
+      
+      <div class="contact-info">
+        <h3>Get in Touch</h3>
+        <p>
+          We're always open to conversations with fellow type designers, researchers, and anyone interested in multilingual design. Whether you have questions about our work, ideas for collaboration, or just want to discuss typography, feel free to reach out at <a href="mailto:nir@yennok.com">nir@yennok.com</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER CONTAINER -->
+  <div id="footer-container"></div>
+
+  <!-- GSAP Scripts for marquee animation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="gsap-public/esm/Draggable.js"></script>
+  <script src="gsap-public/esm/ScrollTrigger.js"></script>
+
+  <script src="footer.js"></script>
+  <script src="script-test.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      loadFooter('Safra');
+      
+      // Initialize the circle marquee animation
+      if (typeof initCircleMarquee === 'function') {
+        initCircleMarquee();
+      }
+
+      // Circle visibility based on sticky-nav position
+      function updateCircleVisibility() {
+        const stickyNav = document.querySelector('.sticky-nav');
+        const circle = document.querySelector('.sticky-green-circle');
+        
+        if (stickyNav && circle) {
+          const navRect = stickyNav.getBoundingClientRect();
+          
+          // If sticky-nav is off screen (top), show circle
+          if (navRect.bottom < 0) {
+            circle.classList.add('visible');
+          } else {
+            circle.classList.remove('visible');
+          }
+        }
+      }
+      
+      // Listen for scroll events
+      window.addEventListener('scroll', updateCircleVisibility);
+      
+      // Initial check
+      updateCircleVisibility();
+
+      // Mobile Overlay Functionality
+      function initMobileOverlay() {
+        const mobileHamburgerCircle = document.getElementById('mobileHamburgerCircle');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+
+        // Open mobile overlay
+        if (mobileHamburgerCircle) {
+          mobileHamburgerCircle.addEventListener('click', function() {
+            if (mobileOverlay) {
+              mobileOverlay.classList.add('active');
+              document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+          });
+        }
+
+        // Close mobile overlay
+        if (closeMobileMenu) {
+          closeMobileMenu.addEventListener('click', function() {
+            if (mobileOverlay) {
+              mobileOverlay.classList.remove('active');
+              document.body.style.overflow = ''; // Restore scrolling
+            }
+          });
+        }
+
+        // Close overlay when clicking outside content
+        if (mobileOverlay) {
+          mobileOverlay.addEventListener('click', function(e) {
+            if (e.target === mobileOverlay) {
+              mobileOverlay.classList.remove('active');
+              document.body.style.overflow = ''; // Restore scrolling
+            }
+          });
+        }
+
+        // Close overlay when pressing escape key
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && mobileOverlay && mobileOverlay.classList.contains('active')) {
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+          }
+        });
+      }
+
+      // Initialize mobile overlay
+      initMobileOverlay();
+    });
+  </script>
+</body>
+</html>

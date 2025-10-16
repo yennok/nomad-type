@@ -18,8 +18,28 @@
       --primary-color: #FF6CF1; /* Orange for Sugar */
     }
 
+    /* Global link styling */
+    a:-webkit-any-link {
+        color: inherit;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
 body.homepage-page {
-  --primary-color: #000000; /* Black for homepage */
+  --primary-color: white; /* Black for homepage */
+  background: black;
+}
+
+/* Homepage-specific nav-links styling */
+body.homepage-page .nav-links {
+  color: white;
+}
+
+/* Homepage-specific LinkedIn button hover styling */
+body.homepage-page .footer-linkedin-btn:hover {
+  color: black;
+  background: white;
+  border: 1px solid white;
 }
 
 body {
@@ -98,13 +118,12 @@ body {
     /* ====== STICKY NAVIGATION MENU ====== */
     .sticky-nav {
       position: fixed;
-      top: 70px;
+      top: 50px;
       left: 60px;
       right: 60px;
       display: flex;
       align-items: center;
       z-index: 1000;
-      transition: top 0.3s ease, opacity 1s ease;
       opacity: 0;
     }
 

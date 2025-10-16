@@ -298,21 +298,9 @@ function initParallax() {
     if (buttonsRect.top <= 29 && !headerIsVisible) {
       // Buttons reached 29px from top AND header is not visible, make them sticky
       buttons.classList.add('sticky');
-      // Align navigation with sticky buttons
-      document.querySelector('.sticky-nav').style.top = '32px';
     } else {
       // Buttons are above 29px OR header is visible, remove sticky
       buttons.classList.remove('sticky');
-      // Reset navigation to original position
-      document.querySelector('.sticky-nav').style.top = '50px';
-    }
-    
-    // Add Y transition when nav is about to disappear
-    if (!shouldTrigger) {
-      document.querySelector('.sticky-nav').style.transition = 'opacity 0.5s ease, top 0.3s ease';
-      document.querySelector('.sticky-nav').style.top = '32px'; // Move up when disappearing
-    } else {
-      document.querySelector('.sticky-nav').style.transition = 'opacity 0.5s ease, top 0.3s ease';
     }
   }
 
