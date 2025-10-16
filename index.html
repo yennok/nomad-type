@@ -772,6 +772,54 @@ ease;
       
       // Initial parallax setup
       updateParallax();
+
+      // Calculate and set height for collage-section-1 on Safari
+      function calculateCollageSectionHeight() {
+        // Only run on mobile Safari
+        if (window.innerWidth > 768) {
+          return;
+        }
+
+        const section1 = document.querySelector('.collage-section-1');
+        const a1Element = document.querySelector('.collage-section-1 .a1');
+        const a2Element = document.querySelector('.collage-section-1 .a2');
+        
+        if (section1 && a1Element && a2Element) {
+          // Wait for images to load
+          const a1Img = a1Element.querySelector('img');
+          const a2Img = a2Element.querySelector('img');
+          
+          Promise.all([
+            new Promise(resolve => {
+              if (a1Img.complete) resolve();
+              else a1Img.onload = resolve;
+            }),
+            new Promise(resolve => {
+              if (a2Img.complete) resolve();
+              else a2Img.onload = resolve;
+            })
+          ]).then(() => {
+            // Get the actual rendered height of the elements (not just images)
+            const a1Height = a1Element.offsetHeight;
+            const a2Height = a2Element.offsetHeight;
+            
+            const margin = 18; // 18px margin between images
+            const extraPadding = 18; // Additional 18px padding
+            
+            // Calculate total height
+            const totalHeight = a1Height + a2Height + margin + extraPadding;
+            
+            // Apply the calculated height
+            section1.style.height = totalHeight + 'px';
+            
+            console.log(`Calculated height: a1(${a1Height}px) + a2(${a2Height}px) + margin(${margin}px) + extraPadding(${extraPadding}px) = ${totalHeight}px`);
+          });
+        }
+      }
+
+      // Run calculation on load and resize
+      calculateCollageSectionHeight();
+      window.addEventListener('resize', calculateCollageSectionHeight);
 });
   </script>
 </body>
