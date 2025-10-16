@@ -324,7 +324,9 @@ ease;
       .collage-section-1 {
         columns: 2;
         column-gap: 18px;
-       
+        margin-bottom: -2.5%;
+        padding-top: 30%;
+        overflow: visible;
       }
 
       /* Section 2: Next 2 images - full width */
@@ -360,19 +362,22 @@ ease;
         margin: 0 auto;
       }
 
-      /* Clean positioning for Kaldanit and Safra */
+      /* Offset Kaldanit and Safra */
       .collage-section-1 .a1 {
-        position: relative;
+        padding-top: 25%;
+        margin-top: -25%;
+      position: relative;
         z-index: 10;
-      }
+    }
 
       .collage-section-1 .a1 img {
-        position: relative;
+        transform: translateY(-32%);
+      position: relative;
         z-index: 10;
       }
       
       .collage-section-1 .a2 img {
-        /* Clean positioning */
+        transform: translateY(-20%);
       }
 
       /* Hide hover images on mobile */
@@ -385,18 +390,19 @@ ease;
         opacity: 1;
       }
 
-      /* Mobile Safari-specific adjustments */
+      /* Mobile Safari-specific fix for Kaldanit */
       @supports (-webkit-touch-callout: none) {
         .collage-section-1 {
           margin-bottom: -10px !important;
         }
         
         .collage-section-1 .a1 {
-          /* Clean positioning */
+          padding-top: 35%;
+          margin-top: -35%;
         }
         
         .collage-section-1 .a1 img {
-          /* Clean positioning */
+          transform: translateY(-10%);
         }
       }
 

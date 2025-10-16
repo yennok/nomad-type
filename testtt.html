@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masonry Grid Hybrid</title>
+<style>
+  body {
+    margin: 0;
+    padding: 20px;
+    font-family: sans-serif;
+    background: #fafafa;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-auto-rows: 100px;
+    gap: 16px;
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: #222;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .short  { background: #ffd4d4; grid-row: span 1; }
+  .medium { background: #c8f0d0; grid-row: span 2; }
+  .tall   { background: #d4d4ff; grid-row: span 3; }
+
+  @media (max-width: 800px) {
+    .grid {
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      grid-auto-rows: 80px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .grid {
+      grid-template-columns: 1fr;
+      grid-auto-rows: 100px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid">
+  <div class="item tall">1</div>
+  <div class="item short">2</div>
+  <div class="item medium">3</div>
+  <div class="item tall">4</div>
+  <div class="item short">5</div>
+  <div class="item medium">6</div>
+  <div class="item tall">7</div>
+  <div class="item short">8</div>
+  <div class="item medium">9</div>
+  <div class="item tall">10</div>
+</div>
+
+</body>
+</html>
