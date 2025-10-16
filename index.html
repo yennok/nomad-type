@@ -1028,6 +1028,49 @@ ease;
 
       // Initialize mobile overlay
       initMobileOverlay();
+
+      // Mobile tap functionality for collage images
+      function initMobileTap() {
+        // Only run on mobile
+        if (window.innerWidth > 768) {
+          return;
+        }
+
+        const collageLinks = document.querySelectorAll('.collage a');
+        
+        collageLinks.forEach((link) => {
+          link.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent default link behavior temporarily
+            
+            const className = link.className;
+            const regularImg = link.querySelector('img:not(.hover)');
+            
+            if (regularImg) {
+              // Turn off hover state for all other images
+              collageLinks.forEach((otherLink) => {
+                if (otherLink !== link) {
+                  const otherRegularImg = otherLink.querySelector('img:not(.hover)');
+                  if (otherRegularImg) {
+                    const otherClassName = otherLink.className;
+                    otherRegularImg.src = `assets/homepage/${otherClassName}-mobile.png`;
+                  }
+                }
+              });
+              
+              // Set current clicked image to hover state
+              regularImg.src = `assets/homepage/${className}-mobile-hover.png`;
+              
+              // Navigate to the link after a short delay to show the hover effect
+              setTimeout(() => {
+                window.location.href = link.href;
+              }, 200);
+            }
+          });
+        });
+      }
+
+      // Initialize mobile tap functionality
+      initMobileTap();
 });
   </script>
 </body>
