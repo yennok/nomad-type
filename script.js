@@ -85,6 +85,9 @@
         });
         grid.appendChild(cell);
       });
+      
+      // Debug: Log grid innerHTML to see what was created
+      console.log('Grid innerHTML:', grid.innerHTML);
 
       const apply = () => {
         const cfg = fontMap[weightSel.value] || { family: 'sans-serif', weight: 400 };
@@ -352,7 +355,6 @@ class AutoFitManager {
     const fontSelect = sectionElement.querySelector('.font-select');
 
     if (!textArea || !sizeSlider) {
-      console.warn('Auto-fit: Missing required elements (textArea or sizeSlider)');
       return;
     }
 
@@ -372,14 +374,12 @@ class AutoFitManager {
     this.setupSectionListeners(sectionData);
     this.updateSectionSize(sectionData);
 
-    // console.log('Auto-fit initialized for section:', sectionElement.className);
   }
 
   // Calculate optimal font size to fit text in one line
   calculateFittingSize(sectionData) {
     const { textArea, config } = sectionData;
     
-    console.log('calculateFittingSize called for:', textArea?.textContent, 'in section:', sectionData.element);
     
     // Get the actual available width for the text - more accurate calculation
     const containerWidth = textArea.offsetWidth;
@@ -419,18 +419,6 @@ class AutoFitManager {
     
     const availableWidth = containerWidth - paddingLeft - paddingRight - buffer;
 
-    console.log('Width calculation:', {
-      containerWidth,
-      paddingLeft,
-      paddingRight,
-      buffer,
-      availableWidth,
-      textLength: text.length,
-      screenWidth: screenWidth,
-      deviceType: screenWidth <= 768 ? 'mobile' : screenWidth <= 1024 ? 'tablet' : 'desktop',
-      isSafari: isSafari,
-      browser: navigator.userAgent.includes('Safari') ? 'Safari' : 'Other'
-    });
 
     if (!text || !availableWidth) return config.baseFontSize;
 
@@ -490,14 +478,6 @@ class AutoFitManager {
 
     document.body.removeChild(tempElement);
     
-    console.log('Font size calculation result:', {
-      text: text,
-      availableWidth: availableWidth,
-      fittingSize: fittingSize,
-      clampedSize: clampedSize,
-      bestSize: bestSize,
-      maxFontSize: config.maxFontSize
-    });
     
     return bestSize;
   }
@@ -546,7 +526,6 @@ class AutoFitManager {
         sectionData.autoFitEnabled = false;
         // Allow normal paragraph behavior (multi-line)
         textArea.style.whiteSpace = 'normal';
-        console.log('Auto-fit disabled: User started adjusting size');
       }
       // Disable transition for immediate response
       textArea.style.transition = 'none';
@@ -557,7 +536,6 @@ class AutoFitManager {
           sectionData.autoFitEnabled = false;
           // Allow normal paragraph behavior (multi-line)
           textArea.style.whiteSpace = 'normal';
-          console.log('Auto-fit disabled: User adjusted size');
         }
         textArea.style.fontSize = sizeSlider.value + 'px';
       }
@@ -573,7 +551,6 @@ class AutoFitManager {
       if (sectionData.autoFitEnabled && !sectionData.userHasTyped) {
         sectionData.autoFitEnabled = false;
         textArea.style.whiteSpace = 'normal';
-        console.log('Auto-fit disabled: User started adjusting size (touch)');
       }
       textArea.style.transition = 'none';
     });
@@ -591,7 +568,6 @@ class AutoFitManager {
           sectionData.autoFitEnabled = false;
           // Allow normal paragraph behavior (multi-line)
           textArea.style.whiteSpace = 'normal';
-          console.log('Auto-fit disabled: User started adjusting line height');
         }
       });
       leadingSlider.addEventListener('input', () => {
@@ -599,7 +575,6 @@ class AutoFitManager {
           sectionData.autoFitEnabled = false;
           // Allow normal paragraph behavior (multi-line)
           textArea.style.whiteSpace = 'normal';
-          console.log('Auto-fit disabled: User adjusted line height');
         }
       });
     }
@@ -612,7 +587,6 @@ class AutoFitManager {
           sectionData.autoFitEnabled = false;
           // Allow normal paragraph behavior (multi-line)
           textArea.style.whiteSpace = 'normal';
-          console.log('Auto-fit disabled: User started adjusting letter spacing');
         }
       });
       spacingSlider.addEventListener('input', () => {
@@ -620,7 +594,6 @@ class AutoFitManager {
           sectionData.autoFitEnabled = false;
           // Allow normal paragraph behavior (multi-line)
           textArea.style.whiteSpace = 'normal';
-          console.log('Auto-fit disabled: User adjusted letter spacing');
         }
       });
     }
@@ -673,13 +646,11 @@ class AutoFitManager {
       sectionData.autoFitEnabled = false;
       // Allow normal paragraph behavior (multi-line)
       textArea.style.whiteSpace = 'normal';
-      console.log('Auto-fit disabled: User typed new text');
     } else if (!hasChanged && sectionData.userHasTyped) {
       sectionData.userHasTyped = false;
       sectionData.autoFitEnabled = true;
       // Restore single line behavior when auto-fit is re-enabled
       textArea.style.whiteSpace = 'nowrap';
-      console.log('Auto-fit re-enabled: Text restored to original');
     }
   }
 
@@ -758,24 +729,16 @@ const autoFitManager = new AutoFitManager();
 function initResponsiveSection() {
   const responsiveSections = document.querySelectorAll('.responsive-section');
   if (responsiveSections.length === 0) {
-    console.log('No responsive sections found');
     return;
   }
 
   // Initialize all responsive sections with auto-fit
   responsiveSections.forEach((section, index) => {
-    console.log(`Initializing section ${index + 1}:`, section);
     
     const textArea = section.querySelector('.type-area');
     const sizeSlider = section.querySelector('.size');
     const fontSelect = section.querySelector('.font-select');
     
-    console.log(`Section ${index + 1} elements:`, {
-      textArea: !!textArea,
-      sizeSlider: !!sizeSlider,
-      fontSelect: !!fontSelect,
-      textContent: textArea?.textContent
-    });
     
     // Calculate responsive max font size based on screen width and text length
     const screenWidth = window.innerWidth;
@@ -812,13 +775,11 @@ function initResponsiveSection() {
       disableOnUserInput: true
     });
 
-    console.log(`Responsive section ${index + 1} initialized with maxFontSize: ${responsiveMaxFontSize}px (screen width: ${screenWidth}px)`);
 
     // Force immediate auto-fit on page load (multiple attempts to catch it early)
     setTimeout(() => {
       const sectionData = autoFitManager.sections.get(section);
       if (sectionData) {
-        console.log(`Immediate auto-fit on page load - Section ${index + 1}`);
         autoFitManager.updateSectionSize(sectionData);
       }
     }, 0);
@@ -826,7 +787,6 @@ function initResponsiveSection() {
     setTimeout(() => {
       const sectionData = autoFitManager.sections.get(section);
       if (sectionData) {
-        console.log(`Delayed auto-fit on page load - Section ${index + 1}`);
         autoFitManager.updateSectionSize(sectionData);
       }
     }, 100);
@@ -834,7 +794,6 @@ function initResponsiveSection() {
     setTimeout(() => {
       const sectionData = autoFitManager.sections.get(section);
       if (sectionData) {
-        console.log(`Final auto-fit on page load - Section ${index + 1}`);
         autoFitManager.updateSectionSize(sectionData);
       }
     }, 300);
@@ -857,7 +816,6 @@ function initResponsiveSection() {
   window.createResponsiveSection = (containerId = 'main-content') => {
     const container = document.getElementById(containerId) || document.querySelector('.content-wrapper');
     if (!container) {
-      console.error('Container not found');
       return;
     }
 
@@ -925,7 +883,6 @@ function initResponsiveSection() {
       disableOnUserInput: true
     });
 
-    console.log(`New responsive section ${sectionCount} created and initialized`);
     return newSection;
   };
 
@@ -933,7 +890,6 @@ function initResponsiveSection() {
   window.testCarousel = (carouselId) => {
     const track = document.getElementById(carouselId);
     if (track) {
-      console.log(`Testing carousel ${carouselId}`);
       track.style.transform = 'translateX(-100%)';
       setTimeout(() => {
         track.style.transform = 'translateX(0%)';
@@ -989,7 +945,6 @@ function initCarousels() {
       if (!aspectRatioSet && img.naturalWidth > 0 && img.naturalHeight > 0) {
         const aspectRatio = img.naturalWidth / img.naturalHeight;
         container.style.aspectRatio = `${aspectRatio}`;
-        console.log(`Carousel ${carousel.track}: Aspect ratio set to ${aspectRatio}`);
         aspectRatioSet = true;
       }
     }
@@ -1003,14 +958,11 @@ function initCarousels() {
           loadedImages++;
           setAspectRatio(img);
           if (loadedImages === allImages.length) {
-            console.log(`Carousel ${carousel.track}: All images loaded`);
           }
         };
         img.onerror = () => {
           loadedImages++;
-          console.warn(`Carousel ${carousel.track}: Image failed to load: ${img.src}`);
           if (loadedImages === allImages.length) {
-            console.log(`Carousel ${carousel.track}: All images processed`);
           }
         };
       }
@@ -1020,7 +972,6 @@ function initCarousels() {
     setTimeout(() => {
       if (!aspectRatioSet) {
         container.style.aspectRatio = '4/3'; // Default fallback
-        console.log(`Carousel ${carousel.track}: Using default aspect ratio 4/3`);
       }
     }, 2000);
 
@@ -1041,11 +992,9 @@ function initCarousels() {
 
     function nextSlide() {
       currentSlide++;
-      console.log(`Carousel ${carousel.track}: Moving to slide ${currentSlide}`);
       
       // When we reach the end of the original slides, jump to the duplicate set
       if (currentSlide >= carousel.totalSlides) {
-        console.log(`Carousel ${carousel.track}: Reached end, jumping to duplicates`);
         updateCarousel();
         
         // After transition completes, reset to beginning seamlessly
@@ -1102,11 +1051,9 @@ function initCarousels() {
     // Start auto-play with delay for right carousel
     if (carousel.delay > 0) {
       setTimeout(() => {
-        console.log(`Starting carousel ${carousel.track} with ${carousel.interval}ms interval`);
         startAutoPlay();
       }, carousel.delay);
     } else {
-      console.log(`Starting carousel ${carousel.track} with ${carousel.interval}ms interval`);
       startAutoPlay();
     }
   });
@@ -1132,7 +1079,6 @@ function initInvertToggle() {
     const isCurrentlyInverted = body.classList.contains('inverted');
     localStorage.setItem('safra-inverted', isCurrentlyInverted.toString());
     
-    console.log('Invert toggle:', isCurrentlyInverted ? 'ON' : 'OFF');
   });
 }
 
@@ -1929,7 +1875,6 @@ function boot() {
         
         const sectionData = autoFitManager.sections.get(responsiveSection);
         if (sectionData) {
-          console.log('Emergency auto-fit triggered');
           autoFitManager.updateSectionSize(sectionData);
         }
       }
@@ -2104,7 +2049,6 @@ function wrapArabicCharacters() {
               typeArea.setAttribute('dir', 'rtl');
             }
           } catch (e) {
-            console.log('Cursor restoration failed:', e);
           }
         }, 10);
       }
@@ -2192,7 +2136,6 @@ document.addEventListener('DOMContentLoaded', function() {
   if (typeof emailjs !== 'undefined') {
     emailjs.init('SY_sCUJHCR5MtWgI5'); // Replace with your actual public key from EmailJS dashboard
   } else {
-    console.error('EmailJS library not loaded');
   }
 });
 
@@ -2262,7 +2205,6 @@ function sendTrialEmail() {
 
   emailjs.send('service_fzf0ivr', 'template_7un2cmq', templateParams)
     .then(function(response) {
-      console.log('SUCCESS!', response.status, response.text);
       submitBtn.innerHTML = '✓ Sent!';
       setTimeout(() => {
         // Hide form and show success message
@@ -2270,10 +2212,8 @@ function sendTrialEmail() {
         document.getElementById('trialSuccessMessage').style.display = 'block';
       }, 500);
     }, function(error) {
-      console.log('FAILED...', error);
       submitBtn.disabled = false;
       submitBtn.textContent = originalText;
-      alert('Sorry, there was an error. Please try again.');
     });
 }
 
@@ -2295,8 +2235,6 @@ function sendBuyEmail() {
   
   // Check if at least one intended use is selected
   const selectedUses = document.querySelectorAll('.buy-form input[name="use"]:checked');
-  console.log('Selected uses count:', selectedUses.length);
-  console.log('Selected uses:', selectedUses);
   if (selectedUses.length === 0) {
     errorMsg.textContent = 'Please select at least one intended use.';
     errorMsg.style.display = 'block';
@@ -2366,7 +2304,6 @@ function sendBuyEmail() {
 
   emailjs.send('service_fzf0ivr', 'template_y27yzjn', templateParams)
     .then(function(response) {
-      console.log('SUCCESS!', response.status, response.text);
       submitBtn.innerHTML = '✓ Sent!';
       setTimeout(() => {
         // Hide intro text and form, show success message
@@ -2375,9 +2312,7 @@ function sendBuyEmail() {
         document.getElementById('buySuccessMessage').style.display = 'block';
       }, 500);
     }, function(error) {
-      console.log('FAILED...', error);
       submitBtn.disabled = false;
       submitBtn.textContent = originalText;
-      alert('Sorry, there was an error. Please try again.');
     });
 }

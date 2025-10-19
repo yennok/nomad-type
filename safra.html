@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
   <link rel="apple-touch-icon" href="assets/favicon.png">
-  <link rel="stylesheet" href="styles-test.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body class="safra-page">
 
@@ -391,6 +391,7 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
 
   <!-- ===== DATA MAPS ===== -->
   <script type="application/json" id="fontMap">{
+    "Kilo Text Regular": { "family": "Kilo Text", "weight": 400 },
     "Safra Regular": { "family": "Safra", "weight": 400 },
     "Safra Bold": { "family": "Safra", "weight": 700 },
     "Safra Sans Regular": { "family": "Safra Sans", "weight": 400 },
@@ -440,7 +441,7 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
 });
   </script>
 
-  <script src="script-test.js"></script>
+  <script src="script.js"></script>
 
   </main>
 
@@ -733,7 +734,6 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
       navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
           e.preventDefault();
-          console.log('Navigation link clicked: ' + this.href + ' - ' + this.textContent);
           if (this.href) {
             window.location.href = this.href;
           }
@@ -745,7 +745,6 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
       trialButtons.forEach(button => {
         button.addEventListener('click', function(e) {
           e.preventDefault();
-          console.log('Trial button clicked: ' + this.textContent);
           window.location.href = 'trial-fonts.html';
         });
       });

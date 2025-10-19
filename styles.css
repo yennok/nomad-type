@@ -1,21 +1,31 @@
     :root { 
       --cell-size: 60px;
-      --glyph-vertical-offset: -3px; /* Adjust this value to align glyphs vertically in grid cells (negative moves up, positive moves down) */
-      --preview-vertical-offset: -14px; /* Adjust this value to align glyphs vertically in preview box (independent from cells) */
+      --glyph-vertical-offset: -1px; /* Adjust this value to align glyphs vertically in grid cells (negative moves up, positive moves down) */
+      --preview-vertical-offset: -3px; /* Adjust this value to align glyphs vertically in preview box (independent from cells) */
       --primary-color: white; /* Default primary color - can be overridden per page */
     }
     
     /* Page-specific color overrides */
     body.safra-page {
       --primary-color: #FF4802; /* Red for Safra */
+      --glyph-vertical-offset: -3px;
+      --preview-vertical-offset: -14px;
     }
     
     body.kilo-page {
-      --primary-color: #EDE5D1; /* Cream for Kilo Text */
+      --primary-color: #d89233; /* Cream for Kilo #c78f42 Text */
+      --glyph-vertical-offset: -1px;
+      --preview-vertical-offset: -3px;
     }
     
     body.sugar-page {
-      --primary-color: #FF6CF1; /* Orange for Sugar */
+      --primary-color: #D81F1F; /* Red for Sugar */
+    }
+    
+    body.spitz-page {
+      --primary-color: #ECFE54; /* Lime green for Romanisch Spitz */
+      --glyph-vertical-offset: -1px;
+      --preview-vertical-offset: -3px;
     }
 
     /* ====== TYPEFACE-SPECIFIC COVER TITLE STYLING ====== */
@@ -88,7 +98,7 @@
       font-family: "Kilo Text", serif;
       font-weight: 400;
       color: black;
-      letter-spacing: -2px;
+      letter-spacing: -.5px;
       font-size: 27px; 
       line-height:45px;
 
@@ -110,6 +120,86 @@
       font-family: "Sugar Serif", serif;
       font-weight: 400;
       color: var(--primary-color);
+    }
+
+    /* Romanisch Spitz Page Styling - Position-Based */
+    body.spitz-page .cover-title div:nth-child(1) {
+      font-family: "Romanisch Spitz", serif;
+      font-weight: 400;
+      color: black;
+      font-size: 150px;
+      line-height: 1;
+      margin-bottom: 0px;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    body.spitz-page .cover-title div:nth-child(2) {
+      font-family: "Romanisch Spitz", serif;
+      font-weight: 400;
+      color: black;
+      font-size: 150px;
+      line-height: 1;
+      margin-bottom: 0px;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    /* Sugar Page Styling - Position-Based */
+    body.sugar-page .cover-title div:nth-child(1) {
+      font-family: "Sugar Serif", serif;
+      font-weight: 400;
+      color: black;
+      font-size: 150px;
+      line-height: 1;
+      margin-bottom: 0px;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    body.sugar-page .cover-title div:nth-child(2) {
+      font-family: "Sugar Sans", sans-serif;
+      font-weight: 400;
+      color: black;
+      font-size: 150px;
+      line-height: 1;
+      margin-bottom: 0px;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    /* Sugar Type Tester Section Styling */
+    body.sugar-page .type-tester:nth-child(1) .type-area {
+      font-family: "Sugar Serif", serif;
+      font-weight: 400;
+    }
+
+    body.sugar-page .type-tester:nth-child(2) .type-area {
+      font-family: "Sugar Sans", sans-serif;
+      font-weight: 700;
+      font-size: 244px;
+      line-height: 1;
+      letter-spacing: -0.07em;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    body.sugar-page .type-tester:nth-child(3) .type-area {
+      font-family: "Sugar Sans", sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+    }
+
+    body.sugar-page .type-tester:nth-child(4) .type-area {
+      font-family: "Sugar Sans", sans-serif;
+      font-weight: 700;
+      font-size: 244px;
+      line-height: 1;
+      letter-spacing: -0.035em;
+      text-align: center;
+      white-space: nowrap;
     }
 
     /* Global link styling */
@@ -153,6 +243,7 @@ body {
     @font-face { font-family: "Safra";       font-weight: 700; font-style: normal; src: url("fonts/Safra-Bold.woff2") format("woff2"); }
     @font-face { font-family: "Safra Mono";  font-weight: 400; font-style: normal; src: url("fonts/SafraMono-Mono.woff2") format("woff2"); }
     @font-face { font-family: "Kilo Text";   font-weight: 400; font-style: normal; src: url("fonts/Kilo-Text/KILOTextV5-Regular.woff2") format("woff2"); }
+    @font-face { font-family: "Romanisch Spitz"; font-weight: 400; font-style: normal; src: url("fonts/Romanisch-Spitz/Romanisch-Spitz-Regular.woff2") format("woff2"); }
 
     /* ====== RESET, LAYOUT ====== */
     * { box-sizing: border-box; }
@@ -811,7 +902,7 @@ body {
 
     transform: translateY(30px);
     }
-    
+
     .cover-title { 
       text-align: center; 
       margin-bottom: 60px; 
@@ -1721,6 +1812,18 @@ body {
       font-family: "Kilo Text", serif;
     }
 
+    .marquee-text.spitz-text {
+      font-family: "Romanisch Spitz", serif;
+    }
+
+    .marquee-text.sugar-serif-text {
+      font-family: "Sugar Serif", serif;
+    }
+
+    .marquee-text.sugar-sans-text {
+      font-family: "Sugar Sans", sans-serif;
+    }
+
     .marquee-text.regular {
       font-weight: 400;
     }
@@ -2360,6 +2463,8 @@ body {
         border-radius: 12px; 
       }
       body.safra-page .cover-title div:nth-child(1), body.safra-page .cover-title div:nth-child(2), body.safra-page .cover-title div:nth-child(3) { font-size: 78px; letter-spacing:-2px; }
+      body.spitz-page .cover-title div:nth-child(1), body.spitz-page .cover-title div:nth-child(2) { font-size: 78px; letter-spacing:-2px; }
+      body.sugar-page .cover-title div:nth-child(1), body.sugar-page .cover-title div:nth-child(2) { font-size: 78px; letter-spacing:-2px; }
       .cover-buttons { 
         bottom: 36px; 
         right: 36px; 
@@ -2377,6 +2482,8 @@ body {
         border-radius: 12px; 
       }
       body.safra-page .cover-title div:nth-child(1), body.safra-page .cover-title div:nth-child(2), body.safra-page .cover-title div:nth-child(3) { font-size: 78px; letter-spacing:-2px; }
+      body.spitz-page .cover-title div:nth-child(1), body.spitz-page .cover-title div:nth-child(2) { font-size: 78px; letter-spacing:-2px; }
+      body.sugar-page .cover-title div:nth-child(1), body.sugar-page .cover-title div:nth-child(2) { font-size: 78px; letter-spacing:-2px; }
       .cover-buttons { 
         bottom: 36px; 
         right: 36px; 

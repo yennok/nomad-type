@@ -1,0 +1,1008 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Font Generator - Dynamic Typeface Page Creator</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Font Generator Specific Styles */
+    .generator-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    
+    .generator-header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #f0f0f0;
+    }
+    
+    .generator-header h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    
+    .generator-header p {
+      font-size: 18px;
+      color: #666;
+      margin: 0;
+    }
+    
+    .config-section {
+      margin-bottom: 40px;
+      padding: 30px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+    
+    .config-section h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .form-group label {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: border-color 0.3s;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+    
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .checkbox-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+    }
+    
+    .generate-button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 100%;
+      margin-top: 20px;
+    }
+    
+    .generate-button:hover {
+      background: #0056b3;
+    }
+    
+    .preview-section {
+      margin-top: 40px;
+      padding: 30px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+    
+    .preview-iframe {
+      width: 100%;
+      height: 800px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      background: white;
+    }
+    
+    .download-section {
+      margin-top: 20px;
+      text-align: center;
+    }
+    
+    .download-button {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 0 10px;
+      transition: background-color 0.3s;
+    }
+    
+    .download-button:hover {
+      background: #1e7e34;
+    }
+    
+    .download-button.secondary {
+      background: #6c757d;
+    }
+    
+    .download-button.secondary:hover {
+      background: #545b62;
+    }
+    
+    /* Color input styling */
+    .color-input-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    .color-input-group input[type="color"] {
+      width: 50px;
+      height: 40px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    
+    .color-input-group input[type="text"] {
+      flex: 1;
+      font-family: monospace;
+    }
+    
+    /* Custom Select Styling */
+    .font-select-custom {
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .font-select-custom .select-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: white;
+      min-height: 20px;
+    }
+    
+    .font-select-custom.active .select-header {
+      border-color: #007bff;
+      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    }
+    
+    .font-select-custom .select-options {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      border: 1px solid #ddd;
+      border-top: none;
+      border-radius: 0 0 6px 6px;
+      max-height: 200px;
+      overflow-y: auto;
+      z-index: 1000;
+      display: none;
+    }
+    
+    .font-select-custom.active .select-options {
+      display: block;
+    }
+    
+    .font-select-custom .select-option {
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .font-select-custom .select-option:hover {
+      background-color: #f8f9fa;
+    }
+    
+    .font-select-custom .select-arrow {
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid #666;
+      transition: transform 0.2s;
+    }
+    
+    .font-select-custom.active .select-arrow {
+      transform: rotate(180deg);
+    }
+  </style>
+</head>
+<body class="homepage-page">
+  
+  <!-- Header Container (will be populated by JavaScript) -->
+  <div id="header-container"></div>
+  
+  <main class="content-wrapper">
+    <div class="generator-container">
+      
+      <!-- Generator Header -->
+      <div class="generator-header">
+        <h1>Font Generator</h1>
+        <p>Create dynamic typeface pages based on the Safra template</p>
+      </div>
+      
+      <!-- Font Configuration -->
+      <div class="config-section">
+        <h2>Font Configuration</h2>
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="fontName">Font Name</label>
+            <input type="text" id="fontName" placeholder="e.g., MyFont" value="MyFont">
+          </div>
+          
+          <div class="form-group">
+            <label for="fontFamily">CSS Font Family</label>
+            <input type="text" id="fontFamily" placeholder="e.g., MyFont, sans-serif" value="MyFont, sans-serif">
+          </div>
+          
+          <div class="form-group">
+            <label for="designer">Designer/Team</label>
+            <input type="text" id="designer" placeholder="e.g., John Designer" value="John Designer">
+          </div>
+          
+          <div class="form-group">
+            <label for="year">Year</label>
+            <input type="text" id="year" placeholder="e.g., 2024" value="2024">
+          </div>
+          
+          <div class="form-group">
+            <label for="pageClass">Page CSS Class</label>
+            <input type="text" id="pageClass" placeholder="e.g., myfont-page" value="myfont-page">
+          </div>
+          
+          <div class="form-group">
+            <label for="primaryColor">Primary Color</label>
+            <div class="color-input-group">
+              <input type="color" id="primaryColor" value="#007bff">
+              <input type="text" id="primaryColorHex" value="#007bff" placeholder="#007bff" maxlength="7">
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="description">Font Description</label>
+          <textarea id="description" placeholder="Describe your font...">MyFont is a contemporary typeface designed for modern digital applications. With its clean lines and excellent readability, it provides a perfect balance between functionality and aesthetic appeal. Ideal for both body text and display use, MyFont ensures consistent typography across various media and devices.</textarea>
+        </div>
+        
+        <div class="form-group">
+          <label>Supported Languages/Scripts</label>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="latin" checked>
+              <label for="latin">Latin</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="arabic">
+              <label for="arabic">Arabic</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="hebrew">
+              <label for="hebrew">Hebrew</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="cyrillic">
+              <label for="cyrillic">Cyrillic</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="greek">
+              <label for="greek">Greek</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="formats">Formats</label>
+            <input type="text" id="formats" placeholder="e.g., TTF, WOFF2" value="TTF, WOFF2">
+          </div>
+          
+          <div class="form-group">
+            <label for="use">Intended Use</label>
+            <input type="text" id="use" placeholder="e.g., Display, Body Text" value="Display, Body Text">
+          </div>
+        </div>
+      </div>
+      
+      <!-- Font Weights -->
+      <div class="config-section">
+        <h2>Font Weights</h2>
+        <div id="weightsContainer">
+          <div class="weight-item" data-weight="regular">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Weight Name</label>
+                <input type="text" value="Regular" class="weight-name">
+              </div>
+              <div class="form-group">
+                <label>CSS Weight</label>
+                <input type="number" value="400" class="weight-value" min="100" max="900" step="100">
+              </div>
+              <div class="form-group">
+                <label>File Name</label>
+                <input type="text" value="MyFont-Regular.woff2" class="weight-file">
+              </div>
+            </div>
+            <button type="button" class="remove-weight-btn" style="background: #dc3545; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; margin-top: 10px;">Remove</button>
+          </div>
+        </div>
+        <button type="button" id="addWeight" style="margin-top: 15px; padding: 8px 16px; background: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer;">Add Weight</button>
+      </div>
+      
+      <!-- Marquee Text -->
+      <div class="config-section">
+        <h2>Marquee Text</h2>
+        <div class="form-group">
+          <label for="marqueeText">Marquee Text (comma-separated)</label>
+          <input type="text" id="marqueeText" placeholder="e.g., Regular, Bold, Light, Medium" value="Regular, Bold, Light, Medium">
+        </div>
+      </div>
+      
+      <!-- Generate Button -->
+      <button class="generate-button" onclick="generateFontPage()">Generate Font Page</button>
+      
+      <!-- Preview Section -->
+      <div class="preview-section" id="previewSection" style="display: none;">
+        <h2>Generated Page Preview</h2>
+        <iframe class="preview-iframe" id="previewFrame"></iframe>
+        
+        <div class="download-section">
+          <button class="download-button" onclick="downloadHTML()">Download HTML</button>
+          <button class="download-button secondary" onclick="copyToClipboard()">Copy to Clipboard</button>
+        </div>
+      </div>
+      
+    </div>
+  </main>
+
+  <!-- Footer Container -->
+  <div id="footer-container"></div>
+
+  <!-- Scripts -->
+  <script src="header.js"></script>
+  <script src="footer.js"></script>
+  <script>
+    // Load header and footer
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof loadHeader === 'function') {
+        loadHeader(`
+          <div style="transform: translateY(0px);">Font Generator</div>
+        `);
+      }
+      
+      if (typeof loadFooter === 'function') {
+        loadFooter('Font Generator');
+      }
+      
+      // Add weight functionality
+      document.getElementById('addWeight').addEventListener('click', addWeight);
+      
+      // Add initial weight removal functionality
+      document.querySelectorAll('.remove-weight-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          this.closest('.weight-item').remove();
+        });
+      });
+      
+      // Sync color picker and HEX input
+      const colorPicker = document.getElementById('primaryColor');
+      const colorHex = document.getElementById('primaryColorHex');
+      
+      colorPicker.addEventListener('input', function() {
+        colorHex.value = this.value;
+      });
+      
+      colorHex.addEventListener('input', function() {
+        // Validate HEX format
+        const hexPattern = /^#[0-9A-Fa-f]{6}$/;
+        if (hexPattern.test(this.value)) {
+          colorPicker.value = this.value;
+        }
+      });
+      
+      // Update HEX input when color picker changes
+      colorHex.addEventListener('blur', function() {
+        // Auto-correct common HEX formats
+        let value = this.value.trim();
+        if (value && !value.startsWith('#')) {
+          value = '#' + value;
+        }
+        if (value.length === 4) { // #RGB format
+          value = '#' + value[1] + value[1] + value[2] + value[2] + value[3] + value[3];
+        }
+        if (value.match(/^#[0-9A-Fa-f]{6}$/)) {
+          this.value = value;
+          colorPicker.value = value;
+        }
+      });
+    });
+
+    let generatedHTML = '';
+
+    // Make helper functions globally accessible
+    window.addWeight = function() {
+      const container = document.getElementById('weightsContainer');
+      const weightItem = document.createElement('div');
+      weightItem.className = 'weight-item';
+      weightItem.innerHTML = `
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Weight Name</label>
+            <input type="text" value="Bold" class="weight-name">
+          </div>
+          <div class="form-group">
+            <label>CSS Weight</label>
+            <input type="number" value="700" class="weight-value" min="100" max="900" step="100">
+          </div>
+          <div class="form-group">
+            <label>File Name</label>
+            <input type="text" value="MyFont-Bold.woff2" class="weight-file">
+          </div>
+        </div>
+        <button type="button" class="remove-weight-btn" style="background: #dc3545; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; margin-top: 10px;">Remove</button>
+      `;
+      container.appendChild(weightItem);
+      
+      // Add event listener to the new remove button
+      const removeBtn = weightItem.querySelector('.remove-weight-btn');
+      removeBtn.addEventListener('click', function() {
+        weightItem.remove();
+      });
+    };
+
+    window.getWeights = function() {
+      const weights = [];
+      const weightItems = document.querySelectorAll('.weight-item');
+      weightItems.forEach(item => {
+        const name = item.querySelector('.weight-name').value;
+        const value = item.querySelector('.weight-value').value;
+        const file = item.querySelector('.weight-file').value;
+        if (name && value) {
+          weights.push({ name, value: parseInt(value), file });
+        }
+      });
+      return weights;
+    };
+
+    window.getSupportedLanguages = function() {
+      const languages = [];
+      if (document.getElementById('latin').checked) languages.push('Latin');
+      if (document.getElementById('arabic').checked) languages.push('Arabic');
+      if (document.getElementById('hebrew').checked) languages.push('Hebrew');
+      if (document.getElementById('cyrillic').checked) languages.push('Cyrillic');
+      if (document.getElementById('greek').checked) languages.push('Greek');
+      return languages.join(', ');
+    };
+
+    window.createFontPageHTML = function(config) {
+      const weights = config.weights;
+      const fontMapEntries = weights.map(w => `    "${config.fontName} ${w.name}": { "family": "${config.fontFamily}", "weight": ${w.value} }`).join(',\n');
+      const fontOptions = weights.map(w => `              <option value="${config.fontName} ${w.name}">${config.fontName} ${w.name}</option>`).join('\n');
+      const marqueeSpans = config.marqueeText.map(text => `            <span class="marquee-text ${config.pageClass} regular">${text}</span>`).join('\n');
+
+      return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>${config.fontName} - Typeface</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body.${config.pageClass} {
+      --primary-color: ${config.primaryColor};
+    }
+    
+    .marquee-text.${config.pageClass} {
+      font-family: "${config.fontFamily}";
+    }
+  </style>
+</head>
+<body class="${config.pageClass}">
+
+  <!-- Header Container (will be populated by JavaScript) -->
+  <div id="header-container"></div>
+  <!-- ====== MAIN CONTENT ====== -->
+  <main class="content-wrapper">
+
+  <!-- ====== FONT INTRO SECTION ====== -->
+  <section class="font-intro">
+    <div class="intro-content">
+      <div class="intro-grid">
+        <div class="intro-text-column">
+          <p>${config.description}</p>
+        </div>
+        
+        <div class="technical-specs-column">
+          <div class="specs-list">
+            <div class="spec-line">Typeface: ${config.fontName}</div>
+            <div class="spec-line">Designed by: ${config.designer}</div>
+            <div class="spec-line">Year: ${config.year}</div>
+            <div class="spec-line">Languages: ${config.languages}</div>
+            <div class="spec-line">Formats: ${config.formats}</div>
+            <div class="spec-line">Use: ${config.use}</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="multilingual-marquee">
+        <div class="marquee-container">
+          <div class="marquee-content">
+${marqueeSpans}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === Section 1, multi column text === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-1">Size</label>
+        <input class="size" id="size-1" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-1">Leading</label>
+        <input class="leading" id="leading-1" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-1">Letter Spacing</label>
+        <input class="spacing" id="spacing-1" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="1">
+            <div class="select-header">
+              <span class="select-value">${config.fontName} Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+${weights.map(w => `              <div class="select-option" data-value="${config.fontName} ${w.name}">${config.fontName} ${w.name}</div>`).join('\n')}
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+${fontOptions}
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left is-active"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-3" contenteditable="true" dir="ltr" style="font-family: ${config.fontFamily}; font-weight: 400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+  </section>
+
+  <!-- === Section 2, large headline === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-2">Size</label>
+        <input class="size" id="size-2" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-2">Leading</label>
+        <input class="leading" id="leading-2" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-2">Letter Spacing</label>
+        <input class="spacing" id="spacing-2" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="2">
+            <div class="select-header">
+              <span class="select-value">${config.fontName} Bold</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+${weights.map(w => `              <div class="select-option" data-value="${config.fontName} ${w.name}">${config.fontName} ${w.name}</div>`).join('\n')}
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+${fontOptions}
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 responsive-text" contenteditable="true" dir="ltr" style="font-family: ${config.fontFamily}; font-weight: 700; font-size: 244px; line-height: 1; letter-spacing: -0.07em; text-align: center; white-space: nowrap;">Hello</div>
+  </section>
+
+  <!-- === Section 3, two columns === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-3">Size</label>
+        <input class="size" id="size-3" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-3">Leading</label>
+        <input class="leading" id="leading-3" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-3">Letter Spacing</label>
+        <input class="spacing" id="spacing-3" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="3">
+            <div class="select-header">
+              <span class="select-value">${config.fontName} Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+${weights.map(w => `              <div class="select-option" data-value="${config.fontName} ${w.name}">${config.fontName} ${w.name}</div>`).join('\n')}
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+${fontOptions}
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left is-active"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-2" contenteditable="true" dir="ltr" style="font-family: ${config.fontFamily}; font-weight: 400; font-size: 18px; line-height: 1.5; letter-spacing: 0.01em;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</div>
+  </section>
+
+  <!-- === Section 4, responsive === -->
+  <section id="fonts" class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-4">Size</label>
+        <input class="size" id="size-4" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-4">Leading</label>
+        <input class="leading" id="leading-4" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-4">Letter Spacing</label>
+        <input class="spacing" id="spacing-4" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="4">
+            <div class="select-header">
+              <span class="select-value">${config.fontName} Bold</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+${weights.map(w => `              <div class="select-option" data-value="${config.fontName} ${w.name}">${config.fontName} ${w.name}</div>`).join('\n')}
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+${fontOptions}
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+     <div class="type-area column-count-1 responsive-text" contenteditable="true" dir="ltr" style="font-family: ${config.fontFamily}; font-weight: 700; font-size: 244px; line-height: 1; letter-spacing: -0.035em; text-align: center; white-space: nowrap;">Hello World</div>
+  </section>
+
+  <!-- ===== GLYPH GRID VIEWER ===== -->
+  <div class="wrapper" id="fontWrapper">
+    <div class="left-panel">
+      <div class="preview-box" id="preview" style="font-family: ${config.fontFamily}; font-weight: 400;" data-preview="!"></div>
+      <div class="controls-lite">
+        <div class="font-wrapper">
+          <div class="custom-select" id="weight-select">
+            <div class="select-header">
+              <span class="select-value">${config.fontName} Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+${weights.map(w => `              <div class="select-option" data-value="${config.fontName} ${w.name}">${config.fontName} ${w.name}</div>`).join('\n')}
+            </div>
+          </div>
+          <select id="weight" style="display: none;">
+${fontOptions}
+          </select>
+        </div>
+      </div>
+      <div class="details" id="details">Unicode decimal: 33<br>Unicode hex: 0021<br>HTML entity: !</div>
+    </div>
+    <div class="grid-container">
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+
+  <!-- ===== DATA MAPS ===== -->
+  &lt;script type="application/json" id="fontMap"&gt;{
+${fontMapEntries}
+  }&lt;/script&gt;
+
+  &lt;script type="application/json" id="glyphMap"&gt;{
+    "default": "!\\"#$%&'()*+,-./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+  }&lt;/script&gt;
+
+  <!-- ===== SCRIPT ===== -->
+  &lt;script src="gsap-public/minified/gsap.min.js"&gt;&lt;/script&gt;
+  &lt;script src="gsap-public/minified/ScrollTrigger.min.js"&gt;&lt;/script&gt;
+  &lt;script src="gsap-public/minified/Draggable.min.js"&gt;&lt;/script&gt;
+  &lt;script src="gsap-public/minified/InertiaPlugin.min.js"&gt;&lt;/script&gt;
+  
+  <!-- EmailJS -->
+  &lt;script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript"&gt;
+    (function(){
+      emailjs.init({
+        publicKey: "SY_sCUJHCR5MtWgI5",
+      });
+    })();
+  &lt;/script&gt;
+
+  &lt;script src="header.js"&gt;&lt;/script&gt;
+  &lt;script&gt;
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof loadHeader === 'function') {
+        loadHeader(\`
+          <div style="transform: translateY(0px);">${config.fontName}</div>
+        \`);
+      }
+
+      // Navigation links - force navigation
+      const navLinks = document.querySelectorAll('.nav-link, .menu-item');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          console.log('Navigation link clicked: ' + this.href + ' - ' + this.textContent);
+          if (this.href) {
+            window.location.href = this.href;
+          }
+        });
+      });
+
+      // Trial buttons - navigate to trial-fonts.html
+      const trialButtons = document.querySelectorAll('.sticky-trial-btn, .scroll-btn');
+      trialButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          console.log('Trial button clicked: ' + this.textContent);
+          window.location.href = 'trial-fonts.html';
+        });
+      });
+
+      // Font selector functionality
+      function initializeFontSelectors() {
+        // Custom select functionality
+        const customSelects = document.querySelectorAll('.font-select-custom');
+        
+        customSelects.forEach(select => {
+          const header = select.querySelector('.select-header');
+          const options = select.querySelector('.select-options');
+          const hiddenSelect = select.nextElementSibling;
+          
+          if (header && options) {
+            header.addEventListener('click', function() {
+              // Close all other selects
+              customSelects.forEach(otherSelect => {
+                if (otherSelect !== select) {
+                  otherSelect.classList.remove('active');
+                }
+              });
+              
+              // Toggle current select
+              select.classList.toggle('active');
+            });
+            
+            // Option click handlers
+            const optionElements = options.querySelectorAll('.select-option');
+            optionElements.forEach(option => {
+              option.addEventListener('click', function() {
+                const value = this.getAttribute('data-value');
+                const displayText = this.textContent;
+                
+                // Update display
+                select.querySelector('.select-value').textContent = displayText;
+                
+                // Update hidden select
+                if (hiddenSelect) {
+                  hiddenSelect.value = value;
+                  hiddenSelect.dispatchEvent(new Event('change'));
+                }
+                
+                // Close select
+                select.classList.remove('active');
+              });
+            });
+          }
+        });
+        
+        // Close selects when clicking outside
+        document.addEventListener('click', function(e) {
+          if (!e.target.closest('.font-select-custom')) {
+            customSelects.forEach(select => {
+              select.classList.remove('active');
+            });
+          }
+        });
+      }
+
+      // Initialize font selectors
+      initializeFontSelectors();
+
+      // Type tester functionality
+      function initializeTypeTesters() {
+        const fontSelects = document.querySelectorAll('.font-select');
+        const typeAreas = document.querySelectorAll('.type-area');
+        
+        fontSelects.forEach(select => {
+          select.addEventListener('change', function() {
+            const fontFamily = this.value;
+            const typeArea = this.closest('.type-tester').querySelector('.type-area');
+            
+            if (typeArea) {
+              typeArea.style.fontFamily = fontFamily;
+            }
+          });
+        });
+      }
+
+      // Initialize type testers
+      initializeTypeTesters();
+
+      // Glyph grid functionality
+      function initializeGlyphGrid() {
+        const charCells = document.querySelectorAll('.char-cell');
+        const previewBox = document.querySelector('.preview-box');
+        
+        if (charCells.length > 0 && previewBox) {
+          charCells.forEach(cell => {
+            cell.addEventListener('click', function() {
+              const char = this.textContent;
+              previewBox.textContent += char;
+            });
+          });
+          
+          // Clear button
+          const clearBtn = document.querySelector('.clear-btn');
+          if (clearBtn) {
+            clearBtn.addEventListener('click', function() {
+              previewBox.textContent = '';
+            });
+          }
+        }
+      }
+
+      // Initialize glyph grid
+      initializeGlyphGrid();
+    });
+  &lt;/script&gt;
+
+  &lt;script src="script.js"&gt;&lt;/script&gt;
+
+  &lt;/main&gt;
+
+  &lt;script src="footer.js"&gt;&lt;/script&gt;
+  &lt;script&gt;
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof loadFooter === 'function') {
+        loadFooter('${config.fontName}');
+      }
+    });
+  &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;`;
+    };
+
+    // Make generateFontPage globally accessible
+    window.generateFontPage = function() {
+      const config = {
+        fontName: document.getElementById('fontName').value,
+        fontFamily: document.getElementById('fontFamily').value,
+        designer: document.getElementById('designer').value,
+        year: document.getElementById('year').value,
+        pageClass: document.getElementById('pageClass').value,
+        primaryColor: document.getElementById('primaryColorHex').value || document.getElementById('primaryColor').value,
+        description: document.getElementById('description').value,
+        formats: document.getElementById('formats').value,
+        use: document.getElementById('use').value,
+        languages: getSupportedLanguages(),
+        marqueeText: document.getElementById('marqueeText').value.split(',').map(s => s.trim()),
+        weights: getWeights()
+      };
+
+      generatedHTML = createFontPageHTML(config);
+      
+      // Show preview
+      document.getElementById('previewSection').style.display = 'block';
+      const iframe = document.getElementById('previewFrame');
+      iframe.srcdoc = generatedHTML;
+    };
+  </script>
+
+  <script src="script.js"></script>
+
+  </main>
+
+  <script src="footer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof loadFooter === 'function') {
+        loadFooter('${config.fontName}');
+      }
+    });
+  </script>
+
+</body>
+</html>`;
+    };
+
+    window.downloadHTML = function() {
+      const blob = new Blob([generatedHTML], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${document.getElementById('fontName').value.toLowerCase().replace(/\s+/g, '-')}.html`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    };
+
+    window.copyToClipboard = function() {
+      navigator.clipboard.writeText(generatedHTML).then(() => {
+        alert('HTML copied to clipboard!');
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    };
+  </script>
+
+</body>
+</html>
+

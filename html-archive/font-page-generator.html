@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Font Page Generator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font-family:system-ui,Arial,sans-serif;margin:32px;max-width:900px}
+h1{font-size:24px;margin-bottom:10px}
+label{display:block;margin-top:14px;font-weight:600}
+textarea,input{width:100%;box-sizing:border-box;font-family:inherit;padding:8px}
+button{margin-top:18px;padding:10px 18px;font-weight:700;border:0;background:#111;color:#fff;border-radius:6px;cursor:pointer}
+#output{margin-top:20px;background:#fafafa;border:1px solid #ccc;padding:10px;white-space:pre-wrap;font-size:13px}
+</style>
+</head>
+<body>
+<h1>Font Page Generator</h1>
+<p>Upload your <code>safra.html</code>, fill in details, and click Generate.</p>
+
+<label>Upload safra.html</label>
+<input type="file" id="htmlFile" accept=".html">
+
+<label>Font name</label>
+<input id="fontName" value="ExampleFont">
+
+<label>Tagline</label>
+<input id="tagline" value="Modern Geometric Sans">
+
+<label>Intro paragraph</label>
+<textarea id="intro">ExampleFont is a geometric sans-serif typeface inspired by modular design.</textarea>
+
+<label>Credits JSON</label>
+<textarea id="credits">{ "DESIGNED_BY": "Your Name", "TEAM": "Designer A, Designer B", "ENGINEERING": "Engineer C", "YEAR": "2025", "LANGUAGES": "Supports 200+ Latin-based languages", "FORMATS": "OTF, TTF, WOFF2" }</textarea>
+
+<label>Header HTML</label>
+<textarea id="headerHtml">&lt;div&gt;أمثلة&lt;/div&gt;&lt;div&gt;ExampleFont&lt;/div&gt;&lt;div&gt;אֶמְצָה&lt;/div&gt;</textarea>
+
+<label>Marquee HTML</label>
+<textarea id="marqueeHtml">&lt;span class='marquee-text serif regular'&gt;Regular רגולר عادي&lt;/span&gt;&lt;span class='marquee-text serif bold'&gt;Bold בולד عريض&lt;/span&gt;</textarea>
+
+<label>Glyph Map JSON</label>
+<textarea id="glyphMap">{ "ExampleFont": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?" }</textarea>
+
+<button id="generateBtn">Generate New HTML</button>
+<div id="output" hidden></div>
+
+<!-- external script -->
+<script src="generator.js"></script>
+</body>
+</html>

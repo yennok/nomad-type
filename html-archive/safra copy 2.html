@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Safra - Multi Script Typeface</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="safra-page">
+
+  <!-- Header Container (will be populated by JavaScript) -->
+  <div id="header-container"></div>
+  <!-- ====== MAIN CONTENT ====== -->
+  <main class="content-wrapper">
+
+  <!-- ====== FONT INTRO SECTION ====== -->
+  <section class="font-intro">
+    <div class="intro-content">
+      <div class="intro-grid">
+        <div class="intro-text-column">
+          <p>Safra ספרא سفرا is a trilingual typeface family comprising both serif and sans styles. Designed with a contemporary, low-contrast approach, it supports Hebrew, Arabic, and Latin scripts with clear and consistent typesetting across languages. Balancing structural differences while preserving the distinct voice of each script, it enables multilingual communication without forcing uniformity. The design functions as a bridge between writing systems, maintaining typographic integrity and visual harmony. Suitable for both extended reading and display use in cultural, educational, and public contexts.</p>
+        </div>
+        
+        <div class="technical-specs-column">
+          <div class="specs-list">
+            <div class="spec-line">Typeface: Safra</div>
+            <div class="spec-line">Designed by: Safra Team</div>
+            <div class="spec-line">Team: Hugues Gentile, Fanny Hamelin, Fadhl Haqq, Léon Hugues, Jean-Baptiste Morizot, Luke Prowse, Florian Runge, Jolana Sýkorová</div>
+            <div class="spec-line">Additional Engineering: Igino Marini</div>
+            <div class="spec-line">Year: 2024</div>
+            <div class="spec-line">Languages: Supporting 305 latin based languages</div>
+            <div class="spec-line">Formats: TTF, WOFF2 (Autohinted)</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="multilingual-marquee">
+        <div class="marquee-container">
+          <div class="marquee-content">
+            <span class="marquee-text serif regular">Regular רגולר عادي</span>
+            <span class="marquee-text serif bold">Bold בולד عريض</span>
+            <span class="marquee-text sans regular">Sans Regular סנס רגולר سانس عادي</span>
+            <span class="marquee-text sans bold">Sans Bold סנס בולד سانس عريض</span>
+            <span class="marquee-text serif regular">Regular רגולר عادي</span>
+            <span class="marquee-text serif bold">Bold בולד عريض</span>
+            <span class="marquee-text sans regular">Sans Regular סנס רגולר سانس عادي</span>
+            <span class="marquee-text sans bold">Sans Bold סנס בולד سانس عريض</span>
+            
+                      </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === Section 1, multi column text, Serif === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-1">Size</label>
+        <input class="size" id="size-1" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-1">Leading</label>
+        <input class="leading" id="leading-1" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-1">Letter Spacing</label>
+        <input class="spacing" id="spacing-1" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="1">
+            <div class="select-header">
+              <span class="select-value">Safra Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+              <div class="select-option" data-value="Sugar Serif Regular">Sugar Serif Regular</div>
+              <div class="select-option" data-value="Sugar Sans Regular">Sugar Sans Regular</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular" selected>Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular">Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+            <option value="Sugar Serif Regular">Sugar Serif Regular</option>
+            <option value="Sugar Sans Regular">Sugar Sans Regular</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left is-active"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-3" contenteditable="true" dir="ltr" style="font-family: Safra; font-weight: 400;">Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer...</div>
+  </section>
+
+  <!-- === Section 2, large multilingual headline, Sans Bold, centered === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-2">Size</label>
+        <input class="size" id="size-2" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-2">Leading</label>
+        <input class="leading" id="leading-2" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-2">Letter Spacing</label>
+        <input class="spacing" id="spacing-2" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="2">
+            <div class="select-header">
+              <span class="select-value">Safra Sans Bold</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular">Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular">Safra Sans Regular</option>
+            <option value="Safra Sans Bold" selected>Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 responsive-text" contenteditable="true" dir="rtl" style="font-family: 'Safra Sans'; font-weight: 700; font-size: 244px; line-height: 1; letter-spacing: -0.07em; text-align: center; white-space: nowrap;">Hello</div>
+  </section>
+
+  <!-- === Section 3, two columns, Sans Regular, long text === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-3">Size</label>
+        <input class="size" id="size-3" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-3">Leading</label>
+        <input class="leading" id="leading-3" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-3">Letter Spacing</label>
+        <input class="spacing" id="spacing-3" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="3">
+            <div class="select-header">
+              <span class="select-value">Safra Sans Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular">Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular" selected>Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left is-active"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-2" contenteditable="true" dir="ltr" style="font-family: 'Safra Sans'; font-weight: 400; font-size: 18px; line-height: 1.5; letter-spacing: 0.01em;">Stefani Joanne Angelina Germanotta, born March 28, 1986, known professionally as Lady Gaga, is an American singer, songwriter, and actress. Known for her image reinventions and versatility across the entertainment industry, she is an influential figure in popular music. With estimated sales of 124 million records, she is one of the best selling music artists of all time. Publications such as Billboard and Rolling Stone have ranked her among the greatest artists in history.
+
+After signing with Interscope Records in 2007, Gaga achieved global recognition with her debut album, The Fame, 2008, and its reissue, The Fame Monster, 2009. The project scored a string of successful singles, including "Just Dance", "Poker Face", "Bad Romance", "Telephone", and "Alejandro". Her second full length album, Born This Way, 2011, explored electronic rock and techno pop and sold more than one million copies first week. Following her electronic dance music influenced third album, Artpop, 2013, she pursued jazz on Cheek to Cheek, 2014, with Tony Bennett, and delved into soft rock on Joanne, 2016.
+
+Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2015 to 2016, A Star Is Born, 2018, and House of Gucci, 2021. Her contributions to the A Star Is Born soundtrack, which spawned the chart topping single "Shallow", made her the first woman to win an Academy, BAFTA, Golden Globe, and Grammy Award in one year. Gaga returned to dance pop with Chromatica, 2020, then Love for Sale, 2021.</div>
+  </section>
+
+  <!-- === Section 4, responsive sans (duplicate of section 2) === -->
+  <section id="fonts" class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-4">Size</label>
+        <input class="size" id="size-4" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-4">Leading</label>
+        <input class="leading" id="leading-4" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-4">Letter Spacing</label>
+        <input class="spacing" id="spacing-4" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="4">
+            <div class="select-header">
+              <span class="select-value">Safra Sans Bold</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular">Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular">Safra Sans Regular</option>
+            <option value="Safra Sans Bold" selected>Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+     <div class="type-area column-count-1 responsive-text" contenteditable="true" dir="rtl" style="font-family: 'Safra Sans'; font-weight: 700; font-size: 244px; line-height: 1; letter-spacing: -0.035em; text-align: center; white-space: nowrap;">שלום مرحبا Hello</div>
+  </section>
+
+
+
+  <!-- ===== GLYPH GRID VIEWER ===== -->
+  <div class="wrapper" id="fontWrapper">
+    <div class="left-panel">
+      <div class="preview-box" id="preview" style="font-family: Safra; font-weight: 400;" data-preview="!"></div>
+      <div class="controls-lite">
+        <div class="font-wrapper">
+          <div class="custom-select" id="weight-select">
+            <div class="select-header">
+              <span class="select-value">Safra Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+              <div class="select-option" data-value="Sugar Serif Regular">Sugar Serif Regular</div>
+              <div class="select-option" data-value="Sugar Sans Regular">Sugar Sans Regular</div>
+            </div>
+          </div>
+          <!-- Hidden original select for functionality -->
+          <select id="weight" style="display: none;">
+            <option value="Safra Regular" selected>Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular">Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+            <option value="Sugar Serif Regular">Sugar Serif Regular</option>
+            <option value="Sugar Sans Regular">Sugar Sans Regular</option>
+          </select>
+        </div>
+      </div>
+      <div class="details" id="details">Unicode decimal: 33<br>Unicode hex: 0021<br>HTML entity: !</div>
+    </div>
+    <div class="grid-container">
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+
+  <!-- ===== IN USE SECTION ===== -->
+  <section class="in-use-section">
+    <div class="section-header">
+      <h2>Safra ספרא سفرا in Use</h2>
+    </div>
+    <div class="in-use-grid">
+      <div class="in-use-item">
+        <img src="photos/safra/safra in use 1.jpg" alt="Safra typeface in use - application 1" />
+      </div>
+      <div class="in-use-item">
+        <img src="photos/safra/safra in use 2.jpg" alt="Safra typeface in use - application 2" />
+      </div>
+      <div class="in-use-item">
+        <img src="photos/safra/safra in use 3.jpg" alt="Safra typeface in use - application 3" />
+      </div>
+    </div>
+    <div class="photo-credit">
+      Photos by Visvaldas Morkevicius
+    </div>
+  </section>
+
+  <!-- ===== SPECIMEN SECTION ===== -->
+  <section id="specimen" class="specimen-section">
+    <div class="section-header">
+      <h2>Specimen</h2>
+    </div>
+    <div class="specimen-carousels">
+      <!-- Left Carousel -->
+      <div class="specimen-carousel">
+        <div class="carousel-container">
+          <div class="carousel-track" id="carousel-a">
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a1.jpg" alt="Safra specimen A1" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a2.jpg" alt="Safra specimen A2" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a3.jpg" alt="Safra specimen A3" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a4.jpg" alt="Safra specimen A4" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a5.jpg" alt="Safra specimen A5" />
+            </div>
+            <!-- Duplicate all slides for infinite loop -->
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a1.jpg" alt="Safra specimen A1" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a2.jpg" alt="Safra specimen A2" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a3.jpg" alt="Safra specimen A3" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a4.jpg" alt="Safra specimen A4" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a5.jpg" alt="Safra specimen A5" />
+            </div>
+          </div>
+        </div>
+        <div class="carousel-indicators" id="indicators-a">
+          <span class="indicator active" data-slide="0"></span>
+          <span class="indicator" data-slide="1"></span>
+          <span class="indicator" data-slide="2"></span>
+          <span class="indicator" data-slide="3"></span>
+          <span class="indicator" data-slide="4"></span>
+        </div>
+      </div>
+
+      <!-- Right Carousel -->
+      <div class="specimen-carousel">
+        <div class="carousel-container">
+          <div class="carousel-track" id="carousel-b">
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b1.jpg" alt="Safra specimen B1" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b2.jpg" alt="Safra specimen B2" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b3.jpg" alt="Safra specimen B3" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b4.jpg" alt="Safra specimen B4" />
+            </div>
+            <!-- Duplicate all slides for infinite loop -->
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b1.jpg" alt="Safra specimen B1" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b2.jpg" alt="Safra specimen B2" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b3.jpg" alt="Safra specimen B3" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b4.jpg" alt="Safra specimen B4" />
+            </div>
+          </div>
+        </div>
+        <div class="carousel-indicators" id="indicators-b">
+          <span class="indicator active" data-slide="0"></span>
+          <span class="indicator" data-slide="1"></span>
+          <span class="indicator" data-slide="2"></span>
+          <span class="indicator" data-slide="3"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DATA MAPS ===== -->
+  <script type="application/json" id="fontMap">{
+    "Kilo Text Regular": { "family": "Kilo Text", "weight": 400 },
+    "Safra Regular": { "family": "Safra", "weight": 400 },
+    "Safra Bold": { "family": "Safra", "weight": 700 },
+    "Safra Sans Regular": { "family": "Safra Sans", "weight": 400 },
+    "Safra Sans Bold": { "family": "Safra Sans", "weight": 700 },
+    "Sugar Serif Regular": { "family": "Sugar Serif", "weight": 400 },
+    "Sugar Sans Regular": { "family": "Sugar Sans", "weight": 400 }
+  }</script>
+
+  <script type="application/json" id="glyphMap">{
+    "default": "!\"#$%&'()*+,-./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+    "Safra2": "0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_{|}~ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzאבגדהוזחטסעפצקרשתابتثجحخدذرزسشصضطظعغفقكلمنهويﺍﺎﺄﺃﺈﺍبﺏﺑﺒتﺕﺗﺘثﺙﺛﺜجﺝﺟﺠحﺡﺣﺤخﺥﺧﺨدﺩﺪذﺫﺬرﺭﺮزﺯﺰسﺱﺳﺴشﺵﺷﺸصﺹﺻﺼضﺽﺿﺾطﻁﻃﻄظﻅﻇﻈعﻉﻋﻌغﻍﻏﻐفﻑﻓﻔقﻕﻗﻘكﻙﻛﻜلﻝﻟﻠمﻡﻣﻤنﻥﻧﻨهﻩﻫﻬوﻭﻮيﻱﻳﻴ"
+  }</script>
+
+  <!-- ===== SCRIPT ===== -->
+  <!-- GSAP for advanced marquee functionality -->
+  <script src="gsap-public/minified/gsap.min.js"></script>
+  <script src="gsap-public/minified/ScrollTrigger.min.js"></script>
+  <script src="gsap-public/minified/Draggable.min.js"></script>
+  <script src="gsap-public/minified/InertiaPlugin.min.js"></script>
+  
+    <!-- EmailJS -->
+    <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+(function(){
+  emailjs.init({
+    publicKey: "SY_sCUJHCR5MtWgI5",
+  });
+})();
+</script>
+
+    <!-- Nomad Type JS -->
+
+  <!-- Load Header Component First -->
+  <script src="header.js"></script>
+  <script>
+    // Load header when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof loadHeader === 'function') {
+        loadHeader(`
+          <div style="transform: translateY(0px);">سفرا</div>
+          <div style="transform: translateY(0px);">Safra</div>
+          <div style="transform: translateY(0px);">ספרא</div>
+        `);
+      }
+});
+  </script>
+
+  <script src="script.js"></script>
+
+  </main>
+
+<!-- ====== OVERLAY FORMS ====== -->
+<!-- Trial Download Form -->
+<div class="overlay" id="trialOverlay">
+  <div class="overlay-content">
+    <div class="form-header">
+      <h2>Download  Safra ספרא سفرا</h2>
+      <button class="close-btn" id="closeTrial"></button>
+    </div>
+    
+    <div class="success-message" id="trialSuccessMessage" style="display: none;">
+      <p class="success-text">Thank you! We'll send your trial fonts shortly.</p>
+      <button class="submit-btn" id="trialSuccessBtn">Continue to Website</button>
+    </div>
+    
+    <form class="trial-form" id="trialFormContent">
+      <div class="form-content">
+        <div class="form-group">
+          <input type="text" id="trialName" name="name" placeholder=" " required>
+          <div class="placeholder-text">Full Name<span class="asterisk">*</span></div>
+        </div>
+        
+        <div class="form-group">
+          <input type="email" id="trialEmail" name="email" placeholder=" " required>
+          <div class="placeholder-text">Email Address<span class="asterisk">*</span></div>
+        </div>
+
+        
+        <div class="form-section collapsible">
+          <h3 class="collapsible-header">
+            <span>Intended Use<span class="asterisk">*</span></span>
+            <span class="dropdown-icon"></span>
+          </h3>
+          <div class="collapsible-content">
+            <div class="radio-group">
+              <label class="radio-label">
+                <input type="radio" name="useType" value="Client" required>
+                <span class="radio-mark"></span>
+                Client Project
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="useType" value="Student" required>
+                <span class="radio-mark"></span>
+                Student Work
+              </label>
+            </div>
+
+            <!-- Client Project Fields -->
+            <div class="conditional-fields" id="clientFields" style="display: none;">
+              <div class="form-group">
+                <input type="text" id="clientCompany" name="clientCompany" placeholder=" ">
+                <div class="placeholder-text">Your Company Name<span class="asterisk">*</span></div>
+              </div>
+              <div class="form-group">
+                <input type="text" id="clientName" name="clientName" placeholder=" ">
+                <div class="placeholder-text">Client Name</div>
+              </div>
+              <div class="form-group">
+                <input type="url" id="clientWebsite" name="clientWebsite" placeholder=" ">
+                <div class="placeholder-text">Link to Client's Website</div>
+              </div>
+            </div>
+
+            <!-- Student Work Fields -->
+            <div class="conditional-fields" id="studentFields" style="display: none;">
+              <div class="form-group">
+                <input type="text" id="institutionName" name="institutionName" placeholder=" ">
+                <div class="placeholder-text">Name of Academic Institution<span class="asterisk">*</span></div>
+              </div>
+              <div class="form-group">
+                <input type="text" id="graduationYear" name="graduationYear" placeholder=" ">
+                <div class="placeholder-text">Year of Graduation<span class="asterisk">*</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Client Consent -->
+        <div class="form-section conditional-consent" id="clientConsent" style="display: none;">
+          <label class="checkbox-label consent">
+            <input type="checkbox" name="consent">
+            <span class="checkmark"></span>
+            <span class="consent-text">I confirm the fonts will only be used for mock-ups or sketches. Any commercial use requires a license via yennok.com.</span>
+          </label>
+        </div>
+
+        <!-- Student Consent -->
+        <div class="form-section conditional-consent" id="studentConsent" style="display: none;">
+          <label class="checkbox-label consent">
+            <input type="checkbox" name="consent">
+            <span class="checkmark"></span>
+            <span class="consent-text">I’ll only use the fonts for school projects. Any commercial use, even during my studies, requires a license from yennok.com.</span>
+          </label>
+        </div>
+        
+        <button type="submit" class="submit-btn">Submit</button>
+        <p class="form-error-message" id="trialError" style="display: none;"></p>
+      </div>
+      
+      <p class="footer-text">By submitting, I agree to receive occasional updates about new releases (unsubscribe anytime).</p>
+    </form>
+  </div>
+</div>
+
+<!-- Buy Now Form -->
+<div class="overlay" id="buyOverlay">
+  <div class="overlay-content">
+    <div class="form-header">
+      <h2>Buy Safra ספרא سفرا</h2>
+      <button class="close-btn" id="closeBuy"></button>
+    </div>
+    
+    <p class="intro-text" id="buyIntroText">Interested in using Safra for your project? Share your details and we'll be in touch soon.</p>
+    
+    <div class="success-message" id="buySuccessMessage" style="display: none;">
+      <p class="success-text">Thank you for your interest! We'll contact you about licensing.</p>
+      <button class="submit-btn" id="buySuccessBtn">Continue to website</button>
+    </div>
+    
+    <form class="buy-form" id="buyFormContent">
+      <div class="form-group">
+        <input type="text" id="buyName" name="name" placeholder=" " required>
+        <div class="placeholder-text">Full Name<span class="asterisk">*</span></div>
+      </div>
+      
+      <div class="form-group">
+        <input type="text" id="buyCompany" name="company" placeholder=" " required>
+        <div class="placeholder-text">Company<span class="asterisk">*</span></div>
+      </div>
+      
+      <div class="form-group">
+        <input type="email" id="buyEmail" name="email" placeholder=" " required>
+        <div class="placeholder-text">Email Address<span class="asterisk">*</span></div>
+      </div>
+      
+      <div class="form-section collapsible">
+        <h3 class="collapsible-header">
+          <span>Select Fonts<span class="required">*</span></span>
+          <span class="dropdown-icon"></span>
+        </h3>
+        <div class="collapsible-content">
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" name="family" value="entire" checked>
+              <span class="checkmark"></span>
+              Full Family (4)
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="family" value="regular" checked>
+              <span class="checkmark"></span>
+              Safra Regular
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="family" value="bold" checked>
+              <span class="checkmark"></span>
+              Safra Bold
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="family" value="sans-regular" checked>
+              <span class="checkmark"></span>
+              Safra Sans Regular
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="family" value="sans-bold" checked>
+              <span class="checkmark"></span>
+              Safra Sans Bold
+            </label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-section collapsible">
+        <h3 class="collapsible-header">
+          <span>Intended Use<span class="required">*</span></span>
+          <span class="dropdown-icon"></span>
+        </h3>
+        <div class="collapsible-content">
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" name="use" value="Desktop">
+              <span class="checkmark"></span>
+              Desktop
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="use" value="Web">
+              <span class="checkmark"></span>
+              Web
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="use" value="App">
+              <span class="checkmark"></span>
+              App
+            </label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-section">
+        <label class="checkbox-label consent">
+          <input type="checkbox" name="consent">
+          <span class="checkmark"></span>
+          <span class="consent-text">I'm happy to be contacted about Safra licensing and to receive occasional updates. No spam – I can unsubscribe anytime.</span>
+        </label>
+      </div>
+      
+      <button type="submit" class="submit-btn">Send Request</button>
+      <p class="form-error-message" id="buyError" style="display: none;"></p>
+    </form>
+  </div>
+</div>
+
+  <!-- ====== SCROLL BUTTONS ====== -->
+  <section class="scroll-buttons-section">
+    <div class="scroll-buttons-content">
+      <div class="scroll-buttons-text">
+        <h2 class="scroll-buttons-title">Safra ספרא سفرا: a trilingual serif & sans family</h2>
+        <p class="scroll-buttons-description">
+          Safra is a contemporary serif and sans typeface designed for multilingual use. It balances structural differences without erasing cultural identity, offering clarity and versatility for long reading and strong display typography alike.
+        </p>
+      </div>
+      
+      <div class="scroll-buttons">
+        <button class="btn btn-primary scroll-btn" id="scrollTrialBtn">Download Trial</button>
+        <button class="btn btn-secondary scroll-btn" id="scrollBuyBtn">Buy Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Container (will be populated by JavaScript) -->
+  <div id="footer-container"></div>
+
+  <!-- Animated Favicon Script -->
+  <script>
+    setTimeout(() => {
+      let favicon_video_image_counter = 0;
+      let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+      let favicon_video_images = [
+  "https://favicongenerator.s3.amazonaws.com/3129f51d17a5c.png","https://favicongenerator.s3.amazonaws.com/cd721e3e8a586.png","https://favicongenerator.s3.amazonaws.com/4af6e76d5ae4a.png","https://favicongenerator.s3.amazonaws.com/e76f98c1d6448.png","https://favicongenerator.s3.amazonaws.com/bc435c23b4eaf.png","https://favicongenerator.s3.amazonaws.com/c806c3265454f.png","https://favicongenerator.s3.amazonaws.com/e95b673a3d845.png","https://favicongenerator.s3.amazonaws.com/230b1204ad4d1.png","https://favicongenerator.s3.amazonaws.com/7fd4916b0902e.png","https://favicongenerator.s3.amazonaws.com/c9dddf2a04e46.png","https://favicongenerator.s3.amazonaws.com/a13c002e6a2ab.png","https://favicongenerator.s3.amazonaws.com/e8eddb001860b.png","https://favicongenerator.s3.amazonaws.com/13f85eb453429.png","https://favicongenerator.s3.amazonaws.com/ce45ac6aa0a8a.png","https://favicongenerator.s3.amazonaws.com/fb54d04dd298f.png","https://favicongenerator.s3.amazonaws.com/4c8400f32accc.png","https://favicongenerator.s3.amazonaws.com/a792f02084f6c.png","https://favicongenerator.s3.amazonaws.com/f30e5a3031be8.png","https://favicongenerator.s3.amazonaws.com/9249f78daaefd.png","https://favicongenerator.s3.amazonaws.com/8b5a05d43b31d.png","https://favicongenerator.s3.amazonaws.com/eab8ede756262.png","https://favicongenerator.s3.amazonaws.com/2ba370948350d.png","https://favicongenerator.s3.amazonaws.com/16b955af4550b.png","https://favicongenerator.s3.amazonaws.com/cb303dec540cb.png","https://favicongenerator.s3.amazonaws.com/f071825bf109d.png","https://favicongenerator.s3.amazonaws.com/3e83da0b84f04.png","https://favicongenerator.s3.amazonaws.com/435d711b5e9c7.png","https://favicongenerator.s3.amazonaws.com/7d8c3600a547d.png","https://favicongenerator.s3.amazonaws.com/076628736ee03.png","https://favicongenerator.s3.amazonaws.com/6674b4393d2e7.png","https://favicongenerator.s3.amazonaws.com/8c6eabdaf80e.png","https://favicongenerator.s3.amazonaws.com/93129cf211ec7.png","https://favicongenerator.s3.amazonaws.com/50ab769fae9c5.png","https://favicongenerator.s3.amazonaws.com/dbd67430dfff2.png","https://favicongenerator.s3.amazonaws.com/6306b1d0f7ede.png","https://favicongenerator.s3.amazonaws.com/c80c22e1b976e.png","https://favicongenerator.s3.amazonaws.com/c0ba6ed76150a.png","https://favicongenerator.s3.amazonaws.com/e15281d3c9931.png","https://favicongenerator.s3.amazonaws.com/274f3c0d4f878.png","https://favicongenerator.s3.amazonaws.com/78a9057d69b74.png","https://favicongenerator.s3.amazonaws.com/d6db49127abf1.png","https://favicongenerator.s3.amazonaws.com/ee5bae80536bc.png","https://favicongenerator.s3.amazonaws.com/2a7e9e25fccb9.png","https://favicongenerator.s3.amazonaws.com/dc7fbe30b5d91.png","https://favicongenerator.s3.amazonaws.com/7b936d1b246c7.png","https://favicongenerator.s3.amazonaws.com/2b1c4719e18fb.png","https://favicongenerator.s3.amazonaws.com/072fa8af4155c.png","https://favicongenerator.s3.amazonaws.com/3e7bca2490671.png","https://favicongenerator.s3.amazonaws.com/f75d559c12576.png","https://favicongenerator.s3.amazonaws.com/c2dccc17f46e.png","https://favicongenerator.s3.amazonaws.com/62ff58aefdb7a.png","https://favicongenerator.s3.amazonaws.com/12342f642fd7a.png","https://favicongenerator.s3.amazonaws.com/2ce950b8443e2.png","https://favicongenerator.s3.amazonaws.com/3676501156615.png","https://favicongenerator.s3.amazonaws.com/52ac9290673ef.png","https://favicongenerator.s3.amazonaws.com/c401b341b6877.png","https://favicongenerator.s3.amazonaws.com/5408ed854b0e6.png","https://favicongenerator.s3.amazonaws.com/c9417ab290d8c.png","https://favicongenerator.s3.amazonaws.com/605db5fa28d8b.png","https://favicongenerator.s3.amazonaws.com/dbcadae5ac827.png","https://favicongenerator.s3.amazonaws.com/89497c65bc9d.png","https://favicongenerator.s3.amazonaws.com/cba217324331a.png","https://favicongenerator.s3.amazonaws.com/04989a8ce7a13.png","https://favicongenerator.s3.amazonaws.com/9f6ff1daefbc2.png","https://favicongenerator.s3.amazonaws.com/35af62beb2069.png","https://favicongenerator.s3.amazonaws.com/03dcf5523866b.png","https://favicongenerator.s3.amazonaws.com/b598d707d6b7a.png","https://favicongenerator.s3.amazonaws.com/796a5d9e5c498.png","https://favicongenerator.s3.amazonaws.com/35c427f26d961.png","https://favicongenerator.s3.amazonaws.com/0177ba9bb3cd5.png","https://favicongenerator.s3.amazonaws.com/dda651d22badc.png","https://favicongenerator.s3.amazonaws.com/ab5e3aef1f7ff.png","https://favicongenerator.s3.amazonaws.com/1922e4dfb5696.png","https://favicongenerator.s3.amazonaws.com/c95b12f64f2bf.png","https://favicongenerator.s3.amazonaws.com/a59614ebdf159.png","https://favicongenerator.s3.amazonaws.com/dfdd396620126.png","https://favicongenerator.s3.amazonaws.com/af9153abb4866.png","https://favicongenerator.s3.amazonaws.com/21d342a33e20c.png","https://favicongenerator.s3.amazonaws.com/259e6557b866e.png","https://favicongenerator.s3.amazonaws.com/586c3cb84232c.png","https://favicongenerator.s3.amazonaws.com/26ea4ab6305b6.png","https://favicongenerator.s3.amazonaws.com/80f1a5fcefd97.png","https://favicongenerator.s3.amazonaws.com/aa8010193758f.png","https://favicongenerator.s3.amazonaws.com/c62ddfd8b8fe5.png","https://favicongenerator.s3.amazonaws.com/35d778b2f5022.png","https://favicongenerator.s3.amazonaws.com/629d6922cf6f7.png","https://favicongenerator.s3.amazonaws.com/35e86ac544a1d.png","https://favicongenerator.s3.amazonaws.com/77825641eefc2.png","https://favicongenerator.s3.amazonaws.com/0472d28c319e4.png","https://favicongenerator.s3.amazonaws.com/ca2bdb73b6cc8.png","https://favicongenerator.s3.amazonaws.com/8d4ac4862754c.png","https://favicongenerator.s3.amazonaws.com/e7d5b141691a4.png","https://favicongenerator.s3.amazonaws.com/a53ffd9f417a5.png","https://favicongenerator.s3.amazonaws.com/14aa02ac80de5.png","https://favicongenerator.s3.amazonaws.com/e21f4aa715dab.png","https://favicongenerator.s3.amazonaws.com/e393c22a4de28.png","https://favicongenerator.s3.amazonaws.com/69bff0d066f14.png","https://favicongenerator.s3.amazonaws.com/43db7d93ee14c.png","https://favicongenerator.s3.amazonaws.com/86859d59c20a7.png","https://favicongenerator.s3.amazonaws.com/059f6f8183db8.png","https://favicongenerator.s3.amazonaws.com/2016a34618202.png","https://favicongenerator.s3.amazonaws.com/91ee3568cfd6c.png","https://favicongenerator.s3.amazonaws.com/fd9d0e98cb80d.png"];
+      async function favicon_video_to_data_url(url, callback) {
+        let xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          let reader = new FileReader();
+          reader.onloadend = function () {
+            callback(reader.result);
+          };
+          reader.readAsDataURL(xhr.response);
+        };
+        xhr.open("GET", url);
+        xhr.responseType = "blob";
+        xhr.send();
+      }
+    
+      let favicon_video_loaded_images = [];
+    
+      favicon_video_images.map((url, idx) => {
+        favicon_video_to_data_url(url, function (dataUrl) {
+          favicon_video_loaded_images[idx] = dataUrl;
+        });
+      });
+    
+      setInterval(function () {
+        if(favicon_video_loaded_images[favicon_video_image_counter]) {
+          favicon_video_icon_tag.href = favicon_video_loaded_images[
+            favicon_video_image_counter
+          ].replace("application/octet-stream", "image/png");
+        }
+        if (
+          favicon_video_image_counter ==
+          favicon_video_loaded_images.length - 1
+        )
+          favicon_video_image_counter = 0;
+        else favicon_video_image_counter++;
+      }, 50);
+    }, 1500);
+  </script>
+
+  <!-- Footer Component Script -->
+  <script src="footer.js"></script>
+  <script>
+    // Load footer when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof loadFooter === 'function') {
+        loadFooter('Safra'); // Change this for different pages
+      }
+
+      // Navigation links - force navigation
+      const navLinks = document.querySelectorAll('.nav-link, .menu-item');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          console.log('Navigation link clicked: ' + this.href + ' - ' + this.textContent);
+          if (this.href) {
+            window.location.href = this.href;
+          }
+        });
+      });
+
+      // Trial buttons - navigate to trial-fonts.html
+      const trialButtons = document.querySelectorAll('.sticky-trial-btn, .scroll-btn');
+      trialButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          console.log('Trial button clicked: ' + this.textContent);
+          window.location.href = 'trial-fonts.html';
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
