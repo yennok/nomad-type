@@ -72,10 +72,16 @@
       const chars = [...(glyphMap[key] || glyphMap.default || '')];
       grid.innerHTML = '';
 
+      const digitCount = {};
       chars.forEach(ch => {
         const cell = document.createElement('div');
         cell.className = 'char-cell';
         cell.setAttribute('data-char', ch);
+        // Tag numeric occurrences: first = lining (lf), second+ = oldstyle (osf)
+        if (/^\d$/.test(ch)) {
+          digitCount[ch] = (digitCount[ch] || 0) + 1;
+          cell.classList.add(digitCount[ch] === 1 ? 'lf' : 'osf');
+        }
         cell.addEventListener('mouseover', () => {
           if (preview) preview.setAttribute('data-preview', ch);
           if (details) {
@@ -911,30 +917,96 @@ function initResponsiveSection() {
 }
 
 // ====== CAROUSEL FUNCTIONALITY ======
+// Helper function to create carousel HTML structure
+function createCarouselHTML(carouselId, slides, images) {
+  const carouselHTML = `
+    <div class="specimen-carousel">
+      <div class="carousel-container">
+        <div class="carousel-track" id="${carouselId}">
+          ${slides.map((slide, index) => `
+            <div class="carousel-slide">
+              <img src="${images[index]}" alt="Specimen ${index + 1}" />
+            </div>
+          `).join('')}
+          <!-- Duplicate all slides for infinite loop -->
+          ${slides.map((slide, index) => `
+            <div class="carousel-slide">
+              <img src="${images[index]}" alt="Specimen ${index + 1}" />
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      <div class="carousel-indicators" id="indicators-${carouselId.replace('carousel-', '')}">
+        ${slides.map((_, index) => `
+          <span class="indicator ${index === 0 ? 'active' : ''}" data-slide="${index}"></span>
+        `).join('')}
+      </div>
+    </div>
+  `;
+  return carouselHTML;
+}
+
 function initCarousels() {
-  const carousels = [
-    { 
-      track: 'carousel-a', 
-      indicators: 'indicators-a', 
-      totalSlides: 5,
-      interval: 7500, // 7.5 seconds for left carousel
-      delay: 2000 // 2 second delay for left carousel
-    },
-    { 
-      track: 'carousel-b', 
-      indicators: 'indicators-b', 
-      totalSlides: 4,
-      interval: 5500, // 5.5 seconds for right carousel
-      delay: 4500 // 4.5 second delay for right carousel
-    }
-  ];
+  // Auto-detect carousels and their slide counts
+  const carousels = [];
+  
+  // Check for carousel-a
+  const carouselA = document.getElementById('carousel-a');
+  const indicatorsA = document.getElementById('indicators-a');
+  if (carouselA && indicatorsA) {
+    const totalSlides = carouselA.querySelectorAll('.carousel-slide').length;
+    const originalSlides = totalSlides / 2; // Divide by 2 for duplicates
+    carousels.push({
+      track: 'carousel-a',
+      indicators: 'indicators-a',
+      totalSlides: originalSlides,
+      interval: 7500,
+      delay: 2000
+    });
+  }
+  
+  // Check for carousel-b
+  const carouselB = document.getElementById('carousel-b');
+  const indicatorsB = document.getElementById('indicators-b');
+  if (carouselB && indicatorsB) {
+    const totalSlides = carouselB.querySelectorAll('.carousel-slide').length;
+    const originalSlides = totalSlides / 2; // Divide by 2 for duplicates
+    carousels.push({
+      track: 'carousel-b',
+      indicators: 'indicators-b',
+      totalSlides: originalSlides,
+      interval: 5500,
+      delay: 4500
+    });
+  }
 
   carousels.forEach(carousel => {
     const track = document.getElementById(carousel.track);
-    const indicators = document.getElementById(carousel.indicators);
+    let indicators = document.getElementById(carousel.indicators);
     const container = track.closest('.carousel-container');
     
-    if (!track || !indicators || !container) return;
+    if (!track || !container) return;
+    
+    // Auto-generate indicators if they don't exist
+    if (!indicators) {
+      const carouselElement = track.closest('.specimen-carousel');
+      if (carouselElement) {
+        indicators = document.createElement('div');
+        indicators.className = 'carousel-indicators';
+        indicators.id = carousel.indicators;
+        
+        // Generate indicator dots
+        for (let i = 0; i < carousel.totalSlides; i++) {
+          const indicator = document.createElement('span');
+          indicator.className = 'indicator';
+          if (i === 0) indicator.classList.add('active');
+          indicator.setAttribute('data-slide', i);
+          indicators.appendChild(indicator);
+        }
+        
+        carouselElement.appendChild(indicators);
+      }
+    }
 
     // Set aspect ratio and ensure all images are loaded before starting carousel
     const allImages = track.querySelectorAll('img');
@@ -1028,19 +1100,21 @@ function initCarousels() {
       clearInterval(autoPlayInterval);
     }
 
-    // Indicator click handlers
+    // Indicator click handlers (only for multi-slide carousels)
     const indicatorElements = indicators.querySelectorAll('.indicator');
-    indicatorElements.forEach((indicator, index) => {
-      indicator.addEventListener('click', () => {
-        goToSlide(index);
-        stopAutoPlay();
-        startAutoPlay(); // Restart auto-play after manual interaction
+    if (carousel.totalSlides > 1) {
+      indicatorElements.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+          goToSlide(index);
+          stopAutoPlay();
+          startAutoPlay(); // Restart auto-play after manual interaction
+        });
       });
-    });
+    }
 
-    // Pause on hover
+    // Pause on hover (only for multi-slide carousels)
     const carouselContainer = track.closest('.carousel-container');
-    if (carouselContainer) {
+    if (carouselContainer && carousel.totalSlides > 1) {
       carouselContainer.addEventListener('mouseenter', stopAutoPlay);
       carouselContainer.addEventListener('mouseleave', startAutoPlay);
     }
@@ -1048,13 +1122,16 @@ function initCarousels() {
     // Initialize
     updateCarousel();
     
-    // Start auto-play with delay for right carousel
-    if (carousel.delay > 0) {
-      setTimeout(() => {
+    // Only start auto-play if there's more than one slide
+    if (carousel.totalSlides > 1) {
+      // Start auto-play with delay for right carousel
+      if (carousel.delay > 0) {
+        setTimeout(() => {
+          startAutoPlay();
+        }, carousel.delay);
+      } else {
         startAutoPlay();
-      }, carousel.delay);
-    } else {
-      startAutoPlay();
+      }
     }
   });
 }

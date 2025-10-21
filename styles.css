@@ -23,9 +23,17 @@
     }
     
     body.spitz-page {
-      --primary-color: #ECFE54; /* Lime green for Romanisch Spitz */
+      --primary-color: #B4DCDF; /* Light blue for Romanisch Spitz */
       --glyph-vertical-offset: -1px;
       --preview-vertical-offset: -3px;
+    }
+
+    body.yeffe-page {
+      --primary-color: #CCDDAD; /* Light green for Yeffe Nefesh */
+    }
+
+    body.werd-page {
+      --primary-color: #00FF00; /* Bright green for Werd */
     }
 
     /* ====== TYPEFACE-SPECIFIC COVER TITLE STYLING ====== */
@@ -122,6 +130,14 @@
       color: var(--primary-color);
     }
 
+    body.sugar-page .cover-title div:nth-child(2) {
+      font-family: "Sugar Sans", serif;
+      font-weight: 400;
+      color: black;
+      letter-spacing: -2px;
+      font-size: 100px; 
+    }
+
     /* Romanisch Spitz Page Styling - Position-Based */
     body.spitz-page .cover-title div:nth-child(1) {
       font-family: "Romanisch Spitz", serif;
@@ -136,6 +152,30 @@
 
     body.spitz-page .cover-title div:nth-child(2) {
       font-family: "Romanisch Spitz", serif;
+      font-weight: 400;
+      color: black;
+      font-size: 150px;
+      line-height: 1;
+      margin-bottom: 0px;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    /* Yeffe Nefesh Page Styling - Position-Based */
+    body.yeffe-page .cover-title div:nth-child(1) {
+      font-family: "Yeffe Nefesh", serif;
+      font-weight: 400;
+      color: black;
+      font-size: 150px;
+      line-height: 1;
+      margin-bottom: 0px;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    /* Werd Page Styling - Position-Based */
+    body.werd-page .cover-title div:nth-child(1) {
+      font-family: "Werd", serif;
       font-weight: 400;
       color: black;
       font-size: 150px;
@@ -166,40 +206,6 @@
       margin-bottom: 0px;
       transform: translateZ(0);
       will-change: transform;
-    }
-
-    /* Sugar Type Tester Section Styling */
-    body.sugar-page .type-tester:nth-child(1) .type-area {
-      font-family: "Sugar Serif", serif;
-      font-weight: 400;
-    }
-
-    body.sugar-page .type-tester:nth-child(2) .type-area {
-      font-family: "Sugar Sans", sans-serif;
-      font-weight: 700;
-      font-size: 244px;
-      line-height: 1;
-      letter-spacing: -0.07em;
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    body.sugar-page .type-tester:nth-child(3) .type-area {
-      font-family: "Sugar Sans", sans-serif;
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 1.5;
-      letter-spacing: 0.01em;
-    }
-
-    body.sugar-page .type-tester:nth-child(4) .type-area {
-      font-family: "Sugar Sans", sans-serif;
-      font-weight: 700;
-      font-size: 244px;
-      line-height: 1;
-      letter-spacing: -0.035em;
-      text-align: center;
-      white-space: nowrap;
     }
 
     /* Global link styling */
@@ -235,8 +241,8 @@ body {
     }
 
     /* ====== FONT FILES ====== */
-    @font-face { font-family: "Sugar Serif"; font-weight: 400; font-style: normal; src: url("fonts/SugarSerif-Regular.woff2") format("woff2"); }
-    @font-face { font-family: "Sugar Sans";  font-weight: 400; font-style: normal; src: url("fonts/SugarSans-Regular.woff2") format("woff2"); }
+    @font-face { font-family: "Sugar Serif"; font-weight: 400; font-style: normal; src: url("fonts/Sugar/SugarSerif-Regular.woff2") format("woff2"); }
+    @font-face { font-family: "Sugar Sans";  font-weight: 400; font-style: normal; src: url("fonts/Sugar/SugarSans-Regular.woff2") format("woff2"); }
     @font-face { font-family: "Safra Sans";  font-weight: 400; font-style: normal; src: url("fonts/SafraSans-Regular.woff2") format("woff2"); }
     @font-face { font-family: "Safra Sans";  font-weight: 700; font-style: normal; src: url("fonts/SafraSans-Bold.woff2") format("woff2"); }
     @font-face { font-family: "Safra";       font-weight: 400; font-style: normal; src: url("fonts/Safra-Regular.woff2") format("woff2"); }
@@ -244,6 +250,12 @@ body {
     @font-face { font-family: "Safra Mono";  font-weight: 400; font-style: normal; src: url("fonts/SafraMono-Mono.woff2") format("woff2"); }
     @font-face { font-family: "Kilo Text";   font-weight: 400; font-style: normal; src: url("fonts/Kilo-Text/KILOTextV5-Regular.woff2") format("woff2"); }
     @font-face { font-family: "Romanisch Spitz"; font-weight: 400; font-style: normal; src: url("fonts/Romanisch-Spitz/Romanisch-Spitz-Regular.woff2") format("woff2"); }
+    @font-face { font-family: "Yeffe Nefesh"; font-weight: 400; font-style: normal; src: url("fonts/Yeffe-Nefesh/Yeffe-Nefesh-Regular.woff2") format("woff2"); }
+    @font-face { font-family: "Werd"; font-weight: 300; font-style: normal; src: url("fonts/werd/werd-Light.woff2") format("woff2"); }
+    @font-face { font-family: "Werd"; font-weight: 400; font-style: normal; src: url("fonts/werd/werd-Regular.woff2") format("woff2"); }
+    @font-face { font-family: "Werd"; font-weight: 700; font-style: normal; src: url("fonts/werd/werd-Bold.woff2") format("woff2"); }
+    @font-face { font-family: "Werd"; font-weight: 800; font-style: normal; src: url("fonts/werd/werd-ExtraBold.woff2") format("woff2"); }
+    @font-face { font-family: "Werd"; font-weight: 900; font-style: normal; src: url("fonts/werd/werd-Black.woff2") format("woff2"); }
 
     /* ====== RESET, LAYOUT ====== */
     * { box-sizing: border-box; }
@@ -581,6 +593,11 @@ body {
     /* Mobile carousel indicators */
     .carousel-indicators {
       justify-content: center !important;
+    }
+
+    /* Hide indicators when there's only one slide */
+    .carousel-indicators:has(span:only-child) {
+      display: none;
     }
     
     .indicator {
@@ -1824,6 +1841,26 @@ body {
       font-family: "Sugar Sans", sans-serif;
     }
 
+    .marquee-text.yeffe-text {
+      font-family: "Yeffe Nefesh", serif;
+    }
+
+    .marquee-text.werd-text {
+      font-family: "Werd", serif;
+    }
+
+    .marquee-text.light {
+      font-weight: 300;
+    }
+
+    .marquee-text.extrabold {
+      font-weight: 800;
+    }
+
+    .marquee-text.black {
+      font-weight: 900;
+    }
+
     .marquee-text.regular {
       font-weight: 400;
     }
@@ -2203,6 +2240,9 @@ body {
       line-height: 1; 
       /*transition: background 0.15s ease; */
     }
+    /* Numeric variants for glyph grid cells */
+    .char-cell.lf { font-variant-numeric: lining-nums; }
+    .char-cell.osf { font-variant-numeric: oldstyle-nums; }
     .char-cell::before {
       content: attr(data-char);
       display: block;
@@ -2272,9 +2312,19 @@ body {
       gap: 2rem;
     }
 
+    .sugar-page .in-use-grid, .yeffe-page .in-use-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
     .specimen-carousels {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .werd-page .specimen-carousels {
+      display: grid;
+      grid-template-columns: 1fr;
       gap: 2rem;
     }
 
@@ -2465,6 +2515,8 @@ body {
       body.safra-page .cover-title div:nth-child(1), body.safra-page .cover-title div:nth-child(2), body.safra-page .cover-title div:nth-child(3) { font-size: 78px; letter-spacing:-2px; }
       body.spitz-page .cover-title div:nth-child(1), body.spitz-page .cover-title div:nth-child(2) { font-size: 78px; letter-spacing:-2px; }
       body.sugar-page .cover-title div:nth-child(1), body.sugar-page .cover-title div:nth-child(2) { font-size: 78px; letter-spacing:-2px; }
+      body.yeffe-page .cover-title div:nth-child(1) { font-size: 78px; letter-spacing:-2px; }
+      body.werd-page .cover-title div:nth-child(1) { font-size: 78px; letter-spacing:-2px; }
       .cover-buttons { 
         bottom: 36px; 
         right: 36px; 
@@ -2484,6 +2536,8 @@ body {
       body.safra-page .cover-title div:nth-child(1), body.safra-page .cover-title div:nth-child(2), body.safra-page .cover-title div:nth-child(3) { font-size: 78px; letter-spacing:-2px; }
       body.spitz-page .cover-title div:nth-child(1), body.spitz-page .cover-title div:nth-child(2) { font-size: 78px; letter-spacing:-2px; }
       body.sugar-page .cover-title div:nth-child(1), body.sugar-page .cover-title div:nth-child(2) { font-size: 78px; letter-spacing:-2px; }
+      body.yeffe-page .cover-title div:nth-child(1) { font-size: 78px; letter-spacing:-2px; }
+      body.werd-page .cover-title div:nth-child(1) { font-size: 78px; letter-spacing:-2px; }
       .cover-buttons { 
         bottom: 36px; 
         right: 36px; 
