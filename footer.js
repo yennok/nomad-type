@@ -76,7 +76,7 @@ const footerHTML = `
       © Nomad Type. All Rights Reserved 2025
     </div>
     <div class="footer-right">
-      Typefaces in Use: <span class="font-name">Safra</span> Sans/Mono
+      Typefaces in Use: Safra Sans/Mono
     </div>
   </div>
 </footer>
@@ -89,11 +89,7 @@ function loadFooter(fontName = 'Safra') {
   if (footerContainer) {
     footerContainer.innerHTML = footerHTML;
     
-    // Update font name if provided
-    const fontNameSpan = footerContainer.querySelector('.font-name');
-    if (fontNameSpan) {
-      fontNameSpan.textContent = fontName;
-    }
+    // Font name is always "Safra Sans/Mono" (site UI fonts) - no longer dynamic
     
     // Re-initialize marquee and carousel after loading
     setTimeout(() => {

@@ -222,7 +222,7 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
   <!-- ===== GLYPH GRID VIEWER ===== -->
   <div class="wrapper" id="fontWrapper">
     <div class="left-panel">
-      <div class="preview-box" id="preview" style="font-family: Safra; font-weight: 400;" data-preview="!"></div>
+      <div class="preview-box" id="preview" style="font-family: Safra; font-weight: 400;" data-preview="a"></div>
       <div class="controls-lite">
         <div class="font-wrapper">
           <div class="custom-select" id="weight-select">
@@ -242,7 +242,7 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
           </select>
         </div>
       </div>
-      <div class="details" id="details">Unicode decimal: 33<br>Unicode hex: 0021<br>HTML entity: !</div>
+      <div class="details" id="details">Unicode decimal: 97<br>Unicode hex: 0061<br>HTML entity: a</div>
     </div>
     <div class="grid-container">
       <div class="grid" id="grid"></div>
@@ -324,7 +324,7 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
 
   <script type="application/json" id="glyphMap">{
     "default": "!\"#$%&'()*+,-./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
-    "Safra2": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzﬁﬂ0123456789½⅓⅔¼¾.:!?#/\\–—()“”‘’„‚®+%"
+    "Safra2": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzﬁﬂ0123456789½⅓⅔¼¾.:!?#/\\–—()“”‘’„‚®%"
   }</script>
 
   <!-- ===== SCRIPT ===== -->
@@ -513,28 +513,14 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
             <label class="checkbox-label">
               <input type="checkbox" name="family" value="entire" checked>
               <span class="checkmark"></span>
-              Full Family (4)
+              Kilo Text Regular<!--Full Family (1)-->
             </label>
-            <label class="checkbox-label">
+            <!--<label class="checkbox-label">
               <input type="checkbox" name="family" value="regular" checked>
               <span class="checkmark"></span>
-              Safra Regular
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" name="family" value="bold" checked>
-              <span class="checkmark"></span>
-              Safra Bold
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" name="family" value="sans-regular" checked>
-              <span class="checkmark"></span>
-              Safra Sans Regular
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" name="family" value="sans-bold" checked>
-              <span class="checkmark"></span>
-              Safra Sans Bold
-            </label>
+              Kilo Text Regular
+            </label>-->
+           
           </div>
         </div>
       </div>
@@ -664,14 +650,15 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
         });
       });
 
-      // Trial buttons - navigate to trial-fonts.html
-      const trialButtons = document.querySelectorAll('.sticky-trial-btn, .scroll-btn');
-      trialButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
+      // Trial buttons - open overlays (handled by initScrollButtonClicks in script.js)
+      // Only handle sticky-trial-btn navigation, scroll buttons open overlays
+      const stickyTrialBtn = document.querySelector('.sticky-trial-btn');
+      if (stickyTrialBtn) {
+        stickyTrialBtn.addEventListener('click', function(e) {
           e.preventDefault();
           window.location.href = 'trial-fonts.html';
         });
-      });
+      }
     });
   </script>
 

@@ -78,8 +78,8 @@
               <div class="select-option" data-value="Safra Bold">Safra Bold</div>
               <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
               <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
-              <div class="select-option" data-value="Sugar Serif Regular">Sugar Serif Regular</div>
-              <div class="select-option" data-value="Sugar Sans Regular">Sugar Sans Regular</div>
+              <div class="select-option" data-value="Sugar Display Regular">Sugar Display Regular</div>
+              <div class="select-option" data-value="Sugar Text Regular">Sugar Text Regular</div>
             </div>
           </div>
           <select class="font-select" aria-label="Font and weight" style="display: none;">
@@ -87,8 +87,8 @@
             <option value="Safra Bold">Safra Bold</option>
             <option value="Safra Sans Regular">Safra Sans Regular</option>
             <option value="Safra Sans Bold">Safra Sans Bold</option>
-            <option value="Sugar Serif Regular">Sugar Serif Regular</option>
-            <option value="Sugar Sans Regular">Sugar Sans Regular</option>
+            <option value="Sugar Display Regular">Sugar Display Regular</option>
+            <option value="Sugar Text Regular">Sugar Text Regular</option>
           </select>
         </div>
         <div class="align-buttons" role="group" aria-label="Align">
@@ -240,7 +240,7 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
   <!-- ===== GLYPH GRID VIEWER ===== -->
   <div class="wrapper" id="fontWrapper">
     <div class="left-panel">
-      <div class="preview-box" id="preview" style="font-family: Safra; font-weight: 400;" data-preview="!"></div>
+      <div class="preview-box" id="preview" style="font-family: Safra; font-weight: 400;" data-preview="a"></div>
       <div class="controls-lite">
         <div class="font-wrapper">
           <div class="custom-select" id="weight-select">
@@ -253,8 +253,8 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
               <div class="select-option" data-value="Safra Bold">Safra Bold</div>
               <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
               <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
-              <div class="select-option" data-value="Sugar Serif Regular">Sugar Serif Regular</div>
-              <div class="select-option" data-value="Sugar Sans Regular">Sugar Sans Regular</div>
+              <div class="select-option" data-value="Sugar Display Regular">Sugar Display Regular</div>
+              <div class="select-option" data-value="Sugar Text Regular">Sugar Text Regular</div>
             </div>
           </div>
           <!-- Hidden original select for functionality -->
@@ -263,12 +263,12 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
             <option value="Safra Bold">Safra Bold</option>
             <option value="Safra Sans Regular">Safra Sans Regular</option>
             <option value="Safra Sans Bold">Safra Sans Bold</option>
-            <option value="Sugar Serif Regular">Sugar Serif Regular</option>
-            <option value="Sugar Sans Regular">Sugar Sans Regular</option>
+            <option value="Sugar Display Regular">Sugar Display Regular</option>
+            <option value="Sugar Text Regular">Sugar Text Regular</option>
           </select>
         </div>
       </div>
-      <div class="details" id="details">Unicode decimal: 33<br>Unicode hex: 0021<br>HTML entity: !</div>
+      <div class="details" id="details">Unicode decimal: 97<br>Unicode hex: 0061<br>HTML entity: a</div>
     </div>
     <div class="grid-container">
       <div class="grid" id="grid"></div>
@@ -396,13 +396,14 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
     "Safra Bold": { "family": "Safra", "weight": 700 },
     "Safra Sans Regular": { "family": "Safra Sans", "weight": 400 },
     "Safra Sans Bold": { "family": "Safra Sans", "weight": 700 },
-    "Sugar Serif Regular": { "family": "Sugar Serif", "weight": 400 },
-    "Sugar Sans Regular": { "family": "Sugar Sans", "weight": 400 }
+    "Sugar Display Regular": { "family": "Sugar Display", "weight": 400 },
+    "Sugar Text Regular": { "family": "Sugar Text", "weight": 400 }
   }</script>
 
   <script type="application/json" id="glyphMap">{
     "default": "!\"#$%&'()*+,-./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
-    "Safra2": "0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_{|}~ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzאבגדהוזחטסעפצקרשתابتثجحخدذرزسشصضطظعغفقكلمنهويﺍﺎﺄﺃﺈﺍبﺏﺑﺒتﺕﺗﺘثﺙﺛﺜجﺝﺟﺠحﺡﺣﺤخﺥﺧﺨدﺩﺪذﺫﺬرﺭﺮزﺯﺰسﺱﺳﺴشﺵﺷﺸصﺹﺻﺼضﺽﺿﺾطﻁﻃﻄظﻅﻇﻈعﻉﻋﻌغﻍﻏﻐفﻑﻓﻔقﻕﻗﻘكﻙﻛﻜلﻝﻟﻠمﻡﻣﻤنﻥﻧﻨهﻩﻫﻬوﻭﻮيﻱﻳﻴ"
+    "Safra2": "0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_{|}~ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzأبجدهوزحطيكلمنسعفصقرشتثخذضظغاآإٱةئؤءאבגדהוזחטיכךלמםנןסעפףצץקרשת"
+
   }</script>
 
   <!-- ===== SCRIPT ===== -->
@@ -740,14 +741,15 @@ Gaga ventured into acting, with leading roles in American Horror Story, Hotel, 2
         });
       });
 
-      // Trial buttons - navigate to trial-fonts.html
-      const trialButtons = document.querySelectorAll('.sticky-trial-btn, .scroll-btn');
-      trialButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
+      // Trial buttons - open overlays (handled by initScrollButtonClicks in script.js)
+      // Only handle sticky-trial-btn navigation, scroll buttons open overlays
+      const stickyTrialBtn = document.querySelector('.sticky-trial-btn');
+      if (stickyTrialBtn) {
+        stickyTrialBtn.addEventListener('click', function(e) {
           e.preventDefault();
           window.location.href = 'trial-fonts.html';
         });
-      });
+      }
     });
   </script>
 

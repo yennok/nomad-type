@@ -17,9 +17,25 @@
       --glyph-vertical-offset: -1px;
       --preview-vertical-offset: -3px;
     }
+
+    body.kilo-display-page {
+      --primary-color: #63B1FF; /* Blue for Kilo Display */
+    }
     
     body.sugar-page {
       --primary-color: #D81F1F; /* Red for Sugar */
+    }
+    
+    body.kaldanit-page {
+      --primary-color: #FF6CF1; /* Pink for Kaldanit */
+       --glyph-vertical-offset: 2px;
+      --preview-vertical-offset: 8px;
+    }
+    
+    body.dear-ai-page {
+      --primary-color: #F6E924; /* Yellow for dear-ai */
+      --glyph-vertical-offset: -4px;
+      --preview-vertical-offset: -23px;
     }
     
     body.spitz-page {
@@ -34,6 +50,12 @@
 
     body.werd-page {
       --primary-color: #00FF00; /* Bright green for Werd */
+    }
+
+    body.bizarre-page {
+      --primary-color: #009953; /* Green for Bizarre Beta */
+      --glyph-vertical-offset: -3px;
+      --preview-vertical-offset: -14px;
     }
 
     /* ====== TYPEFACE-SPECIFIC COVER TITLE STYLING ====== */
@@ -122,23 +144,52 @@
 
     }
 
+    /* Kilo Display Page Styling - Position-Based */
+    body.kilo-display-page .cover-title div:nth-child(1) {
+      font-family: "Kilo Display", serif;
+      font-weight: 400;
+      color: black;
+      font-size: 280px;
+      line-height: 1;
+      letter-spacing: -10px;
+      margin-bottom: 0px;
+      transform: translateZ(0);
+      will-change: transform;
+      font-variation-settings: "wdth" 80;
+      animation: kiloDisplayWidth 4s ease-in-out infinite;
+    }
+
+    @keyframes kiloDisplayWidth {
+      0%, 100% {
+        font-variation-settings: "wdth" 80;
+      }
+      50% {
+        font-variation-settings: "wdth" 200;
+      }
+    }
 
     /* Sugar Page Styling - Position-Based */
     body.sugar-page .cover-title div:nth-child(1) {
-      font-family: "Sugar Serif", serif;
+      font-family: "Sugar Display", serif;
       font-weight: 400;
       color: var(--primary-color);
+      letter-spacing: -3.5px;
     }
 
     body.sugar-page .cover-title div:nth-child(2) {
-      font-family: "Sugar Sans", serif;
+      font-family: "Sugar Text", serif;
       font-weight: 400;
       color: black;
       letter-spacing: -2px;
-      font-size: 100px; 
+      font-size: 80px;
+      line-height: 1.5;
     }
 
     /* Romanisch Spitz Page Styling - Position-Based */
+    body.spitz-page .cover-title {
+      margin-bottom: 30px;
+    }
+
     body.spitz-page .cover-title div:nth-child(1) {
       font-family: "Romanisch Spitz", serif;
       font-weight: 400;
@@ -146,6 +197,7 @@
       font-size: 150px;
       line-height: 1;
       margin-bottom: 0px;
+      letter-spacing: -5px;
       transform: translateZ(0);
       will-change: transform;
     }
@@ -157,6 +209,7 @@
       font-size: 150px;
       line-height: 1;
       margin-bottom: 0px;
+      letter-spacing: -5px;
       transform: translateZ(0);
       will-change: transform;
     }
@@ -174,8 +227,113 @@
     }
 
     /* Werd Page Styling - Position-Based */
+    body.werd-page .cover-title {
+      margin-bottom: 0px;
+    }
+
     body.werd-page .cover-title div:nth-child(1) {
       font-family: "Werd", serif;
+      font-weight: 300;
+      color: black;
+      font-size: 135px;
+      line-height: 0.95;
+      letter-spacing: -4px;
+      margin-bottom: 0px;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    body.werd-page .cover-title div:nth-child(2) {
+      font-family: "Werd", serif;
+      font-weight: 400;
+      color: black;
+      font-size: 135px;
+      line-height: 0.95;
+      letter-spacing: -4px;
+      margin-bottom: 0px;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    body.werd-page .cover-title div:nth-child(3) {
+      font-family: "Werd", serif;
+      font-weight: 700;
+      color: black;
+      font-size: 135px;
+      line-height: 0.95;
+      letter-spacing: -4px;
+      margin-bottom: 0px;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    body.werd-page .cover-title div:nth-child(4) {
+      font-family: "Werd", serif;
+      font-weight: 800;
+      color: black;
+      font-size: 135px;
+      line-height: 0.95;
+      letter-spacing: -4px;
+      margin-bottom: 0px;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    body.werd-page .cover-title div:nth-child(5) {
+      font-family: "Werd", serif;
+      font-weight: 900;
+      color: black;
+      font-size: 135px;
+      line-height: 0.95;
+      letter-spacing: -4px;
+      margin-bottom: 0px;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    /* Kaldanit Page Styling - Position-Based */
+    body.kaldanit-page .cover-title {
+      margin-bottom: 0px;
+    }
+
+    body.kaldanit-page .cover-title div:nth-child(1) {
+      font-family: "Kaldanit", monospace;
+      font-weight: 400;
+      color: black;
+      font-size: 150px;
+      line-height: 1;
+      margin-bottom: 0px;
+      direction: rtl;
+      transform: translateZ(0);
+      will-change: transform;
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    body.kaldanit-page .cover-title div:nth-child(1).typewriter-active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    body.kaldanit-page .cover-title .typewriter-cursor {
+      transition: opacity 0.1s ease-in-out;
+    }
+
+    /* dear-ai Page Styling - Position-Based */
+    body.dear-ai-page .cover-title div:nth-child(1) {
+      font-family: "dear-ai", monospace;
+      font-weight: 400;
+      color: black;
+      font-size: 150px;
+      line-height: 1;
+      margin-bottom: 0px;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    /* Bizarre Page Styling - Position-Based */
+    body.bizarre-page .cover-title div:nth-child(1) {
+      font-family: "bizarre", serif;
       font-weight: 400;
       color: black;
       font-size: 150px;
@@ -187,22 +345,23 @@
 
     /* Sugar Page Styling - Position-Based */
     body.sugar-page .cover-title div:nth-child(1) {
-      font-family: "Sugar Serif", serif;
+      font-family: "Sugar Display", serif;
       font-weight: 400;
       color: black;
       font-size: 150px;
       line-height: 1;
+      letter-spacing: -3.5px;
       margin-bottom: 0px;
       transform: translateZ(0);
       will-change: transform;
     }
 
     body.sugar-page .cover-title div:nth-child(2) {
-      font-family: "Sugar Sans", sans-serif;
+      font-family: "Sugar Text", sans-serif;
       font-weight: 400;
       color: black;
-      font-size: 150px;
-      line-height: 1;
+      font-size: 80px;
+      line-height: 1.5;
       margin-bottom: 0px;
       transform: translateZ(0);
       will-change: transform;
@@ -235,21 +394,113 @@ body.homepage-page .footer-linkedin-btn:hover {
 body {
   background: white; /* Black background */
 }
+
+body.negative {
+  background: black;
+}
+
+body.negative .marquee-container .marquee-text {
+  color: white;
+}
+
+body.negative .intro-content {
+  color: white;
+}
+
+body.negative .sticky-green-line {
+  filter: invert(1);
+}
+
+body.negative .sticky-top-section {
+  filter: invert(1);
+}
+
+body.negative .left-panel {
+  filter: invert(1);
+}
+
+body.negative .controls {
+  filter: invert(1);
+}
+
+body.negative .btn:hover {
+  filter: invert(1);
+}
+
+body.negative .cover-buttons {
+  filter: invert(1);
+}
+
+body.negative .type-area {
+  color: white;
+}
+
+body.negative .char-cell:hover {
+  background: #0916db;
+  color:white;
+}
+
+body.bizarre-page.negative .char-cell:hover {
+  background: #FF66AC;
+  color: white;
+}
+
+body.negative .grid-container {
+  filter: invert(1);
+}
+
+body.negative .section-header {
+  filter: invert(1);
+}
+
+body.negative .scroll-buttons-section {
+  filter: invert(1);
+}
+
+body.negative .scroll-buttons {
+  max-width: 700px;
+  grid-template-columns: 1fr;
+}
+
+body.negative #footer-container {
+  filter: invert(1);
+}
+
+body.negative .footer-nav-link:hover {
+  filter: invert(1);
+}
+
+body.negative .footer-linkedin-btn:hover {
+  filter: invert(1);
+}
+
+body.negative #scrollBuyBtn,
+body.negative .btn-secondary.scroll-btn,
+body.negative #buyBtn {
+  display: none;
+}
     
     @media (max-width: 768px) {
       :root { --cell-size: 50px; }
     }
 
     /* ====== FONT FILES ====== */
-    @font-face { font-family: "Sugar Serif"; font-weight: 400; font-style: normal; src: url("fonts/Sugar/SugarSerif-Regular.woff2") format("woff2"); }
-    @font-face { font-family: "Sugar Sans";  font-weight: 400; font-style: normal; src: url("fonts/Sugar/SugarSans-Regular.woff2") format("woff2"); }
+    @font-face { font-family: "Sugar Display"; font-weight: 400; font-style: normal; src: url("fonts/Sugar/SugarSerif-Regular.woff2") format("woff2"); }
+    @font-face { font-family: "Sugar Text";  font-weight: 400; font-style: normal; src: url("fonts/Sugar/SugarSans-Regular.woff2") format("woff2"); }
     @font-face { font-family: "Safra Sans";  font-weight: 400; font-style: normal; src: url("fonts/SafraSans-Regular.woff2") format("woff2"); }
     @font-face { font-family: "Safra Sans";  font-weight: 700; font-style: normal; src: url("fonts/SafraSans-Bold.woff2") format("woff2"); }
     @font-face { font-family: "Safra";       font-weight: 400; font-style: normal; src: url("fonts/Safra-Regular.woff2") format("woff2"); }
     @font-face { font-family: "Safra";       font-weight: 700; font-style: normal; src: url("fonts/Safra-Bold.woff2") format("woff2"); }
     @font-face { font-family: "Safra Mono";  font-weight: 400; font-style: normal; src: url("fonts/SafraMono-Mono.woff2") format("woff2"); }
     @font-face { font-family: "Kilo Text";   font-weight: 400; font-style: normal; src: url("fonts/Kilo-Text/KILOTextV5-Regular.woff2") format("woff2"); }
+    @font-face { font-family: "Kilo Display"; font-weight: 400; font-style: normal; src: url("fonts/Kilo-Display/KILODisplayV7VF.woff2") format("woff2-variations"); }
     @font-face { font-family: "Romanisch Spitz"; font-weight: 400; font-style: normal; src: url("fonts/Romanisch-Spitz/Romanisch-Spitz-Regular.woff2") format("woff2"); }
+    @font-face { font-family: "Kaldanit"; font-weight: 400; font-style: normal; src: url("fonts/Kaldanit/Kaldanit-Regular.woff2") format("woff2"); }
+    @font-face { font-family: "Kaldanit"; font-weight: 700; font-style: normal; src: url("fonts/Kaldanit/Kaldanit-Bold.woff2") format("woff2"); }
+    @font-face { font-family: "Kaldanit"; font-weight: 400; font-style: italic; src: url("fonts/Kaldanit/Kaldanit-Italic.woff2") format("woff2"); }
+    @font-face { font-family: "dear-ai"; font-weight: 400; font-style: normal; src: url("fonts/Dear-AI/dear-ai.woff2") format("woff2"); }
+    @font-face { font-family: "dear-ai"; font-weight: 400; font-style: normal; src: url("fonts/Dear-AI/dear-ai.woff2") format("woff2"); }
+    @font-face { font-family: "bizarre"; font-weight: 400; font-style: normal; src: url("fonts/bizarre/bizarre-beta.woff2") format("woff2"); }
     @font-face { font-family: "Yeffe Nefesh"; font-weight: 400; font-style: normal; src: url("fonts/Yeffe-Nefesh/Yeffe-Nefesh-Regular.woff2") format("woff2"); }
     @font-face { font-family: "Werd"; font-weight: 300; font-style: normal; src: url("fonts/werd/werd-Light.woff2") format("woff2"); }
     @font-face { font-family: "Werd"; font-weight: 400; font-style: normal; src: url("fonts/werd/werd-Regular.woff2") format("woff2"); }
@@ -723,13 +974,13 @@ body {
 
     .scroll-btn:hover {
       background: var(--primary-color);
-      color: #fff;
+      color: #000;
       border: 1px solid var(--primary-color);
     }
 
     .scroll-btn.btn-primary:hover {
       background: var(--primary-color);
-      color: #fff;
+      color: #000;
       border: 1px solid var(--primary-color);
     }
 
@@ -864,7 +1115,7 @@ body {
 
     .footer-linkedin-btn:hover {
       background: var(--primary-color);
-      color: #fff;
+      color: #000;
       border: 1px solid var(--primary-color);
     }
 
@@ -1662,20 +1913,20 @@ body {
 
     .btn:hover { 
       background: var(--primary-color); 
-      color: #fff; 
+      color: #000; 
       border: 1px solid var(--primary-color); 
 
     }
 
     .btn-primary:hover { 
       background: var(--primary-color); 
-      color: #fff; 
+      color: #000; 
       border: 1px solid var(--primary-color); 
     }
 
     /* ====== CONTENT WRAPPER ====== */
     .content-wrapper { 
-      background: #fff; 
+      /*background: #fff; */
       padding: 90px; 
       overflow-x: hidden;
       width: 100%;
@@ -1733,7 +1984,7 @@ body {
 
     .marquee-container {
       overflow: hidden;
-      background: #fff;
+      /*background: #fff;*/
       width: 100%;
       max-width: 100vw;
       height:220px;
@@ -1829,16 +2080,20 @@ body {
       font-family: "Kilo Text", serif;
     }
 
+    .marquee-text.kilo-display-text {
+      font-family: "Kilo Display", serif;
+    }
+
     .marquee-text.spitz-text {
       font-family: "Romanisch Spitz", serif;
     }
 
     .marquee-text.sugar-serif-text {
-      font-family: "Sugar Serif", serif;
+      font-family: "Sugar Display", serif;
     }
 
     .marquee-text.sugar-sans-text {
-      font-family: "Sugar Sans", sans-serif;
+      font-family: "Sugar Text", sans-serif;
     }
 
     .marquee-text.yeffe-text {
@@ -1847,6 +2102,18 @@ body {
 
     .marquee-text.werd-text {
       font-family: "Werd", serif;
+    }
+
+    .marquee-text.kaldanit-text {
+      font-family: "Kaldanit", monospace;
+    }
+
+    .marquee-text.dear-ai-text {
+      font-family: "dear-ai", monospace;
+    }
+
+    .marquee-text.bizarre-text {
+      font-family: "bizarre", serif;
     }
 
     .marquee-text.light {
@@ -1867,6 +2134,10 @@ body {
 
     .marquee-text.bold {
       font-weight: 700;
+    }
+
+    .marquee-text.italic {
+      font-style: italic;
     }
 
     .marquee-text img {
@@ -1983,7 +2254,7 @@ body {
     /* ====== TYPE TESTER SECTIONS ====== */
     .type-tester { margin: 0 auto 7rem auto; /*max-width: 1200px;*/ }
 
-    .controls { display: flex; flex-wrap: wrap-reverse; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.9rem 0; /*border-top: 1px solid #000; */ border-bottom: 1px solid #000; margin-bottom: 6rem; position: relative; z-index: 10; background: #fff; }
+    .controls { display: flex; flex-wrap: wrap-reverse; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.9rem 0; /*border-top: 1px solid #000; */ border-bottom: 1px solid #000; margin-bottom: 6rem; position: relative; z-index: 10; /*background: #fff;*/ }
 
     .sliders-wrapper { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
     label.label-custom { font-family: "Safra Mono"; font-size: 14px; letter-spacing: 0; }
@@ -2240,6 +2511,14 @@ body {
       line-height: 1; 
       /*transition: background 0.15s ease; */
     }
+
+    body.bizarre-page .char-cell {
+      font-family: "bizarre", serif;
+    }
+
+    body.kilo-display-page .char-cell {
+      font-family: "Kilo Display", serif;
+    }
     /* Numeric variants for glyph grid cells */
     .char-cell.lf { font-variant-numeric: lining-nums; }
     .char-cell.osf { font-variant-numeric: oldstyle-nums; }
@@ -2292,6 +2571,23 @@ body {
       /*adding: 0 90px;*/
     }
 
+    /* Spitz page specific: full-width black background for specimen section */
+    body.spitz-page .specimen-section {
+      margin: 0 -90px -6rem -90px;
+      background: black;
+      padding: 90px;
+      width: calc(100% + 180px);
+      box-sizing: border-box;
+    }
+
+    body.spitz-page .specimen-section .section-header {
+      border-bottom: 1px solid #fff;
+    }
+
+    body.spitz-page .specimen-section .section-header h2 {
+      color: #fff;
+    }
+
     .section-header {
       margin-bottom: 2rem;
       border-bottom: 1px solid #000;
@@ -2314,6 +2610,22 @@ body {
 
     .sugar-page .in-use-grid, .yeffe-page .in-use-grid {
       grid-template-columns: repeat(2, 1fr);
+    }
+
+    .kaldanit-page .in-use-section .in-use-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .kaldanit-page .specimen-section .in-use-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .dear-ai-page .in-use-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bizarre-page .in-use-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
 
     .specimen-carousels {
@@ -2445,6 +2757,23 @@ body {
       background: black;
     }
 
+    /* Spitz page specific: white borders for indicators (on black background) */
+    body.spitz-page .indicator {
+      border: 1px solid #fff;
+    }
+
+    body.spitz-page .indicator.active {
+      border: 1px solid #fff;
+    }
+
+    body.spitz-page .indicator:hover {
+      border: 1px solid #fff;
+    }
+
+    body.spitz-page .indicator:hover::after {
+      background: #fff;
+    }
+
     .in-use-item {
       position: relative;
       overflow: hidden;
@@ -2488,6 +2817,13 @@ body {
       .in-use-section, .specimen-section {
         padding: 0;
       }
+
+      /* Spitz page specific: full-width black background for specimen section on mobile */
+      body.spitz-page .specimen-section {
+        margin: 0 -18px -6rem -18px;
+        padding: 42px 18px;
+        width: calc(100% + 36px);
+      }
       
       .in-use-grid {
         grid-template-columns: 1fr;
@@ -2513,10 +2849,20 @@ body {
         border-radius: 12px; 
       }
       body.safra-page .cover-title div:nth-child(1), body.safra-page .cover-title div:nth-child(2), body.safra-page .cover-title div:nth-child(3) { font-size: 78px; letter-spacing:-2px; }
-      body.spitz-page .cover-title div:nth-child(1), body.spitz-page .cover-title div:nth-child(2) { font-size: 78px; letter-spacing:-2px; }
-      body.sugar-page .cover-title div:nth-child(1), body.sugar-page .cover-title div:nth-child(2) { font-size: 78px; letter-spacing:-2px; }
+      body.spitz-page .cover-title { margin-bottom: 10px; }
+      body.spitz-page .cover-title div:nth-child(1), body.spitz-page .cover-title div:nth-child(2) { font-size: 60px; letter-spacing:-5px; }
+      body.sugar-page .cover-title div:nth-child(1) { font-size: 65px; letter-spacing:-2px; }
+      body.sugar-page .cover-title div:nth-child(2) { font-size: 28px; letter-spacing: 0; line-height: 2; }
       body.yeffe-page .cover-title div:nth-child(1) { font-size: 78px; letter-spacing:-2px; }
-      body.werd-page .cover-title div:nth-child(1) { font-size: 78px; letter-spacing:-2px; }
+      body.kaldanit-page .cover-title div:nth-child(1) { font-size: 55px; transform: translateX(-8px) !important; }
+      body.dear-ai-page .cover-title div:nth-child(1) { font-size: 78px; letter-spacing:-2px; }
+      body.werd-page .cover-title { margin-bottom: 0px; }
+      body.werd-page .cover-title div:nth-child(1), body.werd-page .cover-title div:nth-child(2), body.werd-page .cover-title div:nth-child(3), body.werd-page .cover-title div:nth-child(4), body.werd-page .cover-title div:nth-child(5) { font-size: 78px; letter-spacing:-3px; }
+      body.kilo-page .cover-title div:nth-child(1) { font-size: 69px; line-height: 109px; }
+      body.kilo-page .cover-title div:nth-child(2) { font-size: 47.15px; line-height: 96px; }
+      body.kilo-page .cover-title div:nth-child(3) { font-size: 25.3px; line-height: 60px; }
+      body.kilo-page .cover-title div:nth-child(4) { font-size: 15.25px; line-height: 46px; }
+      body.kilo-page .cover-title div:nth-child(5) { font-size: 10px; line-height: 31px; }
       .cover-buttons { 
         bottom: 36px; 
         right: 36px; 
@@ -2534,10 +2880,20 @@ body {
         border-radius: 12px; 
       }
       body.safra-page .cover-title div:nth-child(1), body.safra-page .cover-title div:nth-child(2), body.safra-page .cover-title div:nth-child(3) { font-size: 78px; letter-spacing:-2px; }
-      body.spitz-page .cover-title div:nth-child(1), body.spitz-page .cover-title div:nth-child(2) { font-size: 78px; letter-spacing:-2px; }
-      body.sugar-page .cover-title div:nth-child(1), body.sugar-page .cover-title div:nth-child(2) { font-size: 78px; letter-spacing:-2px; }
+      body.spitz-page .cover-title { margin-bottom: 10px; }
+      body.spitz-page .cover-title div:nth-child(1), body.spitz-page .cover-title div:nth-child(2) { font-size: 60px; letter-spacing:-5px; }
+      body.sugar-page .cover-title div:nth-child(1) { font-size: 65px; letter-spacing:-2px; }
+      body.sugar-page .cover-title div:nth-child(2) { font-size: 28px; letter-spacing: 0; line-height: 2; }
       body.yeffe-page .cover-title div:nth-child(1) { font-size: 78px; letter-spacing:-2px; }
-      body.werd-page .cover-title div:nth-child(1) { font-size: 78px; letter-spacing:-2px; }
+      body.kaldanit-page .cover-title div:nth-child(1) { font-size: 55px; transform: translateX(-8px) !important; }
+      body.dear-ai-page .cover-title div:nth-child(1) { font-size: 78px; letter-spacing:-2px; }
+      body.werd-page .cover-title { margin-bottom: 0px; }
+      body.werd-page .cover-title div:nth-child(1), body.werd-page .cover-title div:nth-child(2), body.werd-page .cover-title div:nth-child(3), body.werd-page .cover-title div:nth-child(4), body.werd-page .cover-title div:nth-child(5) { font-size: 78px; letter-spacing:-3px; }
+      body.kilo-page .cover-title div:nth-child(1) { font-size: 69px; line-height: 109px; }
+      body.kilo-page .cover-title div:nth-child(2) { font-size: 47.15px; line-height: 96px; }
+      body.kilo-page .cover-title div:nth-child(3) { font-size: 25.3px; line-height: 60px; }
+      body.kilo-page .cover-title div:nth-child(4) { font-size: 15.25px; line-height: 46px; }
+      body.kilo-page .cover-title div:nth-child(5) { font-size: 10px; line-height: 31px; }
       .cover-buttons { 
         bottom: 36px; 
         right: 36px; 
