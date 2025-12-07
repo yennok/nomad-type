@@ -20,6 +20,14 @@
 
     body.kilo-display-page {
       --primary-color: #0B75FF; /* Blue for Kilo Display */
+      --glyph-vertical-offset: 1px;
+      --preview-vertical-offset: 5px;
+    }
+
+    body.middle-east-page {
+      --primary-color: #FFD602; /* Yellow for Middle East */
+      --glyph-vertical-offset: 0px;
+      --preview-vertical-offset: -2px;
     }
     
     body.sugar-page {
@@ -170,6 +178,37 @@
       50% {
         font-variation-settings: "wdth" 80;
       }
+    }
+
+    /* Middle East Page Styling */
+    body.middle-east-page .cover-title {
+      margin: 0 0 40px 0;
+    }
+
+    body.middle-east-page .cover-title div:nth-child(1),
+    body.middle-east-page .cover-title div:nth-child(2),
+    body.middle-east-page .cover-title div:nth-child(3) {
+      font-family: "MiddleEast", serif;
+      font-weight: 400;
+      color: black;
+      font-size: 120px;
+      line-height: 1;
+      letter-spacing: 0;
+      margin-bottom: 0;
+    }
+
+    body.middle-east-page .cover-title div:nth-child(1),
+    body.middle-east-page .cover-title div:nth-child(2) {
+      line-height: 1.3;
+    }
+
+    body.middle-east-page .cover-title div:nth-child(2),
+    body.middle-east-page .cover-title div:nth-child(3) {
+      letter-spacing: -2px;
+    }
+
+    body.middle-east-page .cover-title div:nth-child(3) {
+      line-height: 0.9;
     }
 
     /* Sugar Page Styling - Position-Based */
@@ -498,6 +537,7 @@ body.negative #buyBtn {
     @font-face { font-family: "Safra Mono";  font-weight: 400; font-style: normal; src: url("fonts/SafraMono-Mono.woff2") format("woff2"); }
     @font-face { font-family: "Kilo Text";   font-weight: 400; font-style: normal; src: url("fonts/Kilo-Text/KILOTextV5-Regular.woff2") format("woff2"); }
     @font-face { font-family: "Kilo Display"; font-weight: 400; font-style: normal; src: url("fonts/Kilo-Display/KILODisplayV7VF.woff2") format("woff2-variations"); }
+    @font-face { font-family: "MiddleEast"; font-weight: 400; font-style: normal; src: url("fonts/Middle-East/Middle-East-Singleweight.woff2") format("woff2"); }
     @font-face { font-family: "Romanisch Spitz"; font-weight: 400; font-style: normal; src: url("fonts/Romanisch-Spitz/Romanisch-Spitz-Regular.woff2") format("woff2"); }
     @font-face { font-family: "Kaldanit"; font-weight: 400; font-style: normal; src: url("fonts/Kaldanit/Kaldanit-Regular.woff2") format("woff2"); }
     @font-face { font-family: "Kaldanit"; font-weight: 700; font-style: normal; src: url("fonts/Kaldanit/Kaldanit-Bold.woff2") format("woff2"); }
@@ -2086,6 +2126,10 @@ body.negative #buyBtn {
 
     .marquee-text.kilo-display-text {
       font-family: "Kilo Display", serif;
+    }
+
+    .marquee-text.middle-east {
+      font-family: "MiddleEast", serif;
     }
 
     .marquee-text.spitz-text {
