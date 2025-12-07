@@ -8,8 +8,16 @@
       });
     }
 
+    const KILO_PRESETS = {
+      'KILO Super Narrow': 80,
+      'KILO Narrow': 100,
+      'KILO Compact': 140,
+      'KILO Standard': 200
+    };
+
     function initTypingControls() {
       const fontMap = JSON.parse(document.getElementById('fontMap').textContent);
+      const isKiloDisplayPage = document.body.classList.contains('kilo-display-page');
       document.querySelectorAll('.type-tester').forEach(section => {
         const textArea = section.querySelector('.type-area');
         const size = section.querySelector('.size');
@@ -50,6 +58,17 @@
           textArea.style.fontFamily = cfg.family;
           textArea.style.fontWeight = String(cfg.weight);
           textArea.style.fontStyle = cfg.style || 'normal';
+
+          // For Kilo Display page: map preset label to wdth and sync slider
+          if (isKiloDisplayPage) {
+            const presetWidth = KILO_PRESETS[select.value];
+            if (presetWidth) {
+              textArea.style.fontVariationSettings = `"wdth" ${presetWidth}`;
+              if (widthSlider) {
+                widthSlider.value = presetWidth;
+              }
+            }
+          }
         };
         select.addEventListener('change', applySelect);
         applySelect();
@@ -84,6 +103,7 @@
       const weightSel = document.getElementById('weight');
       const fontMap = JSON.parse(document.getElementById('fontMap').textContent);
       const glyphMap = JSON.parse(document.getElementById('glyphMap').textContent);
+      const isKiloDisplayPage = document.body.classList.contains('kilo-display-page');
 
       const key = 'Safra2';
       const chars = [...(glyphMap[key] || glyphMap.default || '')];
@@ -114,11 +134,19 @@
 
       const apply = () => {
         const cfg = fontMap[weightSel.value] || { family: 'sans-serif', weight: 400 };
+        const presetWidth = isKiloDisplayPage ? KILO_PRESETS[weightSel.value] : null;
+        const variation = presetWidth ? `"wdth" ${presetWidth}` : '';
         updateFontTargets(document.querySelectorAll('.char-cell'), cfg.family, cfg.weight, cfg.style);
         if (preview) { 
           preview.style.fontFamily = cfg.family; 
           preview.style.fontWeight = String(cfg.weight);
           preview.style.fontStyle = cfg.style || 'normal';
+          if (variation) {
+            preview.style.fontVariationSettings = variation;
+          }
+        }
+        if (variation) {
+          document.querySelectorAll('.char-cell').forEach(el => el.style.fontVariationSettings = variation);
         }
       };
       
