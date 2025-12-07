@@ -19,7 +19,7 @@
     }
 
     body.kilo-display-page {
-      --primary-color: #63B1FF; /* Blue for Kilo Display */
+      --primary-color: #0B75FF; /* Blue for Kilo Display */
     }
     
     body.sugar-page {
@@ -145,26 +145,30 @@
     }
 
     /* Kilo Display Page Styling - Position-Based */
+    body.kilo-display-page .cover-title {
+      margin: 0 0 -20px 0;
+    }
+
     body.kilo-display-page .cover-title div:nth-child(1) {
       font-family: "Kilo Display", serif;
       font-weight: 400;
       color: black;
-      font-size: 280px;
+      font-size: 30vw;
       line-height: 1;
-      letter-spacing: -10px;
+      letter-spacing: -1vw;
       margin-bottom: 0px;
       transform: translateZ(0);
       will-change: transform;
-      font-variation-settings: "wdth" 80;
+      font-variation-settings: "wdth" 200;
       animation: kiloDisplayWidth 4s ease-in-out infinite;
     }
 
     @keyframes kiloDisplayWidth {
       0%, 100% {
-        font-variation-settings: "wdth" 80;
+        font-variation-settings: "wdth" 200;
       }
       50% {
-        font-variation-settings: "wdth" 200;
+        font-variation-settings: "wdth" 80;
       }
     }
 
