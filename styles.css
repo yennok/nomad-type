@@ -183,6 +183,7 @@
     /* Middle East Page Styling */
     body.middle-east-page .cover-title {
       margin: 0 0 40px 0;
+      text-align: left;
     }
 
     body.middle-east-page .cover-title div:nth-child(1),
@@ -199,7 +200,7 @@
 
     body.middle-east-page .cover-title div:nth-child(1),
     body.middle-east-page .cover-title div:nth-child(2) {
-      line-height: 1.3;
+      line-height: 1.25;
     }
 
     body.middle-east-page .cover-title div:nth-child(2),
@@ -208,7 +209,7 @@
     }
 
     body.middle-east-page .cover-title div:nth-child(3) {
-      line-height: 0.9;
+      line-height: 0.85;
     }
 
     /* Sugar Page Styling - Position-Based */
