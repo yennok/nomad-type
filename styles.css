@@ -3374,6 +3374,12 @@ body.negative #buyBtn {
   }
 }
 
+/* ====== HIDE JOURNAL LINKS ====== */
+a[href="journal.html"],
+a[href="#journal"] {
+  display: none !important;
+}
+
 /* ====== HOMEPAGE FOOTER STYLES ====== */
 .homepage-footer {
   margin-top: -100px; /* Negative margin to pull footer up */
