@@ -2441,6 +2441,20 @@ body.negative #buyBtn {
 
     @media (max-width: 900px) { .column-count-2, .column-count-3 { column-count: 1; } .controls { gap: 0.25rem; } }
 
+    /* Mobile: make multi-column sections feel shorter */
+    @media (max-width: 768px) {
+      .type-area.column-count-2,
+      .type-area.column-count-3 {
+        font-size: 16px;
+        line-height: 1.35;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 8;
+        overflow: hidden;
+        white-space: normal;
+      }
+    }
+
     /* ====== GLYPH GRID ====== */
     .wrapper { display: flex; align-items: flex-start; gap: 40px; /*max-width: 1400px;*/ margin: 150px auto 7rem auto; }
     .left-panel { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: min(calc(var(--cell-size) * 5), 100%); }
