@@ -2449,7 +2449,7 @@ body.negative #buyBtn {
         line-height: 1.35;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 8;
+        -webkit-line-clamp: 25;
         overflow: hidden;
         white-space: normal;
       }
@@ -2737,7 +2737,7 @@ body.negative #buyBtn {
       .kaldanit-page .section-1-text {
         column-count: 1;
         display: -webkit-box;
-        -webkit-line-clamp: 8;
+        -webkit-line-clamp: 25;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
