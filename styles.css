@@ -2348,6 +2348,8 @@ body.negative #buyBtn {
         flex-direction: row;
         gap: 5px;
         align-items: stretch;
+        width: 100%;
+        flex: 1 1 100%;
       }
       
       .sliders-wrapper label {
@@ -2359,6 +2361,7 @@ body.negative #buyBtn {
       .sliders-wrapper input[type="range"] {
         width: 100%;
         max-width: 100%;
+        flex: 1 1 100%;
       }
       
       .sliders-wrapper input[type="range"]::-webkit-slider-thumb {
@@ -2367,6 +2370,14 @@ body.negative #buyBtn {
         margin-top: -9.5px;
         box-shadow: none;
         -webkit-box-shadow: none;
+      }
+
+      /* Hide leading and letter spacing sliders on mobile */
+      .controls label[for^="leading-"],
+      .controls label[for^="spacing-"],
+      .controls input.leading,
+      .controls input.spacing {
+        display: none;
       }
       
     }
@@ -2689,9 +2700,22 @@ body.negative #buyBtn {
       gap: 2rem;
     }
 
-    /* Preserve poem line breaks on mobile */
-    .kaldanit-page .section-3-text {
+    /* Preserve poem line breaks - remove column-count which breaks <br> tags */
+    .kaldanit-page .section-3-text,
+    .kaldanit-page .type-area.section-3-text,
+    .kaldanit-page .column-count-1.section-3-text {
       white-space: pre-wrap !important;
+      column-count: auto !important;
+    }
+    
+    /* On mobile, ensure section-3-text doesn't use columns which breaks <br> tags */
+    @media (max-width: 768px) {
+      .kaldanit-page .section-3-text,
+      .kaldanit-page .type-area.section-3-text,
+      .kaldanit-page .column-count-1.section-3-text {
+        white-space: pre-wrap !important;
+        column-count: auto !important;
+      }
     }
 
     /* Mobile: shorten Kaldanit section 1 with clamp */
