@@ -2689,6 +2689,23 @@ body.negative #buyBtn {
       gap: 2rem;
     }
 
+    /* Preserve poem line breaks on mobile */
+    .kaldanit-page .section-3-text {
+      white-space: pre-wrap !important;
+    }
+
+    /* Mobile: shorten Kaldanit section 1 with clamp */
+    @media (max-width: 768px) {
+      .kaldanit-page .section-1-text {
+        column-count: 1;
+        display: -webkit-box;
+        -webkit-line-clamp: 8;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
     .specimen-carousel {
       position: relative;
     }
