@@ -5,33 +5,123 @@ const footerHTML = `
   <div class="marquee-container bottom">
     <div class="marquee-content">
       <span class="marquee-img">
-        <a href="#" class="marquee-link">
+        <a href="sugar.html" class="marquee-link">
           <img src="assets/font-marquee/Sugar-Display.png" alt="Sugar Display">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="#" class="marquee-link">
+        <a href="sugar.html" class="marquee-link">
           <img src="assets/font-marquee/Sugar-Text.png" alt="Sugar Text">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="#" class="marquee-link">
+        <a href="safra.html" class="marquee-link">
+          <img src="assets/font-marquee/Safra.png" alt="Safra">
+        </a>
+      </span>
+      <span class="marquee-img">
+        <a href="werd.html" class="marquee-link">
+          <img src="assets/font-marquee/Werd.png" alt="Werd">
+        </a>
+      </span>
+      <span class="marquee-img">
+        <a href="middle-east.html" class="marquee-link">
+          <img src="assets/font-marquee/Middle-East.png" alt="Middle East">
+        </a>
+      </span>
+      <span class="marquee-img">
+        <a href="the-bizarre.html" class="marquee-link">
+          <img src="assets/font-marquee/The-Bizarre-Beta.png" alt="The Bizarre Beta">
+        </a>
+      </span>
+      <span class="marquee-img">
+        <a href="dear-ai.html" class="marquee-link">
+          <img src="assets/font-marquee/Dear-AI-Beta.png" alt="Dear AI Beta">
+        </a>
+      </span>
+      <span class="marquee-img">
+        <a href="yeffe.html" class="marquee-link">
           <img src="assets/font-marquee/Yeffe.png" alt="Yeffe">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="#" class="marquee-link">
+        <a href="spitz.html" class="marquee-link">
+          <img src="assets/font-marquee/Romanisch-Spitz.png" alt="Romanisch Spitz">
+        </a>
+      </span>
+      <span class="marquee-img">
+        <a href="kaldanit.html" class="marquee-link">
+          <img src="assets/font-marquee/Kaladnit.png" alt="Kaldanit">
+        </a>
+      </span>
+      <span class="marquee-img">
+        <a href="kilo-display.html" class="marquee-link">
+          <img src="assets/font-marquee/KILO-Display.png" alt="Kilo Display">
+        </a>
+      </span>
+      <span class="marquee-img">
+        <a href="kilo-text.html" class="marquee-link">
+          <img src="assets/font-marquee/KILO-text.png" alt="Kilo Text">
+        </a>
+      </span>
+      <span class="marquee-img">
+        <a href="sugar.html" class="marquee-link">
           <img src="assets/font-marquee/Sugar-Display.png" alt="Sugar Display">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="#" class="marquee-link">
+        <a href="sugar.html" class="marquee-link">
           <img src="assets/font-marquee/Sugar-Text.png" alt="Sugar Text">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="#" class="marquee-link">
+        <a href="safra.html" class="marquee-link">
+          <img src="assets/font-marquee/Safra.png" alt="Safra">
+        </a>
+      </span>
+      <span class="marquee-img">
+        <a href="werd.html" class="marquee-link">
+          <img src="assets/font-marquee/Werd.png" alt="Werd">
+        </a>
+      </span>
+      <span class="marquee-img">
+        <a href="middle-east.html" class="marquee-link">
+          <img src="assets/font-marquee/Middle-East.png" alt="Middle East">
+        </a>
+      </span>
+      <span class="marquee-img">
+        <a href="the-bizarre.html" class="marquee-link">
+          <img src="assets/font-marquee/The-Bizarre-Beta.png" alt="The Bizarre Beta">
+        </a>
+      </span>
+      <span class="marquee-img">
+        <a href="dear-ai.html" class="marquee-link">
+          <img src="assets/font-marquee/Dear-AI-Beta.png" alt="Dear AI Beta">
+        </a>
+      </span>
+      <span class="marquee-img">
+        <a href="yeffe.html" class="marquee-link">
           <img src="assets/font-marquee/Yeffe.png" alt="Yeffe">
+        </a>
+      </span>
+      <span class="marquee-img">
+        <a href="spitz.html" class="marquee-link">
+          <img src="assets/font-marquee/Romanisch-Spitz.png" alt="Romanisch Spitz">
+        </a>
+      </span>
+      <span class="marquee-img">
+        <a href="kaldanit.html" class="marquee-link">
+          <img src="assets/font-marquee/Kaladnit.png" alt="Kaldanit">
+        </a>
+      </span>
+      <span class="marquee-img">
+        <a href="kilo-display.html" class="marquee-link">
+          <img src="assets/font-marquee/KILO-Display.png" alt="Kilo Display">
+        </a>
+      </span>
+      <span class="marquee-img">
+        <a href="kilo-text.html" class="marquee-link">
+          <img src="assets/font-marquee/KILO-text.png" alt="Kilo Text">
         </a>
       </span>
     </div>
