@@ -380,8 +380,9 @@
       font-family: "bizarre", serif;
       font-weight: 400;
       color: black;
-      font-size: 150px;
+      font-size: 11vw;
       line-height: 1;
+      letter-spacing: -0.1vw;
       margin-bottom: 0px;
       transform: translateZ(0);
       will-change: transform;
@@ -2163,6 +2164,7 @@ body.negative #buyBtn {
 
     .marquee-text.bizarre-text {
       font-family: "bizarre", serif;
+      letter-spacing: 1px;
     }
 
     .marquee-text.light {

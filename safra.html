@@ -204,7 +204,7 @@ And yet, the development of such typefaces remains relatively rare. Unlike globa
         <label class="label-custom" for="spacing-4">Letter Spacing</label>
         <input class="spacing" id="spacing-4" type="range" min="-0.1" max="0.1" step="0.01" />
       </div>
-      <div class="font-align-wrapper">
+  <div class="font-align-wrapper">
         <div class="font-wrapper">
           <div class="custom-select font-select-custom" data-section="4">
             <div class="select-header">
@@ -236,6 +236,308 @@ And yet, the development of such typefaces remains relatively rare. Unlike globa
      <div class="type-area column-count-1 responsive-text" contenteditable="true" dir="rtl" style="font-family: 'Safra Sans'; font-weight: 700; font-size: 244px; line-height: 1; letter-spacing: -0.035em; text-align: center; white-space: nowrap;">שלום مرحبا Hello</div>
   </section>
 
+  <!-- === Section 5, three columns, Hebrew sample === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-5">Size</label>
+        <input class="size" id="size-5" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-5">Leading</label>
+        <input class="leading" id="leading-5" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-5">Letter Spacing</label>
+        <input class="spacing" id="spacing-5" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="5">
+            <div class="select-header">
+              <span class="select-value">Safra Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular" selected>Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular">Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left is-active"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-3" contenteditable="true" dir="rtl" style="font-family: Safra; font-weight: 400; font-size: 18px; line-height: 1.5;">במרחב שבו שלוש שפות חיות יחד על שלטים, בספרי לימוד ובמסכים, צריך כתב שיידע לתת מקום לכולן. האותיות העבריות שומרות על קצב מרובע, הערביות רכות ומתעגלות, והלטיניות פתוחות וזקופות. האתגר הוא לשמור על זהות נפרדת ובכל זאת לייצר הרמוניה אחת שתקרא טוב לכולם. לכן הסדרה פועלת כמו מערכת חזותית: היררכיה ברורה, משקל מאוזן, כבוד למסורת ולשימוש עכשווי.</div>
+  </section>
+
+  <!-- === Section 8, centered single column Michelangelo (moved up) === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-8">Size</label>
+        <input class="size" id="size-8" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-8">Leading</label>
+        <input class="leading" id="leading-8" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-8">Letter Spacing</label>
+        <input class="spacing" id="spacing-8" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="8">
+            <div class="select-header">
+              <span class="select-value">Safra Sans Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular">Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular" selected>Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1" contenteditable="true" dir="rtl" style="font-family: 'Safra'; font-weight: 400; font-size: 186px; line-height: 1.1; text-align: center; font-style: normal; letter-spacing: -0.01em;">מיכלאנג׳לו<br>Michelangelo<br>ميكيلانجيلو</div>
+  </section>
+
+  <!-- === Section 9, single column multilingual list (moved up) === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-9">Size</label>
+        <input class="size" id="size-9" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-9">Leading</label>
+        <input class="leading" id="leading-9" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-9">Letter Spacing</label>
+        <input class="spacing" id="spacing-9" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="9">
+            <div class="select-header">
+              <span class="select-value">Safra Sans Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular">Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular" selected>Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left is-active"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1" contenteditable="true" dir="ltr" style="font-family: 'Safra Sans'; font-weight: 400; font-size: 47px; line-height: 1.4; letter-spacing: 0.01em; font-style: normal; text-align: right;">Clothes בגדים ملابس Costumes תחפושות أزياء Sportswear בגדי ספורט ملابس رياضية Winterwear בגדי חורף ملابس الشتاء Underwear תחתונים ملابس פנימיות Books ספרים كتــــב Magazines מגזינים مجلات Comics קומיקס قصص مصورة Cookbooks ספרי בישול كتب طبخ Children’s Books ספרי ילדים كتب أطفال Toys צעצועים ألعاب Board Games משחקי קופסה ألعاب لوحية Puzzles פאזלים ألغاز Stuffed Animals בובות פרווה דمى محشوة Building Blocks קוביות בנייה مكعبات Bags תיקים حقائب Backpacks תיקי גב حقائب ظهر Tote Bags תיקים פתוחים أكياس قماشية Pouches נרתיקים حافظות Suitcases מזוודות حقائب سفر Shoes נעליים أحذية Sandals סנדלים صنادل Boots מגפיים جزم Sneakers נעלי ספורט أحذية رياضية Slippers נעלי בית شباشב Jewelry תכשיטים مجوهرות Necklaces שרשראות قلادات Bracelets צמידים אساור Earrings עגילים أقراط Rings טבעות خواتם Kitchenware כלי מטבח أدوات مطبخ Plates צלחות صحون Cups כוסות أكواب Utensils סכו״ם أدوات مائدة Pots סירים قدור Stationery כלי כתיבה أدوات مكتبية Notebooks מחברות دفاتر Pens עטים أقلام Markers טושים أقلام تعليم Sticky Notes פתקים דביקים أوراق لاصقة Card Games משחקי קלפים ألعاب ورق Strategy Games משחקי אסטרטגיה ألعاب استراتيجية Word Games משחקי מילים ألعاب كلمات Classic Games משחקים קלאסיים ألعاب تقليدية Decorations חפצי נוי زينة Candles נרות شموع Frames מסגרות إطارات Mini Sculptures פסלונים تماثיל صغيرة Wall Art אמנות קיר فن جداري Fabrics בדים أقمشة Curtains וילונות ستائر Tablecloths מפות שולחן مفارش Blankets שמיכות بطאניות Cushion Covers כיסויי כריות אغطية وسائد CDs & Vinyls דיסקים ותקליטים أقراص ואسطوانות Cassette Tapes קלטות أشرطة كاسيت Music Players נגנים مشغلات מוסיקה Record Sleeves עטיפות תקליטים أغلفة DVDs די.וי.די أقراص וידאו Potted Plants עציצים نباتות في أصص Succulents סוקולנטים عصاريات Flowering Plants צמחים פורחים نباتات مزهرة Herbs עשבי תיבול أعشاب Mini Trees עצי נוי קטנים أشجار زينة صغيرة Small Tools כלי עבודה קטנים أدوات تصليح صغيرة Screwdrivers מברגים مفكات Wrenches מפתחות ברגים مفاتيح Tape Measures סרטי מדידה أشرطة قياس Flashlights פנסים مصابيح Hats כובעים قبعات Caps כובעי מצחייה قبعات בייסבול Beanies כובעי צמר قبعات صوف Sun Hats כובעי שמש قبعات שمس Visors מצחיות واقיות שمس Scarves צעיפים אוושות Silk Scarves צעיפי משי אוושחות حريرية Wool Scarves צעיפי צמר אוֹשחות צמר Headwraps מטפחות ראש لفות رأس Shawls שאלים شالات Sunglasses משקפיים نظارات שمس Eyeglasses משקפי ראייה نظارات طبية Cases for Glasses קופסאות למשקפיים علب نظارات Cleaning Cloths מטליות ניקוי מנאדיל تنظيف Clip-ons קליפ־און عدسات إضافية Phone Cases כיסויים לנייד أغطية هواتف Pop Sockets מחזיקים לטלפון ماسكات للهاتف Chargers מטענים شواحن Headphones אוזניות سماعات Cables כבלים كوابل Sketchbooks מחברות סקיצה دفاتر رسم Planners יומנים ומארגנים مفكرות Calendars לוחות שנה تقاويم Folders תיקיות ملفات Graphic Novels רומנים גרפיים روايات مصورة Manga מנגה مانغا Comic Art Prints הדפסי קומיקס مطبوعות فن</div>
+  </section>
+
+  <!-- === Section 6, three columns, Arabic sample === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-6">Size</label>
+        <input class="size" id="size-6" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-6">Leading</label>
+        <input class="leading" id="leading-6" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-6">Letter Spacing</label>
+        <input class="spacing" id="spacing-6" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="6">
+            <div class="select-header">
+              <span class="select-value">Safra Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular" selected>Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular">Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left is-active"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-3" contenteditable="true" dir="rtl" style="font-family: Safra; font-weight: 400; font-size: 18px; line-height: 1.5;">في عالم تشترك فيه ثلاث لغات في المساحات المادية والرقمية، نحتاج إلى خط يعرف كيف يوازن بين العربية، العبرية واللاتينية دون أن يفقد أي منها صوته الخاص. العربية متصلة ومنحنية، العبرية أكثر زاوية وثباتاً، واللاتينية مفتوحة ومنتصبة. النظام الطباعي هنا يهدف إلى الحفاظ على الإيقاع والوضوح لكل لغة، مع انسجام بصري واحد يليق باللافتات، بالكتب، وبالتطبيقات.</div>
+  </section>
+
+  <!-- === Section 7, two columns, Hebrew long text === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-7">Size</label>
+        <input class="size" id="size-7" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-7">Leading</label>
+        <input class="leading" id="leading-7" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-7">Letter Spacing</label>
+        <input class="spacing" id="spacing-7" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="7">
+            <div class="select-header">
+              <span class="select-value">Safra Sans Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular">Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular" selected>Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left is-active"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-2" contenteditable="true" dir="rtl" style="font-family: 'Safra Sans'; font-weight: 400; font-size: 32px; line-height: 1.2; letter-spacing: -0.01em; font-style: normal;">בעולם שבו שלוש שפות מופיעות על אותו שלט, באותו ספר לימוד ובאותה אפליקציה, צריך משפחת פונטים שמכבדת את הקצב של כל שפה ולא מוחקת הבדלים. העברית מרובעת ובעלת בסיס יציב, הערבית מחוברת ונעה, והלטינית עומדת זקופה ופתוחה. כדי לייצר הרמוניה צריך לחשוב על כיווניות, משקל, מרווחים ואיך כל כותרת או פסקה מרגישה מול האחרות. הכוונה היא לא להשטיח זהויות, אלא לאפשר דיאלוג ברור ושוויוני בין שלוש מערכות כתב שונות.</div>
+  </section>
+
+  <!-- === Section 8, two columns, Arabic long text === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-8">Size</label>
+        <input class="size" id="size-8" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-8">Leading</label>
+        <input class="leading" id="leading-8" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-8">Letter Spacing</label>
+        <input class="spacing" id="spacing-8" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="8">
+            <div class="select-header">
+              <span class="select-value">Safra Sans Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular">Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular" selected>Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left is-active"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-2" contenteditable="true" dir="rtl" style="font-family: 'Safra Sans'; font-weight: 400; font-size: 37px; line-height: 1.45; letter-spacing: 0.01em; font-style: normal;">في سياق يعمل فيه المصممون بثلاث لغات معاً، لا يكفي أن يغطي الخط رموز يونيكود. يجب أن يكون نظاماً بصرياً يوازن بين الاتجاه من اليمين لليسار ومن اليسار لليمין، وبين الإيقاع والوزن، وبين شكل الحروف المتصلة والمنفصلة. الهدف هو أن تشعر العناوين والنصوص المتعددة اللغات متساوية في الوضوح والأهمية، دون أن تهيمن لغة واحدة على الأخرى. هكذا يصبح الخط أداة احترام وإدماج، وليس فقط وسيلة تقنية.</div>
+  </section>
+
+  <!-- === Section 9, centered single column Michelangelo === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-9">Size</label>
+        <input class="size" id="size-9" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-9">Leading</label>
+        <input class="leading" id="leading-9" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-9">Letter Spacing</label>
+        <input class="spacing" id="spacing-9" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="9">
+            <div class="select-header">
+              <span class="select-value">Safra Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular" selected>Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular">Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1" contenteditable="true" dir="rtl" style="font-family: 'Safra'; font-weight: 400; font-size: 186px; line-height: 1.1; text-align: center; font-style: normal; letter-spacing: -0.01em;">ילדים<br>Children<br>أولاد</div>
+  </section>
+
+  
 
 
   <!-- ===== GLYPH GRID VIEWER ===== -->
