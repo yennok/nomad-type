@@ -2162,6 +2162,10 @@ body.negative #buyBtn {
       font-family: "dear-ai", monospace;
     }
 
+    body.dear-ai-page .marquee-text {
+      letter-spacing: 2.5px;
+    }
+
     .marquee-text.bizarre-text {
       font-family: "bizarre", serif;
       letter-spacing: 1px;
