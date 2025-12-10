@@ -2906,6 +2906,13 @@ body.negative #buyBtn {
       margin-top: 1.5rem;
     }
 
+    /* Kilo Display page - Section 2 font size breakpoint */
+    @media (max-width: 1280px) {
+      body.kilo-display-page section.type-tester:nth-of-type(3) .type-area {
+        font-size: 530px !important;
+      }
+    }
+
     /* Responsive adjustments */
     @media (max-width: 1200px) {
       .in-use-grid {
