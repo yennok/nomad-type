@@ -546,13 +546,13 @@ body.negative #buyBtn {
     @font-face { font-family: "Kaldanit"; font-weight: 400; font-style: italic; src: url("fonts/Kaldanit/Kaldanit-Italic.woff2") format("woff2"); }
     @font-face { font-family: "dear-ai"; font-weight: 400; font-style: normal; src: url("fonts/Dear-AI/dear-ai.woff2") format("woff2"); }
     @font-face { font-family: "dear-ai"; font-weight: 400; font-style: normal; src: url("fonts/Dear-AI/dear-ai.woff2") format("woff2"); }
-    @font-face { font-family: "bizarre"; font-weight: 400; font-style: normal; src: url("fonts/bizarre/bizarre-beta.woff2") format("woff2"); }
-    @font-face { font-family: "Yeffe Nefesh"; font-weight: 400; font-style: normal; src: url("fonts/Yeffe-Nefesh/Yeffe-Nefesh-Regular.woff2") format("woff2"); }
-    @font-face { font-family: "Werd"; font-weight: 300; font-style: normal; src: url("fonts/werd/werd-Light.woff2") format("woff2"); }
-    @font-face { font-family: "Werd"; font-weight: 400; font-style: normal; src: url("fonts/werd/werd-Regular.woff2") format("woff2"); }
-    @font-face { font-family: "Werd"; font-weight: 700; font-style: normal; src: url("fonts/werd/werd-Bold.woff2") format("woff2"); }
-    @font-face { font-family: "Werd"; font-weight: 800; font-style: normal; src: url("fonts/werd/werd-ExtraBold.woff2") format("woff2"); }
-    @font-face { font-family: "Werd"; font-weight: 900; font-style: normal; src: url("fonts/werd/werd-Black.woff2") format("woff2"); }
+    @font-face { font-family: "bizarre"; font-weight: 400; font-style: normal; font-display: swap; src: url("fonts/Bizarre/bizarre-beta.woff2") format("woff2"); }
+    @font-face { font-family: "Yeffe Nefesh"; font-weight: 400; font-style: normal; font-display: swap; src: url("fonts/Yeffe-Nefesh/Yeffe-Nefesh-Regular.woff2") format("woff2"); }
+    @font-face { font-family: "Werd"; font-weight: 300; font-style: normal; font-display: swap; src: url("fonts/Werd/werd-Light.woff2") format("woff2"); }
+    @font-face { font-family: "Werd"; font-weight: 400; font-style: normal; font-display: swap; src: url("fonts/Werd/werd-Regular.woff2") format("woff2"); }
+    @font-face { font-family: "Werd"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/Werd/werd-Bold.woff2") format("woff2"); }
+    @font-face { font-family: "Werd"; font-weight: 800; font-style: normal; font-display: swap; src: url("fonts/Werd/werd-ExtraBold.woff2") format("woff2"); }
+    @font-face { font-family: "Werd"; font-weight: 900; font-style: normal; font-display: swap; src: url("fonts/Werd/werd-Black.woff2") format("woff2"); }
 
     /* ====== RESET, LAYOUT ====== */
     * { box-sizing: border-box; }
