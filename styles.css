@@ -2995,7 +2995,7 @@ body.negative #buyBtn {
       body.safra-page .cover-title div:nth-child(1), body.safra-page .cover-title div:nth-child(2), body.safra-page .cover-title div:nth-child(3) { font-size: 78px; letter-spacing:-2px; }
       body.middle-east-page .cover-title div:nth-child(1), body.middle-east-page .cover-title div:nth-child(2), body.middle-east-page .cover-title div:nth-child(3) { font-size: 50px; }
       body.spitz-page .cover-title { margin-bottom: 10px; }
-      body.spitz-page .cover-title div:nth-child(1), body.spitz-page .cover-title div:nth-child(2) { font-size: 60px; letter-spacing:-5px; }
+      body.spitz-page .cover-title div:nth-child(1), body.spitz-page .cover-title div:nth-child(2) { font-size: 60px; letter-spacing:-3px; }
       body.sugar-page .cover-title div:nth-child(1) { font-size: 65px; letter-spacing:-2px; }
       body.sugar-page .cover-title div:nth-child(2) { font-size: 28px; letter-spacing: 0; line-height: 2; }
       body.yeffe-page .cover-title div:nth-child(1) { font-size: 78px; letter-spacing:-2px; }
@@ -3136,6 +3136,11 @@ body.negative #buyBtn {
       
       body.middle-east-page section.type-tester:nth-of-type(8) .type-area {
         font-size: 22px !important;
+      }
+      
+      body.spitz-page section.type-tester:nth-of-type(6) .type-area {
+        font-size: 26px !important;
+        line-height: 1.4 !important;
       }
       
     }
