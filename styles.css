@@ -2997,6 +2997,32 @@ body.negative #buyBtn {
       }
       .content-wrapper { /*display:none;*/
         padding: 42px 18px 18px; }
+      
+      body.safra-page section.type-tester:nth-of-type(7) .type-area {
+        font-size: 50px !important;
+      }
+      
+      body.safra-page section.type-tester:nth-of-type(8) .type-area {
+        font-size: 23px !important;
+        line-height: 1.5 !important;
+        column-count: 1;
+        display: -webkit-box;
+        -webkit-line-clamp: 25;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      
+      body.safra-page section.type-tester:nth-of-type(9) .type-area {
+      
+        column-count: 1;
+        display: -webkit-box;
+        -webkit-line-clamp: 25;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      
     }
 
     @media (max-width: 480px) {
