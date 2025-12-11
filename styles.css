@@ -3013,6 +3013,10 @@ body.negative #buyBtn {
         text-overflow: ellipsis;
       }
       
+      body.safra-page section.type-tester:nth-of-type(9) {
+        display: none !important;
+      }
+      
       body.safra-page section.type-tester:nth-of-type(9) .type-area {
       
         column-count: 1;
