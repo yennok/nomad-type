@@ -2986,7 +2986,7 @@ body.negative #buyBtn {
       body.werd-page .cover-title { margin-bottom: 0px; }
       body.werd-page .cover-title div:nth-child(1), body.werd-page .cover-title div:nth-child(2), body.werd-page .cover-title div:nth-child(3), body.werd-page .cover-title div:nth-child(4), body.werd-page .cover-title div:nth-child(5) { font-size: 78px; letter-spacing:-3px; }
       body.kilo-page .cover-title div:nth-child(1) { font-size: 69px; line-height: 109px; }
-      body.kilo-page .cover-title div:nth-child(2) { font-size: 47.15px; line-height: 96px; }
+      body.kilo-page .cover-title div:nth-child(2) { font-size: 47.15px; line-height: 1.65; }
       body.kilo-page .cover-title div:nth-child(3) { font-size: 25.3px; line-height: 60px; }
       body.kilo-page .cover-title div:nth-child(4) { font-size: 15.25px; line-height: 46px; }
       body.kilo-page .cover-title div:nth-child(5) { font-size: 10px; line-height: 31px; }
@@ -3017,7 +3017,7 @@ body.negative #buyBtn {
       body.werd-page .cover-title { margin-bottom: 0px; }
       body.werd-page .cover-title div:nth-child(1), body.werd-page .cover-title div:nth-child(2), body.werd-page .cover-title div:nth-child(3), body.werd-page .cover-title div:nth-child(4), body.werd-page .cover-title div:nth-child(5) { font-size: 78px; letter-spacing:-3px; }
       body.kilo-page .cover-title div:nth-child(1) { font-size: 69px; line-height: 109px; }
-      body.kilo-page .cover-title div:nth-child(2) { font-size: 47.15px; line-height: 96px; }
+      body.kilo-page .cover-title div:nth-child(2) { font-size: 47.15px; line-height: 1.65; }
       body.kilo-page .cover-title div:nth-child(3) { font-size: 25.3px; line-height: 60px; }
       body.kilo-page .cover-title div:nth-child(4) { font-size: 15.25px; line-height: 46px; }
       body.kilo-page .cover-title div:nth-child(5) { font-size: 10px; line-height: 31px; }
