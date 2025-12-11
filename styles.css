@@ -2748,6 +2748,16 @@ body.negative #buyBtn {
         overflow: hidden;
         text-overflow: ellipsis;
       }
+      
+      /* Stack in-use items on mobile for Kaldanit */
+      .kaldanit-page .in-use-section .in-use-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      /* Stack specimen items on mobile for Kaldanit */
+      .kaldanit-page .specimen-section .in-use-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .specimen-carousel {
