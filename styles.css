@@ -2758,6 +2758,10 @@ body.negative #buyBtn {
       .kaldanit-page .specimen-section .in-use-grid {
         grid-template-columns: 1fr;
       }
+      
+      .yeffe-page .in-use-section .in-use-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .specimen-carousel {
@@ -3025,6 +3029,21 @@ body.negative #buyBtn {
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
+      
+      body.yeffe-page section.type-tester:nth-of-type(3) {
+        display: none !important;
+      }
+      
+      body.yeffe-page section.type-tester:nth-of-type(5) .type-area {
+        font-size: 55px !important;
+        line-height: 1.2 !important;
+      }
+      
+      body.yeffe-page section.type-tester:nth-of-type(7) .type-area {
+        font-size: 40px !important;
+        line-height: 1.35 !important;
+        letter-spacing: 0.05em !important;
       }
       
     }
