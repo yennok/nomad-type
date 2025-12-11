@@ -2055,6 +2055,76 @@ function initTypewriterEffect() {
   setTimeout(tryInitTypewriter, 200);
 }
 
+// ====== TRUNCATE TEXT TO SPECIFIED WORD COUNT ON MOBILE ======
+// Usage: Add class "truncate-text" to .type-area and data attribute "data-truncate-words" with word count
+// Example: <div class="type-area truncate-text" data-truncate-words="40">...</div>
+function initTextTruncations() {
+  const textAreas = document.querySelectorAll('.type-area.truncate-text');
+  
+  textAreas.forEach((textArea) => {
+    const wordCount = parseInt(textArea.getAttribute('data-truncate-words')) || 80;
+    const debug = textArea.hasAttribute('data-truncate-debug');
+    
+    const originalText = textArea.textContent || textArea.innerText;
+    const words = originalText.trim().split(/\s+/);
+    
+    if (debug) {
+      console.log(`Text truncate initialized:`, {
+        element: textArea,
+        wordCount: wordCount,
+        originalWordCount: words.length,
+        originalText: originalText.substring(0, 100) + '...'
+      });
+    }
+    
+    function truncateText() {
+      const isMobile = window.innerWidth <= 768;
+      
+      if (isMobile) {
+        // Mobile: truncate to specified word count
+        if (words.length > wordCount) {
+          const truncated = words.slice(0, wordCount).join(' ') + '...';
+          if (textArea.textContent !== truncated) {
+            textArea.textContent = truncated;
+            if (debug) console.log(`Text truncated to ${wordCount} words on mobile`, textArea);
+          }
+        } else {
+          // Text is already short enough, ensure it's not truncated
+          if (textArea.textContent !== originalText) {
+            textArea.textContent = originalText;
+          }
+        }
+      } else {
+        // Desktop: restore original text
+        if (textArea.textContent !== originalText) {
+          textArea.textContent = originalText;
+          if (debug) console.log('Original text restored on desktop', textArea);
+        }
+      }
+    }
+    
+    // Run on load and resize
+    truncateText();
+    
+    // Store the truncate function on the element for manual control
+    textArea._truncateFunction = truncateText;
+    
+    // Add resize listener (we'll debounce this globally)
+    if (!window._truncateResizeHandler) {
+      let resizeTimeout;
+      window._truncateResizeHandler = () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          document.querySelectorAll('.type-area.truncate-text').forEach(el => {
+            if (el._truncateFunction) el._truncateFunction();
+          });
+        }, 100);
+      };
+      window.addEventListener('resize', window._truncateResizeHandler);
+    }
+  });
+}
+
 function boot() { 
   initStickyNav();
   initScrollButtons();
@@ -2077,6 +2147,7 @@ function boot() {
   initDynamicMenuWidth();
   initInitialNavState();
   initTypewriterEffect();
+  initTextTruncations();
   
   // Additional immediate auto-fit for responsive section
   setTimeout(() => {
