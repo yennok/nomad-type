@@ -3113,13 +3113,16 @@ body.negative #buyBtn {
         line-height: 1.2 !important;
       }
       
-      body.werd-page section.type-tester:nth-of-type(2) .type-area {
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
+      body.werd-page section.type-tester:nth-of-type(8) .type-area {
+        font-size: 20px !important;
+        line-height: 1.3 !important;
       }
+      
+      body.werd-page section.type-tester:nth-of-type(9) .type-area {
+        line-height: 1.1 !important;
+      }
+      
+    
       
       body.middle-east-page section.type-tester:nth-of-type(2) .type-area {
         font-size: 20px !important;
@@ -3151,7 +3154,7 @@ body.negative #buyBtn {
       body.sugar-page .cover-title div:nth-child(2) { font-size: 28px; letter-spacing: 0; line-height: 2; }
       body.yeffe-page .cover-title div:nth-child(1) { font-size: 78px; letter-spacing:-2px; }
       body.kaldanit-page .cover-title div:nth-child(1) { font-size: 55px; transform: translateX(-8px) !important; }
-      body.dear-ai-page .cover-title div:nth-child(1) { font-size: 78px; letter-spacing:-2px; }
+      body.dear-ai-page .cover-title div:nth-child(1) { font-size: 71px; letter-spacing:0px; }
       body.werd-page .cover-title { margin-bottom: 0px; }
       body.werd-page .cover-title div:nth-child(1), body.werd-page .cover-title div:nth-child(2), body.werd-page .cover-title div:nth-child(3), body.werd-page .cover-title div:nth-child(4), body.werd-page .cover-title div:nth-child(5) { font-size: 78px; letter-spacing:-3px; }
       body.kilo-page .cover-title div:nth-child(1) { font-size: 69px; line-height: 109px; }
