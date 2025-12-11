@@ -3035,6 +3035,14 @@ body.negative #buyBtn {
         text-overflow: ellipsis;
       }
       
+      body.safra-page section.type-tester:nth-of-type(14) .type-area {
+        font-size: 84px !important;
+      }
+      
+      body.safra-page section.type-tester:nth-of-type(15) .type-area {
+        font-size: 22px !important;
+      }
+      
       body.yeffe-page section.type-tester:nth-of-type(3) {
         display: none !important;
       }
