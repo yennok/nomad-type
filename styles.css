@@ -2984,6 +2984,7 @@ body.negative #buyBtn {
         border-radius: 12px; 
       }
       body.safra-page .cover-title div:nth-child(1), body.safra-page .cover-title div:nth-child(2), body.safra-page .cover-title div:nth-child(3) { font-size: 78px; letter-spacing:-2px; }
+      body.middle-east-page .cover-title div:nth-child(1), body.middle-east-page .cover-title div:nth-child(2), body.middle-east-page .cover-title div:nth-child(3) { font-size: 50px; }
       body.spitz-page .cover-title { margin-bottom: 10px; }
       body.spitz-page .cover-title div:nth-child(1), body.spitz-page .cover-title div:nth-child(2) { font-size: 60px; letter-spacing:-5px; }
       body.sugar-page .cover-title div:nth-child(1) { font-size: 65px; letter-spacing:-2px; }
@@ -3113,6 +3114,10 @@ body.negative #buyBtn {
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
+      
+      body.middle-east-page section.type-tester:nth-of-type(2) .type-area {
+        font-size: 18px !important;
       }
       
     }
