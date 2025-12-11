@@ -3039,6 +3039,14 @@ body.negative #buyBtn {
         font-size: 84px !important;
       }
       
+      body.safra-page section.type-tester:nth-of-type(11) .type-area {
+        font-size: 25px !important;
+      }
+      
+      body.safra-page section.type-tester:nth-of-type(13) .type-area {
+        font-size: 28px !important;
+      }
+      
       body.safra-page section.type-tester:nth-of-type(15) .type-area {
         font-size: 22px !important;
       }
