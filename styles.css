@@ -3117,7 +3117,13 @@ body.negative #buyBtn {
       }
       
       body.middle-east-page section.type-tester:nth-of-type(2) .type-area {
-        font-size: 18px !important;
+        font-size: 20px !important;
+        line-height: 1.5 !important;
+      }
+      
+      body.middle-east-page section.type-tester:nth-of-type(6) .type-area {
+        font-size: 22px !important;
+        line-height: 1.6 !important;
       }
       
     }
