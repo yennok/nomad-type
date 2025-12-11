@@ -413,13 +413,25 @@ class AutoFitManager {
       return;
     }
 
+    // Store original text - for multi-line sections, preserve line breaks
+    let originalText = textArea.textContent || textArea.innerText;
+    let originalHTML = null;
+    
+    if (textArea.classList.contains('auto-fit-multiline')) {
+      // For multi-line, store the original HTML to preserve &#10; entities
+      originalHTML = textArea.innerHTML;
+      // Store in data attribute for restoration
+      textArea.setAttribute('data-original-html', originalHTML);
+    }
+    
     const sectionData = {
       element: sectionElement,
       textArea,
       sizeSlider,
       fontSelect,
       config,
-      originalText: textArea.textContent || textArea.innerText,
+      originalText: originalText,
+      originalHTML: originalHTML, // Store HTML for multi-line sections
       autoFitEnabled: true,
       userHasTyped: false,
       sliderBeingSetProgrammatically: false
@@ -445,6 +457,18 @@ class AutoFitManager {
     // Use almost all available width - very minimal buffer for maximum utilization
     const text = textArea.textContent || textArea.innerText;
     const screenWidth = window.innerWidth;
+    
+    // Check if this is a multi-line auto-fit section (has line breaks and auto-fit-multiline class)
+    // Note: &#10; in HTML becomes \n in textContent, <br> tags don't create \n in textContent
+    const innerHTML = textArea.innerHTML || '';
+    const hasLineBreaks = text.includes('\n') || 
+                          text.includes(String.fromCharCode(10)) ||
+                          innerHTML.includes('<br>') || 
+                          innerHTML.includes('<br/>') || 
+                          innerHTML.includes('<br />');
+    if (hasLineBreaks && textArea.classList.contains('auto-fit-multiline')) {
+      return this.calculateMultiLineFittingSize(sectionData, text, containerWidth, paddingLeft, paddingRight, computedStyle, config);
+    }
     
     // Smart buffer based on text length and screen size
     let buffer;
@@ -534,6 +558,158 @@ class AutoFitManager {
 
     document.body.removeChild(tempElement);
     
+    
+    return bestSize;
+  }
+
+  // Calculate optimal font size for multi-line text (based on longest line by rendered width)
+  calculateMultiLineFittingSize(sectionData, text, containerWidth, paddingLeft, paddingRight, computedStyle, config) {
+    const { textArea } = sectionData;
+    
+    // Get lines - handle both &#10; (becomes \n) and <br> tags
+    let lines = [];
+    const innerHTML = textArea.innerHTML;
+    
+    // Check if HTML contains <br> tags
+    if (innerHTML.includes('<br>') || innerHTML.includes('<br/>') || innerHTML.includes('<br />')) {
+      // Split by <br> tags and extract text from each part
+      const htmlParts = innerHTML.split(/<br\s*\/?>/i);
+      lines = htmlParts.map(part => {
+        // Create a temporary div to extract text content (handles HTML entities)
+        const temp = document.createElement('div');
+        temp.innerHTML = part;
+        return temp.textContent || temp.innerText || '';
+      }).filter(line => line.trim().length > 0);
+    } else {
+      // Split by \n (from &#10; entities)
+      lines = text.split(/\n/).filter(line => line.trim().length > 0);
+    }
+    
+    if (lines.length === 0) return config.baseFontSize;
+    
+    // Create a temporary measurement element to find the actually widest line
+    const tempMeasure = document.createElement('span');
+    tempMeasure.style.cssText = `
+      position: absolute;
+      visibility: hidden;
+      white-space: nowrap;
+      font-family: ${computedStyle.fontFamily};
+      font-weight: ${computedStyle.fontWeight};
+      font-style: ${computedStyle.fontStyle};
+      letter-spacing: ${computedStyle.letterSpacing};
+      font-size: 100px;
+      line-height: ${computedStyle.lineHeight};
+      font-kerning: ${computedStyle.fontKerning};
+      font-variant-ligatures: ${computedStyle.fontVariantLigatures};
+      text-rendering: ${computedStyle.textRendering};
+      -webkit-font-smoothing: ${computedStyle.webkitFontSmoothing};
+      -webkit-text-stroke: ${computedStyle.webkitTextStroke};
+    `;
+    document.body.appendChild(tempMeasure);
+    
+    // Measure actual rendered width of each line to find the widest one
+    let longestLine = '';
+    let maxWidth = 0;
+    lines.forEach(line => {
+      const trimmed = line.trim();
+      if (trimmed) {
+        tempMeasure.textContent = trimmed;
+        const width = tempMeasure.offsetWidth;
+        if (width > maxWidth) {
+          maxWidth = width;
+          longestLine = trimmed;
+        }
+      }
+    });
+    
+    document.body.removeChild(tempMeasure);
+    
+    if (!longestLine) return config.baseFontSize;
+    
+    const screenWidth = window.innerWidth;
+    
+    // Smart buffer based on text length and screen size
+    let buffer;
+    if (screenWidth <= 768) {
+      buffer = longestLine.length <= 5 ? 2 : longestLine.length <= 10 ? 8 : 15;
+    } else if (screenWidth <= 1024) {
+      buffer = longestLine.length < 8 ? 8 : 5;
+    } else {
+      buffer = longestLine.length < 10 ? 12 : 6;
+    }
+    
+    // Safari-specific adjustments
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    if (isSafari) {
+      buffer += longestLine.length > 10 ? 20 : 10;
+    }
+    
+    const availableWidth = containerWidth - paddingLeft - paddingRight - buffer;
+    if (!availableWidth) return config.baseFontSize;
+    
+    // Create measurement element for the longest line
+    const tempElement = document.createElement('span');
+    tempElement.style.cssText = `
+      position: absolute;
+      visibility: hidden;
+      white-space: nowrap;
+      font-family: ${computedStyle.fontFamily};
+      font-weight: ${computedStyle.fontWeight};
+      font-style: ${computedStyle.fontStyle};
+      letter-spacing: ${computedStyle.letterSpacing};
+      font-size: 100px;
+      line-height: ${computedStyle.lineHeight};
+      font-kerning: ${computedStyle.fontKerning};
+      font-variant-ligatures: ${computedStyle.fontVariantLigatures};
+      text-rendering: ${computedStyle.textRendering};
+      -webkit-font-smoothing: ${computedStyle.webkitFontSmoothing};
+      -webkit-text-stroke: ${computedStyle.webkitTextStroke};
+    `;
+    tempElement.textContent = longestLine;
+    document.body.appendChild(tempElement);
+    
+    // Calculate ratio and fitting size based on longest line
+    const textWidthAt100px = tempElement.offsetWidth;
+    const ratio = textWidthAt100px / 100;
+    const fittingSize = Math.floor(availableWidth / ratio);
+    
+    // Check for section-specific max font size
+    const sectionMaxFontSize = textArea.getAttribute('data-max-font-size');
+    const effectiveMaxFontSize = sectionMaxFontSize 
+      ? Math.min(config.maxFontSize, parseFloat(sectionMaxFontSize))
+      : config.maxFontSize;
+    
+    const clampedSize = Math.max(config.minFontSize, Math.min(effectiveMaxFontSize, fittingSize));
+    
+    // Binary search for precision
+    const searchRange = screenWidth <= 768 ? 100 : 50;
+    let minSize = Math.max(config.minFontSize, clampedSize - searchRange);
+    let maxSize = Math.min(effectiveMaxFontSize, clampedSize + searchRange);
+    let bestSize = clampedSize;
+    
+    for (let i = 0; i < 20; i++) {
+      if (maxSize - minSize <= 1) break;
+      
+      const testSize = Math.floor((minSize + maxSize) / 2);
+      tempElement.style.fontSize = testSize + 'px';
+      
+      if (tempElement.offsetWidth <= availableWidth) {
+        bestSize = testSize;
+        minSize = testSize;
+      } else {
+        maxSize = testSize;
+      }
+    }
+    
+    // Final check: try one size larger (but not exceeding effectiveMaxFontSize)
+    if (bestSize < effectiveMaxFontSize) {
+      tempElement.style.fontSize = (bestSize + 1) + 'px';
+      if (tempElement.offsetWidth <= availableWidth) {
+        bestSize = bestSize + 1;
+      }
+    }
+    
+    document.body.removeChild(tempElement);
     
     return bestSize;
   }
@@ -773,7 +949,12 @@ class AutoFitManager {
   resetToOriginal(sectionElement) {
     const sectionData = this.sections.get(sectionElement);
     if (sectionData) {
-      sectionData.textArea.textContent = sectionData.originalText;
+      // For multi-line sections, restore HTML to preserve &#10;
+      if (sectionData.originalHTML) {
+        sectionData.textArea.innerHTML = sectionData.originalHTML;
+      } else {
+        sectionData.textArea.textContent = sectionData.originalText;
+      }
       this.enableAutoFit(sectionElement);
     }
   }
@@ -781,6 +962,27 @@ class AutoFitManager {
 
 // Global auto-fit manager instance
 const autoFitManager = new AutoFitManager();
+
+// Preserve line breaks for multi-line auto-fit sections on page load
+function preserveMultiLineBreaks() {
+  const multiLineSections = document.querySelectorAll('.type-area.auto-fit-multiline');
+  multiLineSections.forEach(textArea => {
+    // Store original HTML to preserve line breaks (&#10; becomes \n in DOM, but we store HTML)
+    const innerHTML = textArea.innerHTML;
+    textArea.setAttribute('data-original-html', innerHTML);
+    
+    // Ensure white-space is set to preserve line breaks (CSS should handle this, but ensure it)
+    textArea.style.whiteSpace = 'pre-line';
+    
+    // Verify text has line breaks
+    const text = textArea.textContent || textArea.innerText;
+    if (!text.includes('\n') && innerHTML.includes('&#10;')) {
+      // If textContent lost the newlines but HTML has &#10;, restore from HTML
+      // This shouldn't happen, but just in case
+      console.warn('Line breaks may have been lost, restoring from HTML');
+    }
+  });
+}
 
 function initResponsiveSection() {
   const responsiveSections = document.querySelectorAll('.responsive-section');
@@ -2133,6 +2335,7 @@ function boot() {
   initGlyphGrid(); 
   adjustPreviewHeight(); 
   initParallax();
+  preserveMultiLineBreaks(); // Preserve line breaks before initializing responsive sections
   initResponsiveSection();
   initCarousels();
   initInvertToggle();

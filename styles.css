@@ -2728,6 +2728,11 @@ body.negative #buyBtn {
       column-count: auto !important;
     }
     
+    /* Preserve line breaks for multi-line auto-fit sections */
+    .type-area.auto-fit-multiline {
+      white-space: pre-line !important;
+    }
+    
     /* On mobile, ensure section-3-text doesn't use columns which breaks <br> tags */
     @media (max-width: 768px) {
       .kaldanit-page .section-3-text,
@@ -3007,9 +3012,7 @@ body.negative #buyBtn {
       .content-wrapper { /*display:none;*/
         padding: 42px 18px 18px; }
       
-      body.safra-page section.type-tester:nth-of-type(7) .type-area {
-        font-size: 50px !important;
-      }
+      
       
       body.safra-page section.type-tester:nth-of-type(8) .type-area {
         font-size: 23px !important;
@@ -3036,9 +3039,7 @@ body.negative #buyBtn {
         text-overflow: ellipsis;
       }
       
-      body.safra-page section.type-tester:nth-of-type(14) .type-area {
-        font-size: 84px !important;
-      }
+    
       
       body.safra-page section.type-tester:nth-of-type(11) .type-area {
         font-size: 25px !important;
