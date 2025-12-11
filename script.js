@@ -610,11 +610,19 @@ class AutoFitManager {
     // Measure actual rendered width of each line to find the widest one
     let longestLine = '';
     let maxWidth = 0;
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    
     lines.forEach(line => {
       const trimmed = line.trim();
       if (trimmed) {
         tempMeasure.textContent = trimmed;
-        const width = tempMeasure.offsetWidth;
+        
+        // Safari needs a forced reflow to calculate width correctly
+        if (isSafari) {
+          void tempMeasure.offsetWidth; // Force reflow
+        }
+        
+        const width = tempMeasure.offsetWidth || tempMeasure.getBoundingClientRect().width;
         if (width > maxWidth) {
           maxWidth = width;
           longestLine = trimmed;
@@ -638,8 +646,7 @@ class AutoFitManager {
       buffer = longestLine.length < 10 ? 12 : 6;
     }
     
-    // Safari-specific adjustments
-    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    // Safari-specific adjustments (isSafari already defined above)
     if (isSafari) {
       buffer += longestLine.length > 10 ? 20 : 10;
     }
@@ -664,12 +671,26 @@ class AutoFitManager {
       text-rendering: ${computedStyle.textRendering};
       -webkit-font-smoothing: ${computedStyle.webkitFontSmoothing};
       -webkit-text-stroke: ${computedStyle.webkitTextStroke};
+      top: -9999px;
+      left: -9999px;
     `;
     tempElement.textContent = longestLine;
     document.body.appendChild(tempElement);
     
+    // Safari needs a forced reflow and proper layout calculation
+    if (isSafari) {
+      // Force multiple reflows to ensure Safari calculates correctly
+      void tempElement.offsetWidth;
+      void tempElement.offsetHeight;
+      // Use getComputedStyle to force style recalculation
+      getComputedStyle(tempElement).width;
+    }
+    
     // Calculate ratio and fitting size based on longest line
-    const textWidthAt100px = tempElement.offsetWidth;
+    // Use getBoundingClientRect for Safari as it's more reliable
+    const textWidthAt100px = isSafari 
+      ? tempElement.getBoundingClientRect().width || tempElement.offsetWidth
+      : tempElement.offsetWidth || tempElement.getBoundingClientRect().width;
     const ratio = textWidthAt100px / 100;
     const fittingSize = Math.floor(availableWidth / ratio);
     
@@ -693,7 +714,13 @@ class AutoFitManager {
       const testSize = Math.floor((minSize + maxSize) / 2);
       tempElement.style.fontSize = testSize + 'px';
       
-      if (tempElement.offsetWidth <= availableWidth) {
+      // Safari needs a forced reflow to calculate width correctly
+      if (isSafari) {
+        void tempElement.offsetWidth; // Force reflow
+      }
+      
+      const testWidth = tempElement.offsetWidth || tempElement.getBoundingClientRect().width;
+      if (testWidth <= availableWidth) {
         bestSize = testSize;
         minSize = testSize;
       } else {
@@ -704,7 +731,14 @@ class AutoFitManager {
     // Final check: try one size larger (but not exceeding effectiveMaxFontSize)
     if (bestSize < effectiveMaxFontSize) {
       tempElement.style.fontSize = (bestSize + 1) + 'px';
-      if (tempElement.offsetWidth <= availableWidth) {
+      
+      // Safari needs a forced reflow to calculate width correctly
+      if (isSafari) {
+        void tempElement.offsetWidth; // Force reflow
+      }
+      
+      const finalWidth = tempElement.offsetWidth || tempElement.getBoundingClientRect().width;
+      if (finalWidth <= availableWidth) {
         bestSize = bestSize + 1;
       }
     }

@@ -3131,6 +3131,10 @@ body.negative #buyBtn {
         line-height: 1.6 !important;
       }
       
+      body.middle-east-page section.type-tester:nth-of-type(8) .type-area {
+        font-size: 22px !important;
+      }
+      
     }
 
     @media (max-width: 480px) {
