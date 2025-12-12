@@ -2494,6 +2494,15 @@ function containsArabic(text) {
   return /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/.test(text);
 }
 
+function isArabicEnabledPage() {
+  if (typeof document === 'undefined') return false;
+  const body = document.body;
+  if (!body) return false;
+  return body.classList.contains('safra-page') ||
+         body.classList.contains('middle-east-page') ||
+         body.classList.contains('arabic-page');
+}
+
 function getCaretInfo(typeArea) {
   const selection = window.getSelection();
   if (!selection || selection.rangeCount === 0) return null;
@@ -2545,12 +2554,23 @@ function restoreCaret(typeArea, caretInfo) {
 function wrapArabicCharacters() {
   // Only apply on Safari
   const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-  if (!isSafari) return;
+  const isIOS = /iP(hone|od|ad)/i.test(navigator.userAgent);
+  const isMobileSafari = isSafari && isIOS;
+  if (!isSafari || !isArabicEnabledPage()) return;
   
   const typeAreas = document.querySelectorAll('.type-area');
   
   typeAreas.forEach(typeArea => {
     const text = typeArea.textContent || '';
+    
+    // Mobile Safari: avoid DOM rewrites, but enforce zero letter-spacing when Arabic is present
+    if (isMobileSafari) {
+      if (containsArabic(text)) {
+        typeArea.style.letterSpacing = '0';
+      }
+      return;
+    }
+    
     if (!containsArabic(text)) return; // Only run when Arabic is present
     
     // Check if this is the responsive section
@@ -2628,7 +2648,11 @@ document.addEventListener('DOMContentLoaded', wrapArabicCharacters);
 
 // Update Arabic character wrapping in real-time when user types
 function setupLiveArabicUpdate() {
+  if (!isArabicEnabledPage()) return;
   const typeAreas = document.querySelectorAll('.type-area');
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const isIOS = /iP(hone|od|ad)/i.test(navigator.userAgent);
+  const isMobileSafari = isSafari && isIOS;
   
   typeAreas.forEach(typeArea => {
     let isTyping = false;
@@ -2645,6 +2669,16 @@ function setupLiveArabicUpdate() {
       isTyping = true;
       clearTimeout(typingTimeout);
       
+      if (isMobileSafari) {
+        typingTimeout = setTimeout(() => {
+          isTyping = false;
+          if (containsArabic(typeArea.textContent || '')) {
+            typeArea.style.letterSpacing = '0';
+          }
+        }, 50);
+        return;
+      }
+      
       // Only process after user has stopped typing for a longer period
       typingTimeout = setTimeout(() => {
         isTyping = false;
@@ -2655,6 +2689,14 @@ function setupLiveArabicUpdate() {
     // Handle paste events immediately
     typeArea.addEventListener('paste', function() {
       clearTimeout(typingTimeout);
+      if (isMobileSafari) {
+        setTimeout(() => {
+          if (containsArabic(typeArea.textContent || '')) {
+            typeArea.style.letterSpacing = '0';
+          }
+        }, 50);
+        return;
+      }
       setTimeout(() => {
         wrapArabicCharacters();
       }, 100);
@@ -2667,6 +2709,12 @@ function setupLiveArabicUpdate() {
           if (mutation.type === 'childList' || mutation.type === 'characterData') {
             clearTimeout(typeArea.arabicUpdateTimeout);
             typeArea.arabicUpdateTimeout = setTimeout(() => {
+              if (isMobileSafari) {
+                if (containsArabic(typeArea.textContent || '')) {
+                  typeArea.style.letterSpacing = '0';
+                }
+                return;
+              }
               wrapArabicCharacters();
             }, 100);
           }
