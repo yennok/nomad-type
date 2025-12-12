@@ -2490,6 +2490,10 @@ function isArabic(char) {
   return arabicRanges.some(([start, end]) => code >= start && code <= end);
 }
 
+function containsArabic(text) {
+  return /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/.test(text);
+}
+
 function getCaretInfo(typeArea) {
   const selection = window.getSelection();
   if (!selection || selection.rangeCount === 0) return null;
@@ -2546,13 +2550,15 @@ function wrapArabicCharacters() {
   const typeAreas = document.querySelectorAll('.type-area');
   
   typeAreas.forEach(typeArea => {
+    const text = typeArea.textContent || '';
+    if (!containsArabic(text)) return; // Only run when Arabic is present
+    
     // Check if this is the responsive section
     const isResponsiveSection = typeArea.closest('.responsive-section');
     
     const caretInfo = getCaretInfo(typeArea);
     
     // Always process - don't skip based on flag for live updates
-    const text = typeArea.textContent;
     let newHTML = '';
     let currentArabicGroup = '';
     let currentNonArabicGroup = '';
