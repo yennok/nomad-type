@@ -434,12 +434,15 @@ class AutoFitManager {
       originalHTML: originalHTML, // Store HTML for multi-line sections
       autoFitEnabled: true,
       userHasTyped: false,
-      sliderBeingSetProgrammatically: false
+      sliderBeingSetProgrammatically: false,
+      lastContainerWidth: null // Track container width to prevent unnecessary recalculations
     };
 
     this.sections.set(sectionElement, sectionData);
     this.setupSectionListeners(sectionData);
+    // Initialize lastContainerWidth after first update
     this.updateSectionSize(sectionData);
+    sectionData.lastContainerWidth = sectionData.textArea.offsetWidth;
 
   }
 
@@ -929,6 +932,19 @@ class AutoFitManager {
         const screenWidth = window.innerWidth;
         
         this.sections.forEach((sectionData) => {
+          // Get current container width
+          const currentContainerWidth = sectionData.textArea.offsetWidth;
+          
+          // Only recalculate if container width actually changed (more than 1px difference)
+          // This prevents recalculation when only viewport height changes (mobile address bar)
+          if (sectionData.lastContainerWidth !== null && 
+              Math.abs(currentContainerWidth - sectionData.lastContainerWidth) < 2) {
+            return; // Skip recalculation if width hasn't changed
+          }
+          
+          // Update last container width
+          sectionData.lastContainerWidth = currentContainerWidth;
+          
           const text = sectionData.textArea.textContent || sectionData.textArea.innerText;
           let responsiveMaxFontSize;
           
