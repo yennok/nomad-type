@@ -88,70 +88,8 @@
         const updateDir = () => {
           const t = textArea.innerText.trim();
           const first = t.charAt(0);
-          const newDir = rtlRegex.test(first) ? 'rtl' : 'ltr';
-          const currentDir = textArea.getAttribute('dir');
-          
-          // Only update if direction actually changed
-          if (currentDir !== newDir) {
-            // Preserve cursor position before changing dir
-            const selection = window.getSelection();
-            const range = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
-            let savedCursorPosition = null;
-            
-            if (range && textArea.contains(range.startContainer)) {
-              const preRange = range.cloneRange();
-              preRange.selectNodeContents(textArea);
-              preRange.setEnd(range.startContainer, range.startOffset);
-              savedCursorPosition = preRange.toString().length;
-            }
-            
-            textArea.setAttribute('dir', newDir);
-            
-            // Restore cursor position after dir change
-            if (savedCursorPosition !== null) {
-              setTimeout(() => {
-                try {
-                  const walker = document.createTreeWalker(
-                    textArea,
-                    NodeFilter.SHOW_TEXT,
-                    null,
-                    false
-                  );
-                  
-                  let currentOffset = 0;
-                  let targetNode = null;
-                  let targetOffset = 0;
-                  
-                  while (walker.nextNode()) {
-                    const textNode = walker.currentNode;
-                    const textLength = textNode.textContent.length;
-                    
-                    if (currentOffset + textLength >= savedCursorPosition) {
-                      targetNode = textNode;
-                      targetOffset = savedCursorPosition - currentOffset;
-                      break;
-                    }
-                    
-                    currentOffset += textLength;
-                  }
-                  
-                  if (targetNode) {
-                    const newRange = document.createRange();
-                    newRange.setStart(targetNode, Math.min(targetOffset, targetNode.textContent.length));
-                    newRange.setEnd(targetNode, Math.min(targetOffset, targetNode.textContent.length));
-                    
-                    selection.removeAllRanges();
-                    selection.addRange(newRange);
-                  }
-                } catch (e) {
-                  // If restoration fails, just focus the element
-                  if (textArea.contentEditable === 'true') {
-                    textArea.focus();
-                  }
-                }
-              }, 0);
-            }
-          }
+          const dir = rtlRegex.test(first) ? 'rtl' : 'ltr';
+          textArea.setAttribute('dir', dir);
         };
         textArea.addEventListener('input', updateDir);
         updateDir();
@@ -2614,22 +2552,24 @@ function wrapArabicCharacters() {
       // Store cursor position before updating
       const selection = window.getSelection();
       const range = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
-      let savedCursorPosition = null;
+      let cursorOffset = 0;
+      let isInArabicContext = false;
       
-      if (range && typeArea.contains(range.startContainer)) {
-        // Calculate the character offset from the start of the typeArea
-        const preRange = range.cloneRange();
-        preRange.selectNodeContents(typeArea);
-        preRange.setEnd(range.startContainer, range.startOffset);
-        savedCursorPosition = preRange.toString().length;
+      if (range && range.startContainer.nodeType === Node.TEXT_NODE) {
+        cursorOffset = range.startOffset;
+        // Check if cursor is in Arabic text
+        const textNode = range.startContainer;
+        const textBeforeCursor = textNode.textContent.substring(0, cursorOffset);
+        isInArabicContext = textBeforeCursor.split('').some(char => isArabic(char));
       }
       
       typeArea.innerHTML = newHTML;
       
-      // Restore cursor position
-      if (savedCursorPosition !== null && selection.rangeCount === 0) {
+      // Simple cursor restoration - place at end if in Arabic context
+      if (range && isInArabicContext) {
         setTimeout(() => {
           try {
+            // Find the last text node in the element
             const walker = document.createTreeWalker(
               typeArea,
               NodeFilter.SHOW_TEXT,
@@ -2637,59 +2577,24 @@ function wrapArabicCharacters() {
               false
             );
             
-            let currentOffset = 0;
-            let targetNode = null;
-            let targetOffset = 0;
-            
+            let lastTextNode = null;
             while (walker.nextNode()) {
-              const textNode = walker.currentNode;
-              const textLength = textNode.textContent.length;
-              
-              if (currentOffset + textLength >= savedCursorPosition) {
-                targetNode = textNode;
-                targetOffset = savedCursorPosition - currentOffset;
-                break;
-              }
-              
-              currentOffset += textLength;
+              lastTextNode = walker.currentNode;
             }
             
-            // If we didn't find a node, use the last text node
-            if (!targetNode) {
-              const allTextNodes = [];
-              const textWalker = document.createTreeWalker(
-                typeArea,
-                NodeFilter.SHOW_TEXT,
-                null,
-                false
-              );
-              while (textWalker.nextNode()) {
-                allTextNodes.push(textWalker.currentNode);
-              }
-              if (allTextNodes.length > 0) {
-                targetNode = allTextNodes[allTextNodes.length - 1];
-                targetOffset = targetNode.textContent.length;
-              }
-            }
-            
-            if (targetNode) {
+            if (lastTextNode) {
               const newRange = document.createRange();
-              newRange.setStart(targetNode, Math.min(targetOffset, targetNode.textContent.length));
-              newRange.setEnd(targetNode, Math.min(targetOffset, targetNode.textContent.length));
+              newRange.setStart(lastTextNode, lastTextNode.textContent.length);
+              newRange.setEnd(lastTextNode, lastTextNode.textContent.length);
               
               selection.removeAllRanges();
               selection.addRange(newRange);
               
-              // Focus the typeArea to ensure cursor is visible
-              if (typeArea.contentEditable === 'true') {
-                typeArea.focus();
-              }
+              // Ensure RTL direction
+              typeArea.style.direction = 'rtl';
+              typeArea.setAttribute('dir', 'rtl');
             }
           } catch (e) {
-            // If restoration fails, just focus the element
-            if (typeArea.contentEditable === 'true') {
-              typeArea.focus();
-            }
           }
         }, 10);
       }
