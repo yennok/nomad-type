@@ -2490,6 +2490,54 @@ function isArabic(char) {
   return arabicRanges.some(([start, end]) => code >= start && code <= end);
 }
 
+function getCaretInfo(typeArea) {
+  const selection = window.getSelection();
+  if (!selection || selection.rangeCount === 0) return null;
+  const range = selection.getRangeAt(0);
+  if (!typeArea.contains(range.startContainer)) return null;
+
+  // Compute caret offset from start of the typeArea text
+  const preCaretRange = range.cloneRange();
+  preCaretRange.selectNodeContents(typeArea);
+  preCaretRange.setEnd(range.startContainer, range.startOffset);
+  return {
+    offset: preCaretRange.toString().length,
+    isCollapsed: selection.isCollapsed
+  };
+}
+
+function restoreCaret(typeArea, caretInfo) {
+  if (!caretInfo) return;
+  const { offset, isCollapsed } = caretInfo;
+  const selection = window.getSelection();
+  if (!selection) return;
+
+  let currentOffset = 0;
+  const walker = document.createTreeWalker(typeArea, NodeFilter.SHOW_TEXT, null);
+  let node;
+
+  while ((node = walker.nextNode())) {
+    const nextOffset = currentOffset + node.textContent.length;
+    if (offset <= nextOffset) {
+      const pos = Math.max(0, Math.min(node.textContent.length, offset - currentOffset));
+      const range = document.createRange();
+      range.setStart(node, pos);
+      range.collapse(isCollapsed);
+      selection.removeAllRanges();
+      selection.addRange(range);
+      return;
+    }
+    currentOffset = nextOffset;
+  }
+
+  // Fallback: place at end
+  const range = document.createRange();
+  range.selectNodeContents(typeArea);
+  range.collapse(false);
+  selection.removeAllRanges();
+  selection.addRange(range);
+}
+
 function wrapArabicCharacters() {
   // Only apply on Safari
   const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
@@ -2498,10 +2546,10 @@ function wrapArabicCharacters() {
   const typeAreas = document.querySelectorAll('.type-area');
   
   typeAreas.forEach(typeArea => {
-    // Skip wrapping on the interactive type tester to avoid caret jumps
-    if (typeArea.closest('.type-tester')) return;
     // Check if this is the responsive section
     const isResponsiveSection = typeArea.closest('.responsive-section');
+    
+    const caretInfo = getCaretInfo(typeArea);
     
     // Always process - don't skip based on flag for live updates
     const text = typeArea.textContent;
@@ -2551,55 +2599,9 @@ function wrapArabicCharacters() {
     
     // Only update if content has changed
     if (typeArea.innerHTML !== newHTML) {
-      // Store cursor position before updating
-      const selection = window.getSelection();
-      const range = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
-      let cursorOffset = 0;
-      let isInArabicContext = false;
-      
-      if (range && range.startContainer.nodeType === Node.TEXT_NODE) {
-        cursorOffset = range.startOffset;
-        // Check if cursor is in Arabic text
-        const textNode = range.startContainer;
-        const textBeforeCursor = textNode.textContent.substring(0, cursorOffset);
-        isInArabicContext = textBeforeCursor.split('').some(char => isArabic(char));
-      }
-      
       typeArea.innerHTML = newHTML;
-      
-      // Simple cursor restoration - place at end if in Arabic context
-      if (range && isInArabicContext) {
-        setTimeout(() => {
-          try {
-            // Find the last text node in the element
-            const walker = document.createTreeWalker(
-              typeArea,
-              NodeFilter.SHOW_TEXT,
-              null,
-              false
-            );
-            
-            let lastTextNode = null;
-            while (walker.nextNode()) {
-              lastTextNode = walker.currentNode;
-            }
-            
-            if (lastTextNode) {
-              const newRange = document.createRange();
-              newRange.setStart(lastTextNode, lastTextNode.textContent.length);
-              newRange.setEnd(lastTextNode, lastTextNode.textContent.length);
-              
-              selection.removeAllRanges();
-              selection.addRange(newRange);
-              
-              // Ensure RTL direction
-              typeArea.style.direction = 'rtl';
-              typeArea.setAttribute('dir', 'rtl');
-            }
-          } catch (e) {
-          }
-        }, 10);
-      }
+      // Restore caret to original logical position to prevent jumps
+      setTimeout(() => restoreCaret(typeArea, caretInfo), 10);
       
       // If this is the responsive section, trigger auto-fit recalculation
       if (isResponsiveSection) {
@@ -2623,8 +2625,6 @@ function setupLiveArabicUpdate() {
   const typeAreas = document.querySelectorAll('.type-area');
   
   typeAreas.forEach(typeArea => {
-    // Skip live wrapping on the type tester to avoid caret jumps
-    if (typeArea.closest('.type-tester')) return;
     let isTyping = false;
     let typingTimeout;
     
