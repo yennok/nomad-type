@@ -88,8 +88,70 @@
         const updateDir = () => {
           const t = textArea.innerText.trim();
           const first = t.charAt(0);
-          const dir = rtlRegex.test(first) ? 'rtl' : 'ltr';
-          textArea.setAttribute('dir', dir);
+          const newDir = rtlRegex.test(first) ? 'rtl' : 'ltr';
+          const currentDir = textArea.getAttribute('dir');
+          
+          // Only update if direction actually changed
+          if (currentDir !== newDir) {
+            // Preserve cursor position before changing dir
+            const selection = window.getSelection();
+            const range = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
+            let savedCursorPosition = null;
+            
+            if (range && textArea.contains(range.startContainer)) {
+              const preRange = range.cloneRange();
+              preRange.selectNodeContents(textArea);
+              preRange.setEnd(range.startContainer, range.startOffset);
+              savedCursorPosition = preRange.toString().length;
+            }
+            
+            textArea.setAttribute('dir', newDir);
+            
+            // Restore cursor position after dir change
+            if (savedCursorPosition !== null) {
+              setTimeout(() => {
+                try {
+                  const walker = document.createTreeWalker(
+                    textArea,
+                    NodeFilter.SHOW_TEXT,
+                    null,
+                    false
+                  );
+                  
+                  let currentOffset = 0;
+                  let targetNode = null;
+                  let targetOffset = 0;
+                  
+                  while (walker.nextNode()) {
+                    const textNode = walker.currentNode;
+                    const textLength = textNode.textContent.length;
+                    
+                    if (currentOffset + textLength >= savedCursorPosition) {
+                      targetNode = textNode;
+                      targetOffset = savedCursorPosition - currentOffset;
+                      break;
+                    }
+                    
+                    currentOffset += textLength;
+                  }
+                  
+                  if (targetNode) {
+                    const newRange = document.createRange();
+                    newRange.setStart(targetNode, Math.min(targetOffset, targetNode.textContent.length));
+                    newRange.setEnd(targetNode, Math.min(targetOffset, targetNode.textContent.length));
+                    
+                    selection.removeAllRanges();
+                    selection.addRange(newRange);
+                  }
+                } catch (e) {
+                  // If restoration fails, just focus the element
+                  if (textArea.contentEditable === 'true') {
+                    textArea.focus();
+                  }
+                }
+              }, 0);
+            }
+          }
         };
         textArea.addEventListener('input', updateDir);
         updateDir();
