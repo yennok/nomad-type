@@ -29,6 +29,9 @@
 
         if (!textArea) return;
 
+        // Disable spellcheck for all type-area elements
+        textArea.setAttribute('spellcheck', 'false');
+
         // Init from computed styles
         const cs = getComputedStyle(textArea);
         size.value = parseFloat(cs.fontSize) || 40;
@@ -412,6 +415,9 @@ class AutoFitManager {
     if (!textArea || !sizeSlider) {
       return;
     }
+
+    // Disable spellcheck for all type-area elements
+    textArea.setAttribute('spellcheck', 'false');
 
     // Store original text - for multi-line sections, preserve line breaks
     let originalText = textArea.textContent || textArea.innerText;
@@ -1017,6 +1023,8 @@ const autoFitManager = new AutoFitManager();
 function preserveMultiLineBreaks() {
   const multiLineSections = document.querySelectorAll('.type-area.auto-fit-multiline');
   multiLineSections.forEach(textArea => {
+    // Disable spellcheck
+    textArea.setAttribute('spellcheck', 'false');
     // Store original HTML to preserve line breaks (&#10; becomes \n in DOM, but we store HTML)
     const innerHTML = textArea.innerHTML;
     textArea.setAttribute('data-original-html', innerHTML);
@@ -1047,6 +1055,10 @@ function initResponsiveSection() {
     const sizeSlider = section.querySelector('.size');
     const fontSelect = section.querySelector('.font-select');
     
+    // Disable spellcheck for all type-area elements
+    if (textArea) {
+      textArea.setAttribute('spellcheck', 'false');
+    }
     
     // Check if section has explicit max font size via data attribute
     const sectionMaxFontSize = textArea.getAttribute('data-max-font-size');
