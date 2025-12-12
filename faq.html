@@ -38,46 +38,51 @@
       overflow: visible;
       position: relative;
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 100px 0;
+      padding: 240px 0 60px;
     }
 
     .faq-content {
-      max-width: 800px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 90px;
       color: white;
+      display: grid;
+      grid-template-columns: 2fr 3fr 1fr;
+      gap: 60px;
+    }
+
+    .faq-title-column {
+      /* First column for title */
+    }
+
+    .faq-text-column {
+      /* Second column for content */
     }
 
     .faq-title {
       font-family: "Safra Sans", sans-serif;
-      font-size: 48px;
-      font-weight: 700;
-      color: white;
-      margin-bottom: 40px;
-      text-align: center;
-    }
-
-    .faq-intro {
-      font-family: "Safra Sans", sans-serif;
-      font-size: 18px;
+      font-size: 36px;
       font-weight: 400;
       color: white;
-      line-height: 1.6;
-      margin-bottom: 60px;
-      text-align: center;
+      margin: 0;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+      text-align: left;
+      position: sticky;
+      top: 100px;
+      align-self: start;
+      transform: translateY(-9px);
     }
 
     .faq-list {
       display: flex;
       flex-direction: column;
-      gap: 30px;
+      gap: 60px;
     }
 
     .faq-item {
-      border-bottom: 1px solid #333;
-      padding-bottom: 20px;
+      border-bottom: 1px solid white;
+      padding-bottom: 60px;
     }
 
     .faq-item:last-child {
@@ -103,8 +108,8 @@
     .contact-section {
       margin-top: 60px;
       padding-top: 40px;
-      border-top: 1px solid white;
-      text-align: center;
+      border-top: none;
+      text-align: left;
     }
 
     .contact-section h3 {
@@ -134,7 +139,7 @@
 
     /* Footer Styles */
     #footer-container {
-      border-top: 1px solid white;
+      border: none;
       background: black;
     }
 
@@ -186,6 +191,10 @@
       margin-top: 28px;
     }
 
+    .nav-links {
+      filter: invert(1);
+    }
+
     .nav-brand a {
       color: white;
       text-decoration: none;
@@ -193,6 +202,11 @@
 
     .nav-brand a:hover {
       text-decoration: none;
+    }
+
+    .multilingual-marquee,
+    .image-marquee {
+      filter: invert(1);
     }
 
     .sticky-nav {
@@ -250,15 +264,17 @@
     }
 
     @media (max-width: 768px) {
-      .faq-title {
-        font-size: 32px;
-        margin-bottom: 30px;
+      .faq-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
       }
 
-      .faq-intro {
-        font-size: 16px;
-        margin-bottom: 40px;
+      .faq-title {
+        font-size: 24px;
+        margin: 0;
+        position: static;
       }
+
 
       .faq-question {
         font-size: 18px;
@@ -296,7 +312,7 @@
     </div>
   </nav>
 
-  <div class="sticky-green-circle" style="--menu-width: 319px; --menu-padding: 0 36px;">
+  <div class="sticky-green-circle" style="--menu-width: 231px; --menu-padding: 0 36px;">
     <div class="circle-marquee">
       <div class="circle-marquee-content" style="translate: none; rotate: none; scale: none; transform: translate3d(-16.625px, -1px, 0px);">Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type</div>
     </div>
@@ -340,61 +356,63 @@
 
   <div class="main-container">
     <div class="faq-content">
-      <h1 class="faq-title">Frequently Asked Questions</h1>
-      
-      <p class="faq-intro">
-        Common questions about our typefaces, licensing, and multilingual design approach.
-      </p>
-      
-      <div class="faq-list">
-        <div class="faq-item">
-          <h3 class="faq-question">What makes Nomad Type different from other foundries?</h3>
-          <p class="faq-answer">
-            We specialize in multilingual type design, creating typefaces that work seamlessly across Hebrew, Arabic, and Latin scripts. Our approach balances cultural authenticity with contemporary design, ensuring each script maintains its unique character while working harmoniously together.
-          </p>
-        </div>
-        
-        <div class="faq-item">
-          <h3 class="faq-question">How do I download trial fonts?</h3>
-          <p class="faq-answer">
-            You can download trial versions of our fonts directly from our website. Trial fonts include a limited character set and are watermarked, but they're perfect for testing and evaluating our typefaces for your projects.
-          </p>
-        </div>
-        
-        <div class="faq-item">
-          <h3 class="faq-question">What licensing options do you offer?</h3>
-          <p class="faq-answer">
-            We offer flexible licensing options including desktop, web, and app licenses. Our pricing is designed to be fair and accessible, from individual designers to large studios. Each license includes clear usage terms and technical support.
-          </p>
-        </div>
-        
-        <div class="faq-item">
-          <h3 class="faq-question">Do your fonts support all languages?</h3>
-          <p class="faq-answer">
-            Our typefaces are designed with specific focus on Hebrew, Arabic, and Latin scripts. While we don't claim universal language support, our multilingual approach ensures excellent coverage for languages using these writing systems.
-          </p>
-        </div>
-        
-        <div class="faq-item">
-          <h3 class="faq-question">Can I use your fonts for commercial projects?</h3>
-          <p class="faq-answer">
-            Yes, with the appropriate license. Our commercial licenses allow you to use our fonts in client work, publications, and other commercial applications. Please review our licensing terms for specific usage rights and restrictions.
-          </p>
-        </div>
-        
-        <div class="faq-item">
-          <h3 class="faq-question">Do you offer custom type design services?</h3>
-          <p class="faq-answer">
-            We're always interested in discussing custom projects, especially those involving multilingual design challenges. Feel free to reach out to discuss your specific needs and how we might collaborate.
-          </p>
-        </div>
+      <div class="faq-title-column">
+        <h1 class="faq-title">Frequently Asked Questions</h1>
       </div>
       
-      <div class="contact-section">
-        <h3>Still have questions?</h3>
-        <p>
-          If you don't see your question answered here, we'd love to hear from you. Reach out to us at <a href="mailto:nir@yennok.com">nir@yennok.com</a> and we'll get back to you as soon as possible.
-        </p>
+      <div class="faq-text-column">
+        <div class="faq-text-content">
+          <div class="faq-list">
+            <div class="faq-item">
+              <h3 class="faq-question">What makes Nomad Type different from other foundries?</h3>
+              <p class="faq-answer">
+                We specialize in multilingual type design, creating typefaces that work seamlessly across Hebrew, Arabic, and Latin scripts. Our approach balances cultural authenticity with contemporary design, ensuring each script maintains its unique character while working harmoniously together.
+              </p>
+            </div>
+            
+            <div class="faq-item">
+              <h3 class="faq-question">How do I download trial fonts?</h3>
+              <p class="faq-answer">
+                You can download trial versions of our fonts directly from our website. Trial fonts include a limited character set and are watermarked, but they're perfect for testing and evaluating our typefaces for your projects.
+              </p>
+            </div>
+            
+            <div class="faq-item">
+              <h3 class="faq-question">What licensing options do you offer?</h3>
+              <p class="faq-answer">
+                We offer flexible licensing options including desktop, web, and app licenses. Our pricing is designed to be fair and accessible, from individual designers to large studios. Each license includes clear usage terms and technical support.
+              </p>
+            </div>
+            
+            <div class="faq-item">
+              <h3 class="faq-question">Do your fonts support all languages?</h3>
+              <p class="faq-answer">
+                Our typefaces are designed with specific focus on Hebrew, Arabic, and Latin scripts. While we don't claim universal language support, our multilingual approach ensures excellent coverage for languages using these writing systems.
+              </p>
+            </div>
+            
+            <div class="faq-item">
+              <h3 class="faq-question">Can I use your fonts for commercial projects?</h3>
+              <p class="faq-answer">
+                Yes, with the appropriate license. Our commercial licenses allow you to use our fonts in client work, publications, and other commercial applications. Please review our licensing terms for specific usage rights and restrictions.
+              </p>
+            </div>
+            
+            <div class="faq-item">
+              <h3 class="faq-question">Do you offer custom type design services?</h3>
+              <p class="faq-answer">
+                We're always interested in discussing custom projects, especially those involving multilingual design challenges. Feel free to reach out to discuss your specific needs and how we might collaborate.
+              </p>
+            </div>
+          </div>
+          
+          <div class="contact-section">
+            <h3>Still have questions?</h3>
+            <p>
+              If you don't see your question answered here, we'd love to hear from you. Reach out to us at <a href="mailto:nir@yennok.com">nir@yennok.com</a> and we'll get back to you as soon as possible.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -488,6 +506,17 @@
 
       // Initialize mobile overlay
       initMobileOverlay();
+
+      // Navigation links - force navigation
+      const navLinks = document.querySelectorAll('.nav-link, .menu-item');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          if (this.href) {
+            window.location.href = this.href;
+          }
+        });
+      });
     });
   </script>
 </body>

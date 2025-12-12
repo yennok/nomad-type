@@ -38,9 +38,8 @@
       overflow: visible;
       position: relative;
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 200px 0 60px;
+      padding: 240px 0 60px;
     }
 
     .about-content {
@@ -65,6 +64,7 @@
       position: sticky;
       top: 100px;
       align-self: start;
+      transform: translateY(-9px);
     }
 
     .about-text {
@@ -281,7 +281,7 @@
     </div>
   </nav>
 
-  <div class="sticky-green-circle" style="--menu-width: 319px; --menu-padding: 0 36px;">
+  <div class="sticky-green-circle" style="--menu-width: 231px; --menu-padding: 0 36px;">
     <div class="circle-marquee">
       <div class="circle-marquee-content" style="translate: none; rotate: none; scale: none; transform: translate3d(-16.625px, -1px, 0px);">Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type</div>
     </div>
@@ -443,6 +443,17 @@
 
       // Initialize mobile overlay
       initMobileOverlay();
+
+      // Navigation links - force navigation
+      const navLinks = document.querySelectorAll('.nav-link, .menu-item');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          if (this.href) {
+            window.location.href = this.href;
+          }
+        });
+      });
     });
   </script>
 </body>

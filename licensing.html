@@ -38,25 +38,40 @@
       overflow: visible;
       position: relative;
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 100px 0;
+      padding: 240px 0 60px;
     }
 
     .licensing-content {
-      max-width: 800px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 90px;
       color: white;
+      display: grid;
+      grid-template-columns: 2fr 3fr 1fr;
+      gap: 60px;
+    }
+
+    .licensing-title-column {
+      /* First column for title */
+    }
+
+    .licensing-text-column {
+      /* Second column for content */
     }
 
     .licensing-title {
       font-family: "Safra Sans", sans-serif;
-      font-size: 48px;
-      font-weight: 700;
+      font-size: 36px;
+      font-weight: 400;
       color: white;
-      margin-bottom: 40px;
-      text-align: center;
+      margin: 0;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+      text-align: left;
+      position: sticky;
+      top: 100px;
+      align-self: start;
+      transform: translateY(-9px);
     }
 
     .licensing-intro {
@@ -65,8 +80,8 @@
       font-weight: 400;
       color: white;
       line-height: 1.6;
-      margin-bottom: 60px;
-      text-align: center;
+      margin: 0 0 20px 0;
+      text-align: left;
     }
 
     .license-type {
@@ -166,7 +181,7 @@
       margin-top: 60px;
       padding-top: 40px;
       border-top: 1px solid white;
-      text-align: center;
+      text-align: left;
     }
 
     .contact-section h3 {
@@ -196,7 +211,7 @@
 
     /* Footer Styles */
     #footer-container {
-      border-top: 1px solid white;
+      border: none;
       background: black;
     }
 
@@ -248,6 +263,10 @@
       margin-top: 28px;
     }
 
+    .nav-links {
+      filter: invert(1);
+    }
+
     .nav-brand a {
       color: white;
       text-decoration: none;
@@ -255,6 +274,11 @@
 
     .nav-brand a:hover {
       text-decoration: none;
+    }
+
+    .multilingual-marquee,
+    .image-marquee {
+      filter: invert(1);
     }
 
     .sticky-nav {
@@ -312,9 +336,15 @@
     }
 
     @media (max-width: 768px) {
+      .licensing-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
       .licensing-title {
-        font-size: 32px;
-        margin-bottom: 30px;
+        font-size: 24px;
+        margin: 0;
+        position: static;
       }
 
       .licensing-intro {
@@ -386,7 +416,7 @@
     </div>
   </nav>
 
-  <div class="sticky-green-circle" style="--menu-width: 319px; --menu-padding: 0 36px;">
+  <div class="sticky-green-circle" style="--menu-width: 231px; --menu-padding: 0 36px;">
     <div class="circle-marquee">
       <div class="circle-marquee-content" style="translate: none; rotate: none; scale: none; transform: translate3d(-16.625px, -1px, 0px);">Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type</div>
     </div>
@@ -430,94 +460,100 @@
 
   <div class="main-container">
     <div class="licensing-content">
-      <h1 class="licensing-title">Licensing</h1>
+      <div class="licensing-title-column">
+        <h1 class="licensing-title">Licensing</h1>
+      </div>
       
-      <p class="licensing-intro">
-        Clear, straightforward licensing options designed to fit your needs. From individual designers to large studios, we keep it simple and fair.
-      </p>
-      
-      <div class="license-type">
-        <h3>Desktop License</h3>
-        <p>Perfect for print design, branding, and desktop applications.</p>
-        <ul>
-          <li>Install on up to 5 devices</li>
-          <li>Use in print and digital publications</li>
-          <li>Create logos and branding materials</li>
-          <li>Include in client presentations</li>
-          <li>No web embedding or app distribution</li>
-        </ul>
-      </div>
+      <div class="licensing-text-column">
+        <div class="licensing-text-content">
+          <p class="licensing-intro">
+            Clear, straightforward licensing options designed to fit your needs. From individual designers to large studios, we keep it simple and fair.
+          </p>
+          
+          <div class="license-type">
+            <h3>Desktop License</h3>
+            <p>Perfect for print design, branding, and desktop applications.</p>
+            <ul>
+              <li>Install on up to 5 devices</li>
+              <li>Use in print and digital publications</li>
+              <li>Create logos and branding materials</li>
+              <li>Include in client presentations</li>
+              <li>No web embedding or app distribution</li>
+            </ul>
+          </div>
 
-      <div class="license-type">
-        <h3>Web License</h3>
-        <p>For websites and web applications using @font-face or web font services.</p>
-        <ul>
-          <li>Self-hosted or CDN delivery</li>
-          <li>Unlimited page views</li>
-          <li>Multiple domains allowed</li>
-          <li>Includes all weights and styles</li>
-          <li>No desktop installation rights</li>
-        </ul>
-      </div>
+          <div class="license-type">
+            <h3>Web License</h3>
+            <p>For websites and web applications using @font-face or web font services.</p>
+            <ul>
+              <li>Self-hosted or CDN delivery</li>
+              <li>Unlimited page views</li>
+              <li>Multiple domains allowed</li>
+              <li>Includes all weights and styles</li>
+              <li>No desktop installation rights</li>
+            </ul>
+          </div>
 
-      <div class="license-type">
-        <h3>App License</h3>
-        <p>For mobile apps, desktop applications, and software products.</p>
-        <ul>
-          <li>Embed in iOS, Android, and desktop apps</li>
-          <li>Unlimited app downloads</li>
-          <li>Multiple platforms supported</li>
-          <li>No web or print usage rights</li>
-          <li>Source code protection included</li>
-        </ul>
-      </div>
+          <div class="license-type">
+            <h3>App License</h3>
+            <p>For mobile apps, desktop applications, and software products.</p>
+            <ul>
+              <li>Embed in iOS, Android, and desktop apps</li>
+              <li>Unlimited app downloads</li>
+              <li>Multiple platforms supported</li>
+              <li>No web or print usage rights</li>
+              <li>Source code protection included</li>
+            </ul>
+          </div>
 
-      <div class="pricing-section">
-        <h3>Pricing</h3>
-        <p>Fair pricing for every project size. Contact us for custom licensing or volume discounts.</p>
-        
-        <div class="pricing-grid">
-          <div class="pricing-item">
-            <h4>Desktop</h4>
-            <div class="price">$45</div>
-            <p>Single typeface, all weights</p>
+          <div class="pricing-section">
+            <h3>Pricing</h3>
+            <p>Fair pricing for every project size. Contact us for custom licensing or volume discounts.</p>
+            
+            <div class="pricing-grid">
+              <div class="pricing-item">
+                <h4>Desktop</h4>
+                <div class="price">$45</div>
+                <p>Single typeface, all weights</p>
+              </div>
+              
+              <div class="pricing-item">
+                <h4>Web</h4>
+                <div class="price">$75</div>
+                <p>Single typeface, all weights</p>
+              </div>
+              
+              <div class="pricing-item">
+                <h4>App</h4>
+                <div class="price">$125</div>
+                <p>Single typeface, all weights</p>
+              </div>
+              
+              <div class="pricing-item">
+                <h4>Complete</h4>
+                <div class="price">$200</div>
+                <p>All formats, unlimited usage</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="license-type">
+            <h3>Student & Educational Discounts</h3>
+            <p>We offer 50% discounts for students and educational institutions. Contact us with your student ID or institutional email for verification.</p>
+          </div>
+
+          <div class="license-type">
+            <h3>Custom Licensing</h3>
+            <p>Need something different? We're happy to discuss custom licensing arrangements for large projects, extended usage rights, or special requirements. Contact us to discuss your specific needs.</p>
           </div>
           
-          <div class="pricing-item">
-            <h4>Web</h4>
-            <div class="price">$75</div>
-            <p>Single typeface, all weights</p>
-          </div>
-          
-          <div class="pricing-item">
-            <h4>App</h4>
-            <div class="price">$125</div>
-            <p>Single typeface, all weights</p>
-          </div>
-          
-          <div class="pricing-item">
-            <h4>Complete</h4>
-            <div class="price">$200</div>
-            <p>All formats, unlimited usage</p>
+          <div class="contact-section">
+            <h3>Questions about licensing?</h3>
+            <p>
+              If you have questions about which license is right for your project, or need help with custom licensing arrangements, reach out to us at <a href="mailto:nir@yennok.com">nir@yennok.com</a>. We're here to help you find the right solution.
+            </p>
           </div>
         </div>
-      </div>
-
-      <div class="license-type">
-        <h3>Student & Educational Discounts</h3>
-        <p>We offer 50% discounts for students and educational institutions. Contact us with your student ID or institutional email for verification.</p>
-      </div>
-
-      <div class="license-type">
-        <h3>Custom Licensing</h3>
-        <p>Need something different? We're happy to discuss custom licensing arrangements for large projects, extended usage rights, or special requirements. Contact us to discuss your specific needs.</p>
-      </div>
-      
-      <div class="contact-section">
-        <h3>Questions about licensing?</h3>
-        <p>
-          If you have questions about which license is right for your project, or need help with custom licensing arrangements, reach out to us at <a href="mailto:nir@yennok.com">nir@yennok.com</a>. We're here to help you find the right solution.
-        </p>
       </div>
     </div>
   </div>
@@ -611,6 +647,17 @@
 
       // Initialize mobile overlay
       initMobileOverlay();
+
+      // Navigation links - force navigation
+      const navLinks = document.querySelectorAll('.nav-link, .menu-item');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          if (this.href) {
+            window.location.href = this.href;
+          }
+        });
+      });
     });
   </script>
 </body>

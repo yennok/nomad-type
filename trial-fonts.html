@@ -38,25 +38,40 @@
       overflow: visible;
       position: relative;
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 100px 0;
+      padding: 240px 0 60px;
     }
 
     .trial-content {
-      max-width: 800px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 90px;
       color: white;
+      display: grid;
+      grid-template-columns: 2fr 3fr 1fr;
+      gap: 60px;
+    }
+
+    .trial-title-column {
+      /* First column for title */
+    }
+
+    .trial-text-column {
+      /* Second column for content */
     }
 
     .trial-title {
       font-family: "Safra Sans", sans-serif;
-      font-size: 48px;
-      font-weight: 700;
+      font-size: 36px;
+      font-weight: 400;
       color: white;
-      margin-bottom: 40px;
-      text-align: center;
+      margin: 0;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+      text-align: left;
+      position: sticky;
+      top: 100px;
+      align-self: start;
+      transform: translateY(-9px);
     }
 
     .trial-intro {
@@ -65,8 +80,8 @@
       font-weight: 400;
       color: white;
       line-height: 1.6;
-      margin-bottom: 60px;
-      text-align: center;
+      margin: 0 0 20px 0;
+      text-align: left;
     }
 
     .trial-info {
@@ -148,7 +163,7 @@
       margin-top: 60px;
       padding-top: 40px;
       border-top: 1px solid white;
-      text-align: center;
+      text-align: left;
     }
 
     .contact-section h3 {
@@ -178,7 +193,7 @@
 
     /* Footer Styles */
     #footer-container {
-      border-top: 1px solid white;
+      border: none;
       background: black;
     }
 
@@ -230,6 +245,10 @@
       margin-top: 28px;
     }
 
+    .nav-links {
+      filter: invert(1);
+    }
+
     .nav-brand a {
       color: white;
       text-decoration: none;
@@ -237,6 +256,11 @@
 
     .nav-brand a:hover {
       text-decoration: none;
+    }
+
+    .multilingual-marquee,
+    .image-marquee {
+      filter: invert(1);
     }
 
     .sticky-nav {
@@ -294,9 +318,15 @@
     }
 
     @media (max-width: 768px) {
+      .trial-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
       .trial-title {
-        font-size: 32px;
-        margin-bottom: 30px;
+        font-size: 24px;
+        margin: 0;
+        position: static;
       }
 
       .trial-intro {
@@ -351,7 +381,7 @@
     </div>
   </nav>
 
-  <div class="sticky-green-circle" style="--menu-width: 319px; --menu-padding: 0 36px;">
+  <div class="sticky-green-circle" style="--menu-width: 231px; --menu-padding: 0 36px;">
     <div class="circle-marquee">
       <div class="circle-marquee-content" style="translate: none; rotate: none; scale: none; transform: translate3d(-16.625px, -1px, 0px);">Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type</div>
     </div>
@@ -395,45 +425,53 @@
 
   <div class="main-container">
     <div class="trial-content">
-      <h1 class="trial-title">Trial Fonts</h1>
-      
-      <p class="trial-intro">
-        Download trial versions of our typefaces to test them in your projects before purchasing a full license.
-      </p>
-      
-      <div class="trial-info">
-        <h3>What's included in trial fonts?</h3>
-        <p>Our trial fonts include:</p>
-        <ul>
-          <li>Complete character sets for Hebrew, Arabic, and Latin scripts</li>
-          <li>Multiple weights and styles where available</li>
-          <li>Watermarked versions for evaluation purposes</li>
-          <li>Full OpenType features and language support</li>
-        </ul>
-        <p>Trial fonts are perfect for testing layout, readability, and overall design integration before committing to a full license.</p>
+      <div class="trial-title-column">
+        <h1 class="trial-title">Trial Fonts</h1>
       </div>
+      
+      <div class="trial-text-column">
+        <div class="trial-text-content">
+          <div class="trial-sections">
+            <p class="trial-intro">
+              Download trial versions of our typefaces to test them in your projects before purchasing a full license.
+            </p>
+            
+            <div class="trial-info">
+              <h3>What's included in trial fonts?</h3>
+              <p>Our trial fonts include:</p>
+              <ul>
+                <li>Complete character sets for Hebrew, Arabic, and Latin scripts</li>
+                <li>Multiple weights and styles where available</li>
+                <li>Watermarked versions for evaluation purposes</li>
+                <li>Full OpenType features and language support</li>
+              </ul>
+              <p>Trial fonts are perfect for testing layout, readability, and overall design integration before committing to a full license.</p>
+            </div>
 
-      <div class="trial-info">
-        <h3>How to use trial fonts</h3>
-        <p>After downloading, install the fonts on your system and use them in your design applications. Trial fonts work exactly like licensed fonts, with the only difference being the watermark that appears in larger text sizes.</p>
-        <p>Remember that trial fonts are for evaluation purposes only. For commercial use or final production, you'll need to purchase the appropriate license.</p>
-      </div>
+            <div class="trial-info">
+              <h3>How to use trial fonts</h3>
+              <p>After downloading, install the fonts on your system and use them in your design applications. Trial fonts work exactly like licensed fonts, with the only difference being the watermark that appears in larger text sizes.</p>
+              <p>Remember that trial fonts are for evaluation purposes only. For commercial use or final production, you'll need to purchase the appropriate license.</p>
+            </div>
 
-      <div class="download-section">
-        <h3 style="font-family: 'Safra Sans', sans-serif; font-size: 24px; font-weight: 700; color: white; margin-bottom: 30px;">Available Trial Fonts</h3>
-        
-        <a href="#" class="download-btn primary">Download Safra Trial</a>
-        <a href="#" class="download-btn">Download Kaldanit Trial</a>
-        <a href="#" class="download-btn">Download Yeffe Trial</a>
-        <a href="#" class="download-btn">Download Sugar Trial</a>
-        <a href="#" class="download-btn">Download All Trials</a>
-      </div>
-      
-      <div class="contact-section">
-        <h3>Need help with installation?</h3>
-        <p>
-          If you have questions about installing or using our trial fonts, or if you'd like to discuss licensing options, feel free to reach out to us at <a href="mailto:nir@yennok.com">nir@yennok.com</a>.
-        </p>
+            <div class="download-section">
+              <h3 style="font-family: 'Safra Sans', sans-serif; font-size: 24px; font-weight: 700; color: white; margin-bottom: 30px;">Available Trial Fonts</h3>
+              
+              <a href="#" class="download-btn primary">Download Safra Trial</a>
+              <a href="#" class="download-btn">Download Kaldanit Trial</a>
+              <a href="#" class="download-btn">Download Yeffe Trial</a>
+              <a href="#" class="download-btn">Download Sugar Trial</a>
+              <a href="#" class="download-btn">Download All Trials</a>
+            </div>
+            
+            <div class="contact-section">
+              <h3>Need help with installation?</h3>
+              <p>
+                If you have questions about installing or using our trial fonts, or if you'd like to discuss licensing options, feel free to reach out to us at <a href="mailto:nir@yennok.com">nir@yennok.com</a>.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -527,6 +565,17 @@
 
       // Initialize mobile overlay
       initMobileOverlay();
+
+      // Navigation links - force navigation
+      const navLinks = document.querySelectorAll('.nav-link, .menu-item');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          if (this.href) {
+            window.location.href = this.href;
+          }
+        });
+      });
     });
   </script>
 </body>
