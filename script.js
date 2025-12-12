@@ -2607,7 +2607,7 @@ function wrapArabicCharacters() {
     if (typeArea.innerHTML !== newHTML) {
       typeArea.innerHTML = newHTML;
       // Restore caret to original logical position to prevent jumps
-      setTimeout(() => restoreCaret(typeArea, caretInfo), 10);
+      restoreCaret(typeArea, caretInfo);
       
       // If this is the responsive section, trigger auto-fit recalculation
       if (isResponsiveSection) {
