@@ -2498,6 +2498,8 @@ function wrapArabicCharacters() {
   const typeAreas = document.querySelectorAll('.type-area');
   
   typeAreas.forEach(typeArea => {
+    // Skip wrapping on the interactive type tester to avoid caret jumps
+    if (typeArea.closest('.type-tester')) return;
     // Check if this is the responsive section
     const isResponsiveSection = typeArea.closest('.responsive-section');
     
@@ -2621,6 +2623,8 @@ function setupLiveArabicUpdate() {
   const typeAreas = document.querySelectorAll('.type-area');
   
   typeAreas.forEach(typeArea => {
+    // Skip live wrapping on the type tester to avoid caret jumps
+    if (typeArea.closest('.type-tester')) return;
     let isTyping = false;
     let typingTimeout;
     
