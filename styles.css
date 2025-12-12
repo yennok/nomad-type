@@ -2405,6 +2405,16 @@ body.negative #buyBtn {
 
     .type-area { width: 100%; border: none; outline: none; color: #000; display: block; white-space: pre-wrap; word-break: break-word; background: transparent; font-family: "Safra"; font-weight: 400; font-size: 40px; line-height: 1.6; letter-spacing: 0em; margin-bottom: 2rem; }
 
+    /* iOS Safari: prevent clipping of descenders/dots in testers */
+    @supports (-webkit-touch-callout: none) {
+      @media (max-width: 768px) {
+        .type-tester .type-area {
+          overflow: visible;
+          padding-bottom: 0.3em;
+        }
+      }
+    }
+
     /* Safari-specific fix: Remove letter-spacing for Arabic letters only in type tester */
     @media screen and (-webkit-min-device-pixel-ratio: 0) {
       .type-area {
