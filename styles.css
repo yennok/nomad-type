@@ -3015,15 +3015,17 @@ body.negative #buyBtn {
       body.bizarre-page section.type-tester:nth-of-type(4) .type-area { font-size: 40px !important; }
       body.safra-page .type-area.auto-fit-multiline,
       body.safra-page .type-area.responsive-text,
+      body.safra-page .type-area,
       body.middle-east-page .type-area.auto-fit-multiline,
-      body.middle-east-page .type-area.responsive-text {
+      body.middle-east-page .type-area.responsive-text, 
+      body.middle-east-page .type-area {
         padding-bottom: 40px;
         padding-top: 40px;
       }
-      .responsive-section .controls {
+      .responsive-section .controls,  .controls {
         margin-bottom: calc(3rem - 40px) !important;
       }
-      .responsive-section.type-tester {
+      .responsive-section.type-tester, .type-tester {
         margin-bottom: calc(5rem - 40px);
       }
       body.werd-page .cover-title { margin-bottom: 0px; }

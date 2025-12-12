@@ -40,31 +40,40 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 100px 0;
+      padding: 200px 0 60px;
     }
 
     .about-content {
       margin: 0 auto;
       padding: 0 90px;
       color: white;
+      display: grid;
+      grid-template-columns: 2fr 3fr 1fr;
+      gap: 60px;
     }
+
 
     .about-title {
       font-family: "Safra Sans", sans-serif;
-      font-size: 48px;
-      font-weight: 700;
+      font-size: 36px;
+      font-weight: 400;
       color: white;
-      margin-bottom: 40px;
-      text-align: center;
+      margin: 0;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+      text-align: left;
+      position: sticky;
+      top: 100px;
+      align-self: start;
     }
 
     .about-text {
       font-family: "Safra Sans", sans-serif;
-      font-size: 41px;
+      font-size: 18px;
       font-weight: 400;
       color: white;
-      line-height: 1.4;
-      margin-bottom: 30px;
+      line-height: 1.6;
+      margin: 0 0 20px 0;
     }
 
     .about-text:last-child {
@@ -104,7 +113,7 @@
 
     /* Footer Styles */
     #footer-container {
-      border-top: 1px solid white;
+      border: none;
       background: black;
     }
 
@@ -154,6 +163,10 @@
     .nav-brand, .nav-link {
       color: white;
       margin-top: 28px;
+    }
+
+    .nav-links {
+      filter: invert(1);
     }
 
     .nav-brand a {
@@ -219,10 +232,21 @@
       color: black;
     }
 
+    .multilingual-marquee,
+    .image-marquee {
+      filter: invert(1);
+    }
+
     @media (max-width: 768px) {
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
       .about-title {
-        font-size: 32px;
-        margin-bottom: 30px;
+        font-size: 24px;
+        margin: 0;
+        position: static;
       }
 
       .about-text {
@@ -301,25 +325,31 @@
 
   <div class="main-container">
     <div class="about-content">
-      <h1 class="about-title">About Nomad Type</h1>
+      <div class="about-title-column">
+        <h1 class="about-title">About Nomad Type</h1>
+      </div>
       
-      <p class="about-text">
-        Nomad Type is an independent foundry focused on multilingual typefaces for Hebrew, Arabic, and Latin. We design families that let each script keep its voice while working together across print, screen, and motion.
-      </p>
-      
-      <p class="about-text">
-        Every release is built through research, native consultation, and iterative testing to balance rhythm, legibility, and cultural nuance — from expressive display styles to text cuts made for long reading.
-      </p>
-      
-      <p class="about-text">
-        Nomad Type is led by Nir Zabari Yenni, a type designer and lecturer in Visual Communication at Shenkar College. He teaches complex typography and interactive media, works between print and screen, and holds an MA in Type Design from ECAL in Lausanne.
-      </p>
-      
-      <div class="contact-info">
-        <h3>Get in Touch</h3>
-        <p>
-          Questions about a project, licensing, or collaboration? Drop a line at <a href="mailto:nir@yennok.com">nir@yennok.com</a>. The footer links below also have direct ways to reach us.
-        </p>
+      <div class="about-text-column">
+        <div class="about-text-content">
+          <p class="about-text">
+            Nomad Type is an independent foundry focused on multilingual typefaces for Hebrew, Arabic, and Latin. We design families that let each script keep its voice while working together across print, screen, and motion.
+          </p>
+          
+          <p class="about-text">
+            Every release is built through research, native consultation, and iterative testing to balance rhythm, legibility, and cultural nuance — from expressive display styles to text cuts made for long reading.
+          </p>
+          
+          <p class="about-text">
+            Nomad Type is led by Nir Zabari Yenni, a type designer and lecturer in Visual Communication at Shenkar College. He teaches complex typography and interactive media, works between print and screen, and holds an MA in Type Design from ECAL in Lausanne.
+          </p>
+          
+          <div class="contact-info">
+            <h3>Get in Touch</h3>
+            <p>
+              Questions about a project, licensing, or collaboration? Drop a line at <a href="mailto:nir@yennok.com">nir@yennok.com</a>. The footer links below also have direct ways to reach us.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
