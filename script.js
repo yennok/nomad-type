@@ -2579,8 +2579,6 @@ function wrapArabicCharacters() {
     if (isMobileSafari) {
       if (containsArabic(text)) {
         typeArea.style.letterSpacing = '0';
-        // Force reflow to fix Arabic diacritics clipping issue on Safari mobile
-        void typeArea.offsetHeight;
       }
       return;
     }
@@ -2684,16 +2682,10 @@ function setupLiveArabicUpdate() {
       clearTimeout(typingTimeout);
       
       if (isMobileSafari) {
-        // Force reflow to fix Arabic diacritics clipping issue on Safari mobile
-        // Accessing offsetHeight forces Safari to recalculate layout
-        void typeArea.offsetHeight;
-        
         typingTimeout = setTimeout(() => {
           isTyping = false;
           if (containsArabic(typeArea.textContent || '')) {
             typeArea.style.letterSpacing = '0';
-            // Force another reflow after setting letter-spacing
-            void typeArea.offsetHeight;
           }
         }, 50);
         return;
@@ -2713,8 +2705,6 @@ function setupLiveArabicUpdate() {
         setTimeout(() => {
           if (containsArabic(typeArea.textContent || '')) {
             typeArea.style.letterSpacing = '0';
-            // Force reflow to fix Arabic diacritics clipping issue on Safari mobile
-            void typeArea.offsetHeight;
           }
         }, 50);
         return;
@@ -2734,8 +2724,6 @@ function setupLiveArabicUpdate() {
               if (isMobileSafari) {
                 if (containsArabic(typeArea.textContent || '')) {
                   typeArea.style.letterSpacing = '0';
-                  // Force reflow to fix Arabic diacritics clipping issue on Safari mobile
-                  void typeArea.offsetHeight;
                 }
                 return;
               }

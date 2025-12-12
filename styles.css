@@ -2410,14 +2410,7 @@ body.negative #buyBtn {
       @media (max-width: 768px) {
         .type-tester .type-area {
           overflow: visible;
-          /* Force hardware acceleration and proper rendering */
-          transform: translateZ(0);
-          -webkit-transform: translateZ(0);
-          /* Ensure proper line-height for Arabic diacritics */
-          line-height: 1.2;
-          /* Add small padding to prevent clipping */
-          padding-top: 0.1em;
-          padding-bottom: 0.2em;
+          /*padding-bottom: 0.3em;*/
         }
       }
     }
