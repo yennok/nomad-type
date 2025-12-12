@@ -2552,24 +2552,22 @@ function wrapArabicCharacters() {
       // Store cursor position before updating
       const selection = window.getSelection();
       const range = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
-      let cursorOffset = 0;
-      let isInArabicContext = false;
+      let savedCursorPosition = null;
       
-      if (range && range.startContainer.nodeType === Node.TEXT_NODE) {
-        cursorOffset = range.startOffset;
-        // Check if cursor is in Arabic text
-        const textNode = range.startContainer;
-        const textBeforeCursor = textNode.textContent.substring(0, cursorOffset);
-        isInArabicContext = textBeforeCursor.split('').some(char => isArabic(char));
+      if (range && typeArea.contains(range.startContainer)) {
+        // Calculate the character offset from the start of the typeArea
+        const preRange = range.cloneRange();
+        preRange.selectNodeContents(typeArea);
+        preRange.setEnd(range.startContainer, range.startOffset);
+        savedCursorPosition = preRange.toString().length;
       }
       
       typeArea.innerHTML = newHTML;
       
-      // Simple cursor restoration - place at end if in Arabic context
-      if (range && isInArabicContext) {
+      // Restore cursor position
+      if (savedCursorPosition !== null && selection.rangeCount === 0) {
         setTimeout(() => {
           try {
-            // Find the last text node in the element
             const walker = document.createTreeWalker(
               typeArea,
               NodeFilter.SHOW_TEXT,
@@ -2577,24 +2575,59 @@ function wrapArabicCharacters() {
               false
             );
             
-            let lastTextNode = null;
+            let currentOffset = 0;
+            let targetNode = null;
+            let targetOffset = 0;
+            
             while (walker.nextNode()) {
-              lastTextNode = walker.currentNode;
+              const textNode = walker.currentNode;
+              const textLength = textNode.textContent.length;
+              
+              if (currentOffset + textLength >= savedCursorPosition) {
+                targetNode = textNode;
+                targetOffset = savedCursorPosition - currentOffset;
+                break;
+              }
+              
+              currentOffset += textLength;
             }
             
-            if (lastTextNode) {
+            // If we didn't find a node, use the last text node
+            if (!targetNode) {
+              const allTextNodes = [];
+              const textWalker = document.createTreeWalker(
+                typeArea,
+                NodeFilter.SHOW_TEXT,
+                null,
+                false
+              );
+              while (textWalker.nextNode()) {
+                allTextNodes.push(textWalker.currentNode);
+              }
+              if (allTextNodes.length > 0) {
+                targetNode = allTextNodes[allTextNodes.length - 1];
+                targetOffset = targetNode.textContent.length;
+              }
+            }
+            
+            if (targetNode) {
               const newRange = document.createRange();
-              newRange.setStart(lastTextNode, lastTextNode.textContent.length);
-              newRange.setEnd(lastTextNode, lastTextNode.textContent.length);
+              newRange.setStart(targetNode, Math.min(targetOffset, targetNode.textContent.length));
+              newRange.setEnd(targetNode, Math.min(targetOffset, targetNode.textContent.length));
               
               selection.removeAllRanges();
               selection.addRange(newRange);
               
-              // Ensure RTL direction
-              typeArea.style.direction = 'rtl';
-              typeArea.setAttribute('dir', 'rtl');
+              // Focus the typeArea to ensure cursor is visible
+              if (typeArea.contentEditable === 'true') {
+                typeArea.focus();
+              }
             }
           } catch (e) {
+            // If restoration fails, just focus the element
+            if (typeArea.contentEditable === 'true') {
+              typeArea.focus();
+            }
           }
         }, 10);
       }
