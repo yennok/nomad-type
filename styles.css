@@ -3013,6 +3013,21 @@ body.negative #buyBtn {
       body.dear-ai-page .cover-title div:nth-child(1) { font-size: 78px; letter-spacing:-2px; }
       body.bizarre-page .cover-title div:nth-child(1) { font-size: 19vw; }
       body.bizarre-page section.type-tester:nth-of-type(4) .type-area { font-size: 40px !important; }
+      body.safra-page .type-area.auto-fit-multiline,
+      body.safra-page .type-area.responsive-text,
+      body.middle-east-page .type-area.auto-fit-multiline,
+      body.middle-east-page .type-area.responsive-text {
+        padding-bottom: 20px;
+        padding-top: 20px;
+      }
+      .controls:has(.auto-fit-multiline),
+      .controls:has(.responsive-text) {
+        margin-bottom: calc(3rem - 20px);
+      }
+      .type-tester:has(.auto-fit-multiline),
+      .type-tester:has(.responsive-text) {
+        margin-bottom: calc(5rem - 20px);
+      }
       body.werd-page .cover-title { margin-bottom: 0px; }
       body.werd-page .cover-title div:nth-child(1), body.werd-page .cover-title div:nth-child(2), body.werd-page .cover-title div:nth-child(3), body.werd-page .cover-title div:nth-child(4), body.werd-page .cover-title div:nth-child(5) { font-size: 78px; letter-spacing:-3px; }
       body.kilo-page .cover-title div:nth-child(1) { font-size: 69px; line-height: 109px; }
