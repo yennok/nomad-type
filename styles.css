@@ -2330,7 +2330,7 @@ body.negative #buyBtn {
         gap: 0.8em; /* Ensure gap is in em units */
       }
 
-      .type-tester { margin: 0 auto -2rem auto; /*max-width: 1200px;*/ }
+      .type-tester { margin: 0 auto 5rem auto; /*max-width: 1200px;*/ }
       .controls { 
         /*border-top: 1px solid #000;*/
         border-bottom:none;
@@ -2410,7 +2410,7 @@ body.negative #buyBtn {
       @media (max-width: 768px) {
         .type-tester .type-area {
           overflow: visible;
-          padding-bottom: 1em;
+          /*padding-bottom: 0.3em;*/
         }
       }
     }
