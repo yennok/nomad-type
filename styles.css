@@ -3020,12 +3020,10 @@ body.negative #buyBtn {
         padding-bottom: 30px;
         padding-top: 30px;
       }
-      .controls:has(.auto-fit-multiline),
-      .controls:has(.responsive-text) {
-        margin-bottom: calc(3rem - 30px);
+      .responsive-section .controls {
+        margin-bottom: calc(3rem - 30px) !important;
       }
-      .type-tester:has(.auto-fit-multiline),
-      .type-tester:has(.responsive-text) {
+      .responsive-section.type-tester {
         margin-bottom: calc(5rem - 30px);
       }
       body.werd-page .cover-title { margin-bottom: 0px; }
