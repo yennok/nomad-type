@@ -1032,29 +1032,37 @@ function initResponsiveSection() {
     const fontSelect = section.querySelector('.font-select');
     
     
-    // Calculate responsive max font size based on screen width and text length
-    const screenWidth = window.innerWidth;
-    const text = textArea.textContent || textArea.innerText;
+    // Check if section has explicit max font size via data attribute
+    const sectionMaxFontSize = textArea.getAttribute('data-max-font-size');
     let responsiveMaxFontSize;
     
-    if (screenWidth <= 768) {
-      // Mobile: adjust based on text length
-      if (text.length <= 5) {
-        // Short text like "Hello" - allow very large fonts
-        responsiveMaxFontSize = Math.min(400, Math.max(150, Math.floor(screenWidth * 0.35)));
-      } else if (text.length <= 10) {
-        // Medium text - moderate max size
-        responsiveMaxFontSize = Math.min(300, Math.max(120, Math.floor(screenWidth * 0.28)));
-      } else {
-        // Long text like "שלום مرحبا Hello" - more conservative
-        responsiveMaxFontSize = Math.min(200, Math.max(80, Math.floor(screenWidth * 0.20)));
-      }
-    } else if (screenWidth <= 1024) {
-      // Tablet: 30% of screen width
-      responsiveMaxFontSize = Math.min(450, Math.max(120, Math.floor(screenWidth * 0.30)));
+    if (sectionMaxFontSize) {
+      // Use the explicit max font size from data attribute
+      responsiveMaxFontSize = parseFloat(sectionMaxFontSize);
     } else {
-      // Desktop: 25% of screen width
-      responsiveMaxFontSize = Math.min(512, Math.max(100, Math.floor(screenWidth * 0.25)));
+      // Calculate responsive max font size based on screen width and text length
+      const screenWidth = window.innerWidth;
+      const text = textArea.textContent || textArea.innerText;
+      
+      if (screenWidth <= 768) {
+        // Mobile: adjust based on text length
+        if (text.length <= 5) {
+          // Short text like "Hello" - allow very large fonts
+          responsiveMaxFontSize = Math.min(400, Math.max(150, Math.floor(screenWidth * 0.35)));
+        } else if (text.length <= 10) {
+          // Medium text - moderate max size
+          responsiveMaxFontSize = Math.min(300, Math.max(120, Math.floor(screenWidth * 0.28)));
+        } else {
+          // Long text like "שלום مرحبا Hello" - more conservative
+          responsiveMaxFontSize = Math.min(200, Math.max(80, Math.floor(screenWidth * 0.20)));
+        }
+      } else if (screenWidth <= 1024) {
+        // Tablet: 30% of screen width
+        responsiveMaxFontSize = Math.min(450, Math.max(120, Math.floor(screenWidth * 0.30)));
+      } else {
+        // Desktop: 25% of screen width
+        responsiveMaxFontSize = Math.min(512, Math.max(100, Math.floor(screenWidth * 0.25)));
+      }
     }
     
     autoFitManager.initSection(section, {

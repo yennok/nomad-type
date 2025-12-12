@@ -3001,6 +3001,7 @@ body.negative #buyBtn {
       body.yeffe-page .cover-title div:nth-child(1) { font-size: 78px; letter-spacing:-2px; }
       body.kaldanit-page .cover-title div:nth-child(1) { font-size: 55px; transform: translateX(-8px) !important; }
       body.dear-ai-page .cover-title div:nth-child(1) { font-size: 78px; letter-spacing:-2px; }
+      body.bizarre-page .cover-title div:nth-child(1) { font-size: 19vw; }
       body.werd-page .cover-title { margin-bottom: 0px; }
       body.werd-page .cover-title div:nth-child(1), body.werd-page .cover-title div:nth-child(2), body.werd-page .cover-title div:nth-child(3), body.werd-page .cover-title div:nth-child(4), body.werd-page .cover-title div:nth-child(5) { font-size: 78px; letter-spacing:-3px; }
       body.kilo-page .cover-title div:nth-child(1) { font-size: 69px; line-height: 109px; }
