@@ -3017,16 +3017,16 @@ body.negative #buyBtn {
       body.safra-page .type-area.responsive-text,
       body.middle-east-page .type-area.auto-fit-multiline,
       body.middle-east-page .type-area.responsive-text {
-        padding-bottom: 20px;
-        padding-top: 20px;
+        padding-bottom: 30px;
+        padding-top: 30px;
       }
       .controls:has(.auto-fit-multiline),
       .controls:has(.responsive-text) {
-        margin-bottom: calc(3rem - 20px);
+        margin-bottom: calc(3rem - 30px);
       }
       .type-tester:has(.auto-fit-multiline),
       .type-tester:has(.responsive-text) {
-        margin-bottom: calc(5rem - 20px);
+        margin-bottom: calc(5rem - 30px);
       }
       body.werd-page .cover-title { margin-bottom: 0px; }
       body.werd-page .cover-title div:nth-child(1), body.werd-page .cover-title div:nth-child(2), body.werd-page .cover-title div:nth-child(3), body.werd-page .cover-title div:nth-child(4), body.werd-page .cover-title div:nth-child(5) { font-size: 78px; letter-spacing:-3px; }
