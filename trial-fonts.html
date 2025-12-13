@@ -135,25 +135,24 @@
     }
 
     .trial-btn {
-      padding: 7px 10px;
+      font-family: "Safra Mono", monospace;
+      font-size: 16px;
+      font-weight: 400;
+      padding: 15px 30px;
       border: 1px solid white;
       background: white;
-      font-family: "Safra Mono", monospace;
-      font-size: 14px;
-      font-weight: 400;
+      color: black;
       cursor: pointer;
       transition: all 0.3s ease;
       text-decoration: none;
-      color: #000;
       display: inline-block;
       border-radius: 4px;
-      line-height: 17px;
+      line-height: 1.2;
     }
 
     .trial-btn:hover {
       background: transparent;
       color: white;
-      border: 1px solid white;
     }
 
     .contact-section {
@@ -261,7 +260,7 @@
     }
 
     .sticky-nav {
-      position: relative;
+      position: fixed;
       height: 0;
     }
 
@@ -276,7 +275,7 @@
 
     /* Sticky Trial Fonts Button */
     .sticky-trial-btn {
-      /*position: fixed;*/
+      position: fixed;
       top: 29px;
       right: 29px;
       z-index: 1000;
@@ -361,6 +360,28 @@
 
       .trial-content {
         padding: 0 18px;
+      }
+
+      .cover-buttons {
+        display: block !important;
+        visibility: visible !important;
+        filter: invert(1);
+        opacity: 1;
+        transition: opacity 0.3s ease;
+      }
+
+      .cover-buttons.hidden-by-footer {
+        opacity: 0 !important;
+        pointer-events: none;
+      }
+
+      .cover-buttons .btn {
+        position: static;
+        width: 100%;
+      }
+
+      .mobile-hamburger-circle.solid {
+        filter: invert(1);
       }
     }
   </style>
@@ -787,6 +808,37 @@
           });
         }
       }
+
+      // Hide cover-buttons when footer comes into view
+      function initFooterVisibilityCheck() {
+        const coverButtons = document.querySelector('.cover-buttons');
+        const footerContainer = document.getElementById('footer-container');
+        
+        if (coverButtons && footerContainer && footerContainer.children.length > 0) {
+          function checkFooterVisibility() {
+            const footerRect = footerContainer.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            
+            // Hide if footer is visible in viewport
+            if (footerRect.top < viewportHeight) {
+              coverButtons.classList.add('hidden-by-footer');
+            } else {
+              coverButtons.classList.remove('hidden-by-footer');
+            }
+          }
+          
+          // Check on scroll
+          window.addEventListener('scroll', checkFooterVisibility);
+          // Initial check
+          checkFooterVisibility();
+        } else if (coverButtons && footerContainer) {
+          // Footer not loaded yet, try again after a delay
+          setTimeout(initFooterVisibilityCheck, 500);
+        }
+      }
+      
+      // Wait for footer to load, then initialize
+      setTimeout(initFooterVisibilityCheck, 1000);
     });
   </script>
 </body>

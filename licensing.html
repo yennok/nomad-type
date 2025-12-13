@@ -282,7 +282,7 @@
     }
 
     .sticky-nav {
-      position: relative;
+      position: fixed;
       height: 0;
     }
 
@@ -405,6 +405,28 @@
 
       .licensing-content {
         padding: 0 18px;
+      }
+
+      .cover-buttons {
+        display: block !important;
+        visibility: visible !important;
+        filter: invert(1);
+        opacity: 1;
+        transition: opacity 0.3s ease;
+      }
+
+      .cover-buttons.hidden-by-footer {
+        opacity: 0 !important;
+        pointer-events: none;
+      }
+
+      .cover-buttons .btn {
+        position: static;
+        width: 100%;
+      }
+
+      .mobile-hamburger-circle.solid {
+        filter: invert(1);
       }
     }
   </style>
@@ -661,6 +683,37 @@
           }
         });
       });
+
+      // Hide cover-buttons when footer comes into view
+      function initFooterVisibilityCheck() {
+        const coverButtons = document.querySelector('.cover-buttons');
+        const footerContainer = document.getElementById('footer-container');
+        
+        if (coverButtons && footerContainer && footerContainer.children.length > 0) {
+          function checkFooterVisibility() {
+            const footerRect = footerContainer.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            
+            // Hide if footer is visible in viewport
+            if (footerRect.top < viewportHeight) {
+              coverButtons.classList.add('hidden-by-footer');
+            } else {
+              coverButtons.classList.remove('hidden-by-footer');
+            }
+          }
+          
+          // Check on scroll
+          window.addEventListener('scroll', checkFooterVisibility);
+          // Initial check
+          checkFooterVisibility();
+        } else if (coverButtons && footerContainer) {
+          // Footer not loaded yet, try again after a delay
+          setTimeout(initFooterVisibilityCheck, 500);
+        }
+      }
+      
+      // Wait for footer to load, then initialize
+      setTimeout(initFooterVisibilityCheck, 1000);
     });
   </script>
 </body>
