@@ -122,41 +122,38 @@
       margin-bottom: 8px;
     }
 
-    .download-section {
-      text-align: center;
+    .trial-form-section {
       margin-top: 40px;
     }
 
-    .download-btn {
-      font-family: "Safra Mono", monospace;
-      font-size: 16px;
-      font-weight: 400;
-      padding: 15px 30px;
-      border: 1px solid white;
-      background: transparent;
+    .trial-form-section h3 {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 24px;
+      font-weight: 700;
       color: white;
+      margin-bottom: 30px;
+    }
+
+    .trial-btn {
+      padding: 7px 10px;
+      border: 1px solid white;
+      background: white;
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      font-weight: 400;
       cursor: pointer;
       transition: all 0.3s ease;
       text-decoration: none;
+      color: #000;
       display: inline-block;
       border-radius: 4px;
-      line-height: 1.2;
-      margin: 10px;
+      line-height: 17px;
     }
 
-    .download-btn:hover {
-      background: white;
-      color: black;
-    }
-
-    .download-btn.primary {
-      background: white;
-      color: black;
-    }
-
-    .download-btn.primary:hover {
+    .trial-btn:hover {
       background: transparent;
       color: white;
+      border: 1px solid white;
     }
 
     .contact-section {
@@ -330,7 +327,8 @@
       }
 
       .trial-intro {
-        font-size: 16px;
+        font-size: 18px;
+        line-height: 1.6;
         margin-bottom: 40px;
       }
 
@@ -344,13 +342,8 @@
 
       .trial-info p,
       .trial-info ul {
-        font-size: 14px;
-      }
-
-      .download-btn {
-        font-size: 14px;
-        padding: 12px 24px;
-        margin: 5px;
+        font-size: 18px;
+        line-height: 1.6;
       }
 
       .contact-section h3 {
@@ -358,11 +351,12 @@
       }
 
       .contact-section p {
-        font-size: 16px;
+        font-size: 18px;
+        line-height: 1.6;
       }
 
       .main-container {
-        padding: 80px 0;
+        padding: 16.7rem 0 110px;
       }
 
       .trial-content {
@@ -454,14 +448,12 @@
               <p>Remember that trial fonts are for evaluation purposes only. For commercial use or final production, you'll need to purchase the appropriate license.</p>
             </div>
 
-            <div class="download-section">
-              <h3 style="font-family: 'Safra Sans', sans-serif; font-size: 24px; font-weight: 700; color: white; margin-bottom: 30px;">Available Trial Fonts</h3>
-              
-              <a href="#" class="download-btn primary">Download Safra Trial</a>
-              <a href="#" class="download-btn">Download Kaldanit Trial</a>
-              <a href="#" class="download-btn">Download Yeffe Trial</a>
-              <a href="#" class="download-btn">Download Sugar Trial</a>
-              <a href="#" class="download-btn">Download All Trials</a>
+            <div class="trial-form-section">
+              <h3>Request Trial Fonts</h3>
+              <p style="font-family: 'Safra Sans', sans-serif; font-size: 18px; color: white; line-height: 1.6; margin-bottom: 30px;">
+                Download trial versions of our typefaces to test them in your projects before purchasing a full license.
+              </p>
+              <button type="button" class="trial-btn" id="trialBtn">Request Trial Fonts</button>
             </div>
             
             <div class="contact-section">
@@ -476,6 +468,86 @@
     </div>
   </div>
 
+  <!-- Trial Fonts Overlay -->
+  <div class="overlay" id="trialOverlay">
+    <div class="overlay-content">
+      <div class="form-header">
+        <h2>Request Trial Fonts</h2>
+        <button class="close-btn" id="closeTrial"></button>
+      </div>
+      
+      <p class="intro-text">Download trial versions of our typefaces to test them in your projects before purchasing a full license.</p>
+      
+      <div class="success-message" id="trialSuccessMessage" style="display: none;">
+        <p class="success-text">Thank you! We'll send your trial fonts shortly.</p>
+        <button class="submit-btn" id="trialSuccessBtn">Continue to Website</button>
+      </div>
+      
+      <form class="trial-form" id="trialFormContent">
+        <div class="form-content">
+          <div class="form-group">
+            <input type="text" id="trialName" name="name" placeholder=" " required>
+            <div class="placeholder-text">Full Name<span class="asterisk">*</span></div>
+          </div>
+          
+          <div class="form-group">
+            <input type="email" id="trialEmail" name="email" placeholder=" " required>
+            <div class="placeholder-text">Email Address<span class="asterisk">*</span></div>
+          </div>
+
+          <div class="form-section collapsible">
+            <h3 class="collapsible-header">
+              <span>Select Fonts<span class="asterisk">*</span></span>
+              <span class="dropdown-icon"></span>
+            </h3>
+            <div class="collapsible-content">
+              <div class="checkbox-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" name="font" value="Safra">
+                  <span class="checkmark"></span>
+                  Safra
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" name="font" value="Kaldanit">
+                  <span class="checkmark"></span>
+                  Kaldanit
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" name="font" value="Yeffe">
+                  <span class="checkmark"></span>
+                  Yeffe
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" name="font" value="Sugar">
+                  <span class="checkmark"></span>
+                  Sugar
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" name="font" value="All">
+                  <span class="checkmark"></span>
+                  All Fonts
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-section">
+            <label class="checkbox-label consent">
+              <input type="checkbox" name="consent">
+              <span class="checkmark"></span>
+              <span class="consent-text">I'm happy to receive occasional updates about new releases. No spam – I can unsubscribe anytime.</span>
+            </label>
+          </div>
+          
+          <button type="submit" class="submit-btn">Submit Request</button>
+          <p class="form-error-message" id="trialError" style="display: none;"></p>
+        </div>
+        
+        <p class="footer-text">By submitting, I agree to receive occasional updates about new releases (unsubscribe anytime).</p>
+      </form>
+    </div>
+  </div>
+
   <!-- FOOTER CONTAINER -->
   <div id="footer-container"></div>
 
@@ -483,6 +555,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="gsap-public/esm/Draggable.js"></script>
   <script src="gsap-public/esm/ScrollTrigger.js"></script>
+
+  <!-- EmailJS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    emailjs.init({
+      publicKey: "SY_sCUJHCR5MtWgI5",
+    });
+  </script>
 
   <script src="footer.js"></script>
   <script src="script.js"></script>
@@ -576,6 +656,137 @@
           }
         });
       });
+
+      // Initialize all functionality including overlays
+      if (typeof boot === 'function') {
+        boot();
+      }
+      
+      // Also ensure overlay forms are initialized
+      if (typeof initOverlayForms === 'function') {
+        initOverlayForms();
+      }
+      
+      // Initialize trial form logic
+      if (typeof initTrialFormLogic === 'function') {
+        initTrialFormLogic();
+      }
+      
+      // Ensure trial button opens overlay (backup handler)
+      setTimeout(function() {
+        const trialBtn = document.getElementById('trialBtn');
+        const trialOverlay = document.getElementById('trialOverlay');
+        console.log('Debug - trialBtn:', trialBtn);
+        console.log('Debug - trialOverlay:', trialOverlay);
+        
+        if (trialBtn && trialOverlay) {
+          // Add click handler
+          trialBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            alert('Trial button clicked! Opening overlay...');
+            console.log('Trial button clicked!');
+            trialOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // Recalculate viewport height for iOS Safari
+            if (window.innerWidth <= 768 && typeof setViewportHeight === 'function') {
+              setViewportHeight();
+            }
+          });
+          console.log('Click handler attached to trial button');
+        } else {
+          alert('Error: Trial button or overlay not found! Button: ' + (trialBtn ? 'found' : 'NOT found') + ', Overlay: ' + (trialOverlay ? 'found' : 'NOT found'));
+        }
+      }, 100);
+      
+      // Custom handler for trial-fonts page form
+      const trialForm = document.getElementById('trialFormContent');
+      if (trialForm) {
+        trialForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const errorMsg = document.getElementById('trialError');
+          const successMsg = document.getElementById('trialSuccessMessage');
+          
+          // Check if at least one font is selected
+          const selectedFonts = document.querySelectorAll('#trialFormContent input[name="font"]:checked');
+          if (selectedFonts.length === 0) {
+            errorMsg.textContent = 'Please select at least one font.';
+            errorMsg.style.display = 'block';
+            return;
+          }
+          
+          // Check consent
+          const consentCheckbox = document.querySelector('#trialFormContent input[name="consent"]:checked');
+          if (!consentCheckbox) {
+            errorMsg.textContent = 'Please accept the consent agreement before submitting.';
+            errorMsg.style.display = 'block';
+            return;
+          }
+          
+          // Hide error message
+          errorMsg.style.display = 'none';
+          
+          // Get submit button and show loading
+          const submitBtn = trialForm.querySelector('button[type="submit"]');
+          const originalText = submitBtn.textContent;
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<span style="display: inline-block; animation: spin 1s linear infinite;">⏳</span> Sending...';
+          
+          // Get selected fonts
+          const fonts = Array.from(selectedFonts).map(cb => cb.value).join(', ');
+          
+          // Prepare email data
+          const templateParams = {
+            from_name: document.getElementById('trialName').value,
+            from_email: document.getElementById('trialEmail').value,
+            font_requested: fonts,
+            use_type: 'Trial Request',
+            source: 'trial-fonts-page',
+            consent: 'Yes'
+          };
+          
+          // Send email
+          if (typeof emailjs !== 'undefined') {
+            emailjs.send('service_fzf0ivr', 'template_7un2cmq', templateParams)
+              .then(function(response) {
+                submitBtn.innerHTML = '✓ Sent!';
+                setTimeout(() => {
+                  document.getElementById('trialFormContent').style.display = 'none';
+                  document.getElementById('trialSuccessMessage').style.display = 'block';
+                }, 500);
+              }, function(error) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+                errorMsg.textContent = 'Something went wrong. Please try again.';
+                errorMsg.style.display = 'block';
+              });
+          } else {
+            // Fallback
+            document.getElementById('trialFormContent').style.display = 'none';
+            document.getElementById('trialSuccessMessage').style.display = 'block';
+          }
+        });
+        
+        // Handle success button
+        const trialSuccessBtn = document.getElementById('trialSuccessBtn');
+        if (trialSuccessBtn) {
+          trialSuccessBtn.addEventListener('click', function() {
+            const trialOverlay = document.getElementById('trialOverlay');
+            if (trialOverlay) {
+              trialOverlay.classList.remove('active');
+              document.body.style.overflow = '';
+              
+              // Reset form after overlay closes
+              setTimeout(() => {
+                document.getElementById('trialFormContent').reset();
+                document.getElementById('trialFormContent').style.display = '';
+                document.getElementById('trialSuccessMessage').style.display = 'none';
+              }, 600);
+            }
+          });
+        }
+      }
     });
   </script>
 </body>
