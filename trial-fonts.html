@@ -85,8 +85,8 @@
     }
 
     .trial-info {
-      background: #111;
-      border: 1px solid #333;
+      background: black;
+      border: 1px solid white;
       border-radius: 8px;
       padding: 30px;
       margin-bottom: 40px;
@@ -104,7 +104,7 @@
       font-family: "Safra Sans", sans-serif;
       font-size: 16px;
       font-weight: 400;
-      color: #ccc;
+      color: white;
       line-height: 1.6;
       margin-bottom: 10px;
     }
@@ -113,7 +113,7 @@
       font-family: "Safra Sans", sans-serif;
       font-size: 16px;
       font-weight: 400;
-      color: #ccc;
+      color: white;
       line-height: 1.6;
       margin-left: 20px;
     }
@@ -260,7 +260,7 @@
     }
 
     .sticky-nav {
-      position: fixed;
+      position: absolute;
       height: 0;
     }
 
@@ -811,35 +811,158 @@
 
       // Hide cover-buttons when footer comes into view
       function initFooterVisibilityCheck() {
+        console.log('=== INIT FOOTER VISIBILITY CHECK ===');
         const coverButtons = document.querySelector('.cover-buttons');
         const footerContainer = document.getElementById('footer-container');
         
-        if (coverButtons && footerContainer && footerContainer.children.length > 0) {
+        console.log('Elements found:', {
+          coverButtons: !!coverButtons,
+          footerContainer: !!footerContainer,
+          coverButtonsElement: coverButtons,
+          footerContainerElement: footerContainer
+        });
+        
+        if (!coverButtons) {
+          console.error('❌ coverButtons not found!');
+          return;
+        }
+        
+        if (!footerContainer) {
+          console.error('❌ footerContainer not found!');
+          return;
+        }
+        
+        console.log('Footer initial state:', {
+          childrenLength: footerContainer.children.length,
+          innerHTMLLength: footerContainer.innerHTML.trim().length,
+          offsetHeight: footerContainer.offsetHeight,
+          innerHTML: footerContainer.innerHTML.substring(0, 100) + '...'
+        });
+        
+        function setupVisibilityCheck() {
+          console.log('✅ Setting up visibility check');
+          
           function checkFooterVisibility() {
+            // Don't check if overlay is active (prevents interference)
+            const trialOverlay = document.getElementById('trialOverlay');
+            if (trialOverlay && trialOverlay.classList.contains('active')) {
+              console.log('⏸️ Overlay is active, skipping footer check');
+              return;
+            }
+            
             const footerRect = footerContainer.getBoundingClientRect();
             const viewportHeight = window.innerHeight;
+            // Check if any part of the footer is visible in the viewport
+            const isFooterInView = footerRect.top < viewportHeight && footerRect.bottom > 0;
+            
+            console.log('Footer visibility check:', {
+              footerTop: footerRect.top,
+              footerBottom: footerRect.bottom,
+              viewportHeight: viewportHeight,
+              isFooterInView: isFooterInView,
+              scrollY: window.scrollY,
+              windowHeight: window.innerHeight,
+              hasClass: coverButtons.classList.contains('hidden-by-footer'),
+              overlayActive: trialOverlay ? trialOverlay.classList.contains('active') : false
+            });
             
             // Hide if footer is visible in viewport
-            if (footerRect.top < viewportHeight) {
-              coverButtons.classList.add('hidden-by-footer');
+            if (isFooterInView) {
+              if (!coverButtons.classList.contains('hidden-by-footer')) {
+                coverButtons.classList.add('hidden-by-footer');
+                console.log('✅ Added hidden-by-footer class');
+              }
             } else {
-              coverButtons.classList.remove('hidden-by-footer');
+              if (coverButtons.classList.contains('hidden-by-footer')) {
+                coverButtons.classList.remove('hidden-by-footer');
+                console.log('✅ Removed hidden-by-footer class');
+              }
             }
           }
           
-          // Check on scroll
-          window.addEventListener('scroll', checkFooterVisibility);
+          // Check on scroll with throttling
+          let ticking = false;
+          window.addEventListener('scroll', function() {
+            if (!ticking) {
+              window.requestAnimationFrame(function() {
+                checkFooterVisibility();
+                ticking = false;
+              });
+              ticking = true;
+            }
+          });
+          
           // Initial check
+          console.log('Running initial check...');
           checkFooterVisibility();
-        } else if (coverButtons && footerContainer) {
-          // Footer not loaded yet, try again after a delay
-          setTimeout(initFooterVisibilityCheck, 500);
+          
+          // Also check on resize
+          window.addEventListener('resize', checkFooterVisibility);
+        }
+        
+        // Use MutationObserver to wait for footer content to be added
+        const observer = new MutationObserver(function(mutations) {
+          console.log('MutationObserver triggered:', mutations.length, 'mutations');
+          const hasContent = footerContainer.children.length > 0 || 
+                            footerContainer.innerHTML.trim().length > 0 ||
+                            footerContainer.offsetHeight > 0;
+          
+          console.log('Content check:', {
+            hasContent: hasContent,
+            childrenLength: footerContainer.children.length,
+            innerHTMLLength: footerContainer.innerHTML.trim().length,
+            offsetHeight: footerContainer.offsetHeight
+          });
+          
+          if (hasContent) {
+            console.log('✅ Footer content detected!');
+            observer.disconnect(); // Stop observing once content is loaded
+            setupVisibilityCheck();
+          }
+        });
+        
+        // Start observing the footer container for changes
+        observer.observe(footerContainer, {
+          childList: true,
+          subtree: true,
+          characterData: true
+        });
+        
+        // Also do an immediate check in case footer is already loaded
+        const hasContent = footerContainer.children.length > 0 || 
+                          footerContainer.innerHTML.trim().length > 0 ||
+                          footerContainer.offsetHeight > 0;
+        
+        if (hasContent) {
+          console.log('✅ Footer already has content, setting up immediately');
+          observer.disconnect();
+          setupVisibilityCheck();
+        } else {
+          console.log('⏳ Footer content not yet loaded, waiting for MutationObserver...');
         }
       }
       
-      // Wait for footer to load, then initialize
-      setTimeout(initFooterVisibilityCheck, 1000);
+      // Initialize after DOM is ready
+      console.log('Calling initFooterVisibilityCheck...');
+      initFooterVisibilityCheck();
+      
+      // Test: Manually add class after 3 seconds to verify CSS works
+      setTimeout(function() {
+        const testButtons = document.querySelector('.cover-buttons');
+        if (testButtons) {
+          console.log('🧪 TEST: Manually adding hidden-by-footer class...');
+          testButtons.classList.add('hidden-by-footer');
+          console.log('🧪 TEST: Class added. Check if buttons are hidden.');
+          setTimeout(function() {
+            testButtons.classList.remove('hidden-by-footer');
+            console.log('🧪 TEST: Class removed.');
+          }, 2000);
+        } else {
+          console.error('🧪 TEST: cover-buttons not found for test!');
+        }
+      }, 3000);
     });
   </script>
 </body>
 </html>
+
