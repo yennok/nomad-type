@@ -1119,6 +1119,11 @@ body.negative #buyBtn {
     .footer-column p:last-child {
       margin-bottom: 0;
     }
+    
+    /* Ensure all mail@nomad-type.com links are underlined */
+    a[href*="mail@nomad-type.com"] {
+      text-decoration: underline !important;
+    }
 
     /* ====== FOOTER NAVIGATION ====== */
     .footer-nav {

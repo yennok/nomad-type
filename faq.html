@@ -182,6 +182,23 @@
     .contact-section a:hover {
       text-decoration: none;
     }
+    
+    /* Ensure all mail@nomad-type.com links are underlined */
+    a[href*="mail@nomad-type.com"] {
+      text-decoration: underline !important;
+    }
+
+    .footer-nav-link:hover {
+      opacity: 1;
+      color: black;
+      text-decoration: underline;
+    }
+
+    .footer-linkedin-btn:hover {
+      background: black;
+      color: white;
+      border: 1px solid black;
+    }
 
     /* Footer Styles */
     /*
@@ -309,6 +326,7 @@
     .sticky-trial-btn:hover {
       background: black;
       color: white;
+      border: 1px solid black;
     }
 
     @media (max-width: 768px) {
@@ -492,7 +510,7 @@
           <div class="contact-section">
             <h3>Still have questions?</h3>
             <p>
-              If you don't see your question answered here, we'd love to hear from you. Reach out to us at <a href="mailto:mail@nomad-type.com">mail@nomad-type.com</a> and we'll get back to you as soon as possible.
+              If you don't see your question answered here, we'd love to hear from you. Reach out to us at <a href="mailto:mail@nomad-type.com" style="white-space: nowrap;">mail@nomad-type.com</a> and we'll get back to you as soon as possible.
             </p>
           </div>
         </div>

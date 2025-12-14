@@ -27,7 +27,7 @@
     }
 
     body {
-      background-color: white;
+      background-color: black;
       margin: 0;
       padding: 0;
       overflow-x: hidden;
@@ -45,7 +45,7 @@
     .trial-content {
       margin: 0 auto;
       padding: 0 90px;
-      color: black;
+      color: white;
       display: grid;
       grid-template-columns: 2fr 3fr 1fr;
       gap: 60px;
@@ -63,7 +63,7 @@
       font-family: "Safra Sans", sans-serif;
       font-size: 36px;
       font-weight: 400;
-      color: black;
+      color: white;
       margin: 0;
       line-height: 1.4;
       letter-spacing: -0.02em;
@@ -78,17 +78,17 @@
       font-family: "Safra Sans", sans-serif;
       font-size: 18px;
       font-weight: 400;
-      color: black;
+      color: white;
       line-height: 1.6;
       margin: 0 0 20px 0;
       text-align: left;
     }
 
     .trial-info {
-      background: white;
-      border: 1px solid black;
+      background: black;
+      border: 1px solid white;
       border-radius: 8px;
-      padding: 23px 30px;
+      padding: 30px;
       margin-bottom: 40px;
     }
 
@@ -96,31 +96,26 @@
       font-family: "Safra Sans", sans-serif;
       font-size: 20px;
       font-weight: 700;
-      color: black;
-      margin-bottom: 30px;
+      color: white;
+      margin-bottom: 15px;
     }
 
     .trial-info p {
       font-family: "Safra Sans", sans-serif;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 400;
-      color: black;
+      color: white;
       line-height: 1.6;
       margin-bottom: 10px;
-    }
-    
-    .trial-info p:last-child {
-      margin-bottom: 0;
     }
 
     .trial-info ul {
       font-family: "Safra Sans", sans-serif;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 400;
-      color: black;
+      color: white;
       line-height: 1.6;
       margin-left: 20px;
-      margin-bottom: 30px;
     }
 
     .trial-info li {
@@ -133,10 +128,10 @@
 
     .trial-form-section h3 {
       font-family: "Safra Sans", sans-serif;
-      font-size: 20px;
+      font-size: 24px;
       font-weight: 700;
-      color: black;
-      margin-bottom: 5px;
+      color: white;
+      margin-bottom: 30px;
     }
 
     .trial-btn {
@@ -144,9 +139,9 @@
       font-size: 16px;
       font-weight: 400;
       padding: 15px 30px;
-      border: 1px solid black;
-      background: black;
-      color: white;
+      border: 1px solid white;
+      background: white;
+      color: black;
       cursor: pointer;
       transition: all 0.3s ease;
       text-decoration: none;
@@ -157,34 +152,34 @@
 
     .trial-btn:hover {
       background: transparent;
-      color: black;
+      color: white;
     }
 
     .contact-section {
       margin-top: 60px;
       padding-top: 40px;
-      border-top: 1px solid black;
+      border-top: 1px solid white;
       text-align: left;
     }
 
     .contact-section h3 {
       font-family: "Safra Sans", sans-serif;
-      font-size: 20px;
+      font-size: 24px;
       font-weight: 700;
-      color: black;
-      margin-bottom: 5px;
+      color: white;
+      margin-bottom: 20px;
     }
 
     .contact-section p {
       font-family: "Safra Sans", sans-serif;
       font-size: 18px;
       font-weight: 400;
-      color: black;
+      color: white;
       line-height: 1.6;
     }
 
     .contact-section a {
-      color: black;
+      color: white;
       text-decoration: underline;
     }
 
@@ -197,20 +192,7 @@
       text-decoration: underline !important;
     }
 
-    .footer-nav-link:hover {
-      opacity: 1;
-      color: black;
-      text-decoration: underline;
-    }
-
-    .footer-linkedin-btn:hover {
-      background: black;
-      color: white;
-      border: 1px solid black;
-    }
-
     /* Footer Styles */
-    /*
     #footer-container {
       border: none;
       background: black;
@@ -258,19 +240,18 @@
       height: calc(100vh - 214px);
       min-height: 553px;
     }
-    */
 
     .nav-brand, .nav-link {
-      color: black;
+      color: white;
       margin-top: 28px;
     }
 
     .nav-links {
-      /*filter: invert(1);*/
+      filter: invert(1);
     }
 
     .nav-brand a {
-      color: black;
+      color: white;
       text-decoration: none;
     }
 
@@ -280,7 +261,7 @@
 
     .multilingual-marquee,
     .image-marquee {
-      /*filter: invert(1);*/
+      filter: invert(1);
     }
 
     .sticky-nav {
@@ -303,9 +284,9 @@
       top: 29px;
       right: 29px;
       z-index: 1000;
-      background: #000;
-      color: #fff;
-      border: 2px solid #fff;
+      background: #fff;
+      color: #000;
+      border: 2px solid #000;
       padding: 12px 24px;
       border-radius: 25px;
       font-family: "Safra Mono", monospace;
@@ -313,29 +294,28 @@
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
 
     .sticky-trial-btn {
       padding: 7px 10px;
-      border: 1px solid black;
-      background: white;
+      border: 1px solid white;
+      background: black;
       font-family: "Safra Mono", monospace;
       font-size: 14px;
       font-weight: 400;
       cursor: pointer;
       transition: all 0.3s ease;
       text-decoration: none;
-      color: black;
+      color: white;
       display: inline-block;
       border-radius: 4px;
       line-height: 17px;
     }
 
     .sticky-trial-btn:hover {
-      background: black;
-      color: white;
-      border: 1px solid black;
+      background: white;
+      color: black;
     }
 
     @media (max-width: 768px) {
@@ -372,7 +352,6 @@
 
       .contact-section h3 {
         font-size: 20px;
-        margin-bottom: 5px;
       }
 
       .contact-section p {
@@ -407,7 +386,7 @@
       }
 
       .mobile-hamburger-circle.solid {
-        /*filter: invert(1);*/
+        filter: invert(1);
       }
     }
   </style>
@@ -497,7 +476,7 @@
 
             <div class="trial-form-section">
               <h3>Request Trial Fonts</h3>
-              <p style="font-family: 'Safra Sans', sans-serif; font-size: 18px; color: black; line-height: 1.6; margin-bottom: 30px;">
+              <p style="font-family: 'Safra Sans', sans-serif; font-size: 18px; color: white; line-height: 1.6; margin-bottom: 30px;">
                 Download trial versions of our typefaces to test them in your projects before purchasing a full license.
               </p>
               <button type="button" class="trial-btn" id="trialBtn">Request Trial Fonts</button>

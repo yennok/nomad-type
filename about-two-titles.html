@@ -49,6 +49,19 @@
       display: grid;
       grid-template-columns: 2fr 3fr 1fr;
       gap: 60px;
+      align-items: start;
+    }
+    
+    .about-section {
+      display: contents;
+    }
+    
+    .about-section-title {
+      grid-column: 1;
+    }
+    
+    .about-section-content {
+      grid-column: 2;
     }
 
 
@@ -61,10 +74,19 @@
       line-height: 1.4;
       letter-spacing: -0.02em;
       text-align: left;
-      position: sticky;
-      top: 100px;
-      align-self: start;
-      transform: translateY(3px);
+      transform: translateY(-9px);
+    }
+    
+    .contact-title {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 36px;
+      font-weight: 400;
+      color: black;
+      margin: 0;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+      text-align: left;
+      transform: translateY(-9px);
     }
 
     .about-text {
@@ -81,17 +103,9 @@
     }
 
     .contact-info {
-      margin-top: 80px;
-      /* padding-top: 40px;*/
-      /*border-top: 1px solid black;*/
-    }
-
-    .contact-info h3 {
-      font-family: "Safra Sans", sans-serif;
-      font-size: 20px;
-      font-weight: 700;
-      color: black;
-      margin-bottom: 4px;
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
     }
 
     .contact-info p {
@@ -109,6 +123,11 @@
 
     .contact-info a:hover {
       text-decoration: none;
+    }
+    
+    /* Ensure all mail@nomad-type.com links are underlined */
+    a[href*="mail@nomad-type.com"] {
+      text-decoration: underline !important;
     }
 
     /* Footer Styles */
@@ -244,11 +263,24 @@
         grid-template-columns: 1fr;
         gap: 30px;
       }
+      
+      .about-section-title {
+        grid-column: 1;
+      }
+      
+      .about-section-content {
+        grid-column: 1;
+      }
 
-      .about-title {
+      .about-title,
+      .contact-title {
         font-size: 24px;
         margin: 0;
         position: static;
+      }
+      
+      .about-section + .about-section {
+        margin-top: 40px;
       }
 
       .about-text {
@@ -352,12 +384,12 @@
 
   <div class="main-container">
     <div class="about-content">
-      <div class="about-title-column">
-        <h1 class="about-title">About Nomad Type</h1>
-      </div>
-      
-      <div class="about-text-column">
-        <div class="about-text-content">
+      <!-- First section: About Nomad Type -->
+      <div class="about-section">
+        <div class="about-section-title">
+          <h1 class="about-title">About Nomad Type</h1>
+        </div>
+        <div class="about-section-content">
           <p class="about-text">
             Nomad Type is an independent foundry focused on multilingual typefaces for Hebrew, Arabic, and Latin. We design families that let each script keep its voice while working together across print, screen, and motion.
           </p>
@@ -369,11 +401,18 @@
           <p class="about-text">
             Nomad Type is led by Nir Zabari Yenni, a type designer and lecturer in Visual Communication at Shenkar College. He teaches complex typography and interactive media, works between print and screen, and holds an MA in Type Design from ECAL in Lausanne.
           </p>
-          
+        </div>
+      </div>
+      
+      <!-- Second section: Get in Touch -->
+      <div class="about-section">
+        <div class="about-section-title">
+          <h2 class="contact-title">Get in Touch</h2>
+        </div>
+        <div class="about-section-content">
           <div class="contact-info">
-            <h3>Get in Touch</h3>
             <p>
-              Questions about a project, licensing, or collaboration? Drop a line at <a href="mailto:nir@yennok.com">nir@yennok.com</a>. The footer links below also have direct ways to reach us.
+              Questions about a project, licensing, or collaboration? Drop a line at <a href="mailto:mail@nomad-type.com" style="white-space: nowrap;">mail@nomad-type.com</a>. The footer links below also have direct ways to reach us.
             </p>
           </div>
         </div>
