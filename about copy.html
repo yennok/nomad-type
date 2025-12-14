@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FAQ - Nomad Type</title>
+  <title>About - Nomad Type</title>
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/favicon.png">
@@ -14,10 +14,10 @@
   <meta property="og:image" content="assets/featured_image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Nomad Type - FAQ">
+  <meta property="og:image:alt" content="Nomad Type - About">
   <meta name="twitter:image" content="assets/featured_image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image:alt" content="Nomad Type - FAQ">
+  <meta name="twitter:image:alt" content="Nomad Type - About">
   <link rel="stylesheet" href="styles.css">
   <style>
     * {
@@ -42,7 +42,7 @@
       padding: 240px 0 60px;
     }
 
-    .faq-content {
+    .about-content {
       margin: 0 auto;
       padding: 0 90px;
       color: white;
@@ -51,15 +51,8 @@
       gap: 60px;
     }
 
-    .faq-title-column {
-      /* First column for title */
-    }
 
-    .faq-text-column {
-      /* Second column for content */
-    }
-
-    .faq-title {
+    .about-title {
       font-family: "Safra Sans", sans-serif;
       font-size: 36px;
       font-weight: 400;
@@ -74,98 +67,34 @@
       transform: translateY(-9px);
     }
 
-    .faq-list {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
+    .about-text {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: white;
+      line-height: 1.6;
+      margin: 0 0 20px 0;
     }
 
-    .faq-item {
-      border-bottom: 1px solid white;
-      padding-bottom: 6px;
+    .about-text:last-child {
+      margin-bottom: 0;
     }
 
-    .faq-item:last-child {
-      border-bottom: none;
+    .contact-info {
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid white;
     }
 
-    .faq-question {
+    .contact-info h3 {
       font-family: "Safra Sans", sans-serif;
       font-size: 20px;
       font-weight: 700;
       color: white;
-      margin-bottom: 0;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 0;
-      user-select: none;
-      transition: color 0.3s ease;
-    }
-    
-    .faq-item:first-child .faq-question {
-      padding-top: 5px;
-    }
-    
-    .faq-question:hover {
-      color: #ccc;
-    }
-    
-    .faq-question::after {
-      content: '+';
-      font-size: 24px;
-      font-weight: 300;
-      color: white;
-      transition: transform 0.3s ease;
-      flex-shrink: 0;
-      margin-left: 20px;
-    }
-    
-    .faq-item.active .faq-question::after {
-      content: '−';
-      transform: rotate(0deg);
+      margin-bottom: 12px;
     }
 
-    .faq-answer {
-      font-family: "Safra Sans", sans-serif;
-      font-size: 16px;
-      font-weight: 400;
-      color: #ccc;
-      line-height: 1.6;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out, margin 0.3s ease-in-out;
-      padding: 0;
-      margin: 0;
-    }
-    
-    .no-transition .faq-answer {
-      transition: none;
-    }
-    
-    .faq-item.active .faq-answer {
-      max-height: 500px;
-      padding-top: 0px;
-      margin-bottom: 21px;
-    }
-
-    .contact-section {
-      margin-top: 60px;
-      padding-top: 40px;
-      border-top: none;
-      text-align: left;
-    }
-
-    .contact-section h3 {
-      font-family: "Safra Sans", sans-serif;
-      font-size: 24px;
-      font-weight: 700;
-      color: white;
-      margin-bottom: 20px;
-    }
-
-    .contact-section p {
+    .contact-info p {
       font-family: "Safra Sans", sans-serif;
       font-size: 18px;
       font-weight: 400;
@@ -173,12 +102,12 @@
       line-height: 1.6;
     }
 
-    .contact-section a {
+    .contact-info a {
       color: white;
       text-decoration: underline;
     }
 
-    .contact-section a:hover {
+    .contact-info a:hover {
       text-decoration: none;
     }
 
@@ -249,11 +178,6 @@
       text-decoration: none;
     }
 
-    .multilingual-marquee,
-    .image-marquee {
-      filter: invert(1);
-    }
-
     .sticky-nav {
       position: absolute;
       height: 0;
@@ -308,44 +232,34 @@
       color: black;
     }
 
+    .multilingual-marquee,
+    .image-marquee {
+      filter: invert(1);
+    }
+
     @media (max-width: 768px) {
-      .faq-content {
+      .about-content {
         grid-template-columns: 1fr;
         gap: 30px;
       }
 
-      .faq-title {
+      .about-title {
         font-size: 24px;
         margin: 0;
         position: static;
       }
 
-
-      .faq-question {
-        font-size: 18px;
-        padding: 12px 0;
-      }
-      
-      .faq-question::after {
-        font-size: 20px;
-        margin-left: 15px;
-      }
-
-      .faq-answer {
+      .about-text {
         font-size: 18px;
         line-height: 1.6;
       }
-      
-      .faq-item.active .faq-answer {
-        padding-top: 0px;
-        margin-bottom: 21px;
-      }
 
-      .contact-section h3 {
+      .contact-info h3 {
         font-size: 20px;
+        margin-bottom: 12px;
       }
 
-      .contact-section p {
+      .contact-info p {
         font-size: 18px;
         line-height: 1.6;
       }
@@ -354,7 +268,7 @@
         padding: 16.7rem 0 110px;
       }
 
-      .faq-content {
+      .about-content {
         padding: 0 18px;
       }
 
@@ -435,61 +349,29 @@
   </div>
 
   <div class="main-container">
-    <div class="faq-content">
-      <div class="faq-title-column">
-        <h1 class="faq-title">Frequently Asked Questions</h1>
+    <div class="about-content">
+      <div class="about-title-column">
+        <h1 class="about-title">About Nomad Type</h1>
       </div>
       
-      <div class="faq-text-column">
-        <div class="faq-text-content">
-          <div class="faq-list">
-            <div class="faq-item">
-              <h3 class="faq-question">What makes Nomad Type different from other foundries?</h3>
-              <p class="faq-answer">
-                We specialize in multilingual type design, creating typefaces that work seamlessly across Hebrew, Arabic, and Latin scripts. Our approach balances cultural authenticity with contemporary design, ensuring each script maintains its unique character while working harmoniously together.
-              </p>
-            </div>
-            
-            <div class="faq-item">
-              <h3 class="faq-question">How do I download trial fonts?</h3>
-              <p class="faq-answer">
-                You can download trial versions of our fonts directly from our website. Trial fonts include a limited character set and are watermarked, but they're perfect for testing and evaluating our typefaces for your projects.
-              </p>
-            </div>
-            
-            <div class="faq-item">
-              <h3 class="faq-question">What licensing options do you offer?</h3>
-              <p class="faq-answer">
-                We offer flexible licensing options including desktop, web, and app licenses. Our pricing is designed to be fair and accessible, from individual designers to large studios. Each license includes clear usage terms and technical support.
-              </p>
-            </div>
-            
-            <div class="faq-item">
-              <h3 class="faq-question">Do your fonts support all languages?</h3>
-              <p class="faq-answer">
-                Our typefaces are designed with specific focus on Hebrew, Arabic, and Latin scripts. While we don't claim universal language support, our multilingual approach ensures excellent coverage for languages using these writing systems.
-              </p>
-            </div>
-            
-            <div class="faq-item">
-              <h3 class="faq-question">Can I use your fonts for commercial projects?</h3>
-              <p class="faq-answer">
-                Yes, with the appropriate license. Our commercial licenses allow you to use our fonts in client work, publications, and other commercial applications. Please review our licensing terms for specific usage rights and restrictions.
-              </p>
-            </div>
-            
-            <div class="faq-item">
-              <h3 class="faq-question">Do you offer custom type design services?</h3>
-              <p class="faq-answer">
-                We're always interested in discussing custom projects, especially those involving multilingual design challenges. Feel free to reach out to discuss your specific needs and how we might collaborate.
-              </p>
-            </div>
-          </div>
+      <div class="about-text-column">
+        <div class="about-text-content">
+          <p class="about-text">
+            Nomad Type is an independent foundry focused on multilingual typefaces for Hebrew, Arabic, and Latin. We design families that let each script keep its voice while working together across print, screen, and motion.
+          </p>
           
-          <div class="contact-section">
-            <h3>Still have questions?</h3>
+          <p class="about-text">
+            Every release is built through research, native consultation, and iterative testing to balance rhythm, legibility, and cultural nuance — from expressive display styles to text cuts made for long reading.
+          </p>
+          
+          <p class="about-text">
+            Nomad Type is led by Nir Zabari Yenni, a type designer and lecturer in Visual Communication at Shenkar College. He teaches complex typography and interactive media, works between print and screen, and holds an MA in Type Design from ECAL in Lausanne.
+          </p>
+          
+          <div class="contact-info">
+            <h3>Get in Touch</h3>
             <p>
-              If you don't see your question answered here, we'd love to hear from you. Reach out to us at <a href="mailto:nir@yennok.com">nir@yennok.com</a> and we'll get back to you as soon as possible.
+              Questions about a project, licensing, or collaboration? Drop a line at <a href="mailto:nir@yennok.com">nir@yennok.com</a>. The footer links below also have direct ways to reach us.
             </p>
           </div>
         </div>
@@ -515,49 +397,6 @@
       if (typeof initCircleMarquee === 'function') {
         initCircleMarquee();
       }
-      
-      // FAQ Accordion functionality
-      const faqQuestions = document.querySelectorAll('.faq-question');
-      const firstFaqItem = document.querySelector('.faq-item');
-      const faqList = document.querySelector('.faq-list');
-      
-      // Disable transitions for initial load
-      if (faqList) {
-        faqList.classList.add('no-transition');
-      }
-      
-      // Open the first FAQ item on page load (without animation)
-      if (firstFaqItem) {
-        firstFaqItem.classList.add('active');
-      }
-      
-      // Re-enable transitions after a short delay
-      setTimeout(function() {
-        if (faqList) {
-          faqList.classList.remove('no-transition');
-        }
-      }, 50);
-      
-      faqQuestions.forEach(question => {
-        question.addEventListener('click', function() {
-          const faqItem = this.parentElement;
-          const isActive = faqItem.classList.contains('active');
-          
-          // Close all other FAQ items (optional - remove if you want multiple open)
-          // document.querySelectorAll('.faq-item').forEach(item => {
-          //   if (item !== faqItem) {
-          //     item.classList.remove('active');
-          //   }
-          // });
-          
-          // Toggle current item
-          if (isActive) {
-            faqItem.classList.remove('active');
-          } else {
-            faqItem.classList.add('active');
-          }
-        });
-      });
 
       // Circle visibility based on sticky-nav position
       function updateCircleVisibility() {

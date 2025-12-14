@@ -77,12 +77,12 @@
     .faq-list {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 60px;
     }
 
     .faq-item {
       border-bottom: 1px solid white;
-      padding-bottom: 6px;
+      padding-bottom: 60px;
     }
 
     .faq-item:last-child {
@@ -94,37 +94,7 @@
       font-size: 20px;
       font-weight: 700;
       color: white;
-      margin-bottom: 0;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 0;
-      user-select: none;
-      transition: color 0.3s ease;
-    }
-    
-    .faq-item:first-child .faq-question {
-      padding-top: 5px;
-    }
-    
-    .faq-question:hover {
-      color: #ccc;
-    }
-    
-    .faq-question::after {
-      content: '+';
-      font-size: 24px;
-      font-weight: 300;
-      color: white;
-      transition: transform 0.3s ease;
-      flex-shrink: 0;
-      margin-left: 20px;
-    }
-    
-    .faq-item.active .faq-question::after {
-      content: '−';
-      transform: rotate(0deg);
+      margin-bottom: 10px;
     }
 
     .faq-answer {
@@ -133,21 +103,6 @@
       font-weight: 400;
       color: #ccc;
       line-height: 1.6;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out, margin 0.3s ease-in-out;
-      padding: 0;
-      margin: 0;
-    }
-    
-    .no-transition .faq-answer {
-      transition: none;
-    }
-    
-    .faq-item.active .faq-answer {
-      max-height: 500px;
-      padding-top: 0px;
-      margin-bottom: 21px;
     }
 
     .contact-section {
@@ -323,22 +278,11 @@
 
       .faq-question {
         font-size: 18px;
-        padding: 12px 0;
-      }
-      
-      .faq-question::after {
-        font-size: 20px;
-        margin-left: 15px;
       }
 
       .faq-answer {
         font-size: 18px;
         line-height: 1.6;
-      }
-      
-      .faq-item.active .faq-answer {
-        padding-top: 0px;
-        margin-bottom: 21px;
       }
 
       .contact-section h3 {
@@ -515,49 +459,6 @@
       if (typeof initCircleMarquee === 'function') {
         initCircleMarquee();
       }
-      
-      // FAQ Accordion functionality
-      const faqQuestions = document.querySelectorAll('.faq-question');
-      const firstFaqItem = document.querySelector('.faq-item');
-      const faqList = document.querySelector('.faq-list');
-      
-      // Disable transitions for initial load
-      if (faqList) {
-        faqList.classList.add('no-transition');
-      }
-      
-      // Open the first FAQ item on page load (without animation)
-      if (firstFaqItem) {
-        firstFaqItem.classList.add('active');
-      }
-      
-      // Re-enable transitions after a short delay
-      setTimeout(function() {
-        if (faqList) {
-          faqList.classList.remove('no-transition');
-        }
-      }, 50);
-      
-      faqQuestions.forEach(question => {
-        question.addEventListener('click', function() {
-          const faqItem = this.parentElement;
-          const isActive = faqItem.classList.contains('active');
-          
-          // Close all other FAQ items (optional - remove if you want multiple open)
-          // document.querySelectorAll('.faq-item').forEach(item => {
-          //   if (item !== faqItem) {
-          //     item.classList.remove('active');
-          //   }
-          // });
-          
-          // Toggle current item
-          if (isActive) {
-            faqItem.classList.remove('active');
-          } else {
-            faqItem.classList.add('active');
-          }
-        });
-      });
 
       // Circle visibility based on sticky-nav position
       function updateCircleVisibility() {

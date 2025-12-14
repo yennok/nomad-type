@@ -27,7 +27,7 @@
     }
 
     body {
-      background-color: black;
+      background-color: white;
       margin: 0;
       padding: 0;
       overflow-x: hidden;
@@ -45,10 +45,23 @@
     .about-content {
       margin: 0 auto;
       padding: 0 90px;
-      color: white;
+      color: black;
       display: grid;
       grid-template-columns: 2fr 3fr 1fr;
       gap: 60px;
+      align-items: start;
+    }
+    
+    .about-section {
+      display: contents;
+    }
+    
+    .about-section-title {
+      grid-column: 1;
+    }
+    
+    .about-section-content {
+      grid-column: 2;
     }
 
 
@@ -56,14 +69,23 @@
       font-family: "Safra Sans", sans-serif;
       font-size: 36px;
       font-weight: 400;
-      color: white;
+      color: black;
       margin: 0;
       line-height: 1.4;
       letter-spacing: -0.02em;
       text-align: left;
-      position: sticky;
-      top: 100px;
-      align-self: start;
+      transform: translateY(-9px);
+    }
+    
+    .contact-title {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 36px;
+      font-weight: 400;
+      color: black;
+      margin: 0;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+      text-align: left;
       transform: translateY(-9px);
     }
 
@@ -71,7 +93,7 @@
       font-family: "Safra Sans", sans-serif;
       font-size: 18px;
       font-weight: 400;
-      color: white;
+      color: black;
       line-height: 1.6;
       margin: 0 0 20px 0;
     }
@@ -81,29 +103,21 @@
     }
 
     .contact-info {
-      margin-top: 60px;
-      padding-top: 40px;
-      border-top: 1px solid white;
-    }
-
-    .contact-info h3 {
-      font-family: "Safra Sans", sans-serif;
-      font-size: 20px;
-      font-weight: 700;
-      color: white;
-      margin-bottom: 12px;
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
     }
 
     .contact-info p {
       font-family: "Safra Sans", sans-serif;
       font-size: 18px;
       font-weight: 400;
-      color: white;
+      color: black;
       line-height: 1.6;
     }
 
     .contact-info a {
-      color: white;
+      color: black;
       text-decoration: underline;
     }
 
@@ -112,6 +126,7 @@
     }
 
     /* Footer Styles */
+    /*
     #footer-container {
       border: none;
       background: black;
@@ -159,18 +174,19 @@
       height: calc(100vh - 214px);
       min-height: 553px;
     }
+    */
 
     .nav-brand, .nav-link {
-      color: white;
+      color: black;
       margin-top: 28px;
     }
 
     .nav-links {
-      filter: invert(1);
+      /*filter: invert(1);*/
     }
 
     .nav-brand a {
-      color: white;
+      color: black;
       text-decoration: none;
     }
 
@@ -198,9 +214,9 @@
       top: 29px;
       right: 29px;
       z-index: 1000;
-      background: #fff;
-      color: #000;
-      border: 2px solid #000;
+      background: #000;
+      color: #fff;
+      border: 2px solid #fff;
       padding: 12px 24px;
       border-radius: 25px;
       font-family: "Safra Mono", monospace;
@@ -208,33 +224,33 @@
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
     }
 
     .sticky-trial-btn {
       padding: 7px 10px;
-      border: 1px solid white;
-      background: black;
+      border: 1px solid black;
+      background: white;
       font-family: "Safra Mono", monospace;
       font-size: 14px;
       font-weight: 400;
       cursor: pointer;
       transition: all 0.3s ease;
       text-decoration: none;
-      color: white;
+      color: black;
       display: inline-block;
       border-radius: 4px;
       line-height: 17px;
     }
 
     .sticky-trial-btn:hover {
-      background: white;
-      color: black;
+      background: black;
+      color: white;
     }
 
     .multilingual-marquee,
     .image-marquee {
-      filter: invert(1);
+      /*filter: invert(1);*/
     }
 
     @media (max-width: 768px) {
@@ -242,11 +258,24 @@
         grid-template-columns: 1fr;
         gap: 30px;
       }
+      
+      .about-section-title {
+        grid-column: 1;
+      }
+      
+      .about-section-content {
+        grid-column: 1;
+      }
 
-      .about-title {
+      .about-title,
+      .contact-title {
         font-size: 24px;
         margin: 0;
         position: static;
+      }
+      
+      .about-section + .about-section {
+        margin-top: 40px;
       }
 
       .about-text {
@@ -275,7 +304,7 @@
       .cover-buttons {
         display: block !important;
         visibility: visible !important;
-        filter: invert(1);
+        /*filter: invert(1);*/
         opacity: 1;
         transition: opacity 0.3s ease;
       }
@@ -291,7 +320,7 @@
       }
 
       .mobile-hamburger-circle.solid {
-        filter: invert(1);
+        /*filter: invert(1);*/
       }
     }
   </style>
@@ -350,12 +379,12 @@
 
   <div class="main-container">
     <div class="about-content">
-      <div class="about-title-column">
-        <h1 class="about-title">About Nomad Type</h1>
-      </div>
-      
-      <div class="about-text-column">
-        <div class="about-text-content">
+      <!-- First section: About Nomad Type -->
+      <div class="about-section">
+        <div class="about-section-title">
+          <h1 class="about-title">About Nomad Type</h1>
+        </div>
+        <div class="about-section-content">
           <p class="about-text">
             Nomad Type is an independent foundry focused on multilingual typefaces for Hebrew, Arabic, and Latin. We design families that let each script keep its voice while working together across print, screen, and motion.
           </p>
@@ -367,9 +396,16 @@
           <p class="about-text">
             Nomad Type is led by Nir Zabari Yenni, a type designer and lecturer in Visual Communication at Shenkar College. He teaches complex typography and interactive media, works between print and screen, and holds an MA in Type Design from ECAL in Lausanne.
           </p>
-          
+        </div>
+      </div>
+      
+      <!-- Second section: Get in Touch -->
+      <div class="about-section">
+        <div class="about-section-title">
+          <h2 class="contact-title">Get in Touch</h2>
+        </div>
+        <div class="about-section-content">
           <div class="contact-info">
-            <h3>Get in Touch</h3>
             <p>
               Questions about a project, licensing, or collaboration? Drop a line at <a href="mailto:nir@yennok.com">nir@yennok.com</a>. The footer links below also have direct ways to reach us.
             </p>
