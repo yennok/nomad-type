@@ -141,7 +141,7 @@ const footerHTML = `
     </div>
     <div class="footer-column">
       <h3>Collaborations</h3>
-      <p>We're always open to conversations with fellow type designers — whether it's about multilingual design, sharing questions, or exploring collaboration. Feel free to reach out at nir@yennok.com.</p>
+      <p>We're always open to conversations with fellow type designers — whether it's about multilingual design, sharing questions, or exploring collaboration. Feel free to reach out at <a href="mailto:mail@nomad-type.com">mail@nomad-type.com</a>.</p>
     </div>
   </div>
 </section>

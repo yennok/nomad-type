@@ -27,7 +27,7 @@
     }
 
     body {
-      background-color: black;
+      background-color: white;
       margin: 0;
       padding: 0;
       overflow-x: hidden;
@@ -45,7 +45,7 @@
     .faq-content {
       margin: 0 auto;
       padding: 0 90px;
-      color: white;
+      color: black;
       display: grid;
       grid-template-columns: 2fr 3fr 1fr;
       gap: 60px;
@@ -63,7 +63,7 @@
       font-family: "Safra Sans", sans-serif;
       font-size: 36px;
       font-weight: 400;
-      color: white;
+      color: black;
       margin: 0;
       line-height: 1.4;
       letter-spacing: -0.02em;
@@ -71,7 +71,8 @@
       position: sticky;
       top: 100px;
       align-self: start;
-      transform: translateY(-9px);
+     /* transform: translateY(-9px);*/
+           transform: translateY(3px);
     }
 
     .faq-list {
@@ -81,7 +82,7 @@
     }
 
     .faq-item {
-      border-bottom: 1px solid white;
+      border-bottom: 1px solid black;
       padding-bottom: 6px;
     }
 
@@ -93,7 +94,7 @@
       font-family: "Safra Sans", sans-serif;
       font-size: 20px;
       font-weight: 700;
-      color: white;
+      color: black;
       margin-bottom: 0;
       cursor: pointer;
       display: flex;
@@ -104,19 +105,19 @@
       transition: color 0.3s ease;
     }
     
-    .faq-item:first-child .faq-question {
+  /*.faq-item:first-child .faq-question {
       padding-top: 5px;
     }
-    
+    */
     .faq-question:hover {
-      color: #ccc;
+      color: black;
     }
     
     .faq-question::after {
       content: '+';
       font-size: 24px;
       font-weight: 300;
-      color: white;
+      color: black;
       transition: transform 0.3s ease;
       flex-shrink: 0;
       margin-left: 20px;
@@ -129,13 +130,13 @@
 
     .faq-answer {
       font-family: "Safra Sans", sans-serif;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 400;
-      color: #ccc;
+      color: black;
       line-height: 1.6;
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out, margin 0.3s ease-in-out;
+      transition: max-height 0.3s ease, padding 0.3s ease, margin 0.3s ease;
       padding: 0;
       margin: 0;
     }
@@ -159,22 +160,22 @@
 
     .contact-section h3 {
       font-family: "Safra Sans", sans-serif;
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 700;
-      color: white;
-      margin-bottom: 20px;
+      color: black;
+      margin-bottom: 4px;
     }
 
     .contact-section p {
       font-family: "Safra Sans", sans-serif;
       font-size: 18px;
       font-weight: 400;
-      color: white;
+      color: black;
       line-height: 1.6;
     }
 
     .contact-section a {
-      color: white;
+      color: black;
       text-decoration: underline;
     }
 
@@ -183,6 +184,7 @@
     }
 
     /* Footer Styles */
+    /*
     #footer-container {
       border: none;
       background: black;
@@ -230,18 +232,19 @@
       height: calc(100vh - 214px);
       min-height: 553px;
     }
+    */
 
     .nav-brand, .nav-link {
-      color: white;
+      color: black;
       margin-top: 28px;
     }
 
     .nav-links {
-      filter: invert(1);
+      /*filter: invert(1);*/
     }
 
     .nav-brand a {
-      color: white;
+      color: black;
       text-decoration: none;
     }
 
@@ -251,7 +254,7 @@
 
     .multilingual-marquee,
     .image-marquee {
-      filter: invert(1);
+      /*filter: invert(1);*/
     }
 
     .sticky-nav {
@@ -274,9 +277,9 @@
       top: 29px;
       right: 29px;
       z-index: 1000;
-      background: #fff;
-      color: #000;
-      border: 2px solid #000;
+      background: #000;
+      color: #fff;
+      border: 2px solid #fff;
       padding: 12px 24px;
       border-radius: 25px;
       font-family: "Safra Mono", monospace;
@@ -284,28 +287,28 @@
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
     }
 
     .sticky-trial-btn {
       padding: 7px 10px;
-      border: 1px solid white;
-      background: black;
+      border: 1px solid black;
+      background: white;
       font-family: "Safra Mono", monospace;
       font-size: 14px;
       font-weight: 400;
       cursor: pointer;
       transition: all 0.3s ease;
       text-decoration: none;
-      color: white;
+      color: black;
       display: inline-block;
       border-radius: 4px;
       line-height: 17px;
     }
 
     .sticky-trial-btn:hover {
-      background: white;
-      color: black;
+      background: black;
+      color: white;
     }
 
     @media (max-width: 768px) {
@@ -361,7 +364,7 @@
       .cover-buttons {
         display: block !important;
         visibility: visible !important;
-        filter: invert(1);
+        /*filter: invert(1);*/
         opacity: 1;
         transition: opacity 0.3s ease;
       }
@@ -377,7 +380,7 @@
       }
 
       .mobile-hamburger-circle.solid {
-        filter: invert(1);
+        /*filter: invert(1);*/
       }
     }
   </style>
@@ -489,7 +492,7 @@
           <div class="contact-section">
             <h3>Still have questions?</h3>
             <p>
-              If you don't see your question answered here, we'd love to hear from you. Reach out to us at <a href="mailto:nir@yennok.com">nir@yennok.com</a> and we'll get back to you as soon as possible.
+              If you don't see your question answered here, we'd love to hear from you. Reach out to us at <a href="mailto:mail@nomad-type.com">mail@nomad-type.com</a> and we'll get back to you as soon as possible.
             </p>
           </div>
         </div>
