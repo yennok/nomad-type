@@ -123,7 +123,8 @@
       flex-direction: column;
     }
 
-    .license-type h3 {
+    .license-type h3,
+    .license-type .license-header {
       font-family: "Safra Sans", sans-serif;
       font-size: 24px;
       font-weight: 700;
@@ -132,6 +133,10 @@
       margin-bottom: 15px;
       border-bottom: 1px solid black;
       padding-bottom: 15px;
+    }
+
+    .license-content {
+      /* Content wrapper for accordion */
     }
 
     .license-type p {
@@ -412,23 +417,96 @@
 
       .licenses-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 0;
         margin-bottom: 30px;
       }
 
       .license-type,
       .pricing-section {
-        padding: 20px;
+        /* padding: 20px; */
+      }
+
+      .license-type {
+        /* border-bottom: 1px solid black; */
+        /* padding: 0px 0px 25px; */
+        padding: 0px 0px 0px;
       }
 
       .license-type h3,
+      .license-type .license-header {
+        border-bottom: none;
+      }
+
+      .license-type:first-child {
+        border-top: 1px solid black;
+      }
+
+      .license-type:last-child {
+        border-bottom: 1px solid black;
+      }
+
+      .license-type h3,
+      .license-type .license-header,
       .pricing-section h3 {
         font-size: 20px;
       }
 
-      .license-type p,
-      .license-type ul {
+      /* Accordion styles for mobile */
+      .license-type .license-header {
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        user-select: none;
+        transition: color 0.3s ease;
+        margin-bottom: 0;
+        padding-bottom: 15px;
+      }
+
+      .license-type .license-header:hover {
+        color: black;
+      }
+
+      .license-type .license-header::after {
+        content: '+';
+        font-size: 24px;
+        font-weight: 300;
+        color: black;
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+        margin-left: 20px;
+      }
+
+      .license-type.active .license-header::after {
+        content: '−';
+        transform: rotate(0deg);
+      }
+
+      .license-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out, padding 0.3s ease, margin 0.3s ease;
+        padding: 0;
+        margin: 0;
+      }
+
+      .license-type.active .license-content {
+        max-height: 1000px;
+        padding-top: 0px;
+        margin-bottom: 0;
+      }
+
+      .license-type ul li:last-child {
+        margin-bottom: 27px;
+      }
+
+      .license-type p {
         font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .license-type ul {
+        font-size: 14px;
         line-height: 1.6;
       }
 
@@ -451,6 +529,10 @@
 
       .pricing-item p {
         font-size: 12px;
+      }
+
+      .contact-section {
+        padding-top: 0;
       }
 
       .contact-section h3 {
@@ -490,6 +572,11 @@
 
       .mobile-hamburger-circle.solid {
         /*filter: invert(1);*/
+      }
+
+      .sticky-trial-btn {
+        background-color: black;
+        color: white;
       }
     }
   </style>
@@ -556,41 +643,47 @@
         <div class="licensing-text-content">
           <div class="licenses-grid">
             <div class="license-type">
-              <h3>Desktop License</h3>
-              <p>Perfect for print design, branding, and offline use in design tools.</p>
-              <ul>
-                <li>Licensed by number of users: Individual, Studio (up to 5 users), or Company</li>
-                <li>Install on up to 2 devices per licensed user</li>
-                <li>Use in print and digital publications</li>
-                <li>Create logos and branding materials</li>
-                <li>Include fonts in static client presentations</li>
-                <li>Excludes embedding in websites, apps, or software products</li>
-              </ul>
+              <h3 class="license-header">Desktop License</h3>
+              <div class="license-content">
+                <p>Perfect for print design, branding, and offline use in design tools.</p>
+                <ul>
+                  <li>Licensed by number of users: Individual, Studio (up to 5 users), or Company</li>
+                  <li>Install on up to 2 devices per licensed user</li>
+                  <li>Use in print and digital publications</li>
+                  <li>Create logos and branding materials</li>
+                  <li>Include fonts in static client presentations</li>
+                  <li>Excludes embedding in websites, apps, or software products</li>
+                </ul>
+              </div>
             </div>
 
             <div class="license-type">
-              <h3>Web License</h3>
-              <p>For websites and web apps using self&#8209;hosted fonts or @font-face.</p>
-              <ul>
-                <li>Licensed by number of users: Individual, Studio (up to 5 users), or Company</li>
-                <li>Unlimited page views, no tracking required</li>
-                <li>Covers all domains owned by the licensee, for a single brand</li>
-                <li>Fonts provided in WOFF/WOFF2 formats</li>
-                <li>Self-hosting only (no third-party CDN services)</li>
-                <li>Excludes desktop and app installation rights</li>
-              </ul>
+              <h3 class="license-header">Web License</h3>
+              <div class="license-content">
+                <p>For websites and web apps using self&#8209;hosted fonts or @font-face.</p>
+                <ul>
+                  <li>Licensed by number of users: Individual, Studio (up to 5 users), or Company</li>
+                  <li>Unlimited page views, no tracking required</li>
+                  <li>Covers all domains owned by the licensee, for a single brand</li>
+                  <li>Fonts provided in WOFF/WOFF2 formats</li>
+                  <li>Self-hosting only (no third-party CDN services)</li>
+                  <li>Excludes desktop and app installation rights</li>
+                </ul>
+              </div>
             </div>
 
             <div class="license-type">
-              <h3>App License</h3>
-              <p>For embedding fonts in mobile or desktop applications.</p>
-              <ul>
-                <li>Licensed per app title (includes all versions and platforms)</li>
-                <li>Embed in iOS, Android, macOS, and Windows apps</li>
-                <li>Unlimited downloads and updates</li>
-                <li>Source code protection required</li>
-                <li>Excludes use in branding, print, or websites</li>
-              </ul>
+              <h3 class="license-header">App License</h3>
+              <div class="license-content">
+                <p>For embedding fonts in mobile or desktop applications.</p>
+                <ul>
+                  <li>Licensed per app title (includes all versions and platforms)</li>
+                  <li>Embed in iOS, Android, macOS, and Windows apps</li>
+                  <li>Unlimited downloads and updates</li>
+                  <li>Source code protection required</li>
+                  <li>Excludes use in branding, print, or websites</li>
+                </ul>
+              </div>
             </div>
           </div>
 
@@ -735,6 +828,40 @@
 
       // Initialize mobile overlay
       initMobileOverlay();
+
+      // License accordion functionality for mobile
+      function initLicenseAccordion() {
+        const licenseHeaders = document.querySelectorAll('.license-header');
+        const isMobile = window.innerWidth <= 768;
+        
+        if (isMobile) {
+          licenseHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+              const licenseType = this.parentElement;
+              const isActive = licenseType.classList.contains('active');
+              
+              // Toggle current item
+              if (isActive) {
+                licenseType.classList.remove('active');
+              } else {
+                licenseType.classList.add('active');
+              }
+            });
+          });
+        }
+      }
+
+      // Initialize license accordion
+      initLicenseAccordion();
+
+      // Re-initialize on window resize
+      let resizeTimer;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+          initLicenseAccordion();
+        }, 250);
+      });
 
       // Navigation links - force navigation
       const navLinks = document.querySelectorAll('.nav-link, .menu-item');
