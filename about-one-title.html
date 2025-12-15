@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Licensing - Nomad Type</title>
+  <title>About - Nomad Type</title>
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/favicon.png">
@@ -14,10 +14,10 @@
   <meta property="og:image" content="assets/featured_image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Nomad Type - Licensing">
+  <meta property="og:image:alt" content="Nomad Type - About">
   <meta name="twitter:image" content="assets/featured_image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image:alt" content="Nomad Type - Licensing">
+  <meta name="twitter:image:alt" content="Nomad Type - About">
   <link rel="stylesheet" href="styles.css">
   <style>
     * {
@@ -34,7 +34,7 @@
     }
 
     .main-container {
-      min-height: 100vh;
+      /*min-height: 100vh;*/
       overflow: visible;
       position: relative;
       display: flex;
@@ -42,31 +42,20 @@
       padding: 240px 0 60px;
     }
 
-    .licensing-content {
+    .about-content {
       margin: 0 auto;
       padding: 0 90px;
       color: black;
       display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 30px;
-    }
-    
-    .licenses-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-      margin-bottom: 100px;
+      grid-template-columns: 2fr 3fr 1fr;
+      gap: 60px;
     }
 
-    .licensing-title-column {
-      /* First column for title */
+    .about-text-column {
+      margin-top: 15px;
     }
 
-    .licensing-text-column {
-      /* Second column for content */
-    }
-
-    .licensing-title {
+    .about-title {
       font-family: "Safra Sans", sans-serif;
       font-size: 36px;
       font-weight: 400;
@@ -81,157 +70,34 @@
       transform: translateY(3px);
     }
 
-    .licensing-intro {
+    .about-text {
       font-family: "Safra Sans", sans-serif;
       font-size: 18px;
       font-weight: 400;
       color: black;
       line-height: 1.6;
       margin: 0 0 20px 0;
-      text-align: left;
     }
 
-    .licensing-text-section {
-      margin-bottom: 30px;
-      max-width: 665px;
+    .about-text:last-child {
+      margin-bottom: 0;
     }
 
-    .licensing-text-section h3 {
+    .contact-info {
+      margin-top: 80px;
+      /* padding-top: 40px;*/
+      /*border-top: 1px solid black;*/
+    }
+
+    .contact-info h3 {
       font-family: "Safra Sans", sans-serif;
       font-size: 20px;
       font-weight: 700;
       color: black;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
 
-    .licensing-text-section p {
-      font-family: "Safra Sans", sans-serif;
-      font-size: 18px;
-      font-weight: 400;
-      color: black;
-      line-height: 1.6;
-      margin: 0;
-    }
-
-    .license-type {
-      background: white;
-      border-bottom: 1px solid black;
-      padding: 0px 0px 25px;
-      margin-bottom: 0;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .license-type h3 {
-      font-family: "Safra Sans", sans-serif;
-      font-size: 24px;
-      font-weight: 700;
-      color: black;
-      margin-top: 15px;
-      margin-bottom: 15px;
-      border-bottom: 1px solid black;
-      padding-bottom: 15px;
-    }
-
-    .license-type p {
-      font-family: "Safra Sans", sans-serif;
-      font-size: 18px;
-      font-weight: 400;
-      color: black;
-      line-height: 1.6;
-      margin-bottom: 30px;
-    }
-
-    .license-type ul {
-      font-family: "Safra Mono", sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      color: black;
-      line-height: 1.6;
-      margin-left: 13px;
-    }
-
-    .license-type li {
-      margin-bottom: 15px;
-    }
-
-    .license-type ul li:last-child {
-      margin-bottom: 0;
-    }
-
-    .pricing-section {
-      background: white;
-      border: 1px solid black;
-      border-radius: 8px;
-      padding: 30px;
-      margin: 40px 0;
-      text-align: center;
-      display: none;
-    }
-
-    .pricing-section h3 {
-      font-family: "Safra Sans", sans-serif;
-      font-size: 24px;
-      font-weight: 700;
-      color: black;
-      margin-bottom: 20px;
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
-    }
-
-    .pricing-item {
-      background: white;
-      border: 1px solid black;
-      border-radius: 4px;
-      padding: 20px;
-    }
-
-    .pricing-item h4 {
-      font-family: "Safra Sans", sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: black;
-      margin-bottom: 10px;
-    }
-
-    .pricing-item .price {
-      font-family: "Safra Mono", monospace;
-      font-size: 24px;
-      font-weight: 400;
-      color: black;
-      margin-bottom: 10px;
-    }
-
-    .pricing-item p {
-      font-family: "Safra Sans", sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      color: black;
-      line-height: 1.4;
-    }
-
-    .contact-section {
-      /* margin-top: 60px; */
-      /* padding-top: 40px; */
-      text-align: left;
-      max-width: 665px;
-    }
-
-    .contact-section h3 {
-      font-family: "Safra Sans", sans-serif;
-      font-size: 20px;
-      font-weight: 700;
-      color: black;
-      margin-bottom: 5px;
-    }
-
-    .contact-section p {
+    .contact-info p {
       font-family: "Safra Sans", sans-serif;
       font-size: 18px;
       font-weight: 400;
@@ -239,12 +105,12 @@
       line-height: 1.6;
     }
 
-    .contact-section a {
+    .contact-info a {
       color: black;
       text-decoration: underline;
     }
 
-    .contact-section a:hover {
+    .contact-info a:hover {
       text-decoration: none;
     }
     
@@ -253,20 +119,9 @@
       text-decoration: underline !important;
     }
 
-    .footer-nav-link:hover {
-      opacity: 1;
-      color: black;
-      text-decoration: underline;
-    }
-
-    .footer-linkedin-btn:hover {
-      background: black;
-      color: white;
-      border: 1px solid black;
-    }
-
     /* Footer Styles */
-    /*#footer-container {
+    /*
+    #footer-container {
       border: none;
       background: black;
     }
@@ -312,7 +167,8 @@
     .footer-content-section {
       height: calc(100vh - 214px);
       min-height: 553px;
-    }*/
+    }
+    */
 
     .nav-brand, .nav-link {
       color: black;
@@ -330,11 +186,6 @@
 
     .nav-brand a:hover {
       text-decoration: none;
-    }
-
-    .multilingual-marquee,
-    .image-marquee {
-      /*filter: invert(1);*/
     }
 
     .sticky-nav {
@@ -389,75 +240,36 @@
     .sticky-trial-btn:hover {
       background: black;
       color: white;
-      border: 1px solid black;
+    }
+
+    .multilingual-marquee,
+    .image-marquee {
+      /*filter: invert(1);*/
     }
 
     @media (max-width: 768px) {
-      .licensing-content {
+      .about-content {
         grid-template-columns: 1fr;
         gap: 30px;
       }
 
-      .licensing-title {
+      .about-title {
         font-size: 24px;
         margin: 0;
         position: static;
       }
 
-      .licensing-intro {
-        font-size: 18px;
-        line-height: 1.6;
-        margin-bottom: 40px;
-      }
-
-      .licenses-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        margin-bottom: 30px;
-      }
-
-      .license-type,
-      .pricing-section {
-        padding: 20px;
-      }
-
-      .license-type h3,
-      .pricing-section h3 {
-        font-size: 20px;
-      }
-
-      .license-type p,
-      .license-type ul {
+      .about-text {
         font-size: 18px;
         line-height: 1.6;
       }
 
-      .pricing-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-      }
-
-      .pricing-item {
-        padding: 15px;
-      }
-
-      .pricing-item h4 {
-        font-size: 16px;
-      }
-
-      .pricing-item .price {
+      .contact-info h3 {
         font-size: 20px;
+        margin-bottom: 12px;
       }
 
-      .pricing-item p {
-        font-size: 12px;
-      }
-
-      .contact-section h3 {
-        font-size: 20px;
-      }
-
-      .contact-section p {
+      .contact-info p {
         font-size: 18px;
         line-height: 1.6;
       }
@@ -466,7 +278,7 @@
         padding: 16.7rem 0 110px;
       }
 
-      .licensing-content {
+      .about-content {
         padding: 0 18px;
       }
 
@@ -547,98 +359,29 @@
   </div>
 
   <div class="main-container">
-    <div class="licensing-content">
-      <div class="licensing-title-column">
-        <h1 class="licensing-title">Licensing</h1>
+    <div class="about-content">
+      <div class="about-title-column">
+        <h1 class="about-title">About Nomad Type</h1>
       </div>
       
-      <div class="licensing-text-column">
-        <div class="licensing-text-content">
-          <div class="licenses-grid">
-            <div class="license-type">
-              <h3>Desktop License</h3>
-              <p>Perfect for print design, branding, and offline use in design tools.</p>
-              <ul>
-                <li>Licensed by number of users: Individual, Studio (up to 5 users), or Company</li>
-                <li>Install on up to 2 devices per licensed user</li>
-                <li>Use in print and digital publications</li>
-                <li>Create logos and branding materials</li>
-                <li>Include fonts in static client presentations</li>
-                <li>Excludes embedding in websites, apps, or software products</li>
-              </ul>
-            </div>
-
-            <div class="license-type">
-              <h3>Web License</h3>
-              <p>For websites and web apps using self&#8209;hosted fonts or @font-face.</p>
-              <ul>
-                <li>Licensed by number of users: Individual, Studio (up to 5 users), or Company</li>
-                <li>Unlimited page views, no tracking required</li>
-                <li>Covers all domains owned by the licensee, for a single brand</li>
-                <li>Fonts provided in WOFF/WOFF2 formats</li>
-                <li>Self-hosting only (no third-party CDN services)</li>
-                <li>Excludes desktop and app installation rights</li>
-              </ul>
-            </div>
-
-            <div class="license-type">
-              <h3>App License</h3>
-              <p>For embedding fonts in mobile or desktop applications.</p>
-              <ul>
-                <li>Licensed per app title (includes all versions and platforms)</li>
-                <li>Embed in iOS, Android, macOS, and Windows apps</li>
-                <li>Unlimited downloads and updates</li>
-                <li>Source code protection required</li>
-                <li>Excludes use in branding, print, or websites</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="pricing-section">
-            <h3>Pricing</h3>
-            <p>Fair pricing for every project size. Contact us for custom licensing or volume discounts.</p>
-            
-            <div class="pricing-grid">
-              <div class="pricing-item">
-                <h4>Desktop</h4>
-                <div class="price">$45</div>
-                <p>Single typeface, all weights</p>
-              </div>
-              
-              <div class="pricing-item">
-                <h4>Web</h4>
-                <div class="price">$75</div>
-                <p>Single typeface, all weights</p>
-              </div>
-              
-              <div class="pricing-item">
-                <h4>App</h4>
-                <div class="price">$125</div>
-                <p>Single typeface, all weights</p>
-              </div>
-              
-              <div class="pricing-item">
-                <h4>Complete</h4>
-                <div class="price">$200</div>
-                <p>All formats, unlimited usage</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="licensing-text-section">
-            <h3>Student & Educational Discounts</h3>
-            <p>We offer 50% discounts for students and educational institutions. Contact us with your student ID or institutional email for verification.</p>
-          </div>
-
-          <div class="licensing-text-section">
-            <h3>Custom Licensing</h3>
-            <p>Need something different? We're happy to discuss custom licensing arrangements for large projects, extended usage rights, or special requirements. Contact us to discuss your specific needs.</p>
-          </div>
+      <div class="about-text-column">
+        <div class="about-text-content">
+          <p class="about-text">
+            Nomad Type is an independent foundry focused on multilingual typefaces for Hebrew, Arabic, and Latin. We design families that let each script keep its voice while working together across print, screen, and motion.
+          </p>
           
-          <div class="contact-section">
-            <h3>Questions about licensing?</h3>
+          <p class="about-text">
+            Every release is built through research, native consultation, and iterative testing to balance rhythm, legibility, and cultural nuance — from expressive display styles to text cuts made for long reading.
+          </p>
+          
+          <p class="about-text">
+            Nomad Type is led by Nir Zabari Yenni, a type designer and lecturer in Visual Communication at Shenkar College. He teaches complex typography and interactive media, works between print and screen, and holds an MA in Type Design from ECAL in Lausanne.
+          </p>
+          
+          <div class="contact-info">
+            <h3>Get in Touch</h3>
             <p>
-              If you have questions about which license is right for your project, or need help with custom licensing arrangements, reach out to us at <a href="mailto:mail@nomad-type.com" style="white-space: nowrap;">mail@nomad-type.com</a>. We're here to help you find the right solution.
+              Questions about a project, licensing, or collaboration? Drop a line at <a href="mailto:mail@nomad-type.com" style="white-space: nowrap;">mail@nomad-type.com</a>. The footer links below also have direct ways to reach us.
             </p>
           </div>
         </div>
