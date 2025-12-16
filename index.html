@@ -186,6 +186,8 @@ ease;
     .collage a {
       position: absolute;
       display: block;
+      opacity: 0;
+      animation: fadeInUp 1s ease-out forwards;
     }
 
     .collage img {
@@ -193,6 +195,17 @@ ease;
       width: 100%;
       height: auto;
      /* transition: opacity 0.3s ease;*/
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .collage img.hover {
@@ -342,7 +355,7 @@ ease;
 
       .collage {
        /* padding: 16.7rem 1rem 5rem;*/
-          padding: 10.9rem 1rem 5rem;
+          padding: 8.9rem 1rem 5rem;
         position: static;
         overflow: hidden;
       }
@@ -707,6 +720,15 @@ ease;
       if (typeof initCircleMarquee === 'function') {
         initCircleMarquee();
       }
+
+      // Animate collage items with staggered delays
+      function animateCollageItems() {
+        const collageLinks = document.querySelectorAll('.collage a');
+        collageLinks.forEach((link, index) => {
+          link.style.animationDelay = `${index * 0.05}s`;
+        });
+      }
+      animateCollageItems();
 
       // Switch to mobile or desktop images based on viewport
       function useMobileImages() {
