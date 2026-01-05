@@ -16,6 +16,11 @@
       height: 110px;
     }
     
+    body.safra-page .marquee-text {
+      font-feature-settings: "calt" 1;
+      letter-spacing: -0.03em;
+    }
+    
     body.kilo-page {
       --primary-color: #d89233; /* Cream for Kilo #c78f42 Text */
       --glyph-vertical-offset: -1px;
