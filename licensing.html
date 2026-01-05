@@ -152,12 +152,13 @@
     }
 
     .license-type ul {
-      font-family: "Safra Mono", sans-serif;
-      font-size: 14px;
+      font-family: "Safra Sans", sans-serif;
+      font-size: 16px;
       font-weight: 400;
       color: black;
       line-height: 1.6;
       margin-left: 13px;
+      padding-left: 1px;
     }
 
     .license-type li {
@@ -433,11 +434,19 @@
         /* border-bottom: 1px solid black; */
         /* padding: 0px 0px 25px; */
         padding: 0px 0px 0px;
+        border: none;
+        border-radius: 0px;
+      }
+
+      .license-type:nth-child(2) {
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
       }
 
       .license-type h3,
       .license-type .license-header {
         border-bottom: none;
+        padding-left: 0px;
       }
 
       .license-type:first-child {
@@ -509,8 +518,10 @@
       }
 
       .license-type ul {
-        font-size: 14px;
+        font-family: "Safra Sans", sans-serif;
+        font-size: 16px;
         line-height: 1.6;
+        padding-left: 1px;
       }
 
       .pricing-grid {
@@ -668,7 +679,7 @@
                   <li>Licensed by number of users: Individual, Studio (up to 5 users), or Company</li>
                   <li>Unlimited page views, no tracking required</li>
                   <li>Covers all domains owned by the licensee, for a single brand</li>
-                  <li>Fonts provided in WOFF/WOFF2 formats</li>
+                  <li>Fonts provided in WOFF2 format</li>
                   <li>Self-hosting only (no third-party CDN services)</li>
                   <li>Excludes desktop and app installation rights</li>
                 </ul>
