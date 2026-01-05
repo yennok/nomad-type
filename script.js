@@ -43,10 +43,21 @@
         const ls = parseFloat(cs.letterSpacing);
         spacing.value = isNaN(ls) ? 0 : (ls / parseFloat(cs.fontSize)).toFixed(2);
 
-        // Sliders
-        size.addEventListener('input', () => { textArea.style.fontSize = size.value + 'px'; });
-        leading.addEventListener('input', () => { textArea.style.lineHeight = leading.value; });
-        spacing.addEventListener('input', () => { textArea.style.letterSpacing = spacing.value + 'em'; });
+        // Sliders - add both input and touch events for mobile Safari
+        const updateSize = () => { textArea.style.fontSize = size.value + 'px'; };
+        size.addEventListener('input', updateSize);
+        size.addEventListener('touchmove', updateSize, { passive: true });
+        size.addEventListener('touchend', updateSize, { passive: true });
+        
+        const updateLeading = () => { textArea.style.lineHeight = leading.value; };
+        leading.addEventListener('input', updateLeading);
+        leading.addEventListener('touchmove', updateLeading, { passive: true });
+        leading.addEventListener('touchend', updateLeading, { passive: true });
+        
+        const updateSpacing = () => { textArea.style.letterSpacing = spacing.value + 'em'; };
+        spacing.addEventListener('input', updateSpacing);
+        spacing.addEventListener('touchmove', updateSpacing, { passive: true });
+        spacing.addEventListener('touchend', updateSpacing, { passive: true });
 
         // Variable width slider (for variable fonts with 'wdth' axis)
         if (widthSlider) {
