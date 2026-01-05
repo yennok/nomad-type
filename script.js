@@ -43,22 +43,10 @@
         const ls = parseFloat(cs.letterSpacing);
         spacing.value = isNaN(ls) ? 0 : (ls / parseFloat(cs.fontSize)).toFixed(2);
 
-        // Sliders - with mobile Safari touch support
-        const updateSize = () => { textArea.style.fontSize = size.value + 'px'; };
-        const updateLeading = () => { textArea.style.lineHeight = leading.value; };
-        const updateSpacing = () => { textArea.style.letterSpacing = spacing.value + 'em'; };
-        
-        size.addEventListener('input', updateSize);
-        size.addEventListener('touchmove', updateSize); // Mobile Safari support
-        size.addEventListener('touchend', updateSize); // Mobile Safari support
-        
-        leading.addEventListener('input', updateLeading);
-        leading.addEventListener('touchmove', updateLeading); // Mobile Safari support
-        leading.addEventListener('touchend', updateLeading); // Mobile Safari support
-        
-        spacing.addEventListener('input', updateSpacing);
-        spacing.addEventListener('touchmove', updateSpacing); // Mobile Safari support
-        spacing.addEventListener('touchend', updateSpacing); // Mobile Safari support
+        // Sliders
+        size.addEventListener('input', () => { textArea.style.fontSize = size.value + 'px'; });
+        leading.addEventListener('input', () => { textArea.style.lineHeight = leading.value; });
+        spacing.addEventListener('input', () => { textArea.style.letterSpacing = spacing.value + 'em'; });
 
         // Variable width slider (for variable fonts with 'wdth' axis)
         if (widthSlider) {
