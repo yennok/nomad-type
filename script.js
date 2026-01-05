@@ -16,7 +16,11 @@
     };
 
     function initTypingControls() {
-      const fontMap = JSON.parse(document.getElementById('fontMap').textContent);
+      // Guard: Only run if fontMap element exists (not on all pages)
+      const fontMapEl = document.getElementById('fontMap');
+      if (!fontMapEl) return;
+      
+      const fontMap = JSON.parse(fontMapEl.textContent);
       const isKiloDisplayPage = document.body.classList.contains('kilo-display-page');
       document.querySelectorAll('.type-tester').forEach(section => {
         const textArea = section.querySelector('.type-area');
@@ -100,12 +104,18 @@
     }
 
     function initGlyphGrid() {
+      // Guard: Only run if required elements exist (not on all pages)
+      const fontMapEl = document.getElementById('fontMap');
+      const glyphMapEl = document.getElementById('glyphMap');
       const grid = document.getElementById('grid');
+      const weightSel = document.getElementById('weight');
+      
+      if (!fontMapEl || !glyphMapEl || !grid || !weightSel) return;
+      
       const preview = document.getElementById('preview');
       const details = document.getElementById('details');
-      const weightSel = document.getElementById('weight');
-      const fontMap = JSON.parse(document.getElementById('fontMap').textContent);
-      const glyphMap = JSON.parse(document.getElementById('glyphMap').textContent);
+      const fontMap = JSON.parse(fontMapEl.textContent);
+      const glyphMap = JSON.parse(glyphMapEl.textContent);
       const isKiloDisplayPage = document.body.classList.contains('kilo-display-page');
 
       const key = 'Safra2';
@@ -1770,20 +1780,28 @@ function initOverlayForms() {
 }
 
 // ====== COLLAPSIBLE SECTIONS ======
+let collapsibleInitialized = false;
 function initCollapsibleSections() {
-  const collapsibleHeaders = document.querySelectorAll('.collapsible-header');
+  // Only set up event delegation once
+  if (collapsibleInitialized) return;
+  collapsibleInitialized = true;
   
-  collapsibleHeaders.forEach(header => {
-    header.addEventListener('click', function() {
-      const content = this.nextElementSibling;
-      const isActive = this.classList.contains('active');
-      
-      // Toggle active class on header
-      this.classList.toggle('active');
-      
-      // Toggle active class on content
-      content.classList.toggle('active');
-    });
+  // Use event delegation on document to handle dynamically added elements
+  document.addEventListener('click', function(e) {
+    const header = e.target.closest('.collapsible-header');
+    if (!header) return;
+    
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const content = header.nextElementSibling;
+    if (!content || !content.classList.contains('collapsible-content')) return;
+    
+    // Toggle active class on header
+    header.classList.toggle('active');
+    
+    // Toggle active class on content
+    content.classList.toggle('active');
   });
 }
 
@@ -1856,74 +1874,83 @@ function initDraggableMarquee() {
   const marqueeContents = document.querySelectorAll('.marquee-content');
   if (!marqueeContents.length || typeof gsap === 'undefined') return;
 
-  marqueeContents.forEach((marqueeContent, index) => {
-    // Remove CSS animation to avoid conflicts
-    marqueeContent.style.animation = 'none';
-
-    const texts = marqueeContent.querySelectorAll('.marquee-text, .marquee-img');
-    if (texts.length === 0) return;
-
-    // Different speeds for different marquees
-    const speed = index === 0 ? 1.5 : 0.8; // First marquee (top) = 1.5, second marquee (bottom) = 0.8
-    const paddingRight = index === 0 ? 60 : 100; // First marquee (top) = 60px, second marquee (bottom) = 100px
-
-    // Check if we're on the Kaldanit or Yeffe page - reverse direction for left-to-right
-    const isKaldanitPage = document.body.classList.contains('kaldanit-page');
-    const isYeffePage = document.body.classList.contains('yeffe-page');
-    const isReversed = (isKaldanitPage || isYeffePage) && index === 0; // Only reverse the first (top) marquee on these pages
-
-    // Create horizontal loop with GSAP
-    const tl = horizontalLoop(texts, {
-      repeat: -1,
-      speed: speed,
-      draggable: true,
-      reversed: isReversed,
-      paddingRight: paddingRight
+  // Wait for layout to be calculated before initializing
+  requestAnimationFrame(() => {
+    // Force a layout recalculation to ensure accurate positions
+    marqueeContents.forEach(content => {
+      if (content.offsetHeight === 0) return; // Skip if not visible
+      content.offsetHeight; // Force layout recalculation
     });
 
-    // Add hover functionality to the entire marquee content
-    marqueeContent.addEventListener("mouseenter", () => {
-      gsap.to(tl, {timeScale: 0.25, overwrite: true, duration: 0.5});
-    });
-    marqueeContent.addEventListener("mouseleave", () => {
-      gsap.to(tl, {timeScale: 1, overwrite: true, duration: 0.5});
-    });
+    marqueeContents.forEach((marqueeContent, index) => {
+      // Remove CSS animation to avoid conflicts
+      marqueeContent.style.animation = 'none';
 
-    // Debug: Track speed of each span
-    let lastPositions = [];
-    let debugInterval;
-    
-    function startDebug() {
-      lastPositions = Array.from(texts).map(el => ({
-        element: el,
-        xPercent: gsap.getProperty(el, "xPercent") || 0,
-        timestamp: Date.now()
-      }));
+      const texts = marqueeContent.querySelectorAll('.marquee-text, .marquee-img');
+      if (texts.length === 0) return;
+
+      // Different speeds for different marquees
+      const speed = index === 0 ? 1.5 : 0.8; // First marquee (top) = 1.5, second marquee (bottom) = 0.8
+      const paddingRight = index === 0 ? 60 : 100; // First marquee (top) = 60px, second marquee (bottom) = 100px
+
+      // Check if we're on the Kaldanit or Yeffe page - reverse direction for left-to-right
+      const isKaldanitPage = document.body.classList.contains('kaldanit-page');
+      const isYeffePage = document.body.classList.contains('yeffe-page');
+      const isReversed = (isKaldanitPage || isYeffePage) && index === 0; // Only reverse the first (top) marquee on these pages
+
+      // Create horizontal loop with GSAP
+      const tl = horizontalLoop(texts, {
+        repeat: -1,
+        speed: speed,
+        draggable: true,
+        reversed: isReversed,
+        paddingRight: paddingRight
+      });
+
+      // Add hover functionality to the entire marquee content
+      marqueeContent.addEventListener("mouseenter", () => {
+        gsap.to(tl, {timeScale: 0.25, overwrite: true, duration: 0.5});
+      });
+      marqueeContent.addEventListener("mouseleave", () => {
+        gsap.to(tl, {timeScale: 1, overwrite: true, duration: 0.5});
+      });
+
+      // Debug: Track speed of each span
+      let lastPositions = [];
+      let debugInterval;
       
-      debugInterval = setInterval(() => {
-        const currentTime = Date.now();
-        const timeDiff = currentTime - lastPositions[0].timestamp;
+      function startDebug() {
+        lastPositions = Array.from(texts).map(el => ({
+          element: el,
+          xPercent: gsap.getProperty(el, "xPercent") || 0,
+          timestamp: Date.now()
+        }));
         
-        texts.forEach((el, i) => {
-          const currentXPercent = gsap.getProperty(el, "xPercent") || 0;
-          const lastXPercent = lastPositions[i].xPercent;
-          const speed = Math.abs(currentXPercent - lastXPercent) / (timeDiff / 1000); // % per second
+        debugInterval = setInterval(() => {
+          const currentTime = Date.now();
+          const timeDiff = currentTime - lastPositions[0].timestamp;
           
-          // console.log(`Marquee ${index}, Span ${i}: Speed = ${speed.toFixed(2)}% per second, Position = ${currentXPercent.toFixed(2)}%`);
-          
-          lastPositions[i] = {
-            element: el,
-            xPercent: currentXPercent,
-            timestamp: currentTime
-          };
-        });
-        // console.log('---');
-      }, 1000); // Check every second
-    }
-    
-    // Start debugging after a short delay to let the animation begin
-    setTimeout(startDebug, 1000);
-  });
+          texts.forEach((el, i) => {
+            const currentXPercent = gsap.getProperty(el, "xPercent") || 0;
+            const lastXPercent = lastPositions[i].xPercent;
+            const speed = Math.abs(currentXPercent - lastXPercent) / (timeDiff / 1000); // % per second
+            
+            // console.log(`Marquee ${index}, Span ${i}: Speed = ${speed.toFixed(2)}% per second, Position = ${currentXPercent.toFixed(2)}%`);
+            
+            lastPositions[i] = {
+              element: el,
+              xPercent: currentXPercent,
+              timestamp: currentTime
+            };
+          });
+          // console.log('---');
+        }, 1000); // Check every second
+      }
+      
+      // Start debugging after a short delay to let the animation begin
+      setTimeout(startDebug, 1000);
+    });
+  }); // Close requestAnimationFrame
 
   // GSAP Horizontal Loop function (from CodePen example)
   function horizontalLoop(items, config) {

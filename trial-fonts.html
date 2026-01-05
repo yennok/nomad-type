@@ -20,6 +20,10 @@
   <meta name="twitter:image:alt" content="Nomad Type - Trial Fonts">
   <link rel="stylesheet" href="styles.css">
   <style>
+    :root {
+      --primary-color: red;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -39,7 +43,7 @@
       position: relative;
       display: flex;
       justify-content: center;
-      padding: 240px 0 60px;
+      padding: 190px 0 60px;
     }
 
     .trial-content {
@@ -131,7 +135,6 @@
       margin-top: 0;
       border: 1px solid black;
       padding: 19px 23px 23px;
-      border-radius: 8px;
     }
 
     .trial-form-section h3 {
@@ -552,7 +555,7 @@
 
           <div class="form-section collapsible">
             <h3 class="collapsible-header">
-              <span>Select Fonts<span class="asterisk">*</span></span>
+              <span>Select Fonts<span class="asterisk">*</span> (Up to 6)</span>
               <span class="dropdown-icon"></span>
             </h3>
             <div class="collapsible-content">
@@ -560,17 +563,22 @@
                 <label class="checkbox-label">
                   <input type="checkbox" name="font" value="Safra">
                   <span class="checkmark"></span>
-                  Safra
+                  Safra ספרא سفرا
                 </label>
                 <label class="checkbox-label">
-                  <input type="checkbox" name="font" value="Kaldanit">
+                  <input type="checkbox" name="font" value="Middle East">
                   <span class="checkmark"></span>
-                  Kaldanit
+                  Middle East מידל איסט ميدل ايست
                 </label>
                 <label class="checkbox-label">
-                  <input type="checkbox" name="font" value="Yeffe">
+                  <input type="checkbox" name="font" value="Kilo Text">
                   <span class="checkmark"></span>
-                  Yeffe
+                  Kilo Text
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" name="font" value="Kilo Display">
+                  <span class="checkmark"></span>
+                  Kilo Display
                 </label>
                 <label class="checkbox-label">
                   <input type="checkbox" name="font" value="Sugar">
@@ -578,9 +586,34 @@
                   Sugar
                 </label>
                 <label class="checkbox-label">
-                  <input type="checkbox" name="font" value="All">
+                  <input type="checkbox" name="font" value="Werd">
                   <span class="checkmark"></span>
-                  All Fonts
+                  Werd
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" name="font" value="Romanisch Spitz">
+                  <span class="checkmark"></span>
+                  Romanisch Spitz
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" name="font" value="Kaldanit">
+                  <span class="checkmark"></span>
+                  קלדנית
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" name="font" value="Yeffe">
+                  <span class="checkmark"></span>
+                  יפה נפש
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" name="font" value="Dear AI">
+                  <span class="checkmark"></span>
+                  Dear AI (Beta)
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" name="font" value="The Bizarre">
+                  <span class="checkmark"></span>
+                  The Bizarre (Beta)
                 </label>
               </div>
             </div>
@@ -739,7 +772,6 @@
           trialBtn.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            alert('Trial button clicked! Opening overlay...');
             console.log('Trial button clicked!');
             trialOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -747,16 +779,58 @@
             if (window.innerWidth <= 768 && typeof setViewportHeight === 'function') {
               setViewportHeight();
             }
+            // Re-initialize font selection limit when overlay opens
+            setTimeout(() => {
+              if (typeof initFontSelectionLimit === 'function') {
+                initFontSelectionLimit();
+              }
+            }, 100);
           });
           console.log('Click handler attached to trial button');
         } else {
-          alert('Error: Trial button or overlay not found! Button: ' + (trialBtn ? 'found' : 'NOT found') + ', Overlay: ' + (trialOverlay ? 'found' : 'NOT found'));
+          console.error('Error: Trial button or overlay not found! Button: ' + (trialBtn ? 'found' : 'NOT found') + ', Overlay: ' + (trialOverlay ? 'found' : 'NOT found'));
         }
       }, 100);
       
+      // Limit font selection to 6 max
+      function initFontSelectionLimit() {
+        const fontCheckboxes = document.querySelectorAll('#trialFormContent input[name="font"]');
+        // Remove existing listeners to avoid duplicates
+        fontCheckboxes.forEach(checkbox => {
+          const newCheckbox = checkbox.cloneNode(true);
+          checkbox.parentNode.replaceChild(newCheckbox, checkbox);
+        });
+        
+        // Re-query after cloning
+        const updatedCheckboxes = document.querySelectorAll('#trialFormContent input[name="font"]');
+        updatedCheckboxes.forEach(checkbox => {
+          checkbox.addEventListener('change', function() {
+            const selectedFonts = document.querySelectorAll('#trialFormContent input[name="font"]:checked');
+            if (selectedFonts.length > 6) {
+              this.checked = false;
+              const errorMsg = document.getElementById('trialError');
+              if (errorMsg) {
+                errorMsg.textContent = 'You can select a maximum of 6 fonts.';
+                errorMsg.style.display = 'block';
+                setTimeout(() => {
+                  errorMsg.style.display = 'none';
+                }, 3000);
+              }
+            }
+          });
+        });
+      }
+      
+      // Initialize font selection limit on page load
+      setTimeout(() => {
+        initFontSelectionLimit();
+      }, 200);
+
       // Custom handler for trial-fonts page form
       const trialForm = document.getElementById('trialFormContent');
       if (trialForm) {
+        // Initialize font selection limit
+        initFontSelectionLimit();
         trialForm.addEventListener('submit', function(e) {
           e.preventDefault();
           
@@ -767,6 +841,13 @@
           const selectedFonts = document.querySelectorAll('#trialFormContent input[name="font"]:checked');
           if (selectedFonts.length === 0) {
             errorMsg.textContent = 'Please select at least one font.';
+            errorMsg.style.display = 'block';
+            return;
+          }
+          
+          // Check if more than 6 fonts are selected
+          if (selectedFonts.length > 6) {
+            errorMsg.textContent = 'Please select a maximum of 6 fonts.';
             errorMsg.style.display = 'block';
             return;
           }
