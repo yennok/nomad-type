@@ -43,10 +43,16 @@
         const ls = parseFloat(cs.letterSpacing);
         spacing.value = isNaN(ls) ? 0 : (ls / parseFloat(cs.fontSize)).toFixed(2);
 
-        // Sliders
-        size.addEventListener('input', () => { textArea.style.fontSize = size.value + 'px'; });
-        leading.addEventListener('input', () => { textArea.style.lineHeight = leading.value; });
-        spacing.addEventListener('input', () => { textArea.style.letterSpacing = spacing.value + 'em'; });
+        // Sliders - use setProperty with important flag to override CSS !important rules
+        size.addEventListener('input', () => { 
+          textArea.style.setProperty('font-size', size.value + 'px', 'important');
+        });
+        leading.addEventListener('input', () => { 
+          textArea.style.setProperty('line-height', leading.value, 'important');
+        });
+        spacing.addEventListener('input', () => { 
+          textArea.style.setProperty('letter-spacing', spacing.value + 'em', 'important');
+        });
 
         // Variable width slider (for variable fonts with 'wdth' axis)
         if (widthSlider) {
@@ -822,7 +828,8 @@ class AutoFitManager {
           // Allow normal paragraph behavior (multi-line)
           textArea.style.whiteSpace = 'normal';
         }
-        textArea.style.fontSize = sizeSlider.value + 'px';
+        // Use setProperty with important flag to override CSS !important rules
+        textArea.style.setProperty('font-size', sizeSlider.value + 'px', 'important');
       }
     });
     sizeSlider.addEventListener('mouseup', () => {
