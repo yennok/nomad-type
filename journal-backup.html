@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Journal - Nomad Type</title>
-
+  
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
   <link rel="apple-touch-icon" href="assets/favicon.png">
-
+  
   <!-- Featured Image Meta Tags -->
   <meta property="og:image" content="assets/featured_image.png">
   <meta property="og:image:width" content="1200">
@@ -38,111 +38,109 @@
       overflow: visible;
       position: relative;
       display: flex;
+      align-items: center;
       justify-content: center;
-      padding: 190px 0 60px;
+      padding: 100px 0;
     }
 
     .journal-content {
+      max-width: 800px;
       margin: 0 auto;
-      padding: 0 90px;
+      padding: 0 20px;
       color: white;
-      display: grid;
-      gap: 45px;
     }
 
     .journal-title {
       font-family: "Safra Sans", sans-serif;
-      font-size: 36px;
-      font-weight: 400;
+      font-size: 48px;
+      font-weight: 700;
       color: white;
-      margin: 0;
-      line-height: 1.4;
-      letter-spacing: -0.02em;
-      text-align: left;
-      position: sticky;
-      top: 100px;
-      align-self: start;
-      transform: translateY(3px);
+      margin-bottom: 40px;
+      text-align: center;
     }
 
-    .journal-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 60px;
+    .journal-intro {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: white;
+      line-height: 1.6;
       margin-bottom: 60px;
+      text-align: center;
+    }
+
+    .journal-entries {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
     }
 
     .journal-entry {
-      background: black;
-      padding: 0;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      text-decoration: none;
-      color: inherit;
+      border-bottom: 1px solid #333;
+      padding-bottom: 30px;
     }
 
-
-    .journal-entry:hover .entry-thumbnail {
-      filter: brightness(0) saturate(100%) invert(12%) sepia(97%) saturate(7404%) hue-rotate(4deg) brightness(104%) contrast(106%);
-    }
-
-
-    .entry-thumbnail-wrap {
-      width: 100%;
-      margin-bottom: 15px;
-    }
-
-    .entry-thumbnail {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .entry-header {
-      font-family: "Safra Sans", sans-serif;
-      font-size: 30px;
-      font-weight: 400;
-      color: white;
-      margin-top: 0;
-      margin-bottom: 15px;
-      padding-bottom: 0;
-      padding-left: 0;
-    }
-
-    .entry-content {
-      padding: 0;
+    .journal-entry:last-child {
+      border-bottom: none;
     }
 
     .entry-date {
       font-family: "Safra Mono", monospace;
       font-size: 14px;
       font-weight: 400;
+      color: #888;
+      margin-bottom: 10px;
+    }
+
+    .entry-title {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 24px;
+      font-weight: 700;
       color: white;
-      margin-top: 15px;
-      margin-bottom: 0;
+      margin-bottom: 15px;
     }
 
     .entry-excerpt {
       font-family: "Safra Sans", sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #ccc;
+      line-height: 1.6;
+    }
+
+    .journal-entry-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .journal-entry-link:hover .entry-title {
+      color: #ccc;
+    }
+
+    .journal-entry-link:hover .entry-excerpt {
+      color: #999;
+    }
+
+    .coming-soon {
+      text-align: center;
+      padding: 60px 0;
+    }
+
+    .coming-soon h2 {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .coming-soon p {
+      font-family: "Safra Sans", sans-serif;
       font-size: 18px;
       font-weight: 400;
-      color: white;
+      color: #ccc;
       line-height: 1.6;
-      margin: 0;
-    }
-
-    .entry-author {
-      font-family: "Safra Mono", monospace;
-      font-size: 14px;
-      font-weight: 400;
-      color: white;
-      margin-top: 3px;
-    }
-
-    .multilingual-marquee,
-    .image-marquee {
-      filter: invert(1);
     }
 
     /* Footer Styles */
@@ -209,7 +207,7 @@
     }
 
     .sticky-nav {
-      position: absolute;
+      position: relative;
       height: 0;
     }
 
@@ -268,58 +266,38 @@
     }
 
     @media (max-width: 768px) {
-      .main-container {
-        padding: 11.7rem 0 110px;
-      }
-
-      .journal-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        padding: 0 18px;
-      }
-
       .journal-title {
-        font-size: 24px;
-        margin: 0;
-        position: static;
-      }
-
-      .journal-grid {
-        grid-template-columns: 1fr;
-        gap: 120px;
+        font-size: 32px;
         margin-bottom: 30px;
       }
 
-      .entry-header {
+      .journal-intro {
+        font-size: 16px;
+        margin-bottom: 40px;
+      }
+
+      .entry-title {
         font-size: 20px;
       }
 
       .entry-excerpt {
-        font-size: 18px;
-        line-height: 1.6;
-        padding-bottom: 20px;
+        font-size: 14px;
       }
 
-      .cover-buttons {
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1;
-        transition: opacity 0.3s ease;
+      .coming-soon h2 {
+        font-size: 24px;
       }
 
-      .cover-buttons.hidden-by-footer {
-        opacity: 0 !important;
-        pointer-events: none;
+      .coming-soon p {
+        font-size: 16px;
       }
 
-      .cover-buttons .btn {
-        position: static;
-        width: 100%;
+      .main-container {
+        padding: 80px 0;
       }
 
-      .sticky-trial-btn {
-        background-color: black;
-        color: white;
+      .journal-content {
+        padding: 0 18px;
       }
     }
   </style>
@@ -378,59 +356,22 @@
 
   <div class="main-container">
     <div class="journal-content">
-      <div class="journal-title-column">
-        <h1 class="journal-title">Journal</h1>
-      </div>
-
-      <div class="journal-text-column">
-        <div class="journal-grid">
-
-          <!-- Entry 1: Uglendous (real) -->
-          <a href="journal-uglendous.html" class="journal-entry">
-            <div class="entry-thumbnail-wrap">
-              <img src="assets/journal/uglendous-thumb.svg" alt="Uglendous" class="entry-thumbnail">
-            </div>
-            <div class="entry-content">
-              <h3 class="entry-header">כִּעוֹרֵת [Uglendous]</h3>
-              <p class="entry-excerpt">
-                I can&rsquo;t stand Michal Sahar. And I admire her. The sheer freedom she allows herself, her complete disregard for conventions &ndash; it infuriates me to a level I can hardly explain. And it makes me admire her even more.
-              </p>
-              <div class="entry-date">February 2025</div>
-              <div class="entry-author">Nir Zabari Yenni</div>
-            </div>
-          </a>
-
-          <!-- Entry 2: placeholder -->
-          <a href="#" class="journal-entry">
-            <div class="entry-thumbnail-wrap">
-              <img src="assets/journal/zoom1.png" alt="" class="entry-thumbnail">
-            </div>
-            <div class="entry-content">
-              <h3 class="entry-header">Three Scripts, One Word</h3>
-              <p class="entry-excerpt">
-                What happens when you try to make Hebrew, Arabic, and Latin sit in the same line without anyone compromising. The invisible negotiations between scripts that were never meant to coexist.
-              </p>
-              <div class="entry-date">March 2025</div>
-              <div class="entry-author">Nir Zabari Yenni</div>
-            </div>
-          </a>
-
-          <!-- Entry 3: placeholder -->
-          <a href="#" class="journal-entry">
-            <div class="entry-thumbnail-wrap">
-              <img src="assets/journal/uglendous-thumb.svg" alt="" class="entry-thumbnail" style="opacity: 0.2;">
-            </div>
-            <div class="entry-content">
-              <h3 class="entry-header">ECAL at 40</h3>
-              <p class="entry-excerpt">
-                Everyone told me I was too old. That an MFA in type design at forty was a midlife crisis dressed as ambition. I packed two suitcases and moved to Lausanne anyway.
-              </p>
-              <div class="entry-date">April 2025</div>
-              <div class="entry-author">Nir Zabari Yenni</div>
-            </div>
-          </a>
-
-        </div>
+      <h1 class="journal-title">Journal</h1>
+      
+      <p class="journal-intro">
+        Thoughts on multilingual typography, design process, and the intersection of culture and technology in type design.
+      </p>
+      
+      <div class="journal-entries">
+        <a href="journal-uglendous.html" class="journal-entry-link">
+          <div class="journal-entry">
+            <div class="entry-date">February 2025</div>
+            <h2 class="entry-title">Uglendous</h2>
+            <p class="entry-excerpt">
+              I can't stand Michal Sahar. And I admire her. The sheer freedom she allows herself, her complete disregard for conventions...
+            </p>
+          </div>
+        </a>
       </div>
     </div>
   </div>
@@ -448,7 +389,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       loadFooter('Safra');
-
+      
       // Initialize the circle marquee animation
       if (typeof initCircleMarquee === 'function') {
         initCircleMarquee();
@@ -458,10 +399,11 @@
       function updateCircleVisibility() {
         const stickyNav = document.querySelector('.sticky-nav');
         const circle = document.querySelector('.sticky-green-circle');
-
+        
         if (stickyNav && circle) {
           const navRect = stickyNav.getBoundingClientRect();
-
+          
+          // If sticky-nav is off screen (top), show circle
           if (navRect.bottom < 0) {
             circle.classList.add('visible');
           } else {
@@ -469,8 +411,11 @@
           }
         }
       }
-
+      
+      // Listen for scroll events
       window.addEventListener('scroll', updateCircleVisibility);
+      
+      // Initial check
       updateCircleVisibility();
 
       // Mobile Overlay Functionality
@@ -479,68 +424,47 @@
         const mobileOverlay = document.getElementById('mobileOverlay');
         const closeMobileMenu = document.getElementById('closeMobileMenu');
 
+        // Open mobile overlay
         if (mobileHamburgerCircle) {
           mobileHamburgerCircle.addEventListener('click', function() {
             if (mobileOverlay) {
               mobileOverlay.classList.add('active');
-              document.body.style.overflow = 'hidden';
+              document.body.style.overflow = 'hidden'; // Prevent background scrolling
             }
           });
         }
 
+        // Close mobile overlay
         if (closeMobileMenu) {
           closeMobileMenu.addEventListener('click', function() {
             if (mobileOverlay) {
               mobileOverlay.classList.remove('active');
-              document.body.style.overflow = '';
+              document.body.style.overflow = ''; // Restore scrolling
             }
           });
         }
 
+        // Close overlay when clicking outside content
         if (mobileOverlay) {
           mobileOverlay.addEventListener('click', function(e) {
             if (e.target === mobileOverlay) {
               mobileOverlay.classList.remove('active');
-              document.body.style.overflow = '';
+              document.body.style.overflow = ''; // Restore scrolling
             }
           });
         }
 
+        // Close overlay when pressing escape key
         document.addEventListener('keydown', function(e) {
           if (e.key === 'Escape' && mobileOverlay && mobileOverlay.classList.contains('active')) {
             mobileOverlay.classList.remove('active');
-            document.body.style.overflow = '';
+            document.body.style.overflow = ''; // Restore scrolling
           }
         });
       }
 
+      // Initialize mobile overlay
       initMobileOverlay();
-
-      // Hide cover-buttons when footer comes into view
-      function initFooterVisibilityCheck() {
-        const coverButtons = document.querySelector('.cover-buttons');
-        const footerContainer = document.getElementById('footer-container');
-
-        if (coverButtons && footerContainer && footerContainer.children.length > 0) {
-          function checkFooterVisibility() {
-            const footerRect = footerContainer.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
-
-            if (footerRect.top < viewportHeight) {
-              coverButtons.classList.add('hidden-by-footer');
-            } else {
-              coverButtons.classList.remove('hidden-by-footer');
-            }
-          }
-
-          window.addEventListener('scroll', checkFooterVisibility);
-          checkFooterVisibility();
-        } else if (coverButtons && footerContainer) {
-          setTimeout(initFooterVisibilityCheck, 500);
-        }
-      }
-
-      setTimeout(initFooterVisibilityCheck, 1000);
     });
   </script>
 </body>
