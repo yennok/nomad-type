@@ -108,6 +108,20 @@
       line-height: 1.6;
     }
 
+    .journal-entry-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .journal-entry-link:hover .entry-title {
+      color: #ccc;
+    }
+
+    .journal-entry-link:hover .entry-excerpt {
+      color: #999;
+    }
+
     .coming-soon {
       text-align: center;
       padding: 60px 0;
@@ -246,6 +260,11 @@
       color: black;
     }
 
+    /* Show Journal link on this page (hidden globally in styles.css) */
+    a[href="journal.html"] {
+      display: inline !important;
+    }
+
     @media (max-width: 768px) {
       .journal-title {
         font-size: 32px;
@@ -343,33 +362,17 @@
         Thoughts on multilingual typography, design process, and the intersection of culture and technology in type design.
       </p>
       
-      <div class="coming-soon">
-        <h2>Coming Soon</h2>
-        <p>
-          We're working on sharing our insights about multilingual type design, the challenges of working across different scripts, and the stories behind our typefaces. Check back soon for articles about our design process, cultural research, and the technical considerations that shape our work.
-        </p>
-      </div>
-      
-      <!-- Future journal entries will be added here -->
-      <!--
       <div class="journal-entries">
-        <div class="journal-entry">
-          <div class="entry-date">January 15, 2025</div>
-          <h2 class="entry-title">The Challenge of Multilingual Design</h2>
-          <p class="entry-excerpt">
-            Exploring the unique challenges and opportunities that arise when designing typefaces that work across Hebrew, Arabic, and Latin scripts...
-          </p>
-        </div>
-        
-        <div class="journal-entry">
-          <div class="entry-date">December 20, 2024</div>
-          <h2 class="entry-title">Cultural Authenticity in Type Design</h2>
-          <p class="entry-excerpt">
-            How we approach maintaining cultural authenticity while creating contemporary typefaces that serve modern communication needs...
-          </p>
-        </div>
+        <a href="journal-uglendous.html" class="journal-entry-link">
+          <div class="journal-entry">
+            <div class="entry-date">February 2025</div>
+            <h2 class="entry-title">Uglendous</h2>
+            <p class="entry-excerpt">
+              I can't stand Michal Sahar. And I admire her. The sheer freedom she allows herself, her complete disregard for conventions...
+            </p>
+          </div>
+        </a>
       </div>
-      -->
     </div>
   </div>
 

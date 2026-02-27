@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uglendous - Nomad Type Journal</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+
+  <!-- Featured Image Meta Tags -->
+  <meta property="og:image" content="assets/journal/uglendous/zoom1.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Uglendous - Nomad Type Journal">
+  <meta name="twitter:image" content="assets/journal/uglendous/zoom1.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="Uglendous - Nomad Type Journal">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: white;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    /* ====== ARTICLE GRID LAYOUT ====== */
+
+    .main-container {
+      overflow: visible;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      padding: 190px 0 100px;
+    }
+
+    .article-content {
+      margin: 0 auto;
+      padding: 0 90px;
+      color: black;
+      display: grid;
+      grid-template-columns: 2fr 3fr 1fr;
+      gap: 60px;
+    }
+
+    /* ====== LEFT COLUMN: STICKY TITLE ====== */
+
+    .article-left-column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .article-title-column {
+      position: sticky;
+      top: 100px;
+    }
+
+    .article-title-he {
+      font-family: "Safra", sans-serif;
+      font-size: 80px;
+      font-weight: 400;
+      color: #e00;
+      margin: 0 0 24px 0;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+    }
+
+    .article-title-en {
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      font-weight: 400;
+      color: black;
+      margin: 0px 0 430px 0;
+      line-height: 1.2;
+    }
+
+    .article-end-meta {
+      margin-top: auto;
+      padding-top: 130px;
+    }
+
+    .article-date {
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      font-weight: 400;
+      color: black;
+      margin-bottom: 8px;
+    }
+
+    .article-author {
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      font-weight: 400;
+      color: black;
+    }
+
+
+    .article-figure.article-hero-photo {
+      margin: 30px 0 150px 0;
+    }
+
+    .article-hero-photo img {
+      max-width: 250px;
+    }
+
+    .article-figure.article-zoom-photo {
+      margin: 120px 0 50px;
+    }
+
+    .article-figure.article-zoom-photo + .article-figure.article-zoom-photo {
+      margin-top: 25px;
+    }
+
+    .article-zoom-photo img {
+      max-width: 250px;
+    }
+
+    /* ====== MIDDLE COLUMN: TEXT ====== */
+
+    .article-text-column {
+      margin-top: 0;
+    }
+
+    .article-body {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: black;
+      line-height: 1.6;
+    }
+
+    .article-body p {
+      margin: 0 0 20px 0;
+    }
+
+    .article-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ====== INLINE IMAGES ====== */
+
+    .article-figure {
+      margin: 120px 0;
+    }
+
+    .article-figure img {
+      width: 100%;
+      display: block;
+    }
+
+    .article-figure figcaption {
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      font-weight: 400;
+      color: black;
+      margin-top: 30px;
+      line-height: 1.5;
+    }
+
+    .fig-number {
+      color: #e00;
+      font-weight: 500;
+    }
+
+    /* Smaller images */
+    .article-figure.small img {
+      max-width: 280px;
+    }
+
+    /* ====== NAV & FOOTER STYLES ====== */
+
+    .nav-brand, .nav-link {
+      color: black;
+      margin-top: 28px;
+    }
+
+    .nav-brand a {
+      color: black;
+      text-decoration: none;
+    }
+
+    .nav-brand a:hover {
+      text-decoration: none;
+    }
+
+    .sticky-nav {
+      position: absolute;
+      height: 0;
+      overflow: visible;
+      z-index: 100;
+    }
+
+    .sticky-green-circle {
+      transition: opacity 0.5s ease !important;
+      opacity: 0 !important;
+    }
+
+    .sticky-green-circle.visible {
+      opacity: 1 !important;
+    }
+
+    /* Sticky Trial Fonts Button */
+    .sticky-trial-btn {
+      position: fixed;
+      top: 29px;
+      right: 29px;
+      z-index: 1000;
+    }
+
+    .sticky-trial-btn {
+      padding: 7px 10px;
+      border: 1px solid black;
+      background: white;
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      font-weight: 400;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: black;
+      display: inline-block;
+      border-radius: 4px;
+      line-height: 17px;
+    }
+
+    .sticky-trial-btn:hover {
+      background: black;
+      color: white;
+      border: 1px solid black;
+    }
+
+    .footer-nav-link:hover {
+      opacity: 1;
+      color: black;
+      text-decoration: underline;
+    }
+
+    .footer-linkedin-btn:hover {
+      background: black;
+      color: white;
+      border: 1px solid black;
+    }
+
+    /* Show Journal link on this page (hidden globally in styles.css) */
+    a[href="journal.html"] {
+      display: inline !important;
+    }
+
+    /* ====== RESPONSIVE ====== */
+
+    @media (max-width: 768px) {
+      .main-container {
+        padding: 11.7rem 0 60px;
+      }
+
+      .article-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 0 18px;
+      }
+
+      .article-title-column {
+        position: static;
+      }
+
+      .article-title-he,
+      .article-title-en {
+        font-size: 28px;
+      }
+
+      .article-body {
+        font-size: 16px;
+      }
+
+      .article-photo-small {
+        max-width: 120px;
+      }
+
+      .article-figure {
+        margin: 35px 0;
+      }
+
+      .cover-buttons {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+      }
+
+      .cover-buttons.hidden-by-footer {
+        opacity: 0 !important;
+        pointer-events: none;
+      }
+
+      .cover-buttons .btn {
+        position: static;
+        width: 100%;
+      }
+
+      .sticky-trial-btn {
+        background-color: black;
+        color: white;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="sticky-nav" style="transition: opacity 0.5s, top 0.3s; opacity: 1; top: 50px;">
+    <div class="nav-brand"><a href="index.html">Nomad Type</a></div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Typefaces</a>
+      <a href="journal.html" class="nav-link">Journal</a>
+      <a href="about.html" class="nav-link">About</a>
+    </div>
+  </nav>
+
+  <div class="sticky-green-circle" style="--menu-width: 319px; --menu-padding: 0 36px;">
+    <div class="circle-marquee">
+      <div class="circle-marquee-content" style="translate: none; rotate: none; scale: none; transform: translate3d(-16.625px, -1px, 0px);">Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type</div>
+    </div>
+    <div class="menu-background">
+      <div class="menu-items">
+        <a href="index.html" class="menu-item">Typefaces</a>
+        <a href="journal.html" class="menu-item">Journal</a>
+        <a href="about.html" class="menu-item">About</a>
+      </div>
+    </div>
+    <div class="circle-hamburger"></div>
+  </div>
+
+  <div class="mobile-hamburger-circle solid" id="mobileHamburgerCircle" style="display: block;"></div>
+
+  <!-- ====== MOBILE OVERLAY MENU ====== -->
+  <div class="mobile-overlay" id="mobileOverlay">
+    <div class="mobile-overlay-content">
+      <div class="mobile-menu-header">
+        <h2><a href="index.html">Nomad Type</a></h2>
+        <button class="close-btn" id="closeMobileMenu"></button>
+      </div>
+      <nav class="mobile-menu-nav">
+        <a href="index.html" class="mobile-menu-link">Typefaces</a>
+        <a href="licensing.html" class="mobile-menu-link">Licensing</a>
+        <a href="about.html" class="mobile-menu-link">About</a>
+        <a href="journal.html" class="mobile-menu-link">Journal</a>
+        <a href="trial-fonts.html" class="mobile-menu-link">Trial Fonts</a>
+        <a href="faq.html" class="mobile-menu-link">FAQ</a>
+      </nav>
+      <div class="mobile-menu-footer">
+        <p>&copy; Nomad Type. All Rights Reserved 2025</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Trial Fonts Button -->
+  <div class="cover-buttons">
+    <button class="btn btn-primary sticky-trial-btn">Trial Fonts</button>
+  </div>
+
+  <!-- ====== ARTICLE ====== -->
+  <div class="main-container">
+    <div class="article-content">
+
+      <!-- LEFT COLUMN: Sticky title + end meta -->
+      <div class="article-left-column">
+        <div class="article-title-column">
+          <h1 class="article-title-he">&#x5DB;&#x5BC;&#x5B4;&#x5BC;&#x5E2;&#x5D5;&#x5B9;&#x5E8;&#x5B5;&#x5EA;</h1>
+          <h2 class="article-title-en">[Uglendous]</h2>
+        </div>
+        <div class="article-end-meta">
+          <div class="article-date">February 2025</div>
+          <div class="article-author">Nir Zabari Yenni</div>
+        </div>
+      </div>
+
+      <!-- MIDDLE COLUMN: Article text -->
+      <div class="article-text-column">
+        <div class="article-body">
+
+          <!-- Michal Sahar photo -->
+          <figure class="article-figure article-hero-photo">
+            <img src="assets/journal/uglendous/zoom1.png" alt="Michal Sahar">
+          </figure>
+
+          <p>I can&rsquo;t stand Michal Sahar.</p>
+
+          <p>And I admire her.</p>
+
+          <p>The sheer freedom she allows herself, her complete disregard for conventions &ndash; it infuriates me to a level I can hardly explain.</p>
+
+          <p>And it makes me admire her even more.</p>
+
+          <p>I don&rsquo;t think it&rsquo;s an exaggeration to say that Michal is a groundbreaking designer who has changed the face of type design in Israel.</p>
+
+          <p>I first met her as a student at Bezalel, during my final project presentation, where I created the font Carmela, designed for screens. Not only was she on the jury, but she was also the only one who fully grasped how genius my Carmela truly was &ndash; as is often the case with works that are ahead of their time&hellip;</p>
+
+          <p>And so, she invited me to join her and work on one of the fonts she was developing at the time.</p>
+
+          <p>I was responsible for a process called hinting &ndash; which today is mostly automated by type design software, but back then, it required a hungry, obsessive, and overenthusiastic student to do it for a pathetically low wage &ndash; just for the privilege of sitting next to someone who, in my eyes, was a true master.</p>
+
+          <p>For all these reasons, I wanted to interview her.</p>
+
+          <p>Or actually &ndash; just sit and talk to her, try to understand what the hell is going on in that brilliant, deranged mind of hers.</p>
+
+          <!-- Image: Alfa Bravo -->
+          <figure class="article-figure">
+            <img src="assets/journal/uglendous/3.01.svg" alt="Alef from Alfa Bravo by Michal Sahar">
+            <figcaption><span class="fig-number">[03.01]</span> 'Alef' from the eccentric Alfa Bravo, Michal Sahar</figcaption>
+          </figure>
+
+          <p>I approached this interview with the kind of reverence usually reserved for religious pilgrimages. I felt like the kid from The Karate Kid going to meet Mr. Miyagi.</p>
+
+          <p>The night before, I couldn&rsquo;t sleep until six in the morning.<br>
+          By seven, I was already after my coffee, ready to go.</p>
+
+          <p>The entire month leading up to the interview, I dedicated myself to a deep dive into Michal&rsquo;s work, even though it was completely unnecessary &ndash; because as a hardcore fan, I was already one step away from lurking outside her apartment building.</p>
+
+          <p>I meticulously planned the interview, prepared questions, determined not to waste a single second of my Goddess&rsquo; time.</p>
+
+          <p>Ten minutes before the scheduled time, I was already seated in front of my screen, wearing my best clothes, waiting in a mix of fear and anticipation.</p>
+
+          <p>Then, after what felt like an eternity, she joined the Zoom call.</p>
+
+          <p>I tried to play it cool, but my heart was racing at 200, and my mouth went dry.</p>
+
+          <p>Michal showed up like she had just finished a triathlon, still high on adrenaline, fidgeting in her chair, and chugging red wine from a glass that &ndash; by the end of our conversation &ndash; would be emptied and refilled over and over and over again.</p>
+
+          <p>I had a killer opening line prepared and had practiced it the day before.</p>
+
+          <p>I took a deep breath, channeled all the effortless cool I don&rsquo;t possess, and in my suavest, most nonchalant voice, I said:</p>
+
+          <p>&ldquo;So, what&rsquo;s up?&rdquo;</p>
+
+          <p>A wave of pride washed over me. Look at you, I told myself. Having a conversation with Michal Sahar.</p>
+
+          <p>She stared at me.</p>
+
+          <p>Then repeated my question with absolute disdain.</p>
+
+          <p>&ldquo;What&rsquo;s up?&rdquo;</p>
+
+          <p>She made it sound like I had just uttered the single dumbest sentence in the history of human speech.</p>
+
+          <p>I knew I should&rsquo;ve opened with a simple &ldquo;Hey.&rdquo;</p>
+
+          <p>&ldquo;What&rsquo;s up, he asks&hellip;?&rdquo; she scoffed, her voice rising.</p>
+
+          <p>Then, taking another quick, determined sip of wine &ndash; she took off:</p>
+
+          <p>&ldquo;What&rsquo;s up&hellip;? I&rsquo;m just sitting here, pounding wine. That&rsquo;s what&rsquo;s up. I swear, I&rsquo;m gonna end this period of my life as a full-blown alcoholic. It&rsquo;s bad. It&rsquo;s really bad. Like, wine isn&rsquo;t even heavy, you know? But I swear, I cannot get through a day without alcohol. I literally cannot! Some people are into weed, but I don&rsquo;t smoke weed, so I need some other painkiller, okay? I swear, it&rsquo;s terrible. Okay?&rdquo;</p>
+
+          <p>&ldquo;Okay, okay, totally!&rdquo; I jumped at the opportunity to engage &ndash; to prove I wasn&rsquo;t a complete idiot oblivious to what was happening in Israel post-October 7th.</p>
+
+          <p>Desperately trying to steer the conversation, I grasped at the first relevant thing that came to mind and blurted out:</p>
+
+          <p>&ldquo;So&hellip; you read Arabic, huh? Like, read read it?&rdquo;</p>
+
+          <p>Nice&hellip; Read read as opposed to just read?</p>
+
+          <p>&ldquo;OF COURSE!&rdquo; she practically yelled.</p>
+
+          <p>&ldquo;You can&rsquo;t design Arabic without reading Arabic. I don&rsquo;t even understand how that&rsquo;s a question.</p>
+
+          <p>I don&rsquo;t remember a lot of things anymore, but it doesn&rsquo;t matter. It&rsquo;s like if I read Hebrew and forget what &lsquo;bread&rsquo; means. I&rsquo;ll still read &lsquo;bread.&rsquo; It&rsquo;s the same with Arabic. I&rsquo;ve known the script forever. I&rsquo;ve been reading it since I was really young.</p>
+
+          <p>My grandfather&hellip; It&rsquo;s from him. I mean, we learned it in school too. But for me, it was never foreign. It always felt natural. My grandfather used to write in Arabic. He spoke it, too. My dad was Syrian &ndash; may he rest in peace. I&rsquo;m half Halabi. I&rsquo;m a Mizrahi woman who became Ashkenazi. Totally. But I&rsquo;m a full-on Mizrahi, babe. I just look Ashkenazi. I&rsquo;m half Halabi. Half Georgian, half Halabi.&rdquo;</p>
+
+          <!-- Image: Editor Sans -->
+          <figure class="article-figure">
+            <img src="assets/journal/uglendous/3.02.svg" alt="Editor Sans by Michal Sahar">
+            <figcaption><span class="fig-number">[03.02]</span> Editor Sans, Michal Sahar</figcaption>
+          </figure>
+
+          <p>&ldquo;Oh, yeah, same here!&rdquo; I awkwardly tried to chime in.</p>
+
+          <p>&ldquo;I&rsquo;m a mix of Iraqi, Lebanese, Turkish, and Greek.&rdquo;</p>
+
+          <p>As if that would somehow make her see me as her equal. Dream on, kiddo.</p>
+
+          <p>&ldquo;Greece! Wow. Yes. Oh, everyone&rsquo;s hot on Greece now. Everyone&rsquo;s buying houses in Athens. Everyone&rsquo;s obsessed with it. It&rsquo;s crazy. There&rsquo;s nothing like Greece.</p>
+
+          <p>It&rsquo;s actually crazy though, you know? I made Editor. I made it so lovely &ndash; like, Editor Sans &ndash; and suddenly, I thought, wait a second&hellip; I never even considered making an Arabic version.</p>
+
+          <p>But after working on Fedra and Greta with Kristyan (Sarkis) and Peter (Bilak), I was like, huh&hellip; I understand Arabic. Maybe I should give it a shot? And then I discovered &ndash; I&rsquo;m embarrassed to say &ndash; but it just felt completely natural to me.</p>
+
+          <p>It actually felt more natural than Latin. You should know, Latin is much harder for me. I mean, obviously, I&rsquo;m amazing at it &ndash; but the learning curve was so much steeper&hellip;&rdquo;</p>
+
+          <!-- Image: Greta Text -->
+          <figure class="article-figure">
+            <img src="assets/journal/uglendous/3.03.svg" alt="Greta Text trilingual">
+            <figcaption><span class="fig-number">[03.03]</span> Greta Text, random letters showcasing the connection between the scripts (Latin: Peter Bilak, Hebrew: Michal Sahar &amp; Arabic: Kristyan Sarkis)</figcaption>
+          </figure>
+
+          <p>&ldquo;Arabic, though &ndash; energetically, my body just gets it. And Latin, I really have to study it, even though I&rsquo;m already great at it. Yet Arabic feels instinctual, like something in my body, in my nature. I don&rsquo;t even know how to explain it to you.</p>
+
+          <p>It&rsquo;s physical &ndash; like my body understands it. It&rsquo;s not just taking a brief and following instructions &ndash; I feel like I speak this script, like I just get it on a deep, intuitive level, and that&rsquo;s how I can create something really beautiful and really good.</p>
+
+          <p>&hellip;So one day, I just thought, why not try Arabic?</p>
+
+          <p>And then I made Editor Sans, which, by the way, is stunning &ndash; like, truly one of the best&hellip; I nailed it. I nailed Arabic Editor.&rdquo;</p>
+
+          <p>&ldquo;And suddenly I realized just how much Hebrew and Arabic are connected &ndash; especially the Tsadi, Kaf, and Aleph.</p>
+
+          <p>I suddenly saw how deeply the scripts are related. And actually, through fast handwriting, I discovered that so much of the italics can be taken from Arabic. I mean, WOW. It was totally mind-blowing! This was a breakthrough!</p>
+
+          <p>There&rsquo;s just &ndash; there&rsquo;s so, so, so much connection between Hebrew and Arabic.</p>
+
+          <p>And like, when you don&rsquo;t have a reason to wake up in the morning, you just start doing things. With the war going on, projects get postponed, things shift around &ndash; and so, basically, I made Arabic in two months.&rdquo;</p>
+
+          <!-- Image: Rapida -->
+          <figure class="article-figure">
+            <img src="assets/journal/uglendous/3.04.png" alt="Rapida trilingual typeface">
+            <figcaption><span class="fig-number">[03.04]</span> Rapida, Typotheque (Latin: Michelangelo Nigra, Hebrew &amp; Arabic: Michal Sahar)</figcaption>
+          </figure>
+
+          <p>&ldquo;But wait,&rdquo; I interjected. &ldquo;The font you made in Arabic &ndash; do you see Arab designers buying a font made by an Israeli designer?&rdquo;</p>
+
+          <p>&ldquo;Well, the next thing I want to do is open a type foundry anonymously, so no one will know I&rsquo;m Israeli, and I think I could sell Arabic fonts without any problem. Do you know what it means to design a trilingual system like this? It&rsquo;s insane!</p>
+
+          <p>I just made a new Arabic typeface. I haven&rsquo;t even told Peter yet&hellip;&rdquo;</p>
+
+          <figure class="article-figure article-zoom-photo">
+            <img src="assets/journal/uglendous/zoom2.png" alt="Michal Sahar">
+          </figure>
+
+          <figure class="article-figure article-zoom-photo">
+            <img src="assets/journal/uglendous/zoom3.png" alt="Michal Sahar">
+          </figure>
+
+          <p>&ldquo;SIREN!!! OH MY GOD, THERE&rsquo;S A SIREN!!! THERE&rsquo;S A SIREN!</p>
+
+          <p>SHIT. OMG! YOU HEAR THAT?! IT&rsquo;S COMING FROM THE STAIRWELL &ndash; HOLY FUCK, CAN YOU HEAR THIS?!&rdquo;</p>
+
+          <p>She jumped up and ran away, taking the wine with her.</p>
+
+          <p>Three minutes later, she popped back onto the screen.</p>
+
+          <p>&ldquo;I&rsquo;m back. That&rsquo;s it. There were interceptions, there were explosions, but it wasn&rsquo;t near us.&rdquo;</p>
+
+          <p>&ldquo;Wait, that was too fast. Aren&rsquo;t you supposed to stay in the shelter for&hellip;?&rdquo;</p>
+
+          <p>&ldquo;I don&rsquo;t wait,&rdquo; she roared.</p>
+
+          <p>&ldquo;I HEARD ALL THE BOOMS, AND I CAME BACK. So, where were we?&rdquo;</p>
+
+          <p>Like she hadn&rsquo;t just been in a life-threatening situation three minutes ago.</p>
+
+          <p>&ldquo;In my opinion, Hebrew is harder.</p>
+
+          <p>Arabic is a much more beautiful language than Hebrew.</p>
+
+          <p>You need to start with the assumption that Hebrew is ugly, and then figure out &ndash; how do you pull beauty out of this thing?&rdquo;</p>
+
+          <p>&ldquo;Arabic, by the way, is a stunning script. Wait &ndash; did you have a Bar Mitzvah?</p>
+
+          <p>So, the letters in a Torah, you know &ndash; they&rsquo;re Uglendous!&rdquo;</p>
+
+          <p>Leave it to Michal to come up with the perfect word to describe the holiest thing in Judaism&hellip;</p>
+
+          <p>Meanwhile, she had more energy than ever, like someone who had just been given a second lease on life.</p>
+
+          <p>&ldquo;Listen, I really have to go now, but seriously, you can&rsquo;t even describe how uglendous it is.<br>
+          And then you see Arabic &ndash; &lsquo;Allahu Akbar&rsquo; &ndash; and you&rsquo;re just like WOW.<br>
+          So you bring that into it, and it&rsquo;s just&hellip; WOW.<br>
+          I&rsquo;m telling you &ndash; your project? It&rsquo;s going to be a success.<br>
+          Talk to me anytime. Message me. Cool? I love what you&rsquo;re doing.<br>
+          Honestly, I think you&rsquo;ve made huge progress. Like, your self-learning? Amazing.<br>
+          Just amazing.<br>
+          And your kid is cooking up.<br>
+          It&rsquo;s like that song, &lsquo;Growing Up&rsquo; &ndash; except now it&rsquo;s &lsquo;Cooking Up.&rsquo;<br>
+          Incredible. Alright. Text me whenever, okay? Great. Amazing. Really amazing. And say hi to Matthew! Maybe he&rsquo;ll invite me to Switzerland? Yeah, I don&rsquo;t think he&rsquo;ll invite me to Switzerland. My career&rsquo;s down the toilet. Alright. Cool. Bye. Kisses. Bye. Bye. Bye.&rdquo;</p>
+
+
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: Empty (air) -->
+      <div></div>
+
+    </div>
+
+
+  </div>
+
+  <!-- FOOTER CONTAINER -->
+  <div id="footer-container"></div>
+
+  <!-- GSAP Scripts for marquee animation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="gsap-public/esm/Draggable.js"></script>
+  <script src="gsap-public/esm/ScrollTrigger.js"></script>
+
+  <script src="footer.js"></script>
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      loadFooter('Safra');
+
+      if (typeof initCircleMarquee === 'function') {
+        initCircleMarquee();
+      }
+
+      function updateCircleVisibility() {
+        const stickyNav = document.querySelector('.sticky-nav');
+        const circle = document.querySelector('.sticky-green-circle');
+
+        if (stickyNav && circle) {
+          const navRect = stickyNav.getBoundingClientRect();
+          if (navRect.bottom < 0) {
+            circle.classList.add('visible');
+          } else {
+            circle.classList.remove('visible');
+          }
+        }
+      }
+
+      window.addEventListener('scroll', updateCircleVisibility);
+      updateCircleVisibility();
+
+      // Mobile Overlay
+      function initMobileOverlay() {
+        const mobileHamburgerCircle = document.getElementById('mobileHamburgerCircle');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+
+        if (mobileHamburgerCircle) {
+          mobileHamburgerCircle.addEventListener('click', function() {
+            if (mobileOverlay) {
+              mobileOverlay.classList.add('active');
+              document.body.style.overflow = 'hidden';
+            }
+          });
+        }
+
+        if (closeMobileMenu) {
+          closeMobileMenu.addEventListener('click', function() {
+            if (mobileOverlay) {
+              mobileOverlay.classList.remove('active');
+              document.body.style.overflow = '';
+            }
+          });
+        }
+
+        if (mobileOverlay) {
+          mobileOverlay.addEventListener('click', function(e) {
+            if (e.target === mobileOverlay) {
+              mobileOverlay.classList.remove('active');
+              document.body.style.overflow = '';
+            }
+          });
+        }
+
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && mobileOverlay && mobileOverlay.classList.contains('active')) {
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+          }
+        });
+      }
+
+      initMobileOverlay();
+
+      // Hide cover-buttons when footer comes into view
+      function initFooterVisibilityCheck() {
+        const coverButtons = document.querySelector('.cover-buttons');
+        const footerContainer = document.getElementById('footer-container');
+
+        if (coverButtons && footerContainer && footerContainer.children.length > 0) {
+          function checkFooterVisibility() {
+            const footerRect = footerContainer.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            if (footerRect.top < viewportHeight) {
+              coverButtons.classList.add('hidden-by-footer');
+            } else {
+              coverButtons.classList.remove('hidden-by-footer');
+            }
+          }
+          window.addEventListener('scroll', checkFooterVisibility);
+          checkFooterVisibility();
+        } else if (coverButtons && footerContainer) {
+          setTimeout(initFooterVisibilityCheck, 500);
+        }
+      }
+
+      setTimeout(initFooterVisibilityCheck, 1000);
+    });
+  </script>
+</body>
+</html>
