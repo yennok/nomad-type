@@ -84,8 +84,15 @@
     }
 
     .article-end-meta {
-      margin-top: auto;
       padding-top: 130px;
+    }
+
+    .article-end-meta--desktop {
+      margin-top: auto;
+    }
+
+    .article-end-meta--mobile {
+      display: none;
     }
 
     .article-date {
@@ -194,8 +201,14 @@
 
     .sticky-nav {
       position: absolute;
+      height: 0;
       overflow: visible;
       z-index: 100;
+      pointer-events: none;
+    }
+
+    .sticky-nav * {
+      pointer-events: auto;
     }
 
     .sticky-green-circle {
@@ -271,13 +284,31 @@
         position: static;
       }
 
-      .article-title-he,
+      .article-title-he {
+        font-size: 80px;
+        margin: 0 0 18px 0;
+      }
+
       .article-title-en {
-        font-size: 28px;
+        font-size: 14px;
+        margin: 0 0 120px 0px;
+      }
+
+      .article-end-meta--desktop {
+        display: none;
+      }
+
+      .article-end-meta--mobile {
+        display: block;
+        order: 99;
+        padding-top: 0;
+        margin-top: 0px;
+        margin-bottom: 12px;
       }
 
       .article-body {
-        font-size: 16px;
+        font-size: 18px;
+        line-height: 1.6;
       }
 
       .article-photo-small {
@@ -285,7 +316,15 @@
       }
 
       .article-figure {
-        margin: 35px 0;
+        margin: 100px 0;
+      }
+
+      .article-figure figcaption {
+        margin-top: 18px;
+      }
+
+      .article-figure.article-zoom-photo + .article-figure.article-zoom-photo {
+        margin-top: -30px;
       }
 
       .cover-buttons {
@@ -368,13 +407,13 @@
   <div class="main-container">
     <div class="article-content">
 
-      <!-- LEFT COLUMN: Sticky title + end meta -->
+      <!-- LEFT COLUMN: Sticky title + end meta (desktop) -->
       <div class="article-left-column">
         <div class="article-title-column">
           <h1 class="article-title-he">&#x5DB;&#x5BC;&#x5B4;&#x5BC;&#x5E2;&#x5D5;&#x5B9;&#x5E8;&#x5B5;&#x5EA;</h1>
           <h2 class="article-title-en">[Uglendous]</h2>
         </div>
-        <div class="article-end-meta">
+        <div class="article-end-meta article-end-meta--desktop">
           <div class="article-date">February 2025</div>
           <div class="article-author">Nir Zabari Yenni</div>
         </div>
@@ -583,6 +622,12 @@
 
       <!-- RIGHT COLUMN: Empty (air) -->
       <div></div>
+
+      <!-- Article end meta (mobile) -->
+      <div class="article-end-meta article-end-meta--mobile">
+        <div class="article-date">February 2025</div>
+        <div class="article-author">Nir Zabari Yenni</div>
+      </div>
 
     </div>
 
