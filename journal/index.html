@@ -20,6 +20,17 @@
   <meta name="twitter:image:alt" content="Nomad Type - Journal">
   <link rel="stylesheet" href="../styles.css">
   <style>
+    /* Red Journal nav link on journal pages */
+    a.nav-link[href="./"],
+    a.menu-item[href="./"] {
+      color: red !important;
+      filter: invert(1);
+    }
+
+    a.mobile-menu-link[href="./"] {
+      color: red !important;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -272,6 +283,10 @@
     }
 
     @media (max-width: 768px) {
+      .cover-buttons {
+        display: none !important;
+      }
+
       .main-container {
         padding: 11.7rem 0 110px;
       }
@@ -382,9 +397,8 @@
 
   <div class="main-container">
     <div class="journal-content">
-      <div class="journal-title-column">
-        <h1 class="journal-title">Journal</h1>
-      </div>
+      <!-- journal-title removed -->
+
 
       <div class="journal-text-column">
         <div class="journal-grid">

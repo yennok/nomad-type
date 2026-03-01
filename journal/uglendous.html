@@ -28,6 +28,17 @@
   <meta name="twitter:image:alt" content="Uglendous - Nomad Type Journal">
   <link rel="stylesheet" href="../styles.css">
   <style>
+    /* Red Journal nav link on journal pages */
+    a.nav-link[href="./"],
+    a.menu-item[href="./"] {
+      color: red !important;
+      filter: invert(1);
+    }
+
+    a.mobile-menu-link[href="./"] {
+      color: red !important;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -274,6 +285,10 @@
     /* ====== RESPONSIVE ====== */
 
     @media (max-width: 768px) {
+      .cover-buttons {
+        display: none !important;
+      }
+
       .main-container {
         padding: 11.7rem 0 60px;
       }
@@ -618,7 +633,7 @@
           Just amazing.<br>
           And your kid is cooking up.<br>
           It&rsquo;s like that song, &lsquo;Growing Up&rsquo; &ndash; except now it&rsquo;s &lsquo;Cooking Up.&rsquo;<br>
-          Incredible. Alright. Text me whenever, okay? Great. Amazing. Really amazing. And say hi to Matthew! Maybe he&rsquo;ll invite me to Switzerland? Yeah, I don&rsquo;t think he&rsquo;ll invite me to Switzerland. My career&rsquo;s down the toilet. Alright. Cool. Bye. Kisses. Bye. Bye. Bye.&rdquo;</p>
+          Incredible. Alright. Text me whenever, okay? Great. Amazing. Really amazing. And say hi to Matthieu! Maybe he&rsquo;ll invite me to Switzerland? Yeah, I don&rsquo;t think he&rsquo;ll invite me to Switzerland. My career&rsquo;s down the toilet. Alright. Cool. Bye. Kisses. Bye. Bye. Bye.&rdquo;</p>
 
 
         </div>
