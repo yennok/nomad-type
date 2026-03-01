@@ -1315,7 +1315,6 @@ body.negative #buyBtn {
         flex: 1;
         max-width: none;
         text-align: center;
-        color: white;
       }
     }
 
@@ -1973,8 +1972,9 @@ body.negative #buyBtn {
       color: #000; 
     }
 
-    .btn-secondary.scrolled { 
-      background: #fff; 
+    .btn-secondary.scrolled {
+      /* background: #fff; */
+      color: black;
     }
 
     .btn:hover { 
