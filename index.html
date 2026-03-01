@@ -130,6 +130,13 @@
   opacity: 1 !important;
 }
 
+@media (max-width: 768px) {
+  .sticky-green-circle {
+    pointer-events: auto !important;
+    cursor: pointer;
+  }
+}
+
 /* Sticky Trial Fonts Button */
 .sticky-trial-btn {
   position: fixed;
@@ -856,6 +863,16 @@ ease;
       
       // Initial check
       updateCircleVisibility();
+
+      // Mobile: make sticky-green-circle clickable to homepage
+      const greenCircle = document.querySelector('.sticky-green-circle');
+      if (greenCircle) {
+        greenCircle.addEventListener('click', function(e) {
+          if (window.innerWidth <= 768) {
+            window.location.href = './';
+          }
+        });
+      }
       
       // Parallax effect for collage images
       function updateParallax() {

@@ -1314,6 +1314,8 @@ body.negative #buyBtn {
       .cover-buttons .btn {
         flex: 1;
         max-width: none;
+        text-align: center;
+        color: white;
       }
     }
 
