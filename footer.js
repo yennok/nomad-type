@@ -151,10 +151,10 @@ const footerHTML = `
   <div class="footer-nav-wrapper">
     <a href="https://www.nomad-type.com/" class="footer-nav-link">Typefaces</a>
     <a href="https://www.nomad-type.com/journal/" class="footer-nav-link">Journal</a>
-    <a href="https://www.nomad-type.com/faq" class="footer-nav-link">FAQ</a>
+    <a href="https://www.nomad-type.com/trial-fonts" class="footer-nav-link">Trial Fonts</a>
     <a href="https://www.nomad-type.com/licensing" class="footer-nav-link">Licensing</a>
     <a href="https://www.nomad-type.com/about" class="footer-nav-link">About</a>
-    <a href="https://www.nomad-type.com/trial-fonts" class="footer-nav-link">Trial Fonts</a>
+    <a href="https://www.nomad-type.com/faq" class="footer-nav-link">FAQ</a>
     <a href="https://www.linkedin.com/in/yennok/" target="_blank" class="footer-linkedin-btn">Linkedin</a>
   </div>
 </nav>
@@ -163,7 +163,7 @@ const footerHTML = `
 <footer class="footer">
   <div class="footer-content">
     <div class="footer-left">
-      © Nomad Type. All Rights Reserved 2025
+      © Nomad Type. All Rights Reserved ${new Date().getFullYear()}
     </div>
     <div class="footer-right">
       Typefaces in Use: Safra Sans/Mono

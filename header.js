@@ -47,14 +47,14 @@ const headerHTML = `
     </div>
     <nav class="mobile-menu-nav">
       <a href="./" class="mobile-menu-link">Typefaces</a>
-      <a href="licensing" class="mobile-menu-link">Licensing</a>
-      <a href="about" class="mobile-menu-link">About</a>
       <a href="journal/" class="mobile-menu-link">Journal</a>
       <a href="trial-fonts" class="mobile-menu-link">Trial Fonts</a>
+      <a href="licensing" class="mobile-menu-link">Licensing</a>
+      <a href="about" class="mobile-menu-link">About</a>
       <a href="faq" class="mobile-menu-link">FAQ</a>
     </nav>
     <div class="mobile-menu-footer">
-      <p>© Nomad Type. All Rights Reserved 2025</p>
+      <p>© Nomad Type. All Rights Reserved 2026</p>
     </div>
   </div>
 </div>
