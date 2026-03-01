@@ -3,6 +3,11 @@ import http.server
 import os
 
 class CleanURLHandler(http.server.SimpleHTTPRequestHandler):
+    def end_headers(self):
+        # Disable caching for development
+        self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+        super().end_headers()
+
     def do_GET(self):
         # Strip query string for file lookup
         path = self.path.split('?')[0]
