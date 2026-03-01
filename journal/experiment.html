@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Journal - Nomad Type</title>
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+  <link rel="apple-touch-icon" href="../assets/favicon.png">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body {
+      background-color: black;
+    }
+
+    /* ====== COVER TITLE ====== */
+    .cover-title {
+      font-size: 90px;
+      font-family: "Safra Sans", sans-serif;
+      letter-spacing: -0.01em;
+    }
+
+    /* ====== JOURNAL HERO MARQUEE ====== */
+    .marquee-text.journal-text {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 18vw;
+      font-weight: 400;
+      color: white;
+      text-transform: none;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      padding: 0 30px;
+    }
+
+    /* ====== JOURNAL ENTRIES SECTION ====== */
+    .journal-section {
+      padding: 0;
+      background: black;
+    }
+
+    .journal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .journal-entry {
+      background: black;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .journal-entry:hover .entry-thumbnail {
+      filter: brightness(0) saturate(100%) invert(12%) sepia(97%) saturate(7404%) hue-rotate(4deg) brightness(104%) contrast(106%);
+    }
+
+    .entry-thumbnail-wrap {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .entry-thumbnail {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .entry-header {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 30px;
+      font-weight: 400;
+      color: white;
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+
+    .entry-excerpt {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: white;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .entry-date {
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      font-weight: 400;
+      color: white;
+      margin-top: 15px;
+      margin-bottom: 0;
+    }
+
+    .entry-author {
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      font-weight: 400;
+      color: white;
+      margin-top: 3px;
+    }
+
+    /* ====== FOOTER OVERRIDES ====== */
+    #footer-container {
+      background: black;
+    }
+
+    #footer-container .footer-content-section {
+      background: black;
+    }
+
+    #footer-container .footer-column h3,
+    #footer-container .footer-column p {
+      color: white;
+    }
+
+    #footer-container .footer-nav {
+      background: black;
+    }
+
+    #footer-container .footer-nav-link {
+      color: white;
+    }
+
+    #footer-container .footer-linkedin-btn {
+      color: white;
+      border: 1px solid white;
+      background: black;
+    }
+
+    #footer-container .footer-left,
+    #footer-container .footer-right {
+      color: white;
+    }
+
+    .footer {
+      border-top: 1px solid white;
+    }
+
+    .multilingual-marquee,
+    .image-marquee {
+      filter: invert(1);
+    }
+
+    body.negative #footer-container {
+      filter: invert(0);
+    }
+
+    /* Show Journal link */
+    a[href="./"] {
+      display: inline !important;
+    }
+
+    @media (max-width: 768px) {
+      .journal-section {
+        padding: 30px 18px;
+      }
+
+      .journal-grid {
+        grid-template-columns: 1fr;
+        gap: 120px;
+        margin-bottom: 30px;
+      }
+
+      .entry-header {
+        font-size: 20px;
+      }
+
+      .entry-excerpt {
+        font-size: 18px;
+        line-height: 1.6;
+        padding-bottom: 20px;
+      }
+
+      .marquee-text.journal-text {
+        font-size: 25vw;
+      }
+    }
+  </style>
+</head>
+<body class="negative">
+
+  <!-- Header Container (will be populated by JavaScript) -->
+  <div id="header-container"></div>
+
+  <!-- ====== MAIN CONTENT ====== -->
+  <main class="content-wrapper">
+
+  <!-- ====== JOURNAL ENTRIES ====== -->
+  <section class="journal-section">
+    <div class="journal-grid">
+
+      <!-- Entry 1: Uglendous -->
+      <a href="uglendous" class="journal-entry">
+        <div class="entry-thumbnail-wrap">
+          <img src="../assets/journal/uglendous-thumb.svg" alt="Uglendous" class="entry-thumbnail">
+        </div>
+        <div class="entry-content">
+          <h3 class="entry-header">כִּעוֹרֵת [Uglendous]</h3>
+          <p class="entry-excerpt">
+            I can&rsquo;t stand Michal Sahar. And I admire her. The sheer freedom she allows herself, her complete disregard for conventions &ndash; it infuriates me to a level I can hardly explain. And it makes me admire her even more.
+          </p>
+          <div class="entry-date">February 2025</div>
+          <div class="entry-author">Nir Zabari Yenni</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  </main>
+
+  <!-- Footer Container -->
+  <div id="footer-container"></div>
+
+  <!-- GSAP for marquee -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="../gsap-public/esm/Draggable.js"></script>
+  <script src="../gsap-public/esm/ScrollTrigger.js"></script>
+
+  <!-- Load Header -->
+  <script src="../header.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof loadHeader === 'function') {
+        loadHeader(`
+          <div style="transform: translateY(0px);">Journal</div>
+        `);
+      }
+    });
+  </script>
+
+  <!-- Footer & Main Script -->
+  <script src="../footer.js"></script>
+  <script src="../script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof loadFooter === 'function') {
+        loadFooter('Safra');
+      }
+    });
+  </script>
+
+</body>
+</html>
