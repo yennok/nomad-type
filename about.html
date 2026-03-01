@@ -214,6 +214,20 @@
       opacity: 1 !important;
     }
 
+    @media (max-width: 768px) {
+      .sticky-green-circle {
+        pointer-events: auto !important;
+        cursor: pointer;
+      }
+      .sticky-green-circle .menu-background,
+      .sticky-green-circle .circle-hamburger {
+        display: none !important;
+      }
+      .sticky-green-circle:hover .circle-marquee-content {
+        opacity: 1 !important;
+      }
+    }
+
     /* Sticky Trial Fonts Button */
     .sticky-trial-btn {
       position: fixed;
@@ -452,6 +466,16 @@
       
       // Initial check
       updateCircleVisibility();
+
+      // Mobile: make sticky-green-circle clickable to homepage
+      const greenCircle = document.querySelector('.sticky-green-circle');
+      if (greenCircle) {
+        greenCircle.addEventListener('click', function() {
+          if (window.innerWidth <= 768) {
+            window.location.href = './';
+          }
+        });
+      }
 
       // Mobile Overlay Functionality
       function initMobileOverlay() {
