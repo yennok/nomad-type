@@ -18,6 +18,7 @@ const headerHTML = `
   <div class="menu-background">
     <div class="menu-items">
       <a href="index.html" class="menu-item">Typefaces</a>
+      <a href="journal/" class="menu-item">Journal</a>
       <a href="about.html" class="menu-item">About</a>
     </div>
   </div>
@@ -29,6 +30,7 @@ const headerHTML = `
   <div class="nav-brand"><a href="index.html">Nomad Type</a></div>
   <div class="nav-links">
     <a href="index.html" class="nav-link">Typefaces</a>
+    <a href="journal/" class="nav-link">Journal</a>
     <a href="about.html" class="nav-link">About</a>
   </div>
 </nav>
@@ -47,6 +49,7 @@ const headerHTML = `
       <a href="index.html" class="mobile-menu-link">Typefaces</a>
       <a href="licensing.html" class="mobile-menu-link">Licensing</a>
       <a href="about.html" class="mobile-menu-link">About</a>
+      <a href="journal/" class="mobile-menu-link">Journal</a>
       <a href="trial-fonts.html" class="mobile-menu-link">Trial Fonts</a>
       <a href="faq.html" class="mobile-menu-link">FAQ</a>
     </nav>

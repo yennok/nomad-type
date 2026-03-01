@@ -5,123 +5,123 @@ const footerHTML = `
   <div class="marquee-container bottom">
     <div class="marquee-content">
       <span class="marquee-img">
-        <a href="sugar.html" class="marquee-link">
-          <img src="assets/font-marquee/Sugar-Display.png" alt="Sugar Display">
+        <a href="https://www.nomad-type.com/sugar" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/Sugar-Display.png" alt="Sugar Display">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="sugar.html" class="marquee-link">
-          <img src="assets/font-marquee/Sugar-Text.png" alt="Sugar Text">
+        <a href="https://www.nomad-type.com/sugar" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/Sugar-Text.png" alt="Sugar Text">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="safra.html" class="marquee-link">
-          <img src="assets/font-marquee/Safra.png" alt="Safra">
+        <a href="https://www.nomad-type.com/safra" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/Safra.png" alt="Safra">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="werd.html" class="marquee-link">
-          <img src="assets/font-marquee/Werd.png" alt="Werd">
+        <a href="https://www.nomad-type.com/werd" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/Werd.png" alt="Werd">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="middle-east.html" class="marquee-link">
-          <img src="assets/font-marquee/Middle-East.png" alt="Middle East">
+        <a href="https://www.nomad-type.com/middle-east" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/Middle-East.png" alt="Middle East">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="the-bizarre.html" class="marquee-link">
-          <img src="assets/font-marquee/The-Bizarre-Beta.png" alt="The Bizarre Beta">
+        <a href="https://www.nomad-type.com/the-bizarre" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/The-Bizarre-Beta.png" alt="The Bizarre Beta">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="dear-ai.html" class="marquee-link">
-          <img src="assets/font-marquee/Dear-AI-Beta.png" alt="Dear AI Beta">
+        <a href="https://www.nomad-type.com/dear-ai" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/Dear-AI-Beta.png" alt="Dear AI Beta">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="yeffe.html" class="marquee-link">
-          <img src="assets/font-marquee/Yeffe.png" alt="Yeffe">
+        <a href="https://www.nomad-type.com/yeffe" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/Yeffe.png" alt="Yeffe">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="spitz.html" class="marquee-link">
-          <img src="assets/font-marquee/Romanisch-Spitz.png" alt="Romanisch Spitz">
+        <a href="https://www.nomad-type.com/spitz" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/Romanisch-Spitz.png" alt="Romanisch Spitz">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="kaldanit.html" class="marquee-link">
-          <img src="assets/font-marquee/Kaladnit.png" alt="Kaldanit">
+        <a href="https://www.nomad-type.com/kaldanit" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/Kaladnit.png" alt="Kaldanit">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="kilo-display.html" class="marquee-link">
-          <img src="assets/font-marquee/KILO-Display.png" alt="Kilo Display">
+        <a href="https://www.nomad-type.com/kilo-display" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/KILO-Display.png" alt="Kilo Display">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="kilo-text.html" class="marquee-link">
-          <img src="assets/font-marquee/KILO-text.png" alt="Kilo Text">
+        <a href="https://www.nomad-type.com/kilo-text" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/KILO-text.png" alt="Kilo Text">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="sugar.html" class="marquee-link">
-          <img src="assets/font-marquee/Sugar-Display.png" alt="Sugar Display">
+        <a href="https://www.nomad-type.com/sugar" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/Sugar-Display.png" alt="Sugar Display">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="sugar.html" class="marquee-link">
-          <img src="assets/font-marquee/Sugar-Text.png" alt="Sugar Text">
+        <a href="https://www.nomad-type.com/sugar" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/Sugar-Text.png" alt="Sugar Text">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="safra.html" class="marquee-link">
-          <img src="assets/font-marquee/Safra.png" alt="Safra">
+        <a href="https://www.nomad-type.com/safra" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/Safra.png" alt="Safra">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="werd.html" class="marquee-link">
-          <img src="assets/font-marquee/Werd.png" alt="Werd">
+        <a href="https://www.nomad-type.com/werd" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/Werd.png" alt="Werd">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="middle-east.html" class="marquee-link">
-          <img src="assets/font-marquee/Middle-East.png" alt="Middle East">
+        <a href="https://www.nomad-type.com/middle-east" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/Middle-East.png" alt="Middle East">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="the-bizarre.html" class="marquee-link">
-          <img src="assets/font-marquee/The-Bizarre-Beta.png" alt="The Bizarre Beta">
+        <a href="https://www.nomad-type.com/the-bizarre" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/The-Bizarre-Beta.png" alt="The Bizarre Beta">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="dear-ai.html" class="marquee-link">
-          <img src="assets/font-marquee/Dear-AI-Beta.png" alt="Dear AI Beta">
+        <a href="https://www.nomad-type.com/dear-ai" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/Dear-AI-Beta.png" alt="Dear AI Beta">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="yeffe.html" class="marquee-link">
-          <img src="assets/font-marquee/Yeffe.png" alt="Yeffe">
+        <a href="https://www.nomad-type.com/yeffe" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/Yeffe.png" alt="Yeffe">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="spitz.html" class="marquee-link">
-          <img src="assets/font-marquee/Romanisch-Spitz.png" alt="Romanisch Spitz">
+        <a href="https://www.nomad-type.com/spitz" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/Romanisch-Spitz.png" alt="Romanisch Spitz">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="kaldanit.html" class="marquee-link">
-          <img src="assets/font-marquee/Kaladnit.png" alt="Kaldanit">
+        <a href="https://www.nomad-type.com/kaldanit" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/Kaladnit.png" alt="Kaldanit">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="kilo-display.html" class="marquee-link">
-          <img src="assets/font-marquee/KILO-Display.png" alt="Kilo Display">
+        <a href="https://www.nomad-type.com/kilo-display" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/KILO-Display.png" alt="Kilo Display">
         </a>
       </span>
       <span class="marquee-img">
-        <a href="kilo-text.html" class="marquee-link">
-          <img src="assets/font-marquee/KILO-text.png" alt="Kilo Text">
+        <a href="https://www.nomad-type.com/kilo-text" class="marquee-link">
+          <img src="https://www.nomad-type.com/assets/font-marquee/KILO-text.png" alt="Kilo Text">
         </a>
       </span>
     </div>
@@ -149,11 +149,12 @@ const footerHTML = `
 <!-- ====== FOOTER NAVIGATION ====== -->
 <nav class="footer-nav">
   <div class="footer-nav-wrapper">
-    <a href="index.html" class="footer-nav-link">Typefaces</a>
-    <a href="faq.html" class="footer-nav-link">FAQ</a>
-    <a href="licensing.html" class="footer-nav-link">Licensing</a>
-    <a href="about.html" class="footer-nav-link">About</a>
-    <a href="trial-fonts.html" class="footer-nav-link">Trial Fonts</a>
+    <a href="https://www.nomad-type.com/" class="footer-nav-link">Typefaces</a>
+    <a href="https://www.nomad-type.com/journal/" class="footer-nav-link">Journal</a>
+    <a href="https://www.nomad-type.com/faq" class="footer-nav-link">FAQ</a>
+    <a href="https://www.nomad-type.com/licensing" class="footer-nav-link">Licensing</a>
+    <a href="https://www.nomad-type.com/about" class="footer-nav-link">About</a>
+    <a href="https://www.nomad-type.com/trial-fonts" class="footer-nav-link">Trial Fonts</a>
     <a href="https://www.linkedin.com/in/yennok/" target="_blank" class="footer-linkedin-btn">Linkedin</a>
   </div>
 </nav>
@@ -174,7 +175,7 @@ const footerHTML = `
 // Load footer component
 function loadFooter(fontName = 'Safra') {
   const footerContainer = document.getElementById('footer-container');
-  
+
   if (footerContainer) {
     footerContainer.innerHTML = footerHTML;
     
