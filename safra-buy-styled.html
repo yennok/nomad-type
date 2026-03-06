@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Safra — Buy Form (Styled)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+      background: rgba(0,0,0,0.55);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    /* ---- Overlay panel ---- */
+    .overlay-content {
+      background: #fff;
+      max-width: 480px;
+      width: 100%;
+      padding: 36px 32px 32px;
+      position: relative;
+    }
+
+    .form-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .form-header h2 {
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .close-btn {
+      width: 28px;
+      height: 28px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .close-btn::before, .close-btn::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 18px; height: 1.5px;
+      background: #1a1a1a;
+    }
+    .close-btn::before { transform: translate(-50%,-50%) rotate(45deg); }
+    .close-btn::after  { transform: translate(-50%,-50%) rotate(-45deg); }
+
+    .intro-text {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+
+    /* ---- Collapsible sections ---- */
+    .form-section {
+      margin-bottom: 0;
+    }
+
+    .collapsible-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid #1a1a1a;
+      cursor: pointer;
+      user-select: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .collapsible-header .required { color: #e85d3a; }
+
+    .dropdown-icon {
+      width: 12px;
+      height: 12px;
+      border-right: 1.5px solid #1a1a1a;
+      border-bottom: 1.5px solid #1a1a1a;
+      transform: rotate(45deg);
+      transition: transform 0.2s;
+    }
+
+    .collapsible-header.open .dropdown-icon {
+      transform: rotate(-135deg);
+    }
+
+    .collapsible-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .collapsible-content.open {
+      max-height: 600px;
+    }
+
+    .section-inner {
+      padding: 16px 0;
+    }
+
+    /* ---- Toggle buttons (pill style) ---- */
+    .toggle-group {
+      display: flex;
+      gap: 0;
+      border: 1.5px solid #1a1a1a;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .toggle-group label {
+      flex: 1;
+      text-align: center;
+      padding: 9px 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border-left: 1.5px solid #1a1a1a;
+      transition: background 0.15s, color 0.15s;
+      user-select: none;
+    }
+
+    .toggle-group label:first-child { border-left: none; }
+    .toggle-group input { display: none; }
+    .toggle-group label.active {
+      background: #1a1a1a;
+      color: #fff;
+    }
+
+    /* ---- Checkbox list (weights) ---- */
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      font-size: 14px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .checkbox-label input { display: none; }
+
+    .checkmark {
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.15s;
+    }
+
+    .checkbox-label input:checked + .checkmark {
+      background: #e85d3a;
+      border-color: #e85d3a;
+    }
+
+    .checkbox-label input:checked + .checkmark::after {
+      content: '✓';
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* ---- Family upsell ---- */
+    .family-upsell {
+      margin-top: 4px;
+      padding: 10px 12px;
+      border: 1px dashed #2a7d2a;
+      font-size: 12px;
+      color: #2a7d2a;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      transition: background 0.15s;
+    }
+    .family-upsell:hover { background: #f0faf0; }
+    .family-upsell .savings { font-weight: 600; }
+
+    /* ---- App notice ---- */
+    .app-notice {
+      background: #fff8e1;
+      border: 1px solid #e0c860;
+      padding: 10px 14px;
+      font-size: 12px;
+      margin-top: 8px;
+      display: none;
+      line-height: 1.5;
+    }
+    .app-notice a { color: #1a1a1a; }
+
+    /* ---- Enterprise ---- */
+    .enterprise-note {
+      font-size: 12px;
+      color: #888;
+      margin-top: 8px;
+      text-align: center;
+    }
+    .enterprise-note a { color: #1a1a1a; }
+
+    /* ---- Price summary ---- */
+    .price-summary {
+      border-top: 1px solid #1a1a1a;
+      margin-top: 8px;
+      padding-top: 20px;
+    }
+
+    .summary-line {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 4px;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .price-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 20px;
+    }
+
+    .price-total .amount {
+      font-size: 28px;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .price-total .vat-note {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* ---- Consent ---- */
+    .consent-section {
+      margin-bottom: 20px;
+    }
+
+    .consent-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12px;
+      color: #888;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+
+    .consent-label input { display: none; }
+    .consent-label .checkmark {
+      margin-top: 2px;
+    }
+
+    /* ---- Buy button ---- */
+    .buy-btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: #1a1a1a;
+      color: #fff;
+      border: none;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      text-align: center;
+      transition: opacity 0.15s;
+    }
+
+    .buy-btn:hover { opacity: 0.85; }
+
+    .contact-btn {
+      display: none;
+      width: 100%;
+      padding: 14px;
+      background: #fff;
+      color: #1a1a1a;
+      border: 1.5px solid #1a1a1a;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .contact-btn:hover { background: #f5f5f5; }
+
+    /* ---- Debug ---- */
+    .debug {
+      font-size: 10px;
+      color: #ccc;
+      margin-top: 12px;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+  </style>
+</head>
+<body>
+
+<div class="overlay-content">
+  <div class="form-header">
+    <h2>Buy Safra ספרא سفرا</h2>
+    <button class="close-btn"></button>
+  </div>
+
+  <p class="intro-text">Select your package, license type, and team size. Price updates automatically.</p>
+
+  <!-- === SECTION 1: Select Fonts === -->
+  <div class="form-section">
+    <div class="collapsible-header open" data-target="fontsContent">
+      <span>Select Fonts<span class="required">*</span></span>
+      <span class="dropdown-icon"></span>
+    </div>
+    <div class="collapsible-content open" id="fontsContent">
+      <div class="section-inner">
+        <div class="toggle-group" id="packageToggle">
+          <label class="active" data-value="family"><input type="radio" name="package" value="family" checked><span>Full Family (4)</span></label>
+          <label data-value="single"><input type="radio" name="package" value="single"><span>Single Weight</span></label>
+        </div>
+
+        <div id="weightsList">
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" name="weight" value="entire" checked>
+              <span class="checkmark"></span>
+              Full Family (4)
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="weight" value="regular" checked>
+              <span class="checkmark"></span>
+              Safra Regular
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="weight" value="bold" checked>
+              <span class="checkmark"></span>
+              Safra Bold
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="weight" value="sans-regular" checked>
+              <span class="checkmark"></span>
+              Safra Sans Regular
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="weight" value="sans-bold" checked>
+              <span class="checkmark"></span>
+              Safra Sans Bold
+            </label>
+          </div>
+
+          <div class="family-upsell" id="familyUpsell" style="display:none;">
+            <span>Get all 4 weights →</span>
+            <span class="savings" id="savingsText"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- === SECTION 2: License Type === -->
+  <div class="form-section">
+    <div class="collapsible-header open" data-target="licenseContent">
+      <span>License Type<span class="required">*</span></span>
+      <span class="dropdown-icon"></span>
+    </div>
+    <div class="collapsible-content open" id="licenseContent">
+      <div class="section-inner">
+        <div class="toggle-group" id="licenseToggle">
+          <label class="active" data-value="desktop"><input type="radio" name="license" value="desktop" checked><span>Desktop</span></label>
+          <label data-value="web"><input type="radio" name="license" value="web"><span>Web</span></label>
+          <label data-value="bundle"><input type="radio" name="license" value="bundle"><span>D+W Bundle</span></label>
+          <label data-value="app"><input type="radio" name="license" value="app"><span>App</span></label>
+        </div>
+        <div class="app-notice" id="appNotice">
+          App licensing requires a custom quote.<br>
+          Please <a href="mailto:nir@yennok.com">contact us</a> for pricing.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- === SECTION 3: Number of Users === -->
+  <div class="form-section">
+    <div class="collapsible-header open" data-target="usersContent">
+      <span>Number of Users<span class="required">*</span></span>
+      <span class="dropdown-icon"></span>
+    </div>
+    <div class="collapsible-content open" id="usersContent">
+      <div class="section-inner">
+        <div class="toggle-group" id="usersToggle">
+          <label class="active" data-value="individual"><input type="radio" name="users" value="individual" checked><span>Individual</span></label>
+          <label data-value="studio"><input type="radio" name="users" value="studio"><span>Studio (5)</span></label>
+          <label data-value="company"><input type="radio" name="users" value="company"><span>Company (20)</span></label>
+        </div>
+        <div class="enterprise-note">
+          20+ users? <a href="mailto:nir@yennok.com">Contact for Enterprise pricing</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- === PRICE === -->
+  <div class="price-summary">
+    <div class="summary-line" id="summaryLine">Full Family (4) · Desktop · Individual</div>
+    <div class="price-total">
+      <span class="amount" id="totalPrice">₪900</span>
+      <span class="vat-note">+ VAT where applicable</span>
+    </div>
+  </div>
+
+  <!-- Consent -->
+  <div class="consent-section">
+    <label class="consent-label">
+      <input type="checkbox" name="consent">
+      <span class="checkmark"></span>
+      <span>I'm happy to be contacted about Safra licensing and to receive occasional updates. No spam – I can unsubscribe anytime.</span>
+    </label>
+  </div>
+
+  <!-- Buy / Contact -->
+  <button class="buy-btn" id="buyBtn">Buy Now — ₪900</button>
+  <a class="contact-btn" id="contactBtn" href="mailto:nir@yennok.com">Contact Us for App Licensing</a>
+
+  <div class="debug" id="debug">variant: family-desktop-individual</div>
+</div>
+
+<script>
+// =============================================
+// PRICING
+// =============================================
+const PRICES = {
+  single: {
+    desktop: { individual: 350, studio: 550, company: 1400 },
+    web:     { individual: 525, studio: 825, company: 2100 },
+    bundle:  { individual: 700, studio: 1100, company: 2800 },
+  },
+  family: {
+    desktop: { individual: 900, studio: 1400, company: 3600 },
+    web:     { individual: 1350, studio: 2100, company: 5400 },
+    bundle:  { individual: 1800, studio: 2800, company: 7200 },
+  }
+};
+
+const VARIANT_MAP = {
+  'single-desktop-individual':  'VARIANT_ID_1',
+  'single-desktop-studio':     'VARIANT_ID_2',
+  'single-desktop-company':    'VARIANT_ID_3',
+  'single-web-individual':     'VARIANT_ID_4',
+  'single-web-studio':         'VARIANT_ID_5',
+  'single-web-company':        'VARIANT_ID_6',
+  'single-bundle-individual':  'VARIANT_ID_7',
+  'single-bundle-studio':      'VARIANT_ID_8',
+  'single-bundle-company':     'VARIANT_ID_9',
+  'family-desktop-individual': 'VARIANT_ID_10',
+  'family-desktop-studio':     'VARIANT_ID_11',
+  'family-desktop-company':    'VARIANT_ID_12',
+  'family-web-individual':     'VARIANT_ID_13',
+  'family-web-studio':         'VARIANT_ID_14',
+  'family-web-company':        'VARIANT_ID_15',
+  'family-bundle-individual':  'VARIANT_ID_16',
+  'family-bundle-studio':      'VARIANT_ID_17',
+  'family-bundle-company':     'VARIANT_ID_18',
+};
+
+// =============================================
+// STATE
+// =============================================
+let state = {
+  package: 'family',
+  license: 'desktop',
+  users: 'individual',
+};
+
+// =============================================
+// COLLAPSIBLE SECTIONS
+// =============================================
+document.querySelectorAll('.collapsible-header').forEach(header => {
+  header.addEventListener('click', () => {
+    header.classList.toggle('open');
+    const content = header.nextElementSibling;
+    content.classList.toggle('open');
+  });
+});
+
+// =============================================
+// TOGGLE GROUPS
+// =============================================
+document.querySelectorAll('.toggle-group').forEach(group => {
+  group.querySelectorAll('label').forEach(label => {
+    label.addEventListener('click', () => {
+      group.querySelectorAll('label').forEach(l => l.classList.remove('active'));
+      label.classList.add('active');
+      const val = label.dataset.value;
+      if (group.id === 'packageToggle') state.package = val;
+      if (group.id === 'licenseToggle') state.license = val;
+      if (group.id === 'usersToggle') state.users = val;
+      update();
+    });
+  });
+});
+
+// =============================================
+// CHECKBOX LOGIC (visual only — pricing follows toggle)
+// =============================================
+const weightCheckboxes = document.querySelectorAll('input[name="weight"]');
+const entireCheckbox = document.querySelector('input[value="entire"]');
+const individualWeights = document.querySelectorAll('input[name="weight"]:not([value="entire"])');
+
+entireCheckbox.addEventListener('change', () => {
+  individualWeights.forEach(cb => { cb.checked = entireCheckbox.checked; });
+  // If all checked → switch to family, else single
+  state.package = entireCheckbox.checked ? 'family' : 'single';
+  syncPackageToggle();
+  update();
+});
+
+individualWeights.forEach(cb => {
+  cb.addEventListener('change', () => {
+    const allChecked = [...individualWeights].every(c => c.checked);
+    entireCheckbox.checked = allChecked;
+    // Count how many checked
+    const checkedCount = [...individualWeights].filter(c => c.checked).length;
+    state.package = allChecked ? 'family' : 'single';
+    syncPackageToggle();
+    update();
+  });
+});
+
+function syncPackageToggle() {
+  document.querySelectorAll('#packageToggle label').forEach(l => l.classList.remove('active'));
+  document.querySelector(`#packageToggle label[data-value="${state.package}"]`).classList.add('active');
+}
+
+// Family upsell
+document.getElementById('familyUpsell').addEventListener('click', () => {
+  state.package = 'family';
+  entireCheckbox.checked = true;
+  individualWeights.forEach(cb => { cb.checked = true; });
+  syncPackageToggle();
+  update();
+});
+
+// =============================================
+// UPDATE
+// =============================================
+function update() {
+  const isApp = state.license === 'app';
+  const isFamily = state.package === 'family';
+
+  // Checkboxes visual state
+  if (isFamily) {
+    entireCheckbox.checked = true;
+    individualWeights.forEach(cb => { cb.checked = true; });
+  }
+
+  // Show/hide upsell
+  document.getElementById('familyUpsell').style.display = (!isFamily && !isApp) ? 'flex' : 'none';
+
+  // App notice
+  document.getElementById('appNotice').style.display = isApp ? 'block' : 'none';
+
+  // Price
+  let price = null;
+  let variantKey = null;
+
+  if (!isApp) {
+    price = PRICES[state.package][state.license][state.users];
+    variantKey = `${state.package}-${state.license}-${state.users}`;
+  }
+
+  // Summary
+  const pkgLabel = isFamily ? 'Full Family (4)' : 'Single Weight';
+  const licLabel = { desktop: 'Desktop', web: 'Web', bundle: 'D+W Bundle', app: 'App' }[state.license];
+  const usrLabel = { individual: 'Individual', studio: 'Studio (5)', company: 'Company (20)' }[state.users];
+  document.getElementById('summaryLine').textContent = `${pkgLabel} · ${licLabel} · ${usrLabel}`;
+
+  const buyBtn = document.getElementById('buyBtn');
+  const contactBtn = document.getElementById('contactBtn');
+
+  if (isApp) {
+    document.getElementById('totalPrice').textContent = 'Contact us';
+    buyBtn.style.display = 'none';
+    contactBtn.style.display = 'block';
+  } else {
+    const fmt = '₪' + price.toLocaleString();
+    document.getElementById('totalPrice').textContent = fmt;
+    buyBtn.textContent = `Buy Now — ${fmt}`;
+    buyBtn.style.display = 'block';
+    contactBtn.style.display = 'none';
+  }
+
+  // Upsell savings
+  if (!isApp && !isFamily) {
+    const sp = PRICES.single[state.license][state.users];
+    const fp = PRICES.family[state.license][state.users];
+    const pct = Math.round((1 - fp / (sp * 4)) * 100);
+    document.getElementById('savingsText').textContent = `Save ${pct}%`;
+  }
+
+  // Debug
+  document.getElementById('debug').textContent = `variant: ${variantKey || 'app'} → ${variantKey ? VARIANT_MAP[variantKey] : 'N/A'}`;
+}
+
+// Buy
+document.getElementById('buyBtn').addEventListener('click', () => {
+  const key = `${state.package}-${state.license}-${state.users}`;
+  const vid = VARIANT_MAP[key];
+  if (vid && vid.startsWith('VARIANT_ID')) {
+    alert(`Checkout:\nhttps://nomad-type.lemonsqueezy.com/checkout/buy/${vid}\n\n(Replace with real Lemon Squeezy URLs)`);
+  } else {
+    window.open(`https://nomad-type.lemonsqueezy.com/checkout/buy/${vid}`, '_blank');
+  }
+});
+
+update();
+</script>
+
+</body>
+</html>
