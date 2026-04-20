@@ -1,0 +1,11 @@
+# Nomad Type - robots.txt
+# Allow all search engines to index the entire site
+
+User-agent: *
+Allow: /
+
+# Block internal/generator pages from being indexed
+Disallow: /generator.html
+
+# Point to sitemap
+Sitemap: https://www.nomad-type.com/sitemap.xml

@@ -20,22 +20,62 @@
   
   <!-- Featured Image Meta Tags -->
   <link rel="canonical" href="https://www.nomad-type.com/">
-  <meta name="description" content="Nomad Type is an independent multilingual type foundry creating contemporary fonts across scripts.">
+  <meta name="description" content="Nomad Type is an independent multilingual type foundry designing contemporary typefaces in Latin, Arabic, and Hebrew. Retail library: Safra, Werd, Kaldanit, Kilo, Middle East, and more. Custom type commissions available.">
+  <meta name="keywords" content="type foundry, Arabic typeface, Hebrew typeface, Latin typeface, multilingual font, trilingual type design, Nir Zabari Yenni, Safra, Werd, Kaldanit">
+  <meta name="author" content="Nir Zabari Yenni">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.nomad-type.com/">
-  <meta property="og:title" content="Nomad Type | An Independent Multilingual Type Foundry">
-  <meta property="og:description" content="Nomad Type is an independent multilingual type foundry creating contemporary fonts across scripts.">
+  <meta property="og:title" content="Nomad Type | Independent Multilingual Type Foundry — Arabic, Hebrew, Latin">
+  <meta property="og:description" content="Independent multilingual type foundry designing contemporary typefaces in Latin, Arabic, and Hebrew. Retail library: Safra, Werd, Kaldanit, Kilo, Middle East, and more.">
   <meta property="og:image" content="https://www.nomad-type.com/assets/featured_image.png">
   <meta property="og:image:secure_url" content="https://www.nomad-type.com/assets/featured_image.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1500">
   <meta property="og:image:height" content="1000">
-  <meta property="og:image:alt" content="Nomad Type - Font Collage">
+  <meta property="og:image:alt" content="Nomad Type - Arabic, Hebrew, and Latin typeface specimens">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Nomad Type | An Independent Multilingual Type Foundry">
-  <meta name="twitter:description" content="Nomad Type is an independent multilingual type foundry creating contemporary fonts across scripts.">
+  <meta name="twitter:title" content="Nomad Type | Independent Multilingual Type Foundry — Arabic, Hebrew, Latin">
+  <meta name="twitter:description" content="Independent multilingual type foundry designing contemporary typefaces in Latin, Arabic, and Hebrew.">
   <meta name="twitter:image" content="https://www.nomad-type.com/assets/featured_image.png">
-  <meta name="twitter:image:alt" content="Nomad Type - Font Collage">
+  <meta name="twitter:image:alt" content="Nomad Type - Arabic, Hebrew, and Latin typeface specimens">
+
+  <!-- Structured Data: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Nomad Type",
+    "alternateName": "Nomad Type Foundry",
+    "url": "https://www.nomad-type.com/",
+    "logo": "https://www.nomad-type.com/assets/favicon.png",
+    "description": "Independent type foundry designing contemporary typefaces in Latin, Arabic, and Hebrew.",
+    "location": [
+      {
+        "@type": "Place",
+        "name": "Lausanne, Switzerland",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Lausanne",
+          "addressCountry": "CH"
+        }
+      },
+      {
+        "@type": "Place",
+        "name": "Tel Aviv, Israel",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Tel Aviv",
+          "addressCountry": "IL"
+        }
+      }
+    ],
+    "founder": {
+      "@type": "Person",
+      "name": "Nir Zabari Yenni",
+      "url": "https://yennok.com"
+    }
+  }
+  </script>
   <link rel="stylesheet" href="styles.css">
   <style>
     * {
@@ -50,6 +90,20 @@
       padding: 0;
       overflow-x: hidden;
     }
+
+    /* Visually hidden, but readable by Google and screen readers */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
 
     .main-container {
       height: 100vh;
@@ -611,6 +665,9 @@ ease;
   </style>
 </head>
 <body class="homepage-page">
+  <!-- SEO: Semantic H1 for Google (visually hidden, design unchanged) -->
+  <h1 class="sr-only">Nomad Type — Independent Multilingual Type Foundry designing Arabic, Hebrew, and Latin typefaces</h1>
+
   <nav class="sticky-nav" style="transition: opacity 0.5s, top 0.3s; opacity: 1; top: 50px;">
     <div class="nav-brand"><a href="./">Nomad Type</a></div>
     <div class="nav-links">
@@ -666,57 +723,68 @@ ease;
     <div class="collage">
       <!-- Section 1: First 4 images - 2 column masonry -->
       <div class="collage-section-1">
-        <a href="kaldanit" class="a1">
-          <img src="assets/homepage/a1.png" alt="Kaldanit" />
-          <img src="assets/homepage/a1-hover.png" class="hover" alt="Kaldanit Hover" />
+        <a href="kaldanit" class="a1" aria-label="Kaldanit — Hebrew display typeface">
+          <img src="assets/homepage/a1.png" alt="Kaldanit — Hebrew display typeface specimen" />
+          <img src="assets/homepage/a1-hover.png" class="hover" alt="Kaldanit — Hebrew display typeface hover specimen" />
+          <span class="sr-only"><h2>Kaldanit</h2> — Hebrew display typeface</span>
         </a>
-        <a href="safra" class="a2">
-          <img src="assets/homepage/a2.png" alt="Safra" />
-          <img src="assets/homepage/a2-hover.png" class="hover" alt="Safra Hover" />
+        <a href="safra" class="a2" aria-label="Safra — Trilingual Arabic, Hebrew, and Latin typeface family">
+          <img src="assets/homepage/a2.png" alt="Safra — Trilingual Arabic, Hebrew, and Latin typeface specimen" />
+          <img src="assets/homepage/a2-hover.png" class="hover" alt="Safra — Trilingual typeface hover specimen" />
+          <span class="sr-only"><h2>Safra ספרא سفرا</h2> — Trilingual serif and sans typeface family supporting Arabic, Hebrew, and Latin</span>
         </a>
-        <a href="kilo-text" class="a3">
-          <img src="assets/homepage/a3.png" alt="Kilo Text" />
-          <img src="assets/homepage/a3-hover.png" class="hover" alt="Kilo Text Hover" />
+        <a href="kilo-text" class="a3" aria-label="Kilo Text — Modern Latin text typeface">
+          <img src="assets/homepage/a3.png" alt="Kilo Text — modern Latin text typeface specimen" />
+          <img src="assets/homepage/a3-hover.png" class="hover" alt="Kilo Text hover specimen" />
+          <span class="sr-only"><h2>Kilo Text</h2> — Modern Latin text typeface for editorial and long-form reading</span>
         </a>
-        <a href="middle-east" class="a11">
-          <img src="assets/homepage/a11.png" alt="Middle East" />
-          <img src="assets/homepage/a11-hover.png" class="hover" alt="Middle East Hover" />
+        <a href="middle-east" class="a11" aria-label="Middle East — Arabic and Hebrew display typeface">
+          <img src="assets/homepage/a11.png" alt="Middle East — Arabic and Hebrew display typeface specimen" />
+          <img src="assets/homepage/a11-hover.png" class="hover" alt="Middle East hover specimen" />
+          <span class="sr-only"><h2>Middle East</h2> — Arabic and Hebrew display typeface</span>
         </a>
         </div>
-        
+
       <!-- Section 2: Next 2 images - full width -->
       <div class="collage-section-2">
-        <a href="yeffe" class="a6">
-          <img src="assets/homepage/a6.png" alt="Yeffe" />
-          <img src="assets/homepage/a6-hover.png" class="hover" alt="Yeffe Hover" />
+        <a href="yeffe" class="a6" aria-label="Yeffe Nefesh — Hebrew display typeface">
+          <img src="assets/homepage/a6.png" alt="Yeffe Nefesh — Hebrew display typeface specimen" />
+          <img src="assets/homepage/a6-hover.png" class="hover" alt="Yeffe Nefesh hover specimen" />
+          <span class="sr-only"><h2>Yeffe Nefesh</h2> — Hebrew display typeface</span>
         </a>
-        <a href="kilo-display" class="a7">
-          <img src="assets/homepage/a7.png" alt="Kilo" />
-          <img src="assets/homepage/a7-hover.png" class="hover" alt="Kilo Hover" />
+        <a href="kilo-display" class="a7" aria-label="Kilo Display — Latin display typeface">
+          <img src="assets/homepage/a7.png" alt="Kilo Display — Latin display typeface specimen" />
+          <img src="assets/homepage/a7-hover.png" class="hover" alt="Kilo Display hover specimen" />
+          <span class="sr-only"><h2>Kilo Display</h2> — Latin display typeface</span>
         </a>
       </div>
-      
+
       <!-- Section 3: Last 5 images - 2 column masonry -->
       <div class="collage-section-3">
-        <a href="dear-ai" class="a9">
-          <img src="assets/homepage/a9.png" alt="Dear AI" />
-          <img src="assets/homepage/a9-hover.png" class="hover" alt="Dear AI Hover" />
+        <a href="dear-ai" class="a9" aria-label="Dear AI — Experimental Latin typeface">
+          <img src="assets/homepage/a9.png" alt="Dear AI — experimental Latin typeface specimen" />
+          <img src="assets/homepage/a9-hover.png" class="hover" alt="Dear AI hover specimen" />
+          <span class="sr-only"><h2>Dear AI</h2> — Experimental Latin typeface</span>
         </a>
-        <a href="the-bizarre" class="a5">
-          <img src="assets/homepage/a5.png" alt="The-Bizarre" />
-          <img src="assets/homepage/a5-hover.png" class="hover" alt="The-Bizarre" />
+        <a href="the-bizarre" class="a5" aria-label="The Bizarre — Display typeface">
+          <img src="assets/homepage/a5.png" alt="The Bizarre — display typeface specimen" />
+          <img src="assets/homepage/a5-hover.png" class="hover" alt="The Bizarre hover specimen" />
+          <span class="sr-only"><h2>The Bizarre</h2> — Latin display typeface</span>
         </a>
-        <a href="werd" class="a8">
-          <img src="assets/homepage/a8.png" alt="Werd" />
-          <img src="assets/homepage/a8-hover.png" class="hover" alt="Werd Hover" />
+        <a href="werd" class="a8" aria-label="Werd — Arabic text typeface">
+          <img src="assets/homepage/a8.png" alt="Werd — Arabic text typeface specimen" />
+          <img src="assets/homepage/a8-hover.png" class="hover" alt="Werd hover specimen" />
+          <span class="sr-only"><h2>Werd</h2> — Arabic text typeface for editorial use</span>
         </a>
-        <a href="spitz" class="a4">
-          <img src="assets/homepage/a4.png" alt="Spitz" />
-          <img src="assets/homepage/a4-hover.png" class="hover" alt="Spitz Hover" />
+        <a href="spitz" class="a4" aria-label="Romanisch Spitz — Display typeface">
+          <img src="assets/homepage/a4.png" alt="Romanisch Spitz — display typeface specimen" />
+          <img src="assets/homepage/a4-hover.png" class="hover" alt="Romanisch Spitz hover specimen" />
+          <span class="sr-only"><h2>Romanisch Spitz</h2> — Latin display typeface</span>
         </a>
-        <a href="sugar" class="a10">
-          <img src="assets/homepage/a10.png" alt="Sugar" />
-          <img src="assets/homepage/a10-hover.png" class="hover" alt="Sugar Hover" />
+        <a href="sugar" class="a10" aria-label="Sugar Display and Text — Typeface family">
+          <img src="assets/homepage/a10.png" alt="Sugar Display and Text — typeface family specimen" />
+          <img src="assets/homepage/a10-hover.png" class="hover" alt="Sugar hover specimen" />
+          <span class="sr-only"><h2>Sugar Display &amp; Text</h2> — Latin typeface family</span>
         </a>
                       </div>
         </div>
