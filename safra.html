@@ -277,10 +277,6 @@
     margin-left: auto; padding-left: 0.5rem; white-space: nowrap;
   }
   .ssv2-usebundle-tag.lit { color: var(--primary-color); opacity: 1; }
-  /* On mobile the tag row is tight: show just "Bundle" (hide " Price"). */
-  @media (max-width: 768px) {
-    #buyOverlay .ssv2-tag-full { display: none; }
-  }
   /* Early access: short label + "?" with a hover/tap tooltip (no wall of text). */
   .ssv2-ea {
     font-family: "Safra Mono", monospace;
@@ -325,6 +321,12 @@
     }
     #buyOverlay .overlay-content * { max-width: 100%; box-sizing: border-box; min-width: 0; }
     .ssv2-price .amount { font-size: 23px; }
+    /* Mobile: hide the "Your licence" recap (Fonts/Use/Users). It just repeats the
+       choices above and eats the screen; the live price + Buy button stay. */
+    #buyOverlay .ssv2-sum-head,
+    #buyOverlay .ssv2-sum-row { display: none; }
+    /* Mobile: hide the intro paragraph too; the fields are self-explanatory and it eats space. */
+    #buyOverlay .intro-text { display: none; }
   }
 
   /* Let flex rows wrap so long labels/pills/values never overflow horizontally. */
@@ -1366,7 +1368,7 @@ A trilingual typeface designed for consistent reading across Arabic, Hebrew, and
          close-handlers can .reset() it harmlessly) but NOT class "buy-form"
          (so script.js's lead-form submit + checkbox logic skip it entirely).
          All configurator behaviour lives in the scoped script before </body>. -->
-    <p class="intro-text">Configure your licence: pick the fonts, how you'll use them and a tier. The price updates live.</p>
+    <p class="intro-text">Configure your licence: pick the fonts, how you'll use them and users. The price updates live.</p>
     <p class="ssv2-ea">Early access<button type="button" class="ssv2-ea-q" aria-label="What does early access mean?">?</button><span class="ssv2-ea-pop" role="tooltip">Safra is in active development. The fonts you buy keep getting updates and refinements, included in your licence.</span></p>
 
     <form class="ssv2-form" id="buyFormContent" novalidate>
@@ -1424,7 +1426,7 @@ A trilingual typeface designed for consistent reading across Arabic, Hebrew, and
                 <input type="checkbox" name="use" value="Desktop" checked>
                 <span class="checkmark"></span>
                 Desktop
-                <span class="ssv2-usebundle-tag" id="ssv2BundleTag">Bundle<span class="ssv2-tag-full"> Price</span></span>
+                <span class="ssv2-usebundle-tag" id="ssv2BundleTag">Desktop + Web bundle</span>
               </label>
               <label class="checkbox-label">
                 <input type="checkbox" name="use" value="Web">
