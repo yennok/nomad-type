@@ -11,7 +11,7 @@
   </script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>Dolomit דולומיט (stylistic sets test) | Nomad Type</title>
+  <title>Dolomit דולומיט | Nomad Type</title>
 
   <!-- DEMO page: not linked anywhere, not in sitemap. Remove noindex when it goes live. -->
   <meta name="robots" content="noindex">
@@ -374,14 +374,15 @@
     /* Cover title: דולומיט in Bold over (DOLOMIT) in Bold Extended (Hebrew first, Nir 09-12).
        Sizes are in vw so both lines fill the cover width at any screen size (capped by vh on short screens). */
     body.dolomit-page .cover-title {
+      --cover-size: min(16.5vw, 28vh);
       margin-bottom: 0px;
       text-align: center;
     }
     body.dolomit-page .cover-title div:nth-child(2) {
-      font-family: "Dolomit Extended", sans-serif;
+      font-family: "Dolomit", sans-serif;
       font-weight: 700;
       color: black;
-      font-size: min(12.4vw, 21vh);
+      font-size: var(--cover-size);
       line-height: 1;
       margin-bottom: 0px;
       letter-spacing: 0;
@@ -390,12 +391,12 @@
       will-change: transform;
     }
     body.dolomit-page .cover-title div:nth-child(1) {
-      font-family: "Dolomit", sans-serif;
+      font-family: "Dolomit Extended", sans-serif;
       font-weight: 700;
       color: black;
-      font-size: min(23.4vw, 39vh);
+      font-size: var(--cover-size);
       line-height: 1;
-      margin-bottom: -0.06em;
+      margin-bottom: 0.04em;
       letter-spacing: 0;
       white-space: nowrap;
       direction: rtl;
@@ -1040,7 +1041,7 @@
       if (typeof loadHeader === 'function') {
         loadHeader(`
           <div style="transform: translateY(0px);">דולומיט</div>
-          <div style="transform: translateY(0px);">(DOLOMIT)</div>
+          <div style="transform: translateY(0px);">DOLOMIT</div>
         `);
       }
 });
