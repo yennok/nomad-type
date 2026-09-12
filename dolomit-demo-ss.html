@@ -1605,12 +1605,12 @@
 
 
 <script>
-/* PROTOTYPE 09-12: stylistic sets toggle. Only runs on pages that declare sets. */
+/* PROTOTYPE 09-12: stylistic sets toggle. Only runs on pages that declare sets.
+   Each button switches its set on/off on its own; no button pressed = the font's default forms. */
 (function () {
   const SETS = [
-    { label: 'Default', value: 'normal' },
-    { label: 'Set 1',   value: '"ss01" 1' },
-    { label: 'Set 2',   value: '"ss02" 1' },
+    { label: 'Alt 1', tag: 'ss01' },
+    { label: 'Alt 2', tag: 'ss02' },
   ];
   function build() {
     document.querySelectorAll('.type-tester').forEach(section => {
@@ -1620,15 +1620,25 @@
       const group = document.createElement('div');
       group.className = 'ss-buttons';
       group.setAttribute('role', 'group');
-      group.setAttribute('aria-label', 'Stylistic sets');
-      SETS.forEach((set, i) => {
+      group.setAttribute('aria-label', 'Stylistic alternates');
+      const apply = () => {
+        const on = [...group.querySelectorAll('.ss-btn.is-active')].map(b => '"' + b.dataset.tag + '" 1');
+        // keep the site's "kern" setting; with nothing pressed, fall back to the page CSS
+        if (on.length) area.style.setProperty('font-feature-settings', ['"kern" 1'].concat(on).join(', '), 'important');
+        else area.style.removeProperty('font-feature-settings');
+      };
+      SETS.forEach(set => {
         const b = document.createElement('button');
         b.type = 'button';
-        b.className = 'icon-btn ss-btn' + (i === 0 ? ' is-active' : '');
+        b.className = 'icon-btn ss-btn';
+        b.dataset.tag = set.tag;
         b.textContent = set.label;
+        b.title = set.tag;
+        b.setAttribute('aria-pressed', 'false');
         b.addEventListener('click', () => {
-          area.style.setProperty('font-feature-settings', set.value, 'important');
-          group.querySelectorAll('.ss-btn').forEach(x => x.classList.toggle('is-active', x === b));
+          const active = b.classList.toggle('is-active');
+          b.setAttribute('aria-pressed', String(active));
+          apply();
         });
         group.appendChild(b);
       });
