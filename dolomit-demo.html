@@ -356,31 +356,31 @@
       --preview-vertical-offset: 9px;
     }
 
-    /* Cover title, mirroring the poster: (DOLOMIT) in Bold Extended over דולומיט in Bold.
+    /* Cover title: דולומיט in Bold over (DOLOMIT) in Bold Extended (Hebrew first, Nir 09-12).
        Sizes are in vw so both lines fill the cover width at any screen size (capped by vh on short screens). */
     body.dolomit-page .cover-title {
       margin-bottom: 0px;
       text-align: center;
     }
-    body.dolomit-page .cover-title div:nth-child(1) {
+    body.dolomit-page .cover-title div:nth-child(2) {
       font-family: "Dolomit Extended", sans-serif;
       font-weight: 700;
       color: black;
       font-size: min(12.4vw, 21vh);
       line-height: 1;
-      margin-bottom: -0.12em;
+      margin-bottom: 0px;
       letter-spacing: 0;
       white-space: nowrap;
       transform: translateZ(0);
       will-change: transform;
     }
-    body.dolomit-page .cover-title div:nth-child(2) {
+    body.dolomit-page .cover-title div:nth-child(1) {
       font-family: "Dolomit", sans-serif;
       font-weight: 700;
       color: black;
       font-size: min(23.4vw, 39vh);
       line-height: 1;
-      margin-bottom: 0px;
+      margin-bottom: -0.06em;
       letter-spacing: 0;
       white-space: nowrap;
       direction: rtl;
@@ -983,8 +983,8 @@
     document.addEventListener('DOMContentLoaded', function() {
       if (typeof loadHeader === 'function') {
         loadHeader(`
-          <div style="transform: translateY(0px);">(DOLOMIT)</div>
           <div style="transform: translateY(0px);">דולומיט</div>
+          <div style="transform: translateY(0px);">(DOLOMIT)</div>
         `);
       }
 });
