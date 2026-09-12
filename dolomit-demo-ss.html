@@ -343,13 +343,13 @@
     .ss-buttons .ss-btn:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
     .ss-buttons .ss-btn {
       width: auto; min-width: 33px; padding: 0 10px;
-      font-family: "Safra Mono", monospace; font-size: 12px; line-height: 31px;
+      font-family: "Safra Mono", monospace; font-size: 14px !important; line-height: 31px;
       color: #000; background-image: none; white-space: nowrap;
     }
     @media (max-width: 768px) {
       body.dolomit-page .font-align-wrapper { flex-wrap: wrap; row-gap: 0.5rem; }
       .ss-buttons { width: 100%; }
-      .ss-buttons .ss-btn { flex: 1; padding: 0 7px; font-size: 11px; }
+      .ss-buttons .ss-btn { flex: 1; padding: 0 7px; font-size: 14px !important; }
     }
 </style>
 
@@ -1643,6 +1643,9 @@
         b.title = set.tag;
         b.setAttribute('aria-pressed', 'false');
         b.addEventListener('click', () => {
+          // First Alt click resets any fixed alternates baked into the sample (e.g. the ss01 demo line),
+          // so every line follows the buttons from here on.
+          area.querySelectorAll('.dolomit-ss01').forEach(el => el.classList.remove('dolomit-ss01'));
           const active = b.classList.toggle('is-active');
           b.setAttribute('aria-pressed', String(active));
           apply();
