@@ -336,6 +336,21 @@
   #buyOverlay { overflow-x: hidden; }
   #buyOverlay, #buyOverlay * { max-width: 100%; }
     body.dolomit-page .spec-line a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+
+    /* PROTOTYPE 09-12: stylistic sets toggle in each tester's control bar (candidate for shared script.js) */
+    .ss-buttons { display: flex; }
+    .ss-buttons .ss-btn:focus { outline: none; }
+    .ss-buttons .ss-btn:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
+    .ss-buttons .ss-btn {
+      width: auto; min-width: 33px; padding: 0 10px;
+      font-family: "Safra Mono", monospace; font-size: 14px !important; line-height: 31px;
+      color: #000; background-image: none; white-space: nowrap;
+    }
+    @media (max-width: 768px) {
+      body.dolomit-page .font-align-wrapper { flex-wrap: wrap; row-gap: 0.5rem; }
+      .ss-buttons { width: 100%; }
+      .ss-buttons .ss-btn { flex: 1; padding: 0 7px; font-size: 14px !important; }
+    }
 </style>
 
   <!-- ====== DOLOMIT PAGE STYLES ======
@@ -359,14 +374,15 @@
     /* Cover title: דולומיט in Bold over (DOLOMIT) in Bold Extended (Hebrew first, Nir 09-12).
        Sizes are in vw so both lines fill the cover width at any screen size (capped by vh on short screens). */
     body.dolomit-page .cover-title {
+      --cover-size: min(16.5vw, 28vh);
       margin-bottom: 0px;
       text-align: center;
     }
     body.dolomit-page .cover-title div:nth-child(2) {
-      font-family: "Dolomit Extended", sans-serif;
+      font-family: "Dolomit", sans-serif;
       font-weight: 700;
       color: black;
-      font-size: min(12.4vw, 21vh);
+      font-size: var(--cover-size);
       line-height: 1;
       margin-bottom: 0px;
       letter-spacing: 0;
@@ -375,12 +391,12 @@
       will-change: transform;
     }
     body.dolomit-page .cover-title div:nth-child(1) {
-      font-family: "Dolomit", sans-serif;
+      font-family: "Dolomit Extended", sans-serif;
       font-weight: 700;
       color: black;
-      font-size: min(23.4vw, 39vh);
+      font-size: var(--cover-size);
       line-height: 1;
-      margin-bottom: -0.06em;
+      margin-bottom: 0.04em;
       letter-spacing: 0;
       white-space: nowrap;
       direction: rtl;
@@ -1025,7 +1041,7 @@
       if (typeof loadHeader === 'function') {
         loadHeader(`
           <div style="transform: translateY(0px);">דולומיט</div>
-          <div style="transform: translateY(0px);">(DOLOMIT)</div>
+          <div style="transform: translateY(0px);">DOLOMIT</div>
         `);
       }
 });
@@ -1631,5 +1647,59 @@
   })();
   </script>
 
+
+<script>
+/* PROTOTYPE 09-12: stylistic sets toggle. Only runs on pages that declare sets.
+   Each button switches its set on/off on its own; no button pressed = the font's default forms. */
+(function () {
+  const SETS = [
+    { label: 'Alt 1', tag: 'ss01' },
+    { label: 'Alt 2', tag: 'ss02' },
+  ];
+  function build() {
+    document.querySelectorAll('.type-tester').forEach(section => {
+      const area = section.querySelector('.type-area');
+      const align = section.querySelector('.align-buttons');
+      if (!area || !align || section.querySelector('.ss-buttons')) return;
+      const group = document.createElement('div');
+      group.className = 'ss-buttons';
+      group.setAttribute('role', 'group');
+      group.setAttribute('aria-label', 'Stylistic alternates');
+      const apply = () => {
+        const on = [...group.querySelectorAll('.ss-btn.is-active')].map(b => '"' + b.dataset.tag + '" 1');
+        // keep the site's "kern" setting; with nothing pressed, fall back to the page CSS
+        if (on.length) area.style.setProperty('font-feature-settings', ['"kern" 1'].concat(on).join(', '), 'important');
+        else area.style.removeProperty('font-feature-settings');
+        // Alternates change the text width: refit auto-sized testers, same as a style change does
+        if (typeof autoFitManager !== 'undefined' && autoFitManager.sections) {
+          const data = autoFitManager.sections.get(section);
+          if (data) [10, 100, 300].forEach(ms => setTimeout(() => autoFitManager.updateSectionSize(data), ms));
+        }
+      };
+      SETS.forEach(set => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'icon-btn ss-btn';
+        b.dataset.tag = set.tag;
+        b.textContent = set.label;
+        b.title = set.tag;
+        b.setAttribute('aria-pressed', 'false');
+        b.addEventListener('click', () => {
+          // First Alt click resets any fixed alternates baked into the sample (e.g. the ss01 demo line),
+          // so every line follows the buttons from here on.
+          area.querySelectorAll('.dolomit-ss01').forEach(el => el.classList.remove('dolomit-ss01'));
+          const active = b.classList.toggle('is-active');
+          b.setAttribute('aria-pressed', String(active));
+          apply();
+        });
+        group.appendChild(b);
+      });
+      align.insertAdjacentElement('afterend', group);
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build);
+  else build();
+})();
+</script>
 </body>
 </html>
