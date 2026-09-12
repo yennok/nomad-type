@@ -62,6 +62,269 @@
   </script>
 
   <link rel="stylesheet" href="styles.css">
+  <!-- Werd store demo: buy-overlay styles ported from safra.html -->
+<style>
+  /* Make the overlay body a column so the price+Buy block can pin to bottom
+     and the middle can scroll independently on small screens. */
+  #buyOverlay .overlay-content { padding-bottom: 0; }
+  .ssv2-form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+  }
+  .ssv2-scroll {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    margin-right: -0.25rem;
+    padding-right: 0.25rem;
+  }
+
+  /* Full Family row: same black checkbox as the others; only the "bundle price" tag keeps the accent. */
+  .checkbox-label.ssv2-family {
+    color: #000;
+    font-weight: 400;
+  }
+  .ssv2-family-tag {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    color: #000;
+    opacity: 0.55;
+    margin-left: auto;
+    padding-left: 0.5rem;
+    white-space: nowrap;
+  }
+  /* "bundle price" lights up in the accent only when Full Family is selected. */
+  .checkbox-label.ssv2-family input:checked ~ .ssv2-family-tag {
+    color: var(--primary-color);
+    opacity: 1;
+  }
+
+  /* LICENSE TIER — single-select (radios) wearing the site's checkbox look. */
+  .ssv2-tier .checkbox-label input[type="radio"] { display: none; }
+  .ssv2-tier .checkmark {
+    width: 16px; height: 16px; position: relative; flex-shrink: 0;
+    background-image: url('assets/checkbox.svg');
+    background-size: contain; background-repeat: no-repeat; background-position: center;
+  }
+  .ssv2-tier .checkbox-label input[type="radio"]:checked + .checkmark {
+    background-image: url('assets/checkbox-checked.svg');
+  }
+  .ssv2-tier .tier-sub {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    color: #000;
+    opacity: 0.55;
+    margin-left: auto;
+    padding-left: 0.5rem;
+    white-space: nowrap;
+  }
+  .ssv2-tier-note {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    line-height: 1.45;
+    color: #000;
+    opacity: 0.55;
+    margin: 0.5rem 0 0.9rem;
+  }
+
+  /* Collapsibles inside the configurator open by default; give them room. */
+  #buyOverlay .collapsible-content.active { max-height: 640px; }
+
+  /* LIVE SUMMARY + PRICE (pinned above the Buy button) */
+  .ssv2-foot {
+    flex: 0 0 auto;
+    border-top: 1px solid #000;
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+    background: #fff;
+  }
+  .ssv2-sum-head {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    opacity: 0.55;
+    margin: 0 0 0.6rem;
+  }
+  .ssv2-sum-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: "Safra Mono", monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 1px 0;
+  }
+  .ssv2-sum-row .k { opacity: 0.55; }
+  .ssv2-sum-row .v { text-align: right; }
+  .ssv2-includes {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    opacity: 0.75;
+    margin: 0.6rem 0 0.8rem;
+  }
+  .ssv2-includes .inc-tag { color: var(--primary-color); opacity: 1; }
+
+  .ssv2-price {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 0.9rem;
+  }
+  .ssv2-price .amount {
+    font-family: "Safra Sans", serif;
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 1;
+    color: #000;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0px;
+  }
+  .ssv2-price .amount.is-quote { font-size: 26px; }
+  .ssv2-price .amount-label { font-family: "Safra Mono", monospace; font-size: 12px; opacity: 0.55; }
+  .ssv2-price .amount .ssv2-was {
+    text-decoration: line-through;
+    color: #000;
+    opacity: 0.4;
+    font-size: 0.62em;
+    margin-right: 7px;
+    font-weight: 400;
+  }
+
+  .ssv2-subnote {
+    font-family: "Safra Sans", sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: left;
+    opacity: 0.6;
+    margin: 0.4rem 0 1rem;
+  }
+  .ssv2-subnote a { color: #000; }
+
+  /* "Coming soon" note + disabled Buy state for combos with no live checkout. */
+  .ssv2-unavailable {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--primary-color);
+    margin: 0.5rem 0 0;
+  }
+  #buy-btn[disabled] {
+    background: #ececec;
+    color: #a0a0a0;
+    opacity: 1;
+    border: none;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* Buy overlay: accent (orange) selection + asterisks for single fonts / use / Users; black for the Full Family bundle. */
+  #buyOverlay .required, #buyOverlay .asterisk { color: var(--primary-color); }
+  #buyOverlay .ssv2-form .checkmark { position: relative; }
+  #buyOverlay .ssv2-form input:checked + .checkmark {
+    background-image: url('assets/checkbox.svg') !important;
+  }
+  #buyOverlay .ssv2-form input:checked + .checkmark::after {
+    content: ""; position: absolute; top: 29%; left: 29%; right: 29%; bottom: 29%;
+    background: var(--primary-color);
+  }
+  #buyOverlay .checkbox-label.ssv2-family input:checked + .checkmark::after {
+    background: #000;
+  }
+  #buyOverlay .ssv2-includes { display: none; }
+
+  /* "bundle price" tag on the Desktop row: grey by default, accent when Desktop+Web (bundle) is active. */
+  .ssv2-usebundle-tag {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    color: #000; opacity: 0.55;
+    margin-left: auto; padding-left: 0.5rem; white-space: nowrap;
+  }
+  .ssv2-usebundle-tag.lit { color: var(--primary-color); opacity: 1; }
+  /* Early access: short label + "?" with a hover/tap tooltip (no wall of text). */
+  .ssv2-ea {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    color: #000; opacity: 0.75;
+    display: inline-flex; align-items: center; gap: 6px;
+    margin: 0.5rem 0 0; position: relative;
+  }
+  .ssv2-ea-q {
+    all: unset; cursor: help; box-sizing: border-box;
+    width: 15px; height: 15px; line-height: 13px; text-align: center;
+    border: 1px solid currentColor; border-radius: 50%;
+    font-size: 10px;
+  }
+  .ssv2-ea-pop {
+    display: none; position: absolute; left: 0; top: calc(100% + 6px); z-index: 5;
+    width: 235px; max-width: 80vw; background: #000; color: #fff;
+    font-family: "Safra Sans", sans-serif; font-size: 11px; line-height: 1.45;
+    padding: 8px 10px; border-radius: 6px;
+  }
+  .ssv2-ea-q:hover + .ssv2-ea-pop,
+  .ssv2-ea-q:focus + .ssv2-ea-pop { display: block; }
+
+  /* MOBILE OVERFLOW CONTAINMENT — the page's own .overlay rules already make
+     the drawer full-width and own the slide-in (`right`), so we DON'T set width
+     or right here. We only clamp overflow so the GSAP transforms on .cover-title
+     can't push a horizontal scrollbar, and let flex rows wrap when cramped. */
+  @media (max-width: 768px) {
+    #buyOverlay {
+      width: 100vw !important;
+      max-width: 100vw !important;
+      left: auto;
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+    #buyOverlay.active { right: 0 !important; }
+    #buyOverlay .overlay-content {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+    #buyOverlay .overlay-content * { max-width: 100%; box-sizing: border-box; min-width: 0; }
+    .ssv2-price .amount { font-size: 23px; }
+    /* Mobile: hide the "Your licence" recap (Fonts/Use/Users). It just repeats the
+       choices above and eats the screen; the live price + Buy button stay. */
+    #buyOverlay .ssv2-sum-head,
+    #buyOverlay .ssv2-sum-row { display: none; }
+    /* Mobile: hide the intro paragraph too; the fields are self-explanatory and it eats space. */
+    #buyOverlay .intro-text { display: none; }
+  }
+
+  /* Let flex rows wrap so long labels/pills/values never overflow horizontally. */
+  #buyOverlay * { box-sizing: border-box; }
+  #buyOverlay .checkbox-label {
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+  .ssv2-family-tag,
+  .ssv2-tier .tier-sub {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-align: right;
+    max-width: 100%;
+  }
+  .ssv2-sum-row { flex-wrap: wrap; }
+  .ssv2-sum-row .k { flex: 0 0 auto; }
+  .ssv2-sum-row .v {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+  .ssv2-price { flex-wrap: wrap; }
+  .ssv2-price .amount { min-width: 0; overflow-wrap: anywhere; }
+
+  /* Belt-and-braces: never let the drawer or its contents cause page overflow */
+  #buyOverlay { overflow-x: hidden; }
+  #buyOverlay, #buyOverlay * { max-width: 100%; }
+  </style>
 </head>
 <body class="werd-page">
 
@@ -762,6 +1025,7 @@ by Aaron Bartholomew Poxleitner, October 2, 2005</div>
 </div>
 
 <!-- Buy Now Form -->
+<!-- Werd store configurator (DEMO, ported from safra.html) -->
 <div class="overlay" id="buyOverlay">
   <div class="overlay-content">
     <div class="form-header">
@@ -769,106 +1033,152 @@ by Aaron Bartholomew Poxleitner, October 2, 2005</div>
       <button class="close-btn" id="closeBuy"></button>
     </div>
     
-    <p class="intro-text" id="buyIntroText">Interested in using Werd for your project? Share your details and we'll be in touch soon.</p>
-    
-    <div class="success-message" id="buySuccessMessage" style="display: none;">
-      <p class="success-text">Thank you for your interest! We'll contact you about licensing.</p>
-      <button class="submit-btn" id="buySuccessBtn">Continue to website</button>
-    </div>
-    
-    <form class="buy-form" id="buyFormContent">
-      <div class="form-group">
-        <input type="text" id="buyName" name="name" placeholder=" " required>
-        <div class="placeholder-text">Full Name<span class="asterisk">*</span></div>
-      </div>
-      
-      <div class="form-group">
-        <input type="text" id="buyCompany" name="company" placeholder=" " required>
-        <div class="placeholder-text">Company<span class="asterisk">*</span></div>
-      </div>
-      
-      <div class="form-group">
-        <input type="email" id="buyEmail" name="email" placeholder=" " required>
-        <div class="placeholder-text">Email Address<span class="asterisk">*</span></div>
-      </div>
-      
-      <div class="form-section collapsible">
-        <h3 class="collapsible-header">
-          <span>Select Fonts<span class="required">*</span></span>
-          <span class="dropdown-icon"></span>
-        </h3>
-        <div class="collapsible-content">
-          <div class="checkbox-group">
-            <label class="checkbox-label">
-              <input type="checkbox" name="family" value="entire" checked>
-              <span class="checkmark"></span>
-              Full Family (5)
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" name="family" value="regular" checked>
-              <span class="checkmark"></span>
-              Werd Regular
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" name="family" value="light" checked>
-              <span class="checkmark"></span>
-              Werd Light
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" name="family" value="bold" checked>
-              <span class="checkmark"></span>
-              Werd Bold
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" name="family" value="extrabold" checked>
-              <span class="checkmark"></span>
-              Werd Extra Bold
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" name="family" value="black" checked>
-              <span class="checkmark"></span>
-              Werd Black
-            </label>
+    <!-- Hidden stubs so script.js's overlay close-handlers (which still call
+         getElementById('buyIntroText'/'buySuccessMessage') and reset the form)
+         never throw. They are not shown; the live intro is inside the form. -->
+    <span id="buyIntroText" style="display:none;"></span>
+    <span id="buySuccessMessage" style="display:none;"></span>
+
+    <!-- ===== SAFRA STORE V2 CONFIGURATOR (guts swapped in) =====
+         NOTE: this form intentionally has id="buyFormContent" (so the page's
+         close-handlers can .reset() it harmlessly) but NOT class "buy-form"
+         (so script.js's lead-form submit + checkbox logic skip it entirely).
+         All configurator behaviour lives in the scoped script before </body>. -->
+    <p class="intro-text">Configure your licence: pick the fonts, how you'll use them and users. The price updates live.</p>
+    <p class="ssv2-ea">Early access<button type="button" class="ssv2-ea-q" aria-label="What does early access mean?">?</button><span class="ssv2-ea-pop" role="tooltip">Werd is in active development. The fonts you buy keep getting updates and refinements, included in your licence.</span></p>
+
+    <form class="ssv2-form" id="buyFormContent" novalidate>
+
+      <!-- Everything above the price scrolls; price + Buy stay pinned. -->
+      <div class="ssv2-scroll">
+
+        <!-- ===== SELECT FONTS (existing checkbox markup) ===== -->
+        <div class="form-section collapsible">
+          <h3 class="collapsible-header active">
+            <span>Select Fonts<span class="required">*</span></span>
+            <span class="dropdown-icon"></span>
+          </h3>
+          <div class="collapsible-content active">
+            <div class="checkbox-group" id="ssv2Fonts">
+              <label class="checkbox-label ssv2-family">
+                <input type="checkbox" name="family" value="entire">
+                <span class="checkmark"></span>
+                Full Family (5)
+                <span class="ssv2-family-tag">Bundle<span class="ssv2-tag-full"> Price</span></span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="family" value="regular" checked>
+                <span class="checkmark"></span>
+                Werd Regular
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="family" value="light">
+                <span class="checkmark"></span>
+                Werd Light
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="family" value="bold">
+                <span class="checkmark"></span>
+                Werd Bold
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="family" value="extrabold">
+                <span class="checkmark"></span>
+                Werd Extra Bold
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="family" value="black">
+                <span class="checkmark"></span>
+                Werd Black
+              </label>
+            </div>
           </div>
         </div>
-      </div>
-      
-      <div class="form-section collapsible">
-        <h3 class="collapsible-header">
-          <span>Intended Use<span class="required">*</span></span>
-          <span class="dropdown-icon"></span>
-        </h3>
-        <div class="collapsible-content">
-          <div class="checkbox-group">
-            <label class="checkbox-label">
-              <input type="checkbox" name="use" value="Desktop">
-              <span class="checkmark"></span>
-              Desktop
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" name="use" value="Web">
-              <span class="checkmark"></span>
-              Web
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" name="use" value="App">
-              <span class="checkmark"></span>
-              App
-            </label>
+
+        <!-- ===== INTENDED USE (existing checkboxes, multi-select) ===== -->
+        <div class="form-section collapsible">
+          <h3 class="collapsible-header">
+            <span>Intended Use<span class="required">*</span></span>
+            <span class="dropdown-icon"></span>
+          </h3>
+          <div class="collapsible-content">
+            <div class="checkbox-group" id="ssv2Use">
+              <label class="checkbox-label">
+                <input type="checkbox" name="use" value="Desktop" checked>
+                <span class="checkmark"></span>
+                Desktop
+                <span class="ssv2-usebundle-tag" id="ssv2BundleTag">Desktop + Web bundle</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="use" value="Web">
+                <span class="checkmark"></span>
+                Web
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="use" value="App">
+                <span class="checkmark"></span>
+                App
+              </label>
+            </div>
           </div>
         </div>
+
+        <!-- ===== LICENSE TIER (single-select, checkbox look) ===== -->
+        <div class="form-section collapsible ssv2-tier">
+          <h3 class="collapsible-header">
+            <span>Users<span class="required">*</span></span>
+            <span class="dropdown-icon"></span>
+          </h3>
+          <div class="collapsible-content">
+            <div class="checkbox-group" id="ssv2Tier">
+              <label class="checkbox-label">
+                <input type="radio" name="tier" value="individual" checked>
+                <span class="checkmark"></span>
+                Individual
+                <span class="tier-sub">1 user</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="radio" name="tier" value="studio">
+                <span class="checkmark"></span>
+                Studio
+                <span class="tier-sub">≤ 5 users</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="radio" name="tier" value="company">
+                <span class="checkmark"></span>
+                Company
+                <span class="tier-sub">≤ 20 users</span>
+              </label>
+            </div>
+            <p class="ssv2-tier-note" id="ssv2TierNote"></p>
+          </div>
+        </div>
+
+      </div><!-- /.ssv2-scroll -->
+
+      <!-- ===== PINNED: SUMMARY + PRICE + BUY ===== -->
+      <div class="ssv2-foot" aria-live="polite">
+        <p class="ssv2-sum-head">Your licence</p>
+        <div class="ssv2-sum-row"><span class="k">Fonts</span><span class="v" id="ssv2SumFonts">Werd Regular</span></div>
+        <div class="ssv2-sum-row"><span class="k">Use</span><span class="v" id="ssv2SumUse">Desktop</span></div>
+        <div class="ssv2-sum-row"><span class="k">Users</span><span class="v" id="ssv2SumTier">Individual · 1 user</span></div>
+        <p class="ssv2-includes" id="ssv2Includes"></p>
+
+        <div class="ssv2-price">
+          <span class="amount" id="ssv2Price">€260</span>
+          <span class="amount-label">EUR</span>
+        </div>
+
+        <!-- Buy button = site's .submit-btn look, replaces "Send Request" -->
+        <button type="button" class="submit-btn" id="buy-btn"
+                data-config="entire|Desktop|individual" data-price="260">Buy Now — €260</button>
+
+        <!-- Shown only when the current combo has no Lemon Squeezy checkout yet -->
+        <p class="ssv2-unavailable" id="ssv2Unavailable" hidden>This licence isn't available for purchase yet.</p>
+
+        <!-- pricing subnote removed -->
+
       </div>
-      
-      <div class="form-section">
-        <label class="checkbox-label consent">
-          <input type="checkbox" name="consent">
-          <span class="checkmark"></span>
-          <span class="consent-text">I'm happy to be contacted about Werd licensing and to receive occasional updates. No spam – I can unsubscribe anytime.</span>
-        </label>
-      </div>
-      
-      <button type="submit" class="submit-btn">Send Request</button>
-      <p class="form-error-message" id="buyError" style="display: none;"></p>
     </form>
   </div>
 </div>
@@ -968,6 +1278,296 @@ by Aaron Bartholomew Poxleitner, October 2, 2005</div>
         });
       }
     });
+  </script>
+
+<script>
+  (function () {
+    'use strict';
+
+    const PRICES = {
+      single: {
+        desktop: { individual: 100, studio: 160, company: 400 },
+        web:     { individual: 150, studio: 240, company: 600 },
+        bundle:  { individual: 200, studio: 320, company: 800 },
+      },
+      family: {
+        desktop: { individual: 320, studio: 520, company: 1300 },
+        web:     { individual: 480, studio: 780, company: 1950 },
+        bundle:  { individual: 640, studio: 1040, company: 2600 },
+      }
+    };
+
+    // =====================================================================
+    //  LEMON SQUEEZY VARIANT MAP  —  key = `${style}|${format}|${tier}`
+    //    style  : 'entire' (Full Family) OR single style id
+    //             ('regular' | 'bold' | 'sans-regular' | 'sans-bold')
+    //    format : 'desktop' | 'web' | 'bundle' (Desktop+Web)
+    //    tier   : 'individual' | 'studio' | 'company'
+    //  Only ONE of the 45 combos is live right now. Every other combo is
+    //  intentionally absent → Buy button shows a disabled "Coming soon" state.
+    //  Add remaining variants with the SAME key format; no other change needed.
+    // =====================================================================
+    const CHECKOUT_URLS = {
+      'entire|desktop|individual': 'https://buy.stripe.com/5kQ4gAeYd9Ec5KQfP78N306',
+      'entire|desktop|studio': 'https://buy.stripe.com/3cI8wQ3fv6s06OUcCV8N307',
+      'entire|desktop|company': 'https://buy.stripe.com/8x2dRacQ5cQo4GMbyR8N308',
+      'entire|web|individual': 'https://buy.stripe.com/28EcN6eYd3fO7SY8mF8N309',
+      'entire|web|studio': 'https://buy.stripe.com/4gMaEYg2h9Ec6OUdGZ8N30a',
+      'entire|web|company': 'https://buy.stripe.com/bJe9AUeYd7w47SYgTb8N30b',
+      'entire|bundle|individual': 'https://buy.stripe.com/aFabJ2cQ54jS1uAgTb8N30c',
+      'entire|bundle|studio': 'https://buy.stripe.com/7sY7sM6rHaIga16auN8N30d',
+      'entire|bundle|company': 'https://buy.stripe.com/bJe14o5nD6s0ddi46p8N30e',
+      'regular|desktop|individual': 'https://buy.stripe.com/9B614o6rH7w41uA32l8N21t',
+      'regular|desktop|studio': 'https://buy.stripe.com/eVqcN6eYd3fOddidGZ8N21u',
+      'regular|desktop|company': 'https://buy.stripe.com/eVq4gA7vL2bK3CI1Yh8N21v',
+      'regular|web|individual': 'https://buy.stripe.com/6oU7sM3fv3fO6OUcCV8N21w',
+      'regular|web|studio': 'https://buy.stripe.com/00w00k2brbMk6OUbyR8N21x',
+      'regular|web|company': 'https://buy.stripe.com/eVq7sM4jz9Ec2yE9qJ8N21y',
+      'regular|bundle|individual': 'https://buy.stripe.com/5kQbJ29DTeYw3CI32l8N21z',
+      'regular|bundle|studio': 'https://buy.stripe.com/bJe00kcQ58A8ehm46p8N21A',
+      'regular|bundle|company': 'https://buy.stripe.com/eVq6oI8zP4jSehm8mF8N21B',
+      'light|desktop|individual': 'https://buy.stripe.com/cNi28sbM12bKb5adGZ8N21C',
+      'light|desktop|studio': 'https://buy.stripe.com/9B63cw17n5nW2yEdGZ8N21D',
+      'light|desktop|company': 'https://buy.stripe.com/fZu5kE5nD7w41uAauN8N21E',
+      'light|web|individual': 'https://buy.stripe.com/7sYfZibM19Ec4GMauN8N21F',
+      'light|web|studio': 'https://buy.stripe.com/6oU9AU17n3fO1uAgTb8N21G',
+      'light|web|company': 'https://buy.stripe.com/fZu5kE9DTeYwc9e8mF8N21H',
+      'light|bundle|individual': 'https://buy.stripe.com/14A8wQ8zPg2Ab5afP78N21I',
+      'light|bundle|studio': 'https://buy.stripe.com/cNi8wQ03j03Cddi5at8N21J',
+      'light|bundle|company': 'https://buy.stripe.com/4gM6oI17naIga16gTb8N21K',
+      'bold|desktop|individual': 'https://buy.stripe.com/14A3cw3fvbMk4GM8mF8N21L',
+      'bold|desktop|studio': 'https://buy.stripe.com/7sYaEYbM17w40qwbyR8N21M',
+      'bold|desktop|company': 'https://buy.stripe.com/cNibJ2eYdg2Agpu7iB8N21N',
+      'bold|web|individual': 'https://buy.stripe.com/fZuaEY8zP9Ec0qw7iB8N21O',
+      'bold|web|studio': 'https://buy.stripe.com/9B614oaHX6s03CIgTb8N21P',
+      'bold|web|company': 'https://buy.stripe.com/5kQ9AU17nbMk1uA46p8N21Q',
+      'bold|bundle|individual': 'https://buy.stripe.com/00w3cw8zP8A80qw46p8N21R',
+      'bold|bundle|studio': 'https://buy.stripe.com/00w7sMeYd2bKddi8mF8N21S',
+      'bold|bundle|company': 'https://buy.stripe.com/bJe9AU3fv9Ec2yE1Yh8N21T',
+      'extrabold|desktop|individual': 'https://buy.stripe.com/bJedRa17n2bKddi6ex8N21U',
+      'extrabold|desktop|studio': 'https://buy.stripe.com/fZubJ2dU96s0gpu6ex8N21V',
+      'extrabold|desktop|company': 'https://buy.stripe.com/9B66oI4jz03CehmauN8N21W',
+      'extrabold|web|individual': 'https://buy.stripe.com/28E5kEg2h9Ec7SYeL38N21X',
+      'extrabold|web|studio': 'https://buy.stripe.com/00w4gAbM1bMk8X28mF8N21Y',
+      'extrabold|web|company': 'https://buy.stripe.com/28E14o8zP7w4b5a5at8N21Z',
+      'extrabold|bundle|individual': 'https://buy.stripe.com/cNi4gAaHX8A8flq46p8N220',
+      'extrabold|bundle|studio': 'https://buy.stripe.com/7sY6oI8zPbMka16fP78N221',
+      'extrabold|bundle|company': 'https://buy.stripe.com/00w9AUaHX5nWc9e32l8N222',
+      'black|desktop|individual': 'https://buy.stripe.com/dRm4gAaHXg2A8X25at8N223',
+      'black|desktop|studio': 'https://buy.stripe.com/5kQ14o03j9Ec2yEeL38N224',
+      'black|desktop|company': 'https://buy.stripe.com/00wfZi4jz9Ec7SYdGZ8N225',
+      'black|web|individual': 'https://buy.stripe.com/bJe9AU5nDaIgb5a46p8N226',
+      'black|web|studio': 'https://buy.stripe.com/eVq3cw6rH4jSa16cCV8N227',
+      'black|web|company': 'https://buy.stripe.com/4gMfZicQ503C0qw0Ud8N228',
+      'black|bundle|individual': 'https://buy.stripe.com/eVq4gAeYdcQoflq6ex8N229',
+      'black|bundle|studio': 'https://buy.stripe.com/dRmfZieYdg2A1uA6ex8N22a',
+      'black|bundle|company': 'https://buy.stripe.com/14A5kE5nDdUs1uAbyR8N22b',
+    }; // links generated separately -> button shows 'Coming soon'
+
+    function checkoutKey(fonts, format, tier) {
+      if (!format) return null;
+      if (fonts.kind === 'family') return 'entire|' + format + '|' + tier;
+      if (fonts.styles.length === 1) return fonts.styles[0] + '|' + format + '|' + tier;
+      return null;
+    }
+    function checkoutUrlFor(fonts, format, tier) {
+      const key = checkoutKey(fonts, format, tier);
+      return key ? (CHECKOUT_URLS[key] || null) : null;
+    }
+
+    // Open the Stripe hosted checkout (payment link) for the selected variant.
+    function openCheckout(url) {
+      window.location.href = url;
+    }
+
+    const STYLE_LABELS = {
+      'regular': 'Werd Regular', 'light': 'Werd Light', 'bold': 'Werd Bold', 'extrabold': 'Werd Extra Bold', 'black': 'Werd Black'
+    };
+    const TIER_LABELS = {
+      individual: 'Individual · 1 user',
+      studio:     'Studio · up to 5 users',
+      company:    'Company · up to 20 users'
+    };
+    const TIER_NOTES = {
+      individual: 'Licensed to one named user. Desktop installs on up to 2 devices for that user.',
+      studio:     'Covers up to 5 people at your studio. Desktop installs on up to 2 devices per licensed user.',
+      company:    'Covers up to 20 people across the organisation. Need more seats or app embedding? Contact us.'
+    };
+
+    const $ = id => document.getElementById(id);
+    const euro = n => '€' + Number(n).toLocaleString('en-US');
+
+    const overlay = $('buyOverlay');
+    const form    = $('buyFormContent');
+    if (!overlay || !form) return;
+
+    const fontsBox  = $('ssv2Fonts');
+    const familyCb  = fontsBox.querySelector('input[value="entire"]');
+    const singleCbs = Array.from(fontsBox.querySelectorAll('input[name="family"]:not([value="entire"])'));
+
+    // ---- Full Family <-> individual styles interplay ----
+    familyCb.addEventListener('change', function () {
+      singleCbs.forEach(cb => { cb.checked = this.checked; });
+      render();
+    });
+    singleCbs.forEach(cb => {
+      cb.addEventListener('change', function () {
+        if (!this.checked) {
+          familyCb.checked = false;
+        } else if (singleCbs.every(c => c.checked)) {
+          familyCb.checked = true;
+        }
+        render();
+      });
+    });
+
+    $('ssv2Use').addEventListener('change', render);
+    $('ssv2Tier').addEventListener('change', render);
+
+    function selectedUses() {
+      return Array.from(form.querySelectorAll('input[name="use"]:checked')).map(c => c.value);
+    }
+    function formatFromUses(uses) {
+      const d = uses.includes('Desktop'), w = uses.includes('Web');
+      if (d && w) return 'bundle';
+      if (w) return 'web';
+      if (d) return 'desktop';
+      return null;
+    }
+    function selectedTier() {
+      const t = form.querySelector('input[name="tier"]:checked');
+      return t ? t.value : 'individual';
+    }
+    function fontsState() {
+      if (familyCb.checked) {
+        return { kind: 'family', label: 'Full Family (5)', styles: ['regular','light','bold','extrabold','black'] };
+      }
+      const chosen = singleCbs.filter(c => c.checked);
+      return {
+        kind: 'singles',
+        label: chosen.length ? chosen.map(c => STYLE_LABELS[c.value]).join(', ') : 'None selected',
+        styles: chosen.map(c => c.value)
+      };
+    }
+    function basePrice(fonts, format, tier) {
+      if (!format || fonts.styles.length === 0) return null;
+      if (fonts.kind === 'family') return PRICES.family[format][tier];
+      return fonts.styles.length * PRICES.single[format][tier];
+    }
+
+    function render() {
+      const fonts  = fontsState();
+      const uses   = selectedUses();
+      const tier   = selectedTier();
+      const format = formatFromUses(uses);
+      const hasApp = uses.includes('App');
+
+      $('ssv2SumFonts').textContent = fonts.label;
+      $('ssv2SumUse').textContent   = uses.length ? uses.join(' + ') : 'None selected';
+      $('ssv2SumTier').textContent  = TIER_LABELS[tier];
+      $('ssv2TierNote').textContent = TIER_NOTES[tier];
+      const bt = $('ssv2BundleTag'); if (bt) bt.classList.toggle('lit', format === 'bundle');
+
+      const fontCount = fonts.styles.length;
+      const fmtFiles = format === 'bundle' ? 'OTF + WOFF2'
+                     : format === 'web' ? 'WOFF2'
+                     : format === 'desktop' ? 'OTF' : '—';
+      $('ssv2Includes').innerHTML =
+        '<span class="inc-tag">Included:</span> ' +
+        (fontCount ? fontCount + (fontCount === 1 ? ' font' : ' fonts') : 'no fonts yet') +
+        ' · ' + fmtFiles + ' files · EULA (PDF)';
+
+      const priceEl = $('ssv2Price');
+      const buy = $('buy-btn');
+      priceEl.classList.remove('is-quote');
+
+      const base = basePrice(fonts, format, tier);
+      const cfg = (familyCb.checked ? 'entire' : fonts.styles.join('+') || 'none') +
+                  '|' + (uses.join('+') || 'none') + '|' + tier;
+
+      if (fontCount === 0) {
+        priceEl.textContent = '—';
+        buy.textContent = 'Select at least one font';
+        buy.dataset.config = cfg; buy.dataset.price = '';
+        buy.disabled = true; buy.setAttribute('aria-disabled','true');
+        const note = $('ssv2Unavailable'); if (note) note.hidden = true;
+        return;
+      }
+
+      if (base === null) {
+        priceEl.classList.add('is-quote');
+        priceEl.textContent = hasApp ? 'On request' : 'Pick a use';
+        buy.textContent = hasApp ? 'Request app pricing' : 'Choose Desktop, Web or App';
+        buy.dataset.config = cfg;
+        buy.dataset.price = hasApp ? 'on-request' : '';
+        buy.disabled = !hasApp;
+        if (hasApp) { buy.removeAttribute('aria-disabled'); }
+        else { buy.setAttribute('aria-disabled','true'); }
+        const note = $('ssv2Unavailable'); if (note) note.hidden = true;
+        return;
+      }
+
+      const url = checkoutUrlFor(fonts, format, tier);
+
+      if (hasApp) {
+        priceEl.textContent = 'from ' + euro(base);
+        buy.dataset.config = cfg;
+        buy.dataset.price = base + '+app';
+        $('ssv2Includes').innerHTML += ' · <span class="inc-tag">App:</span> priced on request';
+        setBuyState(buy, url ? 'checkout' : 'unavailable', url, 'Buy ' + euro(base) + ' + app quote');
+      } else {
+        // Strikeout = "sum of parts" (no bundles). Shown for Full Family (~35% off)
+        // and for Desktop+Web (~20% off): D+W bundle is ×2 vs ×2.5 bought separately.
+        const parts = (format === 'bundle')
+          ? (PRICES.single.desktop[tier] + PRICES.single.web[tier])
+          : PRICES.single[format][tier];
+        const full = fonts.styles.length * parts;
+        priceEl.innerHTML = (full > base ? '<s class="ssv2-was">' + euro(full) + '</s> ' : '') + euro(base);
+        buy.dataset.config = cfg;
+        buy.dataset.price = String(base);
+        setBuyState(buy, url ? 'checkout' : 'unavailable', url, 'Buy Now — ' + euro(base));
+      }
+    }
+
+    function setBuyState(buy, state, url, activeLabel) {
+      const note = $('ssv2Unavailable');
+      if (state === 'checkout') {
+        buy.dataset.checkoutUrl = url;
+        buy.disabled = false;
+        buy.removeAttribute('aria-disabled');
+        buy.textContent = activeLabel;
+        if (note) note.hidden = true;
+      } else {
+        delete buy.dataset.checkoutUrl;
+        buy.disabled = true;
+        buy.setAttribute('aria-disabled', 'true');
+        buy.textContent = 'Coming soon';
+        if (note) note.hidden = false;
+      }
+    }
+
+    // Buy button — opens the Lemon Squeezy checkout for the selected variant.
+    $('buy-btn').addEventListener('click', function () {
+      if (this.disabled) return;
+      const cfg = this.dataset.config, price = this.dataset.price;
+      if (!price) return;
+
+      if (price === 'on-request') {
+        window.location.href = 'mailto:mail@nomad-type.com?subject=' +
+          encodeURIComponent('Werd app licence — ' + cfg);
+        return;
+      }
+      const url = this.dataset.checkoutUrl;
+      if (url) { openCheckout(url); return; }
+
+      window.location.href = 'mailto:mail@nomad-type.com?subject=' +
+        encodeURIComponent('Werd licence enquiry — ' + cfg);
+    });
+
+    render();
+
+    window.NomadStoreV2 = { render };
+  })();
   </script>
 
 </body>
