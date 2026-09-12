@@ -1225,7 +1225,7 @@
         <p class="ssv2-includes" id="ssv2Includes"></p>
 
         <div class="ssv2-price">
-          <!-- TODO(dolomit): prices not decided (set jointly with Liad). Shows "—" until PRICES is filled in the store script -->
+          <!-- TODO(dolomit): EUR 85 prices shown for now; final choice (70/85) with Liad, then Stripe links -->
           <span class="amount" id="ssv2Price">—</span>
           <span class="amount-label">EUR</span>
         </div>
@@ -1347,10 +1347,20 @@
   (function () {
     'use strict';
 
-    // TODO(dolomit): prices not decided, set jointly with Liad. Fill in with the same shape as the
-    // other pages ({ single: { desktop|web|bundle: { individual, studio, company } }, family: {...} }).
-    // While PRICES is null the price reads "—" and every combo shows "Coming soon".
-    const PRICES = null;
+    // Dolomit pricing, shown for now at the EUR 85 anchor (Nir 09-12), same table as Sugar (2 styles).
+    // TODO(dolomit): Liad picks EUR 70 or 85. No Stripe links yet, so Buy shows "Coming soon".
+    const PRICES = {
+      single: {
+        desktop: { individual: 85,  studio: 135, company: 340 },
+        web:     { individual: 130, studio: 205, company: 510 },
+        bundle:  { individual: 170, studio: 270, company: 680 }
+      },
+      family: {
+        desktop: { individual: 160, studio: 240, company: 620 },
+        web:     { individual: 240, studio: 360, company: 930 },
+        bundle:  { individual: 320, studio: 480, company: 1240 }
+      }
+    };
 
     // =====================================================================
     //  LEMON SQUEEZY VARIANT MAP  —  key = `${style}|${format}|${tier}`
