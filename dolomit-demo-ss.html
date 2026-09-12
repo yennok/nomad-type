@@ -339,6 +339,8 @@
 
     /* PROTOTYPE 09-12: stylistic sets toggle in each tester's control bar (candidate for shared script.js) */
     .ss-buttons { display: flex; }
+    .ss-buttons .ss-btn:focus { outline: none; }
+    .ss-buttons .ss-btn:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
     .ss-buttons .ss-btn {
       width: auto; min-width: 33px; padding: 0 10px;
       font-family: "Safra Mono", monospace; font-size: 12px; line-height: 31px;
@@ -1626,6 +1628,11 @@
         // keep the site's "kern" setting; with nothing pressed, fall back to the page CSS
         if (on.length) area.style.setProperty('font-feature-settings', ['"kern" 1'].concat(on).join(', '), 'important');
         else area.style.removeProperty('font-feature-settings');
+        // Alternates change the text width: refit auto-sized testers, same as a style change does
+        if (typeof autoFitManager !== 'undefined' && autoFitManager.sections) {
+          const data = autoFitManager.sections.get(section);
+          if (data) [10, 100, 300].forEach(ms => setTimeout(() => autoFitManager.updateSectionSize(data), ms));
+        }
       };
       SETS.forEach(set => {
         const b = document.createElement('button');

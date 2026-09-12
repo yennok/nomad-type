@@ -540,6 +540,7 @@ class AutoFitManager {
       line-height: ${computedStyle.lineHeight};
       font-kerning: ${computedStyle.fontKerning};
       font-variant-ligatures: ${computedStyle.fontVariantLigatures};
+      font-feature-settings: ${computedStyle.fontFeatureSettings};
       text-rendering: ${computedStyle.textRendering};
       -webkit-font-smoothing: ${computedStyle.webkitFontSmoothing};
       -webkit-text-stroke: ${computedStyle.webkitTextStroke};
@@ -626,6 +627,7 @@ class AutoFitManager {
       line-height: ${computedStyle.lineHeight};
       font-kerning: ${computedStyle.fontKerning};
       font-variant-ligatures: ${computedStyle.fontVariantLigatures};
+      font-feature-settings: ${computedStyle.fontFeatureSettings};
       text-rendering: ${computedStyle.textRendering};
       -webkit-font-smoothing: ${computedStyle.webkitFontSmoothing};
       -webkit-text-stroke: ${computedStyle.webkitTextStroke};
@@ -693,6 +695,7 @@ class AutoFitManager {
       line-height: ${computedStyle.lineHeight};
       font-kerning: ${computedStyle.fontKerning};
       font-variant-ligatures: ${computedStyle.fontVariantLigatures};
+      font-feature-settings: ${computedStyle.fontFeatureSettings};
       text-rendering: ${computedStyle.textRendering};
       -webkit-font-smoothing: ${computedStyle.webkitFontSmoothing};
       -webkit-text-stroke: ${computedStyle.webkitTextStroke};
