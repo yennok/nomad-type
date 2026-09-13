@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Dolomit — entrance animation tests</title>
+<style>
+
+  @font-face { font-family: "Dolomit"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/Dolomit/Dolomit-Bold.woff2") format("woff2"); }
+  @font-face { font-family: "Dolomit Extended"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/Dolomit/Dolomit-BoldExtended.woff2") format("woff2"); }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #FF3B21;
+    color: #000;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+
+  .intro {
+    padding: 60px 24px 20px;
+    max-width: 720px;
+  }
+
+  .intro h1 {
+    font-size: 18px;
+    margin: 0 0 8px;
+  }
+
+  .intro p {
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+    opacity: 0.85;
+  }
+
+  .option {
+    border-top: 2px solid #000;
+    padding: 28px 24px 40px;
+    position: relative;
+  }
+
+  .option-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .option-label {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .option-label .num {
+    font-weight: 700;
+  }
+
+  .option-label .desc {
+    opacity: 0.8;
+  }
+
+  .replay-btn {
+    font-size: 13px;
+    font-family: inherit;
+    background: transparent;
+    border: 1px solid #000;
+    color: #000;
+    padding: 5px 12px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .replay-btn:hover {
+    background: #000;
+    color: #FF3B21;
+  }
+
+  .stage {
+    display: flex;
+    flex-direction: column;
+    gap: 0.05em;
+  }
+
+  .line {
+    font-weight: 700;
+    line-height: 1.05;
+    font-size: 9vw;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .line-he {
+    font-family: "Dolomit Extended", sans-serif;
+    direction: rtl;
+  }
+
+  .line-la {
+    font-family: "Dolomit", sans-serif;
+  }
+
+  .mask {
+    overflow: hidden;
+    display: block;
+  }
+
+  .char {
+    display: inline-block;
+    will-change: transform, opacity;
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 0.06em;
+    height: 0.8em;
+    background: #000;
+    vertical-align: -0.05em;
+    margin-inline-start: 0.02em;
+  }
+
+  footer {
+    padding: 40px 24px 80px;
+    border-top: 2px solid #000;
+    max-width: 720px;
+  }
+
+  footer h2 {
+    font-size: 15px;
+    margin: 0 0 14px;
+  }
+
+  footer ol {
+    font-size: 13px;
+    line-height: 1.7;
+    padding-inline-start: 20px;
+    margin: 0;
+  }
+
+  footer a {
+    color: #000;
+  }
+
+  @media (max-width: 600px) {
+    .line { font-size: 12vw; }
+  }
+
+  /* ---------- Animations ---------- */
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes riseIn {
+    from { transform: translateY(0.6em); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes dropIn {
+    from { transform: translateY(-1.1em); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes scaleYIn {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+  }
+
+  @keyframes blinkSteps {
+    0%, 100% { opacity: 1; }
+    12.5%, 37.5%, 62.5%, 87.5% { opacity: 0; }
+    25%, 50%, 75% { opacity: 1; }
+  }
+
+  @keyframes cursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .anim-hardcut .char { opacity: 0; animation: fadeIn 1ms steps(1) forwards; animation-delay: calc(var(--i) * 80ms); }
+
+  .anim-fade .char { opacity: 0; animation: fadeIn 150ms ease-out forwards; animation-delay: calc(var(--i) * 150ms); }
+
+  .anim-wipe .line { clip-path: inset(0 100% 0 0); animation: wipeReveal 700ms cubic-bezier(.4,0,.2,1) forwards; }
+  .anim-wipe .line-he { animation-delay: 0ms; }
+  .anim-wipe .line-la { animation-delay: 450ms; }
+  @keyframes wipeReveal { to { clip-path: inset(0 0 0 0); } }
+  .anim-wipe[dir-rtl-wipe] .line-he { clip-path: inset(0 0 0 100%); animation-name: wipeRevealRTL; }
+  @keyframes wipeRevealRTL { to { clip-path: inset(0 0 0 0); } }
+
+  .anim-rise .char { opacity: 0; animation: riseIn 420ms cubic-bezier(.2,.7,.3,1) forwards; animation-delay: calc(var(--i) * 45ms); }
+
+  .anim-drop .mask { }
+  .anim-drop .line { opacity: 0; animation: dropIn 500ms cubic-bezier(.2,.7,.3,1) forwards; }
+  .anim-drop .line-he { animation-delay: 0ms; }
+  .anim-drop .line-la { animation-delay: 350ms; }
+
+  .anim-blink .stage { opacity: 0; animation: blinkThenStay 900ms steps(1) forwards; }
+  @keyframes blinkThenStay {
+    0% { opacity: 0; }
+    12.5% { opacity: 1; }
+    25% { opacity: 0; }
+    37.5% { opacity: 1; }
+    50% { opacity: 0; }
+    62.5% { opacity: 1; }
+    75% { opacity: 0; }
+    87.5% { opacity: 1; }
+    100% { opacity: 1; }
+  }
+
+  .anim-random .char { opacity: 0; animation: fadeIn 1ms steps(1) forwards; animation-delay: calc(var(--ri) * 55ms); }
+
+  .anim-width .char-la { font-family: "Dolomit Extended", sans-serif; opacity: 0; animation: fadeIn 1ms steps(1) forwards, snapWidth 1ms steps(1) forwards; animation-delay: calc(var(--i) * 90ms), calc(var(--i) * 90ms + 500ms); }
+  .anim-width .char-he { font-family: "Dolomit", sans-serif; opacity: 0; animation: fadeIn 1ms steps(1) forwards, snapWidthHe 1ms steps(1) forwards; animation-delay: calc(var(--i) * 90ms), calc(var(--i) * 90ms + 500ms); }
+  @keyframes snapWidth { to { font-family: "Dolomit", sans-serif; } }
+  @keyframes snapWidthHe { to { font-family: "Dolomit Extended", sans-serif; } }
+
+  .anim-scaley .char { transform: scaleY(0); transform-origin: bottom; animation: scaleYIn 380ms cubic-bezier(.3,0,.2,1) forwards; animation-delay: calc(var(--i) * 60ms); }
+
+  .anim-typewriter .char { opacity: 0; animation: fadeIn 1ms steps(1) forwards; animation-delay: calc(var(--i) * 90ms); }
+  .anim-typewriter .cursor { opacity: 0; }
+  .anim-typewriter.cursor-on .cursor { opacity: 1; animation: cursorBlink 500ms steps(1) infinite; }
+  .anim-typewriter.cursor-done .cursor { display: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .char, .line, .stage { animation: none !important; opacity: 1 !important; transform: none !important; clip-path: none !important; }
+    .anim-width .char-la { font-family: "Dolomit", sans-serif !important; }
+    .anim-width .char-he { font-family: "Dolomit Extended", sans-serif !important; }
+    .cursor { display: none !important; }
+  }
+
+</style>
+</head>
+<body>
+
+  <div class="intro">
+    <h1>Dolomit — headline entrance animations</h1>
+    <p>Internal comparison, not for publishing. Nine options, plain CSS, letters split with JS only. Scroll to trigger, or hit Replay.</p>
+  </div>
+
+  <!-- Template for each option is built by JS below. -->
+  <div id="options"></div>
+
+  <footer>
+    <h2>References (checked live 2026-09-13)</h2>
+    <ol>
+      <li><a href="https://tympanus.net/codrops/2019/01/15/text-hover-effects-with-svg-filters/" target="_blank" rel="noopener">tympanus.net — SVG text hover/reveal effects (Codrops)</a> — relates to option 3, clip-path style line reveals.</li>
+      <li><a href="https://tympanus.net/codrops/2021/11/02/how-to-create-text-effects-with-svg-masks/" target="_blank" rel="noopener">tympanus.net — text effects with SVG masks (Codrops)</a> — relates to options 4 and 5, masked rise/drop reveals.</li>
+      <li><a href="https://css-tricks.com/snippets/css/typewriter-effect/" target="_blank" rel="noopener">CSS-Tricks — pure CSS typewriter effect</a> — relates to option 10, typewriter with blinking cursor.</li>
+      <li><a href="https://animate.style/" target="_blank" rel="noopener">Animate.css — bounceIn, fadeIn, flash</a> — relates to options 1, 2 and 6, simple hard-cut and flash reveals.</li>
+      <li><a href="https://gsap.com/docs/v3/Plugins/SplitText/" target="_blank" rel="noopener">GSAP — SplitText plugin docs and demos</a> — relates to options 1, 2, 4, 5 and 9, per-character stagger reveals.</li>
+      <li><a href="https://www.apple.com/" target="_blank" rel="noopener">Apple.com product pages</a> — relates to options 4 and 5, clean masked headline reveals on scroll.</li>
+      <li><a href="https://www.pentagram.com/" target="_blank" rel="noopener">Pentagram.com</a> — relates to option 6, hard graphic on/off headline treatment.</li>
+      <li><a href="https://www.awwwards.com/inspiration_search/?tags=text-animation" target="_blank" rel="noopener">Awwwards — text animation inspiration search</a> — general reference across all nine options.</li>
+    </ol>
+  </footer>
+
+<script>
+(function () {
+
+  var HE = "דולומיט";
+  var LA = "(DOLOMIT)";
+
+  var OPTIONS = [
+    { id: "hardcut",   num: "1", name: "Letter by letter, hard cut",   desc: "No fade, ~80ms per letter, hard on/off.", cls: "anim-hardcut" },
+    { id: "fade",      num: "2", name: "Letter by letter, quick fade", desc: "150ms fade per letter, gentler version of option 1.", cls: "anim-fade" },
+    { id: "wipe",      num: "3", name: "Line wipe",                   desc: "Each line revealed with a clip-path wipe, Hebrew right to left.", cls: "anim-wipe" },
+    { id: "rise",      num: "4", name: "Rise from baseline",          desc: "Letters rise a short distance inside a mask, staggered, ease-out.", cls: "anim-rise" },
+    { id: "drop",      num: "5", name: "Lines drop from above",       desc: "Each line drops in from above inside a mask, one after the other.", cls: "anim-drop" },
+    { id: "blink",     num: "6", name: "Blink-in signage",            desc: "The whole title flashes on and off three times, hard steps, then stays.", cls: "anim-blink" },
+    { id: "random",    num: "7", name: "Random order",                desc: "Letters appear one by one in random order, hard cut.", cls: "anim-random" },
+    { id: "width",     num: "8", name: "Width switch",                desc: "Letters start in the other width, then snap to the final one, showing the family.", cls: "anim-width" },
+    { id: "scaley",    num: "9", name: "Scale from baseline",         desc: "Each letter grows vertically from 0 to full height, no rotation.", cls: "anim-scaley" },
+    { id: "typewriter",num: "10", name: "Typewriter",                 desc: "Letters appear one by one with a blinking block cursor that then disappears.", cls: "anim-typewriter" }
+  ];
+
+  function splitChars(str, extraClass) {
+    var out = "";
+    for (var i = 0; i < str.length; i++) {
+      var ch = str[i];
+      var display = ch === " " ? " " : ch;
+      out += '<span class="char' + (extraClass ? " " + extraClass : "") + '" style="--i:' + i + '">' + display + "</span>";
+    }
+    return out;
+  }
+
+  function shuffledIndices(n) {
+    var arr = [];
+    for (var i = 0; i < n; i++) arr.push(i);
+    for (var i = n - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+    }
+    var order = new Array(n);
+    for (var k = 0; k < n; k++) order[arr[k]] = k;
+    return order;
+  }
+
+  function buildStage(opt) {
+    var heChars, laChars;
+
+    if (opt.id === "wipe" || opt.id === "drop") {
+      heChars = HE;
+      laChars = LA;
+      return (
+        '<div class="stage ' + opt.cls + '"' + (opt.id === "wipe" ? " dir-rtl-wipe" : "") + '>' +
+          '<span class="mask"><span class="line line-he">' + heChars + '</span></span>' +
+          '<span class="mask"><span class="line line-la">' + laChars + '</span></span>' +
+        '</div>'
+      );
+    }
+
+    if (opt.id === "blink") {
+      return (
+        '<div class="stage ' + opt.cls + '">' +
+          '<span class="line line-he">' + HE + '</span>' +
+          '<span class="line line-la">' + LA + '</span>' +
+        '</div>'
+      );
+    }
+
+    if (opt.id === "width") {
+      var heOut = "";
+      for (var i = 0; i < HE.length; i++) {
+        var ch = HE[i] === " " ? " " : HE[i];
+        heOut += '<span class="char char-he" style="--i:' + i + '">' + ch + '</span>';
+      }
+      var laOut = "";
+      for (var j = 0; j < LA.length; j++) {
+        var ch2 = LA[j] === " " ? " " : LA[j];
+        laOut += '<span class="char char-la" style="--i:' + j + '">' + ch2 + '</span>';
+      }
+      return (
+        '<div class="stage ' + opt.cls + '">' +
+          '<span class="line line-he">' + heOut + '</span>' +
+          '<span class="line line-la">' + laOut + '</span>' +
+        '</div>'
+      );
+    }
+
+    if (opt.id === "random") {
+      var heOrder = shuffledIndices(HE.length);
+      var laOrder = shuffledIndices(LA.length);
+      var heOut2 = "";
+      for (var a = 0; a < HE.length; a++) {
+        var chH = HE[a] === " " ? " " : HE[a];
+        heOut2 += '<span class="char" style="--ri:' + heOrder[a] + '">' + chH + '</span>';
+      }
+      var laOut2 = "";
+      for (var b = 0; b < LA.length; b++) {
+        var chL = LA[b] === " " ? " " : LA[b];
+        laOut2 += '<span class="char" style="--ri:' + laOrder[b] + '">' + chL + '</span>';
+      }
+      return (
+        '<div class="stage ' + opt.cls + '">' +
+          '<span class="line line-he">' + heOut2 + '</span>' +
+          '<span class="line line-la">' + laOut2 + '</span>' +
+        '</div>'
+      );
+    }
+
+    if (opt.id === "typewriter") {
+      return (
+        '<div class="stage ' + opt.cls + '">' +
+          '<span class="line line-he">' + splitChars(HE) + '<span class="cursor"></span></span>' +
+          '<span class="line line-la">' + splitChars(LA) + '</span>' +
+        '</div>'
+      );
+    }
+
+    // default per-char options: hardcut, fade, rise, scaley
+    return (
+      '<div class="stage ' + opt.cls + '">' +
+        '<span class="line line-he">' + splitChars(HE) + '</span>' +
+        '<span class="line line-la">' + splitChars(LA) + '</span>' +
+      '</div>'
+    );
+  }
+
+  var container = document.getElementById("options");
+  var html = "";
+  OPTIONS.forEach(function (opt) {
+    html +=
+      '<section class="option" data-id="' + opt.id + '">' +
+        '<div class="option-header">' +
+          '<div class="option-label"><span class="num">' + opt.num + '.</span> ' + opt.name + ' &mdash; <span class="desc">' + opt.desc + '</span></div>' +
+          '<button class="replay-btn" type="button" data-target="' + opt.id + '">Replay</button>' +
+        '</div>' +
+        buildStage(opt) +
+      '</section>';
+  });
+  container.innerHTML = html;
+
+  // Rebuild a stage's inner HTML fresh (so hard-cut / snap animations restart cleanly)
+  var stageBuilders = {};
+  OPTIONS.forEach(function (opt) { stageBuilders[opt.id] = opt; });
+
+  function resetAndPlay(section) {
+    var id = section.getAttribute("data-id");
+    var opt = stageBuilders[id];
+    section.querySelectorAll(".stage").forEach(function (s) { s.remove(); });
+    section.insertAdjacentHTML("beforeend", buildStage(opt));
+    var stage = section.querySelector(".stage");
+
+    if (id === "typewriter") {
+      var chars = stage.querySelectorAll(".char");
+      var n = chars.length;
+      var totalMs = n * 90 + 120;
+      stage.classList.remove("cursor-done");
+      window.setTimeout(function () {
+        stage.classList.add("cursor-on");
+      }, totalMs);
+      window.setTimeout(function () {
+        stage.classList.remove("cursor-on");
+        stage.classList.add("cursor-done");
+      }, totalMs + 900);
+    }
+  }
+
+  var sections = Array.prototype.slice.call(document.querySelectorAll(".option"));
+
+  // Replay buttons
+  sections.forEach(function (section) {
+    var btn = section.querySelector(".replay-btn");
+    btn.addEventListener("click", function () {
+      resetAndPlay(section);
+    });
+  });
+
+  // Play once on scroll into view
+  var played = {};
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      var id = entry.target.getAttribute("data-id");
+      if (entry.isIntersecting && !played[id]) {
+        played[id] = true;
+        resetAndPlay(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(function (s) { io.observe(s); });
+
+})();
+</script>
+
+</body>
+</html>
