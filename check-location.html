@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Location check | Nomad Type</title>
+<style>
+  body { font-family: -apple-system, system-ui, sans-serif; margin: 0; min-height: 100vh; display: grid; place-items: center; background: #fff; color: #000; }
+  .box { text-align: center; padding: 32px; max-width: 520px; }
+  .big { font-size: 56px; line-height: 1.1; margin: 0 0 16px; }
+  .yes { color: #0a7f3f; } .no { color: #b00020; }
+  .small { font-size: 16px; line-height: 1.6; color: #444; }
+  code { background: #f2f2f2; padding: 2px 6px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<div class="box">
+  <p class="big" id="result">…</p>
+  <p class="small">Time zone: <code id="tz"></code><br>Language: <code id="lang"></code></p>
+  <p class="small" id="note"></p>
+</div>
+<script>
+  var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'unknown';
+  var il = tz === 'Asia/Jerusalem';
+  document.getElementById('tz').textContent = tz;
+  document.getElementById('lang').textContent = navigator.language || 'unknown';
+  var r = document.getElementById('result');
+  r.textContent = il ? 'ישראל ✓' : 'Not Israel';
+  r.className = 'big ' + (il ? 'yes' : 'no');
+  document.getElementById('note').textContent = il
+    ? 'This device will see shekel prices and the Israeli checkout.'
+    : 'This device will see euro prices (Stripe).';
+</script>
+</body>
+</html>
