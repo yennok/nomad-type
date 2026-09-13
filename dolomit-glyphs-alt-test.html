@@ -1131,10 +1131,7 @@
           alt.setAttribute('data-char', ch);
           alt.style.fontFeatureSettings = '"' + v.feature + '" 1';
 
-          var label = document.createElement('span');
-          label.className = 'char-cell-alt-label';
-          label.textContent = v.label;
-          alt.appendChild(label);
+          // no visible label (Nir 09-13): alternates sit next to their letter
 
           alt.addEventListener('mouseover', function () { showInPreview(ch, v.feature); });
           alt.addEventListener('click', function () { showInPreview(ch, v.feature); });
