@@ -351,6 +351,14 @@
       .ss-buttons { width: 100%; }
       .ss-buttons .ss-btn { flex: 1; padding: 0 7px; font-size: 14px !important; }
     }
+
+    /* Cover entrance: width switch (Nir 09-13). Letters appear one by one in the other width,
+       then snap to the final one. Final state = no class = the line's own font
+       (Hebrew line Bold Extended, Latin line and brackets Bold). */
+    .cover-title .ct-l { display: inline-block; visibility: hidden; }
+    .cover-title .ct-l.ct-on { visibility: visible; }
+    .cover-title div:nth-child(1) .ct-l.ct-alt { font-family: "Dolomit", sans-serif; }
+    .cover-title div:nth-child(2) .ct-l.ct-alt { font-family: "Dolomit Extended", sans-serif; }
 </style>
 
   <!-- ====== DOLOMIT PAGE STYLES ======
@@ -1699,6 +1707,37 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build);
   else build();
+})();
+</script>
+
+<script>
+/* Cover title entrance: width switch. Plays once; skipped for reduced motion. */
+(function () {
+  function run() {
+    var title = document.querySelector('.cover-title');
+    if (!title || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var i = 0;
+    Array.prototype.forEach.call(title.children, function (line) {
+      var text = line.textContent;
+      line.textContent = '';
+      Array.from(text).forEach(function (ch) {
+        var s = document.createElement('span');
+        s.className = 'ct-l ct-alt';
+        s.textContent = ch;
+        line.appendChild(s);
+        var n = i++;
+        setTimeout(function () { s.classList.add('ct-on'); }, n * 90);
+        setTimeout(function () { s.classList.remove('ct-alt'); }, n * 90 + 500);
+      });
+    });
+    // safety net: whatever happens, end in the final state
+    setTimeout(function () {
+      title.querySelectorAll('.ct-l').forEach(function (s) { s.classList.add('ct-on'); s.classList.remove('ct-alt'); });
+    }, i * 90 + 1200);
+  }
+  function start() { (document.fonts ? document.fonts.ready : Promise.resolve()).then(run); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(start, 0); });
+  else start();
 })();
 </script>
 </body>
