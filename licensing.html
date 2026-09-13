@@ -775,7 +775,7 @@
           
           <div class="licensing-text-section">
             <h3>End User License Agreement</h3>
-            <p>All font licenses are subject to our <a href="assets/Nomad-Type-EULA-1.0.pdf" target="_blank" style="text-decoration: underline;">EULA (End User License Agreement)</a>, available for download. Please review it before purchasing.</p>
+            <p>All font licenses are subject to our <a id="eulaLink" href="assets/Nomad-Type-EULA-1.1.pdf" target="_blank" style="text-decoration: underline;">EULA (End User License Agreement)</a>, available for download. Please review it before purchasing.</p>
           </div>
 
           <div class="contact-section">
@@ -966,5 +966,16 @@
       setTimeout(initFooterVisibilityCheck, 1000);
     });
   </script>
+
+<script>
+  /* EULA by location: buyers in Israel get the Israeli EULA (Nir 09-13). Same detection as /terms. */
+  (function () {
+    try {
+      var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      var link = document.getElementById('eulaLink');
+      if (link && (tz === 'Asia/Jerusalem' || location.hash === '#israel')) link.href = 'assets/Nomad-Type-EULA-1.1-IL.pdf';
+    } catch (e) {}
+  })();
+</script>
 </body>
 </html>
