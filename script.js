@@ -1417,11 +1417,14 @@ function initCarousels() {
           currentSlide = 0;
           track.style.transition = 'none'; // Disable transition for instant jump
           updateCarousel();
-          // Re-enable transition after a brief delay
-          setTimeout(() => {
+          // Force the browser to apply the jump before transitions come back.
+          // (A 10ms timeout was sometimes shorter than a frame, so the jump back to slide 1 animated
+          // backwards across every slide: the "fast jumping / skipping" seen on 2026-09-13.)
+          void track.offsetWidth;
+          requestAnimationFrame(() => requestAnimationFrame(() => {
             const transitionSpeed = carousel.track === 'carousel-b' ? '2.7s' : '2s';
             track.style.transition = `transform ${transitionSpeed} ease-in-out`;
-          }, 10);
+          }));
         }, transitionDuration); // Wait for the transition to complete
       } else {
         updateCarousel();
@@ -1435,6 +1438,7 @@ function initCarousels() {
 
     // Auto-play functionality
     function startAutoPlay() {
+      clearInterval(autoPlayInterval); // never run two timers at once (hover + delayed start could double it)
       autoPlayInterval = setInterval(nextSlide, carousel.interval);
     }
 
