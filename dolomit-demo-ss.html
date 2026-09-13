@@ -1720,14 +1720,16 @@
     Array.prototype.forEach.call(title.children, function (line) {
       var text = line.textContent;
       line.textContent = '';
-      Array.from(text).forEach(function (ch) {
+      // each line starts at the same time (Hebrew and Latin in parallel)
+      Array.from(text).forEach(function (ch, n) {
         var s = document.createElement('span');
-        s.className = 'ct-l ct-alt';
+        var isBracket = ch === '(' || ch === ')';
+        s.className = isBracket ? 'ct-l' : 'ct-l ct-alt'; // brackets stay Bold the whole time
         s.textContent = ch;
         line.appendChild(s);
-        var n = i++;
+        i = Math.max(i, n + 1);
         setTimeout(function () { s.classList.add('ct-on'); }, n * 90);
-        setTimeout(function () { s.classList.remove('ct-alt'); }, n * 90 + 500);
+        if (!isBracket) setTimeout(function () { s.classList.remove('ct-alt'); }, n * 90 + 500);
       });
     });
     // safety net: whatever happens, end in the final state
