@@ -2584,7 +2584,8 @@ function boot() {
   initCollapsibleSections();
   initCheckboxLogic();
   initTrialFormLogic();
-  if (window.NT_MARQUEE_FIX) initDraggableMarqueeFixed(); else initDraggableMarquee();
+  // Weights marquee: fixed version on every page since 2026-09-13 (old initDraggableMarquee kept for one-line rollback).
+  initDraggableMarqueeFixed();
   initCircleMarquee();
   initDynamicMenuWidth();
   initInitialNavState();
