@@ -319,7 +319,15 @@
         color: white;
       }
     }
-  </style>
+  
+    /* Thank-you page: warm, short, set in Safra (trilingual) */
+    .ty-content { display: block; max-width: 900px; margin: 0 auto; padding-top: 40px; text-align: center; }
+    .ty-thanks { font-family: "Safra", serif; font-weight: 400; font-size: clamp(64px, 11vw, 168px); line-height: 1.02; margin: 0 0 48px; letter-spacing: -0.01em; }
+    .ty-thanks span { display: block; }
+    .ty-text { font-size: 20px; line-height: 1.5; max-width: 560px; margin: 0 auto; }
+    .ty-text a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+    @media (max-width: 768px) { .ty-content { padding-top: 10px; } .ty-thanks { margin-bottom: 32px; } .ty-text { font-size: 17px; } }
+</style>
 </head>
 <body>
   <style>.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}</style>
@@ -370,37 +378,15 @@
     </div>
   </div>
 
-  <!-- Sticky Trial Fonts Button -->
-  <div class="cover-buttons">
-    <a href="trial-fonts" class="btn btn-primary sticky-trial-btn">Trial Fonts</a>
-  </div>
-
   <div class="main-container">
-    <div class="terms-content">
-      <div class="terms-title-column">
-        <h1 class="terms-title">Thank you</h1>
-      </div>
-
-      <div class="terms-text-column">
-        <!-- DRAFT(thank-you): written by Claude 2026-09-13, Nir to review -->
-        <p class="terms-intro">Your payment went through.</p>
-
-        <section class="terms-section">
-          <h2>Your fonts are on their way</h2>
-          <p>The font files are emailed to the address you used at checkout, usually within a few minutes. You'll get a ZIP file with the fonts and the EULA.</p>
-          <p>Your invoice or receipt arrives in a separate email.</p>
-        </section>
-
-        <section class="terms-section">
-          <h2>Nothing arrived?</h2>
-          <p>Check your spam folder first. If there's still nothing after an hour, write to <a href="mailto:mail@nomad-type.com">mail@nomad-type.com</a> and we'll sort it out.</p>
-        </section>
-
-        <section class="terms-section">
-          <h2>Using your fonts</h2>
-          <p>Keep the EULA with your files. It explains exactly how your licence can be used. <a href="licensing">Licensing overview</a> · <a href="terms">Terms</a></p>
-        </section>
-      </div>
+    <div class="terms-content ty-content">
+      <!-- DRAFT(thank-you): written by Claude 2026-09-13, Nir to review -->
+      <h1 class="ty-thanks" aria-label="Thank you">
+        <span lang="he" dir="rtl">תודה</span>
+        <span lang="ar" dir="rtl">شكرًا</span>
+        <span lang="en">Thank you</span>
+      </h1>
+      <p class="ty-text">Your fonts are on their way. They should land in your inbox within a few minutes, with the invoice following in a separate email. Nothing there after an hour? Check your spam folder, then write to <a href="mailto:mail@nomad-type.com">mail@nomad-type.com</a> and we'll take care of it.</p>
     </div>
   </div>
 
