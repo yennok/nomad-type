@@ -320,13 +320,13 @@
       }
     }
   
-    /* Thank-you page: warm, short, set in Safra (trilingual) */
-    .ty-content { display: block; max-width: 900px; margin: 0 auto; padding-top: 40px; text-align: center; }
-    .ty-thanks { font-family: "Safra", serif; font-weight: 400; font-size: clamp(64px, 11vw, 168px); line-height: 1.02; margin: 0 0 48px; letter-spacing: -0.01em; }
+    /* Thank-you page: short, trilingual thanks in Safra, body text like the rest of the site */
+    .ty-content { display: block; max-width: 560px; margin: 0 auto; padding-top: 60px; text-align: center; }
+    .ty-thanks { font-family: "Safra", serif; font-weight: 400; font-size: 48px; line-height: 1.1; margin: 0 0 28px; }
     .ty-thanks span { display: block; }
-    .ty-text { font-size: 20px; line-height: 1.5; max-width: 560px; margin: 0 auto; }
+    .ty-text { font-family: "Safra Sans", sans-serif; font-size: 18px; font-weight: 400; line-height: 1.6; color: black; margin: 0 auto; }
     .ty-text a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
-    @media (max-width: 768px) { .ty-content { padding-top: 10px; } .ty-thanks { margin-bottom: 32px; } .ty-text { font-size: 17px; } }
+    @media (max-width: 768px) { .ty-content { padding-top: 20px; } .ty-thanks { font-size: 40px; margin-bottom: 22px; } }
 </style>
 </head>
 <body>
@@ -382,9 +382,9 @@
     <div class="terms-content ty-content">
       <!-- DRAFT(thank-you): written by Claude 2026-09-13, Nir to review -->
       <h1 class="ty-thanks" aria-label="Thank you">
-        <span lang="he" dir="rtl">תודה</span>
         <span lang="ar" dir="rtl">شكرًا</span>
         <span lang="en">Thank you</span>
+        <span lang="he" dir="rtl">תודה</span>
       </h1>
       <p class="ty-text">Your fonts are on their way. They should land in your inbox within a few minutes, with the invoice following in a separate email. Nothing there after an hour? Check your spam folder, then write to <a href="mailto:mail@nomad-type.com">mail@nomad-type.com</a> and we'll take care of it.</p>
     </div>
