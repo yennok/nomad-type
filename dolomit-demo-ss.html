@@ -1723,13 +1723,13 @@
       // each line starts at the same time (Hebrew and Latin in parallel)
       Array.from(text).forEach(function (ch, n) {
         var s = document.createElement('span');
-        var isBracket = ch === '(' || ch === ')';
-        s.className = isBracket ? 'ct-l' : 'ct-l ct-alt'; // brackets stay Bold the whole time
+        var staysBold = !line.matches(':first-child'); // only the Hebrew line switches width; Latin + brackets stay Bold (Nir 09-13)
+        s.className = staysBold ? 'ct-l' : 'ct-l ct-alt';
         s.textContent = ch;
         line.appendChild(s);
         i = Math.max(i, n + 1);
         setTimeout(function () { s.classList.add('ct-on'); }, n * 90);
-        if (!isBracket) setTimeout(function () { s.classList.remove('ct-alt'); }, n * 90 + 500);
+        if (!staysBold) setTimeout(function () { s.classList.remove('ct-alt'); }, n * 90 + 500);
       });
     });
     // safety net: whatever happens, end in the final state
