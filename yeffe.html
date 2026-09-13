@@ -326,7 +326,65 @@
   /* Belt-and-braces: never let the drawer or its contents cause page overflow */
   #buyOverlay { overflow-x: hidden; }
   #buyOverlay, #buyOverlay * { max-width: 100%; }
-  </style>
+
+  /* ===== ISRAEL CHECKOUT: customer details step (only used in Israel mode) ===== */
+  #buyOverlay [hidden] { display: none !important; }
+  .ssv2-price .amount .il-vat { font-size: 0.62em; margin-left: 4px; }
+  .il-back {
+    all: unset;
+    cursor: pointer;
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    color: #000;
+    opacity: 0.55;
+    margin: 0 0 0.6rem;
+  }
+  .il-back:hover { opacity: 1; color: var(--primary-color); }
+  .il-details .il-head {
+    font-family: "Safra Mono", monospace;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+    margin: 0;
+    padding: 0.9rem 0 0.3rem;
+    border-top: 1px solid #000;
+  }
+  .il-details .form-group.is-invalid input { border-bottom-color: var(--primary-color); }
+  .il-err {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--primary-color);
+    margin: 0.35rem 0 0;
+  }
+  .il-details .checkbox-label.consent { margin: 1.4rem 0 1rem; flex-wrap: nowrap; }
+  .il-details .consent-text a { color: #000; text-decoration: underline; }
+  .il-details .consent-text a:hover { color: var(--primary-color); }
+  .il-order {
+    font-family: "Safra Mono", monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0 0 0.6rem;
+    overflow-wrap: anywhere;
+  }
+  .il-order-note {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    line-height: 1.45;
+    opacity: 0.55;
+    margin: -0.3rem 0 0.8rem;
+  }
+  #ilSubmit[disabled] {
+    background: #ececec;
+    color: #a0a0a0;
+    opacity: 1;
+    border: 1px solid #ececec;
+    cursor: not-allowed;
+  }
+  
+  /* Yeffe accent is pale: keep Israeli checkout errors readable */
+  .il-err { color: #b00020 !important; }
+</style>
 </head>
 <body class="yeffe-page">
 
@@ -992,6 +1050,61 @@
 
       </div>
     </form>
+
+    <!-- ===== ISRAEL CHECKOUT: CUSTOMER DETAILS (Israel mode only) =====
+         Shown after Buy, before payment (required by the card processor).
+         Not class "buy-form", so script.js leaves it alone. -->
+    <form class="ssv2-form il-details" id="ilDetails" novalidate hidden>
+      <div class="ssv2-scroll">
+        <button type="button" class="il-back" id="ilBack">&larr; Back</button>
+        <h3 class="il-head">Customer details</h3>
+
+        <div class="form-group" data-field="name">
+          <input type="text" id="ilName" name="name" placeholder=" " autocomplete="name" required>
+          <div class="placeholder-text">Full Name<span class="asterisk">*</span></div>
+        </div>
+        <p class="il-err" id="ilNameErr" hidden>Please enter your full name.</p>
+
+        <div class="form-group" data-field="email">
+          <input type="email" id="ilEmail" name="email" placeholder=" " autocomplete="email" inputmode="email" required>
+          <div class="placeholder-text">Email<span class="asterisk">*</span></div>
+        </div>
+        <p class="il-err" id="ilEmailErr" hidden>Please enter a valid email.</p>
+
+        <div class="form-group" data-field="phone">
+          <input type="tel" id="ilPhone" name="phone" placeholder=" " autocomplete="tel" inputmode="tel" required>
+          <div class="placeholder-text">Phone<span class="asterisk">*</span></div>
+        </div>
+        <p class="il-err" id="ilPhoneErr" hidden>Please enter a valid phone number.</p>
+
+        <div class="form-group">
+          <input type="text" id="ilCompany" name="company" placeholder=" " autocomplete="organization">
+          <div class="placeholder-text">Company Name</div>
+        </div>
+
+        <div class="form-group">
+          <input type="text" id="ilTaxId" name="taxid" placeholder=" ">
+          <div class="placeholder-text">Business ID / VAT Number</div>
+        </div>
+
+        <label class="checkbox-label consent">
+          <input type="checkbox" id="ilTerms" name="terms">
+          <span class="checkmark"></span>
+          <span class="consent-text">I have read and agree to the <a href="/terms#israel" target="_blank" rel="noopener">Terms</a><span class="asterisk">*</span></span>
+        </label>
+      </div><!-- /.ssv2-scroll -->
+
+      <div class="ssv2-foot" aria-live="polite">
+        <p class="ssv2-sum-head">Your order</p>
+        <p class="il-order" id="ilOrderDesc">Yeffe Nefesh · Desktop · Individual</p>
+        <p class="il-order-note" id="ilOrderNote" hidden>App use is quoted separately by email.</p>
+        <div class="ssv2-price">
+          <span class="amount" id="ilOrderPrice">₪300<span class="il-vat"> + VAT</span></span>
+          <span class="amount-label">ILS</span>
+        </div>
+        <button type="submit" class="submit-btn" id="ilSubmit" disabled>Continue to payment</button>
+      </div>
+    </form>
   </div>
 </div>
 
@@ -1105,6 +1218,31 @@
     };
 
     // =====================================================================
+    //  ISRAEL MODE  —  visitors in Asia/Jerusalem see ILS prices (before VAT)
+    //  and a customer-details step instead of the Stripe link. Everyone else
+    //  gets the EUR/Stripe flow above, unchanged.
+    //  Testing: ?il=1 forces Israel mode, ?il=0 forces the regular flow.
+    // =====================================================================
+    const IL = (function () {
+      try {
+        const q = new URLSearchParams(window.location.search).get('il');
+        if (q === '1') return true;
+        if (q === '0') return false;
+        return Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Jerusalem';
+      } catch (e) { return false; }
+    })();
+
+    // Source of truth: font-store prices-ils.json (Yeffe Nefesh). ILS, before VAT.
+    const PRICES_ILS = {
+      single: {
+        desktop: { individual: 300, studio: 480, company: 1200 },
+        web:     { individual: 460, studio: 720, company: 1800 },
+        bundle:  { individual: 600, studio: 950, company: 2400 }
+      }
+    };
+    const IL_CHECKOUT = 'https://nomad-type-il-checkout.shiny-butterfly-7ed8.workers.dev/il-checkout';
+
+    // =====================================================================
     //  LEMON SQUEEZY VARIANT MAP  —  key = `${style}|${format}|${tier}`
     //    style  : 'entire' (Full Family) OR single style id
     //             ('regular' | 'bold' | 'sans-regular' | 'sans-bold')
@@ -1158,6 +1296,13 @@
 
     const $ = id => document.getElementById(id);
     const euro = n => '€' + Number(n).toLocaleString('en-US');
+    const shekel = n => '₪' + Number(n).toLocaleString('en-US');
+    const P = IL ? PRICES_ILS : PRICES;
+    const money = IL ? shekel : euro;
+    const DASH = IL ? '–' : '—';
+    // Price text: EUR as before; ILS gets "+ VAT" after the number.
+    const priceText = n => IL ? shekel(n) + ' + VAT' : euro(n);
+    const priceHTML = n => IL ? shekel(n) + '<span class="il-vat"> + VAT</span>' : euro(n);
 
     const overlay = $('buyOverlay');
     const form    = $('buyFormContent');
@@ -1198,8 +1343,8 @@
     }
     function basePrice(fonts, format, tier) {
       if (!format || fonts.styles.length === 0) return null;
-      if (fonts.kind === 'family') return PRICES.family[format][tier];
-      return fonts.styles.length * PRICES.single[format][tier];
+      if (fonts.kind === 'family') return P.family[format][tier];
+      return fonts.styles.length * P.single[format][tier];
     }
 
     function render() {
@@ -1218,7 +1363,7 @@
       const fontCount = fonts.styles.length;
       const fmtFiles = format === 'bundle' ? 'OTF + WOFF2'
                      : format === 'web' ? 'WOFF2'
-                     : format === 'desktop' ? 'OTF' : '—';
+                     : format === 'desktop' ? 'OTF' : DASH;
       $('ssv2Includes').innerHTML =
         '<span class="inc-tag">Included:</span> ' +
         (fontCount ? fontCount + (fontCount === 1 ? ' font' : ' fonts') : 'no fonts yet') +
@@ -1233,7 +1378,7 @@
                   '|' + (uses.join('+') || 'none') + '|' + tier;
 
       if (fontCount === 0) {
-        priceEl.textContent = '—';
+        priceEl.textContent = DASH;
         buy.textContent = 'Select at least one font';
         buy.dataset.config = cfg; buy.dataset.price = '';
         buy.disabled = true; buy.setAttribute('aria-disabled','true');
@@ -1257,22 +1402,24 @@
       const url = checkoutUrlFor(fonts, format, tier);
 
       if (hasApp) {
-        priceEl.textContent = 'from ' + euro(base);
+        priceEl.innerHTML = 'from ' + priceHTML(base);
         buy.dataset.config = cfg;
         buy.dataset.price = base + '+app';
         $('ssv2Includes').innerHTML += ' · <span class="inc-tag">App:</span> priced on request';
-        setBuyState(buy, url ? 'checkout' : 'unavailable', url, 'Buy ' + euro(base) + ' + app quote');
+        setBuyState(buy, url ? 'checkout' : 'unavailable', url,
+          IL ? 'Buy ' + priceText(base) + ', app on request' : 'Buy ' + euro(base) + ' + app quote');
       } else {
         // Strikeout = "sum of parts" (no bundles). Shown for Full Family (~35% off)
         // and for Desktop+Web (~20% off): D+W bundle is ×2 vs ×2.5 bought separately.
         const parts = (format === 'bundle')
-          ? (PRICES.single.desktop[tier] + PRICES.single.web[tier])
-          : PRICES.single[format][tier];
+          ? (P.single.desktop[tier] + P.single.web[tier])
+          : P.single[format][tier];
         const full = fonts.styles.length * parts;
-        priceEl.innerHTML = (full > base ? '<s class="ssv2-was">' + euro(full) + '</s> ' : '') + euro(base);
+        priceEl.innerHTML = (full > base ? '<s class="ssv2-was">' + money(full) + '</s> ' : '') + priceHTML(base);
         buy.dataset.config = cfg;
         buy.dataset.price = String(base);
-        setBuyState(buy, url ? 'checkout' : 'unavailable', url, 'Buy Now — ' + euro(base));
+        setBuyState(buy, url ? 'checkout' : 'unavailable', url,
+          IL ? 'Buy Now – ' + priceText(base) : 'Buy Now — ' + euro(base));
       }
     }
 
@@ -1301,19 +1448,141 @@
 
       if (price === 'on-request') {
         window.location.href = 'mailto:mail@nomad-type.com?subject=' +
-          encodeURIComponent('Yeffe Nefesh app licence — ' + cfg);
+          encodeURIComponent('Yeffe Nefesh app licence ' + DASH + ' ' + cfg);
         return;
       }
       const url = this.dataset.checkoutUrl;
-      if (url) { openCheckout(url); return; }
+      if (url) {
+        if (IL) { openDetails(); } else { openCheckout(url); }
+        return;
+      }
 
       window.location.href = 'mailto:mail@nomad-type.com?subject=' +
-        encodeURIComponent('Yeffe Nefesh licence enquiry — ' + cfg);
+        encodeURIComponent('Yeffe Nefesh licence enquiry ' + DASH + ' ' + cfg);
     });
+
+    // =====================================================================
+    //  ISRAEL MODE: customer details step (Buy -> details -> Grow payment)
+    // =====================================================================
+    const ilForm = $('ilDetails');
+    const FORMAT_LABELS = { desktop: 'Desktop', web: 'Web', bundle: 'Desktop + Web' };
+    const TIER_SHORT = { individual: 'Individual', studio: 'Studio', company: 'Company' };
+    let ilOrder = null;
+
+    if (IL) {
+      const lbl = document.querySelector('#buyFormContent .ssv2-price .amount-label');
+      if (lbl) lbl.textContent = 'ILS';
+    }
+
+    const ilFields = {
+      name:  { input: $('ilName'),  err: $('ilNameErr'),
+               ok: v => v.trim().length > 0 },
+      email: { input: $('ilEmail'), err: $('ilEmailErr'),
+               ok: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) },
+      phone: { input: $('ilPhone'), err: $('ilPhoneErr'),
+               ok: v => v.replace(/\D/g, '').length >= 9 }
+    };
+    const ilTouched = {};
+
+    function ilCurrentOrder() {
+      const fonts = fontsState();
+      const uses = selectedUses();
+      const tier = selectedTier();
+      const format = formatFromUses(uses);
+      const key = checkoutKey(fonts, format, tier);
+      if (!key) return null;
+      const style = key.split('|')[0];
+      const base = basePrice(fonts, format, tier);
+      const styleLabel = style === 'entire' ? 'Yeffe Nefesh Full Family (1)' : STYLE_LABELS[style];
+      return {
+        style, format, tier, base, hasApp: uses.includes('App'),
+        desc: styleLabel + ' · ' + FORMAT_LABELS[format] + ' · ' + TIER_SHORT[tier]
+      };
+    }
+
+    function ilCheckoutUrl() {
+      if (!ilOrder) return null;
+      const params = [
+        ['font', 'yeffe'], ['style', ilOrder.style], ['format', ilOrder.format],
+        ['tier', ilOrder.tier], ['back', '/yeffe'],
+        ['name', $('ilName').value.trim()], ['email', $('ilEmail').value.trim()],
+        ['phone', $('ilPhone').value.trim()],
+        ['company', $('ilCompany').value.trim()], ['taxid', $('ilTaxId').value.trim()]
+      ].filter(p => p[1] !== '');
+      return IL_CHECKOUT + '?' + params.map(p =>
+        encodeURIComponent(p[0]) + '=' + encodeURIComponent(p[1])).join('&');
+    }
+
+    function ilValidate() {
+      let allOk = true;
+      Object.keys(ilFields).forEach(k => {
+        const f = ilFields[k];
+        const ok = f.ok(f.input.value);
+        if (!ok) allOk = false;
+        const show = !ok && ilTouched[k];
+        f.err.hidden = !show;
+        f.input.closest('.form-group').classList.toggle('is-invalid', show);
+        f.input.setAttribute('aria-invalid', show ? 'true' : 'false');
+      });
+      const ready = allOk && $('ilTerms').checked && !!ilOrder;
+      $('ilSubmit').disabled = !ready;
+      if (ready) ilForm.dataset.checkoutUrl = ilCheckoutUrl();
+      else delete ilForm.dataset.checkoutUrl;
+      return ready;
+    }
+
+    function openDetails() {
+      ilOrder = ilCurrentOrder();
+      if (!ilOrder) return;
+      $('ilOrderDesc').textContent = ilOrder.desc;
+      $('ilOrderPrice').innerHTML = priceHTML(ilOrder.base);
+      $('ilOrderNote').hidden = !ilOrder.hasApp;
+      overlay.querySelectorAll('.overlay-content > .intro-text, .overlay-content > .ssv2-ea')
+        .forEach(el => { el.hidden = true; });
+      form.hidden = true;
+      ilForm.hidden = false;
+      ilForm.querySelector('.ssv2-scroll').scrollTop = 0;
+      overlay.scrollTop = 0;
+      ilValidate();
+    }
+
+    function closeDetails() {
+      ilForm.hidden = true;
+      form.hidden = false;
+      overlay.querySelectorAll('.overlay-content > .intro-text, .overlay-content > .ssv2-ea')
+        .forEach(el => { el.hidden = false; });
+    }
+
+    if (IL && ilForm) {
+      Object.keys(ilFields).forEach(k => {
+        const input = ilFields[k].input;
+        input.addEventListener('blur', () => { ilTouched[k] = true; ilValidate(); });
+        input.addEventListener('input', ilValidate);
+      });
+      ['ilCompany', 'ilTaxId'].forEach(id => $(id).addEventListener('input', ilValidate));
+      $('ilTerms').addEventListener('change', ilValidate);
+      $('ilBack').addEventListener('click', closeDetails);
+
+      ilForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        Object.keys(ilFields).forEach(k => { ilTouched[k] = true; });
+        if (!ilValidate()) return;
+        window.location.href = ilForm.dataset.checkoutUrl;
+      });
+
+      // When the drawer closes, come back to the configurator next time.
+      new MutationObserver(function () {
+        if (!overlay.classList.contains('active') && !ilForm.hidden) {
+          setTimeout(function () {
+            if (!overlay.classList.contains('active')) closeDetails();
+          }, 600);
+        }
+      }).observe(overlay, { attributes: true, attributeFilter: ['class'] });
+    }
 
     render();
 
-    window.NomadStoreV2 = { render };
+    window.NomadStoreV2 = { render, isIsrael: IL };
   })();
   </script>
 
