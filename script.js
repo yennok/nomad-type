@@ -2063,6 +2063,136 @@ function initDraggableMarquee() {
   }
 }
 
+// ====== GSAP DRAGGABLE MARQUEE, FIXED VERSION (test: pages that set window.NT_MARQUEE_FIX = true) ======
+// Bug in the original: widths are measured once, before the web fonts finish loading. The loop animates
+// in xPercent (relative to each item's own width), so when the real font swaps in and every item changes
+// width by a different ratio, items move at different pixel speeds and drift into each other.
+// Fix: build only after document.fonts.ready, and rebuild (keeping the position) when fonts load later
+// or the window is resized. The per-second debug interval from the original is dropped.
+function initDraggableMarqueeFixed() {
+  const marqueeContents = document.querySelectorAll('.marquee-content');
+  if (!marqueeContents.length || typeof gsap === 'undefined') return;
+
+  const loops = []; // { content, index, tl, draggable }
+
+  function build(entry, progress) {
+    const { content, index } = entry;
+    const texts = content.querySelectorAll('.marquee-text, .marquee-img');
+    if (!texts.length || content.offsetHeight === 0) return;
+    content.style.animation = 'none';
+    const speed = index === 0 ? 1.5 : 0.8;
+    const paddingRight = index === 0 ? 60 : 100;
+    const reversed = (document.body.classList.contains('kaldanit-page') || document.body.classList.contains('yeffe-page')) && index === 0;
+    entry.tl = horizontalLoop(texts, { repeat: -1, speed, draggable: true, reversed, paddingRight }, entry);
+    if (typeof progress === 'number') entry.tl.progress(progress);
+  }
+
+  function rebuildAll() {
+    loops.forEach(entry => {
+      const progress = entry.tl ? entry.tl.progress() : undefined;
+      const timeScale = entry.tl ? entry.tl.timeScale() : 1;
+      if (entry.draggable) { entry.draggable.kill(); entry.draggable = null; }
+      if (entry.tl) entry.tl.kill();
+      const texts = entry.content.querySelectorAll('.marquee-text, .marquee-img');
+      gsap.set(texts, { clearProps: 'transform' });
+      build(entry, progress);
+      if (entry.tl) entry.tl.timeScale(timeScale);
+    });
+  }
+
+  function start() {
+    marqueeContents.forEach((content, index) => {
+      const entry = { content, index, tl: null, draggable: null };
+      loops.push(entry);
+      content.addEventListener('mouseenter', () => entry.tl && gsap.to(entry.tl, { timeScale: 0.25, overwrite: true, duration: 0.5 }));
+      content.addEventListener('mouseleave', () => entry.tl && gsap.to(entry.tl, { timeScale: 1, overwrite: true, duration: 0.5 }));
+      build(entry);
+    });
+
+    let t;
+    const later = () => { clearTimeout(t); t = setTimeout(rebuildAll, 200); };
+    window.addEventListener('resize', later);
+    if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', later);
+  }
+
+  const ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+  ready.then(() => requestAnimationFrame(start));
+
+  // Same GSAP horizontalLoop as the original, plus: the Draggable is stored on `entry` so it can be killed on rebuild.
+  function horizontalLoop(items, config, entry) {
+    items = gsap.utils.toArray(items);
+    config = config || {};
+    let tl = gsap.timeline({repeat: config.repeat, paused: config.paused, defaults: {ease: "none"}, onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)}),
+        length = items.length,
+        startX = items[0].offsetLeft,
+        times = [],
+        widths = [],
+        xPercents = [],
+        curIndex = 0,
+        pixelsPerSecond = (config.speed || 1) * 100,
+        snap = config.snap === false ? v => v : gsap.utils.snap(config.snap || 1),
+        populateWidths = () => items.forEach((el, i) => {
+          widths[i] = parseFloat(gsap.getProperty(el, "width", "px"));
+          xPercents[i] = snap(parseFloat(gsap.getProperty(el, "x", "px")) / widths[i] * 100 + gsap.getProperty(el, "xPercent"));
+        }),
+        getTotalWidth = () => items[length-1].offsetLeft + xPercents[length-1] / 100 * widths[length-1] - startX + items[length-1].offsetWidth * gsap.getProperty(items[length-1], "scaleX") + (parseFloat(config.paddingRight) || 0),
+        totalWidth, curX, distanceToStart, distanceToLoop, item, i;
+
+    populateWidths();
+    gsap.set(items, { xPercent: i => xPercents[i] });
+    gsap.set(items, {x: 0});
+    totalWidth = getTotalWidth();
+
+    for (i = 0; i < length; i++) {
+      item = items[i];
+      curX = xPercents[i] / 100 * widths[i];
+      distanceToStart = item.offsetLeft + curX - startX;
+      distanceToLoop = distanceToStart + widths[i] * gsap.getProperty(item, "scaleX");
+      tl.to(item, {xPercent: snap((curX - distanceToLoop) / widths[i] * 100), duration: distanceToLoop / pixelsPerSecond}, 0)
+        .fromTo(item, {xPercent: snap((curX - distanceToLoop + totalWidth) / widths[i] * 100)}, {xPercent: xPercents[i], duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond, immediateRender: false}, distanceToLoop / pixelsPerSecond)
+        .add("label" + i, distanceToStart / pixelsPerSecond);
+      times[i] = distanceToStart / pixelsPerSecond;
+    }
+
+    tl.progress(1, true).progress(0, true);
+    if (config.reversed) {
+      tl.vars.onReverseComplete();
+      tl.reverse();
+    }
+
+    if (config.draggable && typeof(Draggable) === "function") {
+      let proxy = document.createElement("div"),
+          wrap = gsap.utils.wrap(0, 1),
+          ratio, startProgress, draggable, dragSnap, roundFactor,
+          align = () => tl.progress(wrap(startProgress + (draggable.startX - draggable.x) * ratio));
+      draggable = Draggable.create(proxy, {
+        trigger: items[0].parentNode,
+        type: "x",
+        onPress() {
+          startProgress = tl.progress();
+          tl.progress(0);
+          populateWidths();
+          totalWidth = getTotalWidth();
+          ratio = 1 / totalWidth;
+          dragSnap = totalWidth / items.length;
+          roundFactor = Math.pow(10, ((dragSnap + "").split(".")[1] || "").length);
+          tl.progress(startProgress);
+        },
+        onDrag: align,
+        onThrowUpdate: align,
+        inertia: true,
+        snap: value => {
+          let n = Math.round(parseFloat(value) / dragSnap) * dragSnap * roundFactor;
+          return (n - n % 1) / roundFactor;
+        },
+        onThrowComplete: () => gsap.set(proxy, {x: 0})
+      })[0];
+      if (entry) entry.draggable = draggable;
+    }
+    return tl;
+  }
+}
+
 // ====== CIRCLE MARQUEE ======
 function initCircleMarquee() {
   const circleMarqueeContent = document.querySelector('.circle-marquee-content');
@@ -2454,7 +2584,7 @@ function boot() {
   initCollapsibleSections();
   initCheckboxLogic();
   initTrialFormLogic();
-  initDraggableMarquee();
+  if (window.NT_MARQUEE_FIX) initDraggableMarqueeFixed(); else initDraggableMarquee();
   initCircleMarquee();
   initDynamicMenuWidth();
   initInitialNavState();
