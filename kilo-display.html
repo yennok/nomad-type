@@ -325,7 +325,16 @@
   /* Belt-and-braces: never let the drawer or its contents cause page overflow */
   #buyOverlay { overflow-x: hidden; }
   #buyOverlay, #buyOverlay * { max-width: 100%; }
-  </style>
+  
+  /* Kilo Display: variable font note under the Full Family row */
+  .ssv2-variable-note {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    line-height: 1.4;
+    margin: -4px 0 10px 32px;
+    opacity: 0.7;
+  }
+</style>
 </head>
 <body class="kilo-display-page variable">
 
@@ -1084,6 +1093,7 @@
                 Full Family (4)
                 <span class="ssv2-family-tag">Bundle<span class="ssv2-tag-full"> Price</span></span>
               </label>
+              <p class="ssv2-variable-note">Full Family includes the variable font (TTF / WOFF2)</p>
               <label class="checkbox-label">
                 <input type="checkbox" name="family" value="super-narrow" checked>
                 <span class="checkmark"></span>
@@ -1444,7 +1454,7 @@
     }
     function fontsState() {
       if (familyCb.checked) {
-        return { kind: 'family', label: 'Full Family (4)', styles: ['super-narrow','narrow','compact','standard'] };
+        return { kind: 'family', label: 'Full Family (4) + Variable font', styles: ['super-narrow','narrow','compact','standard'] };
       }
       const chosen = singleCbs.filter(c => c.checked);
       return {
