@@ -352,7 +352,7 @@
             <div class="spec-line">Mentored by: Radim Pesko (ECAL)</div>
             <div class="spec-line">Year: 2025</div>
             <div class="spec-line">Languages: Latin</div>
-            <div class="spec-line">Formats: OTF, WOFF2</div>
+            <div class="spec-line">Formats: OTF, WOFF2, Variable (TTF, WOFF2)</div>
             <div class="spec-line">Style: Text</div>
             <div class="spec-line">Use: Editorial, Body Text, Digital</div>
           </div>
@@ -1479,7 +1479,9 @@
       $('ssv2Includes').innerHTML =
         '<span class="inc-tag">Included:</span> ' +
         (fontCount ? fontCount + (fontCount === 1 ? ' font' : ' fonts') : 'no fonts yet') +
-        ' · ' + fmtFiles + ' files · EULA (PDF)';
+        ' · ' + fmtFiles + ' files' +
+        (familyCb.checked && fontCount ? ' · <span class="inc-tag">Variable font</span> included' : '') +
+        ' · EULA (PDF)';
 
       const priceEl = $('ssv2Price');
       const buy = $('buy-btn');
