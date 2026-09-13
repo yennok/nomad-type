@@ -371,10 +371,10 @@
       --preview-vertical-offset: 9px;
     }
 
-    /* Cover title: דולומיט in Bold over (DOLOMIT) in Bold Extended (Hebrew first, Nir 09-12).
+    /* Cover title: דולומיט in Bold Extended over (DOLOMIT) in Bold, same size (Nir 09-13).
        Sizes are in vw so both lines fill the cover width at any screen size (capped by vh on short screens). */
     body.dolomit-page .cover-title {
-      --cover-size: min(16.5vw, 28vh);
+      --cover-size: min(15vw, 26vh);
       margin-bottom: 0px;
       text-align: center;
     }
@@ -1041,7 +1041,7 @@
       if (typeof loadHeader === 'function') {
         loadHeader(`
           <div style="transform: translateY(0px);">דולומיט</div>
-          <div style="transform: translateY(0px);">DOLOMIT</div>
+          <div style="transform: translateY(0px);">(DOLOMIT)</div>
         `);
       }
 });
