@@ -155,6 +155,7 @@ const footerHTML = `
     <a href="https://www.nomad-type.com/licensing" class="footer-nav-link">Licensing</a>
     <a href="https://www.nomad-type.com/about" class="footer-nav-link">About</a>
     <a href="https://www.nomad-type.com/faq" class="footer-nav-link">FAQ</a>
+    <a href="https://www.nomad-type.com/terms" class="footer-nav-link">Terms</a>
     <a href="https://www.linkedin.com/in/yennok/" target="_blank" class="footer-linkedin-btn">Linkedin</a>
   </div>
 </nav>
