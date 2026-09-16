@@ -1,0 +1,1078 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FPE1JV10R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4FPE1JV10R');
+  </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Inter Hebrew — a Hebrew companion to Inter | Nomad Type</title>
+
+  <!-- DEMO page: not linked anywhere, not in sitemap. Remove noindex when it goes live. -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- SEO meta -->
+  <meta name="description" content="Inter Hebrew is a Hebrew companion to Inter by Nir Zabari Yenni, drawn on Inter's own metrics, one variable weight axis from 100 to 900, with full nikud support.">
+  <meta name="keywords" content="Inter Hebrew, Hebrew typeface, Hebrew variable font, Inter, Hebrew companion, nikud, Nomad Type, Nir Zabari Yenni">
+  <meta name="author" content="Nir Zabari Yenni">
+  <link rel="canonical" href="https://www.nomad-type.com/inter-hebrew">
+
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="product">
+  <meta property="og:url" content="https://www.nomad-type.com/inter-hebrew">
+  <meta property="og:title" content="Inter Hebrew | Nomad Type">
+  <meta property="og:description" content="A Hebrew companion to Inter, on Inter's own metric frame. One variable weight axis, 100 to 900, and full nikud.">
+  <meta property="og:image" content="https://www.nomad-type.com/assets/featured_image.png">
+  <meta property="og:image:width" content="1500">
+  <meta property="og:image:height" content="1000">
+  <meta property="og:image:alt" content="Inter Hebrew, a Hebrew companion to Inter">
+  <meta property="og:site_name" content="Nomad Type">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Inter Hebrew | Nomad Type">
+  <meta name="twitter:description" content="A Hebrew companion to Inter, on Inter's own metric frame. One variable weight axis, 100 to 900, and full nikud.">
+  <meta name="twitter:image" content="https://www.nomad-type.com/assets/featured_image.png">
+
+  <!-- Structured Data: Product -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Inter Hebrew",
+    "description": "Inter Hebrew is a Hebrew companion to Inter by Nir Zabari Yenni, drawn on Inter's own metric frame, with one variable weight axis from 100 to 900 and full nikud support.",
+    "url": "https://www.nomad-type.com/inter-hebrew",
+    "category": "Typeface",
+    "brand": { "@type": "Brand", "name": "Nomad Type", "url": "https://www.nomad-type.com/" },
+    "manufacturer": { "@type": "Organization", "name": "Nomad Type", "url": "https://www.nomad-type.com/" },
+    "creator": { "@type": "Person", "name": "Nir Zabari Yenni" },
+    "releaseDate": "2026",
+    "additionalProperty": [
+      { "@type": "PropertyValue", "name": "Scripts", "value": "Hebrew" },
+      { "@type": "PropertyValue", "name": "Designer", "value": "Nir Zabari Yenni" },
+      { "@type": "PropertyValue", "name": "Styles", "value": "Variable, weight 100 to 900" },
+      { "@type": "PropertyValue", "name": "Formats", "value": "WOFF2, variable TTF" }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+  <!-- Inter Hebrew page styles. This page has no store, no trial form and no overlays. -->
+<style>
+  /* This page has no store, so the header's Trial and Buy buttons are hidden. */
+  .inter-hebrew-page .cover-buttons { display: none !important; }
+
+  /* Private page marker: a fluorescent bar pinned to the bottom of the window,
+     plus a marker swipe in the intro. It is there to say out loud that this page is not public. */
+  .ih-private {
+    position: fixed; left: 0; right: 0; bottom: 0; height: 26px; z-index: 900;
+    background: #E8FF3A; display: flex; align-items: center; gap: 2.5rem;
+    overflow: hidden; pointer-events: none;
+  }
+  .ih-private span {
+    font-family: "Safra Mono", monospace; font-size: 11px; letter-spacing: 0.06em;
+    color: #000; white-space: nowrap;
+    animation: ihPrivateSlide 26s linear infinite;
+  }
+  @keyframes ihPrivateSlide {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  body.inter-hebrew-page { padding-bottom: 26px; }
+  .ih-marker {
+    background: #E8FF3A; box-decoration-break: clone; -webkit-box-decoration-break: clone;
+    padding: 0.08em 0.25em; margin: 0 -0.25em;
+  }
+  @media (prefers-reduced-motion: reduce) { .ih-private span { animation: none; } }
+
+  /* Four sliders per tester (Size, Leading, Letter Spacing, Weight): keep each label
+     glued to its own track so a wrap never splits a pair. */
+  .slider-pair { display: inline-flex; align-items: center; gap: 0.6rem; }
+  .slider-pair input[type="range"] { width: 120px; }
+  @media (max-width: 768px) {
+    .inter-hebrew-page .sliders-wrapper { flex-wrap: wrap; }
+    .slider-pair { flex: 1 1 100%; display: flex; }
+    .slider-pair input[type="range"] { width: 100%; flex: 1 1 auto; }
+    .slider-pair label { margin: 0; }
+  }
+
+
+
+    body.inter-hebrew-page .spec-line a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+
+    /* Cover: the cascading weight pulse from the Harold / Celeste film (LAB2, 09-2026).
+       Every line runs the same Thin to Black to Thin pulse, each one a quarter of a second
+       after the line above it, with a short rest on Thin so the cascade never stops together.
+       1.5s pulse + 0.25s rest = a 1.75s loop; the negative delays open on the staircase frame. */
+    body.inter-hebrew-page .cover-title div {
+      animation: ihPulse 1.75s ease-in-out infinite;
+    }
+    body.inter-hebrew-page .cover-title div:nth-child(1) { animation-delay: -1.5s; }
+    body.inter-hebrew-page .cover-title div:nth-child(2) { animation-delay: -1.25s; }
+    body.inter-hebrew-page .cover-title div:nth-child(3) { animation-delay: -1s; }
+    body.inter-hebrew-page .cover-title div:nth-child(4) { animation-delay: -0.75s; }
+    @keyframes ihPulse {
+      0%     { font-variation-settings: "wght" 100; }
+      42.86% { font-variation-settings: "wght" 900; }
+      85.71% { font-variation-settings: "wght" 100; }
+      100%   { font-variation-settings: "wght" 100; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body.inter-hebrew-page .cover-title div { animation: none; }
+    }
+</style>
+
+  <!-- ====== INTER HEBREW PAGE STYLES ======
+       styles.css is shared and untouched for this demo, so everything page-specific lives here.
+       When the page goes live, move these into styles.css (sections: FONT FILES, page colour,
+       cover title + mobile overrides, marquee classes) and delete this block. -->
+  <style>
+    /* One family, two files: Hebrew from the new variable font, Latin from Inter itself. */
+    @font-face { font-family: "Inter Hebrew"; font-weight: 100 900; font-style: normal; font-display: swap;
+      src: url("fonts/Inter-Hebrew/InterHebrew-VF.woff2") format("woff2-variations");
+      unicode-range: U+0590-05FF, U+FB1D-FB4F, U+20AA; }
+    @font-face { font-family: "Inter Hebrew"; font-weight: 100 900; font-style: normal; font-display: swap;
+      src: url("fonts/Inter-Hebrew/Inter-VF.woff2") format("woff2-variations");
+      unicode-range: U+0000-058F, U+2000-20A9, U+20AB-20CF, U+2100-214F; }
+
+    /* Page colour: near-white, so the type carries the page. */
+    body.inter-hebrew-page {
+      --primary-color: #E8FF3A;
+      --glyph-vertical-offset: 0px;
+      --preview-vertical-offset: 0px;
+    }
+
+    /* Cover title: four lines, Hebrew and Latin alternating. */
+    body.inter-hebrew-page .cover-title {
+      --cover-size: min(13vw, 15vh);
+      margin-bottom: 0px;
+      text-align: center;
+    }
+    body.inter-hebrew-page .cover-title div {
+      font-family: "Inter Hebrew", sans-serif;
+      font-weight: 400;
+      font-variation-settings: "wght" 400;
+      color: black;
+      font-size: var(--cover-size);
+      line-height: 1;
+      margin-bottom: 0;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      transform: translateZ(0);
+      will-change: font-variation-settings;
+    }
+    body.inter-hebrew-page .cover-title div:nth-child(2),
+    body.inter-hebrew-page .cover-title div:nth-child(4) { direction: rtl; }
+
+    /* Weights marquee */
+    .marquee-text.ih-he-text {
+      font-family: "Inter Hebrew", sans-serif;
+    }
+    .marquee-text.ih-la-text {
+      font-family: "Inter Hebrew", sans-serif;
+    }
+    body.inter-hebrew-page .marquee-text {
+      letter-spacing: 0;
+    }
+
+    /* In Use / Specimen: two portrait images each, side by side */
+
+
+    /* Mobile: script.js won't auto-fit below 40px, and the two long Extended lines are still too wide there,
+       so they get a vw size. The size slider still wins (it writes an inline !important). */
+    @media (max-width: 768px) {
+      .inter-hebrew-page .type-area.column-count-2 { font-size: 22px !important; }
+      .inter-hebrew-page .type-area.ih-big-mix { font-size: 40px !important; }
+      .inter-hebrew-page .type-area.ih-long-he { font-size: 11vw !important; }
+      .inter-hebrew-page .type-area.ih-long-en { font-size: 11vw !important; }
+      .inter-hebrew-page .type-area.ih-word-he { font-size: 15vw !important; }
+      .inter-hebrew-page .type-area.ih-word-vocal { font-size: 16vw !important; }
+      .inter-hebrew-page .type-area.auto-fit-multiline { font-size: 15vw !important; }
+    }
+  </style>
+</head>
+<body class="inter-hebrew-page">
+
+  <div class="ih-private" aria-hidden="true"><span>Private preview, not a public page &nbsp;&middot;&nbsp; Private preview, not a public page &nbsp;&middot;&nbsp; Private preview, not a public page &nbsp;&middot;&nbsp; Private preview, not a public page &nbsp;&middot;&nbsp; Private preview, not a public page &nbsp;&middot;&nbsp; Private preview, not a public page &nbsp;&middot;&nbsp; Private preview, not a public page &nbsp;&middot;&nbsp; Private preview, not a public page &nbsp;&middot;&nbsp; Private preview, not a public page &nbsp;&middot;&nbsp; Private preview, not a public page &nbsp;&middot;&nbsp; </span></div>
+
+  <style>.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}</style>
+  <h1 class="sr-only">Inter Hebrew, a Hebrew companion to the Inter typeface, variable weight 100 to 900, designed by Nir Zabari Yenni for Nomad Type</h1>
+
+  <!-- Header Container (will be populated by JavaScript) -->
+  <div id="header-container"></div>
+  <!-- ====== MAIN CONTENT ====== -->
+  <main class="content-wrapper">
+
+  <!-- ====== FONT INTRO SECTION ====== -->
+  <section class="font-intro">
+    <div class="intro-content">
+      <div class="intro-grid">
+        <div class="intro-text-column">
+          <p>A Hebrew companion to Inter. It is drawn on Inter's own metric frame, the same units per em, cap height, x-height and vertical metrics, so Hebrew and Latin can be set together on one line with no size or baseline compensation. One variable weight axis runs from 100 to 900 with the same named instances as Inter. The Hebrew covers the alphabet, the five final forms and all seventeen nikud marks with mark positioning, so vocalised text holds together at reading size. Figures and punctuation on this page come from Inter.</p>
+          <p><span class="ih-marker">Still to come: an italic, and an optical size axis to match Inter’s own.</span> The upright weights are finished, and they are what this page shows.</p>
+        </div>
+        
+        <div class="technical-specs-column">
+          <div class="specs-list">
+            <div class="spec-line">Typeface: Inter Hebrew (working title)</div>
+            <div class="spec-line">Designed by: <a href="https://yennok.com" target="_blank" rel="noopener">Nir Zabari Yenni</a></div>
+            <div class="spec-line">Year: 2026</div>
+            <div class="spec-line">Scripts: Hebrew. Latin shown here is Inter</div>
+            <div class="spec-line">Styles: variable, weight 100–900</div>
+            <div class="spec-line">Formats: WOFF2, variable TTF</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="multilingual-marquee">
+        <div class="marquee-container">
+          <div class="marquee-content">
+            <span class="marquee-text ih-he-text" dir="rtl" style="font-weight: 100; font-variation-settings: 'wght' 100;">אינטר דק</span>
+            <span class="marquee-text ih-la-text" style="font-weight: 100; font-variation-settings: 'wght' 100;">Inter Thin</span>
+            <span class="marquee-text ih-he-text" dir="rtl" style="font-weight: 200; font-variation-settings: 'wght' 200;">אינטר אקסטרה־לייט</span>
+            <span class="marquee-text ih-la-text" style="font-weight: 200; font-variation-settings: 'wght' 200;">Inter ExtraLight</span>
+            <span class="marquee-text ih-he-text" dir="rtl" style="font-weight: 300; font-variation-settings: 'wght' 300;">אינטר לייט</span>
+            <span class="marquee-text ih-la-text" style="font-weight: 300; font-variation-settings: 'wght' 300;">Inter Light</span>
+            <span class="marquee-text ih-he-text" dir="rtl" style="font-weight: 400; font-variation-settings: 'wght' 400;">אינטר רגולר</span>
+            <span class="marquee-text ih-la-text" style="font-weight: 400; font-variation-settings: 'wght' 400;">Inter Regular</span>
+            <span class="marquee-text ih-he-text" dir="rtl" style="font-weight: 490; font-variation-settings: 'wght' 490;">אינטר מדיום</span>
+            <span class="marquee-text ih-la-text" style="font-weight: 490; font-variation-settings: 'wght' 490;">Inter Medium</span>
+            <span class="marquee-text ih-he-text" dir="rtl" style="font-weight: 580; font-variation-settings: 'wght' 580;">אינטר סמי־בולד</span>
+            <span class="marquee-text ih-la-text" style="font-weight: 580; font-variation-settings: 'wght' 580;">Inter SemiBold</span>
+            <span class="marquee-text ih-he-text" dir="rtl" style="font-weight: 670; font-variation-settings: 'wght' 670;">אינטר בולד</span>
+            <span class="marquee-text ih-la-text" style="font-weight: 670; font-variation-settings: 'wght' 670;">Inter Bold</span>
+            <span class="marquee-text ih-he-text" dir="rtl" style="font-weight: 780; font-variation-settings: 'wght' 780;">אינטר אקסטרה־בולד</span>
+            <span class="marquee-text ih-la-text" style="font-weight: 780; font-variation-settings: 'wght' 780;">Inter ExtraBold</span>
+            <span class="marquee-text ih-he-text" dir="rtl" style="font-weight: 900; font-variation-settings: 'wght' 900;">אינטר בלאק</span>
+            <span class="marquee-text ih-la-text" style="font-weight: 900; font-variation-settings: 'wght' 900;">Inter Black</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === Section 1: Hebrew display line, shrinks to fit === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-1">Size</label> <input class="size" id="size-1" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-1">Leading</label> <input class="leading" id="leading-1" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-1">Letter Spacing</label> <input class="spacing" id="spacing-1" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+        <span class="slider-pair"><label class="label-custom" for="wght-1">Weight</label> <input class="wght" id="wght-1" type="range" min="100" max="900" step="1" value="780" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="1">
+            <div class="select-header">
+              <span class="select-value">ExtraBold 780</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Inter Hebrew Thin">Thin 100</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraLight">ExtraLight 200</div>
+              <div class="select-option" data-value="Inter Hebrew Light">Light 300</div>
+              <div class="select-option" data-value="Inter Hebrew Regular">Regular 400</div>
+              <div class="select-option" data-value="Inter Hebrew Medium">Medium 490</div>
+              <div class="select-option" data-value="Inter Hebrew SemiBold">SemiBold 580</div>
+              <div class="select-option" data-value="Inter Hebrew Bold">Bold 670</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraBold">ExtraBold 780</div>
+              <div class="select-option" data-value="Inter Hebrew Black">Black 900</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Inter Hebrew Thin">Thin 100</option>
+            <option value="Inter Hebrew ExtraLight">ExtraLight 200</option>
+            <option value="Inter Hebrew Light">Light 300</option>
+            <option value="Inter Hebrew Regular">Regular 400</option>
+            <option value="Inter Hebrew Medium">Medium 490</option>
+            <option value="Inter Hebrew SemiBold">SemiBold 580</option>
+            <option value="Inter Hebrew Bold">Bold 670</option>
+            <option value="Inter Hebrew ExtraBold" selected>ExtraBold 780</option>
+            <option value="Inter Hebrew Black">Black 900</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 responsive-text ih-long-he" contenteditable="true" dir="rtl" style="font-family: 'Inter Hebrew'; font-weight: 780; font-size: 244px; line-height: 1; letter-spacing: -0.02em; white-space: nowrap; text-align: center;">טיפוגרפיה עברית</div>
+  </section>
+
+  <!-- === Section 2: Hebrew running text, two columns (UDHR Article 1 and 2) === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-2">Size</label> <input class="size" id="size-2" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-2">Leading</label> <input class="leading" id="leading-2" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-2">Letter Spacing</label> <input class="spacing" id="spacing-2" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+        <span class="slider-pair"><label class="label-custom" for="wght-2">Weight</label> <input class="wght" id="wght-2" type="range" min="100" max="900" step="1" value="400" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="2">
+            <div class="select-header">
+              <span class="select-value">Regular 400</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Inter Hebrew Thin">Thin 100</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraLight">ExtraLight 200</div>
+              <div class="select-option" data-value="Inter Hebrew Light">Light 300</div>
+              <div class="select-option" data-value="Inter Hebrew Regular">Regular 400</div>
+              <div class="select-option" data-value="Inter Hebrew Medium">Medium 490</div>
+              <div class="select-option" data-value="Inter Hebrew SemiBold">SemiBold 580</div>
+              <div class="select-option" data-value="Inter Hebrew Bold">Bold 670</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraBold">ExtraBold 780</div>
+              <div class="select-option" data-value="Inter Hebrew Black">Black 900</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Inter Hebrew Thin">Thin 100</option>
+            <option value="Inter Hebrew ExtraLight">ExtraLight 200</option>
+            <option value="Inter Hebrew Light">Light 300</option>
+            <option value="Inter Hebrew Regular" selected>Regular 400</option>
+            <option value="Inter Hebrew Medium">Medium 490</option>
+            <option value="Inter Hebrew SemiBold">SemiBold 580</option>
+            <option value="Inter Hebrew Bold">Bold 670</option>
+            <option value="Inter Hebrew ExtraBold">ExtraBold 780</option>
+            <option value="Inter Hebrew Black">Black 900</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right is-active"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-2 truncate-text" data-truncate-words="46" contenteditable="true" dir="rtl" style="font-family: 'Inter Hebrew'; font-weight: 400; font-size: 30px; line-height: 1.5; letter-spacing: 0em; text-align: right;">כל בני אדם נולדו בני חורין ושווים בערכם ובזכויותיהם. כולם חוננו בתבונה ובמצפון, לפיכך חובה עליהם לנהוג איש ברעהו ברוח של אחווה. כל אדם זכאי לזכויות ולחירויות שנקבעו בהכרזה זו ללא הפליה כלשהי, מטעמי גזע, צבע, מין, לשון, דת, דעה פוליטית או דעה בבעיות אחרות, בגלל מוצא לאומי או חברתי, קניין, לידה או מעמד אחר.</div>
+  </section>
+
+  <!-- === Section 2b: Hebrew and Latin mixed in one line, one size, one baseline === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-11">Size</label> <input class="size" id="size-11" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-11">Leading</label> <input class="leading" id="leading-11" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-11">Letter Spacing</label> <input class="spacing" id="spacing-11" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+        <span class="slider-pair"><label class="label-custom" for="wght-11">Weight</label> <input class="wght" id="wght-11" type="range" min="100" max="900" step="1" value="490" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="11">
+            <div class="select-header">
+              <span class="select-value">Medium 490</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Inter Hebrew Thin">Thin 100</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraLight">ExtraLight 200</div>
+              <div class="select-option" data-value="Inter Hebrew Light">Light 300</div>
+              <div class="select-option" data-value="Inter Hebrew Regular">Regular 400</div>
+              <div class="select-option" data-value="Inter Hebrew Medium">Medium 490</div>
+              <div class="select-option" data-value="Inter Hebrew SemiBold">SemiBold 580</div>
+              <div class="select-option" data-value="Inter Hebrew Bold">Bold 670</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraBold">ExtraBold 780</div>
+              <div class="select-option" data-value="Inter Hebrew Black">Black 900</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Inter Hebrew Thin">Thin 100</option>
+            <option value="Inter Hebrew ExtraLight">ExtraLight 200</option>
+            <option value="Inter Hebrew Light">Light 300</option>
+            <option value="Inter Hebrew Regular">Regular 400</option>
+            <option value="Inter Hebrew Medium" selected>Medium 490</option>
+            <option value="Inter Hebrew SemiBold">SemiBold 580</option>
+            <option value="Inter Hebrew Bold">Bold 670</option>
+            <option value="Inter Hebrew ExtraBold">ExtraBold 780</option>
+            <option value="Inter Hebrew Black">Black 900</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right is-active"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 truncate-text ih-big-mix" data-truncate-words="22" contenteditable="true" dir="rtl" style="font-family: 'Inter Hebrew'; font-weight: 490; font-size: 88px; line-height: 1.25; letter-spacing: -0.01em; text-align: right;">עברית ולטינית על אותו קו בסיס <span dir="ltr">Hebrew and Latin on one baseline</span> אותו גובה אות, אותו משקל <span dir="ltr">one size, one weight, no compensation</span> אותו שלד מידות כמו אינטר <span dir="ltr">the same metric frame as Inter</span></div>
+  </section>
+
+  <!-- === Section 3: name in both scripts, fits to the box === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-3">Size</label> <input class="size" id="size-3" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-3">Leading</label> <input class="leading" id="leading-3" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-3">Letter Spacing</label> <input class="spacing" id="spacing-3" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+        <span class="slider-pair"><label class="label-custom" for="wght-3">Weight</label> <input class="wght" id="wght-3" type="range" min="100" max="900" step="1" value="670" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="3">
+            <div class="select-header">
+              <span class="select-value">Bold 670</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Inter Hebrew Thin">Thin 100</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraLight">ExtraLight 200</div>
+              <div class="select-option" data-value="Inter Hebrew Light">Light 300</div>
+              <div class="select-option" data-value="Inter Hebrew Regular">Regular 400</div>
+              <div class="select-option" data-value="Inter Hebrew Medium">Medium 490</div>
+              <div class="select-option" data-value="Inter Hebrew SemiBold">SemiBold 580</div>
+              <div class="select-option" data-value="Inter Hebrew Bold">Bold 670</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraBold">ExtraBold 780</div>
+              <div class="select-option" data-value="Inter Hebrew Black">Black 900</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Inter Hebrew Thin">Thin 100</option>
+            <option value="Inter Hebrew ExtraLight">ExtraLight 200</option>
+            <option value="Inter Hebrew Light">Light 300</option>
+            <option value="Inter Hebrew Regular">Regular 400</option>
+            <option value="Inter Hebrew Medium">Medium 490</option>
+            <option value="Inter Hebrew SemiBold">SemiBold 580</option>
+            <option value="Inter Hebrew Bold" selected>Bold 670</option>
+            <option value="Inter Hebrew ExtraBold">ExtraBold 780</option>
+            <option value="Inter Hebrew Black">Black 900</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 auto-fit-multiline" data-max-font-size="220" contenteditable="true" dir="rtl" style="font-family: 'Inter Hebrew'; font-weight: 670; font-size: 220px; line-height: 1.05; letter-spacing: -0.02em; text-align: center;">אינטר עברית&#10;Inter Hebrew</div>
+  </section>
+
+  <!-- === Section 4: Latin line, Light 300 === -->
+  <section class="type-tester responsive-section" id="fonts">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-4">Size</label> <input class="size" id="size-4" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-4">Leading</label> <input class="leading" id="leading-4" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-4">Letter Spacing</label> <input class="spacing" id="spacing-4" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+        <span class="slider-pair"><label class="label-custom" for="wght-4">Weight</label> <input class="wght" id="wght-4" type="range" min="100" max="900" step="1" value="300" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="4">
+            <div class="select-header">
+              <span class="select-value">Light 300</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Inter Hebrew Thin">Thin 100</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraLight">ExtraLight 200</div>
+              <div class="select-option" data-value="Inter Hebrew Light">Light 300</div>
+              <div class="select-option" data-value="Inter Hebrew Regular">Regular 400</div>
+              <div class="select-option" data-value="Inter Hebrew Medium">Medium 490</div>
+              <div class="select-option" data-value="Inter Hebrew SemiBold">SemiBold 580</div>
+              <div class="select-option" data-value="Inter Hebrew Bold">Bold 670</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraBold">ExtraBold 780</div>
+              <div class="select-option" data-value="Inter Hebrew Black">Black 900</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Inter Hebrew Thin">Thin 100</option>
+            <option value="Inter Hebrew ExtraLight">ExtraLight 200</option>
+            <option value="Inter Hebrew Light" selected>Light 300</option>
+            <option value="Inter Hebrew Regular">Regular 400</option>
+            <option value="Inter Hebrew Medium">Medium 490</option>
+            <option value="Inter Hebrew SemiBold">SemiBold 580</option>
+            <option value="Inter Hebrew Bold">Bold 670</option>
+            <option value="Inter Hebrew ExtraBold">ExtraBold 780</option>
+            <option value="Inter Hebrew Black">Black 900</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 responsive-text ih-long-en" contenteditable="true" dir="ltr" style="font-family: 'Inter Hebrew'; font-weight: 300; font-size: 244px; line-height: 1; letter-spacing: -0.03em; white-space: nowrap; text-align: center;">One variable axis</div>
+  </section>
+
+  <!-- === Section 5: vocalised Hebrew, nikud at display size (Bialik, 1905) === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-5">Size</label> <input class="size" id="size-5" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-5">Leading</label> <input class="leading" id="leading-5" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-5">Letter Spacing</label> <input class="spacing" id="spacing-5" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+        <span class="slider-pair"><label class="label-custom" for="wght-5">Weight</label> <input class="wght" id="wght-5" type="range" min="100" max="900" step="1" value="400" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="5">
+            <div class="select-header">
+              <span class="select-value">Regular 400</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Inter Hebrew Thin">Thin 100</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraLight">ExtraLight 200</div>
+              <div class="select-option" data-value="Inter Hebrew Light">Light 300</div>
+              <div class="select-option" data-value="Inter Hebrew Regular">Regular 400</div>
+              <div class="select-option" data-value="Inter Hebrew Medium">Medium 490</div>
+              <div class="select-option" data-value="Inter Hebrew SemiBold">SemiBold 580</div>
+              <div class="select-option" data-value="Inter Hebrew Bold">Bold 670</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraBold">ExtraBold 780</div>
+              <div class="select-option" data-value="Inter Hebrew Black">Black 900</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Inter Hebrew Thin">Thin 100</option>
+            <option value="Inter Hebrew ExtraLight">ExtraLight 200</option>
+            <option value="Inter Hebrew Light">Light 300</option>
+            <option value="Inter Hebrew Regular" selected>Regular 400</option>
+            <option value="Inter Hebrew Medium">Medium 490</option>
+            <option value="Inter Hebrew SemiBold">SemiBold 580</option>
+            <option value="Inter Hebrew Bold">Bold 670</option>
+            <option value="Inter Hebrew ExtraBold">ExtraBold 780</option>
+            <option value="Inter Hebrew Black">Black 900</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vocalised Hebrew. All 17 nikud marks carry mark positioning, so they stay attached at any weight. -->
+    <div class="type-area column-count-1 auto-fit-multiline" data-max-font-size="96" contenteditable="true" dir="rtl" style="font-family: 'Inter Hebrew'; font-weight: 400; font-size: 96px; line-height: 1.3; letter-spacing: 0em; text-align: center;">הַכְנִיסִינִי תַּחַת כְּנָפֵךְ,&#10;וַהֲיִי לִי אֵם וְאָחוֹת.</div>
+  </section>
+
+  <!-- === Section 6: Hebrew display line, Black 900 === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-6">Size</label> <input class="size" id="size-6" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-6">Leading</label> <input class="leading" id="leading-6" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-6">Letter Spacing</label> <input class="spacing" id="spacing-6" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+        <span class="slider-pair"><label class="label-custom" for="wght-6">Weight</label> <input class="wght" id="wght-6" type="range" min="100" max="900" step="1" value="900" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="6">
+            <div class="select-header">
+              <span class="select-value">Black 900</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Inter Hebrew Thin">Thin 100</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraLight">ExtraLight 200</div>
+              <div class="select-option" data-value="Inter Hebrew Light">Light 300</div>
+              <div class="select-option" data-value="Inter Hebrew Regular">Regular 400</div>
+              <div class="select-option" data-value="Inter Hebrew Medium">Medium 490</div>
+              <div class="select-option" data-value="Inter Hebrew SemiBold">SemiBold 580</div>
+              <div class="select-option" data-value="Inter Hebrew Bold">Bold 670</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraBold">ExtraBold 780</div>
+              <div class="select-option" data-value="Inter Hebrew Black">Black 900</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Inter Hebrew Thin">Thin 100</option>
+            <option value="Inter Hebrew ExtraLight">ExtraLight 200</option>
+            <option value="Inter Hebrew Light">Light 300</option>
+            <option value="Inter Hebrew Regular">Regular 400</option>
+            <option value="Inter Hebrew Medium">Medium 490</option>
+            <option value="Inter Hebrew SemiBold">SemiBold 580</option>
+            <option value="Inter Hebrew Bold">Bold 670</option>
+            <option value="Inter Hebrew ExtraBold">ExtraBold 780</option>
+            <option value="Inter Hebrew Black" selected>Black 900</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 responsive-text ih-word-he" contenteditable="true" dir="rtl" style="font-family: 'Inter Hebrew'; font-weight: 900; font-size: 244px; line-height: 1; letter-spacing: -0.03em; white-space: nowrap; text-align: center;">משקל משתנה</div>
+  </section>
+
+  <!-- === Section 7: Latin running text, two columns (UDHR Article 1 and 2) === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-7">Size</label> <input class="size" id="size-7" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-7">Leading</label> <input class="leading" id="leading-7" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-7">Letter Spacing</label> <input class="spacing" id="spacing-7" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+        <span class="slider-pair"><label class="label-custom" for="wght-7">Weight</label> <input class="wght" id="wght-7" type="range" min="100" max="900" step="1" value="400" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="7">
+            <div class="select-header">
+              <span class="select-value">Regular 400</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Inter Hebrew Thin">Thin 100</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraLight">ExtraLight 200</div>
+              <div class="select-option" data-value="Inter Hebrew Light">Light 300</div>
+              <div class="select-option" data-value="Inter Hebrew Regular">Regular 400</div>
+              <div class="select-option" data-value="Inter Hebrew Medium">Medium 490</div>
+              <div class="select-option" data-value="Inter Hebrew SemiBold">SemiBold 580</div>
+              <div class="select-option" data-value="Inter Hebrew Bold">Bold 670</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraBold">ExtraBold 780</div>
+              <div class="select-option" data-value="Inter Hebrew Black">Black 900</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Inter Hebrew Thin">Thin 100</option>
+            <option value="Inter Hebrew ExtraLight">ExtraLight 200</option>
+            <option value="Inter Hebrew Light">Light 300</option>
+            <option value="Inter Hebrew Regular" selected>Regular 400</option>
+            <option value="Inter Hebrew Medium">Medium 490</option>
+            <option value="Inter Hebrew SemiBold">SemiBold 580</option>
+            <option value="Inter Hebrew Bold">Bold 670</option>
+            <option value="Inter Hebrew ExtraBold">ExtraBold 780</option>
+            <option value="Inter Hebrew Black">Black 900</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left is-active"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-2 truncate-text" data-truncate-words="52" contenteditable="true" dir="ltr" style="font-family: 'Inter Hebrew'; font-weight: 400; font-size: 28px; line-height: 1.5; letter-spacing: 0em; text-align: left;">All human beings are born free and equal in dignity and rights. They are endowed with reason and conscience and should act towards one another in a spirit of brotherhood. Everyone is entitled to all the rights and freedoms set forth in this Declaration, without distinction of any kind, such as race, colour, sex, language, religion, political or other opinion, national or social origin, property, birth or other status.</div>
+  </section>
+
+  <!-- === Section 8: one word in both scripts, SemiBold === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-8">Size</label> <input class="size" id="size-8" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-8">Leading</label> <input class="leading" id="leading-8" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-8">Letter Spacing</label> <input class="spacing" id="spacing-8" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+        <span class="slider-pair"><label class="label-custom" for="wght-8">Weight</label> <input class="wght" id="wght-8" type="range" min="100" max="900" step="1" value="580" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="8">
+            <div class="select-header">
+              <span class="select-value">SemiBold 580</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Inter Hebrew Thin">Thin 100</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraLight">ExtraLight 200</div>
+              <div class="select-option" data-value="Inter Hebrew Light">Light 300</div>
+              <div class="select-option" data-value="Inter Hebrew Regular">Regular 400</div>
+              <div class="select-option" data-value="Inter Hebrew Medium">Medium 490</div>
+              <div class="select-option" data-value="Inter Hebrew SemiBold">SemiBold 580</div>
+              <div class="select-option" data-value="Inter Hebrew Bold">Bold 670</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraBold">ExtraBold 780</div>
+              <div class="select-option" data-value="Inter Hebrew Black">Black 900</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Inter Hebrew Thin">Thin 100</option>
+            <option value="Inter Hebrew ExtraLight">ExtraLight 200</option>
+            <option value="Inter Hebrew Light">Light 300</option>
+            <option value="Inter Hebrew Regular">Regular 400</option>
+            <option value="Inter Hebrew Medium">Medium 490</option>
+            <option value="Inter Hebrew SemiBold" selected>SemiBold 580</option>
+            <option value="Inter Hebrew Bold">Bold 670</option>
+            <option value="Inter Hebrew ExtraBold">ExtraBold 780</option>
+            <option value="Inter Hebrew Black">Black 900</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 auto-fit-multiline" data-max-font-size="240" contenteditable="true" dir="rtl" style="font-family: 'Inter Hebrew'; font-weight: 580; font-size: 240px; line-height: 1.05; letter-spacing: -0.02em; text-align: center;">אות&#10;Letter</div>
+  </section>
+
+  <!-- === Section 9: vocalised Hebrew at ExtraLight 200 === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-9">Size</label> <input class="size" id="size-9" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-9">Leading</label> <input class="leading" id="leading-9" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-9">Letter Spacing</label> <input class="spacing" id="spacing-9" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+        <span class="slider-pair"><label class="label-custom" for="wght-9">Weight</label> <input class="wght" id="wght-9" type="range" min="100" max="900" step="1" value="200" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="9">
+            <div class="select-header">
+              <span class="select-value">ExtraLight 200</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Inter Hebrew Thin">Thin 100</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraLight">ExtraLight 200</div>
+              <div class="select-option" data-value="Inter Hebrew Light">Light 300</div>
+              <div class="select-option" data-value="Inter Hebrew Regular">Regular 400</div>
+              <div class="select-option" data-value="Inter Hebrew Medium">Medium 490</div>
+              <div class="select-option" data-value="Inter Hebrew SemiBold">SemiBold 580</div>
+              <div class="select-option" data-value="Inter Hebrew Bold">Bold 670</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraBold">ExtraBold 780</div>
+              <div class="select-option" data-value="Inter Hebrew Black">Black 900</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Inter Hebrew Thin">Thin 100</option>
+            <option value="Inter Hebrew ExtraLight" selected>ExtraLight 200</option>
+            <option value="Inter Hebrew Light">Light 300</option>
+            <option value="Inter Hebrew Regular">Regular 400</option>
+            <option value="Inter Hebrew Medium">Medium 490</option>
+            <option value="Inter Hebrew SemiBold">SemiBold 580</option>
+            <option value="Inter Hebrew Bold">Bold 670</option>
+            <option value="Inter Hebrew ExtraBold">ExtraBold 780</option>
+            <option value="Inter Hebrew Black">Black 900</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 responsive-text ih-word-vocal" contenteditable="true" dir="rtl" style="font-family: 'Inter Hebrew'; font-weight: 200; font-size: 244px; line-height: 1; letter-spacing: -0.02em; white-space: nowrap; text-align: center;">אָלֶף בֵּית</div>
+  </section>
+
+  <!-- === Section 10: alphabet in both scripts, Medium 490 === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-10">Size</label> <input class="size" id="size-10" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-10">Leading</label> <input class="leading" id="leading-10" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-10">Letter Spacing</label> <input class="spacing" id="spacing-10" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+        <span class="slider-pair"><label class="label-custom" for="wght-10">Weight</label> <input class="wght" id="wght-10" type="range" min="100" max="900" step="1" value="490" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="10">
+            <div class="select-header">
+              <span class="select-value">Medium 490</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Inter Hebrew Thin">Thin 100</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraLight">ExtraLight 200</div>
+              <div class="select-option" data-value="Inter Hebrew Light">Light 300</div>
+              <div class="select-option" data-value="Inter Hebrew Regular">Regular 400</div>
+              <div class="select-option" data-value="Inter Hebrew Medium">Medium 490</div>
+              <div class="select-option" data-value="Inter Hebrew SemiBold">SemiBold 580</div>
+              <div class="select-option" data-value="Inter Hebrew Bold">Bold 670</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraBold">ExtraBold 780</div>
+              <div class="select-option" data-value="Inter Hebrew Black">Black 900</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Inter Hebrew Thin">Thin 100</option>
+            <option value="Inter Hebrew ExtraLight">ExtraLight 200</option>
+            <option value="Inter Hebrew Light">Light 300</option>
+            <option value="Inter Hebrew Regular">Regular 400</option>
+            <option value="Inter Hebrew Medium" selected>Medium 490</option>
+            <option value="Inter Hebrew SemiBold">SemiBold 580</option>
+            <option value="Inter Hebrew Bold">Bold 670</option>
+            <option value="Inter Hebrew ExtraBold">ExtraBold 780</option>
+            <option value="Inter Hebrew Black">Black 900</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 auto-fit-multiline" data-max-font-size="200" contenteditable="true" dir="rtl" style="font-family: 'Inter Hebrew'; font-weight: 490; font-size: 200px; line-height: 1.1; letter-spacing: -0.02em; text-align: center;">אלפבית&#10;Alphabet</div>
+  </section>
+
+
+  <!-- ===== GLYPH GRID VIEWER ===== -->
+  <div class="wrapper" id="fontWrapper">
+    <div class="left-panel">
+      <div class="preview-box" id="preview" style="font-family: 'Inter Hebrew'; font-weight: 400;" data-preview="א"></div>
+      <div class="controls-lite">
+        <div class="font-wrapper">
+          <div class="custom-select" id="weight-select">
+            <div class="select-header">
+              <span class="select-value">Regular 400</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Inter Hebrew Thin">Thin 100</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraLight">ExtraLight 200</div>
+              <div class="select-option" data-value="Inter Hebrew Light">Light 300</div>
+              <div class="select-option" data-value="Inter Hebrew Regular">Regular 400</div>
+              <div class="select-option" data-value="Inter Hebrew Medium">Medium 490</div>
+              <div class="select-option" data-value="Inter Hebrew SemiBold">SemiBold 580</div>
+              <div class="select-option" data-value="Inter Hebrew Bold">Bold 670</div>
+              <div class="select-option" data-value="Inter Hebrew ExtraBold">ExtraBold 780</div>
+              <div class="select-option" data-value="Inter Hebrew Black">Black 900</div>
+            </div>
+          </div>
+          <!-- Hidden original select for functionality -->
+          <select id="weight" style="display: none;">
+            <option value="Inter Hebrew Thin">Thin 100</option>
+            <option value="Inter Hebrew ExtraLight">ExtraLight 200</option>
+            <option value="Inter Hebrew Light">Light 300</option>
+            <option value="Inter Hebrew Regular" selected>Regular 400</option>
+            <option value="Inter Hebrew Medium">Medium 490</option>
+            <option value="Inter Hebrew SemiBold">SemiBold 580</option>
+            <option value="Inter Hebrew Bold">Bold 670</option>
+            <option value="Inter Hebrew ExtraBold">ExtraBold 780</option>
+            <option value="Inter Hebrew Black">Black 900</option>
+          </select>
+        </div>
+      </div>
+      <div class="details" id="details">Unicode decimal: 1488<br>Unicode hex: 05D0<br>HTML entity: &amp;#x5D0;</div>
+    </div>
+    <div class="grid-container">
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+
+  <!-- ===== DATA MAPS ===== -->
+  <script type="application/json" id="fontMap">{
+    "Inter Hebrew Thin": { "family": "Inter Hebrew", "weight": 100 },
+    "Inter Hebrew ExtraLight": { "family": "Inter Hebrew", "weight": 200 },
+    "Inter Hebrew Light": { "family": "Inter Hebrew", "weight": 300 },
+    "Inter Hebrew Regular": { "family": "Inter Hebrew", "weight": 400 },
+    "Inter Hebrew Medium": { "family": "Inter Hebrew", "weight": 490 },
+    "Inter Hebrew SemiBold": { "family": "Inter Hebrew", "weight": 580 },
+    "Inter Hebrew Bold": { "family": "Inter Hebrew", "weight": 670 },
+    "Inter Hebrew ExtraBold": { "family": "Inter Hebrew", "weight": 780 },
+    "Inter Hebrew Black": { "family": "Inter Hebrew", "weight": 900 }
+  }</script>
+
+  <!-- Glyph grid source: letters, finals, vowels, holam male, dagesh forms, shin and sin, Hebrew punctuation and shekel, then figures. Each shape appears once: characters that draw the same as another cell are left out. -->
+  <script type="application/json" id="glyphMap">{"default": "אבגדהוזחטיכךלמםנןסעפףצץקרשתְֱֲֳִֵֶַָֹֻוֹאּבּגּדּהּוּזּטּיּכּךּלּמּנּסּפּףּצּקּרּשּתּשׁשׂשּׁשּׂ־׳״₪0123456789.,:;!?()"}</script>
+
+  <!-- ===== SCRIPT ===== -->
+  <!-- GSAP for advanced marquee functionality -->
+  <script src="gsap-public/minified/gsap.min.js"></script>
+  <script src="gsap-public/minified/ScrollTrigger.min.js"></script>
+  <script src="gsap-public/minified/Draggable.min.js"></script>
+  <script src="gsap-public/minified/InertiaPlugin.min.js"></script>
+  
+    <!-- EmailJS -->
+    <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+(function(){
+  emailjs.init({
+    publicKey: "SY_sCUJHCR5MtWgI5",
+  });
+})();
+</script>
+
+    <!-- Nomad Type JS -->
+
+  <!-- Load Header Component First -->
+  <script src="header.js"></script>
+  <script>
+    // Load header when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof loadHeader === 'function') {
+        loadHeader(`
+          <div>Inter</div>
+          <div>אינטר</div>
+          <div>Hebrew</div>
+          <div>עברית</div>
+        `);
+        // No store on this page. The Trial and Buy buttons stay in the DOM but hidden (page CSS):
+        // script.js initParallax needs .cover-buttons to exist, and without it the header never
+        // switches from the top navigation to the circle.
+      }
+});
+  </script>
+
+  <script src="script.js"></script>
+
+  </main>
+
+  <!-- Footer Container (will be populated by JavaScript) -->
+  <div id="footer-container"></div>
+
+  <!-- Animated Favicon Script -->
+  <script>
+    setTimeout(() => {
+      let favicon_video_image_counter = 0;
+      let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+      let favicon_video_images = [
+  "https://favicongenerator.s3.amazonaws.com/3129f51d17a5c.png","https://favicongenerator.s3.amazonaws.com/cd721e3e8a586.png","https://favicongenerator.s3.amazonaws.com/4af6e76d5ae4a.png","https://favicongenerator.s3.amazonaws.com/e76f98c1d6448.png","https://favicongenerator.s3.amazonaws.com/bc435c23b4eaf.png","https://favicongenerator.s3.amazonaws.com/c806c3265454f.png","https://favicongenerator.s3.amazonaws.com/e95b673a3d845.png","https://favicongenerator.s3.amazonaws.com/230b1204ad4d1.png","https://favicongenerator.s3.amazonaws.com/7fd4916b0902e.png","https://favicongenerator.s3.amazonaws.com/c9dddf2a04e46.png","https://favicongenerator.s3.amazonaws.com/a13c002e6a2ab.png","https://favicongenerator.s3.amazonaws.com/e8eddb001860b.png","https://favicongenerator.s3.amazonaws.com/13f85eb453429.png","https://favicongenerator.s3.amazonaws.com/ce45ac6aa0a8a.png","https://favicongenerator.s3.amazonaws.com/fb54d04dd298f.png","https://favicongenerator.s3.amazonaws.com/4c8400f32accc.png","https://favicongenerator.s3.amazonaws.com/a792f02084f6c.png","https://favicongenerator.s3.amazonaws.com/f30e5a3031be8.png","https://favicongenerator.s3.amazonaws.com/9249f78daaefd.png","https://favicongenerator.s3.amazonaws.com/8b5a05d43b31d.png","https://favicongenerator.s3.amazonaws.com/eab8ede756262.png","https://favicongenerator.s3.amazonaws.com/2ba370948350d.png","https://favicongenerator.s3.amazonaws.com/16b955af4550b.png","https://favicongenerator.s3.amazonaws.com/cb303dec540cb.png","https://favicongenerator.s3.amazonaws.com/f071825bf109d.png","https://favicongenerator.s3.amazonaws.com/3e83da0b84f04.png","https://favicongenerator.s3.amazonaws.com/435d711b5e9c7.png","https://favicongenerator.s3.amazonaws.com/7d8c3600a547d.png","https://favicongenerator.s3.amazonaws.com/076628736ee03.png","https://favicongenerator.s3.amazonaws.com/6674b4393d2e7.png","https://favicongenerator.s3.amazonaws.com/8c6eabdaf80e.png","https://favicongenerator.s3.amazonaws.com/93129cf211ec7.png","https://favicongenerator.s3.amazonaws.com/50ab769fae9c5.png","https://favicongenerator.s3.amazonaws.com/dbd67430dfff2.png","https://favicongenerator.s3.amazonaws.com/6306b1d0f7ede.png","https://favicongenerator.s3.amazonaws.com/c80c22e1b976e.png","https://favicongenerator.s3.amazonaws.com/c0ba6ed76150a.png","https://favicongenerator.s3.amazonaws.com/e15281d3c9931.png","https://favicongenerator.s3.amazonaws.com/274f3c0d4f878.png","https://favicongenerator.s3.amazonaws.com/78a9057d69b74.png","https://favicongenerator.s3.amazonaws.com/d6db49127abf1.png","https://favicongenerator.s3.amazonaws.com/ee5bae80536bc.png","https://favicongenerator.s3.amazonaws.com/2a7e9e25fccb9.png","https://favicongenerator.s3.amazonaws.com/dc7fbe30b5d91.png","https://favicongenerator.s3.amazonaws.com/7b936d1b246c7.png","https://favicongenerator.s3.amazonaws.com/2b1c4719e18fb.png","https://favicongenerator.s3.amazonaws.com/072fa8af4155c.png","https://favicongenerator.s3.amazonaws.com/3e7bca2490671.png","https://favicongenerator.s3.amazonaws.com/f75d559c12576.png","https://favicongenerator.s3.amazonaws.com/c2dccc17f46e.png","https://favicongenerator.s3.amazonaws.com/62ff58aefdb7a.png","https://favicongenerator.s3.amazonaws.com/12342f642fd7a.png","https://favicongenerator.s3.amazonaws.com/2ce950b8443e2.png","https://favicongenerator.s3.amazonaws.com/3676501156615.png","https://favicongenerator.s3.amazonaws.com/52ac9290673ef.png","https://favicongenerator.s3.amazonaws.com/c401b341b6877.png","https://favicongenerator.s3.amazonaws.com/5408ed854b0e6.png","https://favicongenerator.s3.amazonaws.com/c9417ab290d8c.png","https://favicongenerator.s3.amazonaws.com/605db5fa28d8b.png","https://favicongenerator.s3.amazonaws.com/dbcadae5ac827.png","https://favicongenerator.s3.amazonaws.com/89497c65bc9d.png","https://favicongenerator.s3.amazonaws.com/cba217324331a.png","https://favicongenerator.s3.amazonaws.com/04989a8ce7a13.png","https://favicongenerator.s3.amazonaws.com/9f6ff1daefbc2.png","https://favicongenerator.s3.amazonaws.com/35af62beb2069.png","https://favicongenerator.s3.amazonaws.com/03dcf5523866b.png","https://favicongenerator.s3.amazonaws.com/b598d707d6b7a.png","https://favicongenerator.s3.amazonaws.com/796a5d9e5c498.png","https://favicongenerator.s3.amazonaws.com/35c427f26d961.png","https://favicongenerator.s3.amazonaws.com/0177ba9bb3cd5.png","https://favicongenerator.s3.amazonaws.com/dda651d22badc.png","https://favicongenerator.s3.amazonaws.com/ab5e3aef1f7ff.png","https://favicongenerator.s3.amazonaws.com/1922e4dfb5696.png","https://favicongenerator.s3.amazonaws.com/c95b12f64f2bf.png","https://favicongenerator.s3.amazonaws.com/a59614ebdf159.png","https://favicongenerator.s3.amazonaws.com/dfdd396620126.png","https://favicongenerator.s3.amazonaws.com/af9153abb4866.png","https://favicongenerator.s3.amazonaws.com/21d342a33e20c.png","https://favicongenerator.s3.amazonaws.com/259e6557b866e.png","https://favicongenerator.s3.amazonaws.com/586c3cb84232c.png","https://favicongenerator.s3.amazonaws.com/26ea4ab6305b6.png","https://favicongenerator.s3.amazonaws.com/80f1a5fcefd97.png","https://favicongenerator.s3.amazonaws.com/aa8010193758f.png","https://favicongenerator.s3.amazonaws.com/c62ddfd8b8fe5.png","https://favicongenerator.s3.amazonaws.com/35d778b2f5022.png","https://favicongenerator.s3.amazonaws.com/629d6922cf6f7.png","https://favicongenerator.s3.amazonaws.com/35e86ac544a1d.png","https://favicongenerator.s3.amazonaws.com/77825641eefc2.png","https://favicongenerator.s3.amazonaws.com/0472d28c319e4.png","https://favicongenerator.s3.amazonaws.com/ca2bdb73b6cc8.png","https://favicongenerator.s3.amazonaws.com/8d4ac4862754c.png","https://favicongenerator.s3.amazonaws.com/e7d5b141691a4.png","https://favicongenerator.s3.amazonaws.com/a53ffd9f417a5.png","https://favicongenerator.s3.amazonaws.com/14aa02ac80de5.png","https://favicongenerator.s3.amazonaws.com/e21f4aa715dab.png","https://favicongenerator.s3.amazonaws.com/e393c22a4de28.png","https://favicongenerator.s3.amazonaws.com/69bff0d066f14.png","https://favicongenerator.s3.amazonaws.com/43db7d93ee14c.png","https://favicongenerator.s3.amazonaws.com/86859d59c20a7.png","https://favicongenerator.s3.amazonaws.com/059f6f8183db8.png","https://favicongenerator.s3.amazonaws.com/2016a34618202.png","https://favicongenerator.s3.amazonaws.com/91ee3568cfd6c.png","https://favicongenerator.s3.amazonaws.com/fd9d0e98cb80d.png"];
+      async function favicon_video_to_data_url(url, callback) {
+        let xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          let reader = new FileReader();
+          reader.onloadend = function () {
+            callback(reader.result);
+          };
+          reader.readAsDataURL(xhr.response);
+        };
+        xhr.open("GET", url);
+        xhr.responseType = "blob";
+        xhr.send();
+      }
+    
+      let favicon_video_loaded_images = [];
+    
+      favicon_video_images.map((url, idx) => {
+        favicon_video_to_data_url(url, function (dataUrl) {
+          favicon_video_loaded_images[idx] = dataUrl;
+        });
+      });
+    
+      setInterval(function () {
+        if(favicon_video_loaded_images[favicon_video_image_counter]) {
+          favicon_video_icon_tag.href = favicon_video_loaded_images[
+            favicon_video_image_counter
+          ].replace("application/octet-stream", "image/png");
+        }
+        if (
+          favicon_video_image_counter ==
+          favicon_video_loaded_images.length - 1
+        )
+          favicon_video_image_counter = 0;
+        else favicon_video_image_counter++;
+      }, 50);
+    }, 1500);
+  </script>
+
+  <!-- Footer Component Script -->
+  <script src="footer.js"></script>
+  <script>
+    // Load footer when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof loadFooter === 'function') {
+        loadFooter('Inter Hebrew'); // Change this for different pages
+      }
+
+      // Navigation links - force navigation
+      const navLinks = document.querySelectorAll('.nav-link, .menu-item');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          if (this.href) {
+            window.location.href = this.href;
+          }
+        });
+      });
+
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+/* Weight slider in every type tester.
+   The shared script.js only knows a "width" slider (wdth), so the weight axis is wired here.
+   The slider writes font-weight, which is what the variable @font-face resolves; the style
+   dropdown keeps working and pushes its own value back into the slider. */
+(function () {
+  function init() {
+    document.querySelectorAll('.type-tester').forEach(function (section) {
+      var area = section.querySelector('.type-area');
+      var slider = section.querySelector('.wght');
+      var select = section.querySelector('.font-select');
+      if (!area || !slider) return;
+
+      function apply(w) {
+        area.style.setProperty('font-weight', String(w), 'important');
+        // The line width changes with the weight, so refit the auto-sized testers.
+        if (typeof autoFitManager !== 'undefined' && autoFitManager.sections) {
+          var data = autoFitManager.sections.get(section);
+          if (data) [10, 120, 320].forEach(function (ms) {
+            setTimeout(function () { autoFitManager.updateSectionSize(data); }, ms);
+          });
+        }
+      }
+      slider.addEventListener('input', function () { apply(slider.value); });
+
+      // Style dropdown moves the slider with it
+      if (select) {
+        select.addEventListener('change', function () {
+          var w = parseInt(getComputedStyle(area).fontWeight, 10);
+          if (!isNaN(w)) slider.value = w;
+        });
+      }
+      apply(slider.value);
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(init, 0); });
+  else setTimeout(init, 0);
+})();
+</script>
+
+
+<script>
+/* Glyph grid: a combining nikud mark has nothing to sit on in a cell of its own, so show it
+   on the letter it normally belongs to. The Unicode details still describe the mark itself. */
+(function () {
+  var BASE = { '\u05BA': '\u05D5', '\u05BC': '\u05D1', '\u05C1': '\u05E9', '\u05C2': '\u05E9' };
+  function isMark(ch) { var c = ch.codePointAt(0); return c >= 0x05B0 && c <= 0x05C7 && c !== 0x05BE && c !== 0x05C0 && c !== 0x05C3 && c !== 0x05C6; }
+  function fix() {
+    var cells = document.querySelectorAll('#grid .char-cell');
+    if (!cells.length) return false;
+    var preview = document.getElementById('preview');
+    cells.forEach(function (cell) {
+      var ch = cell.getAttribute('data-char');
+      if (!ch || ch.length !== 1 || !isMark(ch)) return;
+      var shown = (BASE[ch] || '\u05D0') + ch;
+      cell.setAttribute('data-char', shown);
+      cell.addEventListener('mouseover', function () { if (preview) preview.setAttribute('data-preview', shown); });
+    });
+    return true;
+  }
+  function start() { var n = 0; (function t() { if (!fix() && n++ < 30) setTimeout(t, 100); })(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(start, 50); });
+  else setTimeout(start, 50);
+})();
+</script>
+
+</body>
+</html>

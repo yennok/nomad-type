@@ -1,0 +1,929 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FPE1JV10R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4FPE1JV10R');
+  </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Kaldanit — a Hebrew companion to Courier Prime | Nomad Type</title>
+
+  <!-- DEMO page: not linked anywhere, not in sitemap. Remove noindex when it goes live. -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- SEO meta -->
+  <meta name="description" content="Kaldanit is a monospaced Hebrew typeface by Nir Zabari Yenni, built on the Courier Prime cell so Hebrew and Latin share one fixed width. Regular, Bold and Italic.">
+  <meta name="keywords" content="Kaldanit, קלדנית, Hebrew monospace, Hebrew typewriter font, Courier Prime, monospaced Hebrew, Nomad Type, Nir Zabari Yenni">
+  <meta name="author" content="Nir Zabari Yenni">
+  <link rel="canonical" href="https://www.nomad-type.com/kaldanit">
+
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="product">
+  <meta property="og:url" content="https://www.nomad-type.com/kaldanit">
+  <meta property="og:title" content="Kaldanit | Nomad Type">
+  <meta property="og:description" content="A monospaced Hebrew typeface on the Courier Prime cell. Hebrew and Latin on one fixed width, in Regular, Bold and Italic.">
+  <meta property="og:image" content="https://www.nomad-type.com/assets/featured_image.png">
+  <meta property="og:image:width" content="1500">
+  <meta property="og:image:height" content="1000">
+  <meta property="og:image:alt" content="Kaldanit, a monospaced Hebrew typeface">
+  <meta property="og:site_name" content="Nomad Type">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kaldanit | Nomad Type">
+  <meta name="twitter:description" content="A monospaced Hebrew typeface on the Courier Prime cell. Hebrew and Latin on one fixed width, in Regular, Bold and Italic.">
+  <meta name="twitter:image" content="https://www.nomad-type.com/assets/featured_image.png">
+
+  <!-- Structured Data: Product -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Kaldanit",
+    "description": "Kaldanit is a monospaced Hebrew typeface by Nir Zabari Yenni, built on the Courier Prime cell so that Hebrew and Latin share one fixed advance width. Regular, Bold and Italic.",
+    "url": "https://www.nomad-type.com/kaldanit",
+    "category": "Typeface",
+    "brand": { "@type": "Brand", "name": "Nomad Type", "url": "https://www.nomad-type.com/" },
+    "manufacturer": { "@type": "Organization", "name": "Nomad Type", "url": "https://www.nomad-type.com/" },
+    "creator": { "@type": "Person", "name": "Nir Zabari Yenni" },
+    "releaseDate": "2026",
+    "additionalProperty": [
+      { "@type": "PropertyValue", "name": "Scripts", "value": "Hebrew" },
+      { "@type": "PropertyValue", "name": "Designer", "value": "Nir Zabari Yenni" },
+      { "@type": "PropertyValue", "name": "Styles", "value": "Regular, Bold, Italic" },
+      { "@type": "PropertyValue", "name": "Spacing", "value": "Monospaced, 1228 of 2048 units" },
+      { "@type": "PropertyValue", "name": "Formats", "value": "WOFF2, OTF" }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+  <!-- Kaldanit page styles. This page has no store, no trial form and no overlays. -->
+<style>
+  /* This page has no store, so the header's Trial and Buy buttons are hidden. */
+  .kaldanit-google-page .cover-buttons { display: none !important; }
+
+  /* Private page marker: a fluorescent bar pinned to the bottom of the window,
+     plus a marker swipe in the intro. It is there to say out loud that this page is not public. */
+  .kd-private {
+    position: fixed; left: 0; right: 0; bottom: 0; height: 26px; z-index: 900;
+    background: #E8FF3A; display: flex; align-items: center; gap: 2.5rem;
+    overflow: hidden; pointer-events: none;
+  }
+  .kd-private span {
+    font-family: "Safra Mono", monospace; font-size: 11px; letter-spacing: 0.06em;
+    color: #000; white-space: nowrap;
+    animation: ihPrivateSlide 26s linear infinite;
+  }
+  @keyframes ihPrivateSlide {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  body.kaldanit-google-page { padding-bottom: 26px; }
+  .kd-marker {
+    background: #E8FF3A; box-decoration-break: clone; -webkit-box-decoration-break: clone;
+    padding: 0.08em 0.25em; margin: 0 -0.25em;
+  }
+  @media (prefers-reduced-motion: reduce) { .kd-private span { animation: none; } }
+
+  /* Keep each slider label glued to its own track so a wrap never splits a pair. */
+  .slider-pair { display: inline-flex; align-items: center; gap: 0.6rem; }
+  .slider-pair input[type="range"] { width: 120px; }
+  @media (max-width: 768px) {
+    .kaldanit-google-page .sliders-wrapper { flex-wrap: wrap; }
+    .slider-pair { flex: 1 1 100%; display: flex; }
+    .slider-pair input[type="range"] { width: 100%; flex: 1 1 auto; }
+    .slider-pair label { margin: 0; }
+  }
+
+
+
+    body.kaldanit-google-page .spec-line a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+
+    /* Cover: the typewriter effect from the Kaldanit page. The two lines are typed out
+       one after the other, then a cursor blinks at the end. Both lines start hidden so
+       nothing flashes before the script takes over. */
+    body.kaldanit-google-page .cover-title div { visibility: hidden; }
+    body.kaldanit-google-page .cover-title div.kd-typed { visibility: visible; }
+    body.kaldanit-google-page .cover-title .kd-cursor { transition: opacity 0.1s ease-in-out; }
+    @media (prefers-reduced-motion: reduce) {
+      body.kaldanit-google-page .cover-title div { visibility: visible; }
+    }
+</style>
+
+  <!-- ====== KALDANIT PAGE STYLES ======
+       styles.css is shared and untouched for this demo, so everything page-specific lives here.
+       When the page goes live, move these into styles.css (sections: FONT FILES, page colour,
+       cover title + mobile overrides, marquee classes) and delete this block. -->
+  <style>
+    /* One family, two sources: the Hebrew is Kaldanit, the Latin is Courier Prime itself.
+       Both sit on the same 1228 unit cell, so a mixed line keeps its grid. */
+    @font-face { font-family: "Kaldanit Mono"; font-weight: 400; font-style: normal; font-display: swap;
+      src: url("fonts/Kaldanit/Kaldanit-Regular.woff2") format("woff2");
+      unicode-range: U+0590-05FF, U+FB1D-FB4F; }
+    @font-face { font-family: "Kaldanit Mono"; font-weight: 700; font-style: normal; font-display: swap;
+      src: url("fonts/Kaldanit/Kaldanit-Bold.woff2") format("woff2");
+      unicode-range: U+0590-05FF, U+FB1D-FB4F; }
+    @font-face { font-family: "Kaldanit Mono"; font-weight: 400; font-style: italic; font-display: swap;
+      src: url("fonts/Kaldanit/Kaldanit-Italic.woff2") format("woff2");
+      unicode-range: U+0590-05FF, U+FB1D-FB4F; }
+    @font-face { font-family: "Kaldanit Mono"; font-weight: 400; font-style: normal; font-display: swap;
+      src: url("fonts/Kaldanit-Google/CourierPrime-Regular.woff2") format("woff2");
+      unicode-range: U+0000-058F, U+2000-20CF, U+2100-214F; }
+    @font-face { font-family: "Kaldanit Mono"; font-weight: 700; font-style: normal; font-display: swap;
+      src: url("fonts/Kaldanit-Google/CourierPrime-Bold.woff2") format("woff2");
+      unicode-range: U+0000-058F, U+2000-20CF, U+2100-214F; }
+    @font-face { font-family: "Kaldanit Mono"; font-weight: 400; font-style: italic; font-display: swap;
+      src: url("fonts/Kaldanit-Google/CourierPrime-Italic.woff2") format("woff2");
+      unicode-range: U+0000-058F, U+2000-20CF, U+2100-214F; }
+
+    /* Page colour: near-white, so the type carries the page. */
+    body.kaldanit-google-page {
+      --primary-color: #FF5CE1;
+      --glyph-vertical-offset: 0px;
+      --preview-vertical-offset: 0px;
+    }
+
+    /* Cover title: קלדנית over (KALDANIT), same size.
+       Sizes are in vw so both lines fill the cover width at any screen size (capped by vh on short screens). */
+    body.kaldanit-google-page .cover-title {
+      --cover-size: min(10.5vw, 20vh);
+      margin-bottom: 0px;
+      text-align: center;
+    }
+    body.kaldanit-google-page .cover-title div:nth-child(2) {
+      font-family: "Kaldanit Mono", monospace;
+      font-weight: 400;
+      color: black;
+      font-size: var(--cover-size);
+      line-height: 1;
+      margin-bottom: 0px;
+      letter-spacing: 0;
+      white-space: nowrap;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+    body.kaldanit-google-page .cover-title div:nth-child(1) {
+      font-family: "Kaldanit Mono", monospace;
+      font-weight: 400;
+      color: black;
+      font-size: var(--cover-size);
+      line-height: 1;
+      margin-bottom: 0.04em;
+      letter-spacing: 0;
+      white-space: nowrap;
+      direction: rtl;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    /* Weights marquee */
+    .marquee-text.kd-he-text {
+      font-family: "Kaldanit Mono", monospace;
+    }
+    .marquee-text.kd-la-text {
+      font-family: "Kaldanit Mono", monospace;
+    }
+    body.kaldanit-google-page .marquee-text {
+      letter-spacing: 0;
+    }
+
+    /* In Use / Specimen: two portrait images each, side by side */
+
+
+    /* Mobile: script.js won't auto-fit below 40px, and the two long Extended lines are still too wide there,
+       so they get a vw size. The size slider still wins (it writes an inline !important). */
+    @media (max-width: 768px) {
+      .kaldanit-google-page .type-area.column-count-2 { font-size: 22px !important; }
+      .kaldanit-google-page .type-area.kd-big-mix { font-size: 32px !important; }
+      .kaldanit-google-page .type-area.kd-long-he { font-size: 8.4vw !important; }
+      .kaldanit-google-page .type-area.kd-long-en { font-size: 6.8vw !important; }
+      .kaldanit-google-page .type-area.kd-word-he { font-size: 12vw !important; }
+      .kaldanit-google-page .type-area.kd-word-mono { font-size: 7.8vw !important; }
+      .kaldanit-google-page .type-area.auto-fit-multiline { font-size: 12vw !important; }
+    }
+  </style>
+</head>
+<body class="kaldanit-google-page">
+
+  <div class="kd-private" aria-hidden="true"><span>Private preview, not a public page &nbsp;&middot;&nbsp; Private preview, not a public page &nbsp;&middot;&nbsp; Private preview, not a public page &nbsp;&middot;&nbsp; Private preview, not a public page &nbsp;&middot;&nbsp; Private preview, not a public page &nbsp;&middot;&nbsp; Private preview, not a public page &nbsp;&middot;&nbsp; Private preview, not a public page &nbsp;&middot;&nbsp; Private preview, not a public page &nbsp;&middot;&nbsp; Private preview, not a public page &nbsp;&middot;&nbsp; Private preview, not a public page &nbsp;&middot;&nbsp; </span></div>
+
+  <style>.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}</style>
+  <h1 class="sr-only">Kaldanit, a monospaced Hebrew typeface built on the Courier Prime cell, in Regular, Bold and Italic, designed by Nir Zabari Yenni for Nomad Type</h1>
+
+  <!-- Header Container (will be populated by JavaScript) -->
+  <div id="header-container"></div>
+  <!-- ====== MAIN CONTENT ====== -->
+  <main class="content-wrapper">
+
+  <!-- ====== FONT INTRO SECTION ====== -->
+  <section class="font-intro">
+    <div class="intro-content">
+      <div class="intro-grid">
+        <div class="intro-text-column">
+          <p>Kaldanit is a monospaced Hebrew typeface. It is built on the cell of <a href="https://fonts.google.com/specimen/Courier+Prime" target="_blank" rel="noopener">Courier Prime</a>, the typewriter face by Alan Dague-Greene for Quote-Unquote Apps: the same 2048 units per em, the same 1228 unit advance for every character, the same cap height, x-height and vertical metrics. A Hebrew line and a Latin line of the same length therefore occupy exactly the same width, which is what a monospace is for. Screenplays, terminals, code, subtitles and tables keep their grid when the script changes.</p>
+          <p>The drawing does not copy Courier Prime, it answers it. Hebrew has no ascender and descender rhythm to lean on, so the weight sits in the horizontals, the joins stay open, and the letters are widened to fill a cell that was cut for a narrower alphabet. The references are Hebrew typewriters and an old FrankRuehl variant rather than a Latin slab.</p>
+          <p><span class="kd-marker">Still to come: a Bold Italic, and mark positioning for the vowel points.</span> The three upright and italic styles are finished, and they are what this page shows. The seventeen nikud marks are drawn and encoded, but each one still sits in its own cell, the way a typewriter's dead keys did, rather than attaching to the letter.</p>
+        </div>
+        
+        <div class="technical-specs-column">
+          <div class="specs-list">
+            <div class="spec-line">Typeface: Kaldanit (קלדנית)</div>
+            <div class="spec-line">Designed by: <a href="https://yennok.com" target="_blank" rel="noopener">Nir Zabari Yenni</a></div>
+            <div class="spec-line">Year: 2026</div>
+            <div class="spec-line">Scripts: Hebrew. Latin shown here is Courier Prime</div>
+            <div class="spec-line">Styles: Regular, Bold, Italic</div>
+            <div class="spec-line">Formats: WOFF2, OTF</div>
+          </div>
+          </div>
+      </div>
+      
+      <div class="multilingual-marquee">
+        <div class="marquee-container">
+          <div class="marquee-content">
+            <span class="marquee-text kd-he-text" dir="rtl" style="font-weight: 400; font-style: normal;">קלדנית רגיל</span>
+            <span class="marquee-text kd-la-text" style="font-weight: 400; font-style: normal;">Kaldanit Regular</span>
+            <span class="marquee-text kd-he-text" dir="rtl" style="font-weight: 700; font-style: normal;">קלדנית בולד</span>
+            <span class="marquee-text kd-la-text" style="font-weight: 700; font-style: normal;">Kaldanit Bold</span>
+            <span class="marquee-text kd-he-text" dir="rtl" style="font-weight: 400; font-style: italic;">קלדנית נטוי</span>
+            <span class="marquee-text kd-la-text" style="font-weight: 400; font-style: italic;">Kaldanit Italic</span>
+            <span class="marquee-text kd-he-text" dir="rtl" style="font-weight: 400; font-style: normal;">קלדנית רגיל</span>
+            <span class="marquee-text kd-la-text" style="font-weight: 400; font-style: normal;">Kaldanit Regular</span>
+            <span class="marquee-text kd-he-text" dir="rtl" style="font-weight: 700; font-style: normal;">קלדנית בולד</span>
+            <span class="marquee-text kd-la-text" style="font-weight: 700; font-style: normal;">Kaldanit Bold</span>
+            <span class="marquee-text kd-he-text" dir="rtl" style="font-weight: 400; font-style: italic;">קלדנית נטוי</span>
+            <span class="marquee-text kd-la-text" style="font-weight: 400; font-style: italic;">Kaldanit Italic</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === Section 1: Hebrew display line, shrinks to fit === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-1">Size</label> <input class="size" id="size-1" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-1">Leading</label> <input class="leading" id="leading-1" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-1">Letter Spacing</label> <input class="spacing" id="spacing-1" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="1">
+            <div class="select-header">
+              <span class="select-value">Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Kaldanit Regular">Regular</div>
+              <div class="select-option" data-value="Kaldanit Bold">Bold</div>
+              <div class="select-option" data-value="Kaldanit Italic">Italic</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Kaldanit Regular" selected>Regular</option>
+            <option value="Kaldanit Bold">Bold</option>
+            <option value="Kaldanit Italic">Italic</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 responsive-text kd-long-he" contenteditable="true" dir="rtl" style="font-family: 'Kaldanit Mono'; font-weight: 400; font-style: normal; font-size: 244px; line-height: 1; letter-spacing: 0em; white-space: nowrap; text-align: center;">מכונת כתיבה עברית</div>
+  </section>
+
+  <!-- === Section 2: Hebrew running text, two columns (UDHR Article 1 and 2) === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-2">Size</label> <input class="size" id="size-2" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-2">Leading</label> <input class="leading" id="leading-2" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-2">Letter Spacing</label> <input class="spacing" id="spacing-2" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="2">
+            <div class="select-header">
+              <span class="select-value">Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Kaldanit Regular">Regular</div>
+              <div class="select-option" data-value="Kaldanit Bold">Bold</div>
+              <div class="select-option" data-value="Kaldanit Italic">Italic</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Kaldanit Regular" selected>Regular</option>
+            <option value="Kaldanit Bold">Bold</option>
+            <option value="Kaldanit Italic">Italic</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right is-active"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-2 truncate-text" data-truncate-words="40" contenteditable="true" dir="rtl" style="font-family: 'Kaldanit Mono'; font-weight: 400; font-style: normal; font-size: 26px; line-height: 1.6; letter-spacing: 0em; text-align: right;">כל בני אדם נולדו בני חורין ושווים בערכם ובזכויותיהם. כולם חוננו בתבונה ובמצפון, לפיכך חובה עליהם לנהוג איש ברעהו ברוח של אחווה. כל אדם זכאי לזכויות ולחירויות שנקבעו בהכרזה זו ללא הפליה כלשהי, מטעמי גזע, צבע, מין, לשון, דת, דעה פוליטית או דעה בבעיות אחרות, בגלל מוצא לאומי או חברתי, קניין, לידה או מעמד אחר.</div>
+  </section>
+
+  <!-- === Section 2b: Hebrew and Latin mixed, every character on the same cell === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-11">Size</label> <input class="size" id="size-11" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-11">Leading</label> <input class="leading" id="leading-11" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-11">Letter Spacing</label> <input class="spacing" id="spacing-11" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="11">
+            <div class="select-header">
+              <span class="select-value">Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Kaldanit Regular">Regular</div>
+              <div class="select-option" data-value="Kaldanit Bold">Bold</div>
+              <div class="select-option" data-value="Kaldanit Italic">Italic</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Kaldanit Regular" selected>Regular</option>
+            <option value="Kaldanit Bold">Bold</option>
+            <option value="Kaldanit Italic">Italic</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right is-active"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 truncate-text kd-big-mix" data-truncate-words="22" contenteditable="true" dir="rtl" style="font-family: 'Kaldanit Mono'; font-weight: 400; font-style: normal; font-size: 72px; line-height: 1.45; letter-spacing: 0em; text-align: right;">כל תו תופס תא אחד <span dir="ltr">every character takes one cell</span> עברית ולטינית באותו רוחב <span dir="ltr">Hebrew and Latin, one fixed width</span> הטבלה לא זזה כשהכתב מתחלף <span dir="ltr">the table holds when the script changes</span></div>
+  </section>
+
+  <!-- === Section 3: name in both scripts, fits to the box === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-3">Size</label> <input class="size" id="size-3" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-3">Leading</label> <input class="leading" id="leading-3" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-3">Letter Spacing</label> <input class="spacing" id="spacing-3" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="3">
+            <div class="select-header">
+              <span class="select-value">Bold</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Kaldanit Regular">Regular</div>
+              <div class="select-option" data-value="Kaldanit Bold">Bold</div>
+              <div class="select-option" data-value="Kaldanit Italic">Italic</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Kaldanit Regular">Regular</option>
+            <option value="Kaldanit Bold" selected>Bold</option>
+            <option value="Kaldanit Italic">Italic</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 auto-fit-multiline" data-max-font-size="220" contenteditable="true" dir="rtl" style="font-family: 'Kaldanit Mono'; font-weight: 700; font-style: normal; font-size: 220px; line-height: 1.1; letter-spacing: 0em; text-align: center;">קלדנית&#10;Kaldanit</div>
+  </section>
+
+  <!-- === Section 4: Latin line, Courier Prime itself === -->
+  <section class="type-tester responsive-section" id="fonts">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-4">Size</label> <input class="size" id="size-4" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-4">Leading</label> <input class="leading" id="leading-4" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-4">Letter Spacing</label> <input class="spacing" id="spacing-4" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="4">
+            <div class="select-header">
+              <span class="select-value">Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Kaldanit Regular">Regular</div>
+              <div class="select-option" data-value="Kaldanit Bold">Bold</div>
+              <div class="select-option" data-value="Kaldanit Italic">Italic</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Kaldanit Regular" selected>Regular</option>
+            <option value="Kaldanit Bold">Bold</option>
+            <option value="Kaldanit Italic">Italic</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 responsive-text kd-long-en" contenteditable="true" dir="ltr" style="font-family: 'Kaldanit Mono'; font-weight: 400; font-style: normal; font-size: 244px; line-height: 1; letter-spacing: 0em; white-space: nowrap; text-align: center;">Fixed width, both ways</div>
+  </section>
+
+  <!-- === Section 5: the italic, Hebrew and Latin together === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-5">Size</label> <input class="size" id="size-5" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-5">Leading</label> <input class="leading" id="leading-5" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-5">Letter Spacing</label> <input class="spacing" id="spacing-5" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="5">
+            <div class="select-header">
+              <span class="select-value">Italic</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Kaldanit Regular">Regular</div>
+              <div class="select-option" data-value="Kaldanit Bold">Bold</div>
+              <div class="select-option" data-value="Kaldanit Italic">Italic</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Kaldanit Regular">Regular</option>
+            <option value="Kaldanit Bold">Bold</option>
+            <option value="Kaldanit Italic" selected>Italic</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vocalised Hebrew. All 17 nikud marks carry mark positioning, so they stay attached at any weight. -->
+    <div class="type-area column-count-1 auto-fit-multiline" data-max-font-size="150" contenteditable="true" dir="rtl" style="font-family: 'Kaldanit Mono'; font-weight: 400; font-style: italic; font-size: 150px; line-height: 1.2; letter-spacing: 0em; text-align: center;">נטוי לצד&#10;its italic</div>
+  </section>
+
+  <!-- === Section 6: Hebrew display line, Bold === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-6">Size</label> <input class="size" id="size-6" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-6">Leading</label> <input class="leading" id="leading-6" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-6">Letter Spacing</label> <input class="spacing" id="spacing-6" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="6">
+            <div class="select-header">
+              <span class="select-value">Bold</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Kaldanit Regular">Regular</div>
+              <div class="select-option" data-value="Kaldanit Bold">Bold</div>
+              <div class="select-option" data-value="Kaldanit Italic">Italic</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Kaldanit Regular">Regular</option>
+            <option value="Kaldanit Bold" selected>Bold</option>
+            <option value="Kaldanit Italic">Italic</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 responsive-text kd-word-he" contenteditable="true" dir="rtl" style="font-family: 'Kaldanit Mono'; font-weight: 700; font-style: normal; font-size: 244px; line-height: 1; letter-spacing: 0em; white-space: nowrap; text-align: center;">אות במכונה</div>
+  </section>
+
+  <!-- === Section 7: Latin running text, two columns (UDHR Article 1 and 2) === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-7">Size</label> <input class="size" id="size-7" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-7">Leading</label> <input class="leading" id="leading-7" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-7">Letter Spacing</label> <input class="spacing" id="spacing-7" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="7">
+            <div class="select-header">
+              <span class="select-value">Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Kaldanit Regular">Regular</div>
+              <div class="select-option" data-value="Kaldanit Bold">Bold</div>
+              <div class="select-option" data-value="Kaldanit Italic">Italic</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Kaldanit Regular" selected>Regular</option>
+            <option value="Kaldanit Bold">Bold</option>
+            <option value="Kaldanit Italic">Italic</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left is-active"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-2 truncate-text" data-truncate-words="48" contenteditable="true" dir="ltr" style="font-family: 'Kaldanit Mono'; font-weight: 400; font-style: normal; font-size: 24px; line-height: 1.6; letter-spacing: 0em; text-align: left;">All human beings are born free and equal in dignity and rights. They are endowed with reason and conscience and should act towards one another in a spirit of brotherhood. Everyone is entitled to all the rights and freedoms set forth in this Declaration, without distinction of any kind, such as race, colour, sex, language, religion, political or other opinion, national or social origin, property, birth or other status.</div>
+  </section>
+
+  <!-- === Section 8: one word in both scripts, Bold === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-8">Size</label> <input class="size" id="size-8" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-8">Leading</label> <input class="leading" id="leading-8" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-8">Letter Spacing</label> <input class="spacing" id="spacing-8" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="8">
+            <div class="select-header">
+              <span class="select-value">Bold</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Kaldanit Regular">Regular</div>
+              <div class="select-option" data-value="Kaldanit Bold">Bold</div>
+              <div class="select-option" data-value="Kaldanit Italic">Italic</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Kaldanit Regular">Regular</option>
+            <option value="Kaldanit Bold" selected>Bold</option>
+            <option value="Kaldanit Italic">Italic</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 auto-fit-multiline" data-max-font-size="240" contenteditable="true" dir="rtl" style="font-family: 'Kaldanit Mono'; font-weight: 700; font-style: normal; font-size: 240px; line-height: 1.1; letter-spacing: 0em; text-align: center;">מקלדת&#10;Keyboard</div>
+  </section>
+
+  <!-- === Section 9: numerals and punctuation, italic === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-9">Size</label> <input class="size" id="size-9" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-9">Leading</label> <input class="leading" id="leading-9" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-9">Letter Spacing</label> <input class="spacing" id="spacing-9" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="9">
+            <div class="select-header">
+              <span class="select-value">Italic</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Kaldanit Regular">Regular</div>
+              <div class="select-option" data-value="Kaldanit Bold">Bold</div>
+              <div class="select-option" data-value="Kaldanit Italic">Italic</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Kaldanit Regular">Regular</option>
+            <option value="Kaldanit Bold">Bold</option>
+            <option value="Kaldanit Italic" selected>Italic</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 responsive-text kd-word-mono" contenteditable="true" dir="ltr" style="font-family: 'Kaldanit Mono'; font-weight: 400; font-style: italic; font-size: 244px; line-height: 1; letter-spacing: 0em; white-space: nowrap; text-align: center;">0123456789 (.,:;!?)</div>
+  </section>
+
+  <!-- === Section 10: alphabet in both scripts === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <span class="slider-pair"><label class="label-custom" for="size-10">Size</label> <input class="size" id="size-10" type="range" min="16" max="512" /></span>
+        <span class="slider-pair"><label class="label-custom" for="leading-10">Leading</label> <input class="leading" id="leading-10" type="range" min="0.5" max="2" step="0.05" /></span>
+        <span class="slider-pair"><label class="label-custom" for="spacing-10">Letter Spacing</label> <input class="spacing" id="spacing-10" type="range" min="-0.1" max="0.1" step="0.01" /></span>
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="10">
+            <div class="select-header">
+              <span class="select-value">Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Kaldanit Regular">Regular</div>
+              <div class="select-option" data-value="Kaldanit Bold">Bold</div>
+              <div class="select-option" data-value="Kaldanit Italic">Italic</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Kaldanit Regular" selected>Regular</option>
+            <option value="Kaldanit Bold">Bold</option>
+            <option value="Kaldanit Italic">Italic</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 auto-fit-multiline" data-max-font-size="200" contenteditable="true" dir="rtl" style="font-family: 'Kaldanit Mono'; font-weight: 400; font-style: normal; font-size: 200px; line-height: 1.15; letter-spacing: 0em; text-align: center;">אלפבית&#10;Alphabet</div>
+  </section>
+
+
+  <!-- ===== GLYPH GRID VIEWER ===== -->
+  <div class="wrapper" id="fontWrapper">
+    <div class="left-panel">
+      <div class="preview-box" id="preview" style="font-family: 'Kaldanit Mono'; font-weight: 400;" data-preview="א"></div>
+      <div class="controls-lite">
+        <div class="font-wrapper">
+          <div class="custom-select" id="weight-select">
+            <div class="select-header">
+              <span class="select-value">Regular 400</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Kaldanit Regular">Regular</div>
+              <div class="select-option" data-value="Kaldanit Bold">Bold</div>
+              <div class="select-option" data-value="Kaldanit Italic">Italic</div>
+            </div>
+          </div>
+          <!-- Hidden original select for functionality -->
+          <select id="weight" style="display: none;">
+            <option value="Kaldanit Regular" selected>Regular</option>
+            <option value="Kaldanit Bold">Bold</option>
+            <option value="Kaldanit Italic">Italic</option>
+          </select>
+        </div>
+      </div>
+      <div class="details" id="details">Unicode decimal: 1488<br>Unicode hex: 05D0<br>HTML entity: &amp;#x5D0;</div>
+    </div>
+    <div class="grid-container">
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+
+  <!-- ===== DATA MAPS ===== -->
+  <script type="application/json" id="fontMap">{
+    "Kaldanit Regular": { "family": "Kaldanit Mono", "weight": 400, "style": "normal" },
+    "Kaldanit Bold": { "family": "Kaldanit Mono", "weight": 700, "style": "normal" },
+    "Kaldanit Italic": { "family": "Kaldanit Mono", "weight": 400, "style": "italic" }
+  }</script>
+
+  <!-- Glyph grid source: Hebrew letters, finals, figures and punctuation. The 17 combining nikud marks are left out, they do not render alone in a cell. -->
+  <script type="application/json" id="glyphMap">{
+    "default": "אבגדהוזחטיכלמנסעפצקרשתךםןףץABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,:;!?-()[]{}/\\@#&*+=<>\"'"
+  }</script>
+
+  <!-- ===== SCRIPT ===== -->
+  <!-- GSAP for advanced marquee functionality -->
+  <script src="gsap-public/minified/gsap.min.js"></script>
+  <script src="gsap-public/minified/ScrollTrigger.min.js"></script>
+  <script src="gsap-public/minified/Draggable.min.js"></script>
+  <script src="gsap-public/minified/InertiaPlugin.min.js"></script>
+  
+    <!-- EmailJS -->
+    <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+(function(){
+  emailjs.init({
+    publicKey: "SY_sCUJHCR5MtWgI5",
+  });
+})();
+</script>
+
+    <!-- Nomad Type JS -->
+
+  <!-- Load Header Component First -->
+  <script src="header.js"></script>
+  <script>
+    // Load header when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof loadHeader === 'function') {
+        loadHeader(`
+          <div style="transform: translateY(0px);">קלדנית</div>
+          <div style="transform: translateY(0px);">Kaldanit</div>
+        `);
+        // No store on this page. The Trial and Buy buttons stay in the DOM but hidden (page CSS):
+        // script.js initParallax needs .cover-buttons to exist, and without it the header never
+        // switches from the top navigation to the circle.
+      }
+});
+  </script>
+
+  <script src="script.js"></script>
+
+  </main>
+
+  <!-- Footer Container (will be populated by JavaScript) -->
+  <div id="footer-container"></div>
+
+  <!-- Animated Favicon Script -->
+  <script>
+    setTimeout(() => {
+      let favicon_video_image_counter = 0;
+      let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+      let favicon_video_images = [
+  "https://favicongenerator.s3.amazonaws.com/3129f51d17a5c.png","https://favicongenerator.s3.amazonaws.com/cd721e3e8a586.png","https://favicongenerator.s3.amazonaws.com/4af6e76d5ae4a.png","https://favicongenerator.s3.amazonaws.com/e76f98c1d6448.png","https://favicongenerator.s3.amazonaws.com/bc435c23b4eaf.png","https://favicongenerator.s3.amazonaws.com/c806c3265454f.png","https://favicongenerator.s3.amazonaws.com/e95b673a3d845.png","https://favicongenerator.s3.amazonaws.com/230b1204ad4d1.png","https://favicongenerator.s3.amazonaws.com/7fd4916b0902e.png","https://favicongenerator.s3.amazonaws.com/c9dddf2a04e46.png","https://favicongenerator.s3.amazonaws.com/a13c002e6a2ab.png","https://favicongenerator.s3.amazonaws.com/e8eddb001860b.png","https://favicongenerator.s3.amazonaws.com/13f85eb453429.png","https://favicongenerator.s3.amazonaws.com/ce45ac6aa0a8a.png","https://favicongenerator.s3.amazonaws.com/fb54d04dd298f.png","https://favicongenerator.s3.amazonaws.com/4c8400f32accc.png","https://favicongenerator.s3.amazonaws.com/a792f02084f6c.png","https://favicongenerator.s3.amazonaws.com/f30e5a3031be8.png","https://favicongenerator.s3.amazonaws.com/9249f78daaefd.png","https://favicongenerator.s3.amazonaws.com/8b5a05d43b31d.png","https://favicongenerator.s3.amazonaws.com/eab8ede756262.png","https://favicongenerator.s3.amazonaws.com/2ba370948350d.png","https://favicongenerator.s3.amazonaws.com/16b955af4550b.png","https://favicongenerator.s3.amazonaws.com/cb303dec540cb.png","https://favicongenerator.s3.amazonaws.com/f071825bf109d.png","https://favicongenerator.s3.amazonaws.com/3e83da0b84f04.png","https://favicongenerator.s3.amazonaws.com/435d711b5e9c7.png","https://favicongenerator.s3.amazonaws.com/7d8c3600a547d.png","https://favicongenerator.s3.amazonaws.com/076628736ee03.png","https://favicongenerator.s3.amazonaws.com/6674b4393d2e7.png","https://favicongenerator.s3.amazonaws.com/8c6eabdaf80e.png","https://favicongenerator.s3.amazonaws.com/93129cf211ec7.png","https://favicongenerator.s3.amazonaws.com/50ab769fae9c5.png","https://favicongenerator.s3.amazonaws.com/dbd67430dfff2.png","https://favicongenerator.s3.amazonaws.com/6306b1d0f7ede.png","https://favicongenerator.s3.amazonaws.com/c80c22e1b976e.png","https://favicongenerator.s3.amazonaws.com/c0ba6ed76150a.png","https://favicongenerator.s3.amazonaws.com/e15281d3c9931.png","https://favicongenerator.s3.amazonaws.com/274f3c0d4f878.png","https://favicongenerator.s3.amazonaws.com/78a9057d69b74.png","https://favicongenerator.s3.amazonaws.com/d6db49127abf1.png","https://favicongenerator.s3.amazonaws.com/ee5bae80536bc.png","https://favicongenerator.s3.amazonaws.com/2a7e9e25fccb9.png","https://favicongenerator.s3.amazonaws.com/dc7fbe30b5d91.png","https://favicongenerator.s3.amazonaws.com/7b936d1b246c7.png","https://favicongenerator.s3.amazonaws.com/2b1c4719e18fb.png","https://favicongenerator.s3.amazonaws.com/072fa8af4155c.png","https://favicongenerator.s3.amazonaws.com/3e7bca2490671.png","https://favicongenerator.s3.amazonaws.com/f75d559c12576.png","https://favicongenerator.s3.amazonaws.com/c2dccc17f46e.png","https://favicongenerator.s3.amazonaws.com/62ff58aefdb7a.png","https://favicongenerator.s3.amazonaws.com/12342f642fd7a.png","https://favicongenerator.s3.amazonaws.com/2ce950b8443e2.png","https://favicongenerator.s3.amazonaws.com/3676501156615.png","https://favicongenerator.s3.amazonaws.com/52ac9290673ef.png","https://favicongenerator.s3.amazonaws.com/c401b341b6877.png","https://favicongenerator.s3.amazonaws.com/5408ed854b0e6.png","https://favicongenerator.s3.amazonaws.com/c9417ab290d8c.png","https://favicongenerator.s3.amazonaws.com/605db5fa28d8b.png","https://favicongenerator.s3.amazonaws.com/dbcadae5ac827.png","https://favicongenerator.s3.amazonaws.com/89497c65bc9d.png","https://favicongenerator.s3.amazonaws.com/cba217324331a.png","https://favicongenerator.s3.amazonaws.com/04989a8ce7a13.png","https://favicongenerator.s3.amazonaws.com/9f6ff1daefbc2.png","https://favicongenerator.s3.amazonaws.com/35af62beb2069.png","https://favicongenerator.s3.amazonaws.com/03dcf5523866b.png","https://favicongenerator.s3.amazonaws.com/b598d707d6b7a.png","https://favicongenerator.s3.amazonaws.com/796a5d9e5c498.png","https://favicongenerator.s3.amazonaws.com/35c427f26d961.png","https://favicongenerator.s3.amazonaws.com/0177ba9bb3cd5.png","https://favicongenerator.s3.amazonaws.com/dda651d22badc.png","https://favicongenerator.s3.amazonaws.com/ab5e3aef1f7ff.png","https://favicongenerator.s3.amazonaws.com/1922e4dfb5696.png","https://favicongenerator.s3.amazonaws.com/c95b12f64f2bf.png","https://favicongenerator.s3.amazonaws.com/a59614ebdf159.png","https://favicongenerator.s3.amazonaws.com/dfdd396620126.png","https://favicongenerator.s3.amazonaws.com/af9153abb4866.png","https://favicongenerator.s3.amazonaws.com/21d342a33e20c.png","https://favicongenerator.s3.amazonaws.com/259e6557b866e.png","https://favicongenerator.s3.amazonaws.com/586c3cb84232c.png","https://favicongenerator.s3.amazonaws.com/26ea4ab6305b6.png","https://favicongenerator.s3.amazonaws.com/80f1a5fcefd97.png","https://favicongenerator.s3.amazonaws.com/aa8010193758f.png","https://favicongenerator.s3.amazonaws.com/c62ddfd8b8fe5.png","https://favicongenerator.s3.amazonaws.com/35d778b2f5022.png","https://favicongenerator.s3.amazonaws.com/629d6922cf6f7.png","https://favicongenerator.s3.amazonaws.com/35e86ac544a1d.png","https://favicongenerator.s3.amazonaws.com/77825641eefc2.png","https://favicongenerator.s3.amazonaws.com/0472d28c319e4.png","https://favicongenerator.s3.amazonaws.com/ca2bdb73b6cc8.png","https://favicongenerator.s3.amazonaws.com/8d4ac4862754c.png","https://favicongenerator.s3.amazonaws.com/e7d5b141691a4.png","https://favicongenerator.s3.amazonaws.com/a53ffd9f417a5.png","https://favicongenerator.s3.amazonaws.com/14aa02ac80de5.png","https://favicongenerator.s3.amazonaws.com/e21f4aa715dab.png","https://favicongenerator.s3.amazonaws.com/e393c22a4de28.png","https://favicongenerator.s3.amazonaws.com/69bff0d066f14.png","https://favicongenerator.s3.amazonaws.com/43db7d93ee14c.png","https://favicongenerator.s3.amazonaws.com/86859d59c20a7.png","https://favicongenerator.s3.amazonaws.com/059f6f8183db8.png","https://favicongenerator.s3.amazonaws.com/2016a34618202.png","https://favicongenerator.s3.amazonaws.com/91ee3568cfd6c.png","https://favicongenerator.s3.amazonaws.com/fd9d0e98cb80d.png"];
+      async function favicon_video_to_data_url(url, callback) {
+        let xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          let reader = new FileReader();
+          reader.onloadend = function () {
+            callback(reader.result);
+          };
+          reader.readAsDataURL(xhr.response);
+        };
+        xhr.open("GET", url);
+        xhr.responseType = "blob";
+        xhr.send();
+      }
+    
+      let favicon_video_loaded_images = [];
+    
+      favicon_video_images.map((url, idx) => {
+        favicon_video_to_data_url(url, function (dataUrl) {
+          favicon_video_loaded_images[idx] = dataUrl;
+        });
+      });
+    
+      setInterval(function () {
+        if(favicon_video_loaded_images[favicon_video_image_counter]) {
+          favicon_video_icon_tag.href = favicon_video_loaded_images[
+            favicon_video_image_counter
+          ].replace("application/octet-stream", "image/png");
+        }
+        if (
+          favicon_video_image_counter ==
+          favicon_video_loaded_images.length - 1
+        )
+          favicon_video_image_counter = 0;
+        else favicon_video_image_counter++;
+      }, 50);
+    }, 1500);
+  </script>
+
+  <!-- Footer Component Script -->
+  <script src="footer.js"></script>
+  <script>
+    // Load footer when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof loadFooter === 'function') {
+        loadFooter('Kaldanit'); // Change this for different pages
+      }
+
+      // Navigation links - force navigation
+      const navLinks = document.querySelectorAll('.nav-link, .menu-item');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          if (this.href) {
+            window.location.href = this.href;
+          }
+        });
+      });
+
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+/* Typewriter cover, the same idea as the Kaldanit page: the lines are typed out one
+   character at a time and a cursor blinks at the end. Written here rather than reusing
+   initTypewriterEffect in script.js, because that one is bound to body.kaldanit-page
+   and only ever types the first line. */
+(function () {
+  var SPEED = 110;       // ms per character
+  var LINE_GAP = 320;    // pause between the two lines
+  var CURSOR = '|';
+
+  function run(title) {
+    var lines = Array.prototype.slice.call(title.children);
+    if (!lines.length) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      lines.forEach(function (l) { l.classList.add('kd-typed'); });
+      return;
+    }
+
+    var texts = lines.map(function (l) { return l.textContent.trim(); });
+    lines.forEach(function (l) { l.textContent = ''; l.classList.add('kd-typed'); });
+
+    function blink(line) {
+      var cursor = document.createElement('span');
+      cursor.className = 'kd-cursor';
+      cursor.textContent = CURSOR;
+      line.appendChild(cursor);
+      var on = true;
+      return setInterval(function () {
+        cursor.style.opacity = on ? '1' : '0';
+        on = !on;
+      }, 500);
+    }
+
+    function typeLine(n) {
+      if (n >= lines.length) return;
+      var line = lines[n], text = texts[n], i = 0;
+      (function step() {
+        if (i < text.length) {
+          line.textContent = text.substring(0, ++i);
+          setTimeout(step, SPEED);
+        } else if (n === lines.length - 1) {
+          blink(line);            // only the last line keeps a cursor
+        } else {
+          setTimeout(function () { typeLine(n + 1); }, LINE_GAP);
+        }
+      })();
+    }
+    typeLine(0);
+  }
+
+  function start() {
+    var tries = 0;
+    (function look() {
+      var title = document.querySelector('.cover-title');
+      if (title && title.children.length && title.textContent.trim()) {
+        (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () { run(title); });
+        return;
+      }
+      if (tries++ < 25) setTimeout(look, 100);
+    })();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
+})();
+</script>
+
+</body>
+</html>
