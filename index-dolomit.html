@@ -725,9 +725,11 @@ ease;
        everything the site pins up there moves down by the bar height. */
     body.nt-sale-page .nt-sale-bar { top: 0; bottom: auto; }
     body.nt-sale-page .sticky-top-section,
-    body.nt-sale-page .sticky-nav,
     body.nt-sale-page .sticky-green-circle,
     body.nt-sale-page .mobile-hamburger-circle { margin-top: var(--nt-sale-h); }
+    /* .sticky-nav is a STATIC element here (it is fixed on a font page), so a margin
+       would collapse with the logo's own 28px and swallow it. Padding never collapses. */
+    body.nt-sale-page .sticky-nav { padding-top: var(--nt-sale-h); }
     /* The bottom reserve is no longer needed; the top one goes on the container that
        actually holds the collage, since content here overflows the body box. */
     body.nt-sale-page #footer-container { padding-bottom: 0; }
