@@ -463,7 +463,40 @@
   }
   @keyframes ntSaleSlide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   @media (prefers-reduced-motion: reduce) { .nt-sale-bar span { animation: none; } }
-  body.nt-sale-page { padding-bottom: 30px; }
+
+  /* ---- Everything below reserves room for the bar. ONE number controls it. ----
+     All of it is scoped to body.nt-sale-page, so no other page on the site is
+     touched. When SALE.on is false the script removes that class and every
+     override here stops applying by itself. */
+  body.nt-sale-page { --nt-sale-h: 30px; padding-bottom: var(--nt-sale-h); }
+  .nt-sale-bar { height: var(--nt-sale-h); }
+
+  /* The cover fills the window minus the header offset. Subtract the bar too,
+     otherwise the bottom of the cover slides under it. */
+  body.nt-sale-page .cover-header {
+    height: calc(100vh - 120px - var(--nt-sale-h));
+    height: calc(var(--vh, 1vh) * 100 - 120px - var(--nt-sale-h));
+  }
+  /* Buy / Trial sit above the bar instead of on it. */
+  body.nt-sale-page .cover-buttons { bottom: calc(29px + var(--nt-sale-h)); }
+  /* .cover-buttons.sticky is pinned by `top`, so it needs nothing here. */
+
+  @media (max-width: 768px) {
+    body.nt-sale-page .cover-header {
+      height: calc(100vh - 40px - var(--nt-sale-h));
+      height: calc(var(--vh, 1vh) * 100 - 40px - var(--nt-sale-h));
+    }
+    /* On mobile the buttons become a full-width bar pinned with `bottom: 0 !important`,
+       so the override has to be !important too. */
+    body.nt-sale-page .cover-buttons { bottom: var(--nt-sale-h) !important; }
+  }
+
+  @media (max-width: 480px) {
+    body.nt-sale-page .cover-header {
+      height: calc(100vh - 20px - var(--nt-sale-h));
+      height: calc(var(--vh, 1vh) * 100 - 106px - var(--nt-sale-h));
+    }
+  }
 
   /* The offer tag that sits next to the live price in the buy overlay. */
   .nt-sale-tag {
