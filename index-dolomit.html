@@ -1313,7 +1313,7 @@ ease;
   <div class="nt-sale-track"><span id="ntSaleText"></span><span id="ntSaleText2"></span></div>
 </a>
 <script>
-  const SALE = { on: true, percent: 20, label: 'Launch offer', endsOn: '', gap: 8 };
+  const SALE = { on: true, percent: 20, label: 'NEW!', barLabel: 'Dolomit Launch Offer', endsOn: '', gap: 8 };
   (function paintSaleBar() {
     const a = document.getElementById('ntSaleText'), b = document.getElementById('ntSaleText2');
     if (!a || !b) return;
@@ -1322,11 +1322,11 @@ ease;
       document.body.classList.remove('nt-sale-page');
       return;
     }
-      const bits = ['Dolomit launch offer', SALE.percent + '% off every licence'];
+    const bits = [SALE.barLabel, SALE.percent + '% off'];
     if (SALE.endsOn) bits.push(SALE.endsOn);
-    // SALE.gap = how many spaces sit on each side of the em dash. Raise it for more air.
+    // SALE.gap = how many spaces sit on each side of the en dash. Raise it for more air.
     const pad = ' '.repeat(SALE.gap || 4);
-    const sep = pad + '\u2014' + pad;
+    const sep = pad + '\u2013' + pad;
     const unit = bits.join(sep) + sep;
 
     // Measure only once the webfont is in. Measuring against the fallback gives a
