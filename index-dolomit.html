@@ -689,16 +689,29 @@ ease;
   }
   /* Seamless marquee: one track holding TWO identical halves, shifted by exactly -50%,
      so half two lands where half one started and the loop never jumps. */
+  /* The track is ABSOLUTE on purpose: as a flex item it was capped at the bar's width,
+     so translateX(-50%) shifted half the BAR, not half the content, and the two halves
+     collided. Absolute positioning lets it shrink-wrap its content instead.
+     The shift is a pixel value measured after the webfont loads (see the script), never
+     a percentage, so neither the element width nor the font swap can throw it off. */
+  /* The track is ABSOLUTE on purpose: as a flex item it was capped at the bar's width,
+     so a -50% shift moved half the BAR, not half the content, and the halves collided.
+     The motion is driven from JS with an exact pixel distance measured after the webfont
+     loads; a custom property inside @keyframes does not reliably update when set by script. */
   .nt-sale-track {
-    display: flex; flex: none; width: max-content;
-    animation: ntSaleSlide 30s linear infinite;
+    position: absolute; top: 0; left: 0; height: 100%;
+    display: flex; align-items: center;
+    width: max-content !important; max-width: none !important;
   }
+  /* max-width: none is load-bearing. A site-wide rule caps spans at 100% of their
+     parent, which clamped each half to the bar width while its text stayed far wider.
+     Measuring that clamped box gave a shift shorter than the text, so the two halves
+     rode over each other. */
   .nt-sale-bar span {
     font-family: "Safra Mono", monospace; font-size: 14px; letter-spacing: 0;
     color: #000; white-space: nowrap; flex: none;
+    max-width: none !important; width: auto !important;
   }
-  @keyframes ntSaleSlide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  @media (prefers-reduced-motion: reduce) { .nt-sale-track { animation: none; } }
 
   /* An open overlay owns the screen: hide the bar underneath it. */
   body.nt-sale-page:has(.overlay.active) .nt-sale-bar,
@@ -1306,17 +1319,38 @@ ease;
       document.body.classList.remove('nt-sale-page');
       return;
     }
-    const bits = ['Dolomit launch offer', SALE.percent + '% off every licence'];
+      const bits = ['Dolomit launch offer', SALE.percent + '% off every licence'];
     if (SALE.endsOn) bits.push(SALE.endsOn);
     const unit = bits.join('  \u2014  ') + '  \u2014  ';
 
-    // Repeat until ONE half is wider than the window, then mirror it into the second.
-    a.textContent = unit;
-    let guard = 0;
-    while (a.getBoundingClientRect().width < window.innerWidth && guard++ < 40) {
+    // Measure only once the webfont is in. Measuring against the fallback gives a
+    // different width, and the swap then knocks the two halves out of register.
+    function build() {
+      a.textContent = unit;
+      let guard = 0;
+      while (a.scrollWidth < window.innerWidth && guard++ < 60) {
       a.textContent += unit;
+      }
+      b.textContent = a.textContent;
+        // scrollWidth, not the box: it is the real text width even if something clamps the box.
+      const half = a.scrollWidth;
+      const track = a.parentElement;
+
+      // Move by EXACTLY one half, in pixels, forever. At -half, half two sits precisely
+      // where half one began, so the loop has no seam. 60 px per second on any width.
+      if (track._ntAnim) track._ntAnim.cancel();
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      track._ntAnim = track.animate(
+        [{ transform: 'translateX(0px)' }, { transform: 'translateX(' + (-half) + 'px)' }],
+        { duration: (half / 60) * 1000, iterations: Infinity, easing: 'linear' }
+      );
     }
-    b.textContent = a.textContent;
+
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () {
+      build();
+      let t;
+      window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(build, 200); });
+    });
   })();
 </script>
 </body>
