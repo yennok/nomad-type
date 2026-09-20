@@ -668,8 +668,32 @@ ease;
       }
     }
   </style>
+
+<!-- ============ LAUNCH OFFER bar (test) ============
+     Same bar as /dolomit-sale-test. The homepage needs less than a font page:
+     its only sticky button (.sticky-trial-btn) is pinned with `top`, so nothing
+     down here collides with it. All of it is scoped to body.nt-sale-page. -->
+<style>
+  body.nt-sale-page { --nt-sale-h: 33px; }
+  /* On the homepage the content overflows the body box, so padding-bottom on <body>
+     does NOT lengthen the page and the last pixels of the footer end up behind the
+     bar. Padding on the footer itself does lengthen it, and padding never collapses. */
+  body.nt-sale-page #footer-container { padding-bottom: var(--nt-sale-h); }
+  .nt-sale-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; height: var(--nt-sale-h); z-index: 1001;
+    background: #E8FF3A; overflow: hidden; pointer-events: none;
+    display: flex; align-items: center;
+  }
+  .nt-sale-bar span {
+    font-family: "Safra Mono", monospace; font-size: 14px; letter-spacing: 0;
+    color: #000; white-space: nowrap; padding-right: 2.5rem;
+    animation: ntSaleSlide 30s linear infinite;
+  }
+  @keyframes ntSaleSlide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .nt-sale-bar span { animation: none; } }
+</style>
 </head>
-<body class="homepage-page">
+<body class="homepage-page nt-sale-page">
   <!-- SEO: Semantic H1 for Google (visually hidden, design unchanged) -->
   <h1 class="sr-only">Nomad Type — Independent Multilingual Type Foundry designing Arabic, Hebrew, and Latin typefaces</h1>
 
@@ -1255,5 +1279,24 @@ ease;
       });
 });
   </script>
+
+<!-- LAUNCH OFFER bar. Same SALE switch as the font page: on=false removes it. -->
+<div class="nt-sale-bar" id="ntSaleBar" aria-hidden="true"><span id="ntSaleText"></span></div>
+<script>
+  const SALE = { on: true, percent: 20, label: 'Launch offer', endsOn: '' };
+  (function paintSaleBar() {
+    const el = document.getElementById('ntSaleText');
+    if (!el) return;
+    if (!SALE.on) {
+      const b = document.getElementById('ntSaleBar'); if (b) b.remove();
+      document.body.classList.remove('nt-sale-page');
+      return;
+    }
+    const bits = ['Dolomit launch offer', SALE.percent + '% off every licence'];
+    if (SALE.endsOn) bits.push(SALE.endsOn);
+    const line = bits.join('  \u00b7  ') + '  \u00b7  ';
+    el.textContent = line + line + line + line + line + line;
+  })();
+</script>
 </body>
 </html>
