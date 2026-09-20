@@ -496,10 +496,8 @@
     max-width: none !important; width: auto !important;
   }
 
-  /* An open overlay (buy, trial, mobile menu) owns the screen: hide the bar so it
-     does not sit on top of the cart. The page keeps its padding, which is invisible
-     while the overlay covers everything. */
-  body.nt-sale-page:has(.overlay.active) .nt-sale-bar { display: none; }
+  /* The bar stays visible when the cart opens; the overlay simply sits above it
+     (overlay z-index 2000 against the bar's 900). */
 
   /* ---- Everything below reserves room for the bar. ONE number controls it. ----
      All of it is scoped to body.nt-sale-page, so no other page on the site is

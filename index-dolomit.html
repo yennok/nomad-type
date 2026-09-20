@@ -713,9 +713,8 @@ ease;
     max-width: none !important; width: auto !important;
   }
 
-  /* An open overlay owns the screen: hide the bar underneath it. */
-  body.nt-sale-page:has(.overlay.active) .nt-sale-bar,
-  body.nt-sale-page:has(.mobile-overlay.active) .nt-sale-bar { display: none; }
+  /* The bar stays visible when an overlay opens; the overlay sits above it
+     (mobile overlay z-index 1005 against the bar's 1001). */
 </style>
 </head>
 <body class="homepage-page nt-sale-page">
