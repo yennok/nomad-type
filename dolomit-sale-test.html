@@ -1579,7 +1579,10 @@
       // SALE.gap is the air BETWEEN repeats, not inside the sentence.
       let sentence = SALE.barLabel + ' \u2013 ' + SALE.percent + '% off';
       if (SALE.endsOn) sentence += ' \u2013 ' + SALE.endsOn;
-      const unit = sentence + ' '.repeat(SALE.gap || 8);
+      // Between repeats: air, an em dash, air. The em dash separates the sentences and
+      // widens the gap; inside the sentence the dash stays an en dash.
+      const air = ' '.repeat(SALE.gap || 8);
+      const unit = sentence + air + '\u2014' + air;
 
       // Measure only once the webfont is in. Measuring against the fallback gives a
       // different width, and the swap then knocks the two halves out of register.
