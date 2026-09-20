@@ -524,12 +524,18 @@
   body.nt-sale-page .cover-buttons:not(.sticky) { bottom: calc(29px + var(--nt-sale-h)); }
 
   @media (max-width: 768px) {
-    /* On mobile the order flips: the white button bar keeps the very bottom of the
-       screen and the yellow bar sits directly ON TOP of it. --nt-buttons-h is measured
-       by the script, so it follows the real height of that bar. */
+    /* On mobile the bar moves to the TOP of the screen. The site's own header is
+       fixed at top: 0, so it gets pushed down by exactly the bar height; everything
+       else follows from the same variable. The white button bar keeps the bottom. */
+    body.nt-sale-page .nt-sale-bar { top: 0; bottom: auto; }
+    /* Everything the site pins to the top of the screen moves down by the bar height.
+       margin-top rather than top: these elements have their own top offsets (and the
+       burger animates its transform), so a margin shifts them without touching either. */
+    body.nt-sale-page .sticky-top-section,
+    body.nt-sale-page .sticky-nav,
+    body.nt-sale-page .sticky-green-circle { margin-top: var(--nt-sale-h); }
+    body.nt-sale-page { padding-top: var(--nt-sale-h); padding-bottom: var(--nt-buttons-h, 70px); }
     body.nt-sale-page .cover-buttons { bottom: 0 !important; }
-    body.nt-sale-page .nt-sale-bar { bottom: var(--nt-buttons-h, 70px); }
-    body.nt-sale-page { padding-bottom: calc(var(--nt-sale-h) + var(--nt-buttons-h, 70px)); }
     body.nt-sale-page .cover-header {
       height: calc(100vh - 40px - var(--nt-sale-h) - var(--nt-buttons-h, 70px));
       height: calc(var(--vh, 1vh) * 100 - 40px - var(--nt-sale-h) - var(--nt-buttons-h, 70px));
