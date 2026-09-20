@@ -1778,7 +1778,12 @@ function initOverlayForms() {
   const trialForm = document.querySelector('.trial-form');
   const buyForm = document.querySelector('.buy-form');
 
-  if (trialForm) {
+  // Pages that build their own trial request (trial-fonts.html sends ONE email listing every
+  // font the visitor ticked) mark the form with data-custom-submit. Binding the generic
+  // handler there too sent a second, wrong email per submit: font_requested came from the
+  // overlay heading ("Request Trial Fonts") instead of the chosen fonts, so the dispatcher
+  // could not parse it and the visitor got a "not ready yet" reply.
+  if (trialForm && !trialForm.hasAttribute('data-custom-submit')) {
     trialForm.addEventListener('submit', function(e) {
       e.preventDefault();
       sendTrialEmail();
