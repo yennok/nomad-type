@@ -1555,7 +1555,9 @@
     //    endsOn  : free text for the bar, e.g. "until 12 October". LEAVE EMPTY
     //              until Nir decides the date - do not invent one.
     // =====================================================================
-    const SALE = { on: true, percent: 20, label: 'Launch offer', endsOn: '' };
+    //  label   : the tag next to the price in the cart, e.g. NEW! 20% off
+    //  barLabel: how the offer reads on the bottom bar
+    const SALE = { on: true, percent: 20, label: 'NEW!', barLabel: 'Dolomit launch offer', endsOn: '' };
 
     const salePrice = (n) => Math.round(n * (100 - SALE.percent) / 100);
 
@@ -1567,7 +1569,7 @@
         document.body.classList.remove('nt-sale-page');
         return;
       }
-      const bits = ['Dolomit launch offer', SALE.percent + '% off every licence'];
+      const bits = [SALE.barLabel, SALE.percent + '% off every licence'];
       if (SALE.endsOn) bits.push(SALE.endsOn);
       const unit = bits.join('  \u2014  ') + '  \u2014  ';
 
@@ -1802,7 +1804,7 @@
           // (The bundle/family saving is already inside `base`.)
           const now = salePrice(base);
           priceEl.innerHTML = '<s class="ssv2-was">' + euro(base) + '</s> ' + euro(now) +
-                              '<span class="nt-sale-tag">' + SALE.label + ' · -' + SALE.percent + '%</span>';
+                              '<span class="nt-sale-tag">' + SALE.label + ' ' + SALE.percent + '% off</span>';
           buy.dataset.config = cfg;
           buy.dataset.price = String(now);
           setBuyState(buy, url ? 'checkout' : 'unavailable', url, 'Buy Now — ' + euro(now));
