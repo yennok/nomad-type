@@ -477,9 +477,12 @@
     height: calc(100vh - 120px - var(--nt-sale-h));
     height: calc(var(--vh, 1vh) * 100 - 120px - var(--nt-sale-h));
   }
-  /* Buy / Trial sit above the bar instead of on it. */
-  body.nt-sale-page .cover-buttons { bottom: calc(29px + var(--nt-sale-h)); }
-  /* .cover-buttons.sticky is pinned by `top`, so it needs nothing here. */
+  /* Buy / Trial sit above the bar instead of on it.
+     :not(.sticky) is load-bearing. After the first fold the buttons get .sticky,
+     which pins them with `top: 29px; bottom: auto`. Without the :not, this rule
+     wins on specificity and puts `bottom` back, so the element ends up pinned top
+     AND bottom and stretches to the full height of the window. */
+  body.nt-sale-page .cover-buttons:not(.sticky) { bottom: calc(29px + var(--nt-sale-h)); }
 
   @media (max-width: 768px) {
     body.nt-sale-page .cover-header {
