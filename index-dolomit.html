@@ -709,7 +709,11 @@ ease;
      rode over each other. */
   .nt-sale-bar span {
     font-family: "Safra Mono", monospace; font-size: 14px; letter-spacing: 0;
-    color: #000; white-space: nowrap; flex: none;
+    color: #000; flex: none;
+    /* pre, not nowrap: nowrap still collapses runs of spaces and drops the trailing
+       ones, which glued the em dash to the next repetition. pre keeps them and
+       still never wraps, so the gap between repeats is exactly what the script writes. */
+    white-space: pre;
     max-width: none !important; width: auto !important;
   }
 
@@ -1309,7 +1313,7 @@ ease;
   <div class="nt-sale-track"><span id="ntSaleText"></span><span id="ntSaleText2"></span></div>
 </a>
 <script>
-  const SALE = { on: true, percent: 20, label: 'Launch offer', endsOn: '' };
+  const SALE = { on: true, percent: 20, label: 'Launch offer', endsOn: '', gap: 8 };
   (function paintSaleBar() {
     const a = document.getElementById('ntSaleText'), b = document.getElementById('ntSaleText2');
     if (!a || !b) return;
@@ -1320,7 +1324,10 @@ ease;
     }
       const bits = ['Dolomit launch offer', SALE.percent + '% off every licence'];
     if (SALE.endsOn) bits.push(SALE.endsOn);
-    const unit = bits.join('  \u2014  ') + '  \u2014  ';
+    // SALE.gap = how many spaces sit on each side of the em dash. Raise it for more air.
+    const pad = ' '.repeat(SALE.gap || 4);
+    const sep = pad + '\u2014' + pad;
+    const unit = bits.join(sep) + sep;
 
     // Measure only once the webfont is in. Measuring against the fallback gives a
     // different width, and the swap then knocks the two halves out of register.

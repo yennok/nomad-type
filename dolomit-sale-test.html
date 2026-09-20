@@ -492,7 +492,11 @@
      rode over each other. */
   .nt-sale-bar span {
     font-family: "Safra Mono", monospace; font-size: 14px; letter-spacing: 0;
-    color: #000; white-space: nowrap; flex: none;
+    color: #000; flex: none;
+    /* pre, not nowrap: nowrap still collapses runs of spaces and drops the trailing
+       ones, which glued the em dash to the next repetition. pre keeps them and
+       still never wraps, so the gap between repeats is exactly what the script writes. */
+    white-space: pre;
     max-width: none !important; width: auto !important;
   }
 
@@ -520,13 +524,16 @@
   body.nt-sale-page .cover-buttons:not(.sticky) { bottom: calc(29px + var(--nt-sale-h)); }
 
   @media (max-width: 768px) {
+    /* On mobile the order flips: the white button bar keeps the very bottom of the
+       screen and the yellow bar sits directly ON TOP of it. --nt-buttons-h is measured
+       by the script, so it follows the real height of that bar. */
+    body.nt-sale-page .cover-buttons { bottom: 0 !important; }
+    body.nt-sale-page .nt-sale-bar { bottom: var(--nt-buttons-h, 70px); }
+    body.nt-sale-page { padding-bottom: calc(var(--nt-sale-h) + var(--nt-buttons-h, 70px)); }
     body.nt-sale-page .cover-header {
-      height: calc(100vh - 40px - var(--nt-sale-h));
-      height: calc(var(--vh, 1vh) * 100 - 40px - var(--nt-sale-h));
+      height: calc(100vh - 40px - var(--nt-sale-h) - var(--nt-buttons-h, 70px));
+      height: calc(var(--vh, 1vh) * 100 - 40px - var(--nt-sale-h) - var(--nt-buttons-h, 70px));
     }
-    /* On mobile the buttons become a full-width bar pinned with `bottom: 0 !important`,
-       so the override has to be !important too. */
-    body.nt-sale-page .cover-buttons { bottom: var(--nt-sale-h) !important; }
   }
 
   @media (max-width: 480px) {
@@ -1308,10 +1315,6 @@
          close-handlers can .reset() it harmlessly) but NOT class "buy-form"
          (so script.js's lead-form submit + checkbox logic skip it entirely).
          All configurator behaviour lives in the scoped script before 
-<!-- LAUNCH OFFER bar. Text comes from the SALE config below so there is one place to edit. -->
-<div class="nt-sale-bar" id="ntSaleBar" aria-hidden="true">
-  <div class="nt-sale-track"><span id="ntSaleText"></span><span id="ntSaleText2"></span></div>
-</div>
 </body>. -->
     <p class="intro-text">Configure your licence: pick the fonts, how you'll use them and users. The price updates live.</p>
     <!-- NOTE(dolomit): "Early access" label removed from the template. Only restore it if Nir and Liad agree Dolomit is sold as early access; the template markup was:
@@ -1555,11 +1558,16 @@
     // =====================================================================
     //  label   : the tag next to the price in the cart, e.g. NEW! 20% off
     //  barLabel: how the offer reads on the bottom bar
-    const SALE = { on: true, percent: 20, label: 'NEW!', barLabel: 'Dolomit launch offer', endsOn: '' };
+    const SALE = { on: true, percent: 20, label: 'NEW!', barLabel: 'Dolomit launch offer', endsOn: '', gap: 8 };
 
     const salePrice = (n) => Math.round(n * (100 - SALE.percent) / 100);
 
-    (function paintSaleBar() {
+    // The bar markup is the last thing in <body>, after this script, so wait for the
+    // parser to finish before looking for it.
+    (function whenReady(fn) {
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+      else fn();
+    })(function paintSaleBar() {
       const a = document.getElementById('ntSaleText'), b = document.getElementById('ntSaleText2');
       if (!a || !b) return;
       if (!SALE.on) {
@@ -1569,7 +1577,10 @@
       }
       const bits = [SALE.barLabel, SALE.percent + '% off every licence'];
       if (SALE.endsOn) bits.push(SALE.endsOn);
-      const unit = bits.join('  \u2014  ') + '  \u2014  ';
+      // SALE.gap = how many spaces sit on each side of the em dash. Raise it for more air.
+      const pad = ' '.repeat(SALE.gap || 4);
+      const sep = pad + '\u2014' + pad;
+      const unit = bits.join(sep) + sep;
 
       // Measure only once the webfont is in. Measuring against the fallback gives a
       // different width, and the swap then knocks the two halves out of register.
@@ -1595,12 +1606,21 @@
         );
       }
 
+      // Height of the mobile button bar, so the yellow bar can sit exactly on top of it.
+      function measureButtons() {
+        const cb = document.querySelector('.cover-buttons');
+        const h = (cb && window.matchMedia('(max-width: 768px)').matches)
+          ? Math.round(cb.getBoundingClientRect().height) : 0;
+        document.body.style.setProperty('--nt-buttons-h', h + 'px');
+      }
+
       (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () {
+        measureButtons();
         build();
         let t;
-        window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(build, 200); });
+        window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(function () { measureButtons(); build(); }, 200); });
       });
-    })();
+    });
 
     const PRICES = {
       single: {
@@ -1943,5 +1963,10 @@
   else start();
 })();
 </script>
+<!-- LAUNCH OFFER bar. A direct child of <body> on purpose: nested inside the buy
+     overlay it inherited that overlay's stacking context and painted over the cart. -->
+<div class="nt-sale-bar" id="ntSaleBar" aria-hidden="true">
+  <div class="nt-sale-track"><span id="ntSaleText"></span><span id="ntSaleText2"></span></div>
+</div>
 </body>
 </html>
