@@ -457,7 +457,7 @@
     display: flex; align-items: center;
   }
   .nt-sale-bar span {
-    font-family: "Safra Mono", monospace; font-size: 11px; letter-spacing: 0.06em;
+    font-family: "Safra Mono", monospace; font-size: 14px; letter-spacing: 0;
     color: #000; white-space: nowrap; padding-right: 2.5rem;
     animation: ntSaleSlide 30s linear infinite;
   }
@@ -468,7 +468,7 @@
      All of it is scoped to body.nt-sale-page, so no other page on the site is
      touched. When SALE.on is false the script removes that class and every
      override here stops applying by itself. */
-  body.nt-sale-page { --nt-sale-h: 30px; padding-bottom: var(--nt-sale-h); }
+  body.nt-sale-page { --nt-sale-h: 33px; padding-bottom: var(--nt-sale-h); }
   .nt-sale-bar { height: var(--nt-sale-h); }
 
   /* The cover fills the window minus the header offset. Subtract the bar too,
