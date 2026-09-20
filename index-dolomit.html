@@ -1313,7 +1313,7 @@ ease;
   <div class="nt-sale-track"><span id="ntSaleText"></span><span id="ntSaleText2"></span></div>
 </a>
 <script>
-  const SALE = { on: true, percent: 20, label: 'NEW!', barLabel: 'Dolomit Launch Offer', endsOn: '', gap: 8 };
+  const SALE = { on: true, percent: 20, label: 'NEW!', barLabel: 'Dolomit Launch Offer', endsOn: '', gap: 10 };
   (function paintSaleBar() {
     const a = document.getElementById('ntSaleText'), b = document.getElementById('ntSaleText2');
     if (!a || !b) return;
@@ -1322,12 +1322,11 @@ ease;
       document.body.classList.remove('nt-sale-page');
       return;
     }
-    const bits = [SALE.barLabel, SALE.percent + '% off'];
-    if (SALE.endsOn) bits.push(SALE.endsOn);
-    // SALE.gap = how many spaces sit on each side of the en dash. Raise it for more air.
-    const pad = ' '.repeat(SALE.gap || 4);
-    const sep = pad + '\u2013' + pad;
-    const unit = bits.join(sep) + sep;
+    // One sentence, spaced normally inside: "Dolomit Launch Offer \u2013 20% off".
+    // SALE.gap is the air BETWEEN repeats, not inside the sentence.
+    let sentence = SALE.barLabel + ' \u2013 ' + SALE.percent + '% off';
+    if (SALE.endsOn) sentence += ' \u2013 ' + SALE.endsOn;
+    const unit = sentence + ' '.repeat(SALE.gap || 8);
 
     // Measure only once the webfont is in. Measuring against the fallback gives a
     // different width, and the swap then knocks the two halves out of register.
