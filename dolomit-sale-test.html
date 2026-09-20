@@ -206,6 +206,15 @@
     font-weight: 400;
   }
 
+  /* Note under the Full Family row: the family also carries the variable font. */
+  .ssv2-variable-note {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    line-height: 1.4;
+    margin: -4px 0 10px 32px;
+    opacity: 0.7;
+  }
+
   .ssv2-subnote {
     font-family: "Safra Sans", sans-serif;
     font-size: 12px;
@@ -370,6 +379,8 @@
        Bold Extended gets its own family name (same pattern fontMap uses: family + weight). */
     @font-face { font-family: "Dolomit"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/Dolomit/Dolomit-Bold.woff2") format("woff2"); }
     @font-face { font-family: "Dolomit Extended"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/Dolomit/Dolomit-BoldExtended.woff2") format("woff2"); }
+    /* The variable font drives every type tester. Axis: wdth 5 (Bold) to 7 (Bold Extended). */
+    @font-face { font-family: "Dolomit Variable"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/Dolomit/Dolomit-Variable.woff2") format("woff2"); }
 
     /* Page colour = the red of Liad's poster. Black text on it is ~5.9:1, same idea as Safra's orange.
        Glyph offsets: Dolomit's letters sit on 0–600 units inside an 800/-284 box, so they need a nudge up. */
@@ -456,13 +467,25 @@
     background: #E8FF3A; overflow: hidden; pointer-events: none;
     display: flex; align-items: center;
   }
-  .nt-sale-bar span {
-    font-family: "Safra Mono", monospace; font-size: 14px; letter-spacing: 0;
-    color: #000; white-space: nowrap; padding-right: 2.5rem;
+  /* Seamless marquee: one track holding TWO identical halves, shifted by exactly -50%.
+     At the end of each cycle half two sits where half one started, so the loop never jumps.
+     (The earlier version animated a single span that also had padding-right, which made
+     -50% land mid-text and produced a visible skip once per cycle.) */
+  .nt-sale-track {
+    display: flex; flex: none; width: max-content;
     animation: ntSaleSlide 30s linear infinite;
   }
+  .nt-sale-bar span {
+    font-family: "Safra Mono", monospace; font-size: 14px; letter-spacing: 0;
+    color: #000; white-space: nowrap; flex: none;
+  }
   @keyframes ntSaleSlide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  @media (prefers-reduced-motion: reduce) { .nt-sale-bar span { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .nt-sale-track { animation: none; } }
+
+  /* An open overlay (buy, trial, mobile menu) owns the screen: hide the bar so it
+     does not sit on top of the cart. The page keeps its padding, which is invisible
+     while the overlay covers everything. */
+  body.nt-sale-page:has(.overlay.active) .nt-sale-bar { display: none; }
 
   /* ---- Everything below reserves room for the bar. ONE number controls it. ----
      All of it is scoped to body.nt-sale-page, so no other page on the site is
@@ -536,7 +559,7 @@
             <div class="spec-line">Consultant: Ben Nathan</div>
             <div class="spec-line">Year: 2026</div>
             <div class="spec-line">Languages: Hebrew, Latin (all caps)</div>
-            <div class="spec-line">Formats: OTF, WOFF2</div>
+            <div class="spec-line">Formats: OTF, WOFF2, Variable (TTF, WOFF2)</div>
           </div>
         </div>
       </div>
@@ -564,6 +587,8 @@
         <input class="leading" id="leading-1" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-1">Letter Spacing</label>
         <input class="spacing" id="spacing-1" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-1">Width</label>
+        <input class="width" id="width-1" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -604,6 +629,8 @@
         <input class="leading" id="leading-2" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-2">Letter Spacing</label>
         <input class="spacing" id="spacing-2" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-2">Width</label>
+        <input class="width" id="width-2" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -643,6 +670,8 @@
         <input class="leading" id="leading-11" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-11">Letter Spacing</label>
         <input class="spacing" id="spacing-11" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-11">Width</label>
+        <input class="width" id="width-11" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -683,6 +712,8 @@
         <input class="leading" id="leading-3" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-3">Letter Spacing</label>
         <input class="spacing" id="spacing-3" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-3">Width</label>
+        <input class="width" id="width-3" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -723,6 +754,8 @@
         <input class="leading" id="leading-4" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-4">Letter Spacing</label>
         <input class="spacing" id="spacing-4" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-4">Width</label>
+        <input class="width" id="width-4" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -763,6 +796,8 @@
         <input class="leading" id="leading-5" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-5">Letter Spacing</label>
         <input class="spacing" id="spacing-5" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-5">Width</label>
+        <input class="width" id="width-5" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -805,6 +840,8 @@
         <input class="leading" id="leading-6" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-6">Letter Spacing</label>
         <input class="spacing" id="spacing-6" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-6">Width</label>
+        <input class="width" id="width-6" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -845,6 +882,8 @@
         <input class="leading" id="leading-7" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-7">Letter Spacing</label>
         <input class="spacing" id="spacing-7" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-7">Width</label>
+        <input class="width" id="width-7" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -885,6 +924,8 @@
         <input class="leading" id="leading-8" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-8">Letter Spacing</label>
         <input class="spacing" id="spacing-8" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-8">Width</label>
+        <input class="width" id="width-8" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -925,6 +966,8 @@
         <input class="leading" id="leading-9" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-9">Letter Spacing</label>
         <input class="spacing" id="spacing-9" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-9">Width</label>
+        <input class="width" id="width-9" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -965,6 +1008,8 @@
         <input class="leading" id="leading-10" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-10">Letter Spacing</label>
         <input class="spacing" id="spacing-10" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-10">Width</label>
+        <input class="width" id="width-10" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -1067,10 +1112,16 @@
   </section>
 
   <!-- ===== DATA MAPS ===== -->
+  <!-- Both presets point at the VARIABLE family; what separates them is the wdth value
+       in NT_WIDTH_PRESETS below, so the Width slider keeps working after a preset change. -->
   <script type="application/json" id="fontMap">{
-    "Dolomit Bold": { "family": "Dolomit", "weight": 700 },
-    "Dolomit Bold Extended": { "family": "Dolomit Extended", "weight": 700 }
+    "Dolomit Bold": { "family": "Dolomit Variable", "weight": 700 },
+    "Dolomit Bold Extended": { "family": "Dolomit Variable", "weight": 700 }
   }</script>
+  <script>
+    // Read by script.js: picking a preset sets this wdth and moves the Width slider to match.
+    window.NT_WIDTH_PRESETS = { 'Dolomit Bold': 5, 'Dolomit Bold Extended': 7 };
+  </script>
 
   <!-- script.js (initGlyphGrid) reads glyphMap key "Safra2", falling back to "default".
        Built from every encoded glyph in Dolomit_05-gimel-tet.glyphs (215 characters):
@@ -1246,7 +1297,9 @@
          (so script.js's lead-form submit + checkbox logic skip it entirely).
          All configurator behaviour lives in the scoped script before 
 <!-- LAUNCH OFFER bar. Text comes from the SALE config below so there is one place to edit. -->
-<div class="nt-sale-bar" id="ntSaleBar" aria-hidden="true"><span id="ntSaleText"></span></div>
+<div class="nt-sale-bar" id="ntSaleBar" aria-hidden="true">
+  <div class="nt-sale-track"><span id="ntSaleText"></span><span id="ntSaleText2"></span></div>
+</div>
 </body>. -->
     <p class="intro-text">Configure your licence: pick the fonts, how you'll use them and users. The price updates live.</p>
     <!-- NOTE(dolomit): "Early access" label removed from the template. Only restore it if Nir and Liad agree Dolomit is sold as early access; the template markup was:
@@ -1271,6 +1324,7 @@
                 Full Family (2)
                 <span class="ssv2-family-tag">Bundle<span class="ssv2-tag-full"> Price</span></span>
               </label>
+              <p class="ssv2-variable-note">Full Family also includes the variable font (TTF / WOFF2)</p>
               <label class="checkbox-label">
                 <input type="checkbox" name="family" value="bold" checked>
                 <span class="checkmark"></span>
@@ -1492,15 +1546,25 @@
     const salePrice = (n) => Math.round(n * (100 - SALE.percent) / 100);
 
     (function paintSaleBar() {
-      const el = document.getElementById('ntSaleText');
-      if (!el) return;
-      if (!SALE.on) { const b = document.getElementById('ntSaleBar'); if (b) b.remove();
-                      document.body.classList.remove('nt-sale-page'); return; }
+      const a = document.getElementById('ntSaleText'), b = document.getElementById('ntSaleText2');
+      if (!a || !b) return;
+      if (!SALE.on) {
+        const bar = document.getElementById('ntSaleBar'); if (bar) bar.remove();
+        document.body.classList.remove('nt-sale-page');
+        return;
+      }
       const bits = ['Dolomit launch offer', SALE.percent + '% off every licence'];
       if (SALE.endsOn) bits.push(SALE.endsOn);
-      // duplicated once so the marquee can loop seamlessly at -50%
-      const line = bits.join('  ·  ') + '  ·  ';
-      el.textContent = line + line + line + line + line + line;
+      const unit = bits.join('  \u2014  ') + '  \u2014  ';
+
+      // Repeat until ONE half is wider than the window, so there is never a gap,
+      // then copy it into the second half. The two halves are what make -50% seamless.
+      a.textContent = unit;
+      let guard = 0;
+      while (a.getBoundingClientRect().width < window.innerWidth && guard++ < 40) {
+        a.textContent += unit;
+      }
+      b.textContent = a.textContent;
     })();
 
     const PRICES = {
@@ -1605,7 +1669,7 @@
     }
     function fontsState() {
       if (familyCb.checked) {
-        return { kind: 'family', label: 'Full Family (2)', styles: ['bold','bold-extended'] };
+        return { kind: 'family', label: 'Full Family (2) + Variable font', styles: ['bold','bold-extended'] };
       }
       const chosen = singleCbs.filter(c => c.checked);
       return {

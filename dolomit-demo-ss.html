@@ -206,6 +206,15 @@
     font-weight: 400;
   }
 
+  /* Note under the Full Family row: the family also carries the variable font. */
+  .ssv2-variable-note {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    line-height: 1.4;
+    margin: -4px 0 10px 32px;
+    opacity: 0.7;
+  }
+
   .ssv2-subnote {
     font-family: "Safra Sans", sans-serif;
     font-size: 12px;
@@ -370,6 +379,8 @@
        Bold Extended gets its own family name (same pattern fontMap uses: family + weight). */
     @font-face { font-family: "Dolomit"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/Dolomit/Dolomit-Bold.woff2") format("woff2"); }
     @font-face { font-family: "Dolomit Extended"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/Dolomit/Dolomit-BoldExtended.woff2") format("woff2"); }
+    /* The variable font drives every type tester. Axis: wdth 5 (Bold) to 7 (Bold Extended). */
+    @font-face { font-family: "Dolomit Variable"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/Dolomit/Dolomit-Variable.woff2") format("woff2"); }
 
     /* Page colour = the red of Liad's poster. Black text on it is ~5.9:1, same idea as Safra's orange.
        Glyph offsets: Dolomit's letters sit on 0–600 units inside an 800/-284 box, so they need a nudge up. */
@@ -474,7 +485,7 @@
             <div class="spec-line">Consultant: Ben Nathan</div>
             <div class="spec-line">Year: 2026</div>
             <div class="spec-line">Languages: Hebrew, Latin (all caps)</div>
-            <div class="spec-line">Formats: OTF, WOFF2</div>
+            <div class="spec-line">Formats: OTF, WOFF2, Variable (TTF, WOFF2)</div>
           </div>
         </div>
       </div>
@@ -502,6 +513,8 @@
         <input class="leading" id="leading-1" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-1">Letter Spacing</label>
         <input class="spacing" id="spacing-1" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-1">Width</label>
+        <input class="width" id="width-1" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -542,6 +555,8 @@
         <input class="leading" id="leading-2" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-2">Letter Spacing</label>
         <input class="spacing" id="spacing-2" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-2">Width</label>
+        <input class="width" id="width-2" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -581,6 +596,8 @@
         <input class="leading" id="leading-11" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-11">Letter Spacing</label>
         <input class="spacing" id="spacing-11" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-11">Width</label>
+        <input class="width" id="width-11" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -621,6 +638,8 @@
         <input class="leading" id="leading-3" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-3">Letter Spacing</label>
         <input class="spacing" id="spacing-3" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-3">Width</label>
+        <input class="width" id="width-3" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -661,6 +680,8 @@
         <input class="leading" id="leading-4" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-4">Letter Spacing</label>
         <input class="spacing" id="spacing-4" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-4">Width</label>
+        <input class="width" id="width-4" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -701,6 +722,8 @@
         <input class="leading" id="leading-5" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-5">Letter Spacing</label>
         <input class="spacing" id="spacing-5" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-5">Width</label>
+        <input class="width" id="width-5" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -743,6 +766,8 @@
         <input class="leading" id="leading-6" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-6">Letter Spacing</label>
         <input class="spacing" id="spacing-6" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-6">Width</label>
+        <input class="width" id="width-6" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -783,6 +808,8 @@
         <input class="leading" id="leading-7" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-7">Letter Spacing</label>
         <input class="spacing" id="spacing-7" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-7">Width</label>
+        <input class="width" id="width-7" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -823,6 +850,8 @@
         <input class="leading" id="leading-8" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-8">Letter Spacing</label>
         <input class="spacing" id="spacing-8" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-8">Width</label>
+        <input class="width" id="width-8" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -863,6 +892,8 @@
         <input class="leading" id="leading-9" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-9">Letter Spacing</label>
         <input class="spacing" id="spacing-9" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-9">Width</label>
+        <input class="width" id="width-9" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -903,6 +934,8 @@
         <input class="leading" id="leading-10" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-10">Letter Spacing</label>
         <input class="spacing" id="spacing-10" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-10">Width</label>
+        <input class="width" id="width-10" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -1005,10 +1038,16 @@
   </section>
 
   <!-- ===== DATA MAPS ===== -->
+  <!-- Both presets point at the VARIABLE family; what separates them is the wdth value
+       in NT_WIDTH_PRESETS below, so the Width slider keeps working after a preset change. -->
   <script type="application/json" id="fontMap">{
-    "Dolomit Bold": { "family": "Dolomit", "weight": 700 },
-    "Dolomit Bold Extended": { "family": "Dolomit Extended", "weight": 700 }
+    "Dolomit Bold": { "family": "Dolomit Variable", "weight": 700 },
+    "Dolomit Bold Extended": { "family": "Dolomit Variable", "weight": 700 }
   }</script>
+  <script>
+    // Read by script.js: picking a preset sets this wdth and moves the Width slider to match.
+    window.NT_WIDTH_PRESETS = { 'Dolomit Bold': 5, 'Dolomit Bold Extended': 7 };
+  </script>
 
   <!-- script.js (initGlyphGrid) reads glyphMap key "Safra2", falling back to "default".
        Built from every encoded glyph in Dolomit_05-gimel-tet.glyphs (215 characters):
@@ -1206,6 +1245,7 @@
                 Full Family (2)
                 <span class="ssv2-family-tag">Bundle<span class="ssv2-tag-full"> Price</span></span>
               </label>
+              <p class="ssv2-variable-note">Full Family also includes the variable font (TTF / WOFF2)</p>
               <label class="checkbox-label">
                 <input type="checkbox" name="family" value="bold" checked>
                 <span class="checkmark"></span>
@@ -1516,7 +1556,7 @@
     }
     function fontsState() {
       if (familyCb.checked) {
-        return { kind: 'family', label: 'Full Family (2)', styles: ['bold','bold-extended'] };
+        return { kind: 'family', label: 'Full Family (2) + Variable font', styles: ['bold','bold-extended'] };
       }
       const chosen = singleCbs.filter(c => c.checked);
       return {

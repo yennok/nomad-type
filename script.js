@@ -72,10 +72,13 @@
           textArea.style.fontWeight = String(cfg.weight);
           textArea.style.fontStyle = cfg.style || 'normal';
 
-          // For Kilo Display page: map preset label to wdth and sync slider
-          if (isKiloDisplayPage) {
-            const presetWidth = KILO_PRESETS[select.value];
-            if (presetWidth) {
+          // Map a style preset to a wdth value and sync the slider.
+          // Kilo Display keeps its own table; any other page can supply one by setting
+          // window.NT_WIDTH_PRESETS = { '<option label>': <wdth>, ... } before this runs.
+          const presets = isKiloDisplayPage ? KILO_PRESETS : window.NT_WIDTH_PRESETS;
+          if (presets) {
+            const presetWidth = presets[select.value];
+            if (presetWidth !== undefined) {
               textArea.style.fontVariationSettings = `"wdth" ${presetWidth}`;
               if (widthSlider) {
                 widthSlider.value = presetWidth;

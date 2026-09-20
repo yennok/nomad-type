@@ -679,18 +679,30 @@ ease;
      does NOT lengthen the page and the last pixels of the footer end up behind the
      bar. Padding on the footer itself does lengthen it, and padding never collapses. */
   body.nt-sale-page #footer-container { padding-bottom: var(--nt-sale-h); }
-  .nt-sale-bar {
+  /* On the homepage the bar is a link to the Dolomit page, so unlike the font page
+     it must accept clicks. */
+  a.nt-sale-bar {
     position: fixed; left: 0; right: 0; bottom: 0; height: var(--nt-sale-h); z-index: 1001;
-    background: #E8FF3A; overflow: hidden; pointer-events: none;
+    background: #E8FF3A; overflow: hidden;
     display: flex; align-items: center;
+    text-decoration: none; cursor: pointer;
+  }
+  /* Seamless marquee: one track holding TWO identical halves, shifted by exactly -50%,
+     so half two lands where half one started and the loop never jumps. */
+  .nt-sale-track {
+    display: flex; flex: none; width: max-content;
+    animation: ntSaleSlide 30s linear infinite;
   }
   .nt-sale-bar span {
     font-family: "Safra Mono", monospace; font-size: 14px; letter-spacing: 0;
-    color: #000; white-space: nowrap; padding-right: 2.5rem;
-    animation: ntSaleSlide 30s linear infinite;
+    color: #000; white-space: nowrap; flex: none;
   }
   @keyframes ntSaleSlide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  @media (prefers-reduced-motion: reduce) { .nt-sale-bar span { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .nt-sale-track { animation: none; } }
+
+  /* An open overlay owns the screen: hide the bar underneath it. */
+  body.nt-sale-page:has(.overlay.active) .nt-sale-bar,
+  body.nt-sale-page:has(.mobile-overlay.active) .nt-sale-bar { display: none; }
 </style>
 </head>
 <body class="homepage-page nt-sale-page">
@@ -1281,21 +1293,30 @@ ease;
   </script>
 
 <!-- LAUNCH OFFER bar. Same SALE switch as the font page: on=false removes it. -->
-<div class="nt-sale-bar" id="ntSaleBar" aria-hidden="true"><span id="ntSaleText"></span></div>
+<a class="nt-sale-bar" id="ntSaleBar" href="dolomit-demo-ss" aria-label="Dolomit launch offer, 20% off every licence">
+  <div class="nt-sale-track"><span id="ntSaleText"></span><span id="ntSaleText2"></span></div>
+</a>
 <script>
   const SALE = { on: true, percent: 20, label: 'Launch offer', endsOn: '' };
   (function paintSaleBar() {
-    const el = document.getElementById('ntSaleText');
-    if (!el) return;
+    const a = document.getElementById('ntSaleText'), b = document.getElementById('ntSaleText2');
+    if (!a || !b) return;
     if (!SALE.on) {
-      const b = document.getElementById('ntSaleBar'); if (b) b.remove();
+      const bar = document.getElementById('ntSaleBar'); if (bar) bar.remove();
       document.body.classList.remove('nt-sale-page');
       return;
     }
     const bits = ['Dolomit launch offer', SALE.percent + '% off every licence'];
     if (SALE.endsOn) bits.push(SALE.endsOn);
-    const line = bits.join('  \u00b7  ') + '  \u00b7  ';
-    el.textContent = line + line + line + line + line + line;
+    const unit = bits.join('  \u2014  ') + '  \u2014  ';
+
+    // Repeat until ONE half is wider than the window, then mirror it into the second.
+    a.textContent = unit;
+    let guard = 0;
+    while (a.getBoundingClientRect().width < window.innerWidth && guard++ < 40) {
+      a.textContent += unit;
+    }
+    b.textContent = a.textContent;
   })();
 </script>
 </body>
