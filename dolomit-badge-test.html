@@ -551,10 +551,10 @@
        expressed as calculations on this variable. */
     body.nt-sale-page { --nt-sale-h: 0px; }
     body.nt-sale-page .nt-sale-bar { display: none; }
-    /* 27px right / 28px up from the RED COVER. Measured from the window those numbers
-       put 42px of the badge behind the white button bar, so they are applied to the
-       cover instead: right = the cover's own 18px inset + 27. */
-    body.nt-sale-page .nt-badge { display: block; right: 45px; bottom: var(--nt-badge-bottom, 116px); }
+    /* Nir's values, straight from the window edges. On a phone this lands the badge
+       inside the red cover: 9px in from its right edge and 10px above its bottom,
+       clear of the white button bar. */
+    body.nt-sale-page .nt-badge { display: block; right: 27px; bottom: 98px; }
     body.nt-sale-page { padding-top: 0; }
   }
 
@@ -1715,12 +1715,6 @@
         } catch (e) {}
         draw(rText + Math.max(reach, 2) + PAD);
 
-        // 28px above the bottom of the red cover, read from the cover itself.
-        const cover = document.querySelector('.cover-header');
-        if (cover) {
-          const gap = Math.round(window.innerHeight - cover.getBoundingClientRect().bottom + 28);
-          document.body.style.setProperty('--nt-badge-bottom', gap + 'px');
-        }
 
       }
 
