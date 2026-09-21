@@ -1,0 +1,2061 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FPE1JV10R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4FPE1JV10R');
+  </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Dolomit דולומיט — rotating badge test | Nomad Type</title>
+
+  <!-- DEMO page: not linked anywhere, not in sitemap. Remove noindex when it goes live. -->
+  <meta name="robots" content="noindex">
+
+  <!-- SEO meta -->
+  <!-- DRAFT(dolomit): written by Claude, Nir to review -->
+  <meta name="description" content="Dolomit דולומיט is a geometric Hebrew display typeface by Liad Shadmi, a modern alternative to the classic Haim letter with sharp corners inspired by paper folds. Bold and Bold Extended, with OpenType alternates and Latin caps.">
+  <meta name="keywords" content="Dolomit, דולומיט, Hebrew typeface, Hebrew font, Hebrew display font, geometric Hebrew font, Haim, Liad Shadmi, Ben Nathan, Nomad Type">
+  <meta name="author" content="Liad Shadmi">
+  <link rel="canonical" href="https://www.nomad-type.com/dolomit">
+
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="product">
+  <meta property="og:url" content="https://www.nomad-type.com/dolomit">
+  <meta property="og:title" content="Dolomit דולומיט | Nomad Type">
+  <!-- DRAFT(dolomit): written by Claude, Nir to review -->
+  <meta property="og:description" content="Dolomit דולומיט is a geometric Hebrew display typeface by Liad Shadmi, a modern alternative to the classic Haim letter with sharp corners inspired by paper folds. Bold and Bold Extended, with OpenType alternates and Latin caps.">
+  <meta property="og:image" content="https://www.nomad-type.com/assets/featured_image.png">
+  <meta property="og:image:width" content="1500">
+  <meta property="og:image:height" content="1000">
+  <meta property="og:image:alt" content="Dolomit typeface by Liad Shadmi">
+  <meta property="og:site_name" content="Nomad Type">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dolomit דולומיט | Nomad Type">
+  <!-- DRAFT(dolomit): written by Claude, Nir to review -->
+  <meta name="twitter:description" content="Dolomit דולומיט is a geometric Hebrew display typeface by Liad Shadmi, a modern alternative to the classic Haim letter with sharp corners inspired by paper folds. Bold and Bold Extended, with OpenType alternates and Latin caps.">
+  <meta name="twitter:image" content="https://www.nomad-type.com/assets/featured_image.png">
+
+  <!-- Structured Data: Product -->
+  <!-- DRAFT(dolomit): written by Claude, Nir to review (JSON-LD description) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Dolomit",
+    "alternateName": "דולומיט",
+    "description": "Dolomit דולומיט is a geometric Hebrew display typeface by Liad Shadmi, a modern alternative to the classic Haim letter with sharp corners inspired by paper folds. Bold and Bold Extended, with OpenType alternates and Latin caps.",
+    "url": "https://www.nomad-type.com/dolomit",
+    "image": "https://www.nomad-type.com/assets/featured_image.png",
+    "category": "Typeface",
+    "brand": { "@type": "Brand", "name": "Nomad Type", "url": "https://www.nomad-type.com/" },
+    "manufacturer": { "@type": "Organization", "name": "Nomad Type", "url": "https://www.nomad-type.com/" },
+    "creator": { "@type": "Person", "name": "Liad Shadmi" },
+    "releaseDate": "2026",
+    "additionalProperty": [
+      { "@type": "PropertyValue", "name": "Scripts", "value": "Hebrew, Latin (all caps)" },
+      { "@type": "PropertyValue", "name": "Designer", "value": "Liad Shadmi" },
+      { "@type": "PropertyValue", "name": "Consultant", "value": "Ben Nathan" },
+      { "@type": "PropertyValue", "name": "Styles", "value": "Bold, Bold Extended" },
+      { "@type": "PropertyValue", "name": "Formats", "value": "OTF, WOFF2" }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+  <!-- Dolomit demo: buy-overlay styles ported from safra.html (via kaldanit.html) -->
+<style>
+  /* Make the overlay body a column so the price+Buy block can pin to bottom
+     and the middle can scroll independently on small screens. */
+  #buyOverlay .overlay-content { padding-bottom: 0; }
+  .ssv2-form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+  }
+  .ssv2-scroll {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    margin-right: -0.25rem;
+    padding-right: 0.25rem;
+  }
+
+  /* Full Family row: same black checkbox as the others; only the "bundle price" tag keeps the accent. */
+  .checkbox-label.ssv2-family {
+    color: #000;
+    font-weight: 400;
+  }
+  .ssv2-family-tag {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    color: #000;
+    opacity: 0.55;
+    margin-left: auto;
+    padding-left: 0.5rem;
+    white-space: nowrap;
+  }
+  /* "bundle price" lights up in the accent only when Full Family is selected. */
+  .checkbox-label.ssv2-family input:checked ~ .ssv2-family-tag {
+    color: var(--primary-color);
+    opacity: 1;
+  }
+
+  /* LICENSE TIER — single-select (radios) wearing the site's checkbox look. */
+  .ssv2-tier .checkbox-label input[type="radio"] { display: none; }
+  .ssv2-tier .checkmark {
+    width: 16px; height: 16px; position: relative; flex-shrink: 0;
+    background-image: url('assets/checkbox.svg');
+    background-size: contain; background-repeat: no-repeat; background-position: center;
+  }
+  .ssv2-tier .checkbox-label input[type="radio"]:checked + .checkmark {
+    background-image: url('assets/checkbox-checked.svg');
+  }
+  .ssv2-tier .tier-sub {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    color: #000;
+    opacity: 0.55;
+    margin-left: auto;
+    padding-left: 0.5rem;
+    white-space: nowrap;
+  }
+  .ssv2-tier-note {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    line-height: 1.45;
+    color: #000;
+    opacity: 0.55;
+    margin: 0.5rem 0 0.9rem;
+  }
+
+  /* Collapsibles inside the configurator open by default; give them room. */
+  #buyOverlay .collapsible-content.active { max-height: 640px; }
+
+  /* LIVE SUMMARY + PRICE (pinned above the Buy button) */
+  .ssv2-foot {
+    flex: 0 0 auto;
+    border-top: 1px solid #000;
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+    background: #fff;
+  }
+  .ssv2-sum-head {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    opacity: 0.55;
+    margin: 0 0 0.6rem;
+  }
+  .ssv2-sum-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: "Safra Mono", monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 1px 0;
+  }
+  .ssv2-sum-row .k { opacity: 0.55; }
+  .ssv2-sum-row .v { text-align: right; }
+  .ssv2-includes {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    opacity: 0.75;
+    margin: 0.6rem 0 0.8rem;
+  }
+  .ssv2-includes .inc-tag { color: var(--primary-color); opacity: 1; }
+
+  .ssv2-price {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 0.9rem;
+  }
+  .ssv2-price .amount {
+    font-family: "Safra Sans", serif;
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 1;
+    color: #000;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0px;
+  }
+  .ssv2-price .amount.is-quote { font-size: 26px; }
+  .ssv2-price .amount-label { font-family: "Safra Mono", monospace; font-size: 12px; opacity: 0.55; }
+  .ssv2-price .amount .ssv2-was {
+    text-decoration: line-through;
+    color: #000;
+    opacity: 0.4;
+    font-size: 0.62em;
+    margin-right: 7px;
+    font-weight: 400;
+  }
+
+  /* Note under the Full Family row: the family also carries the variable font. */
+  .ssv2-variable-note {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    line-height: 1.4;
+    margin: -4px 0 10px 32px;
+    opacity: 0.7;
+  }
+
+  .ssv2-subnote {
+    font-family: "Safra Sans", sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: left;
+    opacity: 0.6;
+    margin: 0.4rem 0 1rem;
+  }
+  .ssv2-subnote a { color: #000; }
+
+  /* "Coming soon" note + disabled Buy state for combos with no live checkout. */
+  .ssv2-unavailable {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--primary-color);
+    margin: 0.5rem 0 0;
+  }
+  #buy-btn[disabled] {
+    background: #ececec;
+    color: #a0a0a0;
+    opacity: 1;
+    border: none;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* Buy overlay: accent (orange) selection + asterisks for single fonts / use / Users; black for the Full Family bundle. */
+  #buyOverlay .required, #buyOverlay .asterisk { color: var(--primary-color); }
+  #buyOverlay .ssv2-form .checkmark { position: relative; }
+  #buyOverlay .ssv2-form input:checked + .checkmark {
+    background-image: url('assets/checkbox.svg') !important;
+  }
+  #buyOverlay .ssv2-form input:checked + .checkmark::after {
+    content: ""; position: absolute; top: 29%; left: 29%; right: 29%; bottom: 29%;
+    background: var(--primary-color);
+  }
+  #buyOverlay .checkbox-label.ssv2-family input:checked + .checkmark::after {
+    background: #000;
+  }
+  #buyOverlay .ssv2-includes { display: none; }
+
+  /* "bundle price" tag on the Desktop row: grey by default, accent when Desktop+Web (bundle) is active. */
+  .ssv2-usebundle-tag {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    color: #000; opacity: 0.55;
+    margin-left: auto; padding-left: 0.5rem; white-space: nowrap;
+  }
+  .ssv2-usebundle-tag.lit { color: var(--primary-color); opacity: 1; }
+  /* Early access: short label + "?" with a hover/tap tooltip (no wall of text). */
+  .ssv2-ea {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    color: #000; opacity: 0.75;
+    display: inline-flex; align-items: center; gap: 6px;
+    margin: 0.5rem 0 0; position: relative;
+  }
+  .ssv2-ea-q {
+    all: unset; cursor: help; box-sizing: border-box;
+    width: 15px; height: 15px; line-height: 13px; text-align: center;
+    border: 1px solid currentColor; border-radius: 50%;
+    font-size: 10px;
+  }
+  .ssv2-ea-pop {
+    display: none; position: absolute; left: 0; top: calc(100% + 6px); z-index: 5;
+    width: 235px; max-width: 80vw; background: #000; color: #fff;
+    font-family: "Safra Sans", sans-serif; font-size: 11px; line-height: 1.45;
+    padding: 8px 10px; border-radius: 6px;
+  }
+  .ssv2-ea-q:hover + .ssv2-ea-pop,
+  .ssv2-ea-q:focus + .ssv2-ea-pop { display: block; }
+
+  /* MOBILE OVERFLOW CONTAINMENT — the page's own .overlay rules already make
+     the drawer full-width and own the slide-in (`right`), so we DON'T set width
+     or right here. We only clamp overflow so the GSAP transforms on .cover-title
+     can't push a horizontal scrollbar, and let flex rows wrap when cramped. */
+  @media (max-width: 768px) {
+    #buyOverlay {
+      width: 100vw !important;
+      max-width: 100vw !important;
+      left: auto;
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+    #buyOverlay.active { right: 0 !important; }
+    #buyOverlay .overlay-content {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+    #buyOverlay .overlay-content * { max-width: 100%; box-sizing: border-box; min-width: 0; }
+    .ssv2-price .amount { font-size: 23px; }
+    /* Mobile: hide the "Your licence" recap (Fonts/Use/Users). It just repeats the
+       choices above and eats the screen; the live price + Buy button stay. */
+    #buyOverlay .ssv2-sum-head,
+    #buyOverlay .ssv2-sum-row { display: none; }
+    /* Mobile: hide the intro paragraph too; the fields are self-explanatory and it eats space. */
+    #buyOverlay .intro-text { display: none; }
+  }
+
+  /* Let flex rows wrap so long labels/pills/values never overflow horizontally. */
+  #buyOverlay * { box-sizing: border-box; }
+  #buyOverlay .checkbox-label {
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+  .ssv2-family-tag,
+  .ssv2-tier .tier-sub {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-align: right;
+    max-width: 100%;
+  }
+  .ssv2-sum-row { flex-wrap: wrap; }
+  .ssv2-sum-row .k { flex: 0 0 auto; }
+  .ssv2-sum-row .v {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+  .ssv2-price { flex-wrap: wrap; }
+  .ssv2-price .amount { min-width: 0; overflow-wrap: anywhere; }
+
+  /* Belt-and-braces: never let the drawer or its contents cause page overflow */
+  #buyOverlay { overflow-x: hidden; }
+  #buyOverlay, #buyOverlay * { max-width: 100%; }
+    body.dolomit-page .spec-line a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+
+    /* PROTOTYPE 09-12: stylistic sets toggle in each tester's control bar (candidate for shared script.js) */
+    .ss-buttons { display: flex; }
+    .ss-buttons .ss-btn:focus { outline: none; }
+    .ss-buttons .ss-btn:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
+    .ss-buttons .ss-btn {
+      width: auto; min-width: 33px; padding: 0 10px;
+      font-family: "Safra Mono", monospace; font-size: 14px !important; line-height: 31px;
+      color: #000; background-image: none; white-space: nowrap;
+    }
+    @media (max-width: 768px) {
+      body.dolomit-page .font-align-wrapper { flex-wrap: wrap; row-gap: 0.5rem; }
+      .ss-buttons { width: 100%; }
+      .ss-buttons .ss-btn { flex: 1; padding: 0 7px; font-size: 14px !important; }
+    }
+
+    /* Cover entrance: width switch (Nir 09-13). Letters appear one by one in the other width,
+       then snap to the final one. Final state = no class = the line's own font
+       (Hebrew line Bold Extended, Latin line and brackets Bold). */
+    .cover-title .ct-l { display: inline-block; visibility: hidden; }
+    .cover-title .ct-l.ct-on { visibility: visible; }
+    .cover-title div:nth-child(1) .ct-l.ct-alt { font-family: "Dolomit", sans-serif; }
+    .cover-title div:nth-child(2) .ct-l.ct-alt { font-family: "Dolomit Extended", sans-serif; }
+</style>
+
+  <!-- ====== DOLOMIT PAGE STYLES ======
+       styles.css is shared and untouched for this demo, so everything page-specific lives here.
+       When the page goes live, move these into styles.css (sections: FONT FILES, page colour,
+       cover title + mobile overrides, marquee classes) and delete this block. -->
+  <style>
+    /* Font files (WOFF2 from Liad, copied into fonts/Dolomit/).
+       Bold Extended gets its own family name (same pattern fontMap uses: family + weight). */
+    @font-face { font-family: "Dolomit"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/Dolomit/Dolomit-Bold.woff2") format("woff2"); }
+    @font-face { font-family: "Dolomit Extended"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/Dolomit/Dolomit-BoldExtended.woff2") format("woff2"); }
+    /* The variable font drives every type tester. Axis: wdth 5 (Bold) to 7 (Bold Extended). */
+    @font-face { font-family: "Dolomit Variable"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/Dolomit/Dolomit-Variable.woff2") format("woff2"); }
+
+    /* Page colour = the red of Liad's poster. Black text on it is ~5.9:1, same idea as Safra's orange.
+       Glyph offsets: Dolomit's letters sit on 0–600 units inside an 800/-284 box, so they need a nudge up. */
+    body.dolomit-page {
+      --primary-color: #FF3B21;
+      --glyph-vertical-offset: 2px;
+      --preview-vertical-offset: 9px;
+    }
+
+    /* Cover title: דולומיט in Bold Extended over (DOLOMIT) in Bold, same size (Nir 09-13).
+       Sizes are in vw so both lines fill the cover width at any screen size (capped by vh on short screens). */
+    body.dolomit-page .cover-title {
+      --cover-size: min(15vw, 26vh);
+      margin-bottom: 0px;
+      text-align: center;
+    }
+    body.dolomit-page .cover-title div:nth-child(2) {
+      font-family: "Dolomit", sans-serif;
+      font-weight: 700;
+      color: black;
+      font-size: var(--cover-size);
+      line-height: 1;
+      margin-bottom: 0px;
+      letter-spacing: 0;
+      white-space: nowrap;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+    body.dolomit-page .cover-title div:nth-child(1) {
+      font-family: "Dolomit Extended", sans-serif;
+      font-weight: 700;
+      color: black;
+      font-size: var(--cover-size);
+      line-height: 1;
+      margin-bottom: 0.04em;
+      letter-spacing: 0;
+      white-space: nowrap;
+      direction: rtl;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    /* Weights marquee */
+    .marquee-text.dolomit-text {
+      font-family: "Dolomit", sans-serif;
+    }
+    .marquee-text.dolomit-extended-text {
+      font-family: "Dolomit Extended", sans-serif;
+    }
+    body.dolomit-page .marquee-text {
+      letter-spacing: 0;
+    }
+
+    /* In Use / Specimen: two portrait images each, side by side */
+    .dolomit-page .in-use-section .in-use-grid,
+    .dolomit-page .specimen-section .in-use-grid { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 768px) {
+      .dolomit-page .in-use-section .in-use-grid,
+      .dolomit-page .specimen-section .in-use-grid { grid-template-columns: 1fr; }
+    }
+
+    .dolomit-page .photo-credit a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+    .dolomit-page .photo-credit a:hover { color: var(--primary-color); }
+
+    /* Stylistic-alternates tester: second line switches on ss01 */
+    .dolomit-alt-demo .dolomit-ss01 { font-feature-settings: "ss01" 1; }
+    /* Mobile: script.js won't auto-fit below 40px, and the two long Extended lines are still too wide there,
+       so they get a vw size. The size slider still wins (it writes an inline !important). */
+    @media (max-width: 768px) {
+      .dolomit-page .type-area.dolomit-alt-demo { font-size: 24vw !important; }
+      .dolomit-page .type-area.column-count-2 { font-size: 22px !important; }
+      .dolomit-page .type-area.dolomit-big-mix { font-size: 40px !important; }
+      .dolomit-page .type-area.dolomit-long-he { font-size: 8.8vw !important; }
+      .dolomit-page .type-area.dolomit-long-en { font-size: 8.2vw !important; }
+    }
+  </style>
+
+<!-- ============ LAUNCH OFFER (test) ============
+     One bar pinned to the bottom of the window, same mechanism as the private bar on
+     /inter-hebrew. Colour #E8FF3A. Remove this block and the SALE config to turn it off. -->
+<style>
+  .nt-sale-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; height: 30px; z-index: 900;
+    background: #E8FF3A; overflow: hidden; pointer-events: none;
+    display: flex; align-items: center;
+  }
+  /* Seamless marquee: one track holding TWO identical halves, shifted by exactly -50%.
+     At the end of each cycle half two sits where half one started, so the loop never jumps.
+     (The earlier version animated a single span that also had padding-right, which made
+     -50% land mid-text and produced a visible skip once per cycle.) */
+  /* The track is ABSOLUTE on purpose: as a flex item it was capped at the bar's width,
+     so translateX(-50%) shifted half the BAR, not half the content, and the two halves
+     collided. Absolute positioning lets it shrink-wrap its content instead.
+     The shift is a pixel value measured after the webfont loads (see the script), never
+     a percentage, so neither the element width nor the font swap can throw it off. */
+  /* The track is ABSOLUTE on purpose: as a flex item it was capped at the bar's width,
+     so a -50% shift moved half the BAR, not half the content, and the halves collided.
+     The motion itself is driven from JS (see the script) with an exact pixel distance
+     measured after the webfont loads. CSS keyframes are not used here: a custom
+     property inside @keyframes does not reliably update when the script sets it. */
+  .nt-sale-track {
+    position: absolute; top: 0; left: 0; height: 100%;
+    display: flex; align-items: center;
+    width: max-content !important; max-width: none !important;
+  }
+  /* max-width: none is load-bearing. A site-wide rule caps spans at 100% of their
+     parent, which clamped each half to the bar width while its text stayed far wider.
+     Measuring that clamped box gave a shift shorter than the text, so the two halves
+     rode over each other. */
+  .nt-sale-bar span {
+    font-family: "Safra Mono", monospace; font-size: 14px; letter-spacing: 0;
+    color: #000; flex: none;
+    /* pre, not nowrap: nowrap still collapses runs of spaces and drops the trailing
+       ones, which glued the em dash to the next repetition. pre keeps them and
+       still never wraps, so the gap between repeats is exactly what the script writes. */
+    white-space: pre;
+    max-width: none !important; width: auto !important;
+  }
+
+  /* The bar stays visible when the cart opens; the overlay simply sits above it
+     (overlay z-index 2000 against the bar's 900). */
+
+  /* ---- Everything below reserves room for the bar. ONE number controls it. ----
+     All of it is scoped to body.nt-sale-page, so no other page on the site is
+     touched. When SALE.on is false the script removes that class and every
+     override here stops applying by itself. */
+  body.nt-sale-page { --nt-sale-h: 33px; padding-bottom: var(--nt-sale-h); }
+  .nt-sale-bar { height: var(--nt-sale-h); }
+
+  /* The cover fills the window minus the header offset. Subtract the bar too,
+     otherwise the bottom of the cover slides under it. */
+  body.nt-sale-page .cover-header {
+    height: calc(100vh - 120px - var(--nt-sale-h));
+    height: calc(var(--vh, 1vh) * 100 - 120px - var(--nt-sale-h));
+  }
+  /* Buy / Trial sit above the bar instead of on it.
+     :not(.sticky) is load-bearing. After the first fold the buttons get .sticky,
+     which pins them with `top: 29px; bottom: auto`. Without the :not, this rule
+     wins on specificity and puts `bottom` back, so the element ends up pinned top
+     AND bottom and stretches to the full height of the window. */
+  body.nt-sale-page .cover-buttons:not(.sticky) { bottom: calc(29px + var(--nt-sale-h)); }
+
+  /* ================= ROTATING BADGE (mobile only) =================
+     A yellow disc with the offer set ON its edge, turning slowly. The text wraps the
+     circle EXACTLY once: the script measures the sentence after the webfont loads and
+     derives the radius from it (r = width / 2pi), so there is no seam to line up and
+     the badge resizes itself if the copy or the type size changes.
+     Built with SVG textPath, not per-letter rotation, because rotating each glyph
+     separately throws away the font's kerning. */
+  .nt-badge {
+    position: fixed; right: 16px; z-index: 900;
+    display: none;                      /* desktop keeps the bar */
+    pointer-events: none;
+  }
+  .nt-badge svg { display: block; overflow: visible; }
+  .nt-badge .nt-badge-disc { fill: #E8FF3A; }
+  .nt-badge .nt-badge-text {
+    fill: #000; font-family: "Safra Mono", monospace; font-size: 14px; letter-spacing: 0;
+  }
+  .nt-badge-spin { transform-origin: 50% 50%; animation: ntBadgeSpin 12s linear infinite; }
+  @keyframes ntBadgeSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .nt-badge-spin { animation: none; } }
+
+  @media (max-width: 768px) {
+    /* The badge replaces the bar on phones. It sits above the white button strip. */
+    body.nt-sale-page .nt-sale-bar { display: none; }
+    body.nt-sale-page .nt-badge { display: block; bottom: calc(var(--nt-buttons-h, 70px) + 16px); }
+    body.nt-sale-page { padding-top: 0; }
+  }
+
+  @media (max-width: 768px) {
+    /* On mobile the bar moves to the TOP of the screen. The site's own header is
+       fixed at top: 0, so it gets pushed down by exactly the bar height; everything
+       else follows from the same variable. The white button bar keeps the bottom. */
+    body.nt-sale-page .nt-sale-bar { top: 0; bottom: auto; }
+    /* Everything the site pins to the top of the screen moves down by the bar height.
+       margin-top rather than top: these elements have their own top offsets (and the
+       burger animates its transform), so a margin shifts them without touching either. */
+    body.nt-sale-page .sticky-top-section,
+    body.nt-sale-page .sticky-nav,
+    body.nt-sale-page .sticky-green-circle,
+    body.nt-sale-page .mobile-hamburger-circle { margin-top: var(--nt-sale-h); }
+    body.nt-sale-page { padding-top: var(--nt-sale-h); padding-bottom: var(--nt-buttons-h, 70px); }
+    body.nt-sale-page .cover-buttons { bottom: 0 !important; }
+    body.nt-sale-page .cover-header {
+      height: calc(100vh - 40px - var(--nt-sale-h) - var(--nt-buttons-h, 70px));
+      height: calc(var(--vh, 1vh) * 100 - 40px - var(--nt-sale-h) - var(--nt-buttons-h, 70px));
+    }
+  }
+
+  @media (max-width: 480px) {
+    body.nt-sale-page .cover-header {
+      height: calc(100vh - 20px - var(--nt-sale-h));
+      height: calc(var(--vh, 1vh) * 100 - 106px - var(--nt-sale-h));
+    }
+  }
+
+  /* The offer tag that sits next to the live price in the buy overlay. */
+  .nt-sale-tag {
+    font-family: "Safra Mono", monospace; font-size: 11px; letter-spacing: 0.04em;
+    background: #E8FF3A; color: #000; padding: 2px 6px; margin-left: 8px;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body class="dolomit-page nt-sale-page">
+
+  <style>.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}</style>
+  <!-- DRAFT(dolomit): written by Claude, Nir to review -->
+  <h1 class="sr-only">Dolomit דולומיט, a geometric Hebrew display typeface with Latin caps in Bold and Bold Extended, designed by Liad Shadmi and published by Nomad Type</h1>
+
+  <!-- Header Container (will be populated by JavaScript) -->
+  <div id="header-container"></div>
+  <!-- ====== MAIN CONTENT ====== -->
+  <main class="content-wrapper">
+
+  <!-- ====== FONT INTRO SECTION ====== -->
+  <section class="font-intro">
+    <div class="intro-content">
+      <div class="intro-grid">
+        <div class="intro-text-column">
+          <!-- DRAFT(dolomit): written by Claude, Nir to review -->
+          <p>Dolomit is a geometric display typeface, drawn as a modern alternative to Haim, the classic Hebrew headline letter shaped in early 20th-century Eastern Europe under the influence of the Bauhaus. It stays true to Haim's sans serif, geometric and constructivist character, and brings a new attitude to it. A second source is Alon, known today as Sela Atzil, which Shmuel Sela designed for Letraset, with curved terminals borrowed from American varsity lettering. Dolomit folds those curves into sharp paper corners, and a nod to Wim Crouwel's New Alphabet gives it a futuristic edge.</p>
+        </div>
+        
+        <div class="technical-specs-column">
+          <div class="specs-list">
+            <div class="spec-line">Typeface: Dolomit דולומיט</div>
+            <div class="spec-line">Designed by: <a href="https://liadshadmi.com" target="_blank" rel="noopener">Liad Shadmi</a></div>
+            <div class="spec-line">Consultant: Ben Nathan</div>
+            <div class="spec-line">Year: 2026</div>
+            <div class="spec-line">Languages: Hebrew, Latin (all caps)</div>
+            <div class="spec-line">Formats: OTF, WOFF2, Variable (TTF, WOFF2)</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="multilingual-marquee">
+        <div class="marquee-container">
+          <div class="marquee-content">
+            <span class="marquee-text dolomit-text bold">Bold בולד</span>
+            <span class="marquee-text dolomit-extended-text bold">Bold Extended בולד אקסטנדד</span>
+            <span class="marquee-text dolomit-text bold">Bold בולד</span>
+            <span class="marquee-text dolomit-extended-text bold">Bold Extended בולד אקסטנדד</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === Section 1: Hebrew display word, responsive === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-1">Size</label>
+        <input class="size" id="size-1" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-1">Leading</label>
+        <input class="leading" id="leading-1" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-1">Letter Spacing</label>
+        <input class="spacing" id="spacing-1" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-1">Width</label>
+        <input class="width" id="width-1" type="range" min="5" max="7" step="0.01" value="5" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="1">
+            <div class="select-header">
+              <span class="select-value">Dolomit Bold Extended</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Dolomit Bold">Dolomit Bold</div>
+              <div class="select-option" data-value="Dolomit Bold Extended">Dolomit Bold Extended</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Dolomit Bold">Dolomit Bold</option>
+            <option value="Dolomit Bold Extended" selected>Dolomit Bold Extended</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DRAFT(dolomit): written by Claude, Nir to review -->
+    <div class="type-area column-count-1 responsive-text dolomit-long-he" contenteditable="true" dir="rtl" style="font-family: 'Dolomit Extended'; font-weight: 700; font-size: 244px; line-height: 1; letter-spacing: 0em; white-space: nowrap; text-align: center;">קונסטרוקטיביזם</div>
+  </section>
+
+  <!-- === Section 2: Hebrew paragraph, two columns (Liad's own words, verbatim) === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-2">Size</label>
+        <input class="size" id="size-2" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-2">Leading</label>
+        <input class="leading" id="leading-2" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-2">Letter Spacing</label>
+        <input class="spacing" id="spacing-2" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-2">Width</label>
+        <input class="width" id="width-2" type="range" min="5" max="7" step="0.01" value="5" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="2">
+            <div class="select-header">
+              <span class="select-value">Dolomit Bold</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Dolomit Bold">Dolomit Bold</div>
+              <div class="select-option" data-value="Dolomit Bold Extended">Dolomit Bold Extended</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Dolomit Bold" selected>Dolomit Bold</option>
+            <option value="Dolomit Bold Extended">Dolomit Bold Extended</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right is-active"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-2 truncate-text" data-truncate-words="40" contenteditable="true" dir="rtl" style="font-family: 'Dolomit'; font-weight: 700; font-size: 36px; line-height: 1.35; letter-spacing: 0em; text-align: right;">פונט דולומיט הוא פונט כותרת גיאומטרי, שעוצב בהשראת מספר מקורות. לדוגמה, האות חיים הקאנונית, המשמשת עד היום כפונט כותרת שכיח בשפה העברית. פונט חיים עוצב בתחילת המאה ה־20 במזרח אירופה, בהשראת תנועת הבאוהאוס, והביא עמו רוח מודרניסטית חדשה לאות העברית. טיפוס האות דולומיט עוצב כתחליף מודרני לאות הקלאסית חיים, ושואב ממנה השראה. הוא נשאר נאמן למאפייניו הסנס־סריפיים, הגיאומטריים והקונסטרוקטיביסטיים, אך מביא גישה חדשנית ושונה לאות. השראה נוספת לעיצוב דולומיט היא טיפוס האות "אלון", או בשמו המודרני "סלע אציל", שעוצב עבור קטלוג אותיות לטרסט על ידי מעצב הפונטים שמואל סלע. פונט דולומיט מהווה וריאציה מודרנית בהשראתו, עם קימורים חדים יותר בקצוות האותיות, המושפעים מקיפולי נייר, ומקנים לאות תחושה מודרנית יותר.</div>
+  </section>
+
+  <!-- === Section 2b: big bilingual paragraph, Hebrew and English mixed === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-11">Size</label>
+        <input class="size" id="size-11" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-11">Leading</label>
+        <input class="leading" id="leading-11" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-11">Letter Spacing</label>
+        <input class="spacing" id="spacing-11" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-11">Width</label>
+        <input class="width" id="width-11" type="range" min="5" max="7" step="0.01" value="5" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="11">
+            <div class="select-header">
+              <span class="select-value">Dolomit Bold</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Dolomit Bold">Dolomit Bold</div>
+              <div class="select-option" data-value="Dolomit Bold Extended">Dolomit Bold Extended</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Dolomit Bold" selected>Dolomit Bold</option>
+            <option value="Dolomit Bold Extended">Dolomit Bold Extended</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right is-active"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DRAFT(dolomit): written by Claude, Nir to review -->
+    <div class="type-area column-count-1 truncate-text dolomit-big-mix" data-truncate-words="20" contenteditable="true" dir="rtl" style="font-family: 'Dolomit'; font-weight: 700; font-size: 96px; line-height: 1.1; letter-spacing: 0em; text-align: right;">מחיים ועד לטרסט. FROM HAIM TO LETRASET. קימורים חדים וקיפולי נייר. SHARP CORNERS AND FOLDED PAPER. אות כותרת עברית עם נוכחות. A HEBREW HEADLINE WITH PRESENCE. חדש וישן באותו משפט. NEW ALPHABET, OLD SOUL.</div>
+  </section>
+
+  <!-- === Section 3: Bilingual pair, Hebrew over Latin caps === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-3">Size</label>
+        <input class="size" id="size-3" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-3">Leading</label>
+        <input class="leading" id="leading-3" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-3">Letter Spacing</label>
+        <input class="spacing" id="spacing-3" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-3">Width</label>
+        <input class="width" id="width-3" type="range" min="5" max="7" step="0.01" value="5" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="3">
+            <div class="select-header">
+              <span class="select-value">Dolomit Bold Extended</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Dolomit Bold">Dolomit Bold</div>
+              <div class="select-option" data-value="Dolomit Bold Extended">Dolomit Bold Extended</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Dolomit Bold">Dolomit Bold</option>
+            <option value="Dolomit Bold Extended" selected>Dolomit Bold Extended</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DRAFT(dolomit): written by Claude, Nir to review -->
+    <div class="type-area column-count-1 auto-fit-multiline" data-max-font-size="220" contenteditable="true" dir="rtl" style="font-family: 'Dolomit Extended'; font-weight: 700; font-size: 220px; line-height: 1.05; letter-spacing: 0em; text-align: center;">דולומיט&#10;DOLOMIT</div>
+  </section>
+
+  <!-- === Section 4: Latin caps line, responsive === -->
+  <section class="type-tester responsive-section" id="fonts">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-4">Size</label>
+        <input class="size" id="size-4" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-4">Leading</label>
+        <input class="leading" id="leading-4" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-4">Letter Spacing</label>
+        <input class="spacing" id="spacing-4" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-4">Width</label>
+        <input class="width" id="width-4" type="range" min="5" max="7" step="0.01" value="5" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="4">
+            <div class="select-header">
+              <span class="select-value">Dolomit Bold Extended</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Dolomit Bold">Dolomit Bold</div>
+              <div class="select-option" data-value="Dolomit Bold Extended">Dolomit Bold Extended</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Dolomit Bold">Dolomit Bold</option>
+            <option value="Dolomit Bold Extended" selected>Dolomit Bold Extended</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DRAFT(dolomit): written by Claude, Nir to review -->
+    <div class="type-area column-count-1 responsive-text dolomit-long-en" contenteditable="true" dir="ltr" style="font-family: 'Dolomit Extended'; font-weight: 700; font-size: 244px; line-height: 1; letter-spacing: 0em; white-space: nowrap; text-align: center;">NEW ALPHABET</div>
+  </section>
+
+  <!-- === Section 5: Stylistic alternates: same word, line 2 with ss01 === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-5">Size</label>
+        <input class="size" id="size-5" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-5">Leading</label>
+        <input class="leading" id="leading-5" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-5">Letter Spacing</label>
+        <input class="spacing" id="spacing-5" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-5">Width</label>
+        <input class="width" id="width-5" type="range" min="5" max="7" step="0.01" value="5" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="5">
+            <div class="select-header">
+              <span class="select-value">Dolomit Bold</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Dolomit Bold">Dolomit Bold</div>
+              <div class="select-option" data-value="Dolomit Bold Extended">Dolomit Bold Extended</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Dolomit Bold" selected>Dolomit Bold</option>
+            <option value="Dolomit Bold Extended">Dolomit Bold Extended</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DRAFT(dolomit): written by Claude, Nir to review -->
+    <!-- Line 1: default letters. Line 2: the same word with stylistic set 1 (ss01) switched on via .dolomit-ss01 (page <style>).
+         script.js only resets family/weight/style on this tester, so the feature setting survives the style dropdown. Dolomit also has ss02 (ב ט ע ש ת, E F). -->
+    <div class="type-area column-count-1 dolomit-alt-demo" contenteditable="true" dir="rtl" style="font-family: 'Dolomit'; font-weight: 700; font-size: 230px; line-height: 1.1; letter-spacing: 0em; white-space: nowrap; text-align: center;">דולומיט<br><span class="dolomit-ss01">דולומיט</span></div>
+  </section>
+
+  <!-- === Section 6: Hebrew display words, responsive === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-6">Size</label>
+        <input class="size" id="size-6" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-6">Leading</label>
+        <input class="leading" id="leading-6" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-6">Letter Spacing</label>
+        <input class="spacing" id="spacing-6" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-6">Width</label>
+        <input class="width" id="width-6" type="range" min="5" max="7" step="0.01" value="5" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="6">
+            <div class="select-header">
+              <span class="select-value">Dolomit Bold</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Dolomit Bold">Dolomit Bold</div>
+              <div class="select-option" data-value="Dolomit Bold Extended">Dolomit Bold Extended</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Dolomit Bold" selected>Dolomit Bold</option>
+            <option value="Dolomit Bold Extended">Dolomit Bold Extended</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DRAFT(dolomit): written by Claude, Nir to review -->
+    <div class="type-area column-count-1 responsive-text" contenteditable="true" dir="rtl" style="font-family: 'Dolomit'; font-weight: 700; font-size: 244px; line-height: 1; letter-spacing: 0em; white-space: nowrap; text-align: center;">קיפולי נייר</div>
+  </section>
+
+  <!-- === Section 7: English caps paragraph, two columns === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-7">Size</label>
+        <input class="size" id="size-7" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-7">Leading</label>
+        <input class="leading" id="leading-7" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-7">Letter Spacing</label>
+        <input class="spacing" id="spacing-7" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-7">Width</label>
+        <input class="width" id="width-7" type="range" min="5" max="7" step="0.01" value="5" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="7">
+            <div class="select-header">
+              <span class="select-value">Dolomit Bold Extended</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Dolomit Bold">Dolomit Bold</div>
+              <div class="select-option" data-value="Dolomit Bold Extended">Dolomit Bold Extended</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Dolomit Bold">Dolomit Bold</option>
+            <option value="Dolomit Bold Extended" selected>Dolomit Bold Extended</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left is-active"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DRAFT(dolomit): written by Claude, Nir to review -->
+    <div class="type-area column-count-2 truncate-text" data-truncate-words="44" contenteditable="true" dir="ltr" style="font-family: 'Dolomit Extended'; font-weight: 700; font-size: 34px; line-height: 1.3; letter-spacing: 0em; text-align: left;">DOLOMIT STARTS FROM HAIM, THE HEBREW HEADLINE LETTER SHAPED BY THE BAUHAUS IN EARLY 20TH-CENTURY EASTERN EUROPE. NOBODY KNOWS FOR SURE WHO DREW IT. SOME SAY JAN LE WITT, OTHERS PESACH IR-SHAY, AND THE POET BIALIK ENCOURAGED IT UNTIL IT CARRIED HIS NAME. DOLOMIT PICKS UP SHMUEL SELA'S ALON FROM THE LETRASET YEARS, WITH ITS HEAVY VARSITY CURVES, FOLDS THOSE CURVES INTO SHARP PAPER CORNERS AND BORROWS A FUTURE FROM WIM CROUWEL'S NEW ALPHABET. TWO WIDTHS, BOLD AND EXTENDED, WITH ALTERNATES FOR ALMOST EVERY HEBREW LETTER. LOUD ON PURPOSE.</div>
+  </section>
+
+  <!-- === Section 8: Bilingual pair, Hebrew over Latin caps === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-8">Size</label>
+        <input class="size" id="size-8" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-8">Leading</label>
+        <input class="leading" id="leading-8" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-8">Letter Spacing</label>
+        <input class="spacing" id="spacing-8" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-8">Width</label>
+        <input class="width" id="width-8" type="range" min="5" max="7" step="0.01" value="5" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="8">
+            <div class="select-header">
+              <span class="select-value">Dolomit Bold</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Dolomit Bold">Dolomit Bold</div>
+              <div class="select-option" data-value="Dolomit Bold Extended">Dolomit Bold Extended</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Dolomit Bold" selected>Dolomit Bold</option>
+            <option value="Dolomit Bold Extended">Dolomit Bold Extended</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DRAFT(dolomit): written by Claude, Nir to review -->
+    <div class="type-area column-count-1 auto-fit-multiline" data-max-font-size="260" contenteditable="true" dir="rtl" style="font-family: 'Dolomit'; font-weight: 700; font-size: 260px; line-height: 1.05; letter-spacing: 0em; text-align: center;">סלע&#10;ROCK</div>
+  </section>
+
+  <!-- === Section 9: Hebrew display word, responsive === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-9">Size</label>
+        <input class="size" id="size-9" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-9">Leading</label>
+        <input class="leading" id="leading-9" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-9">Letter Spacing</label>
+        <input class="spacing" id="spacing-9" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-9">Width</label>
+        <input class="width" id="width-9" type="range" min="5" max="7" step="0.01" value="5" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="9">
+            <div class="select-header">
+              <span class="select-value">Dolomit Bold Extended</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Dolomit Bold">Dolomit Bold</div>
+              <div class="select-option" data-value="Dolomit Bold Extended">Dolomit Bold Extended</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Dolomit Bold">Dolomit Bold</option>
+            <option value="Dolomit Bold Extended" selected>Dolomit Bold Extended</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DRAFT(dolomit): written by Claude, Nir to review -->
+    <div class="type-area column-count-1 responsive-text" contenteditable="true" dir="rtl" style="font-family: 'Dolomit Extended'; font-weight: 700; font-size: 244px; line-height: 1; letter-spacing: 0em; white-space: nowrap; text-align: center;">באוהאוס</div>
+  </section>
+
+  <!-- === Section 10: Bilingual pair, Hebrew over Latin caps === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-10">Size</label>
+        <input class="size" id="size-10" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-10">Leading</label>
+        <input class="leading" id="leading-10" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-10">Letter Spacing</label>
+        <input class="spacing" id="spacing-10" type="range" min="-0.1" max="0.1" step="0.01" />
+        <label class="label-custom" for="width-10">Width</label>
+        <input class="width" id="width-10" type="range" min="5" max="7" step="0.01" value="5" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="10">
+            <div class="select-header">
+              <span class="select-value">Dolomit Bold</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Dolomit Bold">Dolomit Bold</div>
+              <div class="select-option" data-value="Dolomit Bold Extended">Dolomit Bold Extended</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Dolomit Bold" selected>Dolomit Bold</option>
+            <option value="Dolomit Bold Extended">Dolomit Bold Extended</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DRAFT(dolomit): written by Claude, Nir to review -->
+    <div class="type-area column-count-1 auto-fit-multiline" data-max-font-size="220" contenteditable="true" dir="rtl" style="font-family: 'Dolomit'; font-weight: 700; font-size: 220px; line-height: 1.05; letter-spacing: 0em; text-align: center;">אלפבית&#10;ALPHABET</div>
+  </section>
+
+
+  <!-- ===== GLYPH GRID VIEWER ===== -->
+  <div class="wrapper" id="fontWrapper">
+    <div class="left-panel">
+      <div class="preview-box" id="preview" style="font-family: 'Dolomit'; font-weight: 700;" data-preview="א"></div>
+      <div class="controls-lite">
+        <div class="font-wrapper">
+          <div class="custom-select" id="weight-select">
+            <div class="select-header">
+              <span class="select-value">Dolomit Bold</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Dolomit Bold">Dolomit Bold</div>
+              <div class="select-option" data-value="Dolomit Bold Extended">Dolomit Bold Extended</div>
+            </div>
+          </div>
+          <!-- Hidden original select for functionality -->
+          <select id="weight" style="display: none;">
+            <option value="Dolomit Bold" selected>Dolomit Bold</option>
+            <option value="Dolomit Bold Extended">Dolomit Bold Extended</option>
+          </select>
+        </div>
+      </div>
+      <div class="details" id="details">Unicode decimal: 1488<br>Unicode hex: 05D0<br>HTML entity: &amp;#x5D0;</div>
+    </div>
+    <div class="grid-container">
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+
+  <!-- ===== IN USE SECTION ===== -->
+  <section class="in-use-section">
+    <div class="section-header">
+      <h2>Dolomit דולומיט in Use</h2>
+    </div>
+    <div class="in-use-grid">
+      <div class="in-use-item">
+        <!-- DRAFT(dolomit): written by Claude, Nir to review -->
+        <img src="photos/dolomit/in-use/1.jpg" alt="Dolomit typeface in use, a stack of black on white specimen posters with the Hebrew alphabet and four large letter figures" loading="lazy" />
+      </div>
+      <div class="in-use-item">
+        <!-- DRAFT(dolomit): written by Claude, Nir to review -->
+        <img src="photos/dolomit/in-use/2.jpg" alt="Dolomit typeface in use, a stack of red on white specimen posters with the Hebrew alphabet and four large letter figures" loading="lazy" />
+      </div>
+    </div>
+    <div class="photo-credit">
+      Poster: <a href="https://stastuchinsky.cargo.site/" target="_blank" rel="noopener">Stas Tuchinsky</a>
+    </div>
+  </section>
+
+  <!-- ===== SPECIMEN SECTION ===== -->
+  <section id="specimen" class="specimen-section">
+    <div class="section-header">
+      <h2>Specimen</h2>
+    </div>
+    <div class="in-use-grid">
+      <div class="in-use-item">
+        <!-- DRAFT(dolomit): written by Claude, Nir to review -->
+        <img src="photos/dolomit/specimen/1.jpg" alt="Red Dolomit poster with eight figures built from Hebrew letterforms, the name (DOLOMIT) דולומיט and eight numbered Hebrew text blocks" loading="lazy" />
+      </div>
+      <div class="in-use-item">
+        <!-- DRAFT(dolomit): written by Claude, Nir to review -->
+        <img src="photos/dolomit/specimen/2.jpg" alt="Black and white Dolomit specimen poster showing the Hebrew alphabet, figures and symbols in Bold and Bold Extended, four large letter figures and the year 2026" loading="lazy" />
+      </div>
+    </div>
+    <div class="photo-credit">
+      Poster: <a href="https://stastuchinsky.cargo.site/" target="_blank" rel="noopener">Stas Tuchinsky</a>
+    </div>
+  </section>
+
+  <!-- ===== DATA MAPS ===== -->
+  <!-- Both presets point at the VARIABLE family; what separates them is the wdth value
+       in NT_WIDTH_PRESETS below, so the Width slider keeps working after a preset change. -->
+  <script type="application/json" id="fontMap">{
+    "Dolomit Bold": { "family": "Dolomit Variable", "weight": 700 },
+    "Dolomit Bold Extended": { "family": "Dolomit Variable", "weight": 700 }
+  }</script>
+  <script>
+    // Read by script.js: picking a preset sets this wdth and moves the Width slider to match.
+    window.NT_WIDTH_PRESETS = { 'Dolomit Bold': 5, 'Dolomit Bold Extended': 7 };
+  </script>
+
+  <!-- script.js (initGlyphGrid) reads glyphMap key "Safra2", falling back to "default".
+       Built from every encoded glyph in Dolomit_05-gimel-tet.glyphs (215 characters):
+       Hebrew letters + finals, dagesh/shin-dot/vowel presentation forms, alef-lamed ligature, maqaf/geresh/gershayim,
+       Latin A–Z a–z, Ä Ö Ü ä ö ü, figures, punctuation, symbols, currency, arrows, math.
+       Left out: space and the 17 standalone combining niqqud marks (U+05B0–05C7), which don't render alone in a cell. -->
+  <script type="application/json" id="glyphMap">{
+    "default": "אבגדהוזחטיכךלמםנןסעפףצץקרשת\uFB2A\uFB2B\uFB2C\uFB2D\uFB2E\uFB2F\uFB30\uFB31\uFB32\uFB33\uFB34\uFB35\uFB36\uFB38\uFB39\uFB3A\uFB3B\uFB3C\uFB3E\uFB40\uFB41\uFB43\uFB44\uFB46\uFB47\uFB48\uFB49\uFB4A\uFB4B\uFB4F־׳״ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_{|}~¡¢£¤¥¦§©«¬®°±¶·»¿×÷฿–—†‡•…‰‹›₩₪€₴₹₽™←↑→↓↔↕↖↗↘↙∑−√∞∫≈≠≤≥◊",
+    "Safra2": "אבגדהוזחטיכךלמםנןסעפףצץקרשת\uFB2A\uFB2B\uFB2C\uFB2D\uFB2E\uFB2F\uFB30\uFB31\uFB32\uFB33\uFB34\uFB35\uFB36\uFB38\uFB39\uFB3A\uFB3B\uFB3C\uFB3E\uFB40\uFB41\uFB43\uFB44\uFB46\uFB47\uFB48\uFB49\uFB4A\uFB4B\uFB4F־׳״ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_{|}~¡¢£¤¥¦§©«¬®°±¶·»¿×÷฿–—†‡•…‰‹›₩₪€₴₹₽™←↑→↓↔↕↖↗↘↙∑−√∞∫≈≠≤≥◊"
+  }</script>
+
+  <!-- ===== SCRIPT ===== -->
+  <!-- GSAP for advanced marquee functionality -->
+  <script src="gsap-public/minified/gsap.min.js"></script>
+  <script src="gsap-public/minified/ScrollTrigger.min.js"></script>
+  <script src="gsap-public/minified/Draggable.min.js"></script>
+  <script src="gsap-public/minified/InertiaPlugin.min.js"></script>
+  
+    <!-- EmailJS -->
+    <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+(function(){
+  emailjs.init({
+    publicKey: "SY_sCUJHCR5MtWgI5",
+  });
+})();
+</script>
+
+    <!-- Nomad Type JS -->
+
+  <!-- Load Header Component First -->
+  <script src="header.js"></script>
+  <script>
+    // Load header when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof loadHeader === 'function') {
+        loadHeader(`
+          <div style="transform: translateY(0px);">דולומיט</div>
+          <div style="transform: translateY(0px);">(DOLOMIT)</div>
+        `);
+      }
+});
+  </script>
+
+  <script src="script.js"></script>
+
+  </main>
+
+<!-- ====== OVERLAY FORMS ====== -->
+<!-- Trial Download Form -->
+<div class="overlay" id="trialOverlay">
+  <div class="overlay-content">
+    <div class="form-header">
+      <!-- TODO(dolomit): trial ZIP (trial-limited build) + add Dolomit to trial-fonts/fonts.json and Code.gs FONTS. EmailJS reads the font name from this h2 -->
+      <h2>Download Dolomit</h2>
+      <button class="close-btn" id="closeTrial"></button>
+    </div>
+    
+    <div class="success-message" id="trialSuccessMessage" style="display: none;">
+      <p class="success-text">Thank you! We'll send your trial fonts shortly.</p>
+      <button class="submit-btn" id="trialSuccessBtn">Continue to Website</button>
+    </div>
+    
+    <form class="trial-form" id="trialFormContent">
+      <div class="form-content">
+        <div class="form-group">
+          <input type="text" id="trialName" name="name" placeholder=" " required>
+          <div class="placeholder-text">Full Name<span class="asterisk">*</span></div>
+        </div>
+        
+        <div class="form-group">
+          <input type="email" id="trialEmail" name="email" placeholder=" " required>
+          <div class="placeholder-text">Email Address<span class="asterisk">*</span></div>
+        </div>
+
+        
+        <div class="form-section collapsible">
+          <h3 class="collapsible-header">
+            <span>Intended Use<span class="asterisk">*</span></span>
+            <span class="dropdown-icon"></span>
+          </h3>
+          <div class="collapsible-content">
+            <div class="radio-group">
+              <label class="radio-label">
+                <input type="radio" name="useType" value="Client" required>
+                <span class="radio-mark"></span>
+                Client Project
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="useType" value="Student" required>
+                <span class="radio-mark"></span>
+                Student Work
+              </label>
+            </div>
+
+            <!-- Client Project Fields -->
+            <div class="conditional-fields" id="clientFields" style="display: none;">
+              <div class="form-group">
+                <input type="text" id="clientCompany" name="clientCompany" placeholder=" ">
+                <div class="placeholder-text">Your Company Name<span class="asterisk">*</span></div>
+              </div>
+              <div class="form-group">
+                <input type="text" id="clientName" name="clientName" placeholder=" ">
+                <div class="placeholder-text">Client Name</div>
+              </div>
+              <div class="form-group">
+                <input type="url" id="clientWebsite" name="clientWebsite" placeholder=" ">
+                <div class="placeholder-text">Link to Client's Website</div>
+              </div>
+            </div>
+
+            <!-- Student Work Fields -->
+            <div class="conditional-fields" id="studentFields" style="display: none;">
+              <div class="form-group">
+                <input type="text" id="institutionName" name="institutionName" placeholder=" ">
+                <div class="placeholder-text">Name of Academic Institution<span class="asterisk">*</span></div>
+              </div>
+              <div class="form-group">
+                <input type="text" id="graduationYear" name="graduationYear" placeholder=" ">
+                <div class="placeholder-text">Year of Graduation<span class="asterisk">*</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Client Consent -->
+        <div class="form-section conditional-consent" id="clientConsent" style="display: none;">
+          <label class="checkbox-label consent">
+            <input type="checkbox" name="consent">
+            <span class="checkmark"></span>
+            <span class="consent-text">I confirm the fonts will only be used for mock-ups or sketches. Any commercial use requires a license via nomad-type.com.</span>
+          </label>
+        </div>
+
+        <!-- Student Consent -->
+        <div class="form-section conditional-consent" id="studentConsent" style="display: none;">
+          <label class="checkbox-label consent">
+            <input type="checkbox" name="consent">
+            <span class="checkmark"></span>
+            <span class="consent-text">I’ll only use the fonts for school projects. Any commercial use, even during my studies, requires a license from nomad-type.com.</span>
+          </label>
+        </div>
+        
+        <button type="submit" class="submit-btn">Submit</button>
+        <p class="form-error-message" id="trialError" style="display: none;"></p>
+      </div>
+      
+      <p class="footer-text">By submitting, I agree to receive occasional updates about new releases (unsubscribe anytime).</p>
+    </form>
+  </div>
+</div>
+
+<!-- Buy Now Form -->
+<!-- Dolomit store configurator (DEMO, ported from safra.html via kaldanit.html) -->
+<div class="overlay" id="buyOverlay">
+  <div class="overlay-content">
+    <div class="form-header">
+      <h2>Buy Dolomit</h2>
+      <button class="close-btn" id="closeBuy"></button>
+    </div>
+    
+    <!-- Hidden stubs so script.js's overlay close-handlers (which still call
+         getElementById('buyIntroText'/'buySuccessMessage') and reset the form)
+         never throw. They are not shown; the live intro is inside the form. -->
+    <span id="buyIntroText" style="display:none;"></span>
+    <span id="buySuccessMessage" style="display:none;"></span>
+
+    <!-- ===== SAFRA STORE V2 CONFIGURATOR (guts swapped in) =====
+         NOTE: this form intentionally has id="buyFormContent" (so the page's
+         close-handlers can .reset() it harmlessly) but NOT class "buy-form"
+         (so script.js's lead-form submit + checkbox logic skip it entirely).
+         All configurator behaviour lives in the scoped script before 
+</body>. -->
+    <p class="intro-text">Configure your licence: pick the fonts, how you'll use them and users. The price updates live.</p>
+    <!-- NOTE(dolomit): "Early access" label removed from the template. Only restore it if Nir and Liad agree Dolomit is sold as early access; the template markup was:
+         <p class="ssv2-ea">Early access<button type="button" class="ssv2-ea-q" aria-label="What does early access mean?">?</button><span class="ssv2-ea-pop" role="tooltip">[note]</span></p> -->
+
+    <form class="ssv2-form" id="buyFormContent" novalidate>
+
+      <!-- Everything above the price scrolls; price + Buy stay pinned. -->
+      <div class="ssv2-scroll">
+
+        <!-- ===== SELECT FONTS (existing checkbox markup) ===== -->
+        <div class="form-section collapsible">
+          <h3 class="collapsible-header active">
+            <span>Select Fonts<span class="required">*</span></span>
+            <span class="dropdown-icon"></span>
+          </h3>
+          <div class="collapsible-content active">
+            <div class="checkbox-group" id="ssv2Fonts">
+              <label class="checkbox-label ssv2-family">
+                <input type="checkbox" name="family" value="entire">
+                <span class="checkmark"></span>
+                Full Family (2)
+                <span class="ssv2-family-tag">Bundle<span class="ssv2-tag-full"> Price</span></span>
+              </label>
+              <p class="ssv2-variable-note">Full Family also includes the variable font (TTF / WOFF2)</p>
+              <label class="checkbox-label">
+                <input type="checkbox" name="family" value="bold" checked>
+                <span class="checkmark"></span>
+                Dolomit Bold
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="family" value="bold-extended">
+                <span class="checkmark"></span>
+                Dolomit Bold Extended
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== INTENDED USE (existing checkboxes, multi-select) ===== -->
+        <div class="form-section collapsible">
+          <h3 class="collapsible-header">
+            <span>Intended Use<span class="required">*</span></span>
+            <span class="dropdown-icon"></span>
+          </h3>
+          <div class="collapsible-content">
+            <div class="checkbox-group" id="ssv2Use">
+              <label class="checkbox-label">
+                <input type="checkbox" name="use" value="Desktop" checked>
+                <span class="checkmark"></span>
+                Desktop
+                <span class="ssv2-usebundle-tag" id="ssv2BundleTag">Desktop + Web bundle</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="use" value="Web">
+                <span class="checkmark"></span>
+                Web
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="use" value="App">
+                <span class="checkmark"></span>
+                App
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== LICENSE TIER (single-select, checkbox look) ===== -->
+        <div class="form-section collapsible ssv2-tier">
+          <h3 class="collapsible-header">
+            <span>Users<span class="required">*</span></span>
+            <span class="dropdown-icon"></span>
+          </h3>
+          <div class="collapsible-content">
+            <div class="checkbox-group" id="ssv2Tier">
+              <label class="checkbox-label">
+                <input type="radio" name="tier" value="individual" checked>
+                <span class="checkmark"></span>
+                Individual
+                <span class="tier-sub">1 user</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="radio" name="tier" value="studio">
+                <span class="checkmark"></span>
+                Studio
+                <span class="tier-sub">≤ 5 users</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="radio" name="tier" value="company">
+                <span class="checkmark"></span>
+                Company
+                <span class="tier-sub">≤ 20 users</span>
+              </label>
+            </div>
+            <p class="ssv2-tier-note" id="ssv2TierNote"></p>
+          </div>
+        </div>
+
+      </div><!-- /.ssv2-scroll -->
+
+      <!-- ===== PINNED: SUMMARY + PRICE + BUY ===== -->
+      <div class="ssv2-foot" aria-live="polite">
+        <p class="ssv2-sum-head">Your licence</p>
+        <div class="ssv2-sum-row"><span class="k">Fonts</span><span class="v" id="ssv2SumFonts">Dolomit Bold</span></div>
+        <div class="ssv2-sum-row"><span class="k">Use</span><span class="v" id="ssv2SumUse">Desktop</span></div>
+        <div class="ssv2-sum-row"><span class="k">Users</span><span class="v" id="ssv2SumTier">Individual · 1 user</span></div>
+        <p class="ssv2-includes" id="ssv2Includes"></p>
+
+        <div class="ssv2-price">
+          <!-- TODO(dolomit): EUR 85 prices shown for now; final choice (70/85) with Liad, then Stripe links -->
+          <span class="amount" id="ssv2Price">—</span>
+          <span class="amount-label">EUR</span>
+        </div>
+
+        <!-- Buy button = site's .submit-btn look, replaces "Send Request" -->
+        <button type="button" class="submit-btn" id="buy-btn"
+                data-config="bold|Desktop|individual" data-price="" disabled aria-disabled="true">Coming soon</button>
+
+        <!-- Shown only when the current combo has no Lemon Squeezy checkout yet -->
+        <p class="ssv2-unavailable" id="ssv2Unavailable">This licence isn't available for purchase yet.</p>
+
+        <!-- pricing subnote removed -->
+
+      </div>
+    </form>
+  </div>
+</div>
+
+  <!-- ====== SCROLL BUTTONS ====== -->
+  <section class="scroll-buttons-section">
+    <div class="scroll-buttons-content">
+      <div class="scroll-buttons-text">
+        <!-- DRAFT(dolomit): written by Claude, Nir to review -->
+        <h2 class="scroll-buttons-title">Dolomit: geometric Hebrew headlines with folded corners</h2>
+        <!-- DRAFT(dolomit): written by Claude, Nir to review -->
+        <p class="scroll-buttons-description">
+          A modern alternative to the classic Haim letter, with sharp corners inspired by paper folds. Two styles, Bold and Bold Extended, with alternates for almost every Hebrew letter and Latin in caps.
+        </p>
+      </div>
+      
+      <div class="scroll-buttons">
+        <button class="btn btn-primary scroll-btn" id="scrollTrialBtn">Download Trial</button>
+        <button class="btn btn-secondary scroll-btn" id="scrollBuyBtn">Buy Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Container (will be populated by JavaScript) -->
+  <div id="footer-container"></div>
+
+  <!-- Animated Favicon Script -->
+  <script>
+    setTimeout(() => {
+      let favicon_video_image_counter = 0;
+      let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+      let favicon_video_images = [
+  "https://favicongenerator.s3.amazonaws.com/3129f51d17a5c.png","https://favicongenerator.s3.amazonaws.com/cd721e3e8a586.png","https://favicongenerator.s3.amazonaws.com/4af6e76d5ae4a.png","https://favicongenerator.s3.amazonaws.com/e76f98c1d6448.png","https://favicongenerator.s3.amazonaws.com/bc435c23b4eaf.png","https://favicongenerator.s3.amazonaws.com/c806c3265454f.png","https://favicongenerator.s3.amazonaws.com/e95b673a3d845.png","https://favicongenerator.s3.amazonaws.com/230b1204ad4d1.png","https://favicongenerator.s3.amazonaws.com/7fd4916b0902e.png","https://favicongenerator.s3.amazonaws.com/c9dddf2a04e46.png","https://favicongenerator.s3.amazonaws.com/a13c002e6a2ab.png","https://favicongenerator.s3.amazonaws.com/e8eddb001860b.png","https://favicongenerator.s3.amazonaws.com/13f85eb453429.png","https://favicongenerator.s3.amazonaws.com/ce45ac6aa0a8a.png","https://favicongenerator.s3.amazonaws.com/fb54d04dd298f.png","https://favicongenerator.s3.amazonaws.com/4c8400f32accc.png","https://favicongenerator.s3.amazonaws.com/a792f02084f6c.png","https://favicongenerator.s3.amazonaws.com/f30e5a3031be8.png","https://favicongenerator.s3.amazonaws.com/9249f78daaefd.png","https://favicongenerator.s3.amazonaws.com/8b5a05d43b31d.png","https://favicongenerator.s3.amazonaws.com/eab8ede756262.png","https://favicongenerator.s3.amazonaws.com/2ba370948350d.png","https://favicongenerator.s3.amazonaws.com/16b955af4550b.png","https://favicongenerator.s3.amazonaws.com/cb303dec540cb.png","https://favicongenerator.s3.amazonaws.com/f071825bf109d.png","https://favicongenerator.s3.amazonaws.com/3e83da0b84f04.png","https://favicongenerator.s3.amazonaws.com/435d711b5e9c7.png","https://favicongenerator.s3.amazonaws.com/7d8c3600a547d.png","https://favicongenerator.s3.amazonaws.com/076628736ee03.png","https://favicongenerator.s3.amazonaws.com/6674b4393d2e7.png","https://favicongenerator.s3.amazonaws.com/8c6eabdaf80e.png","https://favicongenerator.s3.amazonaws.com/93129cf211ec7.png","https://favicongenerator.s3.amazonaws.com/50ab769fae9c5.png","https://favicongenerator.s3.amazonaws.com/dbd67430dfff2.png","https://favicongenerator.s3.amazonaws.com/6306b1d0f7ede.png","https://favicongenerator.s3.amazonaws.com/c80c22e1b976e.png","https://favicongenerator.s3.amazonaws.com/c0ba6ed76150a.png","https://favicongenerator.s3.amazonaws.com/e15281d3c9931.png","https://favicongenerator.s3.amazonaws.com/274f3c0d4f878.png","https://favicongenerator.s3.amazonaws.com/78a9057d69b74.png","https://favicongenerator.s3.amazonaws.com/d6db49127abf1.png","https://favicongenerator.s3.amazonaws.com/ee5bae80536bc.png","https://favicongenerator.s3.amazonaws.com/2a7e9e25fccb9.png","https://favicongenerator.s3.amazonaws.com/dc7fbe30b5d91.png","https://favicongenerator.s3.amazonaws.com/7b936d1b246c7.png","https://favicongenerator.s3.amazonaws.com/2b1c4719e18fb.png","https://favicongenerator.s3.amazonaws.com/072fa8af4155c.png","https://favicongenerator.s3.amazonaws.com/3e7bca2490671.png","https://favicongenerator.s3.amazonaws.com/f75d559c12576.png","https://favicongenerator.s3.amazonaws.com/c2dccc17f46e.png","https://favicongenerator.s3.amazonaws.com/62ff58aefdb7a.png","https://favicongenerator.s3.amazonaws.com/12342f642fd7a.png","https://favicongenerator.s3.amazonaws.com/2ce950b8443e2.png","https://favicongenerator.s3.amazonaws.com/3676501156615.png","https://favicongenerator.s3.amazonaws.com/52ac9290673ef.png","https://favicongenerator.s3.amazonaws.com/c401b341b6877.png","https://favicongenerator.s3.amazonaws.com/5408ed854b0e6.png","https://favicongenerator.s3.amazonaws.com/c9417ab290d8c.png","https://favicongenerator.s3.amazonaws.com/605db5fa28d8b.png","https://favicongenerator.s3.amazonaws.com/dbcadae5ac827.png","https://favicongenerator.s3.amazonaws.com/89497c65bc9d.png","https://favicongenerator.s3.amazonaws.com/cba217324331a.png","https://favicongenerator.s3.amazonaws.com/04989a8ce7a13.png","https://favicongenerator.s3.amazonaws.com/9f6ff1daefbc2.png","https://favicongenerator.s3.amazonaws.com/35af62beb2069.png","https://favicongenerator.s3.amazonaws.com/03dcf5523866b.png","https://favicongenerator.s3.amazonaws.com/b598d707d6b7a.png","https://favicongenerator.s3.amazonaws.com/796a5d9e5c498.png","https://favicongenerator.s3.amazonaws.com/35c427f26d961.png","https://favicongenerator.s3.amazonaws.com/0177ba9bb3cd5.png","https://favicongenerator.s3.amazonaws.com/dda651d22badc.png","https://favicongenerator.s3.amazonaws.com/ab5e3aef1f7ff.png","https://favicongenerator.s3.amazonaws.com/1922e4dfb5696.png","https://favicongenerator.s3.amazonaws.com/c95b12f64f2bf.png","https://favicongenerator.s3.amazonaws.com/a59614ebdf159.png","https://favicongenerator.s3.amazonaws.com/dfdd396620126.png","https://favicongenerator.s3.amazonaws.com/af9153abb4866.png","https://favicongenerator.s3.amazonaws.com/21d342a33e20c.png","https://favicongenerator.s3.amazonaws.com/259e6557b866e.png","https://favicongenerator.s3.amazonaws.com/586c3cb84232c.png","https://favicongenerator.s3.amazonaws.com/26ea4ab6305b6.png","https://favicongenerator.s3.amazonaws.com/80f1a5fcefd97.png","https://favicongenerator.s3.amazonaws.com/aa8010193758f.png","https://favicongenerator.s3.amazonaws.com/c62ddfd8b8fe5.png","https://favicongenerator.s3.amazonaws.com/35d778b2f5022.png","https://favicongenerator.s3.amazonaws.com/629d6922cf6f7.png","https://favicongenerator.s3.amazonaws.com/35e86ac544a1d.png","https://favicongenerator.s3.amazonaws.com/77825641eefc2.png","https://favicongenerator.s3.amazonaws.com/0472d28c319e4.png","https://favicongenerator.s3.amazonaws.com/ca2bdb73b6cc8.png","https://favicongenerator.s3.amazonaws.com/8d4ac4862754c.png","https://favicongenerator.s3.amazonaws.com/e7d5b141691a4.png","https://favicongenerator.s3.amazonaws.com/a53ffd9f417a5.png","https://favicongenerator.s3.amazonaws.com/14aa02ac80de5.png","https://favicongenerator.s3.amazonaws.com/e21f4aa715dab.png","https://favicongenerator.s3.amazonaws.com/e393c22a4de28.png","https://favicongenerator.s3.amazonaws.com/69bff0d066f14.png","https://favicongenerator.s3.amazonaws.com/43db7d93ee14c.png","https://favicongenerator.s3.amazonaws.com/86859d59c20a7.png","https://favicongenerator.s3.amazonaws.com/059f6f8183db8.png","https://favicongenerator.s3.amazonaws.com/2016a34618202.png","https://favicongenerator.s3.amazonaws.com/91ee3568cfd6c.png","https://favicongenerator.s3.amazonaws.com/fd9d0e98cb80d.png"];
+      async function favicon_video_to_data_url(url, callback) {
+        let xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          let reader = new FileReader();
+          reader.onloadend = function () {
+            callback(reader.result);
+          };
+          reader.readAsDataURL(xhr.response);
+        };
+        xhr.open("GET", url);
+        xhr.responseType = "blob";
+        xhr.send();
+      }
+    
+      let favicon_video_loaded_images = [];
+    
+      favicon_video_images.map((url, idx) => {
+        favicon_video_to_data_url(url, function (dataUrl) {
+          favicon_video_loaded_images[idx] = dataUrl;
+        });
+      });
+    
+      setInterval(function () {
+        if(favicon_video_loaded_images[favicon_video_image_counter]) {
+          favicon_video_icon_tag.href = favicon_video_loaded_images[
+            favicon_video_image_counter
+          ].replace("application/octet-stream", "image/png");
+        }
+        if (
+          favicon_video_image_counter ==
+          favicon_video_loaded_images.length - 1
+        )
+          favicon_video_image_counter = 0;
+        else favicon_video_image_counter++;
+      }, 50);
+    }, 1500);
+  </script>
+
+  <!-- Footer Component Script -->
+  <script src="footer.js"></script>
+  <script>
+    // Load footer when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof loadFooter === 'function') {
+        loadFooter('Dolomit'); // Change this for different pages
+      }
+
+      // Navigation links - force navigation
+      const navLinks = document.querySelectorAll('.nav-link, .menu-item');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          if (this.href) {
+            window.location.href = this.href;
+          }
+        });
+      });
+
+      // Trial buttons - open overlays (handled by initScrollButtonClicks in script.js)
+      // Only handle sticky-trial-btn navigation, scroll buttons open overlays
+      const stickyTrialBtn = document.querySelector('.sticky-trial-btn');
+      if (stickyTrialBtn) {
+        stickyTrialBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.location.href = 'trial-fonts.html';
+        });
+      }
+    });
+  </script>
+
+<script>
+  (function () {
+    'use strict';
+
+    // Dolomit pricing, shown for now at the EUR 85 anchor (Nir 09-12), same table as Sugar (2 styles).
+    // TODO(dolomit): Liad picks EUR 70 or 85. No Stripe links yet, so Buy shows "Coming soon".
+    // =====================================================================
+    //  LAUNCH OFFER  —  the one place to edit the promotion.
+    //    on      : false turns the whole thing off (bar + discounted prices)
+    //    percent : 20 means the buyer pays 80% of the list price
+    //    label   : shown on the tag next to the price
+    //    endsOn  : free text for the bar, e.g. "until 12 October". LEAVE EMPTY
+    //              until Nir decides the date - do not invent one.
+    // =====================================================================
+    //  label   : the tag next to the price in the cart, e.g. NEW! 20% off
+    //  barLabel: how the offer reads on the bottom bar
+    const SALE = { on: true, percent: 20, label: 'NEW!', barLabel: 'Dolomit Launch Offer', endsOn: '', gap: 10 };
+
+    const salePrice = (n) => Math.round(n * (100 - SALE.percent) / 100);
+
+    // The bar markup is the last thing in <body>, after this script, so wait for the
+    // parser to finish before looking for it.
+    (function whenReady(fn) {
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+      else fn();
+    })(function paintSaleBar() {
+      const a = document.getElementById('ntSaleText'), b = document.getElementById('ntSaleText2');
+      if (!a || !b) return;
+      if (!SALE.on) {
+        const bar = document.getElementById('ntSaleBar'); if (bar) bar.remove();
+        document.body.classList.remove('nt-sale-page');
+        return;
+      }
+      // One sentence, spaced normally inside: "Dolomit Launch Offer \u2013 20% off".
+      // SALE.gap is the air BETWEEN repeats, not inside the sentence.
+      let sentence = SALE.barLabel + ' \u2013 ' + SALE.percent + '% off';
+      if (SALE.endsOn) sentence += ' \u2013 ' + SALE.endsOn;
+      // Between repeats: air, an em dash, air. The em dash separates the sentences and
+      // widens the gap; inside the sentence the dash stays an en dash.
+      const air = ' '.repeat(SALE.gap || 8);
+      const unit = sentence + air + '\u2014' + air;
+
+      // Measure only once the webfont is in. Measuring against the fallback gives a
+      // different width, and the swap then knocks the two halves out of register.
+      function build() {
+        a.textContent = unit;
+        let guard = 0;
+        while (a.scrollWidth < window.innerWidth && guard++ < 60) {
+          a.textContent += unit;
+        }
+        b.textContent = a.textContent;
+        // scrollWidth, not the box: it is the real text width even if something clamps the box.
+        const half = a.scrollWidth;
+        const track = a.parentElement;
+
+        // Move by EXACTLY one half, in pixels, forever. When the animation reaches
+        // -half, half two sits precisely where half one began, so the loop has no seam.
+        // Speed is constant at 60 px per second on any screen width.
+        if (track._ntAnim) track._ntAnim.cancel();
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        track._ntAnim = track.animate(
+          [{ transform: 'translateX(0px)' }, { transform: 'translateX(' + (-half) + 'px)' }],
+          { duration: (half / 60) * 1000, iterations: Infinity, easing: 'linear' }
+        );
+      }
+
+      // Height of the mobile button bar, so the yellow bar can sit exactly on top of it.
+      function measureButtons() {
+        const cb = document.querySelector('.cover-buttons');
+        const h = (cb && window.matchMedia('(max-width: 768px)').matches)
+          ? Math.round(cb.getBoundingClientRect().height) : 0;
+        document.body.style.setProperty('--nt-buttons-h', h + 'px');
+      }
+
+      // ---- the rotating badge -------------------------------------------------
+      // Wrap the sentence ONCE around a circle. Measure the real text, then solve for
+      // the radius: circumference = text width  =>  r = width / 2pi.
+      function buildBadge() {
+        const box = document.getElementById('ntBadge');
+        if (!box) return;
+        const svg = document.getElementById('ntBadgeSvg');
+        const disc = document.getElementById('ntBadgeDisc');
+        const path = document.getElementById('ntBadgePath');
+        const tp = document.getElementById('ntBadgeTextPath');
+
+        tp.textContent = sentence;
+
+        // Measure the sentence in the badge's own type, off-screen.
+        const ruler = document.createElement('span');
+        ruler.style.cssText = 'position:absolute;visibility:hidden;white-space:pre;' +
+          'font-family:"Safra Mono",monospace;font-size:14px;letter-spacing:0;';
+        ruler.textContent = sentence;
+        document.body.appendChild(ruler);
+        const textWidth = ruler.getBoundingClientRect().width;
+        ruler.remove();
+
+        const rText = textWidth / (2 * Math.PI);   // the baseline circle
+        const pad = 14 * 0.95;                     // room for ascenders + a margin
+        const R = rText + pad;                     // the yellow disc
+        const size = Math.ceil(2 * R);
+        const c = size / 2;
+
+        svg.setAttribute('width', size);
+        svg.setAttribute('height', size);
+        svg.setAttribute('viewBox', '0 0 ' + size + ' ' + size);
+        disc.setAttribute('cx', c); disc.setAttribute('cy', c); disc.setAttribute('r', R);
+
+        // A full circle as one path, starting at the top and going clockwise, so the
+        // sentence reads left to right along the top of the badge.
+        path.setAttribute('d',
+          'M ' + c + ' ' + (c - rText) +
+          ' a ' + rText + ' ' + rText + ' 0 1 1 -0.01 0');
+      }
+
+      (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () {
+        measureButtons();
+        build();
+        buildBadge();
+        let t;
+        window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(function () { measureButtons(); build(); buildBadge(); }, 200); });
+      });
+    });
+
+    const PRICES = {
+      single: {
+        desktop: { individual: 85,  studio: 135, company: 340 },
+        web:     { individual: 130, studio: 205, company: 510 },
+        bundle:  { individual: 170, studio: 270, company: 680 }
+      },
+      family: {
+        desktop: { individual: 160, studio: 240, company: 620 },
+        web:     { individual: 240, studio: 360, company: 930 },
+        bundle:  { individual: 320, studio: 480, company: 1240 }
+      }
+    };
+
+    // =====================================================================
+    //  LEMON SQUEEZY VARIANT MAP  —  key = `${style}|${format}|${tier}`
+    //    style  : 'entire' (Full Family) OR single style id
+    //             ('bold' | 'bold-extended')
+    //    format : 'desktop' | 'web' | 'bundle' (Desktop+Web)
+    //    tier   : 'individual' | 'studio' | 'company'
+    //  Only ONE of the 45 combos is live right now. Every other combo is
+    //  intentionally absent → Buy button shows a disabled "Coming soon" state.
+    //  Add remaining variants with the SAME key format; no other change needed.
+    // =====================================================================
+    // TODO(dolomit): Stripe payment links, after prices are set (generate-store-links.py, Nir approves)
+    const CHECKOUT_URLS = {}; // empty -> every combo shows 'Coming soon' 
+
+    function checkoutKey(fonts, format, tier) {
+      if (!format) return null;
+      if (fonts.kind === 'family') return 'entire|' + format + '|' + tier;
+      if (fonts.styles.length === 1) return fonts.styles[0] + '|' + format + '|' + tier;
+      return null;
+    }
+    function checkoutUrlFor(fonts, format, tier) {
+      const key = checkoutKey(fonts, format, tier);
+      return key ? (CHECKOUT_URLS[key] || null) : null;
+    }
+
+    // Open the Stripe hosted checkout (payment link) for the selected variant.
+    function openCheckout(url) {
+      window.location.href = url;
+    }
+
+    const STYLE_LABELS = {
+      'bold': 'Dolomit Bold', 'bold-extended': 'Dolomit Bold Extended'
+    };
+    const TIER_LABELS = {
+      individual: 'Individual · 1 user',
+      studio:     'Studio · up to 5 users',
+      company:    'Company · up to 20 users'
+    };
+    const TIER_NOTES = {
+      individual: 'Licensed to one named user. Desktop installs on up to 2 devices for that user.',
+      studio:     'Covers up to 5 people at your studio. Desktop installs on up to 2 devices per licensed user.',
+      company:    'Covers up to 20 people across the organisation. Need more seats or app embedding? Contact us.'
+    };
+
+    const $ = id => document.getElementById(id);
+    const euro = n => '€' + Number(n).toLocaleString('en-US');
+
+    const overlay = $('buyOverlay');
+    const form    = $('buyFormContent');
+    if (!overlay || !form) return;
+
+    const fontsBox  = $('ssv2Fonts');
+    const familyCb  = fontsBox.querySelector('input[value="entire"]');
+    const singleCbs = Array.from(fontsBox.querySelectorAll('input[name="family"]:not([value="entire"])'));
+
+    // ---- Full Family <-> individual styles interplay ----
+    familyCb.addEventListener('change', function () {
+      singleCbs.forEach(cb => { cb.checked = this.checked; });
+      render();
+    });
+    singleCbs.forEach(cb => {
+      cb.addEventListener('change', function () {
+        if (!this.checked) {
+          familyCb.checked = false;
+        } else if (singleCbs.every(c => c.checked)) {
+          familyCb.checked = true;
+        }
+        render();
+      });
+    });
+
+    $('ssv2Use').addEventListener('change', render);
+    $('ssv2Tier').addEventListener('change', render);
+
+    function selectedUses() {
+      return Array.from(form.querySelectorAll('input[name="use"]:checked')).map(c => c.value);
+    }
+    function formatFromUses(uses) {
+      const d = uses.includes('Desktop'), w = uses.includes('Web');
+      if (d && w) return 'bundle';
+      if (w) return 'web';
+      if (d) return 'desktop';
+      return null;
+    }
+    function selectedTier() {
+      const t = form.querySelector('input[name="tier"]:checked');
+      return t ? t.value : 'individual';
+    }
+    function fontsState() {
+      if (familyCb.checked) {
+        return { kind: 'family', label: 'Full Family (2) + Variable font', styles: ['bold','bold-extended'] };
+      }
+      const chosen = singleCbs.filter(c => c.checked);
+      return {
+        kind: 'singles',
+        label: chosen.length ? chosen.map(c => STYLE_LABELS[c.value]).join(', ') : 'None selected',
+        styles: chosen.map(c => c.value)
+      };
+    }
+    function basePrice(fonts, format, tier) {
+      if (!PRICES || !format || fonts.styles.length === 0) return null;
+      if (fonts.kind === 'family') return PRICES.family[format][tier];
+      return fonts.styles.length * PRICES.single[format][tier];
+    }
+
+    function render() {
+      const fonts  = fontsState();
+      const uses   = selectedUses();
+      const tier   = selectedTier();
+      const format = formatFromUses(uses);
+      const hasApp = uses.includes('App');
+
+      $('ssv2SumFonts').textContent = fonts.label;
+      $('ssv2SumUse').textContent   = uses.length ? uses.join(' + ') : 'None selected';
+      $('ssv2SumTier').textContent  = TIER_LABELS[tier];
+      $('ssv2TierNote').textContent = TIER_NOTES[tier];
+      const bt = $('ssv2BundleTag'); if (bt) bt.classList.toggle('lit', format === 'bundle');
+
+      const fontCount = fonts.styles.length;
+      const fmtFiles = format === 'bundle' ? 'OTF + WOFF2'
+                     : format === 'web' ? 'WOFF2'
+                     : format === 'desktop' ? 'OTF' : '—';
+      $('ssv2Includes').innerHTML =
+        '<span class="inc-tag">Included:</span> ' +
+        (fontCount ? fontCount + (fontCount === 1 ? ' font' : ' fonts') : 'no fonts yet') +
+        ' · ' + fmtFiles + ' files · EULA (PDF)';
+
+      const priceEl = $('ssv2Price');
+      const buy = $('buy-btn');
+      priceEl.classList.remove('is-quote');
+
+      const base = basePrice(fonts, format, tier);
+      const cfg = (familyCb.checked ? 'entire' : fonts.styles.join('+') || 'none') +
+                  '|' + (uses.join('+') || 'none') + '|' + tier;
+
+      if (fontCount === 0) {
+        priceEl.textContent = '—';
+        buy.textContent = 'Select at least one font';
+        buy.dataset.config = cfg; buy.dataset.price = '';
+        buy.disabled = true; buy.setAttribute('aria-disabled','true');
+        const note = $('ssv2Unavailable'); if (note) note.hidden = true;
+        return;
+      }
+
+      // Dolomit demo: no prices yet -> no number, just "Coming soon" (once a use is picked).
+      if (!PRICES && uses.length) {
+        priceEl.textContent = '—';
+        buy.dataset.config = cfg;
+        buy.dataset.price = '';
+        setBuyState(buy, 'unavailable', null, '');
+        return;
+      }
+
+      if (base === null) {
+        priceEl.classList.add('is-quote');
+        priceEl.textContent = hasApp ? 'On request' : 'Pick a use';
+        buy.textContent = hasApp ? 'Request app pricing' : 'Choose Desktop, Web or App';
+        buy.dataset.config = cfg;
+        buy.dataset.price = hasApp ? 'on-request' : '';
+        buy.disabled = !hasApp;
+        if (hasApp) { buy.removeAttribute('aria-disabled'); }
+        else { buy.setAttribute('aria-disabled','true'); }
+        const note = $('ssv2Unavailable'); if (note) note.hidden = true;
+        return;
+      }
+
+      const url = checkoutUrlFor(fonts, format, tier);
+
+      if (hasApp) {
+        priceEl.textContent = 'from ' + euro(base);
+        buy.dataset.config = cfg;
+        buy.dataset.price = base + '+app';
+        $('ssv2Includes').innerHTML += ' · <span class="inc-tag">App:</span> priced on request';
+        setBuyState(buy, url ? 'checkout' : 'unavailable', url, 'Buy ' + euro(base) + ' + app quote');
+      } else {
+        // Strikeout = "sum of parts" (no bundles). Shown for Full Family (~35% off)
+        // and for Desktop+Web (~20% off): D+W bundle is ×2 vs ×2.5 bought separately.
+        const parts = (format === 'bundle')
+          ? (PRICES.single.desktop[tier] + PRICES.single.web[tier])
+          : PRICES.single[format][tier];
+        const full = fonts.styles.length * parts;
+
+        if (SALE.on) {
+          // During the offer the struck-through number is the normal list price for this
+          // exact configuration, so the buyer sees what the offer saves and nothing else.
+          // (The bundle/family saving is already inside `base`.)
+          const now = salePrice(base);
+          priceEl.innerHTML = '<s class="ssv2-was">' + euro(base) + '</s> ' + euro(now) +
+                              '<span class="nt-sale-tag">' + SALE.label + ' ' + SALE.percent + '% off</span>';
+          buy.dataset.config = cfg;
+          buy.dataset.price = String(now);
+          setBuyState(buy, url ? 'checkout' : 'unavailable', url, 'Buy Now — ' + euro(now));
+        } else {
+          priceEl.innerHTML = (full > base ? '<s class="ssv2-was">' + euro(full) + '</s> ' : '') + euro(base);
+          buy.dataset.config = cfg;
+          buy.dataset.price = String(base);
+          setBuyState(buy, url ? 'checkout' : 'unavailable', url, 'Buy Now — ' + euro(base));
+        }
+      }
+    }
+
+    function setBuyState(buy, state, url, activeLabel) {
+      const note = $('ssv2Unavailable');
+      if (state === 'checkout') {
+        buy.dataset.checkoutUrl = url;
+        buy.disabled = false;
+        buy.removeAttribute('aria-disabled');
+        buy.textContent = activeLabel;
+        if (note) note.hidden = true;
+      } else {
+        delete buy.dataset.checkoutUrl;
+        buy.disabled = true;
+        buy.setAttribute('aria-disabled', 'true');
+        buy.textContent = 'Coming soon';
+        if (note) note.hidden = false;
+      }
+    }
+
+    // Buy button — opens the Lemon Squeezy checkout for the selected variant.
+    $('buy-btn').addEventListener('click', function () {
+      if (this.disabled) return;
+      const cfg = this.dataset.config, price = this.dataset.price;
+      if (!price) return;
+
+      if (price === 'on-request') {
+        window.location.href = 'mailto:mail@nomad-type.com?subject=' +
+          encodeURIComponent('Dolomit app licence — ' + cfg);
+        return;
+      }
+      const url = this.dataset.checkoutUrl;
+      if (url) { openCheckout(url); return; }
+
+      window.location.href = 'mailto:mail@nomad-type.com?subject=' +
+        encodeURIComponent('Dolomit licence enquiry — ' + cfg);
+    });
+
+    render();
+
+    window.NomadStoreV2 = { render };
+  })();
+  </script>
+
+
+<script>
+/* PROTOTYPE 09-12: stylistic sets toggle. Only runs on pages that declare sets.
+   Each button switches its set on/off on its own; no button pressed = the font's default forms. */
+(function () {
+  const SETS = [
+    { label: 'Alt 1', tag: 'ss01' },
+    { label: 'Alt 2', tag: 'ss02' },
+  ];
+  function build() {
+    document.querySelectorAll('.type-tester').forEach(section => {
+      const area = section.querySelector('.type-area');
+      const align = section.querySelector('.align-buttons');
+      if (!area || !align || section.querySelector('.ss-buttons')) return;
+      const group = document.createElement('div');
+      group.className = 'ss-buttons';
+      group.setAttribute('role', 'group');
+      group.setAttribute('aria-label', 'Stylistic alternates');
+      const apply = () => {
+        const on = [...group.querySelectorAll('.ss-btn.is-active')].map(b => '"' + b.dataset.tag + '" 1');
+        // keep the site's "kern" setting; with nothing pressed, fall back to the page CSS
+        if (on.length) area.style.setProperty('font-feature-settings', ['"kern" 1'].concat(on).join(', '), 'important');
+        else area.style.removeProperty('font-feature-settings');
+        // Alternates change the text width: refit auto-sized testers, same as a style change does
+        if (typeof autoFitManager !== 'undefined' && autoFitManager.sections) {
+          const data = autoFitManager.sections.get(section);
+          if (data) [10, 100, 300].forEach(ms => setTimeout(() => autoFitManager.updateSectionSize(data), ms));
+        }
+      };
+      SETS.forEach(set => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'icon-btn ss-btn';
+        b.dataset.tag = set.tag;
+        b.textContent = set.label;
+        b.title = set.tag;
+        b.setAttribute('aria-pressed', 'false');
+        b.addEventListener('click', () => {
+          // First Alt click resets any fixed alternates baked into the sample (e.g. the ss01 demo line),
+          // so every line follows the buttons from here on.
+          area.querySelectorAll('.dolomit-ss01').forEach(el => el.classList.remove('dolomit-ss01'));
+          const active = b.classList.toggle('is-active');
+          b.setAttribute('aria-pressed', String(active));
+          apply();
+        });
+        group.appendChild(b);
+      });
+      align.insertAdjacentElement('afterend', group);
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build);
+  else build();
+})();
+</script>
+
+<script>
+/* Cover title entrance: width switch. Plays once; skipped for reduced motion. */
+(function () {
+  function run() {
+    var title = document.querySelector('.cover-title');
+    if (!title || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var i = 0;
+    Array.prototype.forEach.call(title.children, function (line) {
+      var text = line.textContent;
+      line.textContent = '';
+      // each line starts at the same time (Hebrew and Latin in parallel)
+      Array.from(text).forEach(function (ch, n) {
+        var s = document.createElement('span');
+        var staysBold = !line.matches(':first-child'); // only the Hebrew line switches width; Latin + brackets stay Bold (Nir 09-13)
+        s.className = staysBold ? 'ct-l' : 'ct-l ct-alt';
+        s.textContent = ch;
+        line.appendChild(s);
+        i = Math.max(i, n + 1);
+        setTimeout(function () { s.classList.add('ct-on'); }, n * 90);
+        if (!staysBold) setTimeout(function () { s.classList.remove('ct-alt'); }, n * 90 + 500);
+      });
+    });
+    // safety net: whatever happens, end in the final state
+    setTimeout(function () {
+      title.querySelectorAll('.ct-l').forEach(function (s) { s.classList.add('ct-on'); s.classList.remove('ct-alt'); });
+    }, i * 90 + 1200);
+  }
+  function start() { (document.fonts ? document.fonts.ready : Promise.resolve()).then(run); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(start, 0); });
+  else start();
+})();
+</script>
+<!-- ROTATING BADGE. Same SALE config as the bar; shown instead of it on phones. -->
+<div class="nt-badge" id="ntBadge" aria-hidden="true">
+  <svg id="ntBadgeSvg" xmlns="http://www.w3.org/2000/svg">
+    <circle class="nt-badge-disc" id="ntBadgeDisc" />
+    <g class="nt-badge-spin">
+      <path id="ntBadgePath" fill="none" />
+      <text class="nt-badge-text"><textPath id="ntBadgeTextPath" href="#ntBadgePath" startOffset="0"></textPath></text>
+    </g>
+  </svg>
+</div>
+
+<!-- LAUNCH OFFER bar. A direct child of <body> on purpose: nested inside the buy
+     overlay it inherited that overlay's stacking context and painted over the cart. -->
+<div class="nt-sale-bar" id="ntSaleBar" aria-hidden="true">
+  <div class="nt-sale-track"><span id="ntSaleText"></span><span id="ntSaleText2"></span></div>
+</div>
+</body>
+</html>
