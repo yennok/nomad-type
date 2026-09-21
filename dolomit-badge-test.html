@@ -556,10 +556,11 @@
        clear of the white button bar. */
     body.nt-sale-page .nt-badge {
       display: block; right: 27px;
-      /* iOS Safari already places fixed elements against the VISIBLE area, so no
-         address-bar maths here: adding it lifted the badge by both toolbars at once.
-         Only the home-indicator inset is real, and it is 0 everywhere else. */
-      bottom: calc(98px + env(safe-area-inset-bottom, 0px));
+      /* No env(safe-area-inset-bottom) here. On an iPhone with a home indicator that
+         is about 34px, and adding it to our own value left the badge visibly floating.
+         iOS already ends the visible viewport above the toolbar, so the breathing room
+         is there without asking for it. */
+      bottom: 98px;
     }
     body.nt-sale-page { padding-top: 0; }
   }

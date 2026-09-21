@@ -726,8 +726,10 @@ ease;
      webfont loads and solves r = width / 2pi - so nothing is lined up by hand. */
   .nt-badge {
     position: fixed; right: 27px; z-index: 1001; display: none;
-    /* PROBE (2026-09-21): bottom 0, nothing added, to see where iOS actually puts a
-       fixed element. Restore calc(27px + env(safe-area-inset-bottom, 0px)) after. */
+    /* 0 on purpose, confirmed on an iPhone. iOS ends the visible viewport above the
+       Safari toolbar, so the badge already gets its breathing room from the toolbar
+       itself. Adding env(safe-area-inset-bottom) on top of a value of our own put it
+       about 34px too high and it read as floating. */
     bottom: 0;
   }
   .nt-badge svg { display: block; overflow: visible; }
