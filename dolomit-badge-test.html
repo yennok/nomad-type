@@ -1610,7 +1610,7 @@
     //  promoCode: the Stripe promotion code. While it is EMPTY the page refuses to
     //  show a discounted price, because the payment links are at full price and the
     //  discount only exists once the code is appended to the checkout URL.
-    const SALE = { on: true, percent: 20, label: 'NEW!', barLabel: 'Dolomit Launch Offer', badgeText: 'NEW! Dolomit 20% off ', endsOn: '', gap: 10, promoCode: '' };
+    const SALE = { on: true, percent: 20, label: 'NEW!', barLabel: 'Dolomit Launch Offer', badgeText: 'NEW! Dolomit 20% off ', endsOn: '', gap: 10, promoCode: 'DOLOMIT20' };
 
     const salePrice = (n) => Math.round(n * (100 - SALE.percent) / 100);
 
