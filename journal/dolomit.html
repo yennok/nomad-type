@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FPE1JV10R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4FPE1JV10R');
+  </script>
+  <meta charset="UTF-8" />
+  <!-- Not linked from the journal index yet, and noindex until launch. -->
+  <meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dolomit - Nomad Type Journal</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+  <link rel="apple-touch-icon" href="../assets/favicon.png">
+
+  <!-- Featured Image Meta Tags -->
+  <meta property="og:title" content="דולומיט [Dolomit] - Nomad Type Journal">
+  <meta property="og:description" content="Dolomit is a geometric display typeface drawn as a modern answer to Haim, the canonical Hebrew headline letter, with Shmuel Sela's Alon and Wim Crouwel's New Alphabet alongside it.">
+  <meta property="og:url" content="https://www.nomad-type.com/journal/dolomit">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://www.nomad-type.com/photos/dolomit/specimen/1.jpg">
+  <meta property="og:image:width" content="1920">
+  <meta property="og:image:height" content="1080">
+  <meta property="og:image:alt" content="Dolomit - Nomad Type Journal">
+  <meta property="article:author" content="Liad Shadmi">
+  <!-- TODO(dolomit): published_time, set on launch day -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="דולומיט [Dolomit] - Nomad Type Journal">
+  <meta name="twitter:description" content="Dolomit is a geometric display typeface drawn as a modern answer to Haim, the canonical Hebrew headline letter, with Shmuel Sela's Alon and Wim Crouwel's New Alphabet alongside it.">
+  <meta name="twitter:image" content="https://www.nomad-type.com/photos/dolomit/specimen/1.jpg">
+  <meta name="twitter:image:alt" content="Dolomit - Nomad Type Journal">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    /* Red Journal nav link on journal pages */
+    a.nav-link[href="./"],
+    a.menu-item[href="./"] {
+      color: red !important;
+    }
+
+    a.mobile-menu-link[href="./"] {
+      color: red !important;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: white;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    /* ====== ARTICLE GRID LAYOUT ====== */
+
+    .main-container {
+      overflow: visible;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      padding: 190px 0 100px;
+    }
+
+    .article-content {
+      margin: 0 auto;
+      padding: 0 90px;
+      color: black;
+      display: grid;
+      grid-template-columns: 2fr 3fr 1fr;
+      gap: 60px;
+    }
+
+    /* ====== LEFT COLUMN: STICKY TITLE ====== */
+
+    .article-left-column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .article-title-column {
+      position: sticky;
+      top: 100px;
+    }
+
+    .article-title-he {
+      font-family: "Safra", sans-serif;
+      font-size: 80px;
+      font-weight: 400;
+      color: #e00;
+      margin: 0 0 24px 0;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+    }
+
+    .article-title-en {
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      font-weight: 400;
+      color: black;
+      margin: 0px 0 430px 0;
+      line-height: 1.2;
+    }
+
+    .article-end-meta {
+      padding-top: 130px;
+    }
+
+    .article-end-meta--desktop {
+      margin-top: auto;
+    }
+
+    .article-end-meta--mobile {
+      display: none;
+    }
+
+    .article-date {
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      font-weight: 400;
+      color: black;
+      margin-bottom: 8px;
+    }
+
+    .article-author {
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      font-weight: 400;
+      color: black;
+    }
+
+
+    .article-figure.article-hero-photo {
+      margin: 30px 0 150px 0;
+    }
+
+    .article-hero-photo img {
+      max-width: 250px;
+    }
+
+    .article-figure.article-zoom-photo {
+      margin: 120px 0 50px;
+    }
+
+    .article-figure.article-zoom-photo + .article-figure.article-zoom-photo {
+      margin-top: 25px;
+    }
+
+    .article-zoom-photo img {
+      max-width: 250px;
+    }
+
+    /* ====== MIDDLE COLUMN: TEXT ====== */
+
+    .article-text-column {
+      margin-top: 0;
+    }
+
+    .article-body {
+      font-family: "Safra Sans", sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: black;
+      line-height: 1.6;
+    }
+
+    .article-body p {
+      margin: 0 0 20px 0;
+    }
+
+    .article-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ====== INLINE IMAGES ====== */
+
+    .article-figure {
+      margin: 120px 0;
+    }
+
+    .article-figure img {
+      width: 100%;
+      display: block;
+    }
+
+    .article-figure figcaption {
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      font-weight: 400;
+      color: black;
+      margin-top: 30px;
+      line-height: 1.5;
+    }
+
+    .fig-number {
+      color: #e00;
+      font-weight: 500;
+    }
+
+    /* Smaller images */
+    .article-figure.small img {
+      max-width: 280px;
+    }
+
+    /* ====== NAV & FOOTER STYLES ====== */
+
+    .nav-brand, .nav-link {
+      color: black;
+      margin-top: 28px;
+    }
+
+    .nav-brand a {
+      color: black;
+      text-decoration: none;
+    }
+
+    .nav-brand a:hover {
+      text-decoration: none;
+    }
+
+    .sticky-nav {
+      position: absolute;
+      height: 0;
+      overflow: visible;
+      z-index: 100;
+    }
+
+    .sticky-green-circle {
+      transition: opacity 0.5s ease !important;
+      opacity: 0 !important;
+    }
+
+    .sticky-green-circle.visible {
+      opacity: 1 !important;
+    }
+
+    @media (max-width: 768px) {
+      .sticky-green-circle {
+        pointer-events: auto !important;
+        cursor: pointer;
+      }
+      .sticky-green-circle .menu-background,
+      .sticky-green-circle .circle-hamburger {
+        display: none !important;
+      }
+      .sticky-green-circle:hover .circle-marquee-content {
+        opacity: 1 !important;
+      }
+    }
+
+    /* Sticky Trial Fonts Button */
+    .sticky-trial-btn {
+      position: fixed;
+      top: 29px;
+      right: 29px;
+      z-index: 1000;
+    }
+
+    .sticky-trial-btn {
+      padding: 7px 10px;
+      border: 1px solid black;
+      background: white;
+      font-family: "Safra Mono", monospace;
+      font-size: 14px;
+      font-weight: 400;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: black;
+      display: inline-block;
+      border-radius: 4px;
+      line-height: 17px;
+    }
+
+    .sticky-trial-btn:hover {
+      background: black;
+      color: white;
+      border: 1px solid black;
+    }
+
+    .footer-nav-link:hover {
+      opacity: 1;
+      color: black;
+      text-decoration: underline;
+    }
+
+    .footer-linkedin-btn:hover {
+      background: black;
+      color: white;
+      border: 1px solid black;
+    }
+
+    /* Show Journal link on this page (hidden globally in styles.css) */
+    a[href="./"] {
+      display: inline !important;
+    }
+
+    /* ====== RESPONSIVE ====== */
+
+    @media (max-width: 768px) {
+      .journal-article .cover-buttons {
+        display: none !important;
+      }
+
+      .main-container {
+        padding: 11.7rem 0 60px;
+      }
+
+      .article-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 0 18px;
+      }
+
+      .article-title-column {
+        position: static;
+      }
+
+      .article-title-he {
+        font-size: 80px;
+        margin: 0 0 18px 0;
+      }
+
+      .article-title-en {
+        font-size: 14px;
+        margin: 0 0 120px 0px;
+      }
+
+      .article-end-meta--desktop {
+        display: none;
+      }
+
+      .article-end-meta--mobile {
+        display: block;
+        order: 99;
+        padding-top: 0;
+        margin-top: 0px;
+        margin-bottom: 12px;
+      }
+
+      .article-body {
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .article-photo-small {
+        max-width: 120px;
+      }
+
+      .article-figure {
+        margin: 100px 0;
+      }
+
+      .article-figure figcaption {
+        margin-top: 18px;
+      }
+
+      .article-figure.article-zoom-photo + .article-figure.article-zoom-photo {
+        margin-top: -30px;
+      }
+
+      .cover-buttons {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+      }
+
+      .cover-buttons.hidden-by-footer {
+        opacity: 0 !important;
+        pointer-events: none;
+      }
+
+      .cover-buttons .btn {
+        position: static;
+        width: 100%;
+      }
+
+      .sticky-trial-btn {
+        background-color: black;
+        color: white;
+      }
+    }
+  </style>
+</head>
+<body class="journal-article">
+  <nav class="sticky-nav" style="transition: opacity 0.5s, top 0.3s; opacity: 1; top: 50px;">
+    <div class="nav-brand"><a href="../">Nomad Type</a></div>
+    <div class="nav-links">
+      <a href="../" class="nav-link">Typefaces</a>
+      <a href="./" class="nav-link">Journal</a>
+      <a href="../about" class="nav-link">About</a>
+    </div>
+  </nav>
+
+  <div class="sticky-green-circle" style="--menu-width: 319px; --menu-padding: 0 36px;">
+    <div class="circle-marquee">
+      <div class="circle-marquee-content" style="translate: none; rotate: none; scale: none; transform: translate3d(-16.625px, -1px, 0px);">Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type Nomad Type</div>
+    </div>
+    <div class="menu-background">
+      <div class="menu-items">
+        <a href="../" class="menu-item">Typefaces</a>
+        <a href="./" class="menu-item">Journal</a>
+        <a href="../about" class="menu-item">About</a>
+      </div>
+    </div>
+    <div class="circle-hamburger"></div>
+  </div>
+
+  <div class="mobile-hamburger-circle solid" id="mobileHamburgerCircle" style="display: block;"></div>
+
+  <!-- ====== MOBILE OVERLAY MENU ====== -->
+  <div class="mobile-overlay" id="mobileOverlay">
+    <div class="mobile-overlay-content">
+      <div class="mobile-menu-header">
+        <h2><a href="../">Nomad Type</a></h2>
+        <button class="close-btn" id="closeMobileMenu"></button>
+      </div>
+      <nav class="mobile-menu-nav">
+        <a href="../" class="mobile-menu-link">Typefaces</a>
+        <a href="./" class="mobile-menu-link">Journal</a>
+        <a href="../trial-fonts" class="mobile-menu-link">Trial Fonts</a>
+        <a href="../licensing" class="mobile-menu-link">Licensing</a>
+        <a href="../about" class="mobile-menu-link">About</a>
+        <a href="../faq" class="mobile-menu-link">FAQ</a>
+      </nav>
+      <div class="mobile-menu-footer">
+        <p>&copy; Nomad Type. All Rights Reserved 2026</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Trial Fonts Button -->
+  <div class="cover-buttons">
+    <a href="../trial-fonts" class="btn btn-primary sticky-trial-btn">Trial Fonts</a>
+  </div>
+
+  <!-- ====== ARTICLE ====== -->
+  <div class="main-container">
+    <div class="article-content">
+
+      <!-- LEFT COLUMN: Sticky title + end meta (desktop) -->
+      <div class="article-left-column">
+        <div class="article-title-column">
+          <h1 class="article-title-he">&#x5D3;&#x5D5;&#x5DC;&#x5D5;&#x5DE;&#x5D9;&#x5D8;</h1>
+          <h2 class="article-title-en">[Dolomit]</h2>
+        </div>
+        <div class="article-end-meta article-end-meta--desktop">
+          <!-- TODO(dolomit): the month, on launch day -->
+          <div class="article-date"></div>
+          <div class="article-author">Liad Shadmi</div>
+        </div>
+      </div>
+
+      <!-- MIDDLE COLUMN: Article text -->
+      <div class="article-text-column">
+        <div class="article-body">
+
+          <figure class="article-figure article-hero-photo">
+            <img src="../photos/dolomit/specimen/1.jpg" alt="Dolomit specimen">
+          </figure>
+
+          <p>Dolomit is a geometric display typeface, drawn with several sources in mind.</p>
+
+          <p>The first is Haim, the canonical Hebrew letter that is still one of the most common headline faces in the language. Haim was drawn in the early twentieth century in Eastern Europe, under the influence of the Bauhaus, and it carried a new modernist spirit into the Hebrew letter. Nobody knows for certain who designed it. Some credit the Polish designer Jan Le&#347;wit, others the Hungarian designer Pesach Ir-Shai. It was met with a good deal of criticism among letter designers at first, while part of the art community encouraged its use. The poet Hayim Nahman Bialik went as far as writing to Pesach Ir-Shai to encourage him to carry on with the letter, and so the designer named it after the poet.</p>
+
+          <figure class="article-figure">
+            <img src="../assets/journal/dolomit/haim-safety-poster.jpg" alt="Israeli public safety poster set in Haim">
+          </figure>
+
+          <p>For all the argument around it, there is no arguing with how present Haim is in Hebrew, or how widely and variously it has been used. Dolomit was drawn as a modern answer to it. It stays faithful to its sans serif, geometric, constructivist character, and brings a different approach to the letter.</p>
+
+          <figure class="article-figure">
+            <img src="../assets/journal/dolomit/haim-election-poster.jpg" alt="Israeli election poster with a heavy geometric Hebrew headline">
+          </figure>
+
+          <figure class="article-figure">
+            <img src="../assets/journal/dolomit/hebrew-covers.jpg" alt="Hebrew book covers and magazine pages using the letter">
+          </figure>
+
+          <p>A second source is the typeface Alon, known in its modern name as Sela Atzil, drawn for a Letraset catalogue by the type designer Shmuel Sela. Sela has been designing Hebrew typefaces since 1977, with original designs produced as fonts for dry transfer sheets, typewriters, phototypesetting systems and personal computers. His geometric letter is marked by geometric curves at the terminals, drawn from the American Collegiate and Varsity lettering styles, which give it weight and presence. It was used widely through the eighties and nineties, and disappeared from the Israeli landscape along with Letraset itself. Dolomit is a modern variation on it, with sharper curves at the terminals, taken from folded paper, which give the letter a more modern feel.</p>
+
+          <figure class="article-figure">
+            <img src="../assets/journal/dolomit/letraset-alon-catalogue.jpg" alt="Letraset catalogue page showing Alon">
+            <figcaption>Alon in the Letraset catalogue</figcaption>
+          </figure>
+
+          <figure class="article-figure">
+            <img src="../assets/journal/dolomit/magazine-spreads.jpg" alt="Israeli magazine spreads from the eighties">
+          </figure>
+
+          <figure class="article-figure">
+            <img src="../assets/journal/dolomit/green-ribbon-poster.jpg" alt="Israeli poster built from geometric shapes">
+          </figure>
+
+          <p>A third source is the Dutch designer Wim Crouwel, one of the fathers of the modernist letter. Dolomit draws directly on his experimental New Alphabet, and above all on the sharp curves at the terminals, which give the letter something futuristic.</p>
+
+          <figure class="article-figure">
+            <img src="../assets/journal/dolomit/crouwel-new-alphabet.jpg" alt="Wim Crouwel, New Alphabet">
+            <figcaption>Wim Crouwel, New Alphabet</figcaption>
+          </figure>
+
+          <figure class="article-figure">
+            <img src="../assets/journal/dolomit/crouwel-stedelijk-1968.jpg" alt="Wim Crouwel, Stedelijk Museum poster, 1968">
+            <figcaption>Wim Crouwel, Stedelijk Museum, 1968</figcaption>
+          </figure>
+
+          <figure class="article-figure">
+            <img src="../assets/journal/dolomit/geometric-alphabet-grid.jpg" alt="A geometric alphabet drawn on a construction grid">
+          </figure>
+
+          <p>Dolomit covers the full Hebrew alphabet, including alternates as OpenType features, which allow a different variation for almost every letter. It also includes Latin capitals, drawn on the Hebrew letters.</p>
+
+          <figure class="article-figure">
+            <img src="../photos/dolomit/in-use/1.jpg" alt="Dolomit in use">
+            <figcaption>Posters by Stas Tuchinsky</figcaption>
+          </figure>
+
+          <figure class="article-figure">
+            <img src="../photos/dolomit/in-use/2.jpg" alt="Dolomit in use">
+          </figure>
+
+          <p>Dolomit was designed by <a href="https://liadshadmi.com" target="_blank" rel="noopener">Liad Shadmi</a>, with typographic consultation by Ben Nathan.</p>
+
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: Empty (air) -->
+      <div></div>
+
+      <!-- Article end meta (mobile) -->
+      <div class="article-end-meta article-end-meta--mobile">
+        <!-- TODO(dolomit): the month, on launch day -->
+        <div class="article-date"></div>
+        <div class="article-author">Liad Shadmi</div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <!-- FOOTER CONTAINER -->
+  <div id="footer-container"></div>
+
+  <!-- GSAP Scripts for marquee animation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="../gsap-public/esm/Draggable.js"></script>
+  <script src="../gsap-public/esm/ScrollTrigger.js"></script>
+
+  <script src="../footer.js"></script>
+  <script src="../script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      loadFooter('Safra');
+
+      if (typeof initCircleMarquee === 'function') {
+        initCircleMarquee();
+      }
+
+      function updateCircleVisibility() {
+        const stickyNav = document.querySelector('.sticky-nav');
+        const circle = document.querySelector('.sticky-green-circle');
+
+        if (stickyNav && circle) {
+          const navRect = stickyNav.getBoundingClientRect();
+          if (navRect.bottom < 0) {
+            circle.classList.add('visible');
+          } else {
+            circle.classList.remove('visible');
+          }
+        }
+      }
+
+      window.addEventListener('scroll', updateCircleVisibility);
+      updateCircleVisibility();
+
+      // Mobile: make sticky-green-circle clickable to homepage
+      const greenCircle = document.querySelector('.sticky-green-circle');
+      if (greenCircle) {
+        greenCircle.addEventListener('click', function() {
+          if (window.innerWidth <= 768) {
+            window.location.href = '../';
+          }
+        });
+      }
+
+      // Mobile Overlay
+      function initMobileOverlay() {
+        const mobileHamburgerCircle = document.getElementById('mobileHamburgerCircle');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+
+        if (mobileHamburgerCircle) {
+          mobileHamburgerCircle.addEventListener('click', function() {
+            if (mobileOverlay) {
+              mobileOverlay.classList.add('active');
+              document.body.style.overflow = 'hidden';
+            }
+          });
+        }
+
+        if (closeMobileMenu) {
+          closeMobileMenu.addEventListener('click', function() {
+            if (mobileOverlay) {
+              mobileOverlay.classList.remove('active');
+              document.body.style.overflow = '';
+            }
+          });
+        }
+
+        if (mobileOverlay) {
+          mobileOverlay.addEventListener('click', function(e) {
+            if (e.target === mobileOverlay) {
+              mobileOverlay.classList.remove('active');
+              document.body.style.overflow = '';
+            }
+          });
+        }
+
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && mobileOverlay && mobileOverlay.classList.contains('active')) {
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+          }
+        });
+      }
+
+      initMobileOverlay();
+
+      // Hide cover-buttons when footer comes into view
+      function initFooterVisibilityCheck() {
+        const coverButtons = document.querySelector('.cover-buttons');
+        const footerContainer = document.getElementById('footer-container');
+
+        if (coverButtons && footerContainer && footerContainer.children.length > 0) {
+          function checkFooterVisibility() {
+            const footerRect = footerContainer.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            if (footerRect.top < viewportHeight) {
+              coverButtons.classList.add('hidden-by-footer');
+            } else {
+              coverButtons.classList.remove('hidden-by-footer');
+            }
+          }
+          window.addEventListener('scroll', checkFooterVisibility);
+          checkFooterVisibility();
+        } else if (coverButtons && footerContainer) {
+          setTimeout(initFooterVisibilityCheck, 500);
+        }
+      }
+
+      setTimeout(initFooterVisibilityCheck, 1000);
+    });
+  </script>
+</body>
+</html>
