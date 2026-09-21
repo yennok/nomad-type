@@ -1477,8 +1477,38 @@
     //  intentionally absent → Buy button shows a disabled "Coming soon" state.
     //  Add remaining variants with the SAME key format; no other change needed.
     // =====================================================================
-    // TODO(dolomit): Stripe payment links, after prices are set (generate-store-links.py, Nir approves)
-    const CHECKOUT_URLS = {}; // empty -> every combo shows 'Coming soon' 
+    // Live Stripe payment links, generated 2026-09-21 at the EUR 85 anchor.
+    // Every link has allow_promotion_codes on, so a launch coupon can be applied by
+    // appending ?prefilled_promo_code=CODE - no second set of links needed.
+    const CHECKOUT_URLS = {
+      'entire|desktop|individual': 'https://buy.stripe.com/28E7sM5nDdUsgpu5at8N30G',
+      'entire|desktop|studio': 'https://buy.stripe.com/14AeVe4jz7w4b5a7iB8N30H',
+      'entire|desktop|company': 'https://buy.stripe.com/4gM5kE6rHdUs8X232l8N30I',
+      'entire|web|individual': 'https://buy.stripe.com/bJe3cw17n5nW2yEcCV8N30J',
+      'entire|web|studio': 'https://buy.stripe.com/6oU7sMaHX7w47SY8mF8N30K',
+      'entire|web|company': 'https://buy.stripe.com/5kQ14oaHX5nWb5a1Yh8N30L',
+      'entire|bundle|individual': 'https://buy.stripe.com/14AaEY03jbMk2yEauN8N30M',
+      'entire|bundle|studio': 'https://buy.stripe.com/6oUbJ27vLaIgb5a5at8N30N',
+      'entire|bundle|company': 'https://buy.stripe.com/5kQ4gA5nD7w43CIbyR8N30O',
+      'bold|desktop|individual': 'https://buy.stripe.com/3cIbJ26rH03Cddi7iB8N30P',
+      'bold|desktop|studio': 'https://buy.stripe.com/dRm8wQ03j9Ec0qw46p8N30Q',
+      'bold|desktop|company': 'https://buy.stripe.com/8x27sM3fv7w45KQ0Ud8N30R',
+      'bold|web|individual': 'https://buy.stripe.com/14A9AU5nD6s01uAeL38N30S',
+      'bold|web|studio': 'https://buy.stripe.com/7sYcN617n9EcflqeL38N30T',
+      'bold|web|company': 'https://buy.stripe.com/00wfZidU9cQo7SYbyR8N30U',
+      'bold|bundle|individual': 'https://buy.stripe.com/8x23cw6rH9Eca1632l8N30V',
+      'bold|bundle|studio': 'https://buy.stripe.com/28EeVedU92bK1uA0Ud8N30W',
+      'bold|bundle|company': 'https://buy.stripe.com/dRmfZiaHX5nW6OUbyR8N30X',
+      'bold-extended|desktop|individual': 'https://buy.stripe.com/7sY3cw17n03Cflq1Yh8N30Y',
+      'bold-extended|desktop|studio': 'https://buy.stripe.com/dRm8wQ9DT17G3CI46p8N30Z',
+      'bold-extended|desktop|company': 'https://buy.stripe.com/dRm28s8zP8A8ehm7iB8N310',
+      'bold-extended|web|individual': 'https://buy.stripe.com/3cIdRa6rHeYw1uAauN8N311',
+      'bold-extended|web|studio': 'https://buy.stripe.com/14A3cw7vLcQo0qw8mF8N312',
+      'bold-extended|web|company': 'https://buy.stripe.com/bJe00kcQ5dUsflqdGZ8N313',
+      'bold-extended|bundle|individual': 'https://buy.stripe.com/bJeaEYdU9eYw0qwcCV8N314',
+      'bold-extended|bundle|studio': 'https://buy.stripe.com/28E3cw9DTbMkb5a0Ud8N315',
+      'bold-extended|bundle|company': 'https://buy.stripe.com/7sYbJ27vL2bKa16auN8N316',
+    };
 
     function checkoutKey(fonts, format, tier) {
       if (!format) return null;
