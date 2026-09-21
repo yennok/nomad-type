@@ -545,7 +545,11 @@
   @media (prefers-reduced-motion: reduce) { .nt-badge-spin { animation: none; } }
 
   @media (max-width: 768px) {
-    /* The badge replaces the bar on phones. It sits above the white button strip. */
+    /* The badge replaces the bar on phones, so there is no top bar to make room for.
+       Setting its height to 0 undoes the whole top-bar treatment in one go: the body
+       padding, the cover height and the margins on the logo, burger and nav are all
+       expressed as calculations on this variable. */
+    body.nt-sale-page { --nt-sale-h: 0px; }
     body.nt-sale-page .nt-sale-bar { display: none; }
     /* 27px right / 28px up from the RED COVER. Measured from the window those numbers
        put 42px of the badge behind the white button bar, so they are applied to the
