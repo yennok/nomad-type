@@ -547,7 +547,10 @@
   @media (max-width: 768px) {
     /* The badge replaces the bar on phones. It sits above the white button strip. */
     body.nt-sale-page .nt-sale-bar { display: none; }
-    body.nt-sale-page .nt-badge { display: block; bottom: calc(var(--nt-buttons-h, 70px) + 16px); }
+    /* 18px in from the red cover's bottom-right corner. `right` is fixed (the cover sits
+       18px off the screen, so 18+18); `bottom` is set by the script from the cover's real
+       bottom edge, because deriving it from the button-bar height was 4px out. */
+    body.nt-sale-page .nt-badge { display: block; right: 36px; bottom: var(--nt-badge-bottom, 106px); }
     body.nt-sale-page { padding-top: 0; }
   }
 
@@ -1593,7 +1596,7 @@
     // =====================================================================
     //  label   : the tag next to the price in the cart, e.g. NEW! 20% off
     //  barLabel: how the offer reads on the bottom bar
-    const SALE = { on: true, percent: 20, label: 'NEW!', barLabel: 'Dolomit Launch Offer', endsOn: '', gap: 10 };
+    const SALE = { on: true, percent: 20, label: 'NEW!', barLabel: 'Dolomit Launch Offer', badgeText: 'Dolomit 20% off', endsOn: '', gap: 10 };
 
     const salePrice = (n) => Math.round(n * (100 - SALE.percent) / 100);
 
@@ -1662,33 +1665,58 @@
         const path = document.getElementById('ntBadgePath');
         const tp = document.getElementById('ntBadgeTextPath');
 
-        tp.textContent = sentence;
+        const words = SALE.badgeText || sentence;
+        tp.textContent = words;
 
-        // Measure the sentence in the badge's own type, off-screen.
+        // Measure the real text, off-screen, in the badge's own type.
         const ruler = document.createElement('span');
         ruler.style.cssText = 'position:absolute;visibility:hidden;white-space:pre;' +
           'font-family:"Safra Mono",monospace;font-size:14px;letter-spacing:0;';
-        ruler.textContent = sentence;
+        ruler.textContent = words;
         document.body.appendChild(ruler);
         const textWidth = ruler.getBoundingClientRect().width;
         ruler.remove();
 
-        const rText = textWidth / (2 * Math.PI);   // the baseline circle
-        const pad = 14 * 0.95;                     // room for ascenders + a margin
-        const R = rText + pad;                     // the yellow disc
-        const size = Math.ceil(2 * R);
-        const c = size / 2;
+        const rText = textWidth / (2 * Math.PI);   // the baseline circle: one lap, exactly
+        const PAD = 10;                            // gap between the glyphs and the disc edge
 
-        svg.setAttribute('width', size);
-        svg.setAttribute('height', size);
-        svg.setAttribute('viewBox', '0 0 ' + size + ' ' + size);
-        disc.setAttribute('cx', c); disc.setAttribute('cy', c); disc.setAttribute('r', R);
+        function draw(R) {
+          const size = Math.ceil(2 * R);
+          const c = size / 2;
+          svg.setAttribute('width', size);
+          svg.setAttribute('height', size);
+          svg.setAttribute('viewBox', '0 0 ' + size + ' ' + size);
+          disc.setAttribute('cx', c); disc.setAttribute('cy', c); disc.setAttribute('r', R);
+          // One full circle, starting at the top, clockwise, so the words read left to right.
+          path.setAttribute('d',
+            'M ' + c + ' ' + (c - rText) +
+            ' a ' + rText + ' ' + rText + ' 0 1 1 -0.01 0');
+          return c;
+        }
 
-        // A full circle as one path, starting at the top and going clockwise, so the
-        // sentence reads left to right along the top of the badge.
-        path.setAttribute('d',
-          'M ' + c + ' ' + (c - rText) +
-          ' a ' + rText + ' ' + rText + ' 0 1 1 -0.01 0');
+        // Two passes: draw once to find how far the glyphs actually reach past the
+        // baseline circle, then size the disc to that plus the padding. Measuring beats
+        // guessing at ascender height, and it stays right if the type size changes.
+        let c = draw(rText + 14 + PAD);
+        const textEl = tp.parentNode;
+        let reach = 14;                            // fallback if getBBox is unavailable
+        try {
+          const bb = textEl.getBBox();             // the ring the glyphs occupy
+          reach = Math.max(
+            c - bb.x,
+            (bb.x + bb.width) - c,
+            c - bb.y,
+            (bb.y + bb.height) - c
+          ) - rText;
+        } catch (e) {}
+        draw(rText + Math.max(reach, 2) + PAD);
+
+        // Sit 18px above the bottom of the red cover, measured rather than assumed.
+        const cover = document.querySelector('.cover-header');
+        if (cover) {
+          const gap = Math.round(window.innerHeight - cover.getBoundingClientRect().bottom + 18);
+          document.body.style.setProperty('--nt-badge-bottom', gap + 'px');
+        }
       }
 
       (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () {
