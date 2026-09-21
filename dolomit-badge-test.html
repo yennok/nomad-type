@@ -1596,7 +1596,7 @@
     // =====================================================================
     //  label   : the tag next to the price in the cart, e.g. NEW! 20% off
     //  barLabel: how the offer reads on the bottom bar
-    const SALE = { on: true, percent: 20, label: 'NEW!', barLabel: 'Dolomit Launch Offer', badgeText: 'Dolomit 20% off', endsOn: '', gap: 10 };
+    const SALE = { on: true, percent: 20, label: 'NEW!', barLabel: 'Dolomit Launch Offer', badgeText: 'NEW! Dolomit 20% off -', endsOn: '', gap: 10 };
 
     const salePrice = (n) => Math.round(n * (100 - SALE.percent) / 100);
 
@@ -1678,7 +1678,7 @@
         ruler.remove();
 
         const rText = textWidth / (2 * Math.PI);   // the baseline circle: one lap, exactly
-        const PAD = 10;                            // gap between the glyphs and the disc edge
+        const PAD = 5;                             // gap between the glyphs and the disc edge
 
         function draw(R) {
           const size = Math.ceil(2 * R);
