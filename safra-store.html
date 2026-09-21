@@ -1,0 +1,646 @@
+<!doctype html>
+<!-- =====================================================================
+     SAFRA STORE — OVERLAY COMPONENT (right-side slide-in drawer)
+     ---------------------------------------------------------------------
+     Self-contained buy panel. Same configurator + pricing logic as the
+     old full-page build, re-housed inside a right-side drawer that slides
+     in over a dimmed backdrop — matching the site's existing #buyOverlay
+     pattern (right:-x% -> right:0, ~0.6s ease), plus a dimmed backdrop
+     that Nir asked for.
+
+     HOW TO USE ON A REAL FONT PAGE
+       Option A (standalone, this file):  open it directly; the drawer
+         auto-opens if the URL has #buy, otherwise it waits for a trigger.
+       Option B (injected like header.js/footer.js):  copy the markup
+         between  <!-- SAFRA-STORE:BEGIN -->  and  <!-- SAFRA-STORE:END -->
+         into the host page, or fetch()+inject this file's body. The JS
+         is namespaced (window.SafraStore) and wires itself on load.
+
+     TRIGGERS (anything with these opens the drawer):
+       - any element with [data-open-buy]
+       - the Safra cover "Buy Now" button  (#scrollBuyBtn / .scroll-btn)
+       - calling  SafraStore.open()  directly
+
+     CLOSE:  × button, backdrop click, or Esc.
+     ===================================================================== -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Buy Safra ספרא سفرا — License | Nomad Type</title>
+  <meta name="description" content="License Safra ספרא سفرا — trilingual serif & sans typeface. Configure style, format and license tier with live EUR pricing." />
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+
+  <!-- Site design system (accent, Safra/SafraSans/SafraMono @font-face, .btn) -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="safra-page">
+
+<!-- SAFRA-STORE:BEGIN  (self-contained: CSS + markup + JS) -->
+
+<style>
+/* =========================================================================
+   SAFRA STORE DRAWER — scoped styles (prefix .ss-)
+   Reuses the site's language: accent var(--primary-color) #FF4802 on
+   .safra-page, Safra / Safra Sans / Safra Mono, 1px-black bordered pills
+   and cards, Safra Mono eyebrows. Right-side drawer echoes site .overlay.
+   ========================================================================= */
+
+.ss-root, .ss-root * { box-sizing: border-box; }
+
+/* ---- Backdrop (dims the page behind) ---- */
+.ss-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.42);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 2400;
+  transition: opacity 0.38s ease, visibility 0s linear 0.38s;
+  -webkit-tap-highlight-color: transparent;
+}
+.ss-root.is-open .ss-backdrop {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.38s ease;
+}
+
+/* ---- Drawer shell ---- */
+.ss-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  width: 460px;
+  max-width: 100vw;
+  background: #fff;
+  border-left: 1px solid #000;
+  z-index: 2500;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  display: flex;
+  flex-direction: column;
+  color: #000;
+  font-family: "Safra Sans", sans-serif;
+  overflow: hidden;               /* internal body scrolls, not the shell */
+  will-change: transform;
+}
+.ss-root.is-open .ss-drawer { transform: translateX(0); }
+
+/* Respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .ss-drawer { transition: none; }
+  .ss-backdrop { transition: opacity 0.01s; }
+}
+
+/* =========================================================================
+   PINNED HEADER
+   ========================================================================= */
+.ss-head {
+  flex: 0 0 auto;
+  padding: 22px 24px 18px;
+  border-bottom: 1px solid #000;
+}
+.ss-eyebrow {
+  font-family: "Safra Mono", monospace;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+}
+.ss-eyebrow .ss-eyebrow-right { color: var(--primary-color); }
+.ss-title {
+  font-family: "Safra", serif;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 16px 0 0;
+  color: var(--primary-color);
+}
+.ss-title-sub {
+  font-family: "Safra Sans", sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 0.6;
+  margin: 8px 0 0;
+}
+
+/* Close button (× top-right, floats over header) */
+.ss-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  font-size: 20px;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  z-index: 2;
+}
+.ss-close:hover { background: var(--primary-color); border-color: var(--primary-color); color: #000; }
+.ss-close svg { width: 14px; height: 14px; display: block; }
+
+/* =========================================================================
+   SCROLLABLE BODY (the three choices)
+   ========================================================================= */
+.ss-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 22px 24px 26px;
+}
+
+.ss-block { margin-bottom: 30px; }
+.ss-block:last-child { margin-bottom: 0; }
+
+.ss-label {
+  font-family: "Safra Mono", monospace;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid #000;
+  padding-bottom: 10px;
+  margin-bottom: 16px;
+}
+.ss-label .ss-step { color: var(--primary-color); }
+
+/* ---- Segmented pill control ---- */
+.ss-seg { display: flex; flex-wrap: wrap; gap: 8px; }
+.ss-seg button {
+  font-family: "Safra Sans", sans-serif;
+  font-size: 15px;
+  color: #000;
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  line-height: 1.2;
+  max-width: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+.ss-seg button:hover { border-color: var(--primary-color); }
+.ss-seg button[aria-pressed="true"] { background: #000; color: #fff; border-color: #000; }
+.ss-seg button .sub { opacity: 0.55; font-size: 12px; }
+.ss-seg button[aria-pressed="true"] .sub { opacity: 0.7; }
+/* Full-family option gets the accent treatment when active */
+.ss-seg button.is-family[aria-pressed="true"] {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #000;
+}
+
+.ss-hint {
+  font-family: "Safra Sans", sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 0.6;
+  margin-top: 12px;
+}
+
+/* License permissions card */
+.ss-permits {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border: 1px solid #000;
+  border-radius: 14px;
+}
+.ss-permits p { font-size: 14px; line-height: 1.5; margin: 0 0 8px; }
+.ss-permits ul { margin: 0; padding-left: 16px; font-size: 13px; line-height: 1.5; }
+.ss-permits li { margin-bottom: 6px; }
+.ss-permits li:last-child { margin-bottom: 0; }
+
+.ss-contact {
+  font-family: "Safra Sans", sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 0.65;
+  margin: 24px 0 0;
+}
+.ss-contact a { color: #000; }
+
+/* =========================================================================
+   PINNED FOOTER  (summary + price + CTA)
+   ========================================================================= */
+.ss-foot {
+  flex: 0 0 auto;
+  border-top: 1px solid #000;
+  padding: 18px 24px 20px;
+  background: #fff;
+}
+.ss-sum-head {
+  font-family: "Safra Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  opacity: 0.55;
+  margin: 0 0 10px;
+}
+.ss-sum { margin-bottom: 12px; }
+.ss-sum-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: "Safra Sans", sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 2px 0;
+}
+.ss-sum-row .k { opacity: 0.55; }
+.ss-sum-row .v { text-align: right; }
+.ss-includes {
+  font-family: "Safra Mono", monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  opacity: 0.75;
+  margin: 0 0 14px;
+}
+.ss-includes .inc-tag { color: var(--primary-color); opacity: 1; }
+
+.ss-price {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.ss-price .amount {
+  font-family: "Safra", serif;
+  font-size: 46px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--primary-color);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+.ss-price .amount-label { font-family: "Safra Mono", monospace; font-size: 11px; opacity: 0.55; }
+
+.ss-buy {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-family: "Safra Mono", monospace;
+  font-size: 15px;
+  padding: 15px 14px;
+  border: 1px solid #000;
+  border-radius: 8px;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.ss-buy:hover { background: var(--primary-color); color: #000; border-color: var(--primary-color); }
+.ss-subnote {
+  font-family: "Safra Sans", sans-serif;
+  font-size: 11px;
+  line-height: 1.5;
+  text-align: center;
+  opacity: 0.55;
+  margin: 10px 0 0;
+}
+.ss-subnote a { color: #000; }
+
+/* =========================================================================
+   RESPONSIVE — drawer goes full-width on phones, content never overflows
+   ========================================================================= */
+@media (max-width: 520px) {
+  .ss-drawer { width: 100vw; border-left: none; }
+  .ss-head { padding: 20px 18px 16px; }
+  .ss-body { padding: 20px 18px 24px; }
+  .ss-foot { padding: 16px 18px 18px; }
+  .ss-title { font-size: 26px; }
+  .ss-price .amount { font-size: 40px; }
+  /* Pills wrap and shrink so nothing bleeds past the right edge */
+  .ss-seg button { font-size: 14px; padding: 7px 13px; }
+}
+
+.ss-sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+</style>
+
+<div class="ss-root" id="ss-root" aria-hidden="true">
+
+  <!-- backdrop -->
+  <div class="ss-backdrop" id="ss-backdrop" tabindex="-1"></div>
+
+  <!-- drawer -->
+  <aside class="ss-drawer" id="ss-drawer" role="dialog" aria-modal="true"
+         aria-labelledby="ss-title" aria-describedby="ss-title-sub">
+
+    <button class="ss-close" id="ss-close" type="button" aria-label="Close">
+      <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1 L13 13 M13 1 L1 13" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+    </button>
+
+    <!-- ===== PINNED HEADER ===== -->
+    <header class="ss-head">
+      <div class="ss-eyebrow">
+        <span>License &amp; Buy</span>
+        <span class="ss-eyebrow-right">Nomad Type</span>
+      </div>
+      <h2 class="ss-title" id="ss-title" dir="auto">Safra ספרא سفرا</h2>
+      <p class="ss-title-sub" id="ss-title-sub">Pick a style, a format and a license tier — the price updates live.</p>
+    </header>
+
+    <!-- ===== SCROLLABLE BODY: THE THREE CHOICES ===== -->
+    <div class="ss-body">
+
+      <!-- STYLE -->
+      <section class="ss-block">
+        <div class="ss-label"><span>Style</span><span class="ss-step">01</span></div>
+        <div class="ss-seg" id="ssStyle" role="group" aria-label="Choose a style">
+          <button type="button" data-style="regular"      aria-pressed="true">Safra Regular</button>
+          <button type="button" data-style="bold"         aria-pressed="false">Safra Bold</button>
+          <button type="button" data-style="sans-regular" aria-pressed="false">Safra Sans Regular</button>
+          <button type="button" data-style="sans-bold"    aria-pressed="false">Safra Sans Bold</button>
+          <button type="button" data-style="family" class="is-family" aria-pressed="false">Full Family <span class="sub">(all 4)</span></button>
+        </div>
+        <p class="ss-hint" id="ssStyleHint">A single style. Choose Full Family for all four fonts at a reduced combined price.</p>
+      </section>
+
+      <!-- FORMAT -->
+      <section class="ss-block">
+        <div class="ss-label"><span>Format</span><span class="ss-step">02</span></div>
+        <div class="ss-seg" id="ssFormat" role="group" aria-label="Choose a format">
+          <button type="button" data-format="desktop" aria-pressed="true">Desktop <span class="sub">OTF</span></button>
+          <button type="button" data-format="web"     aria-pressed="false">Web <span class="sub">WOFF2</span></button>
+          <button type="button" data-format="bundle"  aria-pressed="false">Desktop + Web <span class="sub">OTF + WOFF2</span></button>
+        </div>
+        <p class="ss-hint" id="ssFormatHint"></p>
+      </section>
+
+      <!-- LICENSE TIER -->
+      <section class="ss-block">
+        <div class="ss-label"><span>License tier</span><span class="ss-step">03</span></div>
+        <div class="ss-seg" id="ssTier" role="group" aria-label="Choose a license tier">
+          <button type="button" data-tier="individual" aria-pressed="true">Individual <span class="sub">1 user</span></button>
+          <button type="button" data-tier="studio"      aria-pressed="false">Studio <span class="sub">≤ 5 users</span></button>
+          <button type="button" data-tier="company"     aria-pressed="false">Company <span class="sub">≤ 20 users</span></button>
+        </div>
+        <div class="ss-permits" id="ssPermits"></div>
+      </section>
+
+      <p class="ss-contact">
+        Need 20+ seats, app embedding, or custom terms?
+        <a href="mailto:mail@nomad-type.com">mail@nomad-type.com</a>.
+        Student &amp; educational discounts available.
+      </p>
+    </div>
+
+    <!-- ===== PINNED FOOTER: SUMMARY + PRICE + CTA ===== -->
+    <footer class="ss-foot" aria-live="polite">
+      <p class="ss-sum-head">Your license</p>
+      <div class="ss-sum">
+        <div class="ss-sum-row"><span class="k">Style</span><span class="v" id="ssSumStyle">Safra Regular</span></div>
+        <div class="ss-sum-row"><span class="k">Format</span><span class="v" id="ssSumFormat">Desktop</span></div>
+        <div class="ss-sum-row"><span class="k">Tier</span><span class="v" id="ssSumTier">Individual · 1 user</span></div>
+      </div>
+      <p class="ss-includes" id="ssIncludes"></p>
+
+      <div class="ss-price">
+        <span class="amount" id="ssPrice">€100</span>
+        <span class="amount-label">EUR</span>
+      </div>
+
+      <button class="ss-buy" id="buy-btn" type="button"
+              data-config="regular|desktop|individual"
+              data-price="100">Buy Now — €100</button>
+
+      <p class="ss-subnote">
+        Shown in EUR — local currency &amp; VAT at checkout. Instant download. Includes the
+        <a href="assets/Nomad-Type-EULA-1.0.pdf" target="_blank" rel="noopener">EULA</a>.
+      </p>
+    </footer>
+
+  </aside>
+</div>
+
+<script>
+/* =========================================================================
+   SAFRA STORE — pricing + configurator + drawer controller (vanilla JS)
+   45 combinations = 5 styles × 3 formats × 3 tiers.
+   4 single styles share the SINGLE price table; Full Family uses FAMILY.
+   Namespaced under window.SafraStore so it can be injected into any page.
+   ========================================================================= */
+(function () {
+  'use strict';
+
+  // ---- Exact price tables (EUR), hardcoded from spec ----
+  const PRICES = {
+    single: {
+      desktop: { individual: 100, studio: 160, company: 400 },
+      web:     { individual: 145, studio: 235, company: 600 },
+      bundle:  { individual: 200, studio: 320, company: 800 }
+    },
+    family: {
+      desktop: { individual: 260, studio: 415, company: 1040 },
+      web:     { individual: 375, studio: 610, company: 1560 },
+      bundle:  { individual: 520, studio: 830, company: 2080 }
+    }
+  };
+
+  const STYLE_LABELS = {
+    'regular':      'Safra Regular',
+    'bold':         'Safra Bold',
+    'sans-regular': 'Safra Sans Regular',
+    'sans-bold':    'Safra Sans Bold',
+    'family':       'Full Family (all 4)'
+  };
+  const FORMAT_LABELS = { desktop: 'Desktop', web: 'Web', bundle: 'Desktop + Web' };
+  const TIER_LABELS = {
+    individual: 'Individual · 1 user',
+    studio:     'Studio · up to 5 users',
+    company:    'Company · up to 20 users'
+  };
+  const FORMAT_FILES = { desktop: 'OTF', web: 'WOFF2', bundle: 'OTF + WOFF2' };
+  const FORMAT_HINTS = {
+    desktop: 'Print, branding and offline use in design tools. Delivered as OTF. Install on up to 2 devices per licensed user. Excludes website/app embedding.',
+    web:     'Self-hosted @font-face for websites and web apps. Delivered as WOFF2. Unlimited page views, no tracking. Covers all domains for a single brand. Excludes desktop install.',
+    bundle:  'Both licenses together — desktop plus web. Delivered as OTF + WOFF2, at a combined price.'
+  };
+  const TIER_PERMITS = {
+    individual: {
+      head: 'Licensed to one named user (Individual).',
+      items: [
+        'For a single designer / one licensed user.',
+        'Desktop: install on up to 2 devices for that user.',
+        'Create logos, branding, print and digital publications.'
+      ]
+    },
+    studio: {
+      head: 'Licensed for a studio of up to 5 users.',
+      items: [
+        'Covers up to 5 people at your studio.',
+        'Desktop: install on up to 2 devices per licensed user.',
+        'Web: unlimited page views across all domains for a single brand.'
+      ]
+    },
+    company: {
+      head: 'Licensed for a company of up to 20 users.',
+      items: [
+        'Covers up to 20 people across the organisation.',
+        'Desktop: install on up to 2 devices per licensed user.',
+        'Need more than 20 seats or app embedding? Contact us for a custom quote.'
+      ]
+    }
+  };
+
+  const state = { style: 'regular', format: 'desktop', tier: 'individual' };
+  const euro = n => '€' + n.toLocaleString('en-US');
+  const $ = id => document.getElementById(id);
+
+  function priceFor(style, format, tier) {
+    const table = (style === 'family') ? PRICES.family : PRICES.single;
+    return table[format][tier];
+  }
+
+  // ---- Segmented controls ----
+  function wireSeg(containerId, key) {
+    const box = $(containerId);
+    if (!box) return;
+    box.addEventListener('click', e => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+      box.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', 'false'));
+      btn.setAttribute('aria-pressed', 'true');
+      state[key] = btn.dataset[key];
+      render();
+    });
+  }
+
+  // ---- Render everything from state ----
+  function render() {
+    const { style, format, tier } = state;
+    const price = priceFor(style, format, tier);
+
+    $('ssSumStyle').textContent  = STYLE_LABELS[style];
+    $('ssSumFormat').textContent = FORMAT_LABELS[format];
+    $('ssSumTier').textContent   = TIER_LABELS[tier];
+
+    const styleCount = (style === 'family') ? '4 fonts' : '1 font';
+    $('ssIncludes').innerHTML =
+      '<span class="inc-tag">Included:</span> ' + styleCount +
+      ' · ' + FORMAT_FILES[format] + ' files · EULA (PDF)';
+
+    $('ssPrice').textContent = euro(price);
+    const buy = $('buy-btn');
+    buy.textContent = 'Buy Now — ' + euro(price);
+    buy.dataset.config = style + '|' + format + '|' + tier;
+    buy.dataset.price = String(price);
+
+    $('ssStyleHint').textContent = (style === 'family')
+      ? 'Full Family — all four fonts (Safra Regular, Bold, Sans Regular, Sans Bold) at a combined price.'
+      : 'A single style. Choose Full Family for all four fonts at a reduced combined price.';
+    $('ssFormatHint').textContent = FORMAT_HINTS[format];
+
+    const p = TIER_PERMITS[tier];
+    $('ssPermits').innerHTML =
+      '<p>' + p.head + '</p><ul>' + p.items.map(i => '<li>' + i + '</li>').join('') + '</ul>';
+  }
+
+  // =======================================================================
+  //  DRAWER CONTROLLER — open / close / backdrop / Esc / scroll-lock / focus
+  // =======================================================================
+  const root    = $('ss-root');
+  const drawer  = $('ss-drawer');
+  const backdrop= $('ss-backdrop');
+  let lastFocus = null;
+
+  function lockScroll(lock) {
+    document.documentElement.style.overflow = lock ? 'hidden' : '';
+    document.body.style.overflow = lock ? 'hidden' : '';
+  }
+
+  function open() {
+    if (root.classList.contains('is-open')) return;
+    lastFocus = document.activeElement;
+    root.classList.add('is-open');
+    root.setAttribute('aria-hidden', 'false');
+    lockScroll(true);
+    // move focus into the drawer (close button) once it's on screen
+    requestAnimationFrame(() => { const c = $('ss-close'); if (c) c.focus(); });
+  }
+
+  function close() {
+    if (!root.classList.contains('is-open')) return;
+    root.classList.remove('is-open');
+    root.setAttribute('aria-hidden', 'true');
+    lockScroll(false);
+    if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+  }
+
+  // Close: × button + backdrop click
+  $('ss-close').addEventListener('click', close);
+  backdrop.addEventListener('click', close);
+
+  // Close: Esc  (only when open)
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && root.classList.contains('is-open')) close();
+  });
+
+  // Simple focus trap: keep Tab within the drawer while open
+  drawer.addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    const focusables = drawer.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    if (!focusables.length) return;
+    const first = focusables[0];
+    const last  = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  // Wire triggers: [data-open-buy] + the Safra cover Buy Now (#scrollBuyBtn / .scroll-btn)
+  function wireTriggers() {
+    document.querySelectorAll('[data-open-buy], #scrollBuyBtn, .scroll-btn.js-buy').forEach(el => {
+      el.addEventListener('click', ev => { ev.preventDefault(); open(); });
+    });
+  }
+
+  // ---- Buy button (placeholder — Lemon.js checkout wired later) ----
+  $('buy-btn').addEventListener('click', function () {
+    const cfg = this.dataset.config, price = this.dataset.price;
+    // TODO: replace with Lemon.js — LemonSqueezy.Url.Open(variantUrlFor(cfg))
+    console.log('[safra-store] buy clicked', { config: cfg, priceEUR: price });
+    alert('Checkout coming soon.\n\nSelected: ' + cfg.replace(/\|/g, ' · ') + '\nPrice: €' + price);
+  });
+
+  // ---- init ----
+  wireSeg('ssStyle',  'style');
+  wireSeg('ssFormat', 'format');
+  wireSeg('ssTier',   'tier');
+  wireTriggers();
+  render();
+
+  // Auto-open when the page URL carries #buy (deep-link) — handy for demo/testing.
+  if (location.hash === '#buy') open();
+
+  // Public API for host pages / injectors
+  window.SafraStore = { open, close, render, state };
+})();
+</script>
+<!-- SAFRA-STORE:END -->
+
+</body>
+</html>

@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Safra — Buy Wireframe</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f5;
+      color: #1a1a1a;
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .form-container {
+      background: #fff;
+      border: 2px solid #1a1a1a;
+      max-width: 520px;
+      width: 100%;
+      padding: 32px;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 28px;
+    }
+
+    /* ---- Steps ---- */
+    .step {
+      margin-bottom: 24px;
+    }
+
+    .step-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888;
+      margin-bottom: 8px;
+    }
+
+    /* ---- Toggle buttons (radio-style) ---- */
+    .toggle-group {
+      display: flex;
+      gap: 0;
+      border: 1.5px solid #1a1a1a;
+      border-radius: 0;
+      overflow: hidden;
+    }
+
+    .toggle-group label {
+      flex: 1;
+      text-align: center;
+      padding: 10px 8px;
+      font-size: 13px;
+      cursor: pointer;
+      border-left: 1.5px solid #1a1a1a;
+      transition: background 0.15s, color 0.15s;
+      user-select: none;
+    }
+
+    .toggle-group label:first-child {
+      border-left: none;
+    }
+
+    .toggle-group input { display: none; }
+    .toggle-group input:checked + span {
+      /* handled via JS adding .active class to label */
+    }
+    .toggle-group label.active {
+      background: #1a1a1a;
+      color: #fff;
+    }
+
+    /* ---- Weights checkboxes ---- */
+    .weights-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .weight-option {
+      border: 1.5px solid #ccc;
+      padding: 10px 12px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      user-select: none;
+    }
+
+    .weight-option.selected {
+      border-color: #1a1a1a;
+      background: #f0f0f0;
+    }
+
+    .weight-option .check {
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid #aaa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    .weight-option.selected .check {
+      border-color: #1a1a1a;
+      background: #1a1a1a;
+      color: #fff;
+    }
+
+    .weight-option.disabled {
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    /* ---- Full family banner ---- */
+    .family-banner {
+      border: 1.5px dashed #1a1a1a;
+      padding: 10px 14px;
+      font-size: 12px;
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .family-banner:hover {
+      background: #f0f0f0;
+    }
+
+    .family-banner .savings {
+      font-weight: 700;
+      color: #2a7d2a;
+    }
+
+    /* ---- Price display ---- */
+    .price-section {
+      border-top: 2px solid #1a1a1a;
+      padding-top: 20px;
+      margin-top: 28px;
+    }
+
+    .price-breakdown {
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+    }
+
+    .price-row.total {
+      border-top: 1px solid #ddd;
+      margin-top: 8px;
+      padding-top: 8px;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .price-row .label { color: #666; }
+    .price-row .value { font-variant-numeric: tabular-nums; }
+
+    /* ---- CTA ---- */
+    .buy-btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: #1a1a1a;
+      color: #fff;
+      border: none;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: opacity 0.15s;
+    }
+
+    .buy-btn:hover { opacity: 0.85; }
+    .buy-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .contact-note {
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+      margin-top: 10px;
+    }
+
+    .contact-note a { color: #1a1a1a; }
+
+    /* ---- App notice ---- */
+    .app-notice {
+      background: #fff8e1;
+      border: 1px solid #e0c860;
+      padding: 10px 14px;
+      font-size: 12px;
+      margin-top: 12px;
+      display: none;
+    }
+
+    /* ---- Enterprise notice ---- */
+    .enterprise-link {
+      font-size: 12px;
+      text-align: center;
+      margin-top: 12px;
+      color: #888;
+    }
+
+    .enterprise-link a {
+      color: #1a1a1a;
+      text-decoration: underline;
+    }
+
+    /* ---- Separator ---- */
+    hr.sep {
+      border: none;
+      border-top: 1px solid #eee;
+      margin: 0 0 24px 0;
+    }
+
+    /* Debug: variant id */
+    .debug {
+      font-size: 10px;
+      color: #bbb;
+      margin-top: 8px;
+      font-family: monospace;
+      direction: ltr;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h1>Buy Safra ספרא سفرا</h1>
+  <p class="subtitle">Trilingual typeface — Hebrew, Arabic, Latin</p>
+
+  <!-- STEP 1: Package -->
+  <div class="step">
+    <div class="step-label">1 — Package</div>
+    <div class="toggle-group" id="packageToggle">
+      <label class="active" data-value="single"><input type="radio" name="package" value="single" checked><span>Single Weight</span></label>
+      <label data-value="family"><input type="radio" name="package" value="family"><span>Full Family (4)</span></label>
+    </div>
+  </div>
+
+  <!-- STEP 1b: Which weight (only if single) -->
+  <div class="step" id="weightStep">
+    <div class="step-label">Select Weight</div>
+    <div class="weights-grid">
+      <div class="weight-option selected" data-weight="regular">
+        <span class="check">✓</span> Safra Regular
+      </div>
+      <div class="weight-option" data-weight="bold">
+        <span class="check"></span> Safra Bold
+      </div>
+      <div class="weight-option" data-weight="sans-regular">
+        <span class="check"></span> Safra Sans Regular
+      </div>
+      <div class="weight-option" data-weight="sans-bold">
+        <span class="check"></span> Safra Sans Bold
+      </div>
+    </div>
+    <div class="family-banner" id="familyUpsell">
+      <span>Get all 4 weights →</span>
+      <span class="savings" id="savingsText">Save 35%</span>
+    </div>
+  </div>
+
+  <!-- STEP 2: License -->
+  <div class="step">
+    <div class="step-label">2 — License Type</div>
+    <div class="toggle-group" id="licenseToggle">
+      <label class="active" data-value="desktop"><input type="radio" name="license" value="desktop" checked><span>Desktop</span></label>
+      <label data-value="web"><input type="radio" name="license" value="web"><span>Web</span></label>
+      <label data-value="bundle"><input type="radio" name="license" value="bundle"><span>D+W Bundle</span></label>
+      <label data-value="app"><input type="radio" name="license" value="app"><span>App</span></label>
+    </div>
+    <div class="app-notice" id="appNotice">
+      App licensing requires a custom quote.<br>
+      Please <a href="mailto:nir@yennok.com">contact us</a> for pricing.
+    </div>
+  </div>
+
+  <!-- STEP 3: Users -->
+  <div class="step">
+    <div class="step-label">3 — Number of Users</div>
+    <div class="toggle-group" id="usersToggle">
+      <label class="active" data-value="individual"><input type="radio" name="users" value="individual" checked><span>Individual</span></label>
+      <label data-value="studio"><input type="radio" name="users" value="studio"><span>Studio (5)</span></label>
+      <label data-value="company"><input type="radio" name="users" value="company"><span>Company (20)</span></label>
+    </div>
+    <div class="enterprise-link">
+      20+ users? <a href="mailto:nir@yennok.com">Contact for Enterprise pricing</a>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- PRICE -->
+  <div class="price-section">
+    <div class="price-breakdown">
+      <div class="price-row">
+        <span class="label" id="summaryLine"></span>
+      </div>
+      <div class="price-row total">
+        <span class="label">Total</span>
+        <span class="value" id="totalPrice">₪350</span>
+      </div>
+    </div>
+
+    <button class="buy-btn" id="buyBtn">Buy Now — ₪350</button>
+    <div class="contact-note" id="contactNote" style="display:none;">
+      <a href="mailto:nir@yennok.com">Contact us for App / Enterprise licensing →</a>
+    </div>
+  </div>
+
+  <div class="debug" id="debug"></div>
+</div>
+
+<script>
+// =============================================
+// PRICING TABLE
+// =============================================
+const PRICES = {
+  single: {
+    desktop:  { individual: 350,   studio: 550,   company: 1400  },
+    web:      { individual: 525,   studio: 825,   company: 2100  },
+    bundle:   { individual: 700,   studio: 1100,  company: 2800  },
+  },
+  family: {
+    desktop:  { individual: 900,   studio: 1400,  company: 3600  },
+    web:      { individual: 1350,  studio: 2100,  company: 5400  },
+    bundle:   { individual: 1800,  studio: 2800,  company: 7200  },
+  }
+};
+
+// =============================================
+// VARIANT ID MAP (Lemon Squeezy)
+// TODO: Replace with actual variant IDs/URLs from Lemon Squeezy
+// =============================================
+const VARIANT_MAP = {
+  'single-desktop-individual':  'VARIANT_ID_1',
+  'single-desktop-studio':     'VARIANT_ID_2',
+  'single-desktop-company':    'VARIANT_ID_3',
+  'single-web-individual':     'VARIANT_ID_4',
+  'single-web-studio':         'VARIANT_ID_5',
+  'single-web-company':        'VARIANT_ID_6',
+  'single-bundle-individual':  'VARIANT_ID_7',
+  'single-bundle-studio':      'VARIANT_ID_8',
+  'single-bundle-company':     'VARIANT_ID_9',
+  'family-desktop-individual': 'VARIANT_ID_10',
+  'family-desktop-studio':     'VARIANT_ID_11',
+  'family-desktop-company':    'VARIANT_ID_12',
+  'family-web-individual':     'VARIANT_ID_13',
+  'family-web-studio':         'VARIANT_ID_14',
+  'family-web-company':        'VARIANT_ID_15',
+  'family-bundle-individual':  'VARIANT_ID_16',
+  'family-bundle-studio':      'VARIANT_ID_17',
+  'family-bundle-company':     'VARIANT_ID_18',
+};
+
+// =============================================
+// STATE
+// =============================================
+let state = {
+  package: 'single',    // single | family
+  license: 'desktop',   // desktop | web | bundle | app
+  users: 'individual',  // individual | studio | company
+  weight: 'regular',    // only relevant for single
+};
+
+// =============================================
+// UI WIRING
+// =============================================
+
+// Toggle groups
+document.querySelectorAll('.toggle-group').forEach(group => {
+  group.querySelectorAll('label').forEach(label => {
+    label.addEventListener('click', () => {
+      group.querySelectorAll('label').forEach(l => l.classList.remove('active'));
+      label.classList.add('active');
+      const val = label.dataset.value;
+
+      if (group.id === 'packageToggle') state.package = val;
+      if (group.id === 'licenseToggle') state.license = val;
+      if (group.id === 'usersToggle')   state.users = val;
+
+      update();
+    });
+  });
+});
+
+// Weight selection
+document.querySelectorAll('.weight-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('.weight-option').forEach(o => {
+      o.classList.remove('selected');
+      o.querySelector('.check').textContent = '';
+    });
+    opt.classList.add('selected');
+    opt.querySelector('.check').textContent = '✓';
+    state.weight = opt.dataset.weight;
+    update();
+  });
+});
+
+// Family upsell banner
+document.getElementById('familyUpsell').addEventListener('click', () => {
+  state.package = 'family';
+  document.querySelectorAll('#packageToggle label').forEach(l => l.classList.remove('active'));
+  document.querySelector('#packageToggle label[data-value="family"]').classList.add('active');
+  update();
+});
+
+// =============================================
+// UPDATE
+// =============================================
+function update() {
+  const isApp = state.license === 'app';
+  const isFamily = state.package === 'family';
+
+  // Show/hide weight step
+  document.getElementById('weightStep').style.display = isFamily ? 'none' : '';
+
+  // Show/hide app notice
+  document.getElementById('appNotice').style.display = isApp ? 'block' : 'none';
+
+  // Calculate price
+  let price = null;
+  let variantKey = null;
+
+  if (!isApp) {
+    price = PRICES[state.package][state.license][state.users];
+    variantKey = `${state.package}-${state.license}-${state.users}`;
+  }
+
+  // Summary line
+  const packageLabel = isFamily ? 'Full Family (4 weights)' : `Single Weight`;
+  const licenseLabel = { desktop: 'Desktop', web: 'Web', bundle: 'Desktop + Web Bundle', app: 'App' }[state.license];
+  const usersLabel = { individual: 'Individual (1 user)', studio: 'Studio (up to 5)', company: 'Company (up to 20)' }[state.users];
+
+  document.getElementById('summaryLine').textContent = `${packageLabel} · ${licenseLabel} · ${usersLabel}`;
+
+  // Price display
+  const btn = document.getElementById('buyBtn');
+  const contactNote = document.getElementById('contactNote');
+
+  if (isApp) {
+    document.getElementById('totalPrice').textContent = 'Contact us';
+    btn.style.display = 'none';
+    contactNote.style.display = 'block';
+  } else {
+    const formatted = '₪' + price.toLocaleString();
+    document.getElementById('totalPrice').textContent = formatted;
+    btn.textContent = `Buy Now — ${formatted}`;
+    btn.style.display = 'block';
+    btn.disabled = false;
+    contactNote.style.display = 'none';
+  }
+
+  // Savings text on family upsell
+  if (!isApp && !isFamily) {
+    const singlePrice = PRICES.single[state.license][state.users];
+    const familyPrice = PRICES.family[state.license][state.users];
+    const fourSingles = singlePrice * 4;
+    const savings = Math.round((1 - familyPrice / fourSingles) * 100);
+    document.getElementById('savingsText').textContent = `Save ${savings}% (₪${familyPrice.toLocaleString()} instead of ₪${fourSingles.toLocaleString()})`;
+  }
+
+  // Debug
+  const variantId = variantKey ? VARIANT_MAP[variantKey] : 'N/A';
+  document.getElementById('debug').textContent = `variant: ${variantKey || 'app'} → ${variantId}`;
+}
+
+// Buy button
+document.getElementById('buyBtn').addEventListener('click', () => {
+  const key = `${state.package}-${state.license}-${state.users}`;
+  const variantId = VARIANT_MAP[key];
+  if (variantId && variantId.startsWith('VARIANT_ID')) {
+    alert(`Checkout URL placeholder:\nhttps://nomad-type.lemonsqueezy.com/checkout/buy/${variantId}\n\nReplace VARIANT_IDs with real Lemon Squeezy share URLs.`);
+  } else {
+    window.open(`https://nomad-type.lemonsqueezy.com/checkout/buy/${variantId}`, '_blank');
+  }
+});
+
+// Init
+update();
+</script>
+
+</body>
+</html>

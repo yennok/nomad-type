@@ -1,0 +1,1898 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FPE1JV10R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4FPE1JV10R');
+  </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Safra ספרא سفرا — Trilingual Serif &amp; Sans Typeface | Nomad Type</title>
+
+  <!-- SEO meta -->
+  <meta name="description" content="Safra ספרא سفرا — a trilingual typeface family with serif and sans styles, supporting Hebrew, Arabic, and Latin. Contemporary, low-contrast design for multilingual typesetting. Designed by Nir Zabari Yenni (ECAL MATD Diploma).">
+  <meta name="keywords" content="Safra, ספרא, سفرا, trilingual typeface, Arabic font, Hebrew font, Latin font, multilingual type, serif and sans family, Nir Zabari Yenni, ECAL, Nomad Type">
+  <meta name="author" content="Nir Zabari Yenni">
+  <link rel="canonical" href="https://www.nomad-type.com/safra">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="product">
+  <meta property="og:url" content="https://www.nomad-type.com/safra">
+  <meta property="og:title" content="Safra ספרא سفرا — Trilingual Serif &amp; Sans Typeface">
+  <meta property="og:description" content="A trilingual typeface family with serif and sans styles, supporting Hebrew, Arabic, and Latin. Designed by Nir Zabari Yenni (ECAL MATD Diploma).">
+  <meta property="og:image" content="https://www.nomad-type.com/assets/featured_image.png">
+  <meta property="og:image:secure_url" content="https://www.nomad-type.com/assets/featured_image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1500">
+  <meta property="og:image:height" content="1000">
+  <meta property="og:image:alt" content="Safra — trilingual serif and sans typeface specimen in Hebrew, Arabic, and Latin">
+  <meta property="og:site_name" content="Nomad Type">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Safra ספרא سفرا — Trilingual Serif &amp; Sans Typeface">
+  <meta name="twitter:description" content="A trilingual typeface family with serif and sans styles, supporting Hebrew, Arabic, and Latin.">
+  <meta name="twitter:image" content="https://www.nomad-type.com/assets/featured_image.png">
+  <meta name="twitter:image:alt" content="Safra — trilingual serif and sans typeface specimen in Hebrew, Arabic, and Latin">
+
+  <!-- Structured Data: Product -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Safra",
+    "alternateName": ["ספרא", "سفرا"],
+    "description": "A trilingual typeface family comprising both serif and sans styles. Designed with a contemporary, low-contrast approach, supporting Hebrew, Arabic, and Latin scripts with clear and consistent typesetting across languages.",
+    "url": "https://www.nomad-type.com/safra",
+    "image": "https://www.nomad-type.com/assets/featured_image.png",
+    "category": "Typeface",
+    "brand": {
+      "@type": "Brand",
+      "name": "Nomad Type",
+      "url": "https://www.nomad-type.com/"
+    },
+    "manufacturer": {
+      "@type": "Organization",
+      "name": "Nomad Type",
+      "url": "https://www.nomad-type.com/"
+    },
+    "creator": {
+      "@type": "Person",
+      "name": "Nir Zabari Yenni",
+      "url": "https://yennok.com"
+    },
+    "releaseDate": "2025",
+    "additionalProperty": [
+      { "@type": "PropertyValue", "name": "Scripts", "value": "Latin, Hebrew, Arabic" },
+      { "@type": "PropertyValue", "name": "Styles", "value": "Serif, Sans" },
+      { "@type": "PropertyValue", "name": "Weights", "value": "Regular, Bold" },
+      { "@type": "PropertyValue", "name": "Formats", "value": "OTF, WOFF2" },
+      { "@type": "PropertyValue", "name": "Origin", "value": "ECAL MATD Diploma project, 2025" }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Checkout: Stripe hosted payment links (see CHECKOUT_URLS in the store script below). -->
+
+
+  <!-- =========================================================================
+       SAFRA STORE V2 CONFIGURATOR — add-on styles (ported from safra-store-v2.html)
+       Re-scoped from #buyOverlayV2 → #buyOverlay so they apply to the page's
+       existing overlay. The overlay chrome / header / checkboxes / collapsibles /
+       submit button all come from styles.css and are NOT re-declared here.
+       The mobile rules DO NOT touch `right` (the page's own .overlay /
+       .overlay.active slide wiring owns that); they only contain overflow so the
+       GSAP transforms on .cover-title can't cause horizontal bleed.
+       ========================================================================= -->
+  <style>
+  /* Make the overlay body a column so the price+Buy block can pin to bottom
+     and the middle can scroll independently on small screens. */
+  #buyOverlay .overlay-content { padding-bottom: 0; }
+  .ssv2-form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+  }
+  .ssv2-scroll {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    margin-right: -0.25rem;
+    padding-right: 0.25rem;
+  }
+
+  /* Full Family row: same black checkbox as the others; only the "bundle price" tag keeps the accent. */
+  .checkbox-label.ssv2-family {
+    color: #000;
+    font-weight: 400;
+  }
+  .ssv2-family-tag {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    color: #000;
+    opacity: 0.55;
+    margin-left: auto;
+    padding-left: 0.5rem;
+    white-space: nowrap;
+  }
+  /* "bundle price" lights up in the accent only when Full Family is selected. */
+  .checkbox-label.ssv2-family input:checked ~ .ssv2-family-tag {
+    color: var(--primary-color);
+    opacity: 1;
+  }
+
+  /* LICENSE TIER — single-select (radios) wearing the site's checkbox look. */
+  .ssv2-tier .checkbox-label input[type="radio"] { display: none; }
+  .ssv2-tier .checkmark {
+    width: 16px; height: 16px; position: relative; flex-shrink: 0;
+    background-image: url('assets/checkbox.svg');
+    background-size: contain; background-repeat: no-repeat; background-position: center;
+  }
+  .ssv2-tier .checkbox-label input[type="radio"]:checked + .checkmark {
+    background-image: url('assets/checkbox-checked.svg');
+  }
+  .ssv2-tier .tier-sub {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    color: #000;
+    opacity: 0.55;
+    margin-left: auto;
+    padding-left: 0.5rem;
+    white-space: nowrap;
+  }
+  .ssv2-tier-note {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    line-height: 1.45;
+    color: #000;
+    opacity: 0.55;
+    margin: 0.5rem 0 0.9rem;
+  }
+
+  /* Collapsibles inside the configurator open by default; give them room. */
+  #buyOverlay .collapsible-content.active { max-height: 640px; }
+
+  /* LIVE SUMMARY + PRICE (pinned above the Buy button) */
+  .ssv2-foot {
+    flex: 0 0 auto;
+    border-top: 1px solid #000;
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+    background: #fff;
+  }
+  .ssv2-sum-head {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    opacity: 0.55;
+    margin: 0 0 0.6rem;
+  }
+  .ssv2-sum-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: "Safra Mono", monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 1px 0;
+  }
+  .ssv2-sum-row .k { opacity: 0.55; }
+  .ssv2-sum-row .v { text-align: right; }
+  .ssv2-includes {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    opacity: 0.75;
+    margin: 0.6rem 0 0.8rem;
+  }
+  .ssv2-includes .inc-tag { color: var(--primary-color); opacity: 1; }
+
+  .ssv2-price {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 0.9rem;
+  }
+  .ssv2-price .amount {
+    font-family: "Safra Sans", serif;
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 1;
+    color: #000;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0px;
+  }
+  .ssv2-price .amount.is-quote { font-size: 26px; }
+  .ssv2-price .amount-label { font-family: "Safra Mono", monospace; font-size: 12px; opacity: 0.55; }
+  .ssv2-price .amount .ssv2-was {
+    text-decoration: line-through;
+    color: #000;
+    opacity: 0.4;
+    font-size: 0.62em;
+    margin-right: 7px;
+    font-weight: 400;
+  }
+
+  .ssv2-subnote {
+    font-family: "Safra Sans", sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: left;
+    opacity: 0.6;
+    margin: 0.4rem 0 1rem;
+  }
+  .ssv2-subnote a { color: #000; }
+
+  /* "Coming soon" note + disabled Buy state for combos with no live checkout. */
+  .ssv2-unavailable {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--primary-color);
+    margin: 0.5rem 0 0;
+  }
+  #buy-btn[disabled] {
+    background: #ececec;
+    color: #a0a0a0;
+    opacity: 1;
+    border: none;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* Buy overlay: accent (orange) selection + asterisks for single fonts / use / Users; black for the Full Family bundle. */
+  #buyOverlay .required, #buyOverlay .asterisk { color: var(--primary-color); }
+  #buyOverlay .ssv2-form .checkmark { position: relative; }
+  #buyOverlay .ssv2-form input:checked + .checkmark {
+    background-image: url('assets/checkbox.svg') !important;
+  }
+  #buyOverlay .ssv2-form input:checked + .checkmark::after {
+    content: ""; position: absolute; top: 29%; left: 29%; right: 29%; bottom: 29%;
+    background: var(--primary-color);
+  }
+  #buyOverlay .checkbox-label.ssv2-family input:checked + .checkmark::after {
+    background: #000;
+  }
+  #buyOverlay .ssv2-includes { display: none; }
+
+  /* "bundle price" tag on the Desktop row: grey by default, accent when Desktop+Web (bundle) is active. */
+  .ssv2-usebundle-tag {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    color: #000; opacity: 0.55;
+    margin-left: auto; padding-left: 0.5rem; white-space: nowrap;
+  }
+  .ssv2-usebundle-tag.lit { color: var(--primary-color); opacity: 1; }
+  /* On mobile the tag row is tight: show just "Bundle" (hide " Price"). */
+  @media (max-width: 768px) {
+    #buyOverlay .ssv2-tag-full { display: none; }
+  }
+  /* Early access: short label + "?" with a hover/tap tooltip (no wall of text). */
+  .ssv2-ea {
+    font-family: "Safra Mono", monospace;
+    font-size: 12px;
+    color: #000; opacity: 0.75;
+    display: inline-flex; align-items: center; gap: 6px;
+    margin: 0.5rem 0 0; position: relative;
+  }
+  .ssv2-ea-q {
+    all: unset; cursor: help; box-sizing: border-box;
+    width: 15px; height: 15px; line-height: 13px; text-align: center;
+    border: 1px solid currentColor; border-radius: 50%;
+    font-size: 10px;
+  }
+  .ssv2-ea-pop {
+    display: none; position: absolute; left: 0; top: calc(100% + 6px); z-index: 5;
+    width: 235px; max-width: 80vw; background: #000; color: #fff;
+    font-family: "Safra Sans", sans-serif; font-size: 11px; line-height: 1.45;
+    padding: 8px 10px; border-radius: 6px;
+  }
+  .ssv2-ea-q:hover + .ssv2-ea-pop,
+  .ssv2-ea-q:focus + .ssv2-ea-pop { display: block; }
+
+  /* MOBILE OVERFLOW CONTAINMENT — the page's own .overlay rules already make
+     the drawer full-width and own the slide-in (`right`), so we DON'T set width
+     or right here. We only clamp overflow so the GSAP transforms on .cover-title
+     can't push a horizontal scrollbar, and let flex rows wrap when cramped. */
+  @media (max-width: 768px) {
+    #buyOverlay {
+      width: 100vw !important;
+      max-width: 100vw !important;
+      left: auto;
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+    #buyOverlay.active { right: 0 !important; }
+    #buyOverlay .overlay-content {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+    #buyOverlay .overlay-content * { max-width: 100%; box-sizing: border-box; min-width: 0; }
+    .ssv2-price .amount { font-size: 23px; }
+  }
+
+  /* Let flex rows wrap so long labels/pills/values never overflow horizontally. */
+  #buyOverlay * { box-sizing: border-box; }
+  #buyOverlay .checkbox-label {
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+  .ssv2-family-tag,
+  .ssv2-tier .tier-sub {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-align: right;
+    max-width: 100%;
+  }
+  .ssv2-sum-row { flex-wrap: wrap; }
+  .ssv2-sum-row .k { flex: 0 0 auto; }
+  .ssv2-sum-row .v {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+  .ssv2-price { flex-wrap: wrap; }
+  .ssv2-price .amount { min-width: 0; overflow-wrap: anywhere; }
+
+  /* Belt-and-braces: never let the drawer or its contents cause page overflow */
+  #buyOverlay { overflow-x: hidden; }
+  #buyOverlay, #buyOverlay * { max-width: 100%; }
+  </style>
+</head>
+<body class="safra-page">
+
+  <!-- SEO: visually hidden H1 for Google (design unchanged) -->
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+  <h1 class="sr-only">Safra ספרא سفرا — Trilingual Serif and Sans Typeface Family supporting Hebrew, Arabic, and Latin, by Nir Zabari Yenni / Nomad Type</h1>
+
+  <!-- Header Container (will be populated by JavaScript) -->
+  <div id="header-container"></div>
+  <!-- ====== MAIN CONTENT ====== -->
+  <main class="content-wrapper">
+
+  <!-- ====== FONT INTRO SECTION ====== -->
+  <section class="font-intro">
+    <div class="intro-content">
+      <div class="intro-grid">
+        <div class="intro-text-column">
+          <p>Safra ספרא سفرا is a trilingual typeface family comprising both serif and sans styles. Designed with a contemporary, low-contrast approach, it supports Hebrew, Arabic, and Latin scripts with clear and consistent typesetting across languages. Balancing structural differences while preserving the distinct voice of each script, it enables multilingual communication without forcing uniformity. The design functions as a bridge between writing systems, maintaining typographic integrity and visual harmony. Suitable for both extended reading and display use in cultural, educational, and public contexts.</p>
+        </div>
+        
+        <div class="technical-specs-column">
+          <div class="specs-list">
+            <div class="spec-line">Typeface: Safra سفرا ספרא</div>
+            <div class="spec-line">Designed by: Nir Zabari Yenni</div>
+            <div class="spec-line">Mentored by: Kai Bernau & Radim Pesko (ECAL MATD Diploma project)</div>
+            <div class="spec-line">Consultants: Michal Sahar, Wael Morcos, Titus Nemeth, Amir Mahdi Moslehi, Shaqa Bovand, Daniel Grumer, Nawal Arafat, Borna Izadpanah.</div>
+            <div class="spec-line">Year: 2025</div>
+            <div class="spec-line">Languages: Latin, Hebrew, Arabic</div>
+            <div class="spec-line">Formats: OTF, WOFF2</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="multilingual-marquee">
+        <div class="marquee-container">
+          <div class="marquee-content">
+            <span class="marquee-text serif regular">Regular רגולר عادي</span>
+            <span class="marquee-text serif bold">Bold בולד عريض</span>
+            <span class="marquee-text sans regular">Sans Regular סנס רגולר سانس عادي</span>
+            <span class="marquee-text sans bold">Sans Bold סנס בולד سانس عريض</span>
+            <span class="marquee-text serif regular">Regular רגולר عادي</span>
+            <span class="marquee-text serif bold">Bold בולד عريض</span>
+            <span class="marquee-text sans regular">Sans Regular סנס רגולר سانس عادي</span>
+            <span class="marquee-text sans bold">Sans Bold סנס בולד سانس عريض</span>
+            
+                      </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === Section 1, multi column text, Serif === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-1">Size</label>
+        <input class="size" id="size-1" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-1">Leading</label>
+        <input class="leading" id="leading-1" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-1">Letter Spacing</label>
+        <input class="spacing" id="spacing-1" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="1">
+            <div class="select-header">
+              <span class="select-value">Safra Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular" selected>Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular">Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left is-active"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-3" contenteditable="true" dir="ltr" style="font-family: Safra; font-weight: 400; line-height: 1.3;">Safra is a trilingual typeface family supporting Hebrew, Arabic, and Latin scripts in both serif and sans-serif styles. Designed with regard to cultural context, it enables typographic expression that is plural, balanced, and clear. Rather than subsuming different scripts into a uniform voice, Safra proposes a visual structure where coexistence does not require assimilation. Born from lived experience in a multilingual environment and shaped by conversations with type designers and cultural practitioners from diverse backgrounds, Safra reflects a personal yet collective attempt to reimagine how scripts relate to one another across linguistic and spatial borders.</div>
+  </section>
+
+  <!-- === Section 2, large multilingual headline, Sans Bold, centered === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-2">Size</label>
+        <input class="size" id="size-2" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-2">Leading</label>
+        <input class="leading" id="leading-2" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-2">Letter Spacing</label>
+        <input class="spacing" id="spacing-2" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="2">
+            <div class="select-header">
+              <span class="select-value">Safra Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular" selected>Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular">Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 auto-fit-multiline" contenteditable="true" dir="rtl" style="font-family: 'Safra'; font-weight: 400; font-size: 244px; line-height: 1; letter-spacing: 0em; text-align: center; white-space: nowrap;">هندسيّات</div>
+  </section>
+
+  <!-- === Section 3, two columns, Sans Regular, long text === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-3">Size</label>
+        <input class="size" id="size-3" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-3">Leading</label>
+        <input class="leading" id="leading-3" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-3">Letter Spacing</label>
+        <input class="spacing" id="spacing-3" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="3">
+            <div class="select-header">
+              <span class="select-value">Safra Sans Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular">Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular" selected>Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left is-active"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-2 truncate-text" data-truncate-words="103" contenteditable="true" dir="ltr" style="font-family: 'Safra Sans'; font-weight: 400; font-size: 18px; line-height: 1.5; letter-spacing: 0.01em;">In a world where three languages coexist within the same physical and digital spaces — from government signage to schoolbooks, from train stations to mobile apps — the demand for a trilingual typeface has grown from a niche request to a practical necessity. Hebrew, Arabic, and Latin each carry rich typographic traditions, distinct spatial dynamics, and deeply rooted cultural associations. Designing a type system that allows these three scripts to share visual space without compromising their individual integrity is one of the most complex and rewarding challenges in contemporary type design.
+A successful trilingual typeface must go beyond supporting Unicode coverage or basic character mapping. It must operate as a visual system that accounts for directionality, rhythm, modulation, contrast, and weight across scripts. Arabic flows right to left in a connected cursive form with frequent use of ligatures, baselines that dance and curve, and counters that open toward the left. Hebrew, also right to left, tends toward boxier forms and more consistent baselines. Latin, by contrast, is modular, open, and upright — a system that evolved with very different tools and visual logic. The design challenge lies not in reducing these differences, but in allowing them to coexist in ways that feel both intentional and balanced.
+From a practical standpoint, designers working in multilingual contexts need a typeface that supports visual hierarchy across scripts. A bold headline in Arabic should feel equally prominent as its Hebrew and English counterparts. A paragraph of Hebrew should harmonize with Latin without looking too condensed or oversized. A Latin caption below an Arabic title shouldn’t feel like a typographic afterthought. These are not only matters of visual balance — they are decisions that reflect respect, legibility, and inclusivity.
+The aesthetic strategies for achieving this vary. Some designers seek geometric consistency across scripts — aligning x-heights, cap heights, or stroke modulation. Others allow for greater divergence, trusting that layout and spacing will create harmony rather than uniformity. Both approaches have merit, depending on the intended use. For example, public signage might benefit from strict alignment for quick readability, while a cultural publication may embrace visual rhythm and contrast to evoke emotion or identity.
+Trilingual typefaces are used in a wide range of applications: government documents, academic institutions, museum exhibitions, user interfaces, packaging, urban wayfinding systems, and more. In places like Israel, Palestine, and Lebanon — or among diasporic communities where multilingualism is a lived experience — these typefaces are not only functional, they’re essential. They serve as tools for communication, as visual evidence of plurality, and as cultural artifacts that bridge gaps between audiences who read the world differently.
+And yet, the development of such typefaces remains relatively rare. Unlike global brands that often commission bilingual or pan-European fonts, few systems exist that thoughtfully and beautifully support Hebrew, Arabic, and Latin in equal measure. This is due in part to the complexity of the scripts themselves, but also to the cultural sensitivities required to do this work well. A type designer entering this space must ask: How do I honor each script’s visual voice? How do I balance neutrality with expressiveness? How do I ensure that no one script dominates the tone, simply because it’s more familiar to me?</div>
+  </section>
+
+  <!-- === Section 4, responsive sans (duplicate of section 2) === -->
+  <section id="fonts" class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-4">Size</label>
+        <input class="size" id="size-4" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-4">Leading</label>
+        <input class="leading" id="leading-4" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-4">Letter Spacing</label>
+        <input class="spacing" id="spacing-4" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+  <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="4">
+            <div class="select-header">
+              <span class="select-value">Safra Sans Bold</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular">Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular">Safra Sans Regular</option>
+            <option value="Safra Sans Bold" selected>Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+     <div class="type-area column-count-1 responsive-text" contenteditable="true" dir="rtl" style="font-family: 'Safra Sans'; font-weight: 700; font-size: 244px; line-height: 1.5; letter-spacing: -0.035em; text-align: center; white-space: nowrap;">שלום مرحبا Hello</div>
+  </section>
+
+  <!-- === Section 5, three columns, Hebrew sample === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-5">Size</label>
+        <input class="size" id="size-5" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-5">Leading</label>
+        <input class="leading" id="leading-5" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-5">Letter Spacing</label>
+        <input class="spacing" id="spacing-5" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="5">
+            <div class="select-header">
+              <span class="select-value">Safra Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular" selected>Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular">Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-3" contenteditable="true" dir="rtl" style="font-family: Safra; font-weight: 400; font-size: 25px; line-height: 1.5; font-style: normal; text-align: center;">خط ثلاثي اللغات، مصمّم لقراءة متوازنة بين الـعربية، الـعبرية والـلاتينية. يصلح للنصوص الـطويلة والعناوين على سواء.
+
+A trilingual typeface designed for consistent reading across Arabic, Hebrew, and Latin. Supports both continuous text and headings.
+פונט תלת־לשוני שנועד לאיזון טיפוגרפי בין עברית, ערבית ולטינית. מתאים הן לכותרות והן לטקסטים ארוכים.</div>
+  </section>
+
+  <!-- === Section 6, centered single column Michelangelo === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-6">Size</label>
+        <input class="size" id="size-6" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-6">Leading</label>
+        <input class="leading" id="leading-6" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-6">Letter Spacing</label>
+        <input class="spacing" id="spacing-6" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="6">
+            <div class="select-header">
+              <span class="select-value">Safra Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular" selected>Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular">Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 auto-fit-multiline" data-max-font-size="186" contenteditable="true" dir="rtl" style="font-family: 'Safra'; font-weight: 400; font-size: 186px; line-height: 1.1; text-align: center; font-style: normal; letter-spacing: -0.01em;">מיכלאנג׳לו&#10;Michelangelo&#10;ميكيلانجيلو</div>
+  </section>
+
+  <!-- === Section 7, single column multilingual list === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-7">Size</label>
+        <input class="size" id="size-7" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-7">Leading</label>
+        <input class="leading" id="leading-7" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-7">Letter Spacing</label>
+        <input class="spacing" id="spacing-7" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="7">
+            <div class="select-header">
+              <span class="select-value">Safra Sans Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular">Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular" selected>Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right is-active"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 truncate-text" data-truncate-words="72" contenteditable="true" dir="rtl" style="font-family: 'Safra Sans'; font-weight: 400; font-size: 47px; line-height: 1.4; letter-spacing: 0.01em; font-style: normal; text-align: right;">בגדים ملابس Clothes תחפושות أزياء Costumes בגדי ספורט ملابس رياضية Sportswear בגדי חורף ملابس الشتاء Winterwear תחתונים ملابس פנימיות Underwear ספרים كتــب Books מגזינים مجلات Magazines קומיקס قصص مصورة Comics ספרי בישול كتب طبخ Cookbooks ספרי ילדים كتب أطفال Children's Books צעצועים ألعاب Toys משחקי קופסה ألعاب لوحية Board Games פאזלים ألغاز Puzzles בובות פרווה دمى محشوة Stuffed Animals קוביות בנייה مكعبات Building Blocks תיקים حقائب Bags תיקי גב حقائب ظهر Backpacks תיקים פתוחים أكياس قماشية Tote Bags נרתיקים حافظات Pouches מזוודות حقائب سفر Suitcases נעליים أحذية Shoes סנדלים صنادل Sandals מגפיים جزم Boots נעלי ספורט أحذية رياضية Sneakers נעלי בית شباشב Slippers תכשיטים مجوهرات Jewelry שרשראות قلادات Necklaces</div>
+  </section>
+
+  <!-- === Section 8, responsive sans === -->
+  <section id="fonts" class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-8">Size</label>
+        <input class="size" id="size-8" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-8">Leading</label>
+        <input class="leading" id="leading-8" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-8">Letter Spacing</label>
+        <input class="spacing" id="spacing-8" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+  <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="8">
+            <div class="select-header">
+              <span class="select-value">Safra Sans Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular">Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular" selected>Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+     <div class="type-area column-count-1 responsive-text" contenteditable="true" dir="rtl" style="font-family: 'Safra Sans'; font-weight: 400; font-size: 244px; line-height: 1; letter-spacing: -0.035em; text-align: center; white-space: nowrap;">ספריית חומרים</div>
+  </section>
+
+  <!-- === Section 9, three columns, Arabic sample === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-9">Size</label>
+        <input class="size" id="size-9" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-9">Leading</label>
+        <input class="leading" id="leading-9" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-9">Letter Spacing</label>
+        <input class="spacing" id="spacing-9" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="9">
+            <div class="select-header">
+              <span class="select-value">Safra Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular" selected>Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular">Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right is-active"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-3 truncate-text" data-truncate-words="120" contenteditable="true" dir="rtl" style="font-family: Safra; font-weight: 400; font-size: 18px; line-height: 1.75;">في عالم تتعايش فيه ثلاث لغات ضمن المساحات المادية نفسها من اللافتات الحكومية إلى الكتب، ومن محطات القطار إلى التطبيقات تحولت الحاجة إلى خط ثلاثي اللغات من طلب متخصص إلى ضرورة عملية. تحمل كل من العبرية والعربية واللاتينية تقاليد طباعية، وديناميكيات مكانية متميزة، وروابط ثقافية. يُعد تصميم نظام خطوط يتيح لهذه الأنظمة الثلاثة مشاركة المساحة البصرية دون المساس بسلامة أي منها أحد أكثر التحديات تعقيدًا وإرضاءً في تصميم الخطوط. يجب أن يقدم الخط الثلاثي أكثر من دعم تقني لتغطية Unicode أو تعيين الأحرف الأساسية. يجب أن يعمل كنظام بصري يأخذ في الاعتبار اتجاه الكتابة، والإيقاع، والتعديل، والتباين، والوزن عبر الأنظمة. تتدفق العربية من اليمين إلى اليسار بشكل متصل مع استخدام متكرر للربط، وخطوط أساس تتمايل وتنحني، ومساحات داخلية تفتح نحو اليسار. تميل العبرية أيضًا من اليمين إلى اليسار إلى أشكال أكثر تربيعًا وخطوط أساس أكثر اتساقًا. أما اللاتينية، بالمقابل، فهي نظام مفتوح، قائم، وموديولي تطور باستخدام أدوات ومنطق بصري مختلف تمامًا. يكمن التحدي التصميمي ليس في تقليل هذه الاختلافات، بل في السماح لها بالتعايش بطرق تبدو مقصودة ومتوازنة.
+من الناحية العملية، يحتاج المصممون العاملون في سياقات متعددة اللغات إلى خط يدعم التسلسل الهرمي البصري عبر الأنظمة. يجب أن تبدو العناوين البارزة بالعربية بارزة بنفس القدر مثل نظيراتها بالعبرية والإنجليزية. يجب أن تنسجم الفقرة العبرية مع اللاتينية دون أن تبدو مضغوطة جدًا أو كبيرة الحجم. يجب ألا يبدو التسمية التوضيحية اللاتينية أسفل عنوان عربي كفكرة لاحقة طباعية. هذه ليست فقط مسائل توازن بصري — إنها قرارات تعكس الاحترام، والوضوح، والشمولية.
+تختلف الاستراتيجيات الجمالية لتحقيق ذلك. يسعى بعض المصممين إلى الاتساق الهندسي عبر الأنظمة — مواءمة ارتفاعات الأحرف، أو ارتفاعات الأحرف الكبيرة، أو تعديل السكتات. يسمح آخرون بمزيد من التباين، معتمدين على أن التخطيط والتباعد سيخلقون التناغم بدلاً من التماثل. كلا النهجين لهما قيمة، اعتمادًا على الاستخدام المقصود. على سبيل المثال، قد يستفيد التوقيع العام من المحاذاة الصارمة للقراءة السريعة، بينما قد يحتضن منشور ثقافي الإيقاع البصري والتباين لإثارة العاطفة أو الهوية.
+تُستخدم الخطوط الثلاثية في مجموعة واسعة من التطبيقات: الوثائق الحكومية، المؤسسات الأكاديمية، المعارض المتحفية، واجهات المستخدم، التغليف، أنظمة التوجيه الحضري، والمزيد. في أماكن مثل إسرائيل، فلسطين، ولبنان أو بين المجتمعات الشتاتية حيث التعددية اللغوية تجربة معيشية، وهذه البيئات المتجاورة، هذه الخطوط ليست فقط وظيفية، بل ضرورية. إنها تخدم كأدوات للتواصل، كدليل بصري على التعددية، وكقطع ثقافية معبرة ومتنوعة تجسر الفجوات بين الجماهير الذين يقرؤون العالم بشكل مختلف.
+ومع ذلك، لا يزال تطوير مثل هذه الخطوط نادرًا نسبيًا. على عكس العلامات التجارية العالمية التي غالبًا ما تطلب خطوطًا ثنائية اللغة أو أوروبية شاملة، توجد أنظمة قليلة تدعم العبرية، والعربية، واللاتينية بشكل مدروس وجميل بالتساوي. يرجع ذلك جزئيًا إلى تعقيد الأنظمة نفسها، ولكن أيضًا إلى الحساسيات الثقافية المطلوبة للقيام بهذا العمل بشكل جيد. يجب على مصمم الخط الذي يدخل هذا المجال أن يسأل: كيف أكرم الصوت البصري لكل نظام؟ كيف أوازن بين الحيادية والتعبير؟ كيف أضمن ألا يهيمن نظام واحد على النغمة، لمجرد أنه أكثر ألفة بالنسبة لي.</div>
+  </section>
+
+  <!-- === Section 10, two columns, Hebrew long text === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-10">Size</label>
+        <input class="size" id="size-10" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-10">Leading</label>
+        <input class="leading" id="leading-10" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-10">Letter Spacing</label>
+        <input class="spacing" id="spacing-10" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="10">
+            <div class="select-header">
+              <span class="select-value">Safra Sans Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular">Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular" selected>Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right is-active"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-2 truncate-text" data-truncate-words="41" contenteditable="true" dir="rtl" style="font-family: 'Safra Sans'; font-weight: 400; font-size: 32px; line-height: 1.45; letter-spacing: -0.01em; font-style: normal;">בעולם שבו שלוש שפות מתקיימות זו לצד זו באותם מרחבים פיזיים ודיגיטליים משלטי ממשלה ועד ספרי לימוד, מתחנות רכבת ועד לאפליקציות הדרישה לפונט תלת־לשוני עברה מבקשה נישתית לצורך פרקטי של ממש. עברית, ערבית ולטינית נושאות עמן מסורות טיפוגרפיות, דינמיקות מרחביות ואסוציאציות תרבותיות. עיצוב מערכת אותיות שמאפשרת לשלוש מערכות כתב לחלוק מרחב חזותי מבלי לפגוע בשלמות של אף אחת מהן הוא מהאתגרים המספקים ביותר בעיצוב גופנים. פונט תלת־לשוני מוצלח חייב להציע יותר מאשר תמיכה טכנית ב Unicode או מיפוי של תווים. עליו לתפקד כמערכת חזותית המתייחסת לכיוון כתיבה, קצב, מודולציה, ניגודיות ומשקל באופן המתאים לכל כתב. הכתב הערבי זורם מימין לשמאל בצורת כתיבה מחוברת עם שימוש תדיר בליגטורות, קווי בסיס מעוקלים ודינמיים ותיבות פנימיות הפונות שמאלה. העברית, גם היא מימין לשמאל, נוטה להיות קופסתית יותר ובעלת קווי בסיס יציבים. הלטינית, לעומתן, היא מערכת פתוחה, אנכית ומודולרית שנוצרה מתוך כלים לוגיים ועיצוביים. האתגר העיצובי איננו למחוק את ההבדלים, אלא לאפשר להם להתקיים יחד באופן מכוון ומאוזן.</div>
+  </section>
+
+  <!-- === Section 11, responsive sans === -->
+  <section id="fonts" class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-11">Size</label>
+        <input class="size" id="size-11" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-11">Leading</label>
+        <input class="leading" id="leading-11" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-11">Letter Spacing</label>
+        <input class="spacing" id="spacing-11" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+  <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="11">
+            <div class="select-header">
+              <span class="select-value">Safra Sans Bold</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular">Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular">Safra Sans Regular</option>
+            <option value="Safra Sans Bold" selected>Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+     <div class="type-area column-count-1 responsive-text" contenteditable="true" dir="rtl" style="font-family: 'Safra Sans'; font-weight: 700; font-size: 244px; line-height: 1; letter-spacing: -0.035em; text-align: center; white-space: nowrap;">fragile</div>
+  </section>
+
+  <!-- === Section 12, two columns, Arabic long text === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-12">Size</label>
+        <input class="size" id="size-12" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-12">Leading</label>
+        <input class="leading" id="leading-12" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-12">Letter Spacing</label>
+        <input class="spacing" id="spacing-12" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="12">
+            <div class="select-header">
+              <span class="select-value">Safra Sans Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular">Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular" selected>Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right is-active"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-2 truncate-text" data-truncate-words="41" contenteditable="true" dir="rtl" style="font-family: 'Safra Sans'; font-weight: 400; font-size: 37px; line-height: 1.45; letter-spacing: 0.01em; font-style: normal;">الخط الثلاثي ليس حلًا عمليًا للعمل متعدد اللغات. إنه جسر بين ثقافات وبين طرق رؤية. إنه يتيح للقارئ العربي أن يقرأ نصًا بجانب القارئ العبري دون أن تطغى الطباعة أو تُقصي. إنه يدعو القارئ إلى اللغات المختلفة في الصفحة نفسها، في المساحة نفسها، دون أن تطغى إحداها على الأخريات. بهذا المعنى، يُجسّد الخط الثلاثي رؤية للعيش المتوازي، ليس اندماجًا بل جوارًا، ليس توحيدًا قسريًا بل تعددية دقيقة. إنه يمنح المصممين القدرة ليس فقط على ترجمة النصوص، بل على تصميم هياكل تُمكّن أصواتًا مختلفة من أن تُسمع. في عصر الترجمة والاتصال، يصبح الخط واجهة تُجرى فيها مناقشة بين اللغة والهوية البصرية والقدرة على رؤية الآخر ليس كاستثناء بل كجزء من التصميم ذاته.</div></div>
+  </section>
+
+  <!-- === Section 13, centered single column Michelangelo === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-13">Size</label>
+        <input class="size" id="size-13" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-13">Leading</label>
+        <input class="leading" id="leading-13" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-13">Letter Spacing</label>
+        <input class="spacing" id="spacing-13" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="13">
+            <div class="select-header">
+              <span class="select-value">Safra Sans Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular">Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular" selected>Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 auto-fit-multiline" data-max-font-size="186" contenteditable="true" dir="rtl" style="font-family: 'Safra Sans'; font-weight: 400; font-size: 186px; line-height: 1.1; text-align: center; font-style: normal; letter-spacing: -0.01em;">ילדים&#10;Children&#10;أولاد</div>
+  </section>
+
+  <!-- === Section 14, two columns, Sans Bold, long text (duplicate of section 3) === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-14">Size</label>
+        <input class="size" id="size-14" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-14">Leading</label>
+        <input class="leading" id="leading-14" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-14">Letter Spacing</label>
+        <input class="spacing" id="spacing-14" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="14">
+            <div class="select-header">
+              <span class="select-value">Safra Sans Bold</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="Safra Regular">Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular">Safra Sans Regular</option>
+            <option value="Safra Sans Bold" selected>Safra Sans Bold</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left is-active"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-2 truncate-text" data-truncate-words="89" contenteditable="true" dir="ltr" style="font-family: 'Safra Sans'; font-weight: 700; font-size: 29px; line-height: 1.35; letter-spacing: 0.01em; font-style: normal;">This is where multilingual type design becomes more than a technical challenge, it becomes a political and cultural act. To design with and for three scripts is to acknowledge the histories they carry, the tensions they hold, and the future they shape. It is a process of negotiation, deep listening, cross-referencing shape and meaning across divided lines. A trilingual typeface doesn't just translate words. It embodies coexistence. It allows for parallel presence without forced fusion. It gives designers the tools to write in three languages — and to be understood in one shared typographic space. Each script brings its own rhythm, its own logic of movement. Hebrew reads right to left, Arabic flows with connected letterforms, and Latin stands upright in discrete units. To bring them together is not to flatten these differences but to find a common ground where each can breathe. The result is a typeface that speaks three languages without losing its voice in any of them.</div>
+  </section>
+
+  
+
+
+  <!-- ===== GLYPH GRID VIEWER ===== -->
+  <div class="wrapper" id="fontWrapper">
+    <div class="left-panel">
+      <div class="preview-box" id="preview" style="font-family: Safra; font-weight: 400;" data-preview="a"></div>
+      <div class="controls-lite">
+        <div class="font-wrapper">
+          <div class="custom-select" id="weight-select">
+            <div class="select-header">
+              <span class="select-value">Safra Regular</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="Safra Regular">Safra Regular</div>
+              <div class="select-option" data-value="Safra Bold">Safra Bold</div>
+              <div class="select-option" data-value="Safra Sans Regular">Safra Sans Regular</div>
+              <div class="select-option" data-value="Safra Sans Bold">Safra Sans Bold</div>
+              <div class="select-option" data-value="Sugar Display Regular">Sugar Display Regular</div>
+              <div class="select-option" data-value="Sugar Text Regular">Sugar Text Regular</div>
+            </div>
+          </div>
+          <!-- Hidden original select for functionality -->
+          <select id="weight" style="display: none;">
+            <option value="Safra Regular" selected>Safra Regular</option>
+            <option value="Safra Bold">Safra Bold</option>
+            <option value="Safra Sans Regular">Safra Sans Regular</option>
+            <option value="Safra Sans Bold">Safra Sans Bold</option>
+            <option value="Sugar Display Regular">Sugar Display Regular</option>
+            <option value="Sugar Text Regular">Sugar Text Regular</option>
+          </select>
+        </div>
+      </div>
+      <div class="details" id="details">Unicode decimal: 97<br>Unicode hex: 0061<br>HTML entity: a</div>
+    </div>
+    <div class="grid-container">
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+
+  <!-- ===== IN USE SECTION ===== -->
+  <section class="in-use-section">
+    <div class="section-header">
+      <h2>Safra ספרא سفرا in Use</h2>
+    </div>
+    <div class="in-use-grid">
+      <div class="in-use-item">
+        <img src="photos/safra/safra in use 1.jpg" alt="Safra typeface in use — trilingual wayfinding signage in Hebrew, Arabic, and Latin" />
+      </div>
+      <div class="in-use-item">
+        <img src="photos/safra/safra in use 2.jpg" alt="Safra typeface in use — multilingual typography application" />
+      </div>
+      <div class="in-use-item">
+        <img src="photos/safra/safra in use 3.jpg" alt="Safra typeface in use — trilingual editorial typography" />
+      </div>
+    </div>
+    <div class="photo-credit">
+      Photos by Visvaldas Morkevicius
+    </div>
+  </section>
+
+  <!-- ===== SPECIMEN SECTION ===== -->
+  <section id="specimen" class="specimen-section">
+    <div class="section-header">
+      <h2>Specimen</h2>
+    </div>
+    <div class="specimen-carousels">
+      <!-- Left Carousel -->
+      <div class="specimen-carousel">
+        <div class="carousel-container">
+          <div class="carousel-track" id="carousel-a">
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a1.jpg" alt="Safra specimen — trilingual typeface overview showing serif and sans styles across Hebrew, Arabic, and Latin scripts" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a2.jpg" alt="Safra specimen — Hebrew, Arabic, and Latin characters at text size" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a3.jpg" alt="Safra specimen — serif style detail in Hebrew, Arabic, and Latin" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a4.jpg" alt="Safra specimen — sans style detail in Hebrew, Arabic, and Latin" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a5.jpg" alt="Safra specimen — multilingual paragraph typesetting in Hebrew, Arabic, and Latin" />
+            </div>
+            <!-- Duplicate all slides for infinite loop -->
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a1.jpg" alt="Safra specimen — trilingual typeface overview showing serif and sans styles across Hebrew, Arabic, and Latin scripts" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a2.jpg" alt="Safra specimen — Hebrew, Arabic, and Latin characters at text size" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a3.jpg" alt="Safra specimen — serif style detail in Hebrew, Arabic, and Latin" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a4.jpg" alt="Safra specimen — sans style detail in Hebrew, Arabic, and Latin" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-a5.jpg" alt="Safra specimen — multilingual paragraph typesetting in Hebrew, Arabic, and Latin" />
+            </div>
+          </div>
+        </div>
+        <div class="carousel-indicators" id="indicators-a">
+          <span class="indicator active" data-slide="0"></span>
+          <span class="indicator" data-slide="1"></span>
+          <span class="indicator" data-slide="2"></span>
+          <span class="indicator" data-slide="3"></span>
+          <span class="indicator" data-slide="4"></span>
+        </div>
+      </div>
+
+      <!-- Right Carousel -->
+      <div class="specimen-carousel">
+        <div class="carousel-container">
+          <div class="carousel-track" id="carousel-b">
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b1.jpg" alt="Safra specimen — display weight showcase in Hebrew, Arabic, and Latin" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b2.jpg" alt="Safra specimen — character set across three scripts" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b3.jpg" alt="Safra specimen — regular and bold weights comparison" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b4.jpg" alt="Safra specimen — trilingual typesetting with serif and sans styles side by side" />
+            </div>
+            <!-- Duplicate all slides for infinite loop -->
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b1.jpg" alt="Safra specimen — display weight showcase in Hebrew, Arabic, and Latin" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b2.jpg" alt="Safra specimen — character set across three scripts" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b3.jpg" alt="Safra specimen — regular and bold weights comparison" />
+            </div>
+            <div class="carousel-slide">
+              <img src="photos/safra/specimen-b4.jpg" alt="Safra specimen — trilingual typesetting with serif and sans styles side by side" />
+            </div>
+          </div>
+        </div>
+        <div class="carousel-indicators" id="indicators-b">
+          <span class="indicator active" data-slide="0"></span>
+          <span class="indicator" data-slide="1"></span>
+          <span class="indicator" data-slide="2"></span>
+          <span class="indicator" data-slide="3"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DATA MAPS ===== -->
+  <script type="application/json" id="fontMap">{
+    "Kilo Text Regular": { "family": "Kilo Text", "weight": 400 },
+    "Safra Regular": { "family": "Safra", "weight": 400 },
+    "Safra Bold": { "family": "Safra", "weight": 700 },
+    "Safra Sans Regular": { "family": "Safra Sans", "weight": 400 },
+    "Safra Sans Bold": { "family": "Safra Sans", "weight": 700 },
+    "Sugar Display Regular": { "family": "Sugar Display", "weight": 400 },
+    "Sugar Text Regular": { "family": "Sugar Text", "weight": 400 }
+  }</script>
+
+  <script type="application/json" id="glyphMap">{
+    "default": "!\"#$%&'()*+,-./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+    "Safra2": "0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_{|}~ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzأبجدهوزحطيكلمنسعفصقرشتثخذضظغاآإٱةئؤءאבגדהוזחטיכךלמםנןסעפףצץקרשת"
+
+  }</script>
+
+  <!-- ===== SCRIPT ===== -->
+  <!-- GSAP for advanced marquee functionality -->
+  <script src="gsap-public/minified/gsap.min.js"></script>
+  <script src="gsap-public/minified/ScrollTrigger.min.js"></script>
+  <script src="gsap-public/minified/Draggable.min.js"></script>
+  <script src="gsap-public/minified/InertiaPlugin.min.js"></script>
+  
+    <!-- EmailJS -->
+    <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+(function(){
+  emailjs.init({
+    publicKey: "SY_sCUJHCR5MtWgI5",
+  });
+})();
+</script>
+
+    <!-- Nomad Type JS -->
+
+  <!-- Load Header Component First -->
+  <script src="header.js"></script>
+  <script>
+    // Load header when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof loadHeader === 'function') {
+        loadHeader(`
+          <div style="transform: translateY(0px);">سفرا</div>
+          <div style="transform: translateY(0px);">Safra</div>
+          <div style="transform: translateY(0px);">ספרא</div>
+        `);
+      }
+});
+  </script>
+
+  <script src="script.js"></script>
+
+  </main>
+
+<!-- ====== OVERLAY FORMS ====== -->
+<!-- Trial Download Form -->
+<div class="overlay" id="trialOverlay">
+  <div class="overlay-content">
+    <div class="form-header">
+      <h2>Download  Safra ספרא سفرا</h2>
+      <button class="close-btn" id="closeTrial"></button>
+    </div>
+    
+    <div class="success-message" id="trialSuccessMessage" style="display: none;">
+      <p class="success-text">Thank you! We'll send your trial fonts shortly.</p>
+      <button class="submit-btn" id="trialSuccessBtn">Continue to Website</button>
+    </div>
+    
+    <form class="trial-form" id="trialFormContent">
+      <div class="form-content">
+        <div class="form-group">
+          <input type="text" id="trialName" name="name" placeholder=" " required>
+          <div class="placeholder-text">Full Name<span class="asterisk">*</span></div>
+        </div>
+        
+        <div class="form-group">
+          <input type="email" id="trialEmail" name="email" placeholder=" " required>
+          <div class="placeholder-text">Email Address<span class="asterisk">*</span></div>
+        </div>
+
+        
+        <div class="form-section collapsible">
+          <h3 class="collapsible-header">
+            <span>Intended Use<span class="asterisk">*</span></span>
+            <span class="dropdown-icon"></span>
+          </h3>
+          <div class="collapsible-content">
+            <div class="radio-group">
+              <label class="radio-label">
+                <input type="radio" name="useType" value="Client" required>
+                <span class="radio-mark"></span>
+                Client Project
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="useType" value="Student" required>
+                <span class="radio-mark"></span>
+                Student Work
+              </label>
+            </div>
+
+            <!-- Client Project Fields -->
+            <div class="conditional-fields" id="clientFields" style="display: none;">
+              <div class="form-group">
+                <input type="text" id="clientCompany" name="clientCompany" placeholder=" ">
+                <div class="placeholder-text">Your Company Name<span class="asterisk">*</span></div>
+              </div>
+              <div class="form-group">
+                <input type="text" id="clientName" name="clientName" placeholder=" ">
+                <div class="placeholder-text">Client Name</div>
+              </div>
+              <div class="form-group">
+                <input type="url" id="clientWebsite" name="clientWebsite" placeholder=" ">
+                <div class="placeholder-text">Link to Client's Website</div>
+              </div>
+            </div>
+
+            <!-- Student Work Fields -->
+            <div class="conditional-fields" id="studentFields" style="display: none;">
+              <div class="form-group">
+                <input type="text" id="institutionName" name="institutionName" placeholder=" ">
+                <div class="placeholder-text">Name of Academic Institution<span class="asterisk">*</span></div>
+              </div>
+              <div class="form-group">
+                <input type="text" id="graduationYear" name="graduationYear" placeholder=" ">
+                <div class="placeholder-text">Year of Graduation<span class="asterisk">*</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Client Consent -->
+        <div class="form-section conditional-consent" id="clientConsent" style="display: none;">
+          <label class="checkbox-label consent">
+            <input type="checkbox" name="consent">
+            <span class="checkmark"></span>
+            <span class="consent-text">I confirm the fonts will only be used for mock-ups or sketches. Any commercial use requires a license via nomad-type.com.</span>
+          </label>
+        </div>
+
+        <!-- Student Consent -->
+        <div class="form-section conditional-consent" id="studentConsent" style="display: none;">
+          <label class="checkbox-label consent">
+            <input type="checkbox" name="consent">
+            <span class="checkmark"></span>
+            <span class="consent-text">I’ll only use the fonts for school projects. Any commercial use, even during my studies, requires a license from nomad-type.com.</span>
+          </label>
+        </div>
+        
+        <button type="submit" class="submit-btn">Submit</button>
+        <p class="form-error-message" id="trialError" style="display: none;"></p>
+      </div>
+      
+      <p class="footer-text">By submitting, I agree to receive occasional updates about new releases (unsubscribe anytime).</p>
+    </form>
+  </div>
+</div>
+
+<!-- Buy Now Form -->
+<div class="overlay" id="buyOverlay">
+  <div class="overlay-content">
+    <div class="form-header">
+      <h2>Buy Safra ספרא سفرا</h2>
+      <button class="close-btn" id="closeBuy"></button>
+    </div>
+    
+    <!-- Hidden stubs so script.js's overlay close-handlers (which still call
+         getElementById('buyIntroText'/'buySuccessMessage') and reset the form)
+         never throw. They are not shown; the live intro is inside the form. -->
+    <span id="buyIntroText" style="display:none;"></span>
+    <span id="buySuccessMessage" style="display:none;"></span>
+
+    <!-- ===== SAFRA STORE V2 CONFIGURATOR (guts swapped in) =====
+         NOTE: this form intentionally has id="buyFormContent" (so the page's
+         close-handlers can .reset() it harmlessly) but NOT class "buy-form"
+         (so script.js's lead-form submit + checkbox logic skip it entirely).
+         All configurator behaviour lives in the scoped script before </body>. -->
+    <p class="intro-text">Configure your licence: pick the fonts, how you'll use them and a tier. The price updates live.</p>
+    <p class="ssv2-ea">Early access<button type="button" class="ssv2-ea-q" aria-label="What does early access mean?">?</button><span class="ssv2-ea-pop" role="tooltip">Safra is in active development. The fonts you buy keep getting updates and refinements, included in your licence.</span></p>
+
+    <form class="ssv2-form" id="buyFormContent" novalidate>
+
+      <!-- Everything above the price scrolls; price + Buy stay pinned. -->
+      <div class="ssv2-scroll">
+
+        <!-- ===== SELECT FONTS (existing checkbox markup) ===== -->
+        <div class="form-section collapsible">
+          <h3 class="collapsible-header active">
+            <span>Select Fonts<span class="required">*</span></span>
+            <span class="dropdown-icon"></span>
+          </h3>
+          <div class="collapsible-content active">
+            <div class="checkbox-group" id="ssv2Fonts">
+              <label class="checkbox-label ssv2-family">
+                <input type="checkbox" name="family" value="entire">
+                <span class="checkmark"></span>
+                Full Family (4)
+                <span class="ssv2-family-tag">Bundle<span class="ssv2-tag-full"> Price</span></span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="family" value="regular" checked>
+                <span class="checkmark"></span>
+                Safra Regular
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="family" value="bold">
+                <span class="checkmark"></span>
+                Safra Bold
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="family" value="sans-regular">
+                <span class="checkmark"></span>
+                Safra Sans Regular
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="family" value="sans-bold">
+                <span class="checkmark"></span>
+                Safra Sans Bold
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== INTENDED USE (existing checkboxes, multi-select) ===== -->
+        <div class="form-section collapsible">
+          <h3 class="collapsible-header">
+            <span>Intended Use<span class="required">*</span></span>
+            <span class="dropdown-icon"></span>
+          </h3>
+          <div class="collapsible-content">
+            <div class="checkbox-group" id="ssv2Use">
+              <label class="checkbox-label">
+                <input type="checkbox" name="use" value="Desktop" checked>
+                <span class="checkmark"></span>
+                Desktop
+                <span class="ssv2-usebundle-tag" id="ssv2BundleTag">Bundle<span class="ssv2-tag-full"> Price</span></span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="use" value="Web">
+                <span class="checkmark"></span>
+                Web
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="use" value="App">
+                <span class="checkmark"></span>
+                App
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== LICENSE TIER (single-select, checkbox look) ===== -->
+        <div class="form-section collapsible ssv2-tier">
+          <h3 class="collapsible-header">
+            <span>Users<span class="required">*</span></span>
+            <span class="dropdown-icon"></span>
+          </h3>
+          <div class="collapsible-content">
+            <div class="checkbox-group" id="ssv2Tier">
+              <label class="checkbox-label">
+                <input type="radio" name="tier" value="individual" checked>
+                <span class="checkmark"></span>
+                Individual
+                <span class="tier-sub">1 user</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="radio" name="tier" value="studio">
+                <span class="checkmark"></span>
+                Studio
+                <span class="tier-sub">≤ 5 users</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="radio" name="tier" value="company">
+                <span class="checkmark"></span>
+                Company
+                <span class="tier-sub">≤ 20 users</span>
+              </label>
+            </div>
+            <p class="ssv2-tier-note" id="ssv2TierNote"></p>
+          </div>
+        </div>
+
+      </div><!-- /.ssv2-scroll -->
+
+      <!-- ===== PINNED: SUMMARY + PRICE + BUY ===== -->
+      <div class="ssv2-foot" aria-live="polite">
+        <p class="ssv2-sum-head">Your licence</p>
+        <div class="ssv2-sum-row"><span class="k">Fonts</span><span class="v" id="ssv2SumFonts">Full Family (4)</span></div>
+        <div class="ssv2-sum-row"><span class="k">Use</span><span class="v" id="ssv2SumUse">Desktop</span></div>
+        <div class="ssv2-sum-row"><span class="k">Users</span><span class="v" id="ssv2SumTier">Individual · 1 user</span></div>
+        <p class="ssv2-includes" id="ssv2Includes"></p>
+
+        <div class="ssv2-price">
+          <span class="amount" id="ssv2Price">€260</span>
+          <span class="amount-label">EUR</span>
+        </div>
+
+        <!-- Buy button = site's .submit-btn look, replaces "Send Request" -->
+        <button type="button" class="submit-btn" id="buy-btn"
+                data-config="entire|Desktop|individual" data-price="260">Buy Now — €260</button>
+
+        <!-- Shown only when the current combo has no Lemon Squeezy checkout yet -->
+        <p class="ssv2-unavailable" id="ssv2Unavailable" hidden>This licence isn't available for purchase yet.</p>
+
+        <!-- pricing subnote removed -->
+
+      </div>
+    </form>
+  </div>
+</div>
+
+  <!-- ====== SCROLL BUTTONS ====== -->
+  <section class="scroll-buttons-section">
+    <div class="scroll-buttons-content">
+      <div class="scroll-buttons-text">
+        <h2 class="scroll-buttons-title">Safra ספרא سفرا: a trilingual serif & sans family</h2>
+        <p class="scroll-buttons-description">
+          Safra is a contemporary serif and sans typeface designed for multilingual use. It balances structural differences without erasing cultural identity, offering clarity and versatility for long reading and strong display typography alike.
+        </p>
+      </div>
+      
+      <div class="scroll-buttons">
+        <button class="btn btn-primary scroll-btn" id="scrollTrialBtn">Download Trial</button>
+        <button class="btn btn-secondary scroll-btn" id="scrollBuyBtn">Buy Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Container (will be populated by JavaScript) -->
+  <div id="footer-container"></div>
+
+  <!-- Animated Favicon Script -->
+  <script>
+    setTimeout(() => {
+      let favicon_video_image_counter = 0;
+      let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+      let favicon_video_images = [
+  "https://favicongenerator.s3.amazonaws.com/3129f51d17a5c.png","https://favicongenerator.s3.amazonaws.com/cd721e3e8a586.png","https://favicongenerator.s3.amazonaws.com/4af6e76d5ae4a.png","https://favicongenerator.s3.amazonaws.com/e76f98c1d6448.png","https://favicongenerator.s3.amazonaws.com/bc435c23b4eaf.png","https://favicongenerator.s3.amazonaws.com/c806c3265454f.png","https://favicongenerator.s3.amazonaws.com/e95b673a3d845.png","https://favicongenerator.s3.amazonaws.com/230b1204ad4d1.png","https://favicongenerator.s3.amazonaws.com/7fd4916b0902e.png","https://favicongenerator.s3.amazonaws.com/c9dddf2a04e46.png","https://favicongenerator.s3.amazonaws.com/a13c002e6a2ab.png","https://favicongenerator.s3.amazonaws.com/e8eddb001860b.png","https://favicongenerator.s3.amazonaws.com/13f85eb453429.png","https://favicongenerator.s3.amazonaws.com/ce45ac6aa0a8a.png","https://favicongenerator.s3.amazonaws.com/fb54d04dd298f.png","https://favicongenerator.s3.amazonaws.com/4c8400f32accc.png","https://favicongenerator.s3.amazonaws.com/a792f02084f6c.png","https://favicongenerator.s3.amazonaws.com/f30e5a3031be8.png","https://favicongenerator.s3.amazonaws.com/9249f78daaefd.png","https://favicongenerator.s3.amazonaws.com/8b5a05d43b31d.png","https://favicongenerator.s3.amazonaws.com/eab8ede756262.png","https://favicongenerator.s3.amazonaws.com/2ba370948350d.png","https://favicongenerator.s3.amazonaws.com/16b955af4550b.png","https://favicongenerator.s3.amazonaws.com/cb303dec540cb.png","https://favicongenerator.s3.amazonaws.com/f071825bf109d.png","https://favicongenerator.s3.amazonaws.com/3e83da0b84f04.png","https://favicongenerator.s3.amazonaws.com/435d711b5e9c7.png","https://favicongenerator.s3.amazonaws.com/7d8c3600a547d.png","https://favicongenerator.s3.amazonaws.com/076628736ee03.png","https://favicongenerator.s3.amazonaws.com/6674b4393d2e7.png","https://favicongenerator.s3.amazonaws.com/8c6eabdaf80e.png","https://favicongenerator.s3.amazonaws.com/93129cf211ec7.png","https://favicongenerator.s3.amazonaws.com/50ab769fae9c5.png","https://favicongenerator.s3.amazonaws.com/dbd67430dfff2.png","https://favicongenerator.s3.amazonaws.com/6306b1d0f7ede.png","https://favicongenerator.s3.amazonaws.com/c80c22e1b976e.png","https://favicongenerator.s3.amazonaws.com/c0ba6ed76150a.png","https://favicongenerator.s3.amazonaws.com/e15281d3c9931.png","https://favicongenerator.s3.amazonaws.com/274f3c0d4f878.png","https://favicongenerator.s3.amazonaws.com/78a9057d69b74.png","https://favicongenerator.s3.amazonaws.com/d6db49127abf1.png","https://favicongenerator.s3.amazonaws.com/ee5bae80536bc.png","https://favicongenerator.s3.amazonaws.com/2a7e9e25fccb9.png","https://favicongenerator.s3.amazonaws.com/dc7fbe30b5d91.png","https://favicongenerator.s3.amazonaws.com/7b936d1b246c7.png","https://favicongenerator.s3.amazonaws.com/2b1c4719e18fb.png","https://favicongenerator.s3.amazonaws.com/072fa8af4155c.png","https://favicongenerator.s3.amazonaws.com/3e7bca2490671.png","https://favicongenerator.s3.amazonaws.com/f75d559c12576.png","https://favicongenerator.s3.amazonaws.com/c2dccc17f46e.png","https://favicongenerator.s3.amazonaws.com/62ff58aefdb7a.png","https://favicongenerator.s3.amazonaws.com/12342f642fd7a.png","https://favicongenerator.s3.amazonaws.com/2ce950b8443e2.png","https://favicongenerator.s3.amazonaws.com/3676501156615.png","https://favicongenerator.s3.amazonaws.com/52ac9290673ef.png","https://favicongenerator.s3.amazonaws.com/c401b341b6877.png","https://favicongenerator.s3.amazonaws.com/5408ed854b0e6.png","https://favicongenerator.s3.amazonaws.com/c9417ab290d8c.png","https://favicongenerator.s3.amazonaws.com/605db5fa28d8b.png","https://favicongenerator.s3.amazonaws.com/dbcadae5ac827.png","https://favicongenerator.s3.amazonaws.com/89497c65bc9d.png","https://favicongenerator.s3.amazonaws.com/cba217324331a.png","https://favicongenerator.s3.amazonaws.com/04989a8ce7a13.png","https://favicongenerator.s3.amazonaws.com/9f6ff1daefbc2.png","https://favicongenerator.s3.amazonaws.com/35af62beb2069.png","https://favicongenerator.s3.amazonaws.com/03dcf5523866b.png","https://favicongenerator.s3.amazonaws.com/b598d707d6b7a.png","https://favicongenerator.s3.amazonaws.com/796a5d9e5c498.png","https://favicongenerator.s3.amazonaws.com/35c427f26d961.png","https://favicongenerator.s3.amazonaws.com/0177ba9bb3cd5.png","https://favicongenerator.s3.amazonaws.com/dda651d22badc.png","https://favicongenerator.s3.amazonaws.com/ab5e3aef1f7ff.png","https://favicongenerator.s3.amazonaws.com/1922e4dfb5696.png","https://favicongenerator.s3.amazonaws.com/c95b12f64f2bf.png","https://favicongenerator.s3.amazonaws.com/a59614ebdf159.png","https://favicongenerator.s3.amazonaws.com/dfdd396620126.png","https://favicongenerator.s3.amazonaws.com/af9153abb4866.png","https://favicongenerator.s3.amazonaws.com/21d342a33e20c.png","https://favicongenerator.s3.amazonaws.com/259e6557b866e.png","https://favicongenerator.s3.amazonaws.com/586c3cb84232c.png","https://favicongenerator.s3.amazonaws.com/26ea4ab6305b6.png","https://favicongenerator.s3.amazonaws.com/80f1a5fcefd97.png","https://favicongenerator.s3.amazonaws.com/aa8010193758f.png","https://favicongenerator.s3.amazonaws.com/c62ddfd8b8fe5.png","https://favicongenerator.s3.amazonaws.com/35d778b2f5022.png","https://favicongenerator.s3.amazonaws.com/629d6922cf6f7.png","https://favicongenerator.s3.amazonaws.com/35e86ac544a1d.png","https://favicongenerator.s3.amazonaws.com/77825641eefc2.png","https://favicongenerator.s3.amazonaws.com/0472d28c319e4.png","https://favicongenerator.s3.amazonaws.com/ca2bdb73b6cc8.png","https://favicongenerator.s3.amazonaws.com/8d4ac4862754c.png","https://favicongenerator.s3.amazonaws.com/e7d5b141691a4.png","https://favicongenerator.s3.amazonaws.com/a53ffd9f417a5.png","https://favicongenerator.s3.amazonaws.com/14aa02ac80de5.png","https://favicongenerator.s3.amazonaws.com/e21f4aa715dab.png","https://favicongenerator.s3.amazonaws.com/e393c22a4de28.png","https://favicongenerator.s3.amazonaws.com/69bff0d066f14.png","https://favicongenerator.s3.amazonaws.com/43db7d93ee14c.png","https://favicongenerator.s3.amazonaws.com/86859d59c20a7.png","https://favicongenerator.s3.amazonaws.com/059f6f8183db8.png","https://favicongenerator.s3.amazonaws.com/2016a34618202.png","https://favicongenerator.s3.amazonaws.com/91ee3568cfd6c.png","https://favicongenerator.s3.amazonaws.com/fd9d0e98cb80d.png"];
+      async function favicon_video_to_data_url(url, callback) {
+        let xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          let reader = new FileReader();
+          reader.onloadend = function () {
+            callback(reader.result);
+          };
+          reader.readAsDataURL(xhr.response);
+        };
+        xhr.open("GET", url);
+        xhr.responseType = "blob";
+        xhr.send();
+      }
+    
+      let favicon_video_loaded_images = [];
+    
+      favicon_video_images.map((url, idx) => {
+        favicon_video_to_data_url(url, function (dataUrl) {
+          favicon_video_loaded_images[idx] = dataUrl;
+        });
+      });
+    
+      setInterval(function () {
+        if(favicon_video_loaded_images[favicon_video_image_counter]) {
+          favicon_video_icon_tag.href = favicon_video_loaded_images[
+            favicon_video_image_counter
+          ].replace("application/octet-stream", "image/png");
+        }
+        if (
+          favicon_video_image_counter ==
+          favicon_video_loaded_images.length - 1
+        )
+          favicon_video_image_counter = 0;
+        else favicon_video_image_counter++;
+      }, 50);
+    }, 1500);
+  </script>
+
+  <!-- Footer Component Script -->
+  <script src="footer.js"></script>
+  <script>
+    // Load footer when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof loadFooter === 'function') {
+        loadFooter('Safra'); // Change this for different pages
+      }
+
+      // Navigation links - force navigation
+      const navLinks = document.querySelectorAll('.nav-link, .menu-item');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          if (this.href) {
+            window.location.href = this.href;
+          }
+        });
+      });
+
+      // Trial buttons - open overlays (handled by initScrollButtonClicks in script.js)
+      // Only handle sticky-trial-btn navigation, scroll buttons open overlays
+      const stickyTrialBtn = document.querySelector('.sticky-trial-btn');
+      if (stickyTrialBtn) {
+        stickyTrialBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.location.href = 'trial-fonts.html';
+        });
+      }
+    });
+  </script>
+
+  <!-- =========================================================================
+       SAFRA STORE V2 CONFIGURATOR LOGIC  (ported from safra-store-v2.html)
+       Scoped to the elements now inside the page's existing #buyOverlay.
+       IMPORTANT: this does NOT open/close the overlay and does NOT toggle
+       collapsibles — script.js already owns both (#scrollBuyBtn opens,
+       #closeBuy / click-outside / Esc close, and the delegated
+       initCollapsibleSections handles .collapsible-header clicks). This block
+       only handles: font/use/tier selection → live price → Buy-Now checkout.
+       Loaded AFTER script.js.
+       ========================================================================= -->
+  <script>
+  (function () {
+    'use strict';
+
+    const PRICES = {
+      single: {
+        desktop: { individual: 100, studio: 160, company: 400 },
+        web:     { individual: 150, studio: 240, company: 600 },
+        bundle:  { individual: 200, studio: 320, company: 800 }
+      },
+      family: {
+        desktop: { individual: 260, studio: 415, company: 1040 },
+        web:     { individual: 390, studio: 625, company: 1560 },
+        bundle:  { individual: 520, studio: 830, company: 2080 }
+      }
+    };
+
+    // =====================================================================
+    //  LEMON SQUEEZY VARIANT MAP  —  key = `${style}|${format}|${tier}`
+    //    style  : 'entire' (Full Family) OR single style id
+    //             ('regular' | 'bold' | 'sans-regular' | 'sans-bold')
+    //    format : 'desktop' | 'web' | 'bundle' (Desktop+Web)
+    //    tier   : 'individual' | 'studio' | 'company'
+    //  Only ONE of the 45 combos is live right now. Every other combo is
+    //  intentionally absent → Buy button shows a disabled "Coming soon" state.
+    //  Add remaining variants with the SAME key format; no other change needed.
+    // =====================================================================
+    const CHECKOUT_URLS = {
+      // entire
+      'entire|desktop|individual': 'https://buy.stripe.com/4gMfZi9DTaIgb5agTb8N200',
+      'entire|desktop|studio': 'https://buy.stripe.com/6oUbJ2g2haIgehmgTb8N201',
+      'entire|desktop|company': 'https://buy.stripe.com/bJeaEY2breYw6OU1Yh8N202',
+      'entire|web|individual': 'https://buy.stripe.com/14A4gA17ncQo4GMdGZ8N203',
+      'entire|web|studio': 'https://buy.stripe.com/8x23cwcQ59Ec1uAcCV8N204',
+      'entire|web|company': 'https://buy.stripe.com/7sYfZi3fv8A81uAbyR8N205',
+      'entire|bundle|individual': 'https://buy.stripe.com/dRmeVe8zPg2Agpu7iB8N206',
+      'entire|bundle|studio': 'https://buy.stripe.com/aFa14o5nDdUsddi46p8N207',
+      'entire|bundle|company': 'https://buy.stripe.com/6oU5kE03j6s0a16auN8N208',
+      // regular
+      'regular|desktop|individual': 'https://buy.stripe.com/cNi00k3fv5nWgpu0Ud8N209',
+      'regular|desktop|studio': 'https://buy.stripe.com/6oUdRa4jzg2Aehm1Yh8N20a',
+      'regular|desktop|company': 'https://buy.stripe.com/aFaaEY5nD8A87SY32l8N20b',
+      'regular|web|individual': 'https://buy.stripe.com/3cI14o17n2bKa166ex8N20c',
+      'regular|web|studio': 'https://buy.stripe.com/eVqbJ217ncQoddi9qJ8N20d',
+      'regular|web|company': 'https://buy.stripe.com/00w6oI7vLeYwehmgTb8N20e',
+      'regular|bundle|individual': 'https://buy.stripe.com/5kQcN6cQ53fO3CI9qJ8N20f',
+      'regular|bundle|studio': 'https://buy.stripe.com/00waEY3fv03Ca16fP78N20g',
+      'regular|bundle|company': 'https://buy.stripe.com/cNicN63fv9Ec8X21Yh8N20h',
+      // bold
+      'bold|desktop|individual': 'https://buy.stripe.com/9B6cN6cQ5dUs0qwcCV8N20i',
+      'bold|desktop|studio': 'https://buy.stripe.com/5kQbJ24jz03Cflq5at8N20j',
+      'bold|desktop|company': 'https://buy.stripe.com/eVq7sMdU92bK8X246p8N20k',
+      'bold|web|individual': 'https://buy.stripe.com/3cI14oaHXbMka16fP78N20l',
+      'bold|web|studio': 'https://buy.stripe.com/4gM28s7vL7w4ehm1Yh8N20m',
+      'bold|web|company': 'https://buy.stripe.com/5kQ3cw9DTeYwc9egTb8N20n',
+      'bold|bundle|individual': 'https://buy.stripe.com/cNi8wQ4jz7w42yEeL38N20o',
+      'bold|bundle|studio': 'https://buy.stripe.com/14A4gAeYdeYw3CI8mF8N20p',
+      'bold|bundle|company': 'https://buy.stripe.com/cNidRa4jz9Ec3CIbyR8N20q',
+      // sans-regular
+      'sans-regular|desktop|individual': 'https://buy.stripe.com/4gM00k17ng2Aehm5at8N20r',
+      'sans-regular|desktop|studio': 'https://buy.stripe.com/eVq5kE5nD8A80qw46p8N20s',
+      'sans-regular|desktop|company': 'https://buy.stripe.com/00w7sMcQ59Ecgpu32l8N20t',
+      'sans-regular|web|individual': 'https://buy.stripe.com/bJe6oIg2hdUs5KQ8mF8N20u',
+      'sans-regular|web|studio': 'https://buy.stripe.com/9B68wQaHXaIg6OU32l8N20v',
+      'sans-regular|web|company': 'https://buy.stripe.com/8x24gAg2hg2AehmfP78N20w',
+      'sans-regular|bundle|individual': 'https://buy.stripe.com/aFa4gA5nDbMkgpu5at8N20x',
+      'sans-regular|bundle|studio': 'https://buy.stripe.com/9B66oIg2hg2A0qwauN8N20y',
+      'sans-regular|bundle|company': 'https://buy.stripe.com/bJe7sMaHXcQo6OU32l8N20z',
+      // sans-bold
+      'sans-bold|desktop|individual': 'https://buy.stripe.com/cNi00k6rH7w46OU8mF8N20A',
+      'sans-bold|desktop|studio': 'https://buy.stripe.com/00weVeaHXcQoddi46p8N20B',
+      'sans-bold|desktop|company': 'https://buy.stripe.com/3cIaEY4jz3fO4GM8mF8N20C',
+      'sans-bold|web|individual': 'https://buy.stripe.com/6oUaEYaHXaIg2yE5at8N20D',
+      'sans-bold|web|studio': 'https://buy.stripe.com/eVq14o6rH5nW8X25at8N20E',
+      'sans-bold|web|company': 'https://buy.stripe.com/aFafZiaHX6s03CIfP78N20F',
+      'sans-bold|bundle|individual': 'https://buy.stripe.com/3cI9AU4jz2bK0qwbyR8N20G',
+      'sans-bold|bundle|studio': 'https://buy.stripe.com/dRm00kg2heYw3CIauN8N20H',
+      'sans-bold|bundle|company': 'https://buy.stripe.com/14A28s3fv2bK2yE1Yh8N20I'
+    };
+
+    function checkoutKey(fonts, format, tier) {
+      if (!format) return null;
+      if (fonts.kind === 'family') return 'entire|' + format + '|' + tier;
+      if (fonts.styles.length === 1) return fonts.styles[0] + '|' + format + '|' + tier;
+      return null;
+    }
+    function checkoutUrlFor(fonts, format, tier) {
+      const key = checkoutKey(fonts, format, tier);
+      return key ? (CHECKOUT_URLS[key] || null) : null;
+    }
+
+    // Open the Stripe hosted checkout (payment link) for the selected variant.
+    function openCheckout(url) {
+      window.location.href = url;
+    }
+
+    const STYLE_LABELS = {
+      'regular': 'Safra Regular', 'bold': 'Safra Bold',
+      'sans-regular': 'Safra Sans Regular', 'sans-bold': 'Safra Sans Bold'
+    };
+    const TIER_LABELS = {
+      individual: 'Individual · 1 user',
+      studio:     'Studio · up to 5 users',
+      company:    'Company · up to 20 users'
+    };
+    const TIER_NOTES = {
+      individual: 'Licensed to one named user. Desktop installs on up to 2 devices for that user.',
+      studio:     'Covers up to 5 people at your studio. Desktop installs on up to 2 devices per licensed user.',
+      company:    'Covers up to 20 people across the organisation. Need more seats or app embedding? Contact us.'
+    };
+
+    const $ = id => document.getElementById(id);
+    const euro = n => '€' + Number(n).toLocaleString('en-US');
+
+    const overlay = $('buyOverlay');
+    const form    = $('buyFormContent');
+    if (!overlay || !form) return;
+
+    const fontsBox  = $('ssv2Fonts');
+    const familyCb  = fontsBox.querySelector('input[value="entire"]');
+    const singleCbs = Array.from(fontsBox.querySelectorAll('input[name="family"]:not([value="entire"])'));
+
+    // ---- Full Family <-> individual styles interplay ----
+    familyCb.addEventListener('change', function () {
+      singleCbs.forEach(cb => { cb.checked = this.checked; });
+      render();
+    });
+    singleCbs.forEach(cb => {
+      cb.addEventListener('change', function () {
+        if (!this.checked) {
+          familyCb.checked = false;
+        } else if (singleCbs.every(c => c.checked)) {
+          familyCb.checked = true;
+        }
+        render();
+      });
+    });
+
+    $('ssv2Use').addEventListener('change', render);
+    $('ssv2Tier').addEventListener('change', render);
+
+    function selectedUses() {
+      return Array.from(form.querySelectorAll('input[name="use"]:checked')).map(c => c.value);
+    }
+    function formatFromUses(uses) {
+      const d = uses.includes('Desktop'), w = uses.includes('Web');
+      if (d && w) return 'bundle';
+      if (w) return 'web';
+      if (d) return 'desktop';
+      return null;
+    }
+    function selectedTier() {
+      const t = form.querySelector('input[name="tier"]:checked');
+      return t ? t.value : 'individual';
+    }
+    function fontsState() {
+      if (familyCb.checked) {
+        return { kind: 'family', label: 'Full Family (4)', styles: ['regular','bold','sans-regular','sans-bold'] };
+      }
+      const chosen = singleCbs.filter(c => c.checked);
+      return {
+        kind: 'singles',
+        label: chosen.length ? chosen.map(c => STYLE_LABELS[c.value]).join(', ') : 'None selected',
+        styles: chosen.map(c => c.value)
+      };
+    }
+    function basePrice(fonts, format, tier) {
+      if (!format || fonts.styles.length === 0) return null;
+      if (fonts.kind === 'family') return PRICES.family[format][tier];
+      return fonts.styles.length * PRICES.single[format][tier];
+    }
+
+    function render() {
+      const fonts  = fontsState();
+      const uses   = selectedUses();
+      const tier   = selectedTier();
+      const format = formatFromUses(uses);
+      const hasApp = uses.includes('App');
+
+      $('ssv2SumFonts').textContent = fonts.label;
+      $('ssv2SumUse').textContent   = uses.length ? uses.join(' + ') : 'None selected';
+      $('ssv2SumTier').textContent  = TIER_LABELS[tier];
+      $('ssv2TierNote').textContent = TIER_NOTES[tier];
+      const bt = $('ssv2BundleTag'); if (bt) bt.classList.toggle('lit', format === 'bundle');
+
+      const fontCount = fonts.styles.length;
+      const fmtFiles = format === 'bundle' ? 'OTF + WOFF2'
+                     : format === 'web' ? 'WOFF2'
+                     : format === 'desktop' ? 'OTF' : '—';
+      $('ssv2Includes').innerHTML =
+        '<span class="inc-tag">Included:</span> ' +
+        (fontCount ? fontCount + (fontCount === 1 ? ' font' : ' fonts') : 'no fonts yet') +
+        ' · ' + fmtFiles + ' files · EULA (PDF)';
+
+      const priceEl = $('ssv2Price');
+      const buy = $('buy-btn');
+      priceEl.classList.remove('is-quote');
+
+      const base = basePrice(fonts, format, tier);
+      const cfg = (familyCb.checked ? 'entire' : fonts.styles.join('+') || 'none') +
+                  '|' + (uses.join('+') || 'none') + '|' + tier;
+
+      if (fontCount === 0) {
+        priceEl.textContent = '—';
+        buy.textContent = 'Select at least one font';
+        buy.dataset.config = cfg; buy.dataset.price = '';
+        buy.disabled = true; buy.setAttribute('aria-disabled','true');
+        const note = $('ssv2Unavailable'); if (note) note.hidden = true;
+        return;
+      }
+
+      if (base === null) {
+        priceEl.classList.add('is-quote');
+        priceEl.textContent = hasApp ? 'On request' : 'Pick a use';
+        buy.textContent = hasApp ? 'Request app pricing' : 'Choose Desktop, Web or App';
+        buy.dataset.config = cfg;
+        buy.dataset.price = hasApp ? 'on-request' : '';
+        buy.disabled = !hasApp;
+        if (hasApp) { buy.removeAttribute('aria-disabled'); }
+        else { buy.setAttribute('aria-disabled','true'); }
+        const note = $('ssv2Unavailable'); if (note) note.hidden = true;
+        return;
+      }
+
+      const url = checkoutUrlFor(fonts, format, tier);
+
+      if (hasApp) {
+        priceEl.textContent = 'from ' + euro(base);
+        buy.dataset.config = cfg;
+        buy.dataset.price = base + '+app';
+        $('ssv2Includes').innerHTML += ' · <span class="inc-tag">App:</span> priced on request';
+        setBuyState(buy, url ? 'checkout' : 'unavailable', url, 'Buy ' + euro(base) + ' + app quote');
+      } else {
+        // Strikeout = "sum of parts" (no bundles). Shown for Full Family (~35% off)
+        // and for Desktop+Web (~20% off): D+W bundle is ×2 vs ×2.5 bought separately.
+        const parts = (format === 'bundle')
+          ? (PRICES.single.desktop[tier] + PRICES.single.web[tier])
+          : PRICES.single[format][tier];
+        const full = fonts.styles.length * parts;
+        priceEl.innerHTML = (full > base ? '<s class="ssv2-was">' + euro(full) + '</s> ' : '') + euro(base);
+        buy.dataset.config = cfg;
+        buy.dataset.price = String(base);
+        setBuyState(buy, url ? 'checkout' : 'unavailable', url, 'Buy Now — ' + euro(base));
+      }
+    }
+
+    function setBuyState(buy, state, url, activeLabel) {
+      const note = $('ssv2Unavailable');
+      if (state === 'checkout') {
+        buy.dataset.checkoutUrl = url;
+        buy.disabled = false;
+        buy.removeAttribute('aria-disabled');
+        buy.textContent = activeLabel;
+        if (note) note.hidden = true;
+      } else {
+        delete buy.dataset.checkoutUrl;
+        buy.disabled = true;
+        buy.setAttribute('aria-disabled', 'true');
+        buy.textContent = 'Coming soon';
+        if (note) note.hidden = false;
+      }
+    }
+
+    // Buy button — opens the Lemon Squeezy checkout for the selected variant.
+    $('buy-btn').addEventListener('click', function () {
+      if (this.disabled) return;
+      const cfg = this.dataset.config, price = this.dataset.price;
+      if (!price) return;
+
+      if (price === 'on-request') {
+        window.location.href = 'mailto:mail@nomad-type.com?subject=' +
+          encodeURIComponent('Safra app licence — ' + cfg);
+        return;
+      }
+      const url = this.dataset.checkoutUrl;
+      if (url) { openCheckout(url); return; }
+
+      window.location.href = 'mailto:mail@nomad-type.com?subject=' +
+        encodeURIComponent('Safra licence enquiry — ' + cfg);
+    });
+
+    render();
+
+    window.SafraStoreV2 = { render };
+  })();
+  </script>
+
+</body>
+</html>

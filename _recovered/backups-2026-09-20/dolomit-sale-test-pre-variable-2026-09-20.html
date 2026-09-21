@@ -11,7 +11,7 @@
   </script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>Dolomit דולומיט — badge test B | Nomad Type</title>
+  <title>Dolomit דולומיט — launch offer test | Nomad Type</title>
 
   <!-- DEMO page: not linked anywhere, not in sitemap. Remove noindex when it goes live. -->
   <meta name="robots" content="noindex">
@@ -206,15 +206,6 @@
     font-weight: 400;
   }
 
-  /* Note under the Full Family row: the family also carries the variable font. */
-  .ssv2-variable-note {
-    font-family: "Safra Mono", monospace;
-    font-size: 12px;
-    line-height: 1.4;
-    margin: -4px 0 10px 32px;
-    opacity: 0.7;
-  }
-
   .ssv2-subnote {
     font-family: "Safra Sans", sans-serif;
     font-size: 12px;
@@ -379,8 +370,6 @@
        Bold Extended gets its own family name (same pattern fontMap uses: family + weight). */
     @font-face { font-family: "Dolomit"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/Dolomit/Dolomit-Bold.woff2") format("woff2"); }
     @font-face { font-family: "Dolomit Extended"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/Dolomit/Dolomit-BoldExtended.woff2") format("woff2"); }
-    /* The variable font drives every type tester. Axis: wdth 5 (Bold) to 7 (Bold Extended). */
-    @font-face { font-family: "Dolomit Variable"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/Dolomit/Dolomit-Variable.woff2") format("woff2"); }
 
     /* Page colour = the red of Liad's poster. Black text on it is ~5.9:1, same idea as Safra's orange.
        Glyph offsets: Dolomit's letters sit on 0–600 units inside an 800/-284 box, so they need a nudge up. */
@@ -467,41 +456,13 @@
     background: #E8FF3A; overflow: hidden; pointer-events: none;
     display: flex; align-items: center;
   }
-  /* Seamless marquee: one track holding TWO identical halves, shifted by exactly -50%.
-     At the end of each cycle half two sits where half one started, so the loop never jumps.
-     (The earlier version animated a single span that also had padding-right, which made
-     -50% land mid-text and produced a visible skip once per cycle.) */
-  /* The track is ABSOLUTE on purpose: as a flex item it was capped at the bar's width,
-     so translateX(-50%) shifted half the BAR, not half the content, and the two halves
-     collided. Absolute positioning lets it shrink-wrap its content instead.
-     The shift is a pixel value measured after the webfont loads (see the script), never
-     a percentage, so neither the element width nor the font swap can throw it off. */
-  /* The track is ABSOLUTE on purpose: as a flex item it was capped at the bar's width,
-     so a -50% shift moved half the BAR, not half the content, and the halves collided.
-     The motion itself is driven from JS (see the script) with an exact pixel distance
-     measured after the webfont loads. CSS keyframes are not used here: a custom
-     property inside @keyframes does not reliably update when the script sets it. */
-  .nt-sale-track {
-    position: absolute; top: 0; left: 0; height: 100%;
-    display: flex; align-items: center;
-    width: max-content !important; max-width: none !important;
-  }
-  /* max-width: none is load-bearing. A site-wide rule caps spans at 100% of their
-     parent, which clamped each half to the bar width while its text stayed far wider.
-     Measuring that clamped box gave a shift shorter than the text, so the two halves
-     rode over each other. */
   .nt-sale-bar span {
     font-family: "Safra Mono", monospace; font-size: 14px; letter-spacing: 0;
-    color: #000; flex: none;
-    /* pre, not nowrap: nowrap still collapses runs of spaces and drops the trailing
-       ones, which glued the em dash to the next repetition. pre keeps them and
-       still never wraps, so the gap between repeats is exactly what the script writes. */
-    white-space: pre;
-    max-width: none !important; width: auto !important;
+    color: #000; white-space: nowrap; padding-right: 2.5rem;
+    animation: ntSaleSlide 30s linear infinite;
   }
-
-  /* The bar stays visible when the cart opens; the overlay simply sits above it
-     (overlay z-index 2000 against the bar's 900). */
+  @keyframes ntSaleSlide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .nt-sale-bar span { animation: none; } }
 
   /* ---- Everything below reserves room for the bar. ONE number controls it. ----
      All of it is scoped to body.nt-sale-page, so no other page on the site is
@@ -523,59 +484,14 @@
      AND bottom and stretches to the full height of the window. */
   body.nt-sale-page .cover-buttons:not(.sticky) { bottom: calc(29px + var(--nt-sale-h)); }
 
-  /* ================= ROTATING BADGE (mobile only) =================
-     A yellow disc with the offer set ON its edge, turning slowly. The text wraps the
-     circle EXACTLY once: the script measures the sentence after the webfont loads and
-     derives the radius from it (r = width / 2pi), so there is no seam to line up and
-     the badge resizes itself if the copy or the type size changes.
-     Built with SVG textPath, not per-letter rotation, because rotating each glyph
-     separately throws away the font's kerning. */
-  .nt-badge {
-    position: fixed; right: 16px; z-index: 900;
-    display: none;                      /* desktop keeps the bar */
-    pointer-events: none;
-  }
-  .nt-badge svg { display: block; overflow: visible; }
-  .nt-badge .nt-badge-disc { fill: #E8FF3A; }
-  .nt-badge .nt-badge-text {
-    fill: #000; font-family: "Safra Mono", monospace; font-size: 14px; letter-spacing: 0;
-  }
-  .nt-badge-spin { transform-origin: 50% 50%; animation: ntBadgeSpin 12s linear infinite; }
-  @keyframes ntBadgeSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-  @media (prefers-reduced-motion: reduce) { .nt-badge-spin { animation: none; } }
-
   @media (max-width: 768px) {
-    /* The badge replaces the bar on phones, so there is no top bar to make room for.
-       Setting its height to 0 undoes the whole top-bar treatment in one go: the body
-       padding, the cover height and the margins on the logo, burger and nav are all
-       expressed as calculations on this variable. */
-    body.nt-sale-page { --nt-sale-h: 0px; }
-    body.nt-sale-page .nt-sale-bar { display: none; }
-    /* Nir's values, straight from the window edges. On a phone this lands the badge
-       inside the red cover: 9px in from its right edge and 10px above its bottom,
-       clear of the white button bar. */
-    body.nt-sale-page .nt-badge { display: block; right: 27px; bottom: 98px; }
-    body.nt-sale-page { padding-top: 0; }
-  }
-
-  @media (max-width: 768px) {
-    /* On mobile the bar moves to the TOP of the screen. The site's own header is
-       fixed at top: 0, so it gets pushed down by exactly the bar height; everything
-       else follows from the same variable. The white button bar keeps the bottom. */
-    body.nt-sale-page .nt-sale-bar { top: 0; bottom: auto; }
-    /* Everything the site pins to the top of the screen moves down by the bar height.
-       margin-top rather than top: these elements have their own top offsets (and the
-       burger animates its transform), so a margin shifts them without touching either. */
-    body.nt-sale-page .sticky-top-section,
-    body.nt-sale-page .sticky-nav,
-    body.nt-sale-page .sticky-green-circle,
-    body.nt-sale-page .mobile-hamburger-circle { margin-top: var(--nt-sale-h); }
-    body.nt-sale-page { padding-top: var(--nt-sale-h); padding-bottom: var(--nt-buttons-h, 70px); }
-    body.nt-sale-page .cover-buttons { bottom: 0 !important; }
     body.nt-sale-page .cover-header {
-      height: calc(100vh - 40px - var(--nt-sale-h) - var(--nt-buttons-h, 70px));
-      height: calc(var(--vh, 1vh) * 100 - 40px - var(--nt-sale-h) - var(--nt-buttons-h, 70px));
+      height: calc(100vh - 40px - var(--nt-sale-h));
+      height: calc(var(--vh, 1vh) * 100 - 40px - var(--nt-sale-h));
     }
+    /* On mobile the buttons become a full-width bar pinned with `bottom: 0 !important`,
+       so the override has to be !important too. */
+    body.nt-sale-page .cover-buttons { bottom: var(--nt-sale-h) !important; }
   }
 
   @media (max-width: 480px) {
@@ -620,7 +536,7 @@
             <div class="spec-line">Consultant: Ben Nathan</div>
             <div class="spec-line">Year: 2026</div>
             <div class="spec-line">Languages: Hebrew, Latin (all caps)</div>
-            <div class="spec-line">Formats: OTF, WOFF2, Variable (TTF, WOFF2)</div>
+            <div class="spec-line">Formats: OTF, WOFF2</div>
           </div>
         </div>
       </div>
@@ -648,8 +564,6 @@
         <input class="leading" id="leading-1" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-1">Letter Spacing</label>
         <input class="spacing" id="spacing-1" type="range" min="-0.1" max="0.1" step="0.01" />
-        <label class="label-custom" for="width-1">Width</label>
-        <input class="width" id="width-1" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -690,8 +604,6 @@
         <input class="leading" id="leading-2" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-2">Letter Spacing</label>
         <input class="spacing" id="spacing-2" type="range" min="-0.1" max="0.1" step="0.01" />
-        <label class="label-custom" for="width-2">Width</label>
-        <input class="width" id="width-2" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -731,8 +643,6 @@
         <input class="leading" id="leading-11" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-11">Letter Spacing</label>
         <input class="spacing" id="spacing-11" type="range" min="-0.1" max="0.1" step="0.01" />
-        <label class="label-custom" for="width-11">Width</label>
-        <input class="width" id="width-11" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -773,8 +683,6 @@
         <input class="leading" id="leading-3" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-3">Letter Spacing</label>
         <input class="spacing" id="spacing-3" type="range" min="-0.1" max="0.1" step="0.01" />
-        <label class="label-custom" for="width-3">Width</label>
-        <input class="width" id="width-3" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -815,8 +723,6 @@
         <input class="leading" id="leading-4" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-4">Letter Spacing</label>
         <input class="spacing" id="spacing-4" type="range" min="-0.1" max="0.1" step="0.01" />
-        <label class="label-custom" for="width-4">Width</label>
-        <input class="width" id="width-4" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -857,8 +763,6 @@
         <input class="leading" id="leading-5" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-5">Letter Spacing</label>
         <input class="spacing" id="spacing-5" type="range" min="-0.1" max="0.1" step="0.01" />
-        <label class="label-custom" for="width-5">Width</label>
-        <input class="width" id="width-5" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -901,8 +805,6 @@
         <input class="leading" id="leading-6" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-6">Letter Spacing</label>
         <input class="spacing" id="spacing-6" type="range" min="-0.1" max="0.1" step="0.01" />
-        <label class="label-custom" for="width-6">Width</label>
-        <input class="width" id="width-6" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -943,8 +845,6 @@
         <input class="leading" id="leading-7" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-7">Letter Spacing</label>
         <input class="spacing" id="spacing-7" type="range" min="-0.1" max="0.1" step="0.01" />
-        <label class="label-custom" for="width-7">Width</label>
-        <input class="width" id="width-7" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -985,8 +885,6 @@
         <input class="leading" id="leading-8" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-8">Letter Spacing</label>
         <input class="spacing" id="spacing-8" type="range" min="-0.1" max="0.1" step="0.01" />
-        <label class="label-custom" for="width-8">Width</label>
-        <input class="width" id="width-8" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -1027,8 +925,6 @@
         <input class="leading" id="leading-9" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-9">Letter Spacing</label>
         <input class="spacing" id="spacing-9" type="range" min="-0.1" max="0.1" step="0.01" />
-        <label class="label-custom" for="width-9">Width</label>
-        <input class="width" id="width-9" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -1069,8 +965,6 @@
         <input class="leading" id="leading-10" type="range" min="0.5" max="2" step="0.05" />
         <label class="label-custom" for="spacing-10">Letter Spacing</label>
         <input class="spacing" id="spacing-10" type="range" min="-0.1" max="0.1" step="0.01" />
-        <label class="label-custom" for="width-10">Width</label>
-        <input class="width" id="width-10" type="range" min="5" max="7" step="0.01" value="5" />
       </div>
       <div class="font-align-wrapper">
         <div class="font-wrapper">
@@ -1173,16 +1067,10 @@
   </section>
 
   <!-- ===== DATA MAPS ===== -->
-  <!-- Both presets point at the VARIABLE family; what separates them is the wdth value
-       in NT_WIDTH_PRESETS below, so the Width slider keeps working after a preset change. -->
   <script type="application/json" id="fontMap">{
-    "Dolomit Bold": { "family": "Dolomit Variable", "weight": 700 },
-    "Dolomit Bold Extended": { "family": "Dolomit Variable", "weight": 700 }
+    "Dolomit Bold": { "family": "Dolomit", "weight": 700 },
+    "Dolomit Bold Extended": { "family": "Dolomit Extended", "weight": 700 }
   }</script>
-  <script>
-    // Read by script.js: picking a preset sets this wdth and moves the Width slider to match.
-    window.NT_WIDTH_PRESETS = { 'Dolomit Bold': 5, 'Dolomit Bold Extended': 7 };
-  </script>
 
   <!-- script.js (initGlyphGrid) reads glyphMap key "Safra2", falling back to "default".
        Built from every encoded glyph in Dolomit_05-gimel-tet.glyphs (215 characters):
@@ -1357,6 +1245,8 @@
          close-handlers can .reset() it harmlessly) but NOT class "buy-form"
          (so script.js's lead-form submit + checkbox logic skip it entirely).
          All configurator behaviour lives in the scoped script before 
+<!-- LAUNCH OFFER bar. Text comes from the SALE config below so there is one place to edit. -->
+<div class="nt-sale-bar" id="ntSaleBar" aria-hidden="true"><span id="ntSaleText"></span></div>
 </body>. -->
     <p class="intro-text">Configure your licence: pick the fonts, how you'll use them and users. The price updates live.</p>
     <!-- NOTE(dolomit): "Early access" label removed from the template. Only restore it if Nir and Liad agree Dolomit is sold as early access; the template markup was:
@@ -1381,7 +1271,6 @@
                 Full Family (2)
                 <span class="ssv2-family-tag">Bundle<span class="ssv2-tag-full"> Price</span></span>
               </label>
-              <p class="ssv2-variable-note">Full Family also includes the variable font (TTF / WOFF2)</p>
               <label class="checkbox-label">
                 <input type="checkbox" name="family" value="bold" checked>
                 <span class="checkmark"></span>
@@ -1598,134 +1487,21 @@
     //    endsOn  : free text for the bar, e.g. "until 12 October". LEAVE EMPTY
     //              until Nir decides the date - do not invent one.
     // =====================================================================
-    //  label   : the tag next to the price in the cart, e.g. NEW! 20% off
-    //  barLabel: how the offer reads on the bottom bar
-    const SALE = { on: true, percent: 20, label: 'NEW!', barLabel: 'Dolomit Launch Offer', badgeText: 'Dolomit 20% off! ', endsOn: '', gap: 10 };
+    const SALE = { on: true, percent: 20, label: 'Launch offer', endsOn: '' };
 
     const salePrice = (n) => Math.round(n * (100 - SALE.percent) / 100);
 
-    // The bar markup is the last thing in <body>, after this script, so wait for the
-    // parser to finish before looking for it.
-    (function whenReady(fn) {
-      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
-      else fn();
-    })(function paintSaleBar() {
-      const a = document.getElementById('ntSaleText'), b = document.getElementById('ntSaleText2');
-      if (!a || !b) return;
-      if (!SALE.on) {
-        const bar = document.getElementById('ntSaleBar'); if (bar) bar.remove();
-        document.body.classList.remove('nt-sale-page');
-        return;
-      }
-      // One sentence, spaced normally inside: "Dolomit Launch Offer \u2013 20% off".
-      // SALE.gap is the air BETWEEN repeats, not inside the sentence.
-      let sentence = SALE.barLabel + ' \u2013 ' + SALE.percent + '% off';
-      if (SALE.endsOn) sentence += ' \u2013 ' + SALE.endsOn;
-      // Between repeats: just air, twice the gap. Nir's call: the wide space does the
-      // separating on its own, no dash needed. The en dash inside the sentence stays.
-      const air = ' '.repeat(SALE.gap || 8);
-      const unit = sentence + air + air;
-
-      // Measure only once the webfont is in. Measuring against the fallback gives a
-      // different width, and the swap then knocks the two halves out of register.
-      function build() {
-        a.textContent = unit;
-        let guard = 0;
-        while (a.scrollWidth < window.innerWidth && guard++ < 60) {
-          a.textContent += unit;
-        }
-        b.textContent = a.textContent;
-        // scrollWidth, not the box: it is the real text width even if something clamps the box.
-        const half = a.scrollWidth;
-        const track = a.parentElement;
-
-        // Move by EXACTLY one half, in pixels, forever. When the animation reaches
-        // -half, half two sits precisely where half one began, so the loop has no seam.
-        // Speed is constant at 60 px per second on any screen width.
-        if (track._ntAnim) track._ntAnim.cancel();
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        track._ntAnim = track.animate(
-          [{ transform: 'translateX(0px)' }, { transform: 'translateX(' + (-half) + 'px)' }],
-          { duration: (half / 60) * 1000, iterations: Infinity, easing: 'linear' }
-        );
-      }
-
-      // Height of the mobile button bar, so the yellow bar can sit exactly on top of it.
-      function measureButtons() {
-        const cb = document.querySelector('.cover-buttons');
-        const h = (cb && window.matchMedia('(max-width: 768px)').matches)
-          ? Math.round(cb.getBoundingClientRect().height) : 0;
-        document.body.style.setProperty('--nt-buttons-h', h + 'px');
-      }
-
-      // ---- the rotating badge -------------------------------------------------
-      // Wrap the sentence ONCE around a circle. Measure the real text, then solve for
-      // the radius: circumference = text width  =>  r = width / 2pi.
-      function buildBadge() {
-        const box = document.getElementById('ntBadge');
-        if (!box) return;
-        const svg = document.getElementById('ntBadgeSvg');
-        const disc = document.getElementById('ntBadgeDisc');
-        const path = document.getElementById('ntBadgePath');
-        const tp = document.getElementById('ntBadgeTextPath');
-
-        const words = SALE.badgeText || sentence;
-        tp.textContent = words;
-
-        // Measure the real text, off-screen, in the badge's own type.
-        const ruler = document.createElement('span');
-        ruler.style.cssText = 'position:absolute;visibility:hidden;white-space:pre;' +
-          'font-family:"Safra Mono",monospace;font-size:14px;letter-spacing:0;';
-        ruler.textContent = words;
-        document.body.appendChild(ruler);
-        const textWidth = ruler.getBoundingClientRect().width;
-        ruler.remove();
-
-        const rText = textWidth / (2 * Math.PI);   // the baseline circle: one lap, exactly
-        const PAD = 5;                             // gap between the glyphs and the disc edge
-
-        function draw(R) {
-          const size = Math.ceil(2 * R);
-          const c = size / 2;
-          svg.setAttribute('width', size);
-          svg.setAttribute('height', size);
-          svg.setAttribute('viewBox', '0 0 ' + size + ' ' + size);
-          disc.setAttribute('cx', c); disc.setAttribute('cy', c); disc.setAttribute('r', R);
-          // One full circle, starting at the top, clockwise, so the words read left to right.
-          path.setAttribute('d',
-            'M ' + c + ' ' + (c - rText) +
-            ' a ' + rText + ' ' + rText + ' 0 1 1 -0.01 0');
-          return c;
-        }
-
-        // Two passes: draw once to find how far the glyphs actually reach past the
-        // baseline circle, then size the disc to that plus the padding. Measuring beats
-        // guessing at ascender height, and it stays right if the type size changes.
-        let c = draw(rText + 14 + PAD);
-        const textEl = tp.parentNode;
-        let reach = 14;                            // fallback if getBBox is unavailable
-        try {
-          const bb = textEl.getBBox();             // the ring the glyphs occupy
-          reach = Math.max(
-            c - bb.x,
-            (bb.x + bb.width) - c,
-            c - bb.y,
-            (bb.y + bb.height) - c
-          ) - rText;
-        } catch (e) {}
-        draw(rText + Math.max(reach, 2) + PAD);
-
-
-      }
-
-      (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () {
-        measureButtons();
-        build();
-        buildBadge();
-        let t;
-        window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(function () { measureButtons(); build(); buildBadge(); }, 200); });
-      });
-    });
+    (function paintSaleBar() {
+      const el = document.getElementById('ntSaleText');
+      if (!el) return;
+      if (!SALE.on) { const b = document.getElementById('ntSaleBar'); if (b) b.remove();
+                      document.body.classList.remove('nt-sale-page'); return; }
+      const bits = ['Dolomit launch offer', SALE.percent + '% off every licence'];
+      if (SALE.endsOn) bits.push(SALE.endsOn);
+      // duplicated once so the marquee can loop seamlessly at -50%
+      const line = bits.join('  ·  ') + '  ·  ';
+      el.textContent = line + line + line + line + line + line;
+    })();
 
     const PRICES = {
       single: {
@@ -1829,7 +1605,7 @@
     }
     function fontsState() {
       if (familyCb.checked) {
-        return { kind: 'family', label: 'Full Family (2) + Variable font', styles: ['bold','bold-extended'] };
+        return { kind: 'family', label: 'Full Family (2)', styles: ['bold','bold-extended'] };
       }
       const chosen = singleCbs.filter(c => c.checked);
       return {
@@ -1927,7 +1703,7 @@
           // (The bundle/family saving is already inside `base`.)
           const now = salePrice(base);
           priceEl.innerHTML = '<s class="ssv2-was">' + euro(base) + '</s> ' + euro(now) +
-                              '<span class="nt-sale-tag">' + SALE.label + ' ' + SALE.percent + '% off</span>';
+                              '<span class="nt-sale-tag">' + SALE.label + ' · -' + SALE.percent + '%</span>';
           buy.dataset.config = cfg;
           buy.dataset.price = String(now);
           setBuyState(buy, url ? 'checkout' : 'unavailable', url, 'Buy Now — ' + euro(now));
@@ -2068,21 +1844,5 @@
   else start();
 })();
 </script>
-<!-- ROTATING BADGE. Same SALE config as the bar; shown instead of it on phones. -->
-<div class="nt-badge" id="ntBadge" aria-hidden="true">
-  <svg id="ntBadgeSvg" xmlns="http://www.w3.org/2000/svg">
-    <circle class="nt-badge-disc" id="ntBadgeDisc" />
-    <g class="nt-badge-spin">
-      <path id="ntBadgePath" fill="none" />
-      <text class="nt-badge-text" xml:space="preserve"><textPath id="ntBadgeTextPath" href="#ntBadgePath" startOffset="0"></textPath></text>
-    </g>
-  </svg>
-</div>
-
-<!-- LAUNCH OFFER bar. A direct child of <body> on purpose: nested inside the buy
-     overlay it inherited that overlay's stacking context and painted over the cart. -->
-<div class="nt-sale-bar" id="ntSaleBar" aria-hidden="true">
-  <div class="nt-sale-track"><span id="ntSaleText"></span><span id="ntSaleText2"></span></div>
-</div>
 </body>
 </html>

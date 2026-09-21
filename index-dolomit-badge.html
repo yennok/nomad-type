@@ -1381,10 +1381,10 @@ ease;
     // SALE.gap is the air BETWEEN repeats, not inside the sentence.
     let sentence = SALE.barLabel + ' \u2013 ' + SALE.percent + '% off';
     if (SALE.endsOn) sentence += ' \u2013 ' + SALE.endsOn;
-    // Between repeats: air, an em dash, air. The em dash separates the sentences and
-    // widens the gap; inside the sentence the dash stays an en dash.
+    // Between repeats: just air, twice the gap. Nir's call: the wide space does the
+    // separating on its own, no dash needed. The en dash inside the sentence stays.
     const air = ' '.repeat(SALE.gap || 8);
-    const unit = sentence + air + '\u2014' + air;
+    const unit = sentence + air + air;
 
     // ---- the rotating badge ------------------------------------------------
     function buildBadge() {
