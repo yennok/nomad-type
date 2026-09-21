@@ -726,9 +726,9 @@ ease;
      webfont loads and solves r = width / 2pi - so nothing is lined up by hand. */
   .nt-badge {
     position: fixed; right: 27px; z-index: 1001; display: none;
-    /* iOS Safari already places fixed elements against the VISIBLE area, so no
-       address-bar maths here. Only the home-indicator inset is real. */
-    bottom: calc(27px + env(safe-area-inset-bottom, 0px));
+    /* PROBE (2026-09-21): bottom 0, nothing added, to see where iOS actually puts a
+       fixed element. Restore calc(27px + env(safe-area-inset-bottom, 0px)) after. */
+    bottom: 0;
   }
   .nt-badge svg { display: block; overflow: visible; }
   .nt-badge .nt-badge-disc { fill: #E8FF3A; }
