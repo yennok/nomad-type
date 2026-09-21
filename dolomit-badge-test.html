@@ -556,9 +556,10 @@
        clear of the white button bar. */
     body.nt-sale-page .nt-badge {
       display: block; right: 27px;
-      /* 98px, plus whatever iOS is hiding behind its address bar, plus the home
-         indicator. Both extras resolve to 0 on every other browser. */
-      bottom: calc(98px + var(--nt-badge-vvgap, 0px) + env(safe-area-inset-bottom, 0px));
+      /* iOS Safari already places fixed elements against the VISIBLE area, so no
+         address-bar maths here: adding it lifted the badge by both toolbars at once.
+         Only the home-indicator inset is real, and it is 0 everywhere else. */
+      bottom: calc(98px + env(safe-area-inset-bottom, 0px));
     }
     body.nt-sale-page { padding-top: 0; }
   }
@@ -1720,24 +1721,6 @@
         } catch (e) {}
         draw(rText + Math.max(reach, 2) + PAD);
 
-        // ---- iOS Safari: keep the badge above the address bar ------------------
-        // A fixed element's `bottom` is measured against the LAYOUT viewport, which on
-        // iOS includes the strip behind the collapsing URL bar. VisualViewport reports
-        // the part actually on screen, so the difference is how far the badge must come
-        // up. No-op where VisualViewport is unsupported.
-        function placeBadge() {
-          const vv = window.visualViewport;
-          if (!vv) return;
-          const hidden = Math.max(0, Math.round(window.innerHeight - (vv.height + vv.offsetTop)));
-          document.body.style.setProperty('--nt-badge-vvgap', hidden + 'px');
-        }
-        if (window.visualViewport && !window.__ntBadgeVV) {
-          window.__ntBadgeVV = true;
-          window.visualViewport.addEventListener('resize', placeBadge);
-          window.visualViewport.addEventListener('scroll', placeBadge);
-          window.addEventListener('orientationchange', placeBadge);
-        }
-        placeBadge();
       }
 
       (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () {

@@ -726,9 +726,9 @@ ease;
      webfont loads and solves r = width / 2pi - so nothing is lined up by hand. */
   .nt-badge {
     position: fixed; right: 27px; z-index: 1001; display: none;
-    /* 27px, plus whatever iOS hides behind its address bar, plus the home indicator.
-       Both extras resolve to 0 on every other browser. */
-    bottom: calc(27px + var(--nt-badge-vvgap, 0px) + env(safe-area-inset-bottom, 0px));
+    /* iOS Safari already places fixed elements against the VISIBLE area, so no
+       address-bar maths here. Only the home-indicator inset is real. */
+    bottom: calc(27px + env(safe-area-inset-bottom, 0px));
   }
   .nt-badge svg { display: block; overflow: visible; }
   .nt-badge .nt-badge-disc { fill: #E8FF3A; }
@@ -1428,23 +1428,6 @@ ease;
       } catch (e) {}
       draw(rText + Math.max(reach, 2) + PAD);
 
-    // ---- iOS Safari: keep the badge above the address bar --------------------
-    // A fixed element's `bottom` is measured against the LAYOUT viewport, which on iOS
-    // includes the strip behind the collapsing URL bar. VisualViewport reports the part
-    // actually on screen, so the difference is how far the badge has to come up.
-    // No-op where VisualViewport is unsupported.
-    function placeBadge() {
-      const vv = window.visualViewport;
-      if (!vv) return;
-      const hidden = Math.max(0, Math.round(window.innerHeight - (vv.height + vv.offsetTop)));
-      document.body.style.setProperty('--nt-badge-vvgap', hidden + 'px');
-    }
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', placeBadge);
-      window.visualViewport.addEventListener('scroll', placeBadge);
-      window.addEventListener('orientationchange', placeBadge);
-    }
-    placeBadge();
     }
 
     // Measure only once the webfont is in. Measuring against the fallback gives a
