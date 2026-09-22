@@ -1288,10 +1288,11 @@
           <div class="placeholder-text">Company Name</div>
         </div>
 
-        <div class="form-group">
-          <input type="text" id="ilTaxId" name="taxid" placeholder=" ">
+        <div class="form-group" data-field="taxid">
+          <input type="text" id="ilTaxId" name="taxid" placeholder=" " inputmode="numeric">
           <div class="placeholder-text">Business ID / VAT Number</div>
         </div>
+        <p class="il-err" id="ilTaxIdErr" hidden>That business number doesn't look right. Nine digits, or leave it empty.</p>
 
         <label class="checkbox-label consent">
           <input type="checkbox" id="ilTerms" name="terms">
@@ -1749,8 +1750,25 @@
       email: { input: $('ilEmail'), err: $('ilEmailErr'),
                ok: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) },
       phone: { input: $('ilPhone'), err: $('ilPhoneErr'),
-               ok: v => v.replace(/\D/g, '').length >= 9 }
+               ok: v => v.replace(/\D/g, '').length >= 9 },
+      // Optional, but if it is filled in it has to be real: morning rejects a bad
+      // business number with a raw error the buyer would never understand.
+      taxid: { input: $('ilTaxId'), err: $('ilTaxIdErr'),
+               ok: v => v.trim() === '' || validIsraeliId(v) }
     };
+
+    // Israeli company / dealer number: 9 digits, check digit like the ID number.
+    function validIsraeliId(value) {
+      const d = value.replace(/\D/g, '');
+      if (d.length !== 9) return false;
+      let sum = 0;
+      for (let i = 0; i < 9; i++) {
+        let n = Number(d[i]) * (i % 2 === 0 ? 1 : 2);
+        if (n > 9) n -= 9;
+        sum += n;
+      }
+      return sum % 10 === 0;
+    }
     const ilTouched = {};
 
     function ilCurrentOrder() {
@@ -1828,7 +1846,7 @@
         input.addEventListener('blur', () => { ilTouched[k] = true; ilValidate(); });
         input.addEventListener('input', ilValidate);
       });
-      ['ilCompany', 'ilTaxId'].forEach(id => $(id).addEventListener('input', ilValidate));
+      $('ilCompany').addEventListener('input', ilValidate);
       $('ilTerms').addEventListener('change', ilValidate);
       $('ilBack').addEventListener('click', closeDetails);
 
