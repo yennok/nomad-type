@@ -4,6 +4,7 @@
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FPE1JV10R"></script>
   <script>
+      function tileBase(c) { return (c === "a11" || c === "a12") ? "assets/homepage/dolomit-home/" : "assets/homepage/"; }
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
@@ -321,7 +322,9 @@ ease;
     .a8 { width: 16.05%; top: 44.6%; left: 58.4%; }
     .a9 { width: 10.55%; top: 44.6%; left: 75%; }
     .a10 { width: 38.6%; top: 59.2%; left: 19.3%; }
-    .a11 { width: 20.1%; top: 70.8%; left: 37.8%; }
+    /* Dolomit row: same 10px gutter as the rest; Middle East right-aligned to Sugar */
+    .a11 { width: 17.88%; top: 70.87%; left: 40.02%; }
+    .a12 { width: 17.67%; top: 70.87%; left: 21.83%; }
 
     @media (max-aspect-ratio: 16/9) {
       .wrapper1 {
@@ -663,8 +666,105 @@ ease;
       }
     }
   </style>
+
+<!-- ============ LAUNCH OFFER bar (test) ============
+     Same bar as /dolomit-sale-test. The homepage needs less than a font page:
+     its only sticky button (.sticky-trial-btn) is pinned with `top`, so nothing
+     down here collides with it. All of it is scoped to body.nt-sale-page. -->
+<style>
+  body.nt-sale-page { --nt-sale-h: 33px; }
+  /* On the homepage the content overflows the body box, so padding-bottom on <body>
+     does NOT lengthen the page and the last pixels of the footer end up behind the
+     bar. Padding on the footer itself does lengthen it, and padding never collapses. */
+  body.nt-sale-page #footer-container { padding-bottom: var(--nt-sale-h); }
+  /* On the homepage the bar is a link to the Dolomit page, so unlike the font page
+     it must accept clicks. */
+  a.nt-sale-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; height: var(--nt-sale-h); z-index: 1001;
+    background: #E8FF3A; overflow: hidden;
+    display: flex; align-items: center;
+    text-decoration: none; cursor: pointer;
+  }
+  /* Seamless marquee: one track holding TWO identical halves, shifted by exactly -50%,
+     so half two lands where half one started and the loop never jumps. */
+  /* The track is ABSOLUTE on purpose: as a flex item it was capped at the bar's width,
+     so translateX(-50%) shifted half the BAR, not half the content, and the two halves
+     collided. Absolute positioning lets it shrink-wrap its content instead.
+     The shift is a pixel value measured after the webfont loads (see the script), never
+     a percentage, so neither the element width nor the font swap can throw it off. */
+  /* The track is ABSOLUTE on purpose: as a flex item it was capped at the bar's width,
+     so a -50% shift moved half the BAR, not half the content, and the halves collided.
+     The motion is driven from JS with an exact pixel distance measured after the webfont
+     loads; a custom property inside @keyframes does not reliably update when set by script. */
+  .nt-sale-track {
+    position: absolute; top: 0; left: 0; height: 100%;
+    display: flex; align-items: center;
+    width: max-content !important; max-width: none !important;
+  }
+  /* max-width: none is load-bearing. A site-wide rule caps spans at 100% of their
+     parent, which clamped each half to the bar width while its text stayed far wider.
+     Measuring that clamped box gave a shift shorter than the text, so the two halves
+     rode over each other. */
+  .nt-sale-bar span {
+    font-family: "Safra Mono", monospace; font-size: 14px; letter-spacing: 0;
+    color: #000; flex: none;
+    /* pre, not nowrap: nowrap still collapses runs of spaces and drops the trailing
+       ones, which glued the em dash to the next repetition. pre keeps them and
+       still never wraps, so the gap between repeats is exactly what the script writes. */
+    white-space: pre;
+    max-width: none !important; width: auto !important;
+  }
+
+  /* The bar stays visible when an overlay opens; the overlay sits above it
+     (mobile overlay z-index 1005 against the bar's 1001). */
+
+  /* ================= ROTATING BADGE (mobile only) =================
+     Same object as the font page: a yellow disc with the offer on its edge, turning.
+     The sentence wraps the circle exactly once - the script measures it after the
+     webfont loads and solves r = width / 2pi - so nothing is lined up by hand. */
+  .nt-badge {
+    position: fixed; right: 27px; z-index: 1001; display: none;
+    /* 0 on purpose, confirmed on an iPhone. iOS ends the visible viewport above the
+       Safari toolbar, so the badge already gets its breathing room from the toolbar
+       itself. Adding env(safe-area-inset-bottom) on top of a value of our own put it
+       about 34px too high and it read as floating. */
+    bottom: 0;
+  }
+  .nt-badge svg { display: block; overflow: visible; }
+  .nt-badge .nt-badge-disc { fill: #E8FF3A; }
+  .nt-badge .nt-badge-text {
+    fill: #000; font-family: "Safra Mono", monospace; font-size: 14px; letter-spacing: 0;
+  }
+  .nt-badge-spin { transform-origin: 50% 50%; animation: ntBadgeSpin 12s linear infinite; }
+  @keyframes ntBadgeSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .nt-badge-spin { animation: none; } }
+
+  @media (max-width: 768px) {
+    /* The badge replaces the bar on phones, so there is no top bar to make room for.
+       Zeroing its height undoes the whole top-bar treatment in one line. */
+    body.nt-sale-page { --nt-sale-h: 0px; }
+    body.nt-sale-page .nt-sale-bar { display: none; }
+    body.nt-sale-page .nt-badge { display: block; }
+  }
+
+  @media (max-width: 768px) {
+    /* Same as the font page: on mobile the bar owns the TOP of the screen and
+       everything the site pins up there moves down by the bar height. */
+    body.nt-sale-page .nt-sale-bar { top: 0; bottom: auto; }
+    body.nt-sale-page .sticky-top-section,
+    body.nt-sale-page .sticky-green-circle,
+    body.nt-sale-page .mobile-hamburger-circle { margin-top: var(--nt-sale-h); }
+    /* .sticky-nav is a STATIC element here (it is fixed on a font page), so a margin
+       would collapse with the logo's own 28px and swallow it. Padding never collapses. */
+    body.nt-sale-page .sticky-nav { padding-top: var(--nt-sale-h); }
+    /* The bottom reserve is no longer needed; the top one goes on the container that
+       actually holds the collage, since content here overflows the body box. */
+    body.nt-sale-page #footer-container { padding-bottom: 0; }
+    body.nt-sale-page .main-container { padding-top: var(--nt-sale-h); }
+  }
+</style>
 </head>
-<body class="homepage-page">
+<body class="homepage-page nt-sale-page">
   <!-- SEO: Semantic H1 for Google (visually hidden, design unchanged) -->
   <h1 class="sr-only">Nomad Type — Independent Multilingual Type Foundry designing Arabic, Hebrew, and Latin typefaces</h1>
 
@@ -739,8 +839,8 @@ ease;
           <span class="sr-only"><h2>Kilo Text</h2> — Modern Latin text typeface for editorial and long-form reading</span>
         </a>
         <a href="middle-east" class="a11" aria-label="Middle East — Arabic and Hebrew display typeface">
-          <img src="assets/homepage/a11.png" alt="Middle East — Arabic and Hebrew display typeface specimen" />
-          <img src="assets/homepage/a11-hover.png" class="hover" alt="Middle East hover specimen" />
+          <img src="assets/homepage/dolomit-home/a11.png" alt="Middle East — Arabic and Hebrew display typeface specimen" />
+          <img src="assets/homepage/dolomit-home/a11-hover.png" class="hover" alt="Middle East hover specimen" />
           <span class="sr-only"><h2>Middle East</h2> — Arabic and Hebrew display typeface</span>
         </a>
         </div>
@@ -751,6 +851,11 @@ ease;
           <img src="assets/homepage/a6.png" alt="Yeffe Nefesh — Hebrew display typeface specimen" />
           <img src="assets/homepage/a6-hover.png" class="hover" alt="Yeffe Nefesh hover specimen" />
           <span class="sr-only"><h2>Yeffe Nefesh</h2> — Hebrew display typeface</span>
+        </a>
+        <a href="dolomit" class="a12" aria-label="Dolomit — Hebrew display typeface by Liad Shadmi">
+          <img src="assets/homepage/dolomit-home/a12.png" alt="Dolomit — Hebrew display typeface specimen" />
+          <img src="assets/homepage/dolomit-home/a12-hover.png" class="hover" alt="Dolomit hover specimen" />
+          <span class="sr-only"><h2>Dolomit דולומיט</h2> — Hebrew display typeface with Latin caps</span>
         </a>
         <a href="kilo-display" class="a7" aria-label="Kilo Display — Latin display typeface">
           <img src="assets/homepage/a7.png" alt="Kilo Display — Latin display typeface specimen" />
@@ -845,7 +950,7 @@ ease;
             const regularImg = link.querySelector('img:not(.hover)');
             if (regularImg) {
               const className = link.className;
-              regularImg.src = `assets/homepage/${className}-mobile.png`;
+              regularImg.src = `${tileBase(className)}${className}-mobile.png`;
             }
           });
   } else {
@@ -854,7 +959,7 @@ ease;
             const regularImg = link.querySelector('img:not(.hover)');
             if (regularImg) {
               const className = link.className;
-              regularImg.src = `assets/homepage/${className}.png`;
+              regularImg.src = `${tileBase(className)}${className}.png`;
             }
           });
         }
@@ -889,7 +994,7 @@ ease;
             if (regularImg) {
               const className = link.className;
               // All images show regular version at top
-              regularImg.src = `assets/homepage/${className}-mobile.png`;
+              regularImg.src = `${tileBase(className)}${className}-mobile.png`;
             }
           });
     return;
@@ -919,10 +1024,10 @@ ease;
             
             if (link === activeLink) {
               // Show hover version for the active (middle) image
-              regularImg.src = `assets/homepage/${className}-mobile-hover.png`;
+              regularImg.src = `${tileBase(className)}${className}-mobile-hover.png`;
       } else {
               // Show regular version for all other images
-              regularImg.src = `assets/homepage/${className}-mobile.png`;
+              regularImg.src = `${tileBase(className)}${className}-mobile.png`;
             }
           }
         });
@@ -988,7 +1093,8 @@ ease;
           'a8': 1.8,  // Da
           'a9': 1.6,  // Dear AI
           'a10': 1.1, // Middle East
-          'a11': 1  // Sugar
+          'a11': 1,  // Sugar (note: a10 is actually Sugar, a11 Middle East)
+          'a12': 0.9 // Dolomit
         };
         
         // Apply parallax to each image by its class
@@ -1209,7 +1315,7 @@ ease;
               });
               
               // Set current clicked image to hover state
-              regularImg.src = `assets/homepage/${className}-mobile-hover.png`;
+              regularImg.src = `${tileBase(className)}${className}-mobile-hover.png`;
               
               // Navigate to the link after a short delay to show the hover effect
               setTimeout(() => {
@@ -1244,5 +1350,133 @@ ease;
       });
 });
   </script>
+
+<!-- LAUNCH OFFER bar. Same SALE switch as the font page: on=false removes it. -->
+<a class="nt-badge" id="ntBadge" href="dolomit" aria-label="Dolomit launch offer, 20% off">
+  <svg id="ntBadgeSvg" xmlns="http://www.w3.org/2000/svg">
+    <circle class="nt-badge-disc" id="ntBadgeDisc" />
+    <g class="nt-badge-spin">
+      <path id="ntBadgePath" fill="none" />
+      <text class="nt-badge-text" xml:space="preserve"><textPath id="ntBadgeTextPath" href="#ntBadgePath" startOffset="0"></textPath></text>
+    </g>
+  </svg>
+</a>
+
+<a class="nt-sale-bar" id="ntSaleBar" href="dolomit" aria-label="Dolomit launch offer, 20% off every licence">
+  <div class="nt-sale-track"><span id="ntSaleText"></span><span id="ntSaleText2"></span></div>
+</a>
+<script>
+  const SALE = { on: true, percent: 20, label: 'NEW!', barLabel: 'Dolomit Launch Offer', badgeText: 'NEW! Dolomit 20% off ', endsOn: '', gap: 10, ilLive: false };
+
+  // Israeli visitors buy through morning, not Stripe, and the coupon does not reach them.
+  // Until the checkout worker discounts too (SALE_FONTS / SALE_PERCENT in Cloudflare), the
+  // offer is not announced here either: the homepage must not promise what /dolomit won't honour.
+  // Keep `ilLive` in step with the same flag on the Dolomit page.
+  const IL = (function () {
+    try {
+      const q = new URLSearchParams(window.location.search).get('il');
+      if (q === '1') return true;
+      if (q === '0') return false;
+      return Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Jerusalem';
+    } catch (e) { return false; }
+  })();
+  const SALE_VISIBLE = SALE.on && (IL ? !!SALE.ilLive : true);
+
+  (function paintSaleBar() {
+    const a = document.getElementById('ntSaleText'), b = document.getElementById('ntSaleText2');
+    if (!a || !b) return;
+    if (!SALE_VISIBLE) {
+      const bar = document.getElementById('ntSaleBar'); if (bar) bar.remove();
+      document.body.classList.remove('nt-sale-page');
+      const badge = document.getElementById('ntBadge'); if (badge) badge.remove();
+      return;
+    }
+    // One sentence, spaced normally inside: "Dolomit Launch Offer \u2013 20% off".
+    // SALE.gap is the air BETWEEN repeats, not inside the sentence.
+    let sentence = SALE.barLabel + ' \u2013 ' + SALE.percent + '% off';
+    if (SALE.endsOn) sentence += ' \u2013 ' + SALE.endsOn;
+    // Between repeats: just air, twice the gap. Nir's call: the wide space does the
+    // separating on its own, no dash needed. The en dash inside the sentence stays.
+    const air = ' '.repeat(SALE.gap || 8);
+    const unit = sentence + air + air;
+
+    // ---- the rotating badge ------------------------------------------------
+    function buildBadge() {
+      const box = document.getElementById('ntBadge');
+      if (!box) return;
+      const svg = document.getElementById('ntBadgeSvg');
+      const disc = document.getElementById('ntBadgeDisc');
+      const path = document.getElementById('ntBadgePath');
+      const tp = document.getElementById('ntBadgeTextPath');
+
+      const words = SALE.badgeText || sentence;
+      tp.textContent = words;
+
+      const ruler = document.createElement('span');
+      ruler.style.cssText = 'position:absolute;visibility:hidden;white-space:pre;' +
+        'font-family:"Safra Mono",monospace;font-size:14px;letter-spacing:0;';
+      ruler.textContent = words;
+      document.body.appendChild(ruler);
+      const textWidth = ruler.getBoundingClientRect().width;
+      ruler.remove();
+
+      const rText = textWidth / (2 * Math.PI);   // one lap, exactly
+      const PAD = 5;                             // glyphs to disc edge
+
+      function draw(R) {
+        const size = Math.ceil(2 * R);
+        const c = size / 2;
+        svg.setAttribute('width', size);
+        svg.setAttribute('height', size);
+        svg.setAttribute('viewBox', '0 0 ' + size + ' ' + size);
+        disc.setAttribute('cx', c); disc.setAttribute('cy', c); disc.setAttribute('r', R);
+        path.setAttribute('d', 'M ' + c + ' ' + (c - rText) +
+          ' a ' + rText + ' ' + rText + ' 0 1 1 -0.01 0');
+        return c;
+      }
+
+      // Draw once to see how far the glyphs really reach, then size the disc to that.
+      let c = draw(rText + 14 + PAD);
+      let reach = 14;
+      try {
+        const bb = tp.parentNode.getBBox();
+        reach = Math.max(c - bb.x, (bb.x + bb.width) - c, c - bb.y, (bb.y + bb.height) - c) - rText;
+      } catch (e) {}
+      draw(rText + Math.max(reach, 2) + PAD);
+
+    }
+
+    // Measure only once the webfont is in. Measuring against the fallback gives a
+    // different width, and the swap then knocks the two halves out of register.
+    function build() {
+      a.textContent = unit;
+      let guard = 0;
+      while (a.scrollWidth < window.innerWidth && guard++ < 60) {
+      a.textContent += unit;
+      }
+      b.textContent = a.textContent;
+        // scrollWidth, not the box: it is the real text width even if something clamps the box.
+      const half = a.scrollWidth;
+      const track = a.parentElement;
+
+      buildBadge();
+
+      // Move by EXACTLY one half, in pixels, forever. At -half, half two sits precisely
+      // where half one began, so the loop has no seam. 60 px per second on any width.
+      if (track._ntAnim) track._ntAnim.cancel();
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      track._ntAnim = track.animate(
+        [{ transform: 'translateX(0px)' }, { transform: 'translateX(' + (-half) + 'px)' }],
+        { duration: (half / 60) * 1000, iterations: Infinity, easing: 'linear' }
+      );
+    }
+
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () {
+      build();
+      let t;
+      window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(build, 200); });
+    });
+  })();
+</script>
 </body>
 </html>
