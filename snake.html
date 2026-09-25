@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<!-- Remove this line the day Dolomit launches. Until then the page is live but unlisted. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Dolomit Snake</title>
+<meta name="description" content="A snake that turns the way Dolomit turns.">
+<meta name="theme-color" content="#FF3B21">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="DOLOMIT">
+<link rel="manifest" href="snake.webmanifest">
+<link rel="apple-touch-icon" href="assets/snake-icon.svg">
+
+<style>
+  /* Dolomit: the axis is wdth 5 (Bold) to 7 (Bold Extended). Width, not weight. */
+  @font-face { font-family: "Dolomit"; font-weight: 700; font-style: normal; font-display: block; src: url("fonts/Dolomit/Dolomit-Bold.woff2") format("woff2"); }
+  @font-face { font-family: "Dolomit Variable"; font-weight: 700; font-style: normal; font-display: block; src: url("fonts/Dolomit/Dolomit-Variable.woff2") format("woff2"); }
+
+  :root {
+    --red: #FF3B21;
+    --yel: #E8FF3A;
+    --ink: #0A0A0A;
+    --paper: #FFFFFF;
+    --held: rgba(10,10,10,0.2);      /* the number: black, held well back */
+    --steps: steps(7);               /* the motion law: discrete, never a smooth ease */
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body {
+    margin: 0; height: 100%; overflow: hidden; background: var(--ink);
+    -webkit-user-select: none; user-select: none;
+    touch-action: none; overscroll-behavior: none;
+  }
+
+  /* A true 9:16 frame fitted to the viewport, letterboxed in ink. Never stretched:
+     the lattice has to stay square or the 45 stops being 45. */
+  #frame {
+    position: fixed; inset: 0; margin: auto;
+    width: min(100vw, calc(100dvh * 9 / 16));
+    height: min(100dvh, calc(100vw * 16 / 9));
+    background: var(--red); overflow: hidden; container-type: size;
+  }
+  @supports not (height: 100dvh) {
+    #frame { width: min(100vw, calc(100vh * 9 / 16)); height: min(100vh, calc(100vw * 16 / 9)); }
+  }
+
+  /* The canvas is transparent: the red is the frame's and the number sits between the
+     two, so the snake is always drawn over the number. */
+  #board { display: block; width: 100%; height: 100%; position: relative; z-index: 2; }
+
+  /* Nothing on this screen but the number. */
+  #score {
+    position: absolute; inset: 0; z-index: 1;
+    display: flex; align-items: center; justify-content: center;
+    font-family: "Dolomit Variable", "Dolomit", sans-serif; font-weight: 700;
+    font-variation-settings: "wdth" 5;
+    /* as big as three digits allow: 888 measures the frame's own width, so the
+       number is edge to edge and never has to resize. */
+    font-size: 55cqw; line-height: .78; color: var(--held);
+    font-variant-numeric: tabular-nums; pointer-events: none;
+    transition: font-variation-settings .34s var(--steps);
+  }
+
+  /* No buttons, no borders, no boxes: every screen is set in Dolomit and the words
+     themselves are what you touch. */
+  /* The only screen with words on it is the one after you die. No buttons, no
+     borders, no boxes: it is set in Dolomit and touching it plays again. */
+  .sheet {
+    position: absolute; inset: 0; z-index: 3; display: none;
+    align-items: center; justify-content: center;
+    padding: 3%; text-align: center; cursor: pointer;
+    background: var(--ink); color: var(--paper);
+    font-family: "Dolomit", sans-serif; font-weight: 700;
+  }
+  .sheet.on { display: flex; }
+  /* Two words, one size. GAME OVER is typed in, held, deleted; then REPLAY lands.
+     The caret is the film's caret: a block, blinking in steps, never a fade. */
+  .word {
+    /* As big as the longest word allows. The bar is gone by the time REPLAY is whole,
+       so the binding measure is REPLAY with its I: 348px inside a 353px box at 23cqw.
+       The line break in GAME OVER is a real <br>, so nowrap does not touch it. */
+    font-size: 23cqw; line-height: .84; white-space: nowrap;
+    color: var(--paper);
+  }
+  .word.go { color: var(--yel); }
+  /* The typing bar IS the letter I, set in Dolomit — not a rectangle drawn to its
+     measurements. A solid block read heavier than the glyph does, so the glyph does
+     the job itself and can never drift from the font. */
+  .caret { font-style: normal; animation: blink 1s steps(1, end) infinite; }
+  @keyframes blink { 0%, 50% { opacity: 1 } 50.01%, 100% { opacity: 0 } }
+  @media (prefers-reduced-motion: reduce) { .caret { animation: none } }
+</style>
+</head>
+<body>
+
+<div id="frame">
+  <div id="score"></div>
+  <canvas id="board" width="864" height="1536"></canvas>
+
+  <div class="sheet" id="sheetEnd">
+    <div class="word" id="endWord"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var cv = document.getElementById('board');
+  var ctx = cv.getContext('2d');
+  var W = cv.width, H = cv.height;
+
+  var INK = '#0A0A0A', YEL = '#E8FF3A';
+  var HELD = 'rgba(10,10,10,0.2)';
+
+  // The lattice Nir settled on: a big cell, four 24px grid points across. 9 x 16.
+  var DOT = 24, CELL = DOT * 4;
+  var COLS = W / CELL, ROWS = H / CELL;       // 9 x 16
+  var TOP = 0, BOT = ROWS - 1;                // the whole frame is the board now
+
+  // The corner. A mathematically exact half square reads too big — Nir, 2026-09-25:
+  // "שלא יהיה בול חצי כי יש שם הטעיה אופטית" — so the cut is pulled back a touch, the
+  // way a type designer overshoots a round or narrows a join. 1 is the exact half,
+  // 0.5 was the teaser's old midpoint cut.
+  var CUT = 0.8;
+  var BODY0 = 5;                              // the short body from the teaser
+  var GROW = 2;                               // cells added per dot
+  var TICK0 = 160, TICK_MIN = 100, TICK_STEP = 4;
+
+  // ---- one cell of the body -------------------------------------------------
+  // TAKEN VERBATIM from the teaser in dolomit-social.html. The corner law: straight
+  // through is a plain square, and on a turn the OUTER corner is cut at 45 degrees,
+  // from the middle of one side to the middle of the next. The inner corner stays a
+  // sharp 90. Nothing is ever rounded. This took three attempts and it is verified
+  // by sampling canvas pixels, not by eye. The ONLY change made here is that the
+  // three cells arrive as arguments instead of being read out of a global path.
+  // DO NOT re-derive the geometry below.
+  function cellShape(q, prev, next) {
+    var x = q[0] * CELL, y = q[1] * CELL;
+    if (!prev || !next) { ctx.fillRect(x, y, CELL, CELL); return; }
+    var din = [q[0] - prev[0], q[1] - prev[1]];
+    var dout = [next[0] - q[0], next[1] - q[1]];
+    if (din[0] === dout[0] && din[1] === dout[1]) { ctx.fillRect(x, y, CELL, CELL); return; }
+
+    var ix = din[0] !== 0 ? (din[0] > 0 ? 0 : 1) : (dout[0] > 0 ? 1 : 0);
+    var iy = din[1] !== 0 ? (din[1] > 0 ? 0 : 1) : (dout[1] > 0 ? 1 : 0);
+    // Nir, 2026-09-25: the cut is HALF THE SQUARE. The diagonal runs corner to corner
+    // across the whole cell, not from the middle of one side to the middle of the next,
+    // so the outer cell of an elbow becomes a triangle. CUT is the one number that
+    // says it: 1 is a half square, 0.5 was the old midpoint cut.
+    var ox = 1 - ix, oy = 1 - iy, t = CUT;
+    var pts = [[0,0],[1,0],[1,1],[0,1]], poly = [];
+    for (var k = 0; k < 4; k++) {
+      var cur = pts[k];
+      if (cur[0] === ox && cur[1] === oy) {
+        var pr = pts[(k+3)%4], nx = pts[(k+1)%4];
+        poly.push([cur[0]+(pr[0]-cur[0])*t, cur[1]+(pr[1]-cur[1])*t]);
+        poly.push([cur[0]+(nx[0]-cur[0])*t, cur[1]+(nx[1]-cur[1])*t]);
+      } else poly.push(cur);
+    }
+    for (var d = poly.length - 1; d > 0; d--)
+      if (poly[d][0] === poly[d-1][0] && poly[d][1] === poly[d-1][1]) poly.splice(d, 1);
+    ctx.beginPath();
+    for (var j = 0; j < poly.length; j++) {
+      var vx = x + poly[j][0]*CELL, vy = y + poly[j][1]*CELL;
+      if (j === 0) ctx.moveTo(vx, vy); else ctx.lineTo(vx, vy);
+    }
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // The food is a circle, exactly one cell across, so it reads the same weight as
+  // the stroke. It is the one round thing in a family whose rule is that nothing is
+  // round, and that is the point of it.
+  function drawFood(c, r) {
+    ctx.fillStyle = YEL;
+    ctx.beginPath();
+    ctx.arc(c*CELL + CELL/2, r*CELL + CELL/2, CELL/2, 0, Math.PI*2);
+    ctx.fill();
+  }
+
+  // ---- state ---------------------------------------------------------------
+  var snake = [], dir = [0,-1], queued = [], pending = 0;
+  var score = 0, tick = TICK0, running = false, food = null;
+  var scoreEl = document.getElementById('score');
+
+  function setScore(n) {
+    score = n;
+    scoreEl.textContent = n ? n : '';             // the board starts clean: no zero
+    // the number is the specimen: it opens on the wdth axis as you play, in steps.
+    scoreEl.style.fontVariationSettings = '"wdth" ' + (5 + 2 * Math.min(1, n / 40)).toFixed(2);
+  }
+
+  // The dot never sits in the outermost ring. A ball against the wall is a corner you
+  // cannot take with one button — you would have to turn early and guess.
+  function freeCell() {
+    for (var a = 0; a < 500; a++) {
+      var c = 1 + ((Math.random()*(COLS-2))|0), r = TOP + 1 + ((Math.random()*(BOT-TOP-1))|0);
+      var clash = false;
+      for (var i = 0; i < snake.length; i++) if (snake[i][0] === c && snake[i][1] === r) clash = true;
+      if (!clash) return [c, r];
+    }
+    return [0, TOP];
+  }
+
+  function start() {
+    snake = []; for (var i = 0; i < BODY0; i++) snake.push([4, BOT + i]);  // enters from the bottom edge
+    dir = [0,-1]; queued = []; pending = 0;
+    tick = TICK0; running = true;
+    setScore(0);
+    food = freeCell();
+    clearTimeout(endTimer); canReplay = false;
+    document.getElementById('sheetEnd').classList.remove('on');
+    last = 0; acc = 0;
+    cancelAnimationFrame(raf); raf = requestAnimationFrame(frame);
+  }
+
+  // The end screen is typed. GAME OVER comes in a letter at a time, holds, deletes
+  // itself, and only then does REPLAY land — same size, yellow instead of white. The
+  // screen does not accept a tap until REPLAY is there, so a panicked thumb cannot
+  // skip the beat it is meant to watch.
+  var TYPE_IN = 95, HOLD = 750, TYPE_OUT = 55, BEAT = 220;
+  var endWord = document.getElementById('endWord');
+  var endTimer = 0, canReplay = false;
+
+  function show(text, i, bar) {
+    endWord.innerHTML = text.slice(0, i).replace(/\n/g, '<br>') + (bar ? '<i class="caret">I</i>' : '');
+  }
+  // keepBar: GAME OVER holds its bar while it waits and while it deletes. REPLAY drops
+  // it the instant the word is whole — the finished word is the button.
+  function typeIn(text, i, then, keepBar) {
+    show(text, i, i < text.length || keepBar);
+    endTimer = setTimeout(i < text.length ? function () { typeIn(text, i + 1, then, keepBar); } : then, TYPE_IN);
+  }
+  function typeOut(text, i, then) {
+    show(text, i, true);
+    endTimer = setTimeout(i > 0 ? function () { typeOut(text, i - 1, then); } : then, TYPE_OUT);
+  }
+
+  // GAME OVER types itself in, holds, deletes itself, and REPLAY is typed in after it
+  // — same size, same bar, yellow instead of white. The caret keeps blinking after
+  // REPLAY has landed: the cursor is what asks for the tap.
+  function over() {
+    running = false;
+    clearTimeout(endTimer);
+    canReplay = false;
+    endWord.classList.remove('go');
+    document.getElementById('sheetEnd').classList.add('on');
+    var dead = 'GAME\nOVER';
+    typeIn(dead, 0, function () {
+      endTimer = setTimeout(function () {
+        typeOut(dead, dead.length, function () {
+          endTimer = setTimeout(function () {
+            endWord.classList.add('go');
+            typeIn('REPLAY', 0, function () { canReplay = true; }, false);
+          }, BEAT);
+        });
+      }, HOLD);
+    }, true);
+  }
+
+  // ---- steering --------------------------------------------------------------
+  // One button, and the button is the whole screen. Touch anywhere and the snake
+  // turns a quarter, always the same way: up, right, down, left. Nothing to aim at,
+  // one thumb, no looking at your hand. A corner you overshoot is paid for with
+  // three more turns, and that is the whole game. There is no second control —
+  // swipe steering is kept in snake-lab.html, not here.
+  //
+  // One pointer event, never two: a tap arrives as BOTH a touchstart and a mousedown
+  // on many setups, which used to turn the snake twice.
+  function turn(d) {
+    var ref = queued.length ? queued[queued.length-1] : dir;
+    if (d[0] === -ref[0] && d[1] === -ref[1]) return;   // no reversing into yourself
+    if (d[0] === ref[0] && d[1] === ref[1]) return;
+    if (queued.length < 2) queued.push(d);
+  }
+  function rotate() {
+    var ref = queued.length ? queued[queued.length-1] : dir;
+    turn([-ref[1], ref[0]]);
+  }
+  cv.addEventListener('pointerdown', function () {
+    if (!queued.length) rotate();
+  });
+  addEventListener('keydown', function (e) {           // on a laptop: any key is the button
+    if (e.key === ' ' || e.key === 'Enter' || e.key.indexOf('Arrow') === 0) {
+      if (!queued.length) rotate();
+      e.preventDefault();
+    }
+  });
+
+  // ---- the move ------------------------------------------------------------
+  function step() {
+    if (queued.length) dir = queued.shift();
+    var h = snake[0], n = [h[0]+dir[0], h[1]+dir[1]];
+
+    if (n[0] < 0 || n[0] >= COLS || n[1] < TOP || n[1] > BOT) { over(); return; }
+    for (var i = 0; i < snake.length - 1; i++)
+      if (snake[i][0] === n[0] && snake[i][1] === n[1]) { over(); return; }
+
+    snake.unshift(n);
+
+    if (food && n[0] === food[0] && n[1] === food[1]) {
+      setScore(score + 1);                          // one per dot, nothing else
+      pending += GROW - 1;
+      tick = Math.max(TICK_MIN, tick - TICK_STEP);
+      food = freeCell();
+    }
+    // the tail is held back rather than duplicated: a cell laid down twice has no
+    // direction, and cellShape would cut a 45 into a run that has no corner in it.
+    if (pending > 0) pending--; else snake.pop();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    if (food) drawFood(food[0], food[1]);
+    ctx.fillStyle = INK;
+    for (var i = 0; i < snake.length; i++)
+      cellShape(snake[i], i > 0 ? snake[i-1] : null, i < snake.length-1 ? snake[i+1] : null);
+  }
+
+  var raf = 0, acc = 0, last = 0;
+  function frame(now) {
+    if (!last) last = now;
+    acc += now - last; last = now;
+    if (acc > tick * 4) acc = tick;      // came back from a background tab: do not teleport
+    while (acc > tick) { if (running) step(); acc -= tick; }
+    draw();
+    if (running) raf = requestAnimationFrame(frame);
+  }
+
+  // Switching apps on a phone freezes the frame clock. Stop cleanly and pick the
+  // same move back up, instead of dying to a hand that was not on the screen.
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { cancelAnimationFrame(raf); raf = 0; }
+    else if (running) { last = 0; acc = 0; cancelAnimationFrame(raf); raf = requestAnimationFrame(frame); }
+  });
+
+  // Touching the end screen anywhere plays again. SHARE is the one word that does
+  // something else.
+  document.getElementById('sheetEnd').addEventListener('click', function () {
+    if (canReplay) start();
+  });
+
+  // No title screen and no PLAY: the snake is already running when the page opens.
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve())
+    .then(start);
+})();
+</script>
+</body>
+</html>

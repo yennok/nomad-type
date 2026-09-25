@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#FF3B21"/>
+  <!-- One elbow of the snake, cut at 45 on the outer corner. The whole idea, at icon size. -->
+  <path fill="#0A0A0A" d="M112 112h192v96h-96v192h-96z"/>
+  <path fill="#FF3B21" d="M112 112h96l-96 96z"/>
+  <rect x="336" y="336" width="64" height="64" fill="#E8FF3A"/>
+</svg>

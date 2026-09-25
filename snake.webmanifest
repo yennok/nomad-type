@@ -1,0 +1,16 @@
+{
+  "name": "נחש דולומיט · Dolomit Snake",
+  "short_name": "דולומיט",
+  "description": "A snake that turns the way Dolomit turns. Nomad Type.",
+  "start_url": "/snake.html",
+  "scope": "/",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#FF3B21",
+  "theme_color": "#FF3B21",
+  "lang": "he",
+  "dir": "rtl",
+  "icons": [
+    { "src": "assets/snake-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
