@@ -57,6 +57,11 @@
 
   /* A true 9:16 frame fitted to the viewport, letterboxed in ink. Never stretched:
      the lattice has to stay square or the 45 stops being 45. */
+  /* ?white — the poster palette inverted: paper ground, ink snake, red ball. The
+     number has to be lighter on white than it is on red to sit back the same amount. */
+  .white #frame { background: var(--paper); }
+  .white #score { color: rgba(10,10,10,0.14); }
+
   #frame {
     position: relative; flex: none;
     width: min(100vw, calc(100dvh * 9 / 16));
@@ -123,6 +128,7 @@
     color: var(--paper);
   }
   .word.go { color: var(--yel); }
+  .white .word.go { color: var(--red); }   /* yellow on ink is right; on this cut the red is the accent */
   /* The typing bar IS the letter I, set in Dolomit — not a rectangle drawn to its
      measurements. A solid block read heavier than the glyph does, so the glyph does
      the job itself and can never drift from the font. */
@@ -151,7 +157,12 @@
   var ctx = cv.getContext('2d');
   var W = cv.width, H = cv.height;
 
-  var INK = '#0A0A0A', YEL = '#E8FF3A';
+  var INK = '#0A0A0A';
+  // ?white flips the ground: paper instead of red, and the ball goes red instead of
+  // yellow — yellow on white has no weight at all.
+  var WHITE = /(^|[?&])white(=|&|$)/.test(location.search);
+  if (WHITE) document.documentElement.classList.add('white');
+  var BALL = WHITE ? '#FF3B21' : '#E8FF3A';
   var HELD = 'rgba(10,10,10,0.2)';
 
   // The lattice Nir settled on: a big cell, four 24px grid points across. 9 x 16.
@@ -218,7 +229,7 @@
   // the stroke. It is the one round thing in a family whose rule is that nothing is
   // round, and that is the point of it.
   function drawFood(c, r) {
-    ctx.fillStyle = YEL;
+    ctx.fillStyle = BALL;
     ctx.beginPath();
     ctx.arc(c*CELL + CELL/2, r*CELL + CELL/2, CELL/2, 0, Math.PI*2);
     ctx.fill();
