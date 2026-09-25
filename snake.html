@@ -12,6 +12,10 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DOLOMIT">
 <link rel="manifest" href="snake.webmanifest">
+<!-- Nothing on the board is set in type until you score your first point, so without
+     this the font only starts downloading at the moment the number has to appear. -->
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/Dolomit/Dolomit-Variable.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/Dolomit/Dolomit-Bold.woff2">
 <link rel="apple-touch-icon" href="assets/snake-icon.svg">
 
 <style>
