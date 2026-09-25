@@ -150,7 +150,11 @@
   var CUT = 0.75;
   var BODY0 = 5;                              // the short body from the teaser
   var GROW = 2;                               // cells added per dot
-  var TICK0 = 160, TICK_MIN = 100, TICK_STEP = 4;
+  // A slower cut for a child: ?slow in the URL. It opens at a walking pace, speeds up
+  // half as fast per dot, and never gets faster than the normal game's opening move, so
+  // it stays playable instead of turning into the same game a few seconds later.
+  var SLOW = /(^|[?&])slow(=|&|$)/.test(location.search);
+  var TICK0 = SLOW ? 280 : 160, TICK_MIN = SLOW ? 200 : 100, TICK_STEP = SLOW ? 2 : 4;
 
   // ---- one cell of the body -------------------------------------------------
   // TAKEN VERBATIM from the teaser in dolomit-social.html. The corner law: straight
