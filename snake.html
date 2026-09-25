@@ -118,27 +118,30 @@
     font-family: "Dolomit", sans-serif; font-weight: 700;
   }
   .sheet.on { display: flex; }
-  /* The type is still measured against the 9:16 board rather than the screen, so the
-     words stay the size they were drawn at whatever the device. */
+  /* The end screen is not the board, it is a type moment, so it takes the WHOLE screen
+     — and the word is fitted to it in JS rather than by a cqw guess, because the width
+     axis changes how wide the letters are and only measuring knows. */
   .sheetbox {
-    width: min(100vw, calc(100dvh * 9 / 16));
-    height: min(100dvh, calc(100vw * 16 / 9));
-    container-type: size;
+    width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
     padding: 3%; text-align: center;
   }
-  @supports not (height: 100dvh) {
-    .sheetbox { width: min(100vw, calc(100vh * 9 / 16)); height: min(100vh, calc(100vw * 16 / 9)); }
-  }
+  /* Measured to fit the word; never seen. It lives OUTSIDE the sheet on purpose — the
+     sheet is display:none until you die, and a display:none subtree has no layout, so a
+     probe inside it measures zero and the fit silently falls back to a guess. */
+  #probe { position: absolute; top: 0; left: 0; visibility: hidden; white-space: nowrap; pointer-events: none; }
   /* Two words, one size. GAME OVER is typed in, held, deleted; then REPLAY lands.
      The caret is the film's caret: a block, blinking in steps, never a fade. */
-  .word {
-    /* As big as the longest word allows. The bar is gone by the time REPLAY is whole,
-       so the binding measure is REPLAY with its I: 348px inside a 353px box at 23cqw.
-       The line break in GAME OVER is a real <br>, so nowrap does not touch it. */
-    font-size: 23cqw; line-height: .84; white-space: nowrap;
-    color: var(--paper);
+  /* THE WIDTH OF THE SCREEN SETS THE WIDTH OF THE LETTER. Dolomit's axis is wdth 5
+     (Bold) to 7 (Bold Extended), and a 9:16 phone gets 5 while a 16:9 laptop gets 7 —
+     the font does the responsive work itself, which on a type foundry's own toy is the
+     whole point. Size and axis are both set in JS from the viewport; the line break in
+     GAME OVER is a real <br>, so nowrap does not touch it. */
+  .word, #probe {
+    font-family: "Dolomit Variable", "Dolomit", sans-serif; font-weight: 700;
+    line-height: .84; white-space: nowrap;
   }
+  .word { color: var(--paper); }
   .word.go { color: var(--yel); }
   .white .word.go { color: var(--red); }   /* yellow on ink is right; on this cut the red is the accent */
   /* The typing bar IS the letter I, set in Dolomit — not a rectangle drawn to its
@@ -161,6 +164,8 @@
 <div class="sheet" id="sheetEnd">
   <div class="sheetbox"><div class="word" id="endWord"></div></div>
 </div>
+
+<div id="probe">REPLAY</div>
 
 <script>
 (function () {
@@ -290,6 +295,25 @@
   // skip the beat it is meant to watch.
   var TYPE_IN = 95, HOLD = 750, TYPE_OUT = 55, BEAT = 220;
   var endWord = document.getElementById('endWord');
+  var probe = document.getElementById('probe');
+
+  // Fit the words to the screen, and let the screen's proportion set the letter's width.
+  // A 9:16 phone lands on wdth 5 (Bold), a 16:9 laptop on wdth 7 (Bold Extended); the
+  // size is then measured, not guessed, because the axis changes how wide REPLAY runs.
+  // The height cap is for GAME OVER, which is two lines.
+  function fitWords() {
+    var vw = window.innerWidth, vh = window.innerHeight;
+    var t = Math.max(0, Math.min(1, (vw / vh - 0.6) / (1.5 - 0.6)));
+    var axis = '"wdth" ' + (5 + 2 * t).toFixed(2);
+    probe.style.fontVariationSettings = axis;
+    probe.style.fontSize = '100px';
+    var wide = probe.getBoundingClientRect().width || 400;   // REPLAY at 100px
+    var size = Math.min(100 * (vw * 0.9) / wide, vh * 0.42);
+    endWord.style.fontVariationSettings = axis;
+    endWord.style.fontSize = size.toFixed(1) + 'px';
+  }
+  addEventListener('resize', fitWords);
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(fitWords);
   var endTimer = 0, canReplay = false;
 
   function show(text, i, bar) {
@@ -311,6 +335,7 @@
   // REPLAY has landed: the cursor is what asks for the tap.
   function over() {
     running = false;
+    fitWords();
     clearTimeout(endTimer);
     canReplay = false;
     endWord.classList.remove('go');
