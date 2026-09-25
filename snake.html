@@ -43,11 +43,22 @@
     -webkit-user-select: none; user-select: none;
     touch-action: none; overscroll-behavior: none;
   }
+  /* Centring the board with flex, NOT with position: fixed, and the reason is not
+     layout. Safari 26 ignores theme-color entirely and tints its top and bottom bars by
+     sampling the position: fixed or sticky element at each viewport edge, falling back
+     to the body's background. A fixed red board therefore painted the bars red, and no
+     amount of theme-color could argue with it. With the board unfixed, the only thing
+     Safari can sample at the edges is the body — ink — and the bars go black, which is
+     also what the black end screen (still fixed, still ink) hands it. Do not put this
+     back to fixed.
+     See: nasedk.in/blog/ios26-safari-toolbar-colors, benfrain.com/ios26-safari-theme-
+     color-tab-tinting-with-fixed-position-elements */
+  body { display: flex; align-items: center; justify-content: center; }
 
   /* A true 9:16 frame fitted to the viewport, letterboxed in ink. Never stretched:
      the lattice has to stay square or the 45 stops being 45. */
   #frame {
-    position: fixed; inset: 0; margin: auto;
+    position: relative; flex: none;
     width: min(100vw, calc(100dvh * 9 / 16));
     height: min(100dvh, calc(100vw * 16 / 9));
     background: var(--red); overflow: hidden; container-type: size;
