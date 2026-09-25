@@ -74,19 +74,22 @@
   .white #frame { background: var(--paper); }
   .white #score { color: rgba(10,10,10,0.14); }
 
+  /* The board IS the screen. The lattice keeps 16 rows whatever the shape, and the
+     columns are however many of the same square cell fit across — so a phone plays 9
+     wide and a laptop plays about 29 wide, with the cell the same size relative to the
+     screen either way. The cell must stay square or the 45 stops being 45, so the few
+     leftover pixels at the sides are just more of the frame's red. */
   #frame {
     position: relative; z-index: 1; flex: none;
-    width: min(100vw, calc(100dvh * 9 / 16));
-    height: min(100dvh, calc(100vw * 16 / 9));
+    width: 100vw; height: 100dvh;
     background: var(--red); overflow: hidden; container-type: size;
+    display: flex; align-items: center; justify-content: center;
   }
-  @supports not (height: 100dvh) {
-    #frame { width: min(100vw, calc(100vh * 9 / 16)); height: min(100vh, calc(100vw * 16 / 9)); }
-  }
+  @supports not (height: 100dvh) { #frame { height: 100vh; } }
 
   /* The canvas is transparent: the red is the frame's and the number sits between the
      two, so the snake is always drawn over the number. */
-  #board { display: block; width: 100%; height: 100%; position: relative; z-index: 2; }
+  #board { display: block; position: relative; z-index: 2; }   /* sized in px by layout() */
 
   /* Nothing on this screen but the number. */
   #score {
@@ -96,7 +99,8 @@
     font-variation-settings: "wdth" 5;
     /* as big as three digits allow: 888 measures the frame's own width, so the
        number is edge to edge and never has to resize. */
-    font-size: 55cqw; line-height: .78; color: var(--held);
+    /* on a wide board the height is what keeps the number in proportion */
+    font-size: min(55cqw, 33cqh); line-height: .78; color: var(--held);
     font-variant-numeric: tabular-nums; pointer-events: none;
     transition: font-variation-settings .34s var(--steps);
   }
@@ -173,7 +177,7 @@
 
   var cv = document.getElementById('board');
   var ctx = cv.getContext('2d');
-  var W = cv.width, H = cv.height;
+  var W = cv.width, H = cv.height;   // lattice units; layout() sets the real ones
 
   var INK = '#0A0A0A';
   // ?white flips the ground: paper instead of red, and the ball goes red instead of
@@ -183,10 +187,28 @@
   var BALL = WHITE ? '#FF3B21' : '#E8FF3A';
   var HELD = 'rgba(10,10,10,0.2)';
 
-  // The lattice Nir settled on: a big cell, four 24px grid points across. 9 x 16.
+  // The lattice Nir settled on: a big cell, four 24px grid points across. How many of
+  // them fit is the screen's business — 9 x 19 on a phone, about 28 x 16 on a laptop.
   var DOT = 24, CELL = DOT * 4;
-  var COLS = W / CELL, ROWS = H / CELL;       // 9 x 16
-  var TOP = 0, BOT = ROWS - 1;                // the whole frame is the board now
+  var COLS = 9, ROWS = 16, TOP = 0, BOT = ROWS - 1;
+
+  // The canvas is drawn in lattice units and sized in CSS pixels to whole square cells,
+  // so the cell can never come out a rectangle and the 45 can never come out a 46.
+  function layout() {
+    var vw = window.innerWidth, vh = window.innerHeight;
+    // The cell is the smaller of "nine across" and "sixteen down" — the two proportions
+    // the game was drawn at. A phone therefore keeps exactly the nine columns Nir
+    // settled on and simply gains rows to reach the bottom of the screen; a laptop keeps
+    // sixteen rows and gains columns. The cell is the same size on the screen either way.
+    var cell = Math.min(vw / 9, vh / 16);
+    COLS = Math.max(6, Math.floor(vw / cell));
+    ROWS = Math.max(10, Math.floor(vh / cell));
+    BOT = ROWS - 1;
+    W = COLS * CELL; H = ROWS * CELL;
+    cv.width = W; cv.height = H;
+    cv.style.width = (COLS * cell) + 'px';
+    cv.style.height = (ROWS * cell) + 'px';
+  }
 
   // The corner. A mathematically exact half square reads too big — Nir, 2026-09-25:
   // "שלא יהיה בול חצי כי יש שם הטעיה אופטית" — so the cut is pulled back a touch, the
@@ -278,7 +300,9 @@
   }
 
   function start() {
-    snake = []; for (var i = 0; i < BODY0; i++) snake.push([4, BOT + i]);  // enters from the bottom edge
+    layout();
+    var col = COLS >> 1;
+    snake = []; for (var i = 0; i < BODY0; i++) snake.push([col, BOT + i]);  // enters from the bottom edge
     dir = [0,-1]; queued = []; pending = 0;
     tick = TICK0; running = true;
     setScore(0);
@@ -312,7 +336,12 @@
     endWord.style.fontVariationSettings = axis;
     endWord.style.fontSize = size.toFixed(1) + 'px';
   }
-  addEventListener('resize', fitWords);
+  // A resize changes the lattice itself — the snake's coordinates would no longer mean
+  // the same thing — so the round starts again rather than quietly breaking.
+  addEventListener('resize', function () {
+    fitWords();
+    if (running) start(); else { layout(); draw(); }
+  });
   (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(fitWords);
   var endTimer = 0, canReplay = false;
 
@@ -457,6 +486,7 @@
   });
 
   // No title screen and no PLAY: the snake is already running when the page opens.
+  layout();
   (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve())
     .then(start);
 })();
