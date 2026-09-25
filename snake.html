@@ -73,18 +73,30 @@
     transition: font-variation-settings .34s var(--steps);
   }
 
-  /* No buttons, no borders, no boxes: every screen is set in Dolomit and the words
-     themselves are what you touch. */
-  /* The only screen with words on it is the one after you die. No buttons, no
-     borders, no boxes: it is set in Dolomit and touching it plays again. */
+  /* The only screen with words on it is the one after you die, and it covers the WHOLE
+     viewport, not the 9:16 frame. Safari's top and bottom bars are translucent and blur
+     whatever sits behind them, so a black screen that stopped at the frame's edge left
+     the board's red showing through the chrome — it has to run under the bars. No
+     buttons, no borders, no boxes: it is set in Dolomit and touching it plays again. */
   .sheet {
-    position: absolute; inset: 0; z-index: 3; display: none;
-    align-items: center; justify-content: center;
-    padding: 3%; text-align: center; cursor: pointer;
+    position: fixed; inset: 0; z-index: 3; display: none;
+    align-items: center; justify-content: center; cursor: pointer;
     background: var(--ink); color: var(--paper);
     font-family: "Dolomit", sans-serif; font-weight: 700;
   }
   .sheet.on { display: flex; }
+  /* The type is still measured against the 9:16 board rather than the screen, so the
+     words stay the size they were drawn at whatever the device. */
+  .sheetbox {
+    width: min(100vw, calc(100dvh * 9 / 16));
+    height: min(100dvh, calc(100vw * 16 / 9));
+    container-type: size;
+    display: flex; align-items: center; justify-content: center;
+    padding: 3%; text-align: center;
+  }
+  @supports not (height: 100dvh) {
+    .sheetbox { width: min(100vw, calc(100vh * 9 / 16)); height: min(100vh, calc(100vw * 16 / 9)); }
+  }
   /* Two words, one size. GAME OVER is typed in, held, deleted; then REPLAY lands.
      The caret is the film's caret: a block, blinking in steps, never a fade. */
   .word {
@@ -109,9 +121,10 @@
   <div id="score"></div>
   <canvas id="board" width="864" height="1536"></canvas>
 
-  <div class="sheet" id="sheetEnd">
-    <div class="word" id="endWord"></div>
-  </div>
+</div>
+
+<div class="sheet" id="sheetEnd">
+  <div class="sheetbox"><div class="word" id="endWord"></div></div>
 </div>
 
 <script>
@@ -134,7 +147,7 @@
   // "שלא יהיה בול חצי כי יש שם הטעיה אופטית" — so the cut is pulled back a touch, the
   // way a type designer overshoots a round or narrows a join. 1 is the exact half,
   // 0.5 was the teaser's old midpoint cut.
-  var CUT = 0.7;
+  var CUT = 0.75;
   var BODY0 = 5;                              // the short body from the teaser
   var GROW = 2;                               // cells added per dot
   var TICK0 = 160, TICK_MIN = 100, TICK_STEP = 4;
