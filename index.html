@@ -1366,7 +1366,11 @@ ease;
   <div class="nt-sale-track"><span id="ntSaleText"></span><span id="ntSaleText2"></span></div>
 </a>
 <script>
-  const SALE = { on: true, percent: 20, label: 'NEW!', barLabel: 'Dolomit Launch Offer', badgeText: 'NEW! Dolomit 20% off ', endsOn: '', gap: 10, ilLive: true };
+  const SALE = { on: true, percent: 20, label: 'NEW!', barLabel: 'Dolomit Launch Offer', badgeText: 'NEW! Dolomit 20% off ', endsOn: '', gap: 10, ilLive: true,
+    // Before launch the bar teases instead of selling, and nothing on this page
+    // links through to /dolomit. Set teaser:false on launch day and the offer wording
+    // and the links all come back.
+    teaser: true, teaserText: 'Dolomit \u2013 Coming Soon' };
 
   // Israeli visitors buy through morning, not Stripe, and the coupon does not reach them.
   // Until the checkout worker discounts too (SALE_FONTS / SALE_PERCENT in Cloudflare), the
@@ -1393,8 +1397,21 @@ ease;
     }
     // One sentence, spaced normally inside: "Dolomit Launch Offer \u2013 20% off".
     // SALE.gap is the air BETWEEN repeats, not inside the sentence.
-    let sentence = SALE.barLabel + ' \u2013 ' + SALE.percent + '% off';
-    if (SALE.endsOn) sentence += ' \u2013 ' + SALE.endsOn;
+    let sentence = SALE.teaser
+      ? SALE.teaserText
+      : SALE.barLabel + ' \u2013 ' + SALE.percent + '% off';
+    if (!SALE.teaser && SALE.endsOn) sentence += ' \u2013 ' + SALE.endsOn;
+
+    // Nothing leads to the font page until it opens: strip the href from the bar, the
+    // badge and the homepage tile, so they read as a tease and not as a dead link.
+    if (SALE.teaser) {
+      ['ntSaleBar', 'ntBadge'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) { el.removeAttribute('href'); el.setAttribute('aria-label', 'Dolomit, coming soon'); }
+      });
+      var tile = document.querySelector('a.a12');
+      if (tile) { tile.removeAttribute('href'); tile.setAttribute('aria-label', 'Dolomit, coming soon'); tile.style.cursor = 'default'; }
+    }
     // Between repeats: just air, twice the gap. Nir's call: the wide space does the
     // separating on its own, no dash needed. The en dash inside the sentence stays.
     const air = ' '.repeat(SALE.gap || 8);
@@ -1409,7 +1426,7 @@ ease;
       const path = document.getElementById('ntBadgePath');
       const tp = document.getElementById('ntBadgeTextPath');
 
-      const words = SALE.badgeText || sentence;
+      const words = SALE.teaser ? (SALE.teaserText + ' ') : (SALE.badgeText || sentence);
       tp.textContent = words;
 
       const ruler = document.createElement('span');
