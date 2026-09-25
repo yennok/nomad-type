@@ -193,11 +193,21 @@
 
   // iOS Safari tints its top and bottom bars with the page's theme-color, and a static
   // one does not follow what is on screen — so the bars stayed red around a black GAME
-  // OVER. The meta now follows the screen: red while you play, ink the moment you die.
-  // The letterbox behind the frame stays ink either way; on a wide screen a red surround
-  // would swallow the board's own edges, and those edges are the walls.
-  var themeMeta = document.querySelector('meta[name="theme-color"]');
-  function surround(c) { if (themeMeta) themeMeta.setAttribute('content', c); }
+  // OVER. Editing the existing tag's content was not enough on the phone: Safari only
+  // re-reads it reliably when the ELEMENT is replaced, so the old node is removed and a
+  // fresh one inserted. The root background is set to the same colour as a second signal
+  // for the versions that tint from there instead; the body still paints the letterbox
+  // ink over it, because on a wide screen a red surround would swallow the board's own
+  // edges, and those edges are the walls.
+  function surround(c) {
+    var old = document.querySelector('meta[name="theme-color"]');
+    if (old) old.parentNode.removeChild(old);
+    var m = document.createElement('meta');
+    m.setAttribute('name', 'theme-color');
+    m.setAttribute('content', c);
+    document.head.appendChild(m);
+    document.documentElement.style.backgroundColor = c;
+  }
 
   function setScore(n) {
     score = n;
