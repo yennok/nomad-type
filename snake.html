@@ -79,7 +79,12 @@
      the board's red showing through the chrome — it has to run under the bars. No
      buttons, no borders, no boxes: it is set in Dolomit and touching it plays again. */
   .sheet {
-    position: fixed; inset: 0; z-index: 3; display: none;
+    /* Deliberately bigger than the screen. On iOS a fixed element's `inset: 0` is
+       measured against the SMALL viewport, so the strip behind a collapsed toolbar can
+       stay uncovered and the board's red keeps bleeding through. Overshooting past all
+       four edges guarantees it; the inset is symmetric, so what is inside stays centred
+       on the screen. */
+    position: fixed; inset: -20vh -5vw; z-index: 3; display: none;
     align-items: center; justify-content: center; cursor: pointer;
     background: var(--ink); color: var(--paper);
     font-family: "Dolomit", sans-serif; font-weight: 700;
