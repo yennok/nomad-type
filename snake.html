@@ -38,11 +38,23 @@
   }
 
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  /* The body's background is RED on purpose, even though you never see it: Safari 26
+     tints its bars from the position: fixed element at each viewport edge and, when
+     there is none, from the body. While you play there is none — the board is not
+     fixed — so the bars take the board's own colour. The end screen IS fixed and ink,
+     so they go black with it. Red screen, red bars; black screen, black bars, with no
+     meta tag involved. */
   html, body {
-    margin: 0; height: 100%; overflow: hidden; background: var(--ink);
+    margin: 0; height: 100%; overflow: hidden; background: var(--red);
     -webkit-user-select: none; user-select: none;
     touch-action: none; overscroll-behavior: none;
   }
+  .white, .white body { background: var(--paper); }   /* the class sits on <html> */
+
+  /* What you actually SEE behind the board is this, not the body: ink, so the board's
+     own edges read as edges on a wide screen — and those edges are the walls. It is
+     absolutely positioned, never fixed, so Safari does not sample it. */
+  #ground { position: absolute; inset: 0; background: var(--ink); z-index: 0; }
   /* Centring the board with flex, NOT with position: fixed, and the reason is not
      layout. Safari 26 ignores theme-color entirely and tints its top and bottom bars by
      sampling the position: fixed or sticky element at each viewport edge, falling back
@@ -63,7 +75,7 @@
   .white #score { color: rgba(10,10,10,0.14); }
 
   #frame {
-    position: relative; flex: none;
+    position: relative; z-index: 1; flex: none;
     width: min(100vw, calc(100dvh * 9 / 16));
     height: min(100dvh, calc(100vw * 16 / 9));
     background: var(--red); overflow: hidden; container-type: size;
@@ -139,6 +151,7 @@
 </head>
 <body>
 
+<div id="ground"></div>
 <div id="frame">
   <div id="score"></div>
   <canvas id="board" width="864" height="1536"></canvas>
