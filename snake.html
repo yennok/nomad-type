@@ -117,7 +117,7 @@
   var ctx = cv.getContext('2d');
   var W = cv.width, H = cv.height;
 
-  var INK = '#0A0A0A', YEL = '#E8FF3A';
+  var RED = '#FF3B21', INK = '#0A0A0A', YEL = '#E8FF3A';
   var HELD = 'rgba(10,10,10,0.2)';
 
   // The lattice Nir settled on: a big cell, four 24px grid points across. 9 x 16.
@@ -191,6 +191,14 @@
   var score = 0, tick = TICK0, running = false, food = null;
   var scoreEl = document.getElementById('score');
 
+  // iOS Safari tints its top and bottom bars with the page's theme-color, and a static
+  // one does not follow what is on screen — so the bars stayed red around a black GAME
+  // OVER. The meta now follows the screen: red while you play, ink the moment you die.
+  // The letterbox behind the frame stays ink either way; on a wide screen a red surround
+  // would swallow the board's own edges, and those edges are the walls.
+  var themeMeta = document.querySelector('meta[name="theme-color"]');
+  function surround(c) { if (themeMeta) themeMeta.setAttribute('content', c); }
+
   function setScore(n) {
     score = n;
     scoreEl.textContent = n ? n : '';             // the board starts clean: no zero
@@ -216,6 +224,7 @@
     tick = TICK0; running = true;
     setScore(0);
     food = freeCell();
+    surround(RED);
     clearTimeout(endTimer); canReplay = false;
     document.getElementById('sheetEnd').classList.remove('on');
     last = 0; acc = 0;
@@ -249,6 +258,7 @@
   // REPLAY has landed: the cursor is what asks for the tap.
   function over() {
     running = false;
+    surround(INK);
     clearTimeout(endTimer);
     canReplay = false;
     endWord.classList.remove('go');
