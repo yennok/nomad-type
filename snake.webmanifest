@@ -6,11 +6,16 @@
   "scope": "/",
   "display": "fullscreen",
   "orientation": "portrait",
-  "background_color": "#FF3B21",
-  "theme_color": "#FF3B21",
+  "background_color": "#0A0A0A",
+  "theme_color": "#0A0A0A",
   "lang": "he",
   "dir": "rtl",
   "icons": [
-    { "src": "assets/snake-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+    {
+      "src": "assets/snake-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
   ]
 }

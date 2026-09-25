@@ -7,7 +7,12 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Dolomit Snake</title>
 <meta name="description" content="A snake that turns the way Dolomit turns.">
-<meta name="theme-color" content="#FF3B21">
+<!-- Ink, not the board's red, and it never changes. Safari tints its own top and bottom
+     bars with this, and on iOS it does not reliably re-read a value swapped at runtime —
+     two attempts at that left the bars red around a black GAME OVER. So the board is a
+     red rectangle framed in black on every screen, the same way the letterbox already
+     frames it, and nothing can fall out of step. -->
+<meta name="theme-color" content="#0A0A0A">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DOLOMIT">
@@ -117,7 +122,7 @@
   var ctx = cv.getContext('2d');
   var W = cv.width, H = cv.height;
 
-  var RED = '#FF3B21', INK = '#0A0A0A', YEL = '#E8FF3A';
+  var INK = '#0A0A0A', YEL = '#E8FF3A';
   var HELD = 'rgba(10,10,10,0.2)';
 
   // The lattice Nir settled on: a big cell, four 24px grid points across. 9 x 16.
@@ -191,24 +196,6 @@
   var score = 0, tick = TICK0, running = false, food = null;
   var scoreEl = document.getElementById('score');
 
-  // iOS Safari tints its top and bottom bars with the page's theme-color, and a static
-  // one does not follow what is on screen — so the bars stayed red around a black GAME
-  // OVER. Editing the existing tag's content was not enough on the phone: Safari only
-  // re-reads it reliably when the ELEMENT is replaced, so the old node is removed and a
-  // fresh one inserted. The root background is set to the same colour as a second signal
-  // for the versions that tint from there instead; the body still paints the letterbox
-  // ink over it, because on a wide screen a red surround would swallow the board's own
-  // edges, and those edges are the walls.
-  function surround(c) {
-    var old = document.querySelector('meta[name="theme-color"]');
-    if (old) old.parentNode.removeChild(old);
-    var m = document.createElement('meta');
-    m.setAttribute('name', 'theme-color');
-    m.setAttribute('content', c);
-    document.head.appendChild(m);
-    document.documentElement.style.backgroundColor = c;
-  }
-
   function setScore(n) {
     score = n;
     scoreEl.textContent = n ? n : '';             // the board starts clean: no zero
@@ -234,7 +221,6 @@
     tick = TICK0; running = true;
     setScore(0);
     food = freeCell();
-    surround(RED);
     clearTimeout(endTimer); canReplay = false;
     document.getElementById('sheetEnd').classList.remove('on');
     last = 0; acc = 0;
@@ -268,7 +254,6 @@
   // REPLAY has landed: the cursor is what asks for the tap.
   function over() {
     running = false;
-    surround(INK);
     clearTimeout(endTimer);
     canReplay = false;
     endWord.classList.remove('go');
