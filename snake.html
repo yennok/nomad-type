@@ -32,6 +32,15 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DOLOMIT">
+<!-- The same GA4 property as the rest of nomad-type.com. The page was not in it at all. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4FPE1JV10R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4FPE1JV10R');
+</script>
+
 <link rel="manifest" href="snake.webmanifest">
 <!-- Nothing on the board is set in type until you score your first point, so without
      this the font only starts downloading at the moment the number has to appear. -->
@@ -291,6 +300,20 @@
     ctx.fill();
   }
 
+  // ---- what we measure -------------------------------------------------------
+  // Visits alone say nothing about a toy. These three say whether it works: did they
+  // find the control at all, how long did a round last and what did they score, and —
+  // the one that matters — did they press REPLAY. Every event carries which cut they
+  // were playing, so slow and white can be compared against the normal game.
+  var CUT_NAME = (SLOW ? 'slow' : 'normal') + (WHITE ? '-white' : '');
+  var began = 0, moved = false, rounds = 0;
+  function track(name, params) {
+    if (typeof gtag !== 'function') return;
+    params = params || {};
+    params.cut = CUT_NAME;
+    try { gtag('event', name, params); } catch (e) {}
+  }
+
   // ---- state ---------------------------------------------------------------
   var snake = [], dir = [0,-1], queued = [], pending = 0;
   var score = 0, tick = TICK0, running = false, food = null;
@@ -321,6 +344,9 @@
     snake = []; for (var i = 0; i < BODY0; i++) snake.push([col, BOT + i]);  // enters from the bottom edge
     dir = [0,-1]; queued = []; pending = 0;
     tick = TICK0; running = true;
+    rounds++;
+    if (rounds > 1) track('replay', { round: rounds });
+    began = Date.now(); moved = false;
     setScore(0);
     food = freeCell();
     clearTimeout(endTimer); canReplay = false;
@@ -380,6 +406,7 @@
   // REPLAY has landed: the cursor is what asks for the tap.
   function over() {
     running = false;
+    track('game_over', { score: score, seconds: Math.round((Date.now() - began) / 1000), round: rounds });
     fitWords();
     clearTimeout(endTimer);
     canReplay = false;
@@ -417,18 +444,27 @@
     var ref = queued.length ? queued[queued.length-1] : dir;
     turn([-ref[1], ref[0]]);
   }
+
+  // the first steer of a session: proof the one-button control is discoverable at all
+  function steered() {
+    if (moved) return;
+    moved = true;
+    track('first_move', { seconds: Math.round((Date.now() - began) / 1000) });
+  }
   // Two controls, one per cut: the normal game is the one button above; the SLOW cut
   // steers by swipe instead, because a child wants to say where to go rather than count
   // quarter turns to get there.
   var tsx = 0, tsy = 0;
   cv.addEventListener('pointerdown', function (e) {
     if (SLOW) { tsx = e.clientX; tsy = e.clientY; return; }
+    steered();
     if (!queued.length) rotate();
   });
   cv.addEventListener('pointerup', function (e) {
     if (!SLOW) return;
     var dx = e.clientX - tsx, dy = e.clientY - tsy;
     if (Math.abs(dx) < 20 && Math.abs(dy) < 20) return;     // a tap is not a swipe
+    steered();
     if (Math.abs(dx) > Math.abs(dy)) turn([dx > 0 ? 1 : -1, 0]);
     else turn([0, dy > 0 ? 1 : -1]);
   });
@@ -443,6 +479,7 @@
       else if (k === 'ArrowRight' || k === 'd') turn([1,0]);
       else return;
     } else if (k === ' ' || k === 'Enter' || k.indexOf('Arrow') === 0) {
+      steered();
       if (!queued.length) rotate();
     } else return;
     e.preventDefault();
