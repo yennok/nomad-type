@@ -38,7 +38,28 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-4FPE1JV10R');
+
+  // ONE SHORT WORD INSTEAD OF A TAIL OF utm_ PARAMETERS. A link you post has to look
+  // like something a person would send, so what gets shared is
+  // nomad-type.com/snake?story — and it is translated here into the campaign fields
+  // GA4 actually reports on. Same answer in Acquisition, without the ugly address.
+  // (gtag's campaign_* config fields: support.google.com/analytics/answer/11259997)
+  // Real utm_ links still work; GA4 reads those by itself.
+  var FROM = {
+    story: ['instagram', 'story'],
+    bio:   ['instagram', 'bio'],
+    post:  ['instagram', 'post'],
+    li:    ['linkedin', 'post'],
+    dm:    ['whatsapp', 'dm'],
+    news:  ['newsletter', 'email'],
+    site:  ['nomad-type', 'site']
+  };
+  var cfg = {}, q = location.search.slice(1).split('&');
+  for (var i = 0; i < q.length; i++) {
+    var tag = FROM[q[i].split('=')[0]];
+    if (tag) { cfg.campaign_source = tag[0]; cfg.campaign_medium = tag[1]; cfg.campaign_name = 'dolomit-snake'; }
+  }
+  gtag('config', 'G-4FPE1JV10R', cfg);
 </script>
 
 <link rel="manifest" href="snake.webmanifest">
