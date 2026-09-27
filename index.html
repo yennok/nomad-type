@@ -1370,7 +1370,7 @@ ease;
     // Before launch the bar teases instead of selling, and nothing on this page
     // links through to /dolomit. Set teaser:false on launch day and the offer wording
     // and the links all come back.
-    teaser: true, teaserText: 'Dolomit \u2013 Coming Soon' };
+    teaser: true, teaserText: 'Dolomit \u2013 Coming Soon \u2013 Play', teaserHref: 'snake' };
 
   // Israeli visitors buy through morning, not Stripe, and the coupon does not reach them.
   // Until the checkout worker discounts too (SALE_FONTS / SALE_PERCENT in Cloudflare), the
@@ -1402,12 +1402,20 @@ ease;
       : SALE.barLabel + ' \u2013 ' + SALE.percent + '% off';
     if (!SALE.teaser && SALE.endsOn) sentence += ' \u2013 ' + SALE.endsOn;
 
-    // Nothing leads to the font page until it opens: strip the href from the bar, the
-    // badge and the homepage tile, so they read as a tease and not as a dead link.
+    // Before launch nothing leads to the font page. The bar and the badge lead to the
+    // game instead: it is built from Dolomit's own letters, so it shows the typeface
+    // without showing the shop. The tile just stops being a link.
     if (SALE.teaser) {
       ['ntSaleBar', 'ntBadge'].forEach(function (id) {
         var el = document.getElementById(id);
-        if (el) { el.removeAttribute('href'); el.setAttribute('aria-label', 'Dolomit, coming soon'); }
+        if (!el) return;
+        if (SALE.teaserHref) {
+          el.setAttribute('href', SALE.teaserHref);
+          el.setAttribute('aria-label', 'Dolomit is coming, play the game');
+        } else {
+          el.removeAttribute('href');
+          el.setAttribute('aria-label', 'Dolomit, coming soon');
+        }
       });
       var tile = document.querySelector('a.a12');
       if (tile) { tile.removeAttribute('href'); tile.setAttribute('aria-label', 'Dolomit, coming soon'); tile.style.cursor = 'default'; }
