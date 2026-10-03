@@ -2982,8 +2982,16 @@ function sendTrialEmail() {
     graduationYear = document.getElementById('graduationYear')?.value || '';
   }
   
-  // Get font name from the form header (remove "Download " prefix)
-  const fontRequested = (document.querySelector('#trialOverlay .form-header h2')?.textContent?.trim() || 'Font Request').replace(/^Download\s+/i, '');
+  // The font name comes from the overlay's data-font attribute, NOT from the heading on
+  // screen. A visitor reading the site through Google Translate gets a translated heading,
+  // and the translated name reached the trial dispatcher: a real request on 3 Oct 2026
+  // arrived as "Descargar Spitz romanico". That one still matched on "spitz", but
+  // "Middle East" becomes "Medio Oriente" and matches nothing, so the person is told the
+  // font is not ready. Attribute values are never translated. The heading stays as a
+  // fallback for any page that has no data-font yet.
+  const trialOverlayEl = document.getElementById('trialOverlay');
+  const fontRequested = trialOverlayEl?.dataset.font
+    || (document.querySelector('#trialOverlay .form-header h2')?.textContent?.trim() || 'Font Request').replace(/^Download\s+/i, '');
   
   const templateParams = {
     from_name: document.getElementById('trialName').value,
@@ -3064,8 +3072,11 @@ function sendBuyEmail() {
   submitBtn.disabled = true;
   submitBtn.innerHTML = '<span style="display: inline-block; animation: spin 1s linear infinite;">⏳</span> Sending...';
   
-  // Get font name from the form header (remove "Buy " prefix)
-  const fontRequested = (document.querySelector('#buyOverlay .form-header h2')?.textContent?.trim() || 'Font Request').replace(/^Buy\s+/i, '');
+  // Same as the trial form above: data-font first, so a machine-translated page does not
+  // send a translated font name. Heading text only as a fallback.
+  const buyOverlayEl = document.getElementById('buyOverlay');
+  const fontRequested = buyOverlayEl?.dataset.font
+    || (document.querySelector('#buyOverlay .form-header h2')?.textContent?.trim() || 'Font Request').replace(/^Buy\s+/i, '');
   
   // Get selected fonts (excluding Full Family)
   const selectedFonts = Array.from(document.querySelectorAll('.buy-form input[name="family"]:checked'))
