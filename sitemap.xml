@@ -10,6 +10,11 @@
 
   <!-- Typeface pages -->
   <url>
+    <loc>https://www.nomad-type.com/dolomit</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://www.nomad-type.com/safra</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
