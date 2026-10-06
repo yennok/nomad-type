@@ -2734,6 +2734,26 @@ body.negative #buyBtn {
       grid-template-columns: repeat(2, 1fr);
     }
 
+    /* Dolomit pairs 4:5 posters with a 16:9 title sequence. Three columns would put the
+       video in the same row as a poster and the shorter one would sit over a grey gap,
+       so the in-use rows are pinned to two: posters on one row, motion on the next.
+       The specimen section below keeps the default three. */
+    .dolomit-page .in-use-section .in-use-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* A video is a grid child like any image and needs the same box rules. */
+    .in-use-item video {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .in-use-item:hover video {
+      transform: scale(1.02);
+    }
+
     .bizarre-page .in-use-grid {
       grid-template-columns: repeat(3, 1fr);
     }
