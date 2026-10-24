@@ -85,6 +85,8 @@ var COPY={
   kalpi:{ title:'קלפי', plate:'ועדת\nהבחירות', letters:'אבגדהוזח', end:'הצבעתי' },
   tray: { title:'איזו אות?', letters:'אבגדהוזחטיכלמנסעפצקרשת   ', stop:17 },
   petek:{ title:'פתק', letters:'אבגדהוזחטיכלמנסעפצקרשת', names:{'א':'אלף','ב':'בית','ג':'גימל','ד':'דלת','ה':'הא','ו':'וו','ז':'זין','ח':'חית','ט':'טית','י':'יוד','כ':'כף','ל':'למד','מ':'מם','נ':'נון','ס':'סמך','ע':'עין','פ':'פא','צ':'צדי','ק':'קוף','ר':'ריש','ש':'שין','ת':'תו'}, final:'ל', envelope:'הבחירות לכנסת' },
+  pikuach:{ mark:'השגחה', bug:'14', third:'טוהר הבחירות', sub:'שידור חי מהקלפי', ticker:'עוד כותרת דרמטית · עוד הכרזה מוטלת בספק באמינותה · עוד שקר כלשהו · עוד סילוף מידע · עוד הטעיית ציבור · ' },
+  closing:{ bug:'14', last:'שידור אחרון · ', end:'סוף השידורים', morning:'בוקר טוב' },
   midgam:{ mark:'מדגם', bug:'14', third:'הקלפיות נסגרו', sub:'22:00', hafuch:'מהפך!', flash:'מבזק! · ',
            // twelve generic faces, a letter and a seat count each, never a party
            faces:[{l:'א',n:23},{l:'ב',n:20},{l:'ג',n:13},{l:'ד',n:8},{l:'ה',n:8},{l:'ו',n:7},{l:'ז',n:7},{l:'ח',n:7},{l:'ט',n:6},{l:'י',n:4},{l:'כ',n:4},{l:'ל',n:4}],
@@ -113,7 +115,12 @@ var GN=6, GEVERY=3, GURL=[];
 })();
 
 /* ---- primitives: a rect, a grey (grained) rect, an ellipse, a word ---------------- */
-function el(cls,css){ var d=document.createElement('div'); d.className=cls; if(css) d.style.cssText=css; stage.appendChild(d); return d; }
+var TARGET=null;      // where primitives draw: the stage, or a clip box for a moment
+function el(cls,css){ var d=document.createElement('div'); d.className=cls; if(css) d.style.cssText=css; (TARGET||stage).appendChild(d); return d; }
+/* draw inside a box that clips: everything drawn in fn is cut to x,y,w,h */
+function clipped(x,y,w,h,fn){ var box=document.createElement('div'); box.className='ly'; box.style.cssText='left:'+x+'px;top:'+y+'px;width:'+w+'px;height:'+h+'px;overflow:hidden'; stage.appendChild(box);
+  var inner=document.createElement('div'); inner.style.cssText='position:absolute;left:'+(-x)+'px;top:'+(-y)+'px;width:'+W+'px;height:'+H+'px'; box.appendChild(inner);
+  var prev=TARGET; TARGET=inner; try{ fn(); } finally { TARGET=prev; } }
 function rect(x,y,w,h,fill){ return el('ly','left:'+x+'px;top:'+y+'px;width:'+w+'px;height:'+h+'px;background:'+fill); }
 function grey(x,y,w,h,fr){ var d=rect(x,y,w,h,GRY); d.style.backgroundImage='url('+GURL[Math.floor(fr/GEVERY)%GN]+')'; d.style.backgroundPosition=(-x)+'px '+(-y)+'px'; return d; }
 function ground(fill){ stage.style.background=fill; }
@@ -193,9 +200,12 @@ FILMS.kalpi={ title:'הקלפי · a slip a beat, then the word', shots:[
  {beats:9, note:'eight slips drop into the slot, one a beat; the count climbs', draw:function(tb,fr){
     groundGrey(fr);
     var L=COPY.kalpi.letters, n=Math.min(L.length,Math.floor(tb+1e-9)+1);
-    for(var i=0;i<n;i++){ var p=move(tb-i,1); if(p>=1) continue;
-      slip(420,lerp(-340,BAND_T+320,p),240,300,L.charAt(i),null,120); }
     ballotBox();
+    // the slip is drawn over the box and cut at the slot's line, so it goes in, not behind
+    var slotY=BAND_T+300+30+11;
+    clipped(0,0,W,slotY,function(){
+      for(var i=0;i<n;i++){ var p=move(tb-i,1); if(p>=1) continue;
+        slip(420,lerp(-340,slotY+10,p),240,300,L.charAt(i),null,120); } });
     var c=Math.min(L.length,Math.floor(tb+1e-9));
     titles(COPY.kalpi.title, c>0?two(c):undefined);
  }},
@@ -251,35 +261,86 @@ FILMS.petek={ title:'הפתק · the alphabet, a letter a half beat', shots:[
  {beats:2, note:'rest on the envelope', draw:function(tb,fr){ ground(RED); envelope(130,BAND_B-560,820,560); titles(COPY.petek.title,undefined,PAP); }}
 ]};
 
-/* the broadcast. Channel 14 is dull, so this one is red, ink, paper and grained grey, and nothing else. */
-function face(x,y,cw,chh,f,on,body){
-  rect(x+10,y,cw-20,chh-20,PAP);
-  if(!on) return;
-  ellipse(x+cw/2,y+78,100,100,INK); rect(x+cw/2-70,y+132,140,100,body);
-  text(f.l,{x:x+10,y:y+160,w:cw-20,h:50,size:44,f:'ext',fill:PAP,fit:false});
-  rect(x+10,y+228,cw-20,62,INK); text(String(f.n),{x:x+10,y:y+232,w:cw-20,h:54,size:54,f:'reg',fill:PAP,fit:false});
+/* the broadcasts. Channel 14 is dull, so these are red, ink, paper and grained grey, and nothing else. */
+function flashStrip(fr,word,ground){
+  var TY=BAND_B-127; rect(0,TY,W,127,INK); rect(0,TY,W,5,ground||PAP);
+  var run=el('ly','left:0;top:'+(TY+38)+'px;width:1080px;height:56px;overflow:hidden');
+  var w=el('wd reg','position:absolute;top:0;left:0;font-size:46px;color:'+PAP+';line-height:52px;white-space:pre;direction:rtl;width:max-content');
+  var t=''; for(var i=0;i<18;i++) t+=word; w.textContent=t; run.appendChild(w);
+  var tw=w.getBoundingClientRect().width/3; w.style.left=(1080-3*tw+(fr*5)%tw)+'px';
 }
-function facesGrid(tb){
-  var F=COPY.midgam.faces, cols=4, rows=3, cw=250, chh=310, x0=40, y0=BAND_T+230, body=[RED,INK];   // three rows end above the ticker
-  var shown=Math.floor(tb*2+1e-9);                      // one face a half beat, right to left, top to bottom
-  for(var i=0;i<cols*rows;i++){ var r=Math.floor(i/cols), c=i%cols, x=x0+(cols-1-c)*cw, y=y0+r*chh;
-    face(x,y,cw,chh,F[i],i<shown,body[i%2]); }
+/* the exit poll: five bars that land on the beat, the percentages in them */
+function pollBars(tb){
+  var B=COPY.midgam.bars, cols=[RED,INK,PAP,RED,INK], base=BAND_B-127-130-190-40, pitch=200, bw=200, x0=40, maxH=620, vmax=B[0].v;
+  for(var i=0;i<B.length;i++){ var p=move(tb-i,1); if(p<=0) continue;
+    var h=lerp(0,maxH*B[i].v/vmax,p), x=x0+(B.length-1-i)*pitch, c=cols[i%cols.length];
+    rect(x,base-h,bw,h,c);
+    if(p>=1){ text(B[i].l,{x:x,y:base-h-150,w:bw,h:120,size:110,f:'ext',fill:INK,fit:false});
+              text(B[i].v+'%',{x:x,y:base-h+24,w:bw,h:80,size:64,f:'reg',fill:c===PAP?INK:PAP,fit:false}); } }
 }
-FILMS.midgam={ title:'המדגם · twelve faces land on the half beat, then מהפך', shots:[
+FILMS.midgam={ title:'המדגם · a graph: five bars land on the beat, then מהפך', shots:[
  {beats:1, note:'the chrome alone: bug, mark, ticker', draw:function(tb,fr){ groundGrey(fr); chrome(fr,COPY.midgam); }},
- {beats:7, note:'twelve empty cards, then a face and a seat count every half beat', draw:function(tb,fr){
-    groundGrey(fr); facesGrid(tb); chrome(fr,COPY.midgam); }},
+ {beats:7, note:'five bars land right to left, a beat each', draw:function(tb,fr){ groundGrey(fr); pollBars(tb); chrome(fr,COPY.midgam); }},
  {beats:2, note:'the lower third slides in from the right', draw:function(tb,fr){
-    groundGrey(fr); facesGrid(99); lowerThird(lerp(1080,162,move(tb,1)),COPY.midgam.third,COPY.midgam.sub); chrome(fr,COPY.midgam); }},
+    groundGrey(fr); pollBars(99); lowerThird(lerp(1080,162,move(tb,1)),COPY.midgam.third,COPY.midgam.sub); chrome(fr,COPY.midgam); }},
  {beats:3, note:'cut to red: מהפך!, and the flash strip under it', draw:function(tb,fr){ ground(RED);
     var on=stepAt(tb,0.5)%2===0 || tb>=2;                 // it blinks twice, then holds
     if(on) text(COPY.midgam.hafuch,{x:40,y:BAND_T+470,w:1000,h:300,size:250,f:'ext',fill:PAP});
-    var TY=BAND_B-127; rect(0,TY,W,127,INK); rect(0,TY,W,5,PAP);
-    var run=el('ly','left:0;top:'+(TY+38)+'px;width:1080px;height:56px;overflow:hidden');
-    var w=el('wd reg','position:absolute;top:0;left:0;font-size:46px;color:'+PAP+';line-height:52px;white-space:pre;direction:rtl;width:max-content');
-    var fl=COPY.midgam.flash; w.textContent=fl+fl+fl+fl+fl+fl+fl+fl+fl+fl+fl+fl+fl+fl+fl+fl+fl+fl; run.appendChild(w);
-    var tw=w.getBoundingClientRect().width/3; w.style.left=(1080-3*tw+(fr*5)%tw)+'px';
- }}
+    flashStrip(fr,COPY.midgam.flash,PAP); }}
+]};
+
+/* the supervision: twelve generic people at the polling station, all talking at once. The hum is in
+   the bodies: each one's height wanders on its own clock, the way the chan frame's figures do. */
+function person(x,y,cw,chh,i,fr,body){
+  rect(x+10,y,cw-20,chh-20,PAP);
+  var bob=Math.sin(fr*0.21+i*1.7)*6+Math.sin(fr*0.53+i*0.9)*4;     // a few pixels, never still
+  var mouth=(Math.floor(fr/3+i)%3===0);                            // talking: the head opens a gap on some frames
+  ellipse(x+cw/2,y+78+bob*0.3,100,100,INK);
+  if(mouth) rect(x+cw/2-18,y+78+bob*0.3+18,36,10,PAP);
+  rect(x+cw/2-70,y+132+bob,140,chh-20-132-bob,body);
+}
+function peopleGrid(fr){
+  var cols=4, rows=3, cw=250, chh=310, x0=40, y0=BAND_T+230, body=[RED,INK];
+  for(var i=0;i<cols*rows;i++){ var r=Math.floor(i/cols), c=i%cols, x=x0+(cols-1-c)*cw, y=y0+r*chh; person(x,y,cw,chh,i,fr,body[i%2]); }
+}
+FILMS.pikuach={ title:'השגחה · twelve people at the polling station, all talking', shots:[
+ {beats:1, note:'the chrome alone', draw:function(tb,fr){ groundGrey(fr); chrome(fr,COPY.pikuach); }},
+ {beats:6, note:'the room: everyone talks, a hum', draw:function(tb,fr){ groundGrey(fr); peopleGrid(fr); chrome(fr,COPY.pikuach); }},
+ {beats:4, note:'the lower third slides in; they keep talking', draw:function(tb,fr){
+    groundGrey(fr); peopleGrid(fr); lowerThird(lerp(1080,162,move(tb,1)),COPY.pikuach.third,COPY.pikuach.sub); chrome(fr,COPY.pikuach); }}
+]};
+
+/* the closing: the last broadcast. Two presenters, the strip says it is the last; then the
+   end-of-transmission card; then the set switches off, the picture collapsing to a line and a
+   dot the way a tube did; and out of the dot, a sun. Sad, then glad. */
+function presenters(fr){
+  var fig=[{x:242,h:597},{x:574,h:680}];
+  for(var i=0;i<2;i++){ var f=fig[i], bob=Math.sin(fr*0.19+i*2.1)*5;
+    ellipse(f.x+129,BAND_B-127-f.h-110+bob,194,194,INK); rect(f.x,BAND_B-127-f.h+bob,259,f.h-bob+127,RED); }
+}
+function testCard(){
+  var cols=[PAP,GRY,RED,INK,GRY,PAP,INK,RED], bw=W/cols.length;
+  for(var i=0;i<cols.length;i++) rect(i*bw,BAND_T,bw,BAND_B-BAND_T,cols[i]);
+}
+FILMS.closing={ title:'סגירה · the last broadcast, the set switches off, a sun comes up', shots:[
+ {beats:4, note:'two presenters, the strip reads last broadcast', draw:function(tb,fr){
+    groundGrey(fr); presenters(fr);
+    ellipse(1080-54-75,BAND_T+65+75,151,151,RED); text(COPY.closing.bug,{x:1080-54-151,y:BAND_T+65+40,w:151,h:71,size:71,f:'reg',fill:PAP,fit:false});
+    flashStrip(fr,COPY.closing.last,RED); }},
+ {beats:3, note:'the end-of-transmission card', draw:function(tb,fr){
+    ground(INK); testCard(); rect(0,BAND_T+560,W,230,INK);
+    text(COPY.closing.end,{x:40,y:BAND_T+600,w:1000,h:150,size:140,f:'ext',fill:PAP}); }},
+ {beats:2, note:'the tube goes off: the picture collapses to a line, then a dot', draw:function(tb,fr){
+    ground(INK); var p1=move(tb,1), p2=move(tb-1,1);
+    var h=lerp(BAND_B-BAND_T,6,p1), w=lerp(W,6,p2);
+    if(tb<1){ clipped(0,BAND_T+(BAND_B-BAND_T-h)/2,W,h,function(){ testCard(); }); }
+    else rect((W-w)/2,BAND_T+(BAND_B-BAND_T)/2-3,w,6,PAP); }},
+ {beats:1, note:'dark, a dot', draw:function(tb,fr){ ground(INK); ellipse(540,BAND_T+(BAND_B-BAND_T)/2,6,6,PAP); }},
+ {beats:4, note:'the dot grows into a sun on blue, and a good morning', draw:function(tb,fr){
+    var p=move(tb,2); ground(p>0.5?BLU:INK);
+    if(p<=0.5){ ellipse(540,BAND_T+(BAND_B-BAND_T)/2,lerp(6,1400,p*2),lerp(6,1400,p*2),YEL); }
+    else { var q=(p-0.5)*2; ellipse(540,lerp(BAND_T+(BAND_B-BAND_T)/2,BAND_T+560,q),lerp(1400,520,q),lerp(1400,520,q),YEL); }
+    if(tb>=2.5) text(COPY.closing.morning,{x:40,y:BAND_T+920,w:1000,h:170,size:150,f:'ext',fill:PAP}); }}
 ]};
 
 FILMS.shabaton={ title:'יום שבתון · one word, then the hour', shots:[
@@ -301,19 +362,21 @@ function blocMap(fr,st){
   grey(cx-r,cy-r,2*r,2*r,fr).style.borderRadius='50%';
   grey(0,cy,W,H-cy,fr);
   text(COPY.blocs.title,{x:60,y:BAND_T+80,w:960,h:130,size:120,f:'ext',fill:INK});
-  text(String(A),{x:720,y:cy+20,w:300,h:120,size:120,f:'reg',fill:BLU,align:'right'});
-  text(String(B),{x:60,y:cy+20,w:300,h:120,size:120,f:'reg',fill:RED,align:'left'});
-  if(C>0) text(String(C),{x:490,y:cy-R-110,w:100,h:70,size:64,f:'reg',fill:INK});
+  text(String(Math.round(A)),{x:720,y:cy+20,w:300,h:120,size:120,f:'reg',fill:BLU,align:'right'});
+  text(String(Math.round(B)),{x:60,y:cy+20,w:300,h:120,size:120,f:'reg',fill:RED,align:'left'});
+  if(Math.round(C)>0) text(String(Math.round(C)),{x:490,y:cy-R-110,w:100,h:70,size:64,f:'reg',fill:INK});
   text(COPY.blocs.right,{x:720,y:cy+150,w:300,h:70,size:60,f:'reg',fill:INK,align:'right'});
   text(COPY.blocs.left,{x:60,y:cy+150,w:300,h:70,size:60,f:'reg',fill:INK,align:'left'});
   text(COPY.blocs.magic,{x:390,y:cy-120,w:300,h:160,size:160,f:'ext',fill:INK});
 }
 FILMS.blocs={ title:'מפת הגושים · the arc jumps between results on the half beat', shots:[
  {beats:1, note:'the first state, still', draw:function(tb,fr){ groundGrey(fr); blocMap(fr,COPY.blocs.states[0]); }},
- {beats:7, note:'results coming in: a new state every half beat, no easing', draw:function(tb,fr){
-    groundGrey(fr); var S=COPY.blocs.states, k=Math.min(S.length-1, 1+stepAt(tb,0.5)%(S.length-1)); 
-    if(tb>=6) k=S.length-1;                                   // the last beat settles on the final state
-    blocMap(fr,S[k]); }},
+ {beats:7, note:'results coming in: the arc slides to a new state every half beat, like a pie', draw:function(tb,fr){
+    groundGrey(fr); var S=COPY.blocs.states, n=S.length-1;
+    var h=tb/0.5, k=Math.min(n-1,Math.floor(h)), u=easeIO(h-k);   // from state k to k+1 over the half beat
+    if(k>=n-1 && tb>=(n-1)*0.5){ k=n-1; u=easeIO(Math.min(1,(tb-(n-1)*0.5)/0.5)); }
+    var a=S[k], b=S[Math.min(n,k+1)], st=[lerp(a[0],b[0],u),lerp(a[1],b[1],u),lerp(a[2],b[2],u)];
+    blocMap(fr,st); }},
  {beats:3, note:'hold on the deadlock', draw:function(tb,fr){ groundGrey(fr); blocMap(fr,COPY.blocs.states[COPY.blocs.states.length-1]); }}
 ]};
 
