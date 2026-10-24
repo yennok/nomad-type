@@ -14,3 +14,10 @@ Needs node, playwright (chromium) and ffmpeg.
 
 `story` is 1080x1920, `post` is the 1080x1350 band. Films: kalpi, tray, blocs, midgam,
 emblem (also petek, shabaton). Beat 0.6s = 100 BPM.
+
+## Music
+
+Both Mechanical Minor takes run at 100 BPM. The first downbeat is at 0.430s in the
+m4a and 1.180s in the mp3; a film's audio starts at downbeat + k × 2.4s so its first
+cut lands on a bar. The cut used: kalpi, blocs, pikuach, turnout on the m4a at bars
+2, 14, 8, 21; tray, midgam, closing, emblem on the mp3 at bars 2, 13, 7, 16.
