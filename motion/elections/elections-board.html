@@ -94,6 +94,9 @@ var COPY={
            ticker:'עוד כותרת דרמטית · עוד הכרזה מוטלת בספק באמינותה · עוד שקר כלשהו · עוד סילוף מידע · עוד הטעיית ציבור · ' },
   shabaton:{ word:'יום שבתון', time:'22:00', line:'הקלפיות נסגרות' },
   emblem:{ word:'ישראל' },
+  turnout:{ title:'אחוזי הצבעה', record:'שיא', end:'אחרית הימים', flash:'מבזק! · ',
+            // the last five, as they were, then the one that breaks the frame
+            years:[{y:'4/19',v:68.5},{y:'9/19',v:69.8},{y:'3/20',v:71.5},{y:'3/21',v:67.4},{y:'11/22',v:70.6}], last:{y:'2026',v:90} },
   blocs:{ title:'מפת הגושים', right:'גוש א', left:'גוש ב', magic:'61',
           // the states the map jumps between, [right, middle, left]; it ends on the last one
           states:[[58,4,58],[61,4,55],[55,4,61],[59,4,57],[57,4,59],[62,3,55],[56,3,61],[60,0,60]] }
@@ -418,13 +421,50 @@ FILMS.emblem={ title:'הסמל · the shield, then a part a beat, the word last'
  {beats:3, note:'hold', draw:function(tb,fr){ emblem(7); }}
 ]};
 
+/* the turnout: five grey bars for the elections that were, then one red bar that breaks the
+   frame. Ink ground, a strobe, the picture shaking: the end of days, read off a bar chart. */
+function turnoutChart(fr,nbars,lastP,strobe){
+  var Y=COPY.turnout.years, L=COPY.turnout.last, base=BAND_B-230, bw=140, pitch=170, x0=40, per=8.2;   // 8.2px a percent: 70% is 574px
+  var flash=strobe && (Math.floor(fr/2)%2===0);
+  ground(flash?RED:INK);
+  text(COPY.turnout.title,{x:60,y:BAND_T+80,w:960,h:130,size:110,f:'ext',fill:flash?INK:PAP,align:'right'});
+  rect(0,base,W,8,flash?INK:PAP);
+  for(var i=0;i<Y.length;i++){ var p=move(nbars-i,1); if(p<=0) continue;
+    var h=Y[i].v*per*p, x=x0+(5-i)*pitch;
+    grey(x,base-h,bw,h,fr);
+    text(Y[i].y,{x:x-15,y:base+30,w:bw+30,h:60,size:50,f:'reg',fill:flash?INK:PAP,fit:false});
+    if(p>=1) text(Y[i].v+'%',{x:x-15,y:base-h-70,w:bw+30,h:60,size:48,f:'reg',fill:flash?INK:PAP,fit:false}); }
+  if(lastP>0){ var h2=L.v*per*lastP, x2=x0;
+    rect(x2,base-h2,bw,h2+0,flash?INK:RED);
+    text(L.y,{x:x2-15,y:base+30,w:bw+30,h:60,size:50,f:'reg',fill:flash?INK:PAP,fit:false});
+    if(lastP>=1) text(L.v+'%',{x:x2-40,y:Math.max(BAND_T+200,base-Math.min(h2,L.v*per)-90),w:bw+80,h:80,size:70,f:'reg',fill:flash?INK:RED,fit:false}); }
+}
+FILMS.turnout={ title:'אחוזי הצבעה · five years as they were, then the one that breaks the frame', shots:[
+ {beats:1, note:'ink, the title, the baseline', draw:function(tb,fr){ turnoutChart(fr,-1,0,false); }},
+ {beats:6, note:'five grey bars rise, one a beat, right to left', draw:function(tb,fr){ turnoutChart(fr,tb,0,false); }},
+ {beats:3, note:'2026: the red bar rises past everything; the picture starts to shake', draw:function(tb,fr){
+    var p=move(tb,2); if(tb>=2) p=1+easeIO((tb-2))*2.2;          // it lands on 90, then keeps going, out of the frame
+    turnoutChart(fr,99,p,tb>=2);
+    var amp=lerp(0,14,clamp01((tb-0.5)/2)); SHAKE=[Math.sin(fr*7.1)*amp,Math.cos(fr*5.3)*amp]; }},
+ {beats:3, note:'the number alone: 90%, strobing, shaking', draw:function(tb,fr){
+    var flash=Math.floor(fr/2)%2===0; ground(flash?RED:INK);
+    text(COPY.turnout.last.v+'%',{x:40,y:BAND_T+380,w:1000,h:420,size:420,f:'reg',fill:flash?INK:RED});
+    text(COPY.turnout.record,{x:40,y:BAND_T+840,w:1000,h:140,size:120,f:'ext',fill:flash?INK:PAP});
+    SHAKE=[Math.sin(fr*7.1)*14,Math.cos(fr*5.3)*14]; }},
+ {beats:4, note:'red: the end of days, and the flash strip', draw:function(tb,fr){
+    ground(RED); text(COPY.turnout.end,{x:40,y:BAND_T+500,w:1000,h:300,size:220,f:'ext',fill:INK});
+    flashStrip(fr,COPY.turnout.flash,RED); SHAKE=[0,0]; }}
+]};
+
 /* ---- engine ----------------------------------------------------------------------- */
 var FILM='kalpi', SEG=[], TOTAL=0, FMT='story';
 function layout(name){ FILM=name; SEG=[]; var t=0; FILMS[name].shots.forEach(function(s,i){ SEG.push({i:i,t0:t,t1:t+s.beats*BEAT}); t+=s.beats*BEAT; }); TOTAL=t; return TOTAL; }
+var SHAKE=[0,0];
 function __frame(fr){
-  var t=fr/FPS; stage.innerHTML=''; stage.style.background=INK;
+  var t=fr/FPS; stage.innerHTML=''; stage.style.background=INK; SHAKE=[0,0];
   var seg=SEG[0]; for(var j=SEG.length-1;j>=0;j--) if(t>=SEG[j].t0-1e-9){ seg=SEG[j]; break; }
   FILMS[FILM].shots[seg.i].draw((t-seg.t0)/BEAT, fr);
+  stage.style.transform=(SHAKE[0]||SHAKE[1])?'translate('+SHAKE[0]+'px,'+SHAKE[1]+'px)':'';
   return seg.i;
 }
 
