@@ -330,11 +330,13 @@ function menorah(cx,base,u,fill,stage){
   if(stage>=5) for(var k=-3;k<=3;k++){ var ax=cx+k*1.5*u, side=u*0.9;
     rect(ax-side/2,top-1.0*u-side/2,side,side,fill).style.transform='rotate(45deg)'; }
 }
-function olive(cx,top,n,u,fill){
-  var half=u*1.7, drop=half, th=u*0.62, bh=drop+th, pitch=u*0.95;
-  rect(cx-u*0.3,top,u*0.6,n*pitch+bh-th*0.2,fill);
+/* the olive branch, version A: s the stem width, leaves one stem wide, the reach twice the stem,
+   a step of 1.75 stems between leaves, the ends cut vertically, the stem on above and below. */
+function olive(cx,top,n,s,fill){
+  var th=s, half=2*s, pitch=1.75*s, bh=half+th;
+  rect(cx-s/2,top-0.25*s,s,(n-1)*pitch+bh+2.5*s,fill);
   for(var i=0;i<n;i++){ var y=top+i*pitch;
-    polyRect(cx-half,y,2*half,bh,fill,[[0,0],[half,drop],[2*half,0],[2*half,th],[half,bh],[0,th]]); }
+    polyRect(cx-half,y,2*half,bh,fill,[[0,0],[half,half],[2*half,0],[2*half,th],[half,bh],[0,th]]); }
 }
 function shield(oy,fill,ground){
   var o=rect(140,oy+120,800,1110,fill); o.style.clipPath='polygon(0 0,100% 0,100% 72%,50% 100%,0 72%)';
@@ -345,7 +347,7 @@ function emblem(stage){
   var oy=BAND_T; ground(BLU);
   shield(oy,PAP,BLU);
   menorah(540,oy+735,34,PAP,stage);
-  if(stage>=6){ olive(300,oy+290,8,36,PAP); olive(780,oy+290,8,36,PAP); }
+  if(stage>=6){ olive(290,oy+385,7,26,PAP); olive(790,oy+385,7,26,PAP); }
   if(stage>=7) text(COPY.emblem.word,{x:220,y:oy+815,w:640,h:150,size:128,f:'ext',fill:PAP});
 }
 FILMS.emblem={ title:'הסמל · the shield, then a part a beat, the word last', shots:[
