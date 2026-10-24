@@ -405,8 +405,10 @@ function olive(cx,top,n,s,fill){
     polyRect(cx-half,y,2*half,bh,fill,[[0,0],[half,half],[2*half,0],[2*half,th],[half,bh],[0,th]]); }
 }
 function shield(oy,fill,ground){
-  var o=rect(140,oy+120,800,1110,fill); o.style.clipPath='polygon(0 0,100% 0,100% 72%,50% 100%,0 72%)';
-  var i=rect(170,oy+150,740,1050,ground); i.style.clipPath='polygon(0 0,100% 0,100% 72%,50% 100%,0 72%)';
+  /* as Nir set it in Figma: the top at 240, the sides straight to 919, the point at 1230;
+     the inner edge is the same shape 30 in (a 30 stroke, inside, mitred) */
+  var o=rect(140,oy+240,800,990,fill); o.style.clipPath='polygon(0 0,100% 0,100% 68.6%,50% 100%,0 68.6%)';
+  var i=rect(170,oy+270,740,922,ground); i.style.clipPath='polygon(0 0,100% 0,100% 68.8%,50% 100%,0 68.8%)';
 }
 function emblem(stage){
   // stage: 0 shield, 1 base+stem, 2..4 branches, 5 flames, 6 olives, 7 the word
