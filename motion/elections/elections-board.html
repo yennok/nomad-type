@@ -478,21 +478,17 @@ function blocMap(fr,st){
   text(COPY.blocs.title,{x:60,y:TITLEY(),w:960,h:130,size:120,f:'ext',fill:INK});
   text(String(Math.round(A)),{x:720,y:cy+20,w:300,h:120,size:120,f:'reg',fill:BLU,align:'right'});
   text(String(Math.round(B)),{x:60,y:cy+20,w:300,h:120,size:120,f:'reg',fill:RED,align:'left'});
-  if(Math.round(C)>0) text(String(Math.round(C)),{x:490,y:cy-R-110,w:100,h:70,size:64,f:'reg',fill:INK});
   text(COPY.blocs.right,{x:720,y:cy+150,w:300,h:70,size:60,f:'reg',fill:INK,align:'right'});
   text(COPY.blocs.left,{x:60,y:cy+150,w:300,h:70,size:60,f:'reg',fill:INK,align:'left'});
   text(COPY.blocs.magic,{x:390,y:cy-120,w:300,h:160,size:160,f:'ext',fill:INK});
 }
-FILMS.blocs={ title:'מפת הגושים · the arc jumps between results on the half beat', shots:[
- {beats:1, note:'the first state, still', draw:function(tb,fr){ groundGrey(fr); blocMap(fr,COPY.blocs.states[0]); }},
- {beats:7, note:'the needle revs: the arc swings between 20 and 80 every quarter beat, then settles', draw:function(tb,fr){
+FILMS.blocs={ title:'מפת הגושים · the arc swings between results from the first frame, and it never settles: a cut', shots:[
+ {beats:7, note:'the needle revs from frame one: the arc swings between 20 and 80 every quarter beat, and the film cuts mid-swing', draw:function(tb,fr){
     groundGrey(fr);
     var q=tb/0.25, k=Math.floor(q), u=easeIO(q-k);
-    function T(j){ if(j===0) return 58; return j%2===0 ? 22+h2(j,3)*12 : 86+h2(j,5)*12; }   // from the still state: about 20% of the arc, then 80%, and back
-    var d=tb>5 ? clamp01((7-tb)/2) : 1;                                  // the last two beats die down to the middle
-    var a=60+(lerp(T(k),T(k+1),u)-60)*d, c=Math.round(4*h2(k,9)*d), b=120-a-c;
-    blocMap(fr,[a,c,b]); }},
- {beats:3, note:'hold on the deadlock', draw:function(tb,fr){ groundGrey(fr); blocMap(fr,COPY.blocs.states[COPY.blocs.states.length-1]); }}
+    function T(j){ if(j===0) return 58; return j%2===0 ? 22+h2(j,3)*12 : 86+h2(j,5)*12; }   // about 20% of the arc, then 80%, and back
+    var a=lerp(T(k),T(k+1),u), c=Math.round(4*h2(k,9)), b=120-a-c;
+    blocMap(fr,[a,c,b]); }}
 ]};
 
 /* ---- the state emblem, in the language of the figures. Everything a rect, a fold or a square. ---- */
