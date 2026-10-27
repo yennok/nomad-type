@@ -23,3 +23,6 @@ Both Mechanical Minor takes run at 100 BPM. The first downbeat is at 0.430s in t
 m4a and 1.180s in the mp3; a film's audio starts at downbeat + k × 2.4s so its first
 cut lands on a bar. The cut used: kalpi, blocs, pikuach, turnout on the m4a at bars
 2, 14, 8, 21; tray, midgam, closing, emblem, boker and bokerAr on the mp3 at bars 2, 13, 7, 16, 22, 22.
+
+The hope carousel's Hebrew tray opens on one frame of the Arabic أمل slip (trayAr, frame 70)
+put before frame 0, so the cover is أمل; its audio starts one frame earlier to keep the beat.
