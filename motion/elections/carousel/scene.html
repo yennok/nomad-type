@@ -19,7 +19,8 @@ function el(cls,css){ var d=document.createElement('div'); d.className=cls; if(c
 function rect(x,y,w,h,fill){ return el('ly','left:'+x+'px;top:'+y+'px;width:'+w+'px;height:'+h+'px;background:'+fill); }
 function polyRect(x,y,w,h,fill,pts){ var d=rect(x,y,w,h,fill); d.style.clipPath='polygon('+pts.map(function(p){return p[0]+'px '+p[1]+'px';}).join(',')+')'; return d; }
 function text(t,o){ var d=el('wd '+(o.f||'ext')); d.textContent=t; d.dir='rtl'; d.style.left=o.x+'px'; d.style.top=o.y+'px'; d.style.width=o.w+'px';
-  d.style.fontSize=o.size+'px'; d.style.lineHeight=o.h+'px'; d.style.color=o.fill||INK; return d; }
+  d.style.fontSize=o.size+'px'; d.style.lineHeight=o.h+'px'; d.style.color=o.fill||INK;
+  var sw=d.scrollWidth; if(sw>o.w) d.style.fontSize=(o.size*o.w/sw)+'px'; return d; }
 
 /* ---- the emblem, exactly as on the board, in its own 1080 x 1350 frame ---- */
 function menorah(cx,base,u,fill){
@@ -44,8 +45,8 @@ var ECX=EX+EW/2, ECY=EY+EH/2;
 var BODY={x:90,y:706,w:900,h:1400}, LID={x:60,y:606,w:960,h:100};
 function boxWorld(){
   world.textContent=''; TARGET=world;
-  rect(440,330,200,300,PAP);                                       // the slip, half in the slot
-  text('הצבעתי',{x:450,y:400,w:180,h:56,size:44,f:'ext',fill:INK});
+  rect(420,330,240,300,PAP);                                       // the slip, half in the slot
+  text('הצבעתי',{x:440,y:400,w:200,h:56,size:44,f:'ext',fill:INK});   // shrinks to sit inside the slip
   rect(BODY.x,BODY.y,BODY.w,BODY.h,BLU);
   var g=el('ly','left:'+EX+'px;top:'+EY+'px;width:1080px;height:1350px;transform-origin:0 0;transform:scale('+ES+')');
   var prev=TARGET; TARGET=g; emblemArt(); TARGET=prev;
