@@ -85,6 +85,7 @@ var BAND_T=285, BAND_B=1635;        // the 4:5 band inside the story
    Nothing here sells anything. Letters only, never a party's letters, never its name. */
 var EMBLEM={"bg": "<rect width=\"1080\" height=\"1350\" fill=\"#2045DE\"/>", "stages": ["<path d=\"M925 217V824.65L540 1181.55L155 824.65V217H925Z\" stroke=\"white\" stroke-width=\"30\"/>", "<rect x=\"424\" y=\"672\" width=\"232\" height=\"35\" fill=\"white\"/>\n<rect x=\"462\" y=\"638\" width=\"156\" height=\"35\" fill=\"white\"/>\n<rect x=\"499\" y=\"604\" width=\"82\" height=\"35\" fill=\"white\"/>\n<rect x=\"523\" y=\"384.6\" width=\"34\" height=\"222\" fill=\"white\"/>", "<path d=\"M472 384.6H506V428.8H574V384.6H608V428.8L574 462.8H506L472 428.8V384.6Z\" fill=\"white\"/>", "<path d=\"M420.5 384.5H454.5L455 476.4H625L624.5 384.5H658.5L659 476.4L625 510.4H455L421 476.4L420.5 384.5Z\" fill=\"white\"/>", "<path d=\"M370 384.4H404V528H676V384.4H710V528L676 562H404L370 528V384.4Z\" fill=\"white\"/>", "<rect x=\"365.363\" y=\"350.6\" width=\"30.6\" height=\"30.6\" transform=\"rotate(-45 365.363 350.6)\" fill=\"white\"/>\n<rect x=\"416.363\" y=\"350.6\" width=\"30.6\" height=\"30.6\" transform=\"rotate(-45 416.363 350.6)\" fill=\"white\"/>\n<rect x=\"467.363\" y=\"350.6\" width=\"30.6\" height=\"30.6\" transform=\"rotate(-45 467.363 350.6)\" fill=\"white\"/>\n<rect x=\"518.363\" y=\"350.6\" width=\"30.6\" height=\"30.6\" transform=\"rotate(-45 518.363 350.6)\" fill=\"white\"/>\n<rect x=\"569.363\" y=\"350.6\" width=\"30.6\" height=\"30.6\" transform=\"rotate(-45 569.363 350.6)\" fill=\"white\"/>\n<rect x=\"620.363\" y=\"350.6\" width=\"30.6\" height=\"30.6\" transform=\"rotate(-45 620.363 350.6)\" fill=\"white\"/>\n<rect x=\"671.363\" y=\"350.6\" width=\"30.6\" height=\"30.6\" transform=\"rotate(-45 671.363 350.6)\" fill=\"white\"/>", "<rect x=\"795\" y=\"329\" width=\"26\" height=\"378\" fill=\"white\"/>\n<path d=\"M756 341L808 393L860 341V378L808 430L756 378L756 341Z\" fill=\"white\"/>\n<path d=\"M756 403L808 455L860 403V440L808 492L756 440L756 403Z\" fill=\"white\"/>\n<path d=\"M756 463L808 515L860 463V500L808 552L756 500L756 463Z\" fill=\"white\"/>\n<path d=\"M756 523L808 575L860 523V560L808 612L756 560L756 523Z\" fill=\"white\"/>\n<path d=\"M756 583L808 635L860 583V620L808 672L756 620L756 583Z\" fill=\"white\"/>\n<rect x=\"259\" y=\"329\" width=\"26\" height=\"378\" fill=\"white\"/>\n<path d=\"M220 341L272 393L324 341V378L272 430L220 378L220 341Z\" fill=\"white\"/>\n<path d=\"M220 403L272 455L324 403V440L272 492L220 440L220 403Z\" fill=\"white\"/>\n<path d=\"M220 463L272 515L324 463V500L272 552L220 500L220 463Z\" fill=\"white\"/>\n<path d=\"M220 523L272 575L324 523V560L272 612L220 560L220 523Z\" fill=\"white\"/>\n<path d=\"M220 583L272 635L324 583V620L272 672L220 620L220 583Z\" fill=\"white\"/>", "<path d=\"M396.623 783.2V835.296L372.303 860H309.071V835.296H372.047V807.904H284.495V763.744H309.071V783.2H396.623ZM499.67 860L431.446 810.976V860H407.126L406.87 793.312V783.2H429.526L478.294 819.04H501.078V783.2H525.654V810.592L501.334 835.296H500.438L533.974 860H499.67ZM615.598 860V807.904H541.87V783.2H615.726L640.174 807.904V860H615.598ZM650.37 860V783.2H674.946V835.296H700.034V783.2H724.61V821.344L710.786 835.296H746.114V783.2H770.69V835.296L746.37 860H650.37ZM780.87 827.36V783.2H805.446V827.36H780.87Z\" fill=\"white\"/>"]};   // from Figma, file SSdo8AKFO1Foi8kuY5vM47, frame 1:2
 var COPY={
+  kalpiReel:{ letters:['ת','أ','ש','س','ח','ح','י','ف'] },
   kalpi:{ letters:'אבגדהוזח', last:'הצבעתי', end:'הצבעתי!' },
   trayHope: { cover:'ת', letters:'אבגדהוזחטיכלמנסעפצקרשת ', stops:'תשחי', words:{'ת':'תקווה','ש':'שלום','ח':'חיים','י':'ישראל'} },
   trayAr: { cover:'أ', letters:'أبتثجحخدذرزسشصضطظعغفقكلمنهوي ', stops:'أسحف', words:{'أ':'أمل','س':'سلام','ح':'حياة','ف':'فلسطين'} }, /* alef with its hamza, as أمل begins */
@@ -234,6 +235,21 @@ FILMS.kalpi={ title:'הקלפי · a slip a beat, then the word', shots:[
  {beats:3, note:'cut: the word, on paper', draw:function(tb,fr){ ground(PAP);
     text(COPY.kalpi.end,{x:40,y:BAND_T+520,w:1000,h:300,size:300,f:'ext',fill:INK}); }}
 ]};
+
+/* the kalpi as a trial reel, for people who don't know the account: it opens with the first slip already in
+   the air (half a beat in, so the first frame moves), and the slips carry the hope letters, Hebrew and Arabic
+   in turn, so no slip looks like a party's. */
+FILMS.kalpiReel={ title:'הקלפי · ריל: the hope letters, Hebrew and Arabic in turn, and the first frame already falling', shots:[
+ {beats:8.5, note:'eight slips drop into the slot, one a beat; the first is already in the air', draw:function(tb,fr){
+    tb+=0.5; groundGrey(fr);
+    var L=COPY.kalpiReel.letters, n=Math.min(L.length,Math.floor(tb+1e-9)+1);
+    ballotBox();
+    var slotY=BOX.lid+44;
+    clipped(0,0,W,slotY,function(){
+      for(var i=0;i<n;i++){ var p=move(tb-i,1); if(p>=1) continue; var ar=/[\u0600-\u06FF]/.test(L[i]);
+        slip(420,lerp(-340,slotY+10,p),240,300,L[i],null,ar?180:120,ar?'arR':'ext'); } });   /* Safra Sans Regular is light: set larger to sit with Dolomit */
+ }}
+].concat(FILMS.kalpi.shots.slice(1)) };
 
 /* the tray, as it was: א to ת in a 5 x 5 grid, the blank white slip after ת, the empty compartments in a darker
    blue. Four rounds: the cursor hops a half beat at a time and stops, then that slip full size on red. The stops
