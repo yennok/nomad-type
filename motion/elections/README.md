@@ -13,8 +13,9 @@ Needs node, playwright (chromium) and ffmpeg.
       -c:v libx264 -pix_fmt yuv420p -crf 20 -c:a aac -movflags +faststart kalpi-story.mp4
 
 `story` is 1080x1920, `post` is the 1080x1350 band. Films: kalpi, tray, blocs, midgam,
-emblem, boker, bokerAr (also petek, shabaton). Beat 0.6s = 100 BPM.
-bokerAr sets صباح الخير in Safra Sans Bold, inlined from fonts/SafraSans-Bold.woff2.
+emblem, boker, bokerAr, trayHope, trayAr (also petek, shabaton). Beat 0.6s = 100 BPM.
+bokerAr sets صباح الخير in Safra Sans Bold; trayAr sets the Arabic tray in Safra Sans Regular, since
+Safra Sans Bold has no isolated sin, sheen, ain, ghain, kaf or lam. Both are inlined from fonts/.
 
 ## Music
 
