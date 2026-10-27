@@ -100,6 +100,7 @@ var COPY={
            ticker:'עוד כותרת דרמטית · עוד הכרזה מוטלת בספק באמינותה · עוד שקר כלשהו · עוד סילוף מידע · עוד הטעיית ציבור · ' },
   shabaton:{ word:'יום שבתון', time:'22:00', line:'הקלפיות נסגרות' },
   emblem:{ word:'ישראל' },
+  flash:{ two:'שוב בחירות', three:'הסוף קרוב', four:'ערוץ 14 סוגר', five:'סוף השידורים', six:'נתראה\nבבחירות הבאות' },
   turnout:{ title:'אחוזי הצבעה', record:'שיא', end:'אחרית הימים', flash:'מבזק! · ',
             // the last five, as they were, then the one that breaks the frame
             years:[{y:'4/19',v:68.5},{y:'9/19',v:69.8},{y:'3/20',v:71.5},{y:'3/21',v:67.4},{y:'11/22',v:70.6}], last:{y:'2026',v:90} },
@@ -570,12 +571,19 @@ FILMS.turnout={ title:'אחוזי הצבעה · five years as they were, then th
     text(COPY.turnout.record,{x:40,y:BAND_T+840,w:1000,h:140,size:120,f:'ext',fill:flash?INK:PAP});
     }}
 ]};
-FILMS.acharit={ title:'אחרית הימים · red, the words, the flash strip', shots:[
- {beats:1, note:'red alone, the strip running', draw:function(tb,fr){ ground(RED); flashStrip(fr,COPY.turnout.flash,RED); }},
+function flashFilm(word,g,ink){ return [
+ {beats:1, note:'the ground alone, the strip running', draw:function(tb,fr){ ground(g); flashStrip(fr,COPY.turnout.flash,g); }},
  {beats:6, note:'the words land and hold', draw:function(tb,fr){
-    ground(RED); text(COPY.turnout.end,{x:40,y:BAND_T+500,w:1000,h:300,size:220,f:'ext',fill:INK});
-    flashStrip(fr,COPY.turnout.flash,RED); }}
-]};
+    ground(g); var n=word.split('\n').length; text(word,n===1?{x:40,y:BAND_T+500,w:1000,h:300,size:220,f:'ext',fill:ink}:{x:40,y:BAND_T+650-90*n,w:1000,h:180*n,lines:n,size:220,f:'ext',fill:ink});   /* a long line breaks in two */
+    flashStrip(fr,COPY.turnout.flash,g); }}
+]; }
+FILMS.acharit={ title:'אחרית הימים · red, the words, the flash strip', shots:flashFilm(COPY.turnout.end,RED,INK) };
+/* two more in the same breath: the flash, a ground of the palette, one line */
+FILMS.flash2={ title:'מבזק 2 · blue', shots:flashFilm(COPY.flash.two,BLU,PAP) };
+FILMS.flash3={ title:'מבזק 3 · yellow', shots:flashFilm(COPY.flash.three,YEL,INK) };
+FILMS.flash4={ title:'מבזק 4 · red', shots:flashFilm(COPY.flash.four,RED,INK) };
+FILMS.flash5={ title:'מבזק 5 · blue', shots:flashFilm(COPY.flash.five,BLU,PAP) };
+FILMS.flash6={ title:'מבזק 6 · yellow', shots:flashFilm(COPY.flash.six,YEL,INK) };
 
 /* ---- engine ----------------------------------------------------------------------- */
 var FILM='kalpi', SEG=[], TOTAL=0, FMT='story';
