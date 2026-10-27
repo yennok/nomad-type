@@ -116,7 +116,8 @@ function slipAt(y,label,word){
 }
 window.__vidTotal=function(){ return 11*BEAT; };
 window.__vidFrame=function(fr){
-  var b=fr/FPS/BEAT; stage.style.background=GRY; document.getElementById('ground').style.display='block';
+  var b=fr/FPS/BEAT+0.4;   // open mid-fall: the first slip is already moving on frame one
+  stage.style.background=GRY; document.getElementById('ground').style.display='block';
   grain(Math.floor(fr/3)%6); HIDE_SLIP=true; world.dataset.k=''; boxWorld(); HIDE_SLIP=false;
   // the frame's top edge is scene y 260, so a slip just out of view starts at -40; the slips are cut at the
   // bottom of the slot (662), drawn over it: the slip covers the bar and vanishes under its bottom edge
