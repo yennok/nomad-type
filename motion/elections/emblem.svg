@@ -1,10 +1,10 @@
 <svg width="1080" height="1350" viewBox="0 0 1080 1350" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="1080" height="1350" fill="#2045DE"/>
 <path d="M925 217V824.65L540 1181.55L155 824.65V217H925Z" stroke="white" stroke-width="30"/>
-<rect x="424" y="673" width="232" height="34" fill="white"/>
-<rect x="462" y="639" width="156" height="34" fill="white"/>
-<rect x="499" y="605" width="82" height="34" fill="white"/>
-<rect x="523" y="384.6" width="34" height="221" fill="white"/>
+<rect x="424" y="672" width="232" height="35" fill="white"/>
+<rect x="462" y="638" width="156" height="35" fill="white"/>
+<rect x="499" y="604" width="82" height="35" fill="white"/>
+<rect x="523" y="384.6" width="34" height="222" fill="white"/>
 <path d="M472 384.6H506V428.8H574V384.6H608V428.8L574 462.8H506L472 428.8V384.6Z" fill="white"/>
 <path d="M420.5 384.5H454.5L455 476.4H625L624.5 384.5H658.5L659 476.4L625 510.4H455L421 476.4L420.5 384.5Z" fill="white"/>
 <path d="M370 384.4H404V528H676V384.4H710V528L676 562H404L370 528V384.4Z" fill="white"/>
