@@ -482,13 +482,35 @@ function blocMap(fr,st){
   text(COPY.blocs.left,{x:60,y:cy+150,w:300,h:70,size:60,f:'reg',fill:INK,align:'left'});
   text(COPY.blocs.magic,{x:390,y:cy-120,w:300,h:160,size:160,f:'ext',fill:INK});
 }
-FILMS.blocs={ title:'מפת הגושים · the arc swings between results from the first frame, and it never settles: a cut', shots:[
- {beats:7, note:'the needle revs from frame one: the arc swings between 20 and 80 every quarter beat, and the film cuts mid-swing', draw:function(tb,fr){
-    groundGrey(fr);
-    var q=tb/0.25, k=Math.floor(q), u=easeIO(q-k);
-    function T(j){ if(j===0) return 58; return j%2===0 ? 22+h2(j,3)*12 : 86+h2(j,5)*12; }   // about 20% of the arc, then 80%, and back
-    var a=lerp(T(k),T(k+1),u), c=Math.round(4*h2(k,9)), b=120-a-c;
-    blocMap(fr,[a,c,b]); }}
+/* the needle, as results come in: every beat lands on a big swing, and between the beats it twitches
+   a random number of times, small and large, some eased, some snapping, the undecided slice coming and
+   going. Eight beats, two bars, so the cut lands on the downbeat with the music, on a last big swing. */
+var BLOC_PATH=(function(){
+  var segs=[], t=0, a=58, j=1, S=1/6;                               // one tick is a sixth of a beat
+  while(t<8-1e-9){
+    var onBeat=Math.abs(t-Math.round(t))<1e-6, nextBeat=Math.floor(t+1e-9)+1;
+    var big=onBeat || h2(j,1)<0.22, na;
+    if(big) na = a<60 ? 64+h2(j,2)*34 : 20+h2(j,3)*34;              // across the middle, by a different amount each time
+    else na = Math.max(16,Math.min(104,a+(h2(j,4)-0.5)*(h2(j,6)<0.5?10:26)));   // a twitch, small or not so small
+    var n=onBeat ? 1+Math.floor(h2(j,5)*3) : 1+Math.floor(h2(j,5)*2), dur=Math.min(n*S,nextBeat-t);
+    var mode=onBeat ? (h2(j,7)<0.5?'quick':'ease') : (h2(j,7)<0.45?'snap':'ease');
+    if(t>=7.5-1e-9){ na = a<60 ? 104 : 14; dur=8.25-t; mode='ease'; }   // the last swing is meant to end after the cut: the film cuts in mid-flight
+    segs.push({t0:t,t1:t+dur,from:a,to:na,c0:segs.length?segs[segs.length-1].c1:2,c1:Math.round(h2(j,8)*7),mode:mode});
+    a=na; t+=dur; j++;
+  }
+  return segs;
+})();
+function blocAt(tb){
+  var s=BLOC_PATH[BLOC_PATH.length-1];
+  for(var i=0;i<BLOC_PATH.length;i++) if(tb<BLOC_PATH[i].t1-1e-9){ s=BLOC_PATH[i]; break; }
+  var u=clamp01((tb-s.t0)/(s.t1-s.t0));
+  var k = s.mode==='snap' ? 1 : s.mode==='quick' ? easeIO(Math.min(1,u*3)) : easeIO(u);
+  var a=lerp(s.from,s.to,k), c=Math.round(lerp(s.c0,s.c1,k));
+  return [a,c,120-a-c];
+}
+FILMS.blocs={ title:'מפת הגושים · the needle, at random: a big swing on every beat, twitches between, and the cut on the downbeat', shots:[
+ {beats:8, note:'two bars of results coming in; it never settles, and the cut comes on the downbeat, with the music', draw:function(tb,fr){
+    groundGrey(fr); blocMap(fr,blocAt(tb)); }}
 ]};
 
 /* ---- the state emblem, in the language of the figures. Everything a rect, a fold or a square. ---- */
