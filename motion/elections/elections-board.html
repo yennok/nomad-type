@@ -367,24 +367,22 @@ function presenters(fr){
   for(var i=0;i<2;i++){ var f=fig[i], bob=Math.sin(fr*0.19+i*2.1)*5;
     ellipse(f.x+129,BAND_B-127-f.h-110+bob,194,194,INK); rect(f.x,BAND_B-127-f.h+bob,259,f.h-bob+127,RED); }
 }
-/* the end-of-transmission card: colour bars laid out like the broadcast test card, in this channel's
-   four colours only (grey, as always, grained). Seven bars, a reversed strip under them, the blocks
-   at the foot, and the words on a black band across the middle. It fills the whole story frame. */
+/* the end-of-transmission card, as Nir's reference: five bars (white, yellow, grained grey, red, black)
+   down the top three quarters, the reversed strip under them, the blocks at the foot. No words. */
 function testCard(fr){
-  var top=[PAP,GRY,RED,INK,PAP,RED,GRY], bw=W/7, H1=Math.round(H*0.62), H2=Math.round(H*0.08);
-  for(var i=0;i<7;i++){ var c=top[i]; c===GRY ? grey(i*bw,0,bw+1,H1,fr) : rect(i*bw,0,bw+1,H1,c); }
-  var rev=[GRY,INK,RED,INK,PAP,INK,PAP];
-  for(var j=0;j<7;j++){ var c2=rev[j]; c2===GRY ? grey(j*bw,H1,bw+1,H2,fr) : rect(j*bw,H1,bw+1,H2,c2); }
-  var y3=H1+H2, h3=H-y3, blocks=[[RED,1.25],[PAP,1.25],[INK,1.25],[GRY,1.25],[INK,0.4],['#262626',0.4],[INK,1.2]], x=0;
-  blocks.forEach(function(b){ var w=b[1]*bw; b[0]===GRY ? grey(x,y3,w+1,h3,fr) : rect(x,y3,w+1,h3,b[0]); x+=w; });
+  var bw=W/5, H1=Math.round(H*0.729), H2=Math.round(H*0.091), y3=H1+H2, h3=H-y3;
+  [PAP,YEL,GRY,RED,INK].forEach(function(c,i){ c===GRY ? grey(i*bw,0,bw+1,H1,fr) : rect(i*bw,0,bw+1,H1,c); });
+  [INK,RED,INK,GRY,PAP].forEach(function(c,i){ c===GRY ? grey(i*bw,H1,bw+1,H2,fr) : rect(i*bw,H1,bw+1,H2,c); });
+  var u=W/540, x=0;
+  [[RED,97],[PAP,97],[GRY,92],[INK,254]].forEach(function(bk){ var w=bk[1]*u; bk[0]===GRY ? grey(x,y3,w+1,h3,fr) : rect(x,y3,w+1,h3,bk[0]); x+=w; });
 }
-function endCard(fr){ testCard(fr); rect(0,BAND_T+560,W,230,INK); text(COPY.closing.end,{x:40,y:BAND_T+600,w:1000,h:150,size:140,f:'ext',fill:PAP}); }
+function endCard(fr){ testCard(fr); }
 FILMS.closing={ title:'סגירה · the last broadcast, the card, and the set switches off', shots:[
  {beats:4, note:'two presenters, the strip reads last broadcast', draw:function(tb,fr){
     groundGrey(fr); presenters(fr);
     ellipse(1080-54-75,BAND_T+65+75,151,151,RED); text(COPY.closing.bug,{x:1080-54-151,y:BAND_T+65+40,w:151,h:71,size:71,f:'reg',fill:PAP,fit:false});
     flashStrip(fr,COPY.closing.last,RED); }},
- {beats:4, note:'the colour bars: end of transmission', draw:function(tb,fr){ ground(INK); endCard(fr); }},
+ {beats:4, note:'the colour bars and the tone: end of transmission', draw:function(tb,fr){ ground(INK); endCard(fr); }},
  {beats:2, note:'the tube goes off: the picture collapses to a line, then a dot', draw:function(tb,fr){
     ground(INK); var p1=move(tb,1), p2=move(tb-1,1);
     var h=lerp(H,6,p1), w=lerp(W,6,p2);
