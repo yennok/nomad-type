@@ -87,7 +87,7 @@ var EMBLEM={"bg": "<rect width=\"1080\" height=\"1350\" fill=\"#2045DE\"/>", "st
 var COPY={
   kalpi:{ letters:'אבגדהוזח', last:'הצבעתי', end:'הצבעתי!' },
   trayHope: { letters:'אבגדהוזחטיכלמנסעפצקרשת ', stops:'תשחי', words:{'ת':'תקווה','ש':'שלום','ח':'חיים','י':'ישראל'} },
-  trayAr: { letters:'ابتثجحخدذرزسشصضطظعغفقكلمنهوي ', stops:'اسحف', words:{'ا':'أمل','س':'سلام','ح':'حياة','ف':'فلسطين'} },
+  trayAr: { letters:'أبتثجحخدذرزسشصضطظعغفقكلمنهوي ', stops:'أسحف', words:{'أ':'أمل','س':'سلام','ح':'حياة','ف':'فلسطين'} }, /* alef with its hamza, as أمل begins */
   tray: { title:'איזו אות?', letters:'אבגדהוזחטיכלמנסעפצקרשת ', stops:'צאשת' },   // the trailing space is the blank white slip; the stops are never a party's single letter
   petek:{ title:'פתק', letters:'אבגדהוזחטיכלמנסעפצקרשת', names:{'א':'אלף','ב':'בית','ג':'גימל','ד':'דלת','ה':'הא','ו':'וו','ז':'זין','ח':'חית','ט':'טית','י':'יוד','כ':'כף','ל':'למד','מ':'מם','נ':'נון','ס':'סמך','ע':'עין','פ':'פא','צ':'צדי','ק':'קוף','ר':'ריש','ש':'שין','ת':'תו'}, final:'ל', envelope:'הבחירות לכנסת' },
   pikuach:{ mark:'עדכון מהשטח', bug:'14', third:'טוהר הבחירות', sub:'שידור חי מהקלפי', ticker:'עוד כותרת דרמטית · עוד הכרזה מוטלת בספק באמינותה · עוד שקר כלשהו · עוד סילוף מידע · עוד הטעיית ציבור · ' },
@@ -177,9 +177,9 @@ function ballotBox(){
 /* the Israeli slip: white, the letter big, its name small on a line under it */
 function slip(x,y,w,h,letter,name,size,lf,nf){
   rect(x,y,w,h,PAP);
-  var ar=lf==='arR';                               // Arabic sits high in its line: drop its baseline to centre it, and the rule and word with it
-  text(letter,{x:x,y:y+h*(ar?0.20:0.14),w:w,h:h*0.46,size:size||h*0.42,f:lf||'ext',fill:INK,fit:false});
-  if(name){ rect(x+w*0.25,y+h*(ar?0.77:0.68),w*0.5,4,INK); text(name,{x:x+w*0.06,y:y+h*(ar?0.80:0.72),w:w*0.88,h:h*(ar?0.14:0.16),size:h*(ar?0.10:0.09),f:nf||'reg',fill:INK}); }
+  var ar=lf==='arR';                               // Arabic, measured against the Hebrew: the same baseline, the same rule, the word centred where the Hebrew word is
+  text(letter,{x:x,y:y+h*(ar?0.129:0.14),w:w,h:h*0.46,size:(size||h*0.42)*(ar?0.87:1),f:lf||'ext',fill:INK,fit:false});   /* a touch smaller and higher, so sin and hah clear the rule */
+  if(name){ rect(x+w*0.25,y+h*0.68,w*0.5,4,INK); text(name,{x:x+w*0.06,y:y+h*(ar?0.73:0.72),w:w*0.88,h:h*0.16,size:h*(ar?0.10:0.09),f:nf||'reg',fill:INK}); }
 }
 /* the envelope: blue, a line of type, two paper labels, as the real one */
 function envelope(x,y,w,h){
@@ -275,7 +275,7 @@ function trayHopeShots(C,G,lf,nf){
   return out;
 }
 FILMS.trayHope={ title:'המגש · תקווה: the rounds stop on ת ש ח י, each slip with its word', shots:trayHopeShots(COPY.trayHope,TRAY,'ext','reg') };
-FILMS.trayAr={ title:'الصينية · أمل: the Arabic tray stops on ا س ح ف, each slip with its word', shots:trayHopeShots(COPY.trayAr,TRAY_AR,'arR','arR') };
+FILMS.trayAr={ title:'الصينية · أمل: the Arabic tray stops on أ س ح ف, each slip with its word', shots:trayHopeShots(COPY.trayAr,TRAY_AR,'arR','arR') };
 
 FILMS.petek={ title:'הפתק · the alphabet, a letter a half beat', shots:[
  {beats:6, note:'one slip; the letter and its name change on the half beat', draw:function(tb,fr){

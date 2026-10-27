@@ -6,7 +6,7 @@ const { chromium } = require('playwright'); const fs = require('fs'); const path
   p.on('pageerror', e => console.log('pageerror', e.message));
   await p.goto('file://' + path.resolve(board)); await p.evaluate(() => window.__ready);
   await p.evaluate(() => { window.__renderMode('post'); window.__film('trayHope'); window.__frame(0); });
-  const WORDS = [['ת','תקווה','he'],['ا','أمل','ar'],['ש','שלום','he'],['س','سلام','ar'],['ח','חיים','he'],['ح','حياة','ar'],['י','ישראל','he'],['ف','فلسطين','ar']];
+  const WORDS = [['ת','תקווה','he'],['أ','أمل','ar'],['ש','שלום','he'],['س','سلام','ar'],['ח','חיים','he'],['ح','حياة','ar'],['י','ישראל','he'],['ف','فلسطين','ar']];
   const GROUNDS = ['blue','red','yellow','grey'];
   for (const g of GROUNDS) for (let i = 0; i < WORDS.length; i++) {
     const [l, w, lang] = WORDS[i];
