@@ -471,9 +471,9 @@ function emblem(stage){
   // stage: 0 shield, 1 base and stem, 2..4 the branches, 5 flames, 6 olives, 7 the word
   ground(BLU); var d=el('ly','left:0;top:'+BAND_T+'px;width:1080px;height:1350px'); d.innerHTML=emblemSvg(stage,false);
 }
-FILMS.emblem={ title:'הסמל · the shield, then a part a beat, the word last', shots:[
- {beats:8, note:'shield; base and stem; branch, branch, branch; flames; olives; the word', draw:function(tb,fr){ emblem(Math.floor(tb+1e-9)); }},
- {beats:3, note:'hold', draw:function(tb,fr){ emblem(7); }}
+FILMS.emblem={ title:'הסמל · twice as fast: a part every half beat, the word last', shots:[
+ {beats:4, note:'shield; base and stem; branch, branch, branch; flames; olives; the word, a half beat each', draw:function(tb,fr){ emblem(Math.floor(tb*2+1e-9)); }},
+ {beats:1.5, note:'hold', draw:function(tb,fr){ emblem(7); }}
 ]};
 
 /* the turnout: five grey bars for the elections that were, then one red bar that breaks the
