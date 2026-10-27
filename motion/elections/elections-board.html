@@ -467,14 +467,21 @@ function shield(oy,fill,ground){
   var o=rect(140,oy+240,800,990,fill); o.style.clipPath='polygon(0 0,100% 0,100% 68.6%,50% 100%,0 68.6%)';
   var i=rect(170,oy+270,740,922,ground); i.style.clipPath='polygon(0 0,100% 0,100% 68.8%,50% 100%,0 68.8%)';
 }
-function emblem(stage,k){
+function emblem(stage,k,tb){
   // stage: 0 shield, 1 base and stem, 2..4 the branches, 5 flames, 6 olives, 7 the word
   // k: the shield's pump (1 = at rest). It scales about its own middle; the line keeps its 30.
+  // tb: when given, the seven flames jump on the beat like an equaliser, each to its own height.
   ground(BLU); var d=el('ly','left:0;top:'+BAND_T+'px;width:1080px;height:1350px');
   if(!k || k===1){ d.innerHTML=emblemSvg(stage,false); return; }
   var sh=EMBLEM.stages[0].replace('<path','<path vector-effect="non-scaling-stroke"');
+  var parts=EMBLEM.stages.slice(1,stage+1);
+  if(tb!==undefined && stage>=5){
+    var fl=EMBLEM.stages[5].split('\n'), beat=Math.floor(tb+1e-9), t=(tb-beat)*BEAT;
+    var hit=Math.pow(Math.max(0,1-t/0.35),2), twitch=t>=BEAT/2 ? 0.35*Math.pow(Math.max(0,1-(t-BEAT/2)/0.2),2) : 0;
+    parts[4]=fl.map(function(r,i){ var dy=(22+52*h2(beat,i+3))*(hit+twitch); /* up to 74, still inside the shield */ return '<g transform="translate(0 '+(-dy).toFixed(1)+')">'+r+'</g>'; }).join('');
+  }
   d.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" fill="none" style="display:block">'+
-    '<g transform="translate(540 699) scale('+k+') translate(-540 -699)">'+sh+'</g>'+EMBLEM.stages.slice(1,stage+1).join('')+'</svg>';
+    '<g transform="translate(540 699) scale('+k+') translate(-540 -699)">'+sh+'</g>'+parts.join('')+'</svg>';
 }
 /* the pump, as Elite's roundel on the logo board: a real hit on the beat, a short twitch on the half beat */
 function pump(tb){
@@ -483,9 +490,9 @@ function pump(tb){
   if(inBeat>=3) k+=0.04*Math.pow(Math.max(0,1-((inBeat-3)*TICK)/0.2),2);
   return k;
 }
-FILMS.emblem={ title:'הסמל · built twice as fast, then the frame pumps like a speaker', shots:[
+FILMS.emblem={ title:'הסמל · built twice as fast, then the frame pumps and the flames jump', shots:[
  {beats:4, note:'shield; base and stem; branch, branch, branch; flames; olives; the word, a half beat each', draw:function(tb,fr){ emblem(Math.floor(tb*2+1e-9)); }},
- {beats:4, note:'the frame pumps on the beat, a twitch on the half beat; the menorah holds still', draw:function(tb,fr){ emblem(7,pump(tb)); }}
+ {beats:12, note:'the frame pumps on the beat, the seven flames jump like an equaliser; the rest holds still', draw:function(tb,fr){ emblem(7,pump(tb),tb); }}
 ]};
 
 /* the turnout: five grey bars for the elections that were, then one red bar that breaks the
