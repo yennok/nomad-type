@@ -107,7 +107,7 @@ window.__fig=function(n){ var f=FIG[n]; HIDE_SLIP=!!f.hide; stage.style.backgrou
    Eight letter slips fall into the slot, a beat each, then the הצבעתי slip, the same size, falls in and stops
    where the frame has it, and it holds. The slips are drawn behind the lid, as in the scene. ---- */
 /* the reel: the same Zoom 4 scale, the frame 9:16 and centred on the same point; Hebrew letters only, none a party's */
-var Z4={x:-208,y:-75,s:1496/1080}, LET='תשחיאצ';
+var Z4={x:-448,y:-372,s:1.83}, LET='תשחיאצ';   /* closer, as Nir's frame: the slip 438px wide, the slot at a third, the emblem whole */
 function slipAt(y,label,word){
   var d=document.createElement('div'); d.className='ly'; d.style.cssText='left:420px;top:'+y+'px;width:240px;height:300px;background:'+PAP;
   if(word){ var w=document.createElement('div'); w.className='ly'; w.style.cssText='left:26.25px;top:68px;width:187.5px;height:39px'; w.innerHTML=SLIP_WORD; d.appendChild(w); }
