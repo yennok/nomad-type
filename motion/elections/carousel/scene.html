@@ -118,10 +118,13 @@ window.__vidTotal=function(){ return 11*BEAT; };
 window.__vidFrame=function(fr){
   var b=fr/FPS/BEAT; stage.style.background=GRY; document.getElementById('ground').style.display='block';
   grain(Math.floor(fr/3)%6); HIDE_SLIP=true; world.dataset.k=''; boxWorld(); HIDE_SLIP=false;
-  var box=document.createElement('div'); box.className='ly'; box.style.cssText='left:0;top:0;width:1080px;height:1350px';
-  for(var i=0;i<LET.length;i++){ var u=b-i; if(u<0||u>=1) continue; box.appendChild(slipAt(-420+(720+420)*ease(u),LET.charAt(i),false)); }
-  if(b>=8){ var v=Math.min(1,b-8); box.appendChild(slipAt(-420+(338+420)*ease(v),'',true)); }
-  world.insertBefore(box,world.firstChild);
+  // the frame's top edge is scene y 260, so a slip just out of view starts at -40; the slips are cut at the
+  // middle of the slot (650) and the slot is drawn over them, so they go into the box, not behind it
+  var EDGE=(0-Z4.y)/Z4.s-300;
+  var box=document.createElement('div'); box.className='ly'; box.style.cssText='left:0;top:0;width:1080px;height:650px;overflow:hidden';
+  for(var i=0;i<LET.length;i++){ var u=b-i; if(u<0||u>=1) continue; box.appendChild(slipAt(EDGE+(700-EDGE)*ease(u),LET.charAt(i),false)); }
+  if(b>=8){ var v=Math.min(1,b-8); box.appendChild(slipAt(EDGE+(350-EDGE)*ease(v),'',true)); }
+  world.appendChild(box); TARGET=world; rect(390,638,300,24,INK);
   world.style.transform='translate('+Z4.x+'px,'+Z4.y+'px) scale('+Z4.s+')';
 };
 window.__ready=Promise.all(['Dolomit','Dolomit Ext'].map(function(f){return document.fonts.load('700 200px "'+f+'"');})).then(function(){return document.fonts.ready;});
