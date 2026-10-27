@@ -165,7 +165,7 @@ function emblemArtAt(x,y,sc){
 var BOX={x:90,w:900,lid:880,slotX:390,slotW:300};
 function ballotBox(){
   rect(BOX.x,BOX.lid+100,BOX.w,H-BOX.lid-100,BLU);                  // body, off the foot of the frame
-  emblemArtAt(540-1080*0.36/2,BOX.lid+102,0.36);                     // the emblem, small, in the box's own blue
+  emblemArtAt(540-1080*0.36/2,BOX.lid+131,0.36);                     // the emblem, small, where Figma has it
   rect(BOX.x-30,BOX.lid,BOX.w+60,100,BLU);                           // lid, a little wider than the body
   rect(BOX.x-30,BOX.lid+94,BOX.w+60,6,INK);                          // the lid's edge
   rect(BOX.slotX,BOX.lid+32,BOX.slotW,24,INK);                       // the slot
@@ -247,6 +247,13 @@ function trayDraw(cur,S){
   }
 }
 function letterNames(t){ return Array.from(t).map(function(ch){ var base={'ך':'כ','ם':'מ','ן':'נ','ף':'פ','ץ':'צ'}[ch]||ch; return COPY.petek.names[base]||''; }).join(' '); }
+/* the box for the zoom carousel's last item: the letters, and the moment ח is in, the הצבעתי slip drops in
+   halfway. No rest, no card: it ends there, holding. */
+FILMS.kalpi45={ title:'הקלפי לקרוסלה · eight slips, then הצבעתי at once, and it holds', shots:[
+ {beats:8, note:'eight slips drop through the air into the slot, one a beat', draw:function(tb,fr){ FILMS.kalpi.shots[0].draw(tb,fr); }},
+ {beats:3, note:'right after ח, the הצבעתי slip drops in halfway and holds', draw:function(tb,fr){ FILMS.kalpi.shots[2].draw(tb,fr); }}
+]};
+
 FILMS.tray={ title:'המגש · the tray, a slip, the tray shuffled, another slip, four times', shots:(function(){
   var out=[];
   COPY.tray.cycles.forEach(function(stop,c){

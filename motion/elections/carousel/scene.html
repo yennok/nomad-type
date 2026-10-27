@@ -40,13 +40,13 @@ function emblemArt(){ var d=el('ly','left:0;top:0;width:1080px;height:1350px'); 
 /* ---- the world: the box close, as in the film. The lid at the middle of the frame, the body cut off
    by its foot, the air above. The emblem sits on the front just under the lid, in the box's own blue,
    so on the first slide the box is invisible: it is all emblem. ---- */
-var ES=0.36, EW=1080*ES, EH=1350*ES, EX=540-EW/2, EY=708;        // the emblem frame on the box: 389 x 486, as in the film
+var ES=0.36, EW=1080*ES, EH=1350*ES, EX=540-EW/2, EY=737;   // EY as moved in Figma        // the emblem frame on the box: 389 x 486, as in the film
 var ECX=EX+EW/2, ECY=EY+EH/2;
 var BODY={x:90,y:706,w:900,h:1400}, LID={x:60,y:606,w:960,h:100};
 function boxWorld(){
   world.textContent=''; TARGET=world;
-  rect(420,330,240,300,PAP);                                       // the slip, half in the slot
-  text('הצבעתי',{x:440,y:400,w:200,h:56,size:44,f:'ext',fill:INK});   // shrinks to sit inside the slip
+  if(!HIDE_SLIP){ rect(420,338,240,300,PAP);                       // the slip, as in Figma
+    var wd=el('ly','left:446.25px;top:406px;width:187.5px;height:39px'); wd.innerHTML=SLIP_WORD; }
   rect(BODY.x,BODY.y,BODY.w,BODY.h,BLU);
   var g=el('ly','left:'+EX+'px;top:'+EY+'px;width:1080px;height:1350px;transform-origin:0 0;transform:scale('+ES+')');
   var prev=TARGET; TARGET=g; emblemArt(); TARGET=prev;
@@ -97,5 +97,10 @@ window.__zoomFrame=function(fr){
   grain(Math.floor(fr/3)%6); if(!world.firstChild || world.dataset.k!=='box'){ boxWorld(); world.dataset.k='box'; }
   camera(c.z,c.cx,c.cy);
 };
+var HIDE_SLIP=false, SLIP_WORD="<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"187.5\" height=\"39.0\" viewBox=\"0 0 187.5 39.0\"><path d=\"M1.44 7.199999999999999H8.351999999999999V19.619999999999997H1.44Z M11.232 28.799999999999997V21.851999999999997H14.364V7.199999999999999H39.096L45.936 14.147999999999998V28.799999999999997H39.024V14.147999999999998H21.276V28.799999999999997Z M48.815999999999995 21.851999999999997H53.928V7.199999999999999H60.839999999999996V21.851999999999997H74.232V7.199999999999999H81.144V21.851999999999997L74.268 28.799999999999997H48.815999999999995Z M84.024 21.851999999999997H107.208V14.147999999999998H84.024V7.199999999999999H107.28L114.156 14.147999999999998L114.12 17.927999999999997L110.232 21.851999999999997H115.632V28.799999999999997H84.024Z M121.14 21.851999999999997H137.448L119.052 7.199999999999999H128.808L139.572 15.839999999999998H142.848V7.199999999999999H149.76V14.183999999999997L144.36 19.692L148.968 23.4V28.799999999999997H121.14Z M179.136 14.147999999999998H152.64V7.199999999999999H179.172L186.048 14.147999999999998V28.799999999999997H179.136ZM152.64 18.395999999999997H159.552V28.799999999999997H152.64Z\" fill=\"#0A0A0A\"/></svg>";
+/* the three stills exactly as the Figma frames place the scene instance: x, y, scale, and frame 2 hides the slip */
+var FIG=[{x:-1120,y:-2359,s:3320/1080},{x:-824,y:-1517,s:2728/1080,hide:true},{x:-656,y:-1132,s:2392/1080}];
+window.__fig=function(n){ var f=FIG[n]; HIDE_SLIP=!!f.hide; stage.style.background=GRY; document.getElementById('ground').style.display='block';
+  grain(n); world.dataset.k=''; boxWorld(); world.style.transform='translate('+f.x+'px,'+f.y+'px) scale('+f.s+')'; HIDE_SLIP=false; };
 window.__ready=Promise.all(['Dolomit','Dolomit Ext'].map(function(f){return document.fonts.load('700 200px "'+f+'"');})).then(function(){return document.fonts.ready;});
 </script></body></html>
