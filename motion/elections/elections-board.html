@@ -482,21 +482,18 @@ function blocMap(fr,st){
   text(COPY.blocs.left,{x:60,y:cy+150,w:300,h:70,size:60,f:'reg',fill:INK,align:'left'});
   text(COPY.blocs.magic,{x:390,y:cy-120,w:300,h:160,size:160,f:'ext',fill:INK});
 }
-/* the needle, as results come in: every beat lands on a big swing, and between the beats it twitches
-   a random number of times, small and large, some eased, some snapping, the undecided slice coming and
-   going. Eight beats, two bars, so the cut lands on the downbeat with the music, on a last big swing. */
+/* the needle, as results come in, sweeping the whole dial. Eight beats, two bars, so the cut lands on the
+   downbeat with the music, in the middle of a last swing. */
 var BLOC_PATH=(function(){
-  var segs=[], t=0, a=58, j=1, S=1/6;                               // one tick is a sixth of a beat
+  /* the whole dial, side to side: every swing crosses the middle and goes most of the way to the far end,
+     by a random amount, half a beat or a whole beat long, eased; no small twitches. */
+  var segs=[], t=0, a=60, j=1;
   while(t<8-1e-9){
-    var onBeat=Math.abs(t-Math.round(t))<1e-6, nextBeat=Math.floor(t+1e-9)+1;
-    var big=onBeat || h2(j,1)<0.22, na;
-    if(big) na = a<60 ? 64+h2(j,2)*34 : 20+h2(j,3)*34;              // across the middle, by a different amount each time
-    else na = Math.max(16,Math.min(104,a+(h2(j,4)-0.5)*(h2(j,6)<0.5?10:26)));   // a twitch, small or not so small
-    var n=onBeat ? 1+Math.floor(h2(j,5)*3) : 1+Math.floor(h2(j,5)*2), dur=Math.min(n*S,nextBeat-t);
-    var mode=onBeat ? (h2(j,7)<0.5?'quick':'ease') : (h2(j,7)<0.45?'snap':'ease');
-    if(t>=7.5-1e-9){ na = a<60 ? 104 : 14; dur=8.25-t; mode='ease'; }   // the last swing is meant to end after the cut: the film cuts in mid-flight
-    segs.push({t0:t,t1:t+dur,from:a,to:na,c0:segs.length?segs[segs.length-1].c1:2,c1:Math.round(h2(j,8)*7),mode:mode});
-    a=na; t+=dur; j++;
+    var na = a<60 ? 78+h2(j,2)*38 : 4+h2(j,3)*38;                    // from one side to the other, 78..116 or 4..42
+    var dur = Math.min(h2(j,5)<0.55 ? 0.5 : 1, 8-t), mode='ease';
+    if(t>=7.5-1e-9){ dur=8.25-t; }                                    // the last swing ends after the cut: cut in mid-flight
+    segs.push({t0:t,t1:t+dur,from:a,to:na,c0:segs.length?segs[segs.length-1].c1:2,c1:Math.round(h2(j,8)*4),mode:mode});
+    a=na; t+=Math.min(dur,8-t); j++;
   }
   return segs;
 })();
@@ -508,7 +505,7 @@ function blocAt(tb){
   var a=lerp(s.from,s.to,k), c=Math.round(lerp(s.c0,s.c1,k));
   return [a,c,120-a-c];
 }
-FILMS.blocs={ title:'מפת הגושים · the needle, at random: a big swing on every beat, twitches between, and the cut on the downbeat', shots:[
+FILMS.blocs={ title:'מפת הגושים · the needle sweeps the whole dial, side to side, at random, and the cut on the downbeat', shots:[
  {beats:8, note:'two bars of results coming in; it never settles, and the cut comes on the downbeat, with the music', draw:function(tb,fr){
     groundGrey(fr); blocMap(fr,blocAt(tb)); }}
 ]};
