@@ -85,7 +85,7 @@ var COPY={
   kalpi:{ letters:'אבגדהוזח', end:'הצבעתי!' },
   tray: { title:'איזו אות?', letters:'אבגדהוזחטיכלמנסעפצקרשת ', stop:17 },   // the trailing space is the blank white slip
   petek:{ title:'פתק', letters:'אבגדהוזחטיכלמנסעפצקרשת', names:{'א':'אלף','ב':'בית','ג':'גימל','ד':'דלת','ה':'הא','ו':'וו','ז':'זין','ח':'חית','ט':'טית','י':'יוד','כ':'כף','ל':'למד','מ':'מם','נ':'נון','ס':'סמך','ע':'עין','פ':'פא','צ':'צדי','ק':'קוף','ר':'ריש','ש':'שין','ת':'תו'}, final:'ל', envelope:'הבחירות לכנסת' },
-  pikuach:{ mark:'השגחה', bug:'14', third:'טוהר הבחירות', sub:'שידור חי מהקלפי', ticker:'עוד כותרת דרמטית · עוד הכרזה מוטלת בספק באמינותה · עוד שקר כלשהו · עוד סילוף מידע · עוד הטעיית ציבור · ' },
+  pikuach:{ mark:'עדכון מהשטח', bug:'14', third:'טוהר הבחירות', sub:'שידור חי מהקלפי', ticker:'עוד כותרת דרמטית · עוד הכרזה מוטלת בספק באמינותה · עוד שקר כלשהו · עוד סילוף מידע · עוד הטעיית ציבור · ' },
   closing:{ bug:'14', last:'שידור אחרון · ', end:'סוף השידורים', morning:'בוקר טוב' },
   midgam:{ mark:'מדגם', bug:'14', third:'הקלפיות נסגרו', sub:'22:00', hafuch:'מהפך!', flash:'מבזק! · ',
            // twelve generic faces, a letter and a seat count each, never a party
@@ -199,8 +199,8 @@ function chrome(fr,o){
   var sx=(fr*5)%tw;                                  // 150px a second, rightward, as the ticker runs rtl
   w.style.left=(1080-3*tw+sx)+'px';
 }
-function lowerThird(x,text1,text2){
-  var ly=BAND_B-127-130-190; rect(x,ly,1200,190,PAP);
+function lowerThird(x,text1,text2,ly){
+  if(ly===undefined) ly=BAND_B-127-130-190; rect(x,ly,1200,190,PAP);
   text(text1,{x:x+40,y:ly+28,w:720,h:76,size:66,f:'reg',fill:INK,align:'right'});
   if(text2) text(text2,{x:x+40,y:ly+112,w:720,h:56,size:48,f:'reg',fill:INK,align:'right'});
 }
@@ -299,25 +299,44 @@ FILMS.midgam={ title:'המדגם · a graph: five bars land on the beat, then מ
     flashStrip(fr,COPY.midgam.flash,PAP); }}
 ]};
 
-/* the supervision: twelve generic people at the polling station, all talking at once. The hum is in
-   the bodies: each one's height wanders on its own clock, the way the chan frame's figures do. */
-function person(x,y,cw,chh,i,fr,body){
+/* the field report: twelve people at the polling station. Each one built and dressed differently, short
+   and tall, narrow and broad, in red, ink and grained grey; none of them talks. The hum is in the bodies:
+   each one rises and sinks on its own clock. */
+var PEOPLE=[
+  {bw:150,bh:150,hd:100,st:'split', c1:RED,c2:INK}, {bw:110,bh:120,hd:88, st:'solid', c1:GRY,c2:GRY},
+  {bw:170,bh:158,hd:110,st:'tie',   c1:INK,c2:RED}, {bw:130,bh:110,hd:92, st:'jacket',c1:GRY,c2:INK},
+  {bw:100,bh:135,hd:84, st:'sash',  c1:RED,c2:GRY}, {bw:160,bh:100,hd:106,st:'split', c1:GRY,c2:RED},
+  {bw:120,bh:155,hd:96, st:'solid', c1:INK,c2:INK}, {bw:145,bh:125,hd:90, st:'jacket',c1:RED,c2:INK},
+  {bw:175,bh:140,hd:112,st:'tie',   c1:GRY,c2:RED}, {bw:105,bh:115,hd:86, st:'split', c1:INK,c2:GRY},
+  {bw:140,bh:160,hd:102,st:'sash',  c1:INK,c2:RED}, {bw:125,bh:130,hd:94, st:'solid', c1:RED,c2:RED}
+];
+function cloth(x,y,w,h,c,fr){ return c===GRY ? grey(x,y,w,h,fr) : rect(x,y,w,h,c); }
+function person(x,y,cw,chh,i,fr){
+  var v=PEOPLE[i%PEOPLE.length], foot=y+chh-20;
   rect(x+10,y,cw-20,chh-20,PAP);
-  var bob=Math.sin(fr*0.21+i*1.7)*6+Math.sin(fr*0.53+i*0.9)*4;     // a few pixels, never still
-  var mouth=(Math.floor(fr/3+i)%3===0);                            // talking: the head opens a gap on some frames
-  ellipse(x+cw/2,y+78+bob*0.3,100,100,INK);
-  if(mouth) rect(x+cw/2-18,y+78+bob*0.3+18,36,10,PAP);
-  rect(x+cw/2-70,y+132+bob,140,chh-20-132-bob,body);
+  var bob=Math.sin(fr*0.21+i*1.7)*11+Math.sin(fr*0.53+i*0.9)*5;    // up to 16px, never still
+  var top=foot-v.bh-bob, bx=x+cw/2-v.bw/2, h=foot-top;
+  ellipse(x+cw/2,top-v.hd/2,v.hd,v.hd,INK);
+  if(v.st==='solid') cloth(bx,top,v.bw,h,v.c1,fr);
+  else if(v.st==='split'){ cloth(bx,top,v.bw,h*0.55,v.c1,fr); cloth(bx,top+h*0.55,v.bw,h*0.45,v.c2,fr); }
+  else if(v.st==='tie'){ cloth(bx,top,v.bw,h,v.c1,fr); polyRect(bx+v.bw/2-11,top,22,h*0.62,v.c2,[[0,0],[22,0],[22,h*0.62-11],[11,h*0.62],[0,h*0.62-11]]); }
+  else if(v.st==='jacket'){ cloth(bx,top,v.bw,h,v.c1,fr); cloth(bx+v.bw*0.36,top,v.bw*0.28,h,v.c2,fr); }
+  else if(v.st==='sash'){ cloth(bx,top,v.bw,h,v.c1,fr); polyRect(bx,top,v.bw,h,v.c2,[[0,0],[v.bw*0.32,0],[v.bw,h*0.75],[v.bw,h],[v.bw*0.68,h],[0,h*0.25]]); }
 }
 function peopleGrid(fr){
-  var cols=4, rows=3, cw=250, chh=310, x0=40, y0=BAND_T+230, body=[RED,INK];
-  for(var i=0;i<cols*rows;i++){ var r=Math.floor(i/cols), c=i%cols, x=x0+(cols-1-c)*cw, y=y0+r*chh; person(x,y,cw,chh,i,fr,body[i%2]); }
+  var cols=4, rows=3, cw=250, chh=310, x0=40, y0=BAND_T+230;
+  for(var i=0;i<cols*rows;i++){ var r=Math.floor(i/cols), c=i%cols, x=x0+(cols-1-c)*cw, y=y0+r*chh; person(x,y,cw,chh,i,fr); }
 }
-FILMS.pikuach={ title:'השגחה · twelve people at the polling station, all talking', shots:[
- {beats:1, note:'the chrome alone', draw:function(tb,fr){ groundGrey(fr); chrome(fr,COPY.pikuach); }},
- {beats:6, note:'the room: everyone talks, a hum', draw:function(tb,fr){ groundGrey(fr); peopleGrid(fr); chrome(fr,COPY.pikuach); }},
- {beats:4, note:'the lower third slides in; they keep talking', draw:function(tb,fr){
-    groundGrey(fr); peopleGrid(fr); lowerThird(lerp(1080,162,move(tb,1)),COPY.pikuach.third,COPY.pikuach.sub); chrome(fr,COPY.pikuach); }}
+function fieldChrome(o){
+  ellipse(1080-54-75,BAND_T+65+75,151,151,RED);
+  text(o.bug,{x:1080-54-151,y:BAND_T+65+40,w:151,h:71,size:71,f:'reg',fill:PAP,fit:false});
+  text(o.mark,{x:68,y:BAND_T+65,w:760,h:120,size:100,f:'ext',fill:RED,align:'left'});
+}
+FILMS.pikuach={ title:'עדכון מהשטח · twelve different people at the polling station, humming', shots:[
+ {beats:1, note:'the mark and the bug alone', draw:function(tb,fr){ groundGrey(fr); fieldChrome(COPY.pikuach); }},
+ {beats:6, note:'the room: everyone rises and sinks on their own clock', draw:function(tb,fr){ groundGrey(fr); peopleGrid(fr); fieldChrome(COPY.pikuach); }},
+ {beats:4, note:'the lower third slides in over them; they keep humming', draw:function(tb,fr){
+    groundGrey(fr); peopleGrid(fr); lowerThird(lerp(1080,162,move(tb,1)),COPY.pikuach.third,COPY.pikuach.sub,BAND_B-230); fieldChrome(COPY.pikuach); }}
 ]};
 
 /* the closing: the last broadcast. Two presenters, the strip says it is the last; then the
@@ -451,18 +470,21 @@ function turnoutChart(fr,nbars,lastP,strobe){
 FILMS.turnout={ title:'אחוזי הצבעה · five years as they were, then the one that breaks the frame', shots:[
  {beats:1, note:'ink, the title, the baseline', draw:function(tb,fr){ turnoutChart(fr,-1,0,false); }},
  {beats:6, note:'five grey bars rise, one a beat, right to left', draw:function(tb,fr){ turnoutChart(fr,tb,0,false); }},
- {beats:3, note:'2026: the red bar rises past everything; the picture starts to shake', draw:function(tb,fr){
+ {beats:3, note:'2026: the red bar rises past everything, the screen strobes', draw:function(tb,fr){
     var p=move(tb,2); if(tb>=2) p=1+easeIO((tb-2))*2.2;          // it lands on 90, then keeps going, out of the frame
     turnoutChart(fr,99,p,tb>=2);
-    var amp=lerp(0,14,clamp01((tb-0.5)/2)); SHAKE=[Math.sin(fr*7.1)*amp,Math.cos(fr*5.3)*amp]; }},
- {beats:3, note:'the number alone: 90%, strobing, shaking', draw:function(tb,fr){
+    }},
+ {beats:3, note:'the number alone: 90%, strobing', draw:function(tb,fr){
     var flash=Math.floor(fr/2)%2===0; ground(flash?RED:INK);
     text(COPY.turnout.last.v+'%',{x:40,y:BAND_T+380,w:1000,h:420,size:420,f:'reg',fill:flash?INK:RED});
     text(COPY.turnout.record,{x:40,y:BAND_T+840,w:1000,h:140,size:120,f:'ext',fill:flash?INK:PAP});
-    SHAKE=[Math.sin(fr*7.1)*14,Math.cos(fr*5.3)*14]; }},
- {beats:4, note:'red: the end of days, and the flash strip', draw:function(tb,fr){
+    }}
+]};
+FILMS.acharit={ title:'אחרית הימים · red, the words, the flash strip', shots:[
+ {beats:1, note:'red alone, the strip running', draw:function(tb,fr){ ground(RED); flashStrip(fr,COPY.turnout.flash,RED); }},
+ {beats:6, note:'the words land and hold', draw:function(tb,fr){
     ground(RED); text(COPY.turnout.end,{x:40,y:BAND_T+500,w:1000,h:300,size:220,f:'ext',fill:INK});
-    flashStrip(fr,COPY.turnout.flash,RED); SHAKE=[0,0]; }}
+    flashStrip(fr,COPY.turnout.flash,RED); }}
 ]};
 
 /* ---- engine ----------------------------------------------------------------------- */
