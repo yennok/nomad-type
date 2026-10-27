@@ -391,10 +391,9 @@ FILMS.closing={ title:'סגירה · the last broadcast, the card, and the set s
     var d=lerp(6,0,move(tb,1)); if(d>0.5) ellipse(540,H/2,d,d,PAP); }}
 ]};
 /* good morning: out of the dot the set left behind, a sun comes up on blue. On its own, it gives hope. */
-FILMS.boker={ title:'בוקר טוב · the dot grows into a sun, and a good morning', shots:[
- {beats:1, note:'dark, a dot', draw:function(tb,fr){ ground(INK); ellipse(540,H/2,6,6,PAP); }},
- {beats:4, note:'the dot grows into a sun on blue', draw:function(tb,fr){
-    var p=move(tb,2); ground(p>0.5?BLU:INK);
+FILMS.boker={ title:'בוקר טוב · the sun is already growing on the first frame, and a good morning', shots:[
+ {beats:4, note:'opens mid-growth, so the first frame already moves: the dot grows into a sun on blue', draw:function(tb,fr){
+    var p=move(tb+0.5,2.5); ground(p>0.5?BLU:INK);
     if(p<=0.5){ ellipse(540,H/2,lerp(6,1400,p*2),lerp(6,1400,p*2),YEL); }
     else { var q=(p-0.5)*2; ellipse(540,lerp(H/2,BAND_T+560,q),lerp(1400,520,q),lerp(1400,520,q),YEL); }
     if(tb>=2.5) text(COPY.closing.morning,{x:40,y:BAND_T+920,w:1000,h:170,size:150,f:'ext',fill:PAP}); }},
