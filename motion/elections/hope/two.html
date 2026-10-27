@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="he"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:"Safra";font-weight:400;src:url(file:///home/user/nomad-type/fonts/Safra-Regular.woff2) format("woff2");font-display:block}
+*{box-sizing:border-box;margin:0} html,body{background:#000}
+#stage{position:relative;width:1080px;height:1350px;overflow:hidden}
+canvas{position:absolute;inset:0}
+.slip{position:absolute;background:#fff}
+.big{position:absolute;left:6%;right:6%;top:12.5%;height:46%;display:flex;align-items:center;justify-content:center;color:#0A0A0A;white-space:nowrap;line-height:1;font-family:"Safra";font-weight:400}
+.rule{position:absolute;left:25%;right:25%;top:69.4%;height:4px;background:#0A0A0A}
+.name{position:absolute;left:6%;right:6%;top:75%;height:12.5%;display:flex;align-items:center;justify-content:center;color:#0A0A0A;white-space:nowrap;line-height:1;font-family:"Safra";font-weight:400}
+</style></head><body>
+<div id="stage"><canvas id="g" width="1080" height="1350"></canvas><div id="slips"></div></div>
+<script>
+/* two slips, equal in every way: the same slip, the same face (Safra Regular carries both scripts),
+   the same size, on the same grained grey. Only the letter and the name change. */
+var A={big:'י', name:'ישראל'}, B={big:'ف', name:'فلسطين'};
+var SLIDES=[ [[260,315,560,720,A]], [[260,315,560,720,B]], [[580,375,420,540,A],[80,375,420,540,B]] ];
+function ground(seed){
+  var cv=document.getElementById('g'), x=cv.getContext('2d'); x.fillStyle='#C7C7C7'; x.fillRect(0,0,1080,1350);
+  var im=x.getImageData(0,0,1080,1350), d=im.data, s=987654321+seed*7919;
+  function r(){ s=(s*1664525+1013904223)&0x7fffffff; return s/0x7fffffff; }
+  for(var i=0;i<d.length;i+=4) if(r()<0.055){ d[i]=10; d[i+1]=10; d[i+2]=10; }
+  x.putImageData(im,0,0);
+}
+function fit(el,max){ el.style.fontSize=max+'px'; var w=el.scrollWidth, lim=el.clientWidth; if(w>lim) el.style.fontSize=(max*lim/w)+'px'; }
+window.__slide=function(n){
+  ground(n+20); var box=document.getElementById('slips'); box.textContent='';
+  SLIDES[n].forEach(function(sp){ var x=sp[0],y=sp[1],w=sp[2],h=sp[3],c=sp[4], k=w/560;
+    var s=document.createElement('div'); s.className='slip'; s.style.cssText='left:'+x+'px;top:'+y+'px;width:'+w+'px;height:'+h+'px';
+    s.innerHTML='<div class="big" dir="rtl"></div><div class="rule"></div><div class="name" dir="rtl"></div>'; box.appendChild(s);
+    s.querySelector('.big').textContent=c.big; s.querySelector('.name').textContent=c.name;
+    fit(s.querySelector('.big'),300*k); fit(s.querySelector('.name'),60*k); });
+  return SLIDES.length;
+};
+window.__ready=document.fonts.load('400 100px "Safra"','ישראל فلسطين').then(function(){return document.fonts.ready;});
+</script></body></html>
