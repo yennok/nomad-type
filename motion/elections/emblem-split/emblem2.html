@@ -9,9 +9,9 @@ function build(v){
     '<text x="810" y="566" font-family="DX" font-weight="700" font-size="165" fill="white" text-anchor="middle" direction="rtl">ת</text>'+
     '<text x="272" y="638" font-family="SB" font-weight="700" font-size="250" fill="white" text-anchor="middle" direction="rtl">أ</text>';
   var words='<g transform="translate(725 812) scale(0.62) translate(-544.5 -811.6)">'+WORD.join('')+'</g>'+
-    '<text x="355" y="840" font-family="SB" font-weight="700" font-size="92" fill="white" text-anchor="middle" direction="rtl">فلسطين</text>';
+    '<text x="340" y="840" font-family="SB" font-weight="700" font-size="92" fill="white" text-anchor="middle" direction="rtl">فلسطين</text>';
   document.getElementById('s').innerHTML='<svg width="1080" height="1350" viewBox="0 0 1080 1350" fill="none" xmlns="http://www.w3.org/2000/svg">'+
-    '<rect width="540" height="1350" fill="#FF3B21"/><rect x="540" width="540" height="1350" fill="#2045DE"/>'+REST.join('')+olives+words+'</svg>';
+    (window.DIAG ? '<rect width="1080" height="1350" fill="#2045DE"/><polygon points="0,0 650,0 430,1350 0,1350" fill="#FF3B21"/>' : '<rect width="540" height="1350" fill="#FF3B21"/><rect x="540" width="540" height="1350" fill="#2045DE"/>')+REST.join('')+olives+words+'</svg>';
 }
 window.__ready=Promise.all([document.fonts.load('700 100px DX','ת'),document.fonts.load('700 100px SB','فلسطينأ')]);
 </script>
