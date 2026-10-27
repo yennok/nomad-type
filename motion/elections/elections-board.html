@@ -240,10 +240,13 @@ FILMS.kalpi={ title:'הקלפי · a slip a beat, then the word', shots:[
    are letters that are not a party's single letter on the 26th Knesset list. */
 var TRAY={cols:5,rows:5,cw:200,ch:260,x0:40,y0:BAND_T+25};
 function trayDraw(cur,L,G,lf){
-  L=L||COPY.tray.letters; G=G||TRAY; var sw=G.cw-50, sx=25;
+  L=L||COPY.tray.letters; G=G||TRAY; var sx=G.sx||25, sw=G.cw-2*sx;
   for(var i=0;i<G.cols*G.rows;i++){ var r=Math.floor(i/G.cols), c=i%G.cols, x=G.x0+(G.cols-1-c)*G.cw, y=G.y0+r*G.ch;
     if(i===cur) rect(x,y,G.cw,G.ch,RED);
-    if(i<L.length){ var ch_=L.charAt(i); slip(x+sx,y+30,sw,200,ch_.trim()?ch_:'',null,G.size||84,lf); }
+    if(i<L.length){ var ch_=L.charAt(i);
+      if(G.centre){ rect(x+sx,y+30,sw,200,PAP);    /* the Arabic slips: one big letter in the middle of the slip */
+        if(ch_.trim()) text(ch_,{x:x+sx,y:y+30+G.dy,w:sw,h:200,size:G.size,f:lf,fill:INK,fit:false}); }
+      else slip(x+sx,y+30,sw,200,ch_.trim()?ch_:'',null,G.size||84,lf); }
     else rect(x+sx,y+30,sw,200,BLU_D);
   }
 }
@@ -262,7 +265,7 @@ FILMS.tray={ title:'המגש · the tray, a slip, again: four rounds on letters 
 /* the tray again, for the hope carousel: the rounds stop on the first letters of hope, peace and life, then
    Israel in the Hebrew tray and Palestine in the Arabic one, and each slip carries its word under the rule. The Arabic tray holds 28 letters and the blank
    slip in 6 x 5, set in Safra Sans Regular: Safra Sans Bold has no isolated sin, sheen, ain, ghain, kaf or lam. */
-var TRAY_AR={cols:6,rows:5,cw:166,ch:260,x0:42,y0:BAND_T+25,size:80};
+var TRAY_AR={cols:6,rows:5,cw:166,ch:260,x0:42,y0:BAND_T+25,size:106,sx:12,centre:true,dy:-8};
 function trayHopeShots(C,G,lf,nf){
   var out=[], L=C.letters;
   Array.from(C.stops).forEach(function(l,c){
