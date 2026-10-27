@@ -568,9 +568,8 @@ function turnoutChart(fr,nbars,lastP,strobe){
     text(L.y,{x:x2-15,y:base+30,w:bw+30,h:60,size:50,f:'reg',fill:flash?INK:PAP,fit:false});
     if(lastP>=1) text(L.v+'%',{x:x2-40,y:Math.max(TITLEY()+130,base-Math.min(h2,L.v*per)-90),w:bw+80,h:80,size:70,f:'reg',fill:flash?INK:RED,fit:false}); }
 }
-FILMS.turnout={ title:'אחוזי הצבעה · five years as they were, then the one that breaks the frame', shots:[
- {beats:1, note:'ink, the title, the baseline', draw:function(tb,fr){ turnoutChart(fr,-1,0,false); }},
- {beats:6, note:'five grey bars rise, one a beat, right to left', draw:function(tb,fr){ turnoutChart(fr,tb,0,false); }},
+FILMS.turnout={ title:'אחוזי הצבעה · five years, fast, from the first frame, then the one that breaks the frame', shots:[
+ {beats:2.5, note:'no wait: the first bar is already rising on frame one; five grey bars, one every half beat, right to left', draw:function(tb,fr){ turnoutChart(fr,tb*2+0.5,0,false); }},
  {beats:3, note:'2026: the red bar rises past everything, the screen strobes', draw:function(tb,fr){
     var p=move(tb,2); if(tb>=2) p=1+easeIO((tb-2))*2.2;          // it lands on 90, then keeps going, out of the frame
     turnoutChart(fr,99,p,tb>=2);
