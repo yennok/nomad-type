@@ -23,16 +23,15 @@ var INK='#0A0A0A',PAP='#FFFFFF',YEL='#E8FF3A',RED='#FF3B21',BLU='#2045DE',GRY='#
 /* Arabic is set in the Regular weights: Safra Bold has no final lam and Safra Sans Bold no hamza alef.
    each slide is a ballot slip: the letters big, a rule, the name small, as the real slip is laid out.
    Nothing here is a party's letter: ת, ש, ח and א are not on the 26th Knesset's list. */
-var SLIDES=[
-  {g:BLU, big:'ת',      bf:'"Dolomit Ext"', bw:700, bs:300, name:'תקווה', nf:'"Dolomit"',     nw:700},
-  {g:YEL, big:'תקווה',  bf:'"Dolomit Ext"', bw:700, bs:150, name:'أمل',   nf:'"Safra"',       nw:400},
-  {g:RED, big:'أمل',    bf:'"Safra"',       bw:400, bs:260, name:'תקווה', nf:'"Safra"',       nw:400},
-  {g:GRY, big:'أمل',    bf:'"Safra Sans"',  bw:400, bs:260, name:'תקווה', nf:'"Safra Sans"',  nw:700},
-  {g:BLU, big:'ש',      bf:'"Safra"',       bw:700, bs:300, name:'שלום',  nf:'"Safra"',       nw:700},
-  {g:INK, big:'سلام',   bf:'"Safra"',       bw:700, bs:200, name:'שלום',  nf:'"Safra"',       nw:400},
-  {g:YEL, big:'ח',      bf:'"Safra Sans"',  bw:700, bs:300, name:'חיים',  nf:'"Safra Sans"',  nw:700},
-  {g:RED, big:'א',      bf:'"Dolomit Ext"', bw:700, bs:300, name:'אחווה', nf:'"Dolomit"',     nw:700},
-  {g:BLU, big:'תקווה',  bf:'"Dolomit Ext"', bw:700, bs:150, name:'أمل · תקווה', nf:'"Safra"', nw:400}
+var SLIDES=[   // one letter big on each slip, the whole word under the rule
+  {g:BLU, big:'ת', bf:'"Dolomit Ext"', bw:700, bs:300, name:'תקווה', nf:'"Dolomit"',    nw:700},
+  {g:YEL, big:'أ', bf:'"Safra"',       bw:400, bs:300, name:'أمل',   nf:'"Safra"',      nw:400},
+  {g:RED, big:'أ', bf:'"Safra Sans"',  bw:400, bs:300, name:'أمل',   nf:'"Safra Sans"', nw:400},
+  {g:GRY, big:'ש', bf:'"Safra"',       bw:700, bs:300, name:'שלום',  nf:'"Safra"',      nw:700},
+  {g:INK, big:'س', bf:'"Safra"',       bw:400, bs:300, name:'سلام',  nf:'"Safra"',      nw:400},
+  {g:YEL, big:'ח', bf:'"Safra Sans"',  bw:700, bs:300, name:'חיים',  nf:'"Safra Sans"', nw:700},
+  {g:RED, big:'א', bf:'"Dolomit Ext"', bw:700, bs:300, name:'אחווה', nf:'"Dolomit"',    nw:700},
+  {g:BLU, big:'ת', bf:'"Dolomit Ext"', bw:700, bs:300, name:'תקווה · أمل', nf:'"Safra"', nw:700}
 ];
 function ground(c,seed){
   var cv=document.getElementById('g'), x=cv.getContext('2d'); x.fillStyle=c; x.fillRect(0,0,1080,1350);

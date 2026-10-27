@@ -84,7 +84,7 @@ var BAND_T=285, BAND_B=1635;        // the 4:5 band inside the story
 var EMBLEM={"bg": "<rect width=\"1080\" height=\"1350\" fill=\"#2045DE\"/>", "stages": ["<path d=\"M925 217V824.65L540 1181.55L155 824.65V217H925Z\" stroke=\"white\" stroke-width=\"30\"/>", "<rect x=\"424\" y=\"673\" width=\"232\" height=\"34\" fill=\"white\"/>\n<rect x=\"462\" y=\"639\" width=\"156\" height=\"34\" fill=\"white\"/>\n<rect x=\"499\" y=\"605\" width=\"82\" height=\"34\" fill=\"white\"/>\n<rect x=\"523\" y=\"384.6\" width=\"34\" height=\"221\" fill=\"white\"/>", "<path d=\"M472 384.6H506V428.8H574V384.6H608V428.8L574 462.8H506L472 428.8V384.6Z\" fill=\"white\"/>", "<path d=\"M420.5 384.5H454.5L455 476.4H625L624.5 384.5H658.5L659 476.4L625 510.4H455L421 476.4L420.5 384.5Z\" fill=\"white\"/>", "<path d=\"M370 384.4H404V528H676V384.4H710V528L676 562H404L370 528V384.4Z\" fill=\"white\"/>", "<rect x=\"365.363\" y=\"350.6\" width=\"30.6\" height=\"30.6\" transform=\"rotate(-45 365.363 350.6)\" fill=\"white\"/>\n<rect x=\"416.363\" y=\"350.6\" width=\"30.6\" height=\"30.6\" transform=\"rotate(-45 416.363 350.6)\" fill=\"white\"/>\n<rect x=\"467.363\" y=\"350.6\" width=\"30.6\" height=\"30.6\" transform=\"rotate(-45 467.363 350.6)\" fill=\"white\"/>\n<rect x=\"518.363\" y=\"350.6\" width=\"30.6\" height=\"30.6\" transform=\"rotate(-45 518.363 350.6)\" fill=\"white\"/>\n<rect x=\"569.363\" y=\"350.6\" width=\"30.6\" height=\"30.6\" transform=\"rotate(-45 569.363 350.6)\" fill=\"white\"/>\n<rect x=\"620.363\" y=\"350.6\" width=\"30.6\" height=\"30.6\" transform=\"rotate(-45 620.363 350.6)\" fill=\"white\"/>\n<rect x=\"671.363\" y=\"350.6\" width=\"30.6\" height=\"30.6\" transform=\"rotate(-45 671.363 350.6)\" fill=\"white\"/>", "<rect x=\"795\" y=\"329\" width=\"26\" height=\"378\" fill=\"white\"/>\n<path d=\"M756 341L808 393L860 341V378L808 430L756 378L756 341Z\" fill=\"white\"/>\n<path d=\"M756 403L808 455L860 403V440L808 492L756 440L756 403Z\" fill=\"white\"/>\n<path d=\"M756 463L808 515L860 463V500L808 552L756 500L756 463Z\" fill=\"white\"/>\n<path d=\"M756 523L808 575L860 523V560L808 612L756 560L756 523Z\" fill=\"white\"/>\n<path d=\"M756 583L808 635L860 583V620L808 672L756 620L756 583Z\" fill=\"white\"/>\n<rect x=\"259\" y=\"329\" width=\"26\" height=\"378\" fill=\"white\"/>\n<path d=\"M220 341L272 393L324 341V378L272 430L220 378L220 341Z\" fill=\"white\"/>\n<path d=\"M220 403L272 455L324 403V440L272 492L220 440L220 403Z\" fill=\"white\"/>\n<path d=\"M220 463L272 515L324 463V500L272 552L220 500L220 463Z\" fill=\"white\"/>\n<path d=\"M220 523L272 575L324 523V560L272 612L220 560L220 523Z\" fill=\"white\"/>\n<path d=\"M220 583L272 635L324 583V620L272 672L220 620L220 583Z\" fill=\"white\"/>", "<path d=\"M396.623 783.2V835.296L372.303 860H309.071V835.296H372.047V807.904H284.495V763.744H309.071V783.2H396.623ZM499.67 860L431.446 810.976V860H407.126L406.87 793.312V783.2H429.526L478.294 819.04H501.078V783.2H525.654V810.592L501.334 835.296H500.438L533.974 860H499.67ZM615.598 860V807.904H541.87V783.2H615.726L640.174 807.904V860H615.598ZM650.37 860V783.2H674.946V835.296H700.034V783.2H724.61V821.344L710.786 835.296H746.114V783.2H770.69V835.296L746.37 860H650.37ZM780.87 827.36V783.2H805.446V827.36H780.87Z\" fill=\"white\"/>"]};   // from Figma, file SSdo8AKFO1Foi8kuY5vM47, frame 1:2
 var COPY={
   kalpi:{ letters:'אבגדהוזח', last:'הצבעתי', end:'הצבעתי!' },
-  tray: { title:'איזו אות?', slips:['טג', 'זפ', 'סג', 'צט', 'עג', 'קפ', 'שג', 'תז', 'חט', 'גצ', 'פט', 'זק', 'סצ', 'טש', 'צז', 'קג', 'גח', 'טף', 'זם', 'טך', 'שץ', 'פגץ', 'תט', 'חצג', 'צק', 'גזט', 'עצג', 'תפ', 'שז', 'כט', 'פץ', 'סגט', 'קז', 'טחץ', 'זגט', 'צגם', 'גטש', 'תקז', 'עזט', 'חפט', ''], stop:15 },   // made up, none of them a party's; the empty one is the blank white slip
+  tray: { title:'איזו אות?', slips:['טג', 'זפ', 'סג', 'צט', 'עג', 'קפ', 'שג', 'תז', 'חט', 'גצ', 'פט', 'זק', 'סצ', 'טש', 'צז', 'קג', 'גח', 'טף', 'זם', 'טך', 'שץ', 'פגץ', 'תט', 'חצג', 'צק', 'גזט', 'עצג', 'תפ', 'שז', 'כט', 'פץ', 'סגט', 'קז', 'טחץ', 'זגט', 'צגם', 'גטש', 'תקז', 'עזט', 'חפט', ''], cycles:[15,4,27,9] },   // each cycle: the tray shuffled, then the slip it stops on   // made up, none of them a party's; the empty one is the blank white slip
   petek:{ title:'פתק', letters:'אבגדהוזחטיכלמנסעפצקרשת', names:{'א':'אלף','ב':'בית','ג':'גימל','ד':'דלת','ה':'הא','ו':'וו','ז':'זין','ח':'חית','ט':'טית','י':'יוד','כ':'כף','ל':'למד','מ':'מם','נ':'נון','ס':'סמך','ע':'עין','פ':'פא','צ':'צדי','ק':'קוף','ר':'ריש','ש':'שין','ת':'תו'}, final:'ל', envelope:'הבחירות לכנסת' },
   pikuach:{ mark:'עדכון מהשטח', bug:'14', third:'טוהר הבחירות', sub:'שידור חי מהקלפי', ticker:'עוד כותרת דרמטית · עוד הכרזה מוטלת בספק באמינותה · עוד שקר כלשהו · עוד סילוף מידע · עוד הטעיית ציבור · ' },
   closing:{ bug:'14', last:'שידור אחרון · ', end:'סוף השידורים', morning:'בוקר טוב' },
@@ -234,8 +234,12 @@ FILMS.kalpi={ title:'הקלפי · a slip a beat, then the word', shots:[
    compartment in a darker blue. A red cursor hops a half beat at a time and stops on one. */
 var TRAY={cols:6,rows:7,cw:1000/6,ch:192,x0:40,y0:BAND_T+3};
 function trayCell(i){ var r=Math.floor(i/TRAY.cols), c=i%TRAY.cols; return {x:TRAY.x0+(TRAY.cols-1-c)*TRAY.cw, y:TRAY.y0+r*TRAY.ch}; }
-function trayDraw(cur){
-  var S=COPY.tray.slips;
+function trayArr(c){                        // the forty combinations, shuffled for cycle c; the blank slip stays last
+  var a=COPY.tray.slips.filter(function(t){return t;}), sd=c*7919+13;
+  for(var i=a.length-1;i>0;i--){ sd=(sd*9301+49297)%233280; var j=Math.floor(sd/233280*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; }
+  return a.concat(['']);
+}
+function trayDraw(cur,S){
   for(var i=0;i<TRAY.cols*TRAY.rows;i++){ var p=trayCell(i);
     if(i===cur) rect(p.x,p.y,TRAY.cw,TRAY.ch,RED);
     if(i<S.length){ var t=S[i]; slip(p.x+16,p.y+14,TRAY.cw-32,TRAY.ch-28,'',null); if(t) text(t,{x:p.x+22,y:p.y+44,w:TRAY.cw-44,h:70,size:t.length>2?52:64,f:'ext',fill:INK}); }
@@ -243,16 +247,19 @@ function trayDraw(cur){
   }
 }
 function letterNames(t){ return Array.from(t).map(function(ch){ var base={'ך':'כ','ם':'מ','ן':'נ','ף':'פ','ץ':'צ'}[ch]||ch; return COPY.petek.names[base]||''; }).join(' '); }
-FILMS.tray={ title:'המגש · the cursor hops over made-up slips, then stops on one', shots:[
- {beats:8, note:'the tray; a red cursor hops a half beat at a time and stops', draw:function(tb,fr){
-    ground(BLU); var S=COPY.tray.slips, hops=Math.min(COPY.tray.stop, stepAt(tb,0.5));
-    var cur=Math.floor(h2(hops,7)*S.length); if(hops>=COPY.tray.stop) cur=COPY.tray.stop; trayDraw(cur); }},
- {beats:2, note:'hold on the chosen one', draw:function(tb,fr){ ground(BLU); trayDraw(COPY.tray.stop); }},
- {beats:3, note:'cut: that slip, full size, on red, with its letters named', draw:function(tb,fr){
-    ground(RED); var t=COPY.tray.slips[COPY.tray.stop];
-    slip(260,BAND_T+300,560,720,'',letterNames(t),300);
-    text(t,{x:290,y:BAND_T+300+110,w:500,h:300,size:t.length>2?190:250,f:'ext',fill:INK}); }}
-]};
+FILMS.tray={ title:'המגש · the tray, a slip, the tray shuffled, another slip, four times', shots:(function(){
+  var out=[];
+  COPY.tray.cycles.forEach(function(stop,c){
+    out.push({beats:3, note:'tray '+(c+1)+': the cursor hops a half beat at a time and stops', draw:function(tb,fr){
+      ground(BLU); var S=trayArr(c), hops=stepAt(tb,0.5);
+      var cur=hops>=5 ? stop : Math.floor(h2(hops+c*17,7)*S.length); trayDraw(cur,S); }});
+    out.push({beats:2, note:'slip '+(c+1)+': full size on red, its letters named', draw:function(tb,fr){
+      ground(RED); var t=trayArr(c)[stop];
+      slip(260,BAND_T+300,560,720,'',letterNames(t),300);
+      text(t,{x:290,y:BAND_T+300+110,w:500,h:300,size:t.length>2?190:250,f:'ext',fill:INK}); }});
+  });
+  return out; })()
+};
 
 FILMS.petek={ title:'הפתק · the alphabet, a letter a half beat', shots:[
  {beats:6, note:'one slip; the letter and its name change on the half beat', draw:function(tb,fr){
