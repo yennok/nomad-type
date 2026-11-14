@@ -1309,7 +1309,7 @@ ease;
                   const otherRegularImg = otherLink.querySelector('img:not(.hover)');
                   if (otherRegularImg) {
                     const otherClassName = otherLink.className;
-                    otherRegularImg.src = `assets/homepage/${otherClassName}-mobile.png`;
+                    otherRegularImg.src = `${tileBase(otherClassName)}${otherClassName}-mobile.png`;
                   }
                 }
               });
