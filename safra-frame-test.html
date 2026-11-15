@@ -413,8 +413,14 @@
     cursor: not-allowed;
   }
   </style>
+  <style>
+    /* FRAME TEST v3 (11-15): a white strip that lives only ABOVE the top edge (under the iPhone clock bar).
+       It never covers the page itself, and it stays on while the frame hides. */
+    .nt-top-guard{position:fixed;left:0;right:0;bottom:100%;height:200px;background:#fff;z-index:1003;pointer-events:none}
+  </style>
 </head>
 <body class="safra-page">
+  <div class="nt-top-guard" aria-hidden="true"></div>
 
   <!-- SEO: visually hidden H1 for Google (design unchanged) -->
   <style>
@@ -1298,7 +1304,7 @@ A trilingual typeface designed for consistent reading across Arabic, Hebrew, and
 });
   </script>
 
-  <script src="script-frame-test.js"></script>
+  <script src="script.js"></script>
 
   </main>
 
