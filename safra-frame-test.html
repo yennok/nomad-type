@@ -413,12 +413,6 @@
     cursor: not-allowed;
   }
   </style>
-  <style>
-    /* FRAME TEST v4 (11-15, Nir's idea): once the red cover has scrolled off the screen,
-       it turns white, so nothing red is left under the iPhone clock bar. */
-    .cover-header.nt-cover-gone{background:#fff !important}
-    .cover-header.nt-cover-gone > *{visibility:hidden}
-  </style>
 </head>
 <body class="safra-page">
 
@@ -1305,20 +1299,6 @@ A trilingual typeface designed for consistent reading across Arabic, Hebrew, and
   </script>
 
   <script src="script.js"></script>
-  <script>
-    (function(){
-      var tick=false;
-      function check(){
-        tick=false;
-        var c=document.querySelector('.cover-header'); if(!c) return;
-        c.classList.toggle('nt-cover-gone', c.getBoundingClientRect().bottom <= 1);
-      }
-      function onScroll(){ if(!tick){ tick=true; requestAnimationFrame(check); } }
-      window.addEventListener('scroll', onScroll, {passive:true});
-      window.addEventListener('resize', onScroll);
-      check();
-    })();
-  </script>
 
   </main>
 

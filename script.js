@@ -3125,3 +3125,25 @@ function sendBuyEmail() {
       submitBtn.textContent = originalText;
     });
 }
+
+// COVER TURNS WHITE OFF-SCREEN (2026-11-15, Nir's idea, tested on safra-frame-test).
+// iOS 26 Safari draws the page under the clock bar, so once the frame hides, the bottom of
+// the red cover peeked up there. When the cover has fully left the screen it turns white
+// (content hidden too), so nothing red is left under the clock. Scrolling back restores it.
+// To undo: delete this block (backup: backups/script-pre-cover-white-2026-11-15.js).
+(function () {
+  var st = document.createElement('style');
+  st.textContent = '.cover-header.nt-cover-gone{background:#fff !important}' +
+                   '.cover-header.nt-cover-gone > *{visibility:hidden}';
+  document.head.appendChild(st);
+  var tick = false;
+  function check() {
+    tick = false;
+    var c = document.querySelector('.cover-header'); if (!c) return;
+    c.classList.toggle('nt-cover-gone', c.getBoundingClientRect().bottom <= 1);
+  }
+  function onScroll() { if (!tick) { tick = true; requestAnimationFrame(check); } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', check); else check();
+})();
