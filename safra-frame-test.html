@@ -414,13 +414,13 @@
   }
   </style>
   <style>
-    /* FRAME TEST v3 (11-15): a white strip that lives only ABOVE the top edge (under the iPhone clock bar).
-       It never covers the page itself, and it stays on while the frame hides. */
-    .nt-top-guard{position:fixed;left:0;right:0;bottom:100%;height:200px;background:#fff;z-index:1003;pointer-events:none}
+    /* FRAME TEST v4 (11-15, Nir's idea): once the red cover has scrolled off the screen,
+       it turns white, so nothing red is left under the iPhone clock bar. */
+    .cover-header.nt-cover-gone{background:#fff !important}
+    .cover-header.nt-cover-gone > *{visibility:hidden}
   </style>
 </head>
 <body class="safra-page">
-  <div class="nt-top-guard" aria-hidden="true"></div>
 
   <!-- SEO: visually hidden H1 for Google (design unchanged) -->
   <style>
@@ -1305,6 +1305,20 @@ A trilingual typeface designed for consistent reading across Arabic, Hebrew, and
   </script>
 
   <script src="script.js"></script>
+  <script>
+    (function(){
+      var tick=false;
+      function check(){
+        tick=false;
+        var c=document.querySelector('.cover-header'); if(!c) return;
+        c.classList.toggle('nt-cover-gone', c.getBoundingClientRect().bottom <= 1);
+      }
+      function onScroll(){ if(!tick){ tick=true; requestAnimationFrame(check); } }
+      window.addEventListener('scroll', onScroll, {passive:true});
+      window.addEventListener('resize', onScroll);
+      check();
+    })();
+  </script>
 
   </main>
 
