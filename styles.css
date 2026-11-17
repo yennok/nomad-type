@@ -1995,6 +1995,7 @@ body.negative #buyBtn {
       /*background: #fff; */
       padding: 90px; 
       overflow-x: hidden;
+      overflow-x: clip; /* clip, not hidden: hidden makes this a scroll box and breaks position: sticky inside it */
       width: 100%;
       box-sizing: border-box;
     }
@@ -2646,6 +2647,11 @@ body.negative #buyBtn {
       transform: translateY(var(--glyph-vertical-offset, 0));
     }
     .char-cell:hover { background: var(--primary-color); color: black; }
+
+    /* Glyph set: the big preview stays in view while the grid scrolls (desktop only) */
+    @media (min-width: 905px) {
+      .wrapper > .left-panel { position: sticky; top: 100px; }
+    }
 
     @media (max-width: 904px) { .wrapper { flex-direction: column; 
     
