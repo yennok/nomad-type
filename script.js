@@ -182,6 +182,24 @@
       apply();
     }
 
+    // The big glyph used to be drawn with CSS ::before { content: attr(data-preview) }.
+    // Safari does not repaint that reliably when the attribute changes: glyphs get cut off
+    // and pieces of the previous glyph stay on screen. Mirror data-preview into a real
+    // span instead, replaced on every change so Safari paints it fresh.
+    function initPreviewGlyph() {
+      document.querySelectorAll('.preview-box').forEach(box => {
+        const render = () => {
+          const span = document.createElement('span');
+          span.className = 'preview-glyph';
+          span.textContent = box.getAttribute('data-preview') || '';
+          box.replaceChildren(span);
+        };
+        box.classList.add('has-glyph');
+        render();
+        new MutationObserver(render).observe(box, { attributes: true, attributeFilter: ['data-preview'] });
+      });
+    }
+
     function adjustPreviewHeight() {
   const sampleCell = document.querySelector('.char-cell');
   const preview = document.getElementById('preview');
@@ -2584,6 +2602,7 @@ function boot() {
   initScrollButtonClicks();
   initTypingControls(); 
   initGlyphGrid(); 
+  initPreviewGlyph();
   adjustPreviewHeight(); 
   initParallax();
   preserveMultiLineBreaks(); // Preserve line breaks before initializing responsive sections

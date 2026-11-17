@@ -2515,11 +2515,19 @@ body.negative #buyBtn {
       border-radius: 15px;
       color: transparent; /* Hide regular text content */
     }
-    .preview-box::before {
+    /* Fallback only: script.js swaps in a real .preview-glyph span (Safari repaint bug with attr()) */
+    .preview-box:not(.has-glyph)::before {
       content: attr(data-preview);
       display: block;
       transform: translateY(var(--preview-vertical-offset, 0));
       color: #000; /* Show only the ::before content */
+    }
+    .preview-box .preview-glyph {
+      display: block;
+      padding: 0 0.3em; /* room for ink that overhangs the advance width, so nothing is clipped */
+      white-space: pre;
+      transform: translateY(var(--preview-vertical-offset, 0));
+      color: #000;
     }
     
     @media (max-width: 1305px) {
