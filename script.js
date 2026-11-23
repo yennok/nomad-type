@@ -2956,6 +2956,38 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+// ====== WHERE A VISITOR CAME FROM (for Nir's Nomad Type app) ======
+// Remembers how this browser first reached the site (utm tags, the in-app browser of
+// Instagram / Facebook / LinkedIn, or the referring site) and how this visit started.
+// Sent only together with a trial or buy request, next to the email the person typed.
+// Wrapped so it can never stop a form from sending.
+(function ntSource() {
+  try {
+    const q = new URLSearchParams(location.search);
+    const ua = navigator.userAgent || '';
+    const app = /Instagram/i.test(ua) ? 'Instagram' : /FBAN|FBAV/i.test(ua) ? 'Facebook' : /LinkedInApp/i.test(ua) ? 'LinkedIn' : '';
+    let ref = '';
+    try { const h = new URL(document.referrer).hostname.replace(/^www\./, ''); if (!/(^|\.)nomad-type\.com$/.test(h)) ref = h; } catch (e) {}
+    const visit = { ref, app, utm: { source: q.get('utm_source') || '', medium: q.get('utm_medium') || '', campaign: q.get('utm_campaign') || '' }, landing: location.pathname, at: new Date().toISOString() };
+    const outside = visit.ref || visit.app || visit.utm.source;
+    let first = null, now = null;
+    try { first = JSON.parse(localStorage.getItem('nt_src_first') || 'null'); } catch (e) {}
+    if (!first) { first = visit; try { localStorage.setItem('nt_src_first', JSON.stringify(visit)); } catch (e) {} }
+    try { now = JSON.parse(sessionStorage.getItem('nt_src_now') || 'null'); } catch (e) {}
+    if (!now || outside) { now = visit; try { sessionStorage.setItem('nt_src_now', JSON.stringify(visit)); } catch (e) {} }
+    window.ntSourceInfo = () => ({ first, now });
+  } catch (e) {}
+})();
+function ntSendSource(email, kind) {
+  try {
+    if (!email || !window.ntSourceInfo) return;
+    const body = JSON.stringify(Object.assign({ email: email, kind: kind }, window.ntSourceInfo()));
+    const url = 'https://nomad-type-app.fly.dev/api/source';
+    if (navigator.sendBeacon && navigator.sendBeacon(url, body)) return;
+    fetch(url, { method: 'POST', body: body, mode: 'no-cors', keepalive: true }).catch(function () {});
+  } catch (e) {}
+}
+
 // ====== EMAILJS FUNCTIONS ======
 function sendTrialEmail() {
   // Get error message element
@@ -3028,6 +3060,7 @@ function sendTrialEmail() {
     consent: document.querySelector('input[name="consent"]:checked') ? 'Yes' : 'No'
   };
 
+  ntSendSource(templateParams.from_email, 'trial');
   emailjs.send('service_fzf0ivr', 'template_7un2cmq', templateParams)
     .then(function(response) {
       submitBtn.innerHTML = '✓ Sent!';
@@ -3130,6 +3163,7 @@ function sendBuyEmail() {
     consent: document.querySelector('.buy-form input[name="consent"]:checked') ? 'Yes' : 'No'
   };
 
+  ntSendSource(templateParams.from_email, 'buy');
   emailjs.send('service_fzf0ivr', 'template_y27yzjn', templateParams)
     .then(function(response) {
       submitBtn.innerHTML = '✓ Sent!';
