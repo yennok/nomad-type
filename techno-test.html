@@ -1,0 +1,1306 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FPE1JV10R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4FPE1JV10R');
+  </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Techno טכנו | Nomad Type</title>
+
+  <!-- PREVIEW: not public. noindex, not in sitemap.xml, not linked from the homepage, the store or the footer.
+       At launch: remove the robots meta, add /techno to sitemap.xml, add the homepage tile + trial-fonts checkbox,
+       and fill the TODO(techno) slots below with Ilya's text. -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- SEO meta (description = Ilya's own words from mockup 003) -->
+  <meta name="description" content="Techno טכנו is a display typeface by Ilya Yasinov, designed for impact. Built for headlines, posters, album art, culture, and bold visual identity.">
+  <meta name="author" content="Ilya Yasinov">
+  <link rel="canonical" href="https://www.nomad-type.com/techno-test">
+
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- ====== TECHNO PAGE STYLES ======
+       styles.css is shared and untouched, so everything page-specific lives here (same as Dolomit before launch). -->
+  <style>
+    /* Font files: WOFF2 converted from Ilya's OTFs (Downloads/Techno Typeface, 6 Sep 2026).
+       One family per width/slant, weights 300/400/700, so the browser never fakes a slant. */
+    @font-face { font-family: "Techno"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/Techno/Techno-Bold.woff2") format("woff2"); }
+    @font-face { font-family: "Techno Slanted"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/Techno/Techno-Slanted-Bold.woff2") format("woff2"); }
+    @font-face { font-family: "Techno Extended"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/Techno/Techno-Extended-Bold.woff2") format("woff2"); }
+    @font-face { font-family: "Techno Extended Slanted"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/Techno/Techno-Extended-Slanted-Bold.woff2") format("woff2"); }
+
+    /* TODO(techno): --primary-color is now only the button hover and glyph-cell hover color (the page colors come
+       from the color button below). Placeholder: the red of Ilya's mockup 003 (#EE402D). Nir decides. */
+    body.techno-page {
+      --primary-color: #EE402D;
+      --glyph-vertical-offset: 0px;
+      --preview-vertical-offset: 0px;
+    }
+
+    /* Cover title: טכנו over TECHNO, Extended Bold, same size (as in Ilya's mockups 001/002) */
+    body.techno-page .cover-title {
+      --cover-size: min(15vw, 28vh); /* TECHNO in Bold is 5.6em wide, so 15vw fills ~85% of the width */
+      margin-bottom: 0px;
+      text-align: center;
+    }
+    body.techno-page .cover-title div:nth-child(1),
+    body.techno-page .cover-title div:nth-child(2) {
+      font-family: "Techno Extended", sans-serif;
+      font-weight: 700;
+      color: var(--page-bg, #FF3D00); /* the cover takes the page pair swapped, see PAGE COLORS */
+      font-size: var(--cover-size);
+      line-height: 1;
+      letter-spacing: 0;
+      white-space: nowrap;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+    body.techno-page .cover-title div:nth-child(1) { direction: rtl; margin-bottom: 0.06em; }
+    /* Nir 11-08: the Latin line is Bold, not Extended */
+    body.techno-page .cover-title div:nth-child(2) { font-family: "Techno", sans-serif; }
+
+    body.techno-page .marquee-text { letter-spacing: 0; }
+
+    /* In Use: two landscape images. Specimen: eight portrait posters, four across. */
+    .techno-page .in-use-section .in-use-grid { grid-template-columns: repeat(2, 1fr); }
+    .techno-page .specimen-section .in-use-grid { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 768px) {
+      .techno-page .in-use-section .in-use-grid { grid-template-columns: 1fr; }
+      .techno-page .specimen-section .in-use-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* Alternates tester: second line switches on ss04 (alternate 6 and 9) */
+    .techno-alt-demo .techno-ss04 { font-feature-settings: "ss04" 1; }
+
+    /* Mobile: the two-line figures sample gets a vw size (auto-fit only handles one-line testers).
+       The size slider still wins (it writes an inline !important). */
+    @media (max-width: 768px) {
+      .techno-page .type-area.techno-alt-demo { font-size: 13vw !important; }
+    }
+
+    /* "Coming soon" panels behind Download Trial / Buy Now (no trial ZIP and no price yet) */
+    .techno-page .techno-soon { padding: 24px 0; font-size: 18px; line-height: 1.4; }
+
+    /* ====== PAGE COLORS (one button, Nir 11-15) ======
+       Ported from cover-monet/index-all.html, stripped to four pages. A tap on the round button in the
+       Buy Now / Download Trial bar moves to the next page: BLACK, WHITE, ORANGE, HAZE, then BLACK again.
+       The button shows the NEXT color (its background with a dot in its text color), so it says what a tap will do.
+       BLACK is the site's own body.negative, WHITE is the plain page, ORANGE and HAZE use the two-color filter. */
+
+    /* styles.css body.negative hides Buy (Dear AI is not sold). Techno will be, so on BLACK the Buy buttons
+       come back and the bottom buttons stay two across. */
+    body.techno-page.negative #buyBtn,
+    body.techno-page.negative #scrollBuyBtn { display: inline-block; }
+    body.techno-page.negative .scroll-buttons { max-width: none; grid-template-columns: 1fr 1fr; }
+    @media (max-width: 768px) { body.techno-page.negative .scroll-buttons { grid-template-columns: 1fr; } }
+
+    /* Cover: the page pair, swapped. The block takes the page's text color, the title takes the page color.
+       ORANGE: haze block, orange title. HAZE: orange block, haze title. BLACK: white block. WHITE: black block. */
+    body.techno-page .cover-header { background: var(--page-fg, #181C20); }
+    /* script.js turns the cover white once it has left the screen (iOS clock bar); here it turns the page color */
+    body.techno-page .cover-header.nt-cover-gone { background: var(--page-bg, #fff) !important; }
+    /* The nav and the phone menu circle sit on the cover, so they take the cover's ink (the title color) too.
+       The circle is an SVG drawing, so it gets the same kind of ink-only filter as the page (#cover-ink, set below).
+       Once scrolled, the circle turns solid white (styles.css) and goes back to its own black. */
+    body.techno-page .sticky-nav .nav-brand, body.techno-page .sticky-nav .nav-brand a,
+    body.techno-page .sticky-nav .nav-link { color: var(--page-bg, #000); }
+    body.techno-page .mobile-hamburger-circle:not(.solid) { filter: url(#cover-ink); }
+
+    /* The button. 44px tap target; the circle is drawn inside it (30px, 36px on a phone). The negative margin keeps
+       the bar at its own height, so the Trial and Buy buttons do not stretch. */
+    .color-dots { display: flex; align-items: center; flex: none; }
+    .color-dots button { width: 44px; height: 44px; margin: -6px 0; padding: 0; border: 0; border-radius: 50%; background: none;
+      cursor: pointer; position: relative; -webkit-tap-highlight-color: transparent; }
+    .color-dots button::before { content: ""; position: absolute; inset: 7px; box-sizing: border-box; border-radius: 50%;
+      border: 1px solid var(--dot-line, #000); background: var(--dot-bg); }
+    .color-dots button::after { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; margin: -5px 0 0 -5px;
+      border-radius: 50%; background: var(--dot-fg); }
+    .color-dots button:focus-visible { outline: 2px solid var(--dot-line, #000); outline-offset: 0; }
+    /* BLACK: the whole bar is inverted by styles.css, so the button is inverted back to show its true colors */
+    body.negative .color-dots { filter: invert(1); --dot-line: #fff; }
+    body.page-duo .color-dots { --dot-line: var(--page-fg); }
+    @media (max-width: 768px) {
+      .cover-buttons { gap: 12px !important; }
+      .cover-buttons .btn { white-space: nowrap; }
+      .color-dots button::before { inset: 4px; }
+      .color-dots button::after { width: 12px; height: 12px; margin: -6px 0 0 -6px; }
+    }
+
+    /* ORANGE and HAZE: text gets the color, the black-on-white parts are recolored by a two-color filter. */
+    body.page-duo { background: var(--page-bg); }
+    body.page-duo .marquee-container .marquee-text, body.page-duo .intro-content, body.page-duo .type-area { color: var(--page-fg); }
+    /* One source for the page color (Nir 11-14, phone): Safari color-corrects a filter's output, Chrome does not, so a page
+       color drawn by the filter never matches the CSS background on every screen. The filter draws only the ink (black
+       parts become the text color, white parts become see-through) and every background is plain CSS. Boxes that must stay
+       solid (the fixed bars, the open font list) get the CSS color themselves and only their insides are filtered. */
+    body.page-duo .sticky-green-line { background: var(--page-bg); }
+    body.page-duo .sticky-top-section > *, body.page-duo .preview-box, body.page-duo .details, body.page-duo .sliders-wrapper,
+    body.page-duo .align-buttons, body.page-duo .select-header, body.page-duo .select-option, body.page-duo .cover-buttons > .btn,
+    body.page-duo .grid-container, body.page-duo .section-header, body.page-duo .scroll-buttons-section,
+    body.page-duo #footer-container { filter: url(#page-duo); }
+    body.page-duo .sticky-top-section > .svg-shape.center { filter: none; background: var(--page-bg); }
+    body.page-duo .cover-buttons, body.page-duo .select-options { background: var(--page-bg); border-color: var(--page-fg); }
+    body.page-duo .controls { border-color: var(--page-fg); }
+    body.page-duo .char-cell:hover { background: #000; color: #fff; }
+    /* Photos: a two-color duotone in the page's pair (ORANGE) or its negative (HAZE). The duotone also draws only its
+       dark-or-light ink; the page color in the photo is the page itself showing through. */
+    body.page-duo .in-use-item { background: transparent; }
+    body.page-duo.img-duo .in-use-grid img, body.page-duo.img-neg .in-use-grid img { filter: url(#img-duo); }
+
+  </style>
+<!-- ============ LAUNCH OFFER (test) ============
+     One bar pinned to the bottom of the window, same mechanism as the private bar on
+     /inter-hebrew. Colour #E8FF3A. Remove this block and the SALE config to turn it off. -->
+<style>
+  .nt-sale-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; height: 30px; z-index: 900;
+    background: #E8FF3A; overflow: hidden; pointer-events: none;
+    display: flex; align-items: center;
+  }
+  /* Seamless marquee: one track holding TWO identical halves, shifted by exactly -50%.
+     At the end of each cycle half two sits where half one started, so the loop never jumps.
+     (The earlier version animated a single span that also had padding-right, which made
+     -50% land mid-text and produced a visible skip once per cycle.) */
+  /* The track is ABSOLUTE on purpose: as a flex item it was capped at the bar's width,
+     so translateX(-50%) shifted half the BAR, not half the content, and the two halves
+     collided. Absolute positioning lets it shrink-wrap its content instead.
+     The shift is a pixel value measured after the webfont loads (see the script), never
+     a percentage, so neither the element width nor the font swap can throw it off. */
+  /* The track is ABSOLUTE on purpose: as a flex item it was capped at the bar's width,
+     so a -50% shift moved half the BAR, not half the content, and the halves collided.
+     The motion itself is driven from JS (see the script) with an exact pixel distance
+     measured after the webfont loads. CSS keyframes are not used here: a custom
+     property inside @keyframes does not reliably update when the script sets it. */
+  .nt-sale-track {
+    position: absolute; top: 0; left: 0; height: 100%;
+    display: flex; align-items: center;
+    width: max-content !important; max-width: none !important;
+  }
+  /* max-width: none is load-bearing. A site-wide rule caps spans at 100% of their
+     parent, which clamped each half to the bar width while its text stayed far wider.
+     Measuring that clamped box gave a shift shorter than the text, so the two halves
+     rode over each other. */
+  .nt-sale-bar span {
+    font-family: "Safra Mono", monospace; font-size: 14px; letter-spacing: 0;
+    color: #000; flex: none;
+    /* pre, not nowrap: nowrap still collapses runs of spaces and drops the trailing
+       ones, which glued the em dash to the next repetition. pre keeps them and
+       still never wraps, so the gap between repeats is exactly what the script writes. */
+    white-space: pre;
+    max-width: none !important; width: auto !important;
+  }
+
+  /* The bar stays visible when the cart opens; the overlay simply sits above it
+     (overlay z-index 2000 against the bar's 900). */
+
+  /* ---- Everything below reserves room for the bar. ONE number controls it. ----
+     All of it is scoped to body.nt-sale-page, so no other page on the site is
+     touched. When SALE.on is false the script removes that class and every
+     override here stops applying by itself. */
+  body.nt-sale-page { --nt-sale-h: 33px; padding-bottom: var(--nt-sale-h); }
+  .nt-sale-bar { height: var(--nt-sale-h); }
+
+  /* The cover fills the window minus the header offset. Subtract the bar too,
+     otherwise the bottom of the cover slides under it. */
+  body.nt-sale-page .cover-header {
+    height: calc(100vh - 120px - var(--nt-sale-h));
+    height: calc(var(--vh, 1vh) * 100 - 120px - var(--nt-sale-h));
+  }
+  /* Buy / Trial sit above the bar instead of on it.
+     :not(.sticky) is load-bearing. After the first fold the buttons get .sticky,
+     which pins them with `top: 29px; bottom: auto`. Without the :not, this rule
+     wins on specificity and puts `bottom` back, so the element ends up pinned top
+     AND bottom and stretches to the full height of the window. */
+  body.nt-sale-page .cover-buttons:not(.sticky) { bottom: calc(29px + var(--nt-sale-h)); }
+
+  /* ================= ROTATING BADGE (mobile only) =================
+     A yellow disc with the offer set ON its edge, turning slowly. The text wraps the
+     circle EXACTLY once: the script measures the sentence after the webfont loads and
+     derives the radius from it (r = width / 2pi), so there is no seam to line up and
+     the badge resizes itself if the copy or the type size changes.
+     Built with SVG textPath, not per-letter rotation, because rotating each glyph
+     separately throws away the font's kerning. */
+  .nt-badge {
+    position: fixed; right: 16px; z-index: 900;
+    display: none;                      /* desktop keeps the bar */
+    pointer-events: none;
+  }
+  .nt-badge svg { display: block; overflow: visible; }
+  .nt-badge .nt-badge-disc { fill: #E8FF3A; }
+  .nt-badge .nt-badge-text {
+    fill: #000; font-family: "Safra Mono", monospace; font-size: 14px; letter-spacing: 0;
+  }
+  .nt-badge-spin { transform-origin: 50% 50%; animation: ntBadgeSpin 12s linear infinite; }
+  @keyframes ntBadgeSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .nt-badge-spin { animation: none; } }
+
+  @media (max-width: 768px) {
+    /* The badge replaces the bar on phones, so there is no top bar to make room for.
+       Setting its height to 0 undoes the whole top-bar treatment in one go: the body
+       padding, the cover height and the margins on the logo, burger and nav are all
+       expressed as calculations on this variable. */
+    body.nt-sale-page { --nt-sale-h: 0px; }
+    body.nt-sale-page .nt-sale-bar { display: none; }
+    /* Nir's values, straight from the window edges. On a phone this lands the badge
+       inside the red cover: 9px in from its right edge and 10px above its bottom,
+       clear of the white button bar. */
+    body.nt-sale-page .nt-badge {
+      display: block; right: 27px;
+      /* No env(safe-area-inset-bottom) here. On an iPhone with a home indicator that
+         is about 34px, and adding it to our own value left the badge visibly floating.
+         iOS already ends the visible viewport above the toolbar, so the breathing room
+         is there without asking for it. */
+      bottom: 98px;
+    }
+    body.nt-sale-page { padding-top: 0; }
+  }
+
+  @media (max-width: 768px) {
+    /* On mobile the bar moves to the TOP of the screen. The site's own header is
+       fixed at top: 0, so it gets pushed down by exactly the bar height; everything
+       else follows from the same variable. The white button bar keeps the bottom. */
+    body.nt-sale-page .nt-sale-bar { top: 0; bottom: auto; }
+    /* Everything the site pins to the top of the screen moves down by the bar height.
+       margin-top rather than top: these elements have their own top offsets (and the
+       burger animates its transform), so a margin shifts them without touching either. */
+    body.nt-sale-page .sticky-top-section,
+    body.nt-sale-page .sticky-nav,
+    body.nt-sale-page .sticky-green-circle,
+    body.nt-sale-page .mobile-hamburger-circle { margin-top: var(--nt-sale-h); }
+    body.nt-sale-page { padding-top: var(--nt-sale-h); padding-bottom: var(--nt-buttons-h, 70px); }
+    body.nt-sale-page .cover-buttons { bottom: 0 !important; }
+    body.nt-sale-page .cover-header {
+      height: calc(100vh - 40px - var(--nt-sale-h) - var(--nt-buttons-h, 70px));
+      height: calc(var(--vh, 1vh) * 100 - 40px - var(--nt-sale-h) - var(--nt-buttons-h, 70px));
+    }
+  }
+
+  @media (max-width: 480px) {
+    body.nt-sale-page .cover-header {
+      height: calc(100vh - 20px - var(--nt-sale-h));
+      height: calc(var(--vh, 1vh) * 100 - 106px - var(--nt-sale-h));
+    }
+  }
+
+  /* The offer tag that sits next to the live price in the buy overlay. */
+  .nt-sale-tag {
+    font-family: "Safra Mono", monospace; font-size: 11px; letter-spacing: 0.04em;
+    background: #E8FF3A; color: #000; padding: 2px 6px; margin-left: 8px;
+    white-space: nowrap;
+  }
+</style>
+<!-- Techno test page (11-27): the bar shows on phones too. On dolomit.html phones get only the badge;
+     here the bar sits at the TOP of the phone screen (the top-bar rules above were already written for that)
+     and the badge stays as well. Delete this block to go back to the Dolomit behavior. -->
+<style>
+  @media (max-width: 768px) {
+    body.nt-sale-page { --nt-sale-h: 33px; }
+    body.nt-sale-page .nt-sale-bar { display: flex; }
+  }
+</style>
+</head>
+<body class="techno-page nt-sale-page">
+  <!-- ====== PAGE COLORS: filters + script (ported from cover-monet/index-all.html) ======
+       Placed first in <body> so the page color is set before anything paints. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="page-duo" color-interpolation-filters="sRGB"><feColorMatrix id="duoM" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -0.2126 -0.7152 -0.0722 1 0"/></filter><filter id="img-duo" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0 0 0 1 0"/><feComponentTransfer><feFuncR id="imgCurve" type="table" tableValues="0 1"/></feComponentTransfer><feColorMatrix id="imgM" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -1 0 0 1 0"/></filter><filter id="cover-ink" color-interpolation-filters="sRGB"><feColorMatrix id="inkM" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -0.2126 -0.7152 -0.0722 1 0"/></filter></svg>
+  <script>
+  (function(){
+    /* [background, text, name] */
+    var PAGES = {black:['#000000','#FFFFFF','BLACK'], white:['#FFFFFF','#000000','WHITE'],
+      orange:['#FF3D00','#181C20','ORANGE'], haze:['#181C20','#FF3D00','HAZE']};
+    var ORDER = ['black','white','orange','haze'];
+    var CON = 70;   // photo contrast: grey backgrounds sink toward the dark color
+    var KEY = 'techno-page-color';
+    /* ?color=orange|haze|black|white forces a color (for checking and screenshots) and is not remembered.
+       Otherwise the viewer's last pick, otherwise ORANGE. */
+    var forced = null; try { forced = new URLSearchParams(location.search).get('color') } catch(e){}
+    var saved = null; try { saved = localStorage.getItem(KEY) } catch(e){}
+    var page = PAGES[forced] ? forced : PAGES[saved] ? saved : 'orange';
+    /* HAZE shows the photos as a negative duotone, ORANGE as a duotone; BLACK and WHITE keep the photos as they are */
+    function imgFor(k){ return k === 'haze' ? 'neg' : 'duo' }
+    function el(id){ return document.getElementById(id) }
+
+    /* On a wide-gamut screen (Mac, iPhone) the filter's output reaches the screen without color correction, so it looks more
+       vivid than plain CSS #FF3D00. Nir prefers that vivid look (11-14), so the page background and text use the same numbers
+       as Display P3 colors: one vivid orange everywhere. Other screens get the plain colors. */
+    var VIVID = window.CSS && CSS.supports('color', 'color(display-p3 1 0 0)');
+    function hexv(h, i){ return (parseInt(h.slice(1 + 2*i, 3 + 2*i), 16)/255).toFixed(4) }
+    function css(h){ return VIVID ? 'color(display-p3 ' + [0,1,2].map(function(i){ return hexv(h, i) }).join(' ') + ')' : h }
+    function curve(cn){ var k = cn/100, lo = 0.3*k, hi = 1 - 0.1*k, g = 1 + 0.9*k, a = [];
+      for (var i = 0; i <= 16; i++){ var t = Math.max(0, Math.min(1, (i/16 - lo)/(hi - lo))); a.push(Math.pow(t, g).toFixed(4)) } return a.join(' ') }
+
+    function setPage(k){ page = k; var c = PAGES[k], b = document.body, img = imgFor(k), duo = k !== 'black' && k !== 'white';
+      b.classList.toggle('negative', k === 'black'); b.classList.toggle('page-duo', duo);
+      b.style.setProperty('--page-bg', css(c[0])); b.style.setProperty('--page-fg', css(c[1]));
+      /* photo duotone: shadows take the darker of the pair, highlights the lighter; the negative swaps them */
+      var L = function(h){ return 0.2126*hexv(h,0) + 0.7152*hexv(h,1) + 0.0722*hexv(h,2) }, dk = L(c[0]) < L(c[1]) ? c[0] : c[1], lt = dk === c[0] ? c[1] : c[0];
+      if (img === 'neg'){ var t = dk; dk = lt; lt = t }
+      /* only the non-page color is drawn: where the photo should be the page color it is see-through */
+      var ink = c[1], A = ink === dk ? '-1 0 0 1 0' : '1 0 0 0 0';
+      el('imgM').setAttribute('values', [0,1,2].map(function(i){ return '0 0 0 0 ' + hexv(ink, i) }).join('  ') + '  ' + A);
+      el('imgCurve').setAttribute('tableValues', curve(CON));
+      ['duo','neg'].forEach(function(m){ b.classList.toggle('img-' + m, duo && img === m) });
+      el('duoM').setAttribute('values', [0,1,2].map(function(i){ return '0 0 0 0 ' + hexv(c[1], i) }).join('  ') + '  -0.2126 -0.7152 -0.0722 1 0');  // black -> text color, white -> see-through
+      el('inkM').setAttribute('values', [0,1,2].map(function(i){ return '0 0 0 0 ' + hexv(c[0], i) }).join('  ') + '  -0.2126 -0.7152 -0.0722 1 0');  // on the cover: black -> page color
+      markDot() }
+
+    /* the round button in the fixed Buy Now / Download Trial bar */
+    var dotsEl = document.createElement('div'); dotsEl.className = 'color-dots';
+    var dotB = document.createElement('button'); dotB.type = 'button'; dotsEl.appendChild(dotB);
+    function nextPage(){ return ORDER[(ORDER.indexOf(page) + 1) % ORDER.length] }
+    function markDot(){ var k = nextPage(); dotB.style.setProperty('--dot-bg', css(PAGES[k][0])); dotB.style.setProperty('--dot-fg', css(PAGES[k][1]));
+      dotB.setAttribute('aria-label', 'Page color: ' + PAGES[page][2] + '. Next: ' + PAGES[k][2]); dotB.title = PAGES[k][2] }
+    dotB.onclick = function(){ var k = nextPage(); setPage(k); try { localStorage.setItem(KEY, k) } catch(e){} };
+    /* header.js builds the bar on DOMContentLoaded; wait for it */
+    (function put(n){ var bar = document.querySelector('.cover-buttons'); if (bar) bar.appendChild(dotsEl); else if (n < 100) setTimeout(function(){ put(n + 1) }, 100) })(0);
+
+    setPage(page);
+  })();
+  </script>
+
+  <style>.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}</style>
+  <h1 class="sr-only">Techno טכנו, a Hebrew and Latin display typeface in Bold, with Slanted and Extended styles, designed by Ilya Yasinov and published by Nomad Type</h1>
+
+  <!-- Header Container (will be populated by JavaScript) -->
+  <div id="header-container"></div>
+  <!-- ====== MAIN CONTENT ====== -->
+  <main class="content-wrapper">
+
+  <!-- ====== FONT INTRO SECTION ====== -->
+  <section class="font-intro">
+    <div class="intro-content">
+      <div class="intro-grid">
+        <div class="intro-text-column">
+          <!-- TODO(techno): Ilya's own words from mockup 003, verbatim. The site's other pages carry ~80-100 words here;
+               a longer text from Ilya (per guest-font-brief.md, section 3) replaces this. -->
+          <p>Techno is a display typeface designed for impact. Built for headlines, posters, album art, culture, and bold visual identity.</p>
+        </div>
+
+        <div class="technical-specs-column">
+          <div class="specs-list">
+            <div class="spec-line">Typeface: Techno</div>
+            <!-- TODO(techno): link to Ilya's site or Instagram once he names one -->
+            <div class="spec-line">Designed by: Ilya Yasinov</div>
+            <div class="spec-line">Year: 2026</div>
+            <div class="spec-line">Languages: Hebrew, Latin (all caps)</div>
+            <div class="spec-line">Styles: BOLD, SLANTED BOLD, EXTENDED BOLD, EXTENDED SLANTED BOLD</div>
+            <div class="spec-line">Formats: OTF, WOFF2</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="multilingual-marquee">
+        <div class="marquee-container">
+          <div class="marquee-content">
+            <span class="marquee-text techno-m" style="font-family: 'Techno'; font-weight: 700;">BOLD</span>
+            <span class="marquee-text techno-m" style="font-family: 'Techno Slanted'; font-weight: 700;">SLANTED BOLD</span>
+            <span class="marquee-text techno-m" style="font-family: 'Techno Extended'; font-weight: 700;">EXTENDED BOLD</span>
+            <span class="marquee-text techno-m" style="font-family: 'Techno Extended Slanted'; font-weight: 700;">EXTENDED SLANTED BOLD</span>
+            <span class="marquee-text techno-m" style="font-family: 'Techno'; font-weight: 700;">BOLD</span>
+            <span class="marquee-text techno-m" style="font-family: 'Techno Slanted'; font-weight: 700;">SLANTED BOLD</span>
+            <span class="marquee-text techno-m" style="font-family: 'Techno Extended'; font-weight: 700;">EXTENDED BOLD</span>
+            <span class="marquee-text techno-m" style="font-family: 'Techno Extended Slanted'; font-weight: 700;">EXTENDED SLANTED BOLD</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === Section 1: name pair, mockups 001/002 === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-1">Size</label>
+        <input class="size" id="size-1" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-1">Leading</label>
+        <input class="leading" id="leading-1" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-1">Letter Spacing</label>
+        <input class="spacing" id="spacing-1" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="1">
+            <div class="select-header">
+              <span class="select-value">TECHNO EXTENDED BOLD</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="TECHNO BOLD">TECHNO BOLD</div>
+              <div class="select-option" data-value="TECHNO SLANTED BOLD">TECHNO SLANTED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED BOLD">TECHNO EXTENDED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="TECHNO BOLD">TECHNO BOLD</option>
+            <option value="TECHNO SLANTED BOLD">TECHNO SLANTED BOLD</option>
+            <option value="TECHNO EXTENDED BOLD" selected>TECHNO EXTENDED BOLD</option>
+            <option value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 responsive-text techno-word" contenteditable="true" dir="rtl" style="font-family: 'Techno Extended'; font-weight: 700; font-size: 240px; line-height: 1; letter-spacing: 0em; white-space: nowrap; text-align: center;">טכנו TECHNO</div>
+  </section>
+
+  <!-- === Section 2: proposal, club === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-2">Size</label>
+        <input class="size" id="size-2" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-2">Leading</label>
+        <input class="leading" id="leading-2" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-2">Letter Spacing</label>
+        <input class="spacing" id="spacing-2" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="2">
+            <div class="select-header">
+              <span class="select-value">TECHNO SLANTED BOLD</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="TECHNO BOLD">TECHNO BOLD</div>
+              <div class="select-option" data-value="TECHNO SLANTED BOLD">TECHNO SLANTED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED BOLD">TECHNO EXTENDED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="TECHNO BOLD">TECHNO BOLD</option>
+            <option value="TECHNO SLANTED BOLD" selected>TECHNO SLANTED BOLD</option>
+            <option value="TECHNO EXTENDED BOLD">TECHNO EXTENDED BOLD</option>
+            <option value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 responsive-text techno-word" contenteditable="true" dir="ltr" style="font-family: 'Techno Slanted'; font-weight: 700; font-size: 240px; line-height: 1; letter-spacing: 0em; white-space: nowrap; text-align: center;">RAVE רייב</div>
+  </section>
+
+  <!-- === Section 3: proposal, club === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-3">Size</label>
+        <input class="size" id="size-3" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-3">Leading</label>
+        <input class="leading" id="leading-3" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-3">Letter Spacing</label>
+        <input class="spacing" id="spacing-3" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="3">
+            <div class="select-header">
+              <span class="select-value">TECHNO BOLD</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="TECHNO BOLD">TECHNO BOLD</div>
+              <div class="select-option" data-value="TECHNO SLANTED BOLD">TECHNO SLANTED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED BOLD">TECHNO EXTENDED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="TECHNO BOLD" selected>TECHNO BOLD</option>
+            <option value="TECHNO SLANTED BOLD">TECHNO SLANTED BOLD</option>
+            <option value="TECHNO EXTENDED BOLD">TECHNO EXTENDED BOLD</option>
+            <option value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 responsive-text techno-word" contenteditable="true" dir="rtl" style="font-family: 'Techno'; font-weight: 700; font-size: 240px; line-height: 1; letter-spacing: 0em; white-space: nowrap; text-align: center;">מועדון CLUB</div>
+  </section>
+
+  <!-- === Section 4: proposal, club cities === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-4">Size</label>
+        <input class="size" id="size-4" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-4">Leading</label>
+        <input class="leading" id="leading-4" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-4">Letter Spacing</label>
+        <input class="spacing" id="spacing-4" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="4">
+            <div class="select-header">
+              <span class="select-value">TECHNO EXTENDED SLANTED BOLD</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="TECHNO BOLD">TECHNO BOLD</div>
+              <div class="select-option" data-value="TECHNO SLANTED BOLD">TECHNO SLANTED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED BOLD">TECHNO EXTENDED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="TECHNO BOLD">TECHNO BOLD</option>
+            <option value="TECHNO SLANTED BOLD">TECHNO SLANTED BOLD</option>
+            <option value="TECHNO EXTENDED BOLD">TECHNO EXTENDED BOLD</option>
+            <option value="TECHNO EXTENDED SLANTED BOLD" selected>TECHNO EXTENDED SLANTED BOLD</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 responsive-text techno-word" contenteditable="true" dir="rtl" style="font-family: 'Techno Extended Slanted'; font-weight: 700; font-size: 240px; line-height: 1; letter-spacing: 0em; white-space: nowrap; text-align: center;">תל אביב BERLIN</div>
+  </section>
+
+  <!-- === Section 5: proposal, club === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-5">Size</label>
+        <input class="size" id="size-5" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-5">Leading</label>
+        <input class="leading" id="leading-5" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-5">Letter Spacing</label>
+        <input class="spacing" id="spacing-5" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="5">
+            <div class="select-header">
+              <span class="select-value">TECHNO EXTENDED BOLD</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="TECHNO BOLD">TECHNO BOLD</div>
+              <div class="select-option" data-value="TECHNO SLANTED BOLD">TECHNO SLANTED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED BOLD">TECHNO EXTENDED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="TECHNO BOLD">TECHNO BOLD</option>
+            <option value="TECHNO SLANTED BOLD">TECHNO SLANTED BOLD</option>
+            <option value="TECHNO EXTENDED BOLD" selected>TECHNO EXTENDED BOLD</option>
+            <option value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 responsive-text techno-word" contenteditable="true" dir="ltr" style="font-family: 'Techno Extended'; font-weight: 700; font-size: 240px; line-height: 1; letter-spacing: 0em; white-space: nowrap; text-align: center;">AFTER PARTY אפטר</div>
+  </section>
+
+  <!-- === Section 6: proposal, art === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-6">Size</label>
+        <input class="size" id="size-6" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-6">Leading</label>
+        <input class="leading" id="leading-6" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-6">Letter Spacing</label>
+        <input class="spacing" id="spacing-6" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="6">
+            <div class="select-header">
+              <span class="select-value">TECHNO SLANTED BOLD</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="TECHNO BOLD">TECHNO BOLD</div>
+              <div class="select-option" data-value="TECHNO SLANTED BOLD">TECHNO SLANTED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED BOLD">TECHNO EXTENDED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="TECHNO BOLD">TECHNO BOLD</option>
+            <option value="TECHNO SLANTED BOLD" selected>TECHNO SLANTED BOLD</option>
+            <option value="TECHNO EXTENDED BOLD">TECHNO EXTENDED BOLD</option>
+            <option value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 responsive-text techno-word" contenteditable="true" dir="rtl" style="font-family: 'Techno Slanted'; font-weight: 700; font-size: 240px; line-height: 1; letter-spacing: 0em; white-space: nowrap; text-align: center;">גלריה GALLERY</div>
+  </section>
+
+  <!-- === Section 7: proposal, club === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-7">Size</label>
+        <input class="size" id="size-7" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-7">Leading</label>
+        <input class="leading" id="leading-7" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-7">Letter Spacing</label>
+        <input class="spacing" id="spacing-7" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="7">
+            <div class="select-header">
+              <span class="select-value">TECHNO BOLD</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="TECHNO BOLD">TECHNO BOLD</div>
+              <div class="select-option" data-value="TECHNO SLANTED BOLD">TECHNO SLANTED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED BOLD">TECHNO EXTENDED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="TECHNO BOLD" selected>TECHNO BOLD</option>
+            <option value="TECHNO SLANTED BOLD">TECHNO SLANTED BOLD</option>
+            <option value="TECHNO EXTENDED BOLD">TECHNO EXTENDED BOLD</option>
+            <option value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 responsive-text techno-word" contenteditable="true" dir="ltr" style="font-family: 'Techno'; font-weight: 700; font-size: 240px; line-height: 1; letter-spacing: 0em; white-space: nowrap; text-align: center;">LINE UP ליינאפ</div>
+  </section>
+
+  <!-- === Section 8: proposal, music === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-8">Size</label>
+        <input class="size" id="size-8" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-8">Leading</label>
+        <input class="leading" id="leading-8" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-8">Letter Spacing</label>
+        <input class="spacing" id="spacing-8" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="8">
+            <div class="select-header">
+              <span class="select-value">TECHNO EXTENDED SLANTED BOLD</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="TECHNO BOLD">TECHNO BOLD</div>
+              <div class="select-option" data-value="TECHNO SLANTED BOLD">TECHNO SLANTED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED BOLD">TECHNO EXTENDED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="TECHNO BOLD">TECHNO BOLD</option>
+            <option value="TECHNO SLANTED BOLD">TECHNO SLANTED BOLD</option>
+            <option value="TECHNO EXTENDED BOLD">TECHNO EXTENDED BOLD</option>
+            <option value="TECHNO EXTENDED SLANTED BOLD" selected>TECHNO EXTENDED SLANTED BOLD</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 responsive-text techno-word" contenteditable="true" dir="rtl" style="font-family: 'Techno Extended Slanted'; font-weight: 700; font-size: 240px; line-height: 1; letter-spacing: 0em; white-space: nowrap; text-align: center;">ויניל VINYL</div>
+  </section>
+
+  <!-- === Section 9: proposal, club (figures) === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-9">Size</label>
+        <input class="size" id="size-9" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-9">Leading</label>
+        <input class="leading" id="leading-9" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-9">Letter Spacing</label>
+        <input class="spacing" id="spacing-9" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="9">
+            <div class="select-header">
+              <span class="select-value">TECHNO EXTENDED BOLD</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="TECHNO BOLD">TECHNO BOLD</div>
+              <div class="select-option" data-value="TECHNO SLANTED BOLD">TECHNO SLANTED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED BOLD">TECHNO EXTENDED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="TECHNO BOLD">TECHNO BOLD</option>
+            <option value="TECHNO SLANTED BOLD">TECHNO SLANTED BOLD</option>
+            <option value="TECHNO EXTENDED BOLD" selected>TECHNO EXTENDED BOLD</option>
+            <option value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 responsive-text techno-word" contenteditable="true" dir="ltr" style="font-family: 'Techno Extended'; font-weight: 700; font-size: 240px; line-height: 1; letter-spacing: 0em; white-space: nowrap; text-align: center;">128 BPM</div>
+  </section>
+
+  <!-- === Section 10: proposal, art === -->
+  <section class="type-tester responsive-section">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-10">Size</label>
+        <input class="size" id="size-10" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-10">Leading</label>
+        <input class="leading" id="leading-10" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-10">Letter Spacing</label>
+        <input class="spacing" id="spacing-10" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="10">
+            <div class="select-header">
+              <span class="select-value">TECHNO SLANTED BOLD</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="TECHNO BOLD">TECHNO BOLD</div>
+              <div class="select-option" data-value="TECHNO SLANTED BOLD">TECHNO SLANTED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED BOLD">TECHNO EXTENDED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="TECHNO BOLD">TECHNO BOLD</option>
+            <option value="TECHNO SLANTED BOLD" selected>TECHNO SLANTED BOLD</option>
+            <option value="TECHNO EXTENDED BOLD">TECHNO EXTENDED BOLD</option>
+            <option value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 responsive-text techno-word" contenteditable="true" dir="rtl" style="font-family: 'Techno Slanted'; font-weight: 700; font-size: 240px; line-height: 1; letter-spacing: 0em; white-space: nowrap; text-align: center;">תערוכה EXHIBITION</div>
+  </section>
+
+  <!-- === Section 11: alternate figures: line 2 has ss04 on (only 6 and 9 change in this font) === -->
+  <section class="type-tester">
+    <div class="controls">
+      <div class="sliders-wrapper">
+        <label class="label-custom" for="size-11">Size</label>
+        <input class="size" id="size-11" type="range" min="16" max="512" />
+        <label class="label-custom" for="leading-11">Leading</label>
+        <input class="leading" id="leading-11" type="range" min="0.5" max="2" step="0.05" />
+        <label class="label-custom" for="spacing-11">Letter Spacing</label>
+        <input class="spacing" id="spacing-11" type="range" min="-0.1" max="0.1" step="0.01" />
+      </div>
+      <div class="font-align-wrapper">
+        <div class="font-wrapper">
+          <div class="custom-select font-select-custom" data-section="11">
+            <div class="select-header">
+              <span class="select-value">TECHNO BOLD</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="TECHNO BOLD">TECHNO BOLD</div>
+              <div class="select-option" data-value="TECHNO SLANTED BOLD">TECHNO SLANTED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED BOLD">TECHNO EXTENDED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</div>
+            </div>
+          </div>
+          <select class="font-select" aria-label="Font and weight" style="display: none;">
+            <option value="TECHNO BOLD" selected>TECHNO BOLD</option>
+            <option value="TECHNO SLANTED BOLD">TECHNO SLANTED BOLD</option>
+            <option value="TECHNO EXTENDED BOLD">TECHNO EXTENDED BOLD</option>
+            <option value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</option>
+          </select>
+        </div>
+        <div class="align-buttons" role="group" aria-label="Align">
+          <button class="icon-btn align-left"   type="button" data-align="left" aria-label="Align left"></button>
+          <button class="icon-btn align-center is-active" type="button" data-align="center" aria-label="Align center"></button>
+          <button class="icon-btn align-right"  type="button" data-align="right" aria-label="Align right"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-area column-count-1 techno-alt-demo" contenteditable="true" dir="ltr" style="font-family: 'Techno'; font-weight: 700; font-size: 120px; line-height: 1.1; letter-spacing: 0em; text-align: center;">0123456789<br><span class="techno-ss04">0123456789</span></div>
+  </section>
+
+
+  <!-- ===== GLYPH GRID VIEWER ===== -->
+  <div class="wrapper" id="fontWrapper">
+    <div class="left-panel">
+      <div class="preview-box" id="preview" style="font-family: 'Techno'; font-weight: 700;" data-preview="א"></div>
+      <div class="controls-lite">
+        <div class="font-wrapper">
+          <div class="custom-select" id="weight-select">
+            <div class="select-header">
+              <span class="select-value">TECHNO BOLD</span>
+              <span class="select-arrow"></span>
+            </div>
+            <div class="select-options">
+              <div class="select-option" data-value="TECHNO BOLD">TECHNO BOLD</div>
+              <div class="select-option" data-value="TECHNO SLANTED BOLD">TECHNO SLANTED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED BOLD">TECHNO EXTENDED BOLD</div>
+              <div class="select-option" data-value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</div>
+            </div>
+          </div>
+          <!-- Hidden original select for functionality -->
+          <select id="weight" style="display: none;">
+            <option value="TECHNO BOLD" selected>TECHNO BOLD</option>
+            <option value="TECHNO SLANTED BOLD">TECHNO SLANTED BOLD</option>
+            <option value="TECHNO EXTENDED BOLD">TECHNO EXTENDED BOLD</option>
+            <option value="TECHNO EXTENDED SLANTED BOLD">TECHNO EXTENDED SLANTED BOLD</option>
+          </select>
+        </div>
+      </div>
+      <div class="details" id="details">Unicode decimal: 1488<br>Unicode hex: 05D0<br>HTML entity: &amp;#x5D0;</div>
+    </div>
+    <div class="grid-container">
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+
+  <!-- ===== IN USE SECTION ===== (Ilya's mockups 010 and 011) -->
+  <section class="in-use-section">
+    <div class="section-header">
+      <h2>Techno in Use</h2>
+    </div>
+    <div class="in-use-grid">
+      <div class="in-use-item">
+        <img src="photos/techno/in-use/1.jpg" alt="Techno in use, large white figures and letters on a black wall behind a row of people working at a long table" loading="lazy" />
+      </div>
+      <div class="in-use-item">
+        <img src="photos/techno/in-use/2.jpg" alt="Techno in use, huge white letters on red behind a microscope image of a tardigrade" loading="lazy" />
+      </div>
+    </div>
+    <!-- TODO(techno): image credits, if Ilya wants any (and confirm the photos inside the mockups are cleared for use) -->
+  </section>
+
+  <!-- ===== SPECIMEN SECTION ===== (Ilya's mockups 001-008) -->
+  <section id="specimen" class="specimen-section">
+    <div class="section-header">
+      <h2>Specimen</h2>
+    </div>
+    <div class="in-use-grid">
+      <div class="in-use-item">
+        <img src="photos/techno/specimen/1.jpg" alt="Techno poster: TECHNO/טכנו over a stepped mountain line, with the styles and weights listed in Latin and Hebrew" loading="lazy" />
+      </div>
+      <div class="in-use-item">
+        <img src="photos/techno/specimen/2.jpg" alt="Techno poster in pink on black: large A1K, the Hebrew and Latin alphabet in Bold, Regular and Light" loading="lazy" />
+      </div>
+      <div class="in-use-item">
+        <img src="photos/techno/specimen/3.jpg" alt="Techno poster: TECHNO DISPLAY FONT, a red block of text and Hebrew lines in Slanted" loading="lazy" />
+      </div>
+      <div class="in-use-item">
+        <img src="photos/techno/specimen/4.jpg" alt="Techno poster in yellow: large Hebrew letters and a Hebrew paragraph over a photo of people jumping off a pier" loading="lazy" />
+      </div>
+      <div class="in-use-item">
+        <img src="photos/techno/specimen/5.jpg" alt="Techno specimen sheet: TECHNO / DISPLAY FONT, Hebrew and Latin pangrams, Bold, Regular and Light" loading="lazy" />
+      </div>
+      <div class="in-use-item">
+        <img src="photos/techno/specimen/6.jpg" alt="Techno poster: a large red 1984 in Bold over a photo of a street camera" loading="lazy" />
+      </div>
+      <div class="in-use-item">
+        <img src="photos/techno/specimen/7.jpg" alt="Techno poster in green: TECHNO set vertically, a pixel vegetable drawing and lists of fruit and vegetable names" loading="lazy" />
+      </div>
+      <div class="in-use-item">
+        <img src="photos/techno/specimen/8.jpg" alt="Techno poster in black with a red border: a large 404" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DATA MAPS ===== -->
+  <script type="application/json" id="fontMap">{
+    "TECHNO BOLD": { "family": "Techno", "weight": 700 },
+    "TECHNO SLANTED BOLD": { "family": "Techno Slanted", "weight": 700 },
+    "TECHNO EXTENDED BOLD": { "family": "Techno Extended", "weight": 700 },
+    "TECHNO EXTENDED SLANTED BOLD": { "family": "Techno Extended Slanted", "weight": 700 }
+  }</script>
+
+  <!-- script.js (initGlyphGrid) reads glyphMap key "Safra2", falling back to "default".
+       Every encoded character in Techno-Regular.otf except space and the standalone niqqud marks. -->
+  <script type="application/json" id="glyphMap">{
+    "default": "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`{|}~¢£¥©«®¯°±»×÷־אבגדהוזחטיךכלםמןנסעףפץצקרשת׳״‐‑‒–—―‘’“”†‡•…‾⁻₋₪€№™←↑→↓↔−≠≤≥⎯⏤─━⸺⸻﹘﹣－＿",
+    "Safra2": "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`{|}~¢£¥©«®¯°±»×÷־אבגדהוזחטיךכלםמןנסעףפץצקרשת׳״‐‑‒–—―‘’“”†‡•…‾⁻₋₪€№™←↑→↓↔−≠≤≥⎯⏤─━⸺⸻﹘﹣－＿"
+  }</script>
+
+  <!-- ===== SCRIPT ===== -->
+  <script src="gsap-public/minified/gsap.min.js"></script>
+  <script src="gsap-public/minified/ScrollTrigger.min.js"></script>
+  <script src="gsap-public/minified/Draggable.min.js"></script>
+  <script src="gsap-public/minified/InertiaPlugin.min.js"></script>
+
+  <!-- Load Header Component First -->
+  <script src="header.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof loadHeader === 'function') {
+        loadHeader(`
+          <div style="transform: translateY(0px);">טכנו</div>
+          <div style="transform: translateY(0px);">TECHNO</div>
+        `);
+      }
+    });
+  </script>
+
+  <script src="script.js"></script>
+
+  </main>
+
+<!-- ====== OVERLAYS ======
+     Preview only: no trial ZIP and no price yet, so both buttons open a plain "Coming soon".
+     No form, so nothing reaches EmailJS or the trial dispatcher from this page.
+     The empty form + hidden spans exist only so script.js's close handlers find the ids they reset. -->
+<div class="overlay" id="trialOverlay" data-font="Techno">
+  <div class="overlay-content">
+    <div class="form-header">
+      <h2>Download Techno</h2>
+      <button class="close-btn" id="closeTrial"></button>
+    </div>
+    <p class="techno-soon">Coming soon.</p>
+    <form id="trialFormContent" style="display:none;"></form>
+    <span id="trialSuccessMessage" style="display:none;"></span>
+  </div>
+</div>
+
+<div class="overlay" id="buyOverlay" data-font="Techno">
+  <div class="overlay-content">
+    <div class="form-header">
+      <h2>Buy Techno</h2>
+      <button class="close-btn" id="closeBuy"></button>
+    </div>
+    <!-- TODO(techno): price tier (EUR 70 / 85 / 100) still open between Nir and Ilya. No Stripe links. -->
+    <p class="techno-soon">Coming soon.</p>
+    <form id="buyFormContent" style="display:none;"></form>
+    <span id="buyIntroText" style="display:none;"></span>
+    <span id="buySuccessMessage" style="display:none;"></span>
+  </div>
+</div>
+
+  <section class="scroll-buttons-section">
+    <div class="scroll-buttons-content">
+      <div class="scroll-buttons-text">
+        <!-- TODO(techno): tagline + one or two sentences from Ilya (guest-font-brief.md, section 5). Ilya's mockup words for now. -->
+        <h2 class="scroll-buttons-title">Techno: a display typeface designed for impact</h2>
+        <p class="scroll-buttons-description">
+          Bold, Slanted Bold, Extended Bold and Extended Slanted Bold. Hebrew and Latin caps.
+        </p>
+      </div>
+
+      <div class="scroll-buttons">
+        <button class="btn btn-primary scroll-btn" id="scrollTrialBtn">Download Trial</button>
+        <button class="btn btn-secondary scroll-btn" id="scrollBuyBtn">Buy Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Container (will be populated by JavaScript) -->
+  <div id="footer-container"></div>
+
+  <!-- Animated Favicon Script -->
+  <script>
+    setTimeout(() => {
+      let favicon_video_image_counter = 0;
+      let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+      let favicon_video_images = [
+  "https://favicongenerator.s3.amazonaws.com/3129f51d17a5c.png","https://favicongenerator.s3.amazonaws.com/cd721e3e8a586.png","https://favicongenerator.s3.amazonaws.com/4af6e76d5ae4a.png","https://favicongenerator.s3.amazonaws.com/e76f98c1d6448.png","https://favicongenerator.s3.amazonaws.com/bc435c23b4eaf.png","https://favicongenerator.s3.amazonaws.com/c806c3265454f.png","https://favicongenerator.s3.amazonaws.com/e95b673a3d845.png","https://favicongenerator.s3.amazonaws.com/230b1204ad4d1.png","https://favicongenerator.s3.amazonaws.com/7fd4916b0902e.png","https://favicongenerator.s3.amazonaws.com/c9dddf2a04e46.png","https://favicongenerator.s3.amazonaws.com/a13c002e6a2ab.png","https://favicongenerator.s3.amazonaws.com/e8eddb001860b.png","https://favicongenerator.s3.amazonaws.com/13f85eb453429.png","https://favicongenerator.s3.amazonaws.com/ce45ac6aa0a8a.png","https://favicongenerator.s3.amazonaws.com/fb54d04dd298f.png","https://favicongenerator.s3.amazonaws.com/4c8400f32accc.png","https://favicongenerator.s3.amazonaws.com/a792f02084f6c.png","https://favicongenerator.s3.amazonaws.com/f30e5a3031be8.png","https://favicongenerator.s3.amazonaws.com/9249f78daaefd.png","https://favicongenerator.s3.amazonaws.com/8b5a05d43b31d.png","https://favicongenerator.s3.amazonaws.com/eab8ede756262.png","https://favicongenerator.s3.amazonaws.com/2ba370948350d.png","https://favicongenerator.s3.amazonaws.com/16b955af4550b.png","https://favicongenerator.s3.amazonaws.com/cb303dec540cb.png","https://favicongenerator.s3.amazonaws.com/f071825bf109d.png","https://favicongenerator.s3.amazonaws.com/3e83da0b84f04.png","https://favicongenerator.s3.amazonaws.com/435d711b5e9c7.png","https://favicongenerator.s3.amazonaws.com/7d8c3600a547d.png","https://favicongenerator.s3.amazonaws.com/076628736ee03.png","https://favicongenerator.s3.amazonaws.com/6674b4393d2e7.png","https://favicongenerator.s3.amazonaws.com/8c6eabdaf80e.png","https://favicongenerator.s3.amazonaws.com/93129cf211ec7.png","https://favicongenerator.s3.amazonaws.com/50ab769fae9c5.png","https://favicongenerator.s3.amazonaws.com/dbd67430dfff2.png","https://favicongenerator.s3.amazonaws.com/6306b1d0f7ede.png","https://favicongenerator.s3.amazonaws.com/c80c22e1b976e.png","https://favicongenerator.s3.amazonaws.com/c0ba6ed76150a.png","https://favicongenerator.s3.amazonaws.com/e15281d3c9931.png","https://favicongenerator.s3.amazonaws.com/274f3c0d4f878.png","https://favicongenerator.s3.amazonaws.com/78a9057d69b74.png","https://favicongenerator.s3.amazonaws.com/d6db49127abf1.png","https://favicongenerator.s3.amazonaws.com/ee5bae80536bc.png","https://favicongenerator.s3.amazonaws.com/2a7e9e25fccb9.png","https://favicongenerator.s3.amazonaws.com/dc7fbe30b5d91.png","https://favicongenerator.s3.amazonaws.com/7b936d1b246c7.png","https://favicongenerator.s3.amazonaws.com/2b1c4719e18fb.png","https://favicongenerator.s3.amazonaws.com/072fa8af4155c.png","https://favicongenerator.s3.amazonaws.com/3e7bca2490671.png","https://favicongenerator.s3.amazonaws.com/f75d559c12576.png","https://favicongenerator.s3.amazonaws.com/c2dccc17f46e.png","https://favicongenerator.s3.amazonaws.com/62ff58aefdb7a.png","https://favicongenerator.s3.amazonaws.com/12342f642fd7a.png","https://favicongenerator.s3.amazonaws.com/2ce950b8443e2.png","https://favicongenerator.s3.amazonaws.com/3676501156615.png","https://favicongenerator.s3.amazonaws.com/52ac9290673ef.png","https://favicongenerator.s3.amazonaws.com/c401b341b6877.png","https://favicongenerator.s3.amazonaws.com/5408ed854b0e6.png","https://favicongenerator.s3.amazonaws.com/c9417ab290d8c.png","https://favicongenerator.s3.amazonaws.com/605db5fa28d8b.png","https://favicongenerator.s3.amazonaws.com/dbcadae5ac827.png","https://favicongenerator.s3.amazonaws.com/89497c65bc9d.png","https://favicongenerator.s3.amazonaws.com/cba217324331a.png","https://favicongenerator.s3.amazonaws.com/04989a8ce7a13.png","https://favicongenerator.s3.amazonaws.com/9f6ff1daefbc2.png","https://favicongenerator.s3.amazonaws.com/35af62beb2069.png","https://favicongenerator.s3.amazonaws.com/03dcf5523866b.png","https://favicongenerator.s3.amazonaws.com/b598d707d6b7a.png","https://favicongenerator.s3.amazonaws.com/796a5d9e5c498.png","https://favicongenerator.s3.amazonaws.com/35c427f26d961.png","https://favicongenerator.s3.amazonaws.com/0177ba9bb3cd5.png","https://favicongenerator.s3.amazonaws.com/dda651d22badc.png","https://favicongenerator.s3.amazonaws.com/ab5e3aef1f7ff.png","https://favicongenerator.s3.amazonaws.com/1922e4dfb5696.png","https://favicongenerator.s3.amazonaws.com/c95b12f64f2bf.png","https://favicongenerator.s3.amazonaws.com/a59614ebdf159.png","https://favicongenerator.s3.amazonaws.com/dfdd396620126.png","https://favicongenerator.s3.amazonaws.com/af9153abb4866.png","https://favicongenerator.s3.amazonaws.com/21d342a33e20c.png","https://favicongenerator.s3.amazonaws.com/259e6557b866e.png","https://favicongenerator.s3.amazonaws.com/586c3cb84232c.png","https://favicongenerator.s3.amazonaws.com/26ea4ab6305b6.png","https://favicongenerator.s3.amazonaws.com/80f1a5fcefd97.png","https://favicongenerator.s3.amazonaws.com/aa8010193758f.png","https://favicongenerator.s3.amazonaws.com/c62ddfd8b8fe5.png","https://favicongenerator.s3.amazonaws.com/35d778b2f5022.png","https://favicongenerator.s3.amazonaws.com/629d6922cf6f7.png","https://favicongenerator.s3.amazonaws.com/35e86ac544a1d.png","https://favicongenerator.s3.amazonaws.com/77825641eefc2.png","https://favicongenerator.s3.amazonaws.com/0472d28c319e4.png","https://favicongenerator.s3.amazonaws.com/ca2bdb73b6cc8.png","https://favicongenerator.s3.amazonaws.com/8d4ac4862754c.png","https://favicongenerator.s3.amazonaws.com/e7d5b141691a4.png","https://favicongenerator.s3.amazonaws.com/a53ffd9f417a5.png","https://favicongenerator.s3.amazonaws.com/14aa02ac80de5.png","https://favicongenerator.s3.amazonaws.com/e21f4aa715dab.png","https://favicongenerator.s3.amazonaws.com/e393c22a4de28.png","https://favicongenerator.s3.amazonaws.com/69bff0d066f14.png","https://favicongenerator.s3.amazonaws.com/43db7d93ee14c.png","https://favicongenerator.s3.amazonaws.com/86859d59c20a7.png","https://favicongenerator.s3.amazonaws.com/059f6f8183db8.png","https://favicongenerator.s3.amazonaws.com/2016a34618202.png","https://favicongenerator.s3.amazonaws.com/91ee3568cfd6c.png","https://favicongenerator.s3.amazonaws.com/fd9d0e98cb80d.png"];
+      async function favicon_video_to_data_url(url, callback) {
+        let xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          let reader = new FileReader();
+          reader.onloadend = function () {
+            callback(reader.result);
+          };
+          reader.readAsDataURL(xhr.response);
+        };
+        xhr.open("GET", url);
+        xhr.responseType = "blob";
+        xhr.send();
+      }
+    
+      let favicon_video_loaded_images = [];
+    
+      favicon_video_images.map((url, idx) => {
+        favicon_video_to_data_url(url, function (dataUrl) {
+          favicon_video_loaded_images[idx] = dataUrl;
+        });
+      });
+    
+      setInterval(function () {
+        if(favicon_video_loaded_images[favicon_video_image_counter]) {
+          favicon_video_icon_tag.href = favicon_video_loaded_images[
+            favicon_video_image_counter
+          ].replace("application/octet-stream", "image/png");
+        }
+        if (
+          favicon_video_image_counter ==
+          favicon_video_loaded_images.length - 1
+        )
+          favicon_video_image_counter = 0;
+        else favicon_video_image_counter++;
+      }, 50);
+    }, 1500);
+  </script>
+
+  <!-- Footer Component Script -->
+  <script src="footer.js"></script>
+  <script>
+    // Load footer when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof loadFooter === 'function') {
+        loadFooter('Techno'); // Change this for different pages
+      }
+
+      // Navigation links - force navigation
+      const navLinks = document.querySelectorAll('.nav-link, .menu-item');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          if (this.href) {
+            window.location.href = this.href;
+          }
+        });
+      });
+
+      // Trial buttons - open overlays (handled by initScrollButtonClicks in script.js)
+      // Only handle sticky-trial-btn navigation, scroll buttons open overlays
+      const stickyTrialBtn = document.querySelector('.sticky-trial-btn');
+      if (stickyTrialBtn) {
+        stickyTrialBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.location.href = 'trial-fonts.html';
+        });
+      }
+    });
+  </script>
+
+<!-- ROTATING BADGE. Same SALE config as the bar; shown instead of it on phones. -->
+<div class="nt-badge" id="ntBadge" aria-hidden="true">
+  <svg id="ntBadgeSvg" xmlns="http://www.w3.org/2000/svg">
+    <circle class="nt-badge-disc" id="ntBadgeDisc" />
+    <g class="nt-badge-spin">
+      <path id="ntBadgePath" fill="none" />
+      <text class="nt-badge-text" xml:space="preserve"><textPath id="ntBadgeTextPath" href="#ntBadgePath" startOffset="0"></textPath></text>
+    </g>
+  </svg>
+</div>
+
+<!-- LAUNCH OFFER bar. A direct child of <body> on purpose: nested inside the buy
+     overlay it inherited that overlay's stacking context and painted over the cart. -->
+<div class="nt-sale-bar" id="ntSaleBar" aria-hidden="true">
+  <div class="nt-sale-track"><span id="ntSaleText"></span><span id="ntSaleText2"></span></div>
+</div>
+<!-- SALE switch (same block as dolomit.html). Flip on:false to hide the bar and the badge. -->
+<script>
+(function () {
+    const IL = (function () {
+      try {
+        const q = new URLSearchParams(window.location.search).get('il');
+        if (q === '1') return true;
+        if (q === '0') return false;
+        return Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Jerusalem';
+      } catch (e) { return false; }
+    })();
+
+    const SALE = { on: true, percent: 50, label: 'NEW!', barLabel: 'Techno Launch Offer', badgeText: 'NEW! Techno 50% off ', endsOn: '', gap: 10, promoCode: '', ilLive: false };
+
+    // The offer is only announced to people who can actually get it. Outside Israel that
+    // means a live Stripe promotion code; inside Israel it means the checkout worker is
+    // discounting too. Otherwise the bar and the badge would promise what checkout won't do.
+    // Techno test page: no checkout exists yet, so there is no promo code or Israeli checkout to wait for.
+    // The bar shows whenever SALE.on is true, in Israel too. At launch, put back Dolomit's line:
+    // const SALE_VISIBLE = SALE.on && (IL ? !!SALE.ilLive : !!SALE.promoCode);
+    const SALE_VISIBLE = SALE.on;
+
+    const salePrice = (n) => Math.round(n * (100 - SALE.percent) / 100);
+
+    // The bar markup is the last thing in <body>, after this script, so wait for the
+    // parser to finish before looking for it.
+    (function whenReady(fn) {
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+      else fn();
+    })(function paintSaleBar() {
+      const a = document.getElementById('ntSaleText'), b = document.getElementById('ntSaleText2');
+      if (!a || !b) return;
+      if (!SALE_VISIBLE) {
+        const bar = document.getElementById('ntSaleBar'); if (bar) bar.remove();
+        document.body.classList.remove('nt-sale-page');
+        const badge = document.getElementById('ntBadge'); if (badge) badge.remove();
+        return;
+      }
+      // One sentence, spaced normally inside: "Dolomit Launch Offer \u2013 20% off".
+      // SALE.gap is the air BETWEEN repeats, not inside the sentence.
+      let sentence = SALE.barLabel + ' \u2013 ' + SALE.percent + '% off';
+      if (SALE.endsOn) sentence += ' \u2013 ' + SALE.endsOn;
+      // Between repeats: just air, twice the gap. Nir's call: the wide space does the
+      // separating on its own, no dash needed. The en dash inside the sentence stays.
+      const air = ' '.repeat(SALE.gap || 8);
+      const unit = sentence + air + air;
+
+      // Measure only once the webfont is in. Measuring against the fallback gives a
+      // different width, and the swap then knocks the two halves out of register.
+      function build() {
+        a.textContent = unit;
+        let guard = 0;
+        while (a.scrollWidth < window.innerWidth && guard++ < 60) {
+          a.textContent += unit;
+        }
+        b.textContent = a.textContent;
+        // scrollWidth, not the box: it is the real text width even if something clamps the box.
+        const half = a.scrollWidth;
+        const track = a.parentElement;
+
+        // Move by EXACTLY one half, in pixels, forever. When the animation reaches
+        // -half, half two sits precisely where half one began, so the loop has no seam.
+        // Speed is constant at 60 px per second on any screen width.
+        if (track._ntAnim) track._ntAnim.cancel();
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        track._ntAnim = track.animate(
+          [{ transform: 'translateX(0px)' }, { transform: 'translateX(' + (-half) + 'px)' }],
+          { duration: (half / 60) * 1000, iterations: Infinity, easing: 'linear' }
+        );
+      }
+
+      // Height of the mobile button bar, so the yellow bar can sit exactly on top of it.
+      function measureButtons() {
+        const cb = document.querySelector('.cover-buttons');
+        const h = (cb && window.matchMedia('(max-width: 768px)').matches)
+          ? Math.round(cb.getBoundingClientRect().height) : 0;
+        document.body.style.setProperty('--nt-buttons-h', h + 'px');
+      }
+
+      // ---- the rotating badge -------------------------------------------------
+      // Wrap the sentence ONCE around a circle. Measure the real text, then solve for
+      // the radius: circumference = text width  =>  r = width / 2pi.
+      function buildBadge() {
+        const box = document.getElementById('ntBadge');
+        if (!box) return;
+        const svg = document.getElementById('ntBadgeSvg');
+        const disc = document.getElementById('ntBadgeDisc');
+        const path = document.getElementById('ntBadgePath');
+        const tp = document.getElementById('ntBadgeTextPath');
+
+        const words = SALE.badgeText || sentence;
+        tp.textContent = words;
+
+        // Measure the real text, off-screen, in the badge's own type.
+        const ruler = document.createElement('span');
+        ruler.style.cssText = 'position:absolute;visibility:hidden;white-space:pre;' +
+          'font-family:"Safra Mono",monospace;font-size:14px;letter-spacing:0;';
+        ruler.textContent = words;
+        document.body.appendChild(ruler);
+        const textWidth = ruler.getBoundingClientRect().width;
+        ruler.remove();
+
+        const rText = textWidth / (2 * Math.PI);   // the baseline circle: one lap, exactly
+        const PAD = 5;                             // gap between the glyphs and the disc edge
+
+        function draw(R) {
+          const size = Math.ceil(2 * R);
+          const c = size / 2;
+          svg.setAttribute('width', size);
+          svg.setAttribute('height', size);
+          svg.setAttribute('viewBox', '0 0 ' + size + ' ' + size);
+          disc.setAttribute('cx', c); disc.setAttribute('cy', c); disc.setAttribute('r', R);
+          // One full circle, starting at the top, clockwise, so the words read left to right.
+          path.setAttribute('d',
+            'M ' + c + ' ' + (c - rText) +
+            ' a ' + rText + ' ' + rText + ' 0 1 1 -0.01 0');
+          return c;
+        }
+
+        // Two passes: draw once to find how far the glyphs actually reach past the
+        // baseline circle, then size the disc to that plus the padding. Measuring beats
+        // guessing at ascender height, and it stays right if the type size changes.
+        let c = draw(rText + 14 + PAD);
+        const textEl = tp.parentNode;
+        let reach = 14;                            // fallback if getBBox is unavailable
+        try {
+          const bb = textEl.getBBox();             // the ring the glyphs occupy
+          reach = Math.max(
+            c - bb.x,
+            (bb.x + bb.width) - c,
+            c - bb.y,
+            (bb.y + bb.height) - c
+          ) - rText;
+        } catch (e) {}
+        draw(rText + Math.max(reach, 2) + PAD);
+
+      }
+
+      (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () {
+        measureButtons();
+        build();
+        buildBadge();
+        let t;
+        window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(function () { measureButtons(); build(); buildBadge(); }, 200); });
+      });
+    });
+})();
+</script>
+</body>
+</html>
