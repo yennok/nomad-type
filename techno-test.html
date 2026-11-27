@@ -326,19 +326,21 @@
       orange:['#FF3D00','#181C20','ORANGE'], haze:['#181C20','#FF3D00','HAZE'],
       /* 11-28 tries for the second slot (Nir): BROWN from his reference image (brown ground, orange ink),
          LED = the LED-sign colors of techno-references.html direction 2, LED+ = the same sign with diode dots and glow */
-      brown:['#33261E','#FF4F2E','BROWN'], led:['#120804','#FF5A1F','LED'], ledfx:['#0B0B0C','#FF5A1F','LED+']};
+      brown:['#33261E','#FF4F2E','BROWN'], led:['#120804','#FF5A1F','LED'], ledfx:['#0B0B0C','#FF5A1F','LED+'],
+      /* their negatives (Nir 11-28), the way ORANGE is the negative of HAZE */
+      brownneg:['#FF4F2E','#33261E','BROWN NEGATIVE'], ledneg:['#FF5A1F','#120804','LED NEGATIVE']};
     var ORDER = ['orange','haze','black','white'];  // Nir 11-27: orange, gray+orange, black, white, again
     /* ?alt=brown|led|ledfx puts that version in the gray (HAZE) slot, for comparing */
-    try { var alt = new URLSearchParams(location.search).get('alt'); if (PAGES[alt] && ['brown','led','ledfx'].indexOf(alt) > -1) ORDER[1] = alt } catch(e){}
+    try { var alt = new URLSearchParams(location.search).get('alt'); if (PAGES[alt] && ['brown','led','ledfx'].indexOf(alt) > -1) { ORDER[1] = alt; if (PAGES[alt + 'neg']) ORDER[0] = alt + 'neg' } } catch(e){}
     var CON = 70;   // photo contrast: grey backgrounds sink toward the dark color
     var KEY = 'techno-page-color';
     /* ?color=orange|haze|black|white forces a color (for checking and screenshots) and is not remembered.
        Otherwise the viewer's last pick, otherwise ORANGE. */
     var forced = null; try { forced = new URLSearchParams(location.search).get('color') } catch(e){}
     var saved = null; try { saved = localStorage.getItem(KEY) } catch(e){}
-    var page = PAGES[forced] ? forced : PAGES[saved] ? saved : 'orange';
+    var page = PAGES[forced] ? forced : ORDER.indexOf(saved) > -1 ? saved : ORDER[0];
     /* HAZE shows the photos as a negative duotone, ORANGE as a duotone; BLACK and WHITE keep the photos as they are */
-    function imgFor(k){ return k === 'orange' ? 'duo' : 'neg' }  /* dark grounds show the photos as a negative */
+    function imgFor(k){ return ['orange','brownneg','ledneg'].indexOf(k) > -1 ? 'duo' : 'neg' }  /* dark grounds show the photos as a negative */
     function el(id){ return document.getElementById(id) }
 
     /* On a wide-gamut screen (Mac, iPhone) the filter's output reaches the screen without color correction, so it looks more
@@ -1366,6 +1368,26 @@
     document.addEventListener('click', function(e){ if (e.target.closest && e.target.closest('.select-option')) setTimeout(fitMenus, 50); });
     fitMenus(); window.addEventListener('load', function(){ setTimeout(fit, 300); setTimeout(fit, 1200); fitMenus(); });
     var t; window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(function(){ fit(); fitMenus(); }, 250); });
+  })();
+  </script>
+  <!-- ====== PAINTING BACKGROUNDS (Nir 11-28, test only): ?bg=<name> puts a cover-monet still behind the cover title.
+       Desktop gets the 1/8-pixel image, phones (under 1024px) the 1/4-pixel one, as decided 14.11. Title #FF3D00. -->
+  <style>
+    body.bg-painting .cover-header { background: #000 var(--bg-desk) center / cover no-repeat !important; image-rendering: pixelated; }
+    @media (max-width: 1023px) { body.bg-painting .cover-header { background-image: var(--bg-phone) !important; } }
+    body.bg-painting .cover-title div:nth-child(1), body.bg-painting .cover-title div:nth-child(2) { color: #FF3D00 !important; }
+    body.bg-painting .sticky-nav .nav-brand, body.bg-painting .sticky-nav .nav-brand a, body.bg-painting .sticky-nav .nav-link { color: #FF3D00; }
+  </style>
+  <script>
+  (function(){
+    var NAMES = ['impression-pink','impression-blue','impression-bright','impression-soft','starry-pink','starry-pink-nored',
+                 'starry-pink-tone','starry-blue','starry-bright','starry-soft'];
+    var k = null; try { k = new URLSearchParams(location.search).get('bg') } catch(e){}
+    if (NAMES.indexOf(k) < 0) return;
+    var b = document.body;
+    b.classList.add('bg-painting');
+    b.style.setProperty('--bg-desk', "url('assets/techno-bg/" + k + "-desktop.png')");
+    b.style.setProperty('--bg-phone', "url('assets/techno-bg/" + k + "-phone.png')");
   })();
   </script>
 </body>
