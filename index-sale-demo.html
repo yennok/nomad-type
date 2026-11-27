@@ -13,7 +13,8 @@
   <meta charset="UTF-8" />
   <script>(function () { var v = new URLSearchParams(location.search).get("v");
     document.documentElement.setAttribute("data-skin", /^(fill|outline|both)$/.test(v || "") ? v : "fill");
-    var bg = new URLSearchParams(location.search).get("bg"); if (bg === "white" || bg === "yellow") document.documentElement.setAttribute("data-bg", bg); })();</script>
+    var bg = new URLSearchParams(location.search).get("bg"); if (bg === "white" || bg === "yellow") document.documentElement.setAttribute("data-bg", bg);
+    if (new URLSearchParams(location.search).get("pal") === "earth") document.documentElement.setAttribute("data-pal", "earth"); })();</script>
   <!-- ?bg=white (Nir 11-27): the same skin on a white page instead of black -->
   <style>html[data-bg="white"], html[data-bg="white"] body, html[data-bg="white"] .wrapper1, html[data-bg="white"] .collage, html[data-bg="white"] main, html[data-bg="white"] section { background-color: #ffffff !important; }
     html[data-bg="white"] body, html[data-bg="white"] a:not(.nt-sale-bar):not(.nt-badge), html[data-bg="white"] p, html[data-bg="white"] h1, html[data-bg="white"] h2, html[data-bg="white"] h3, html[data-bg="white"] span { color: #000000; }
@@ -830,6 +831,42 @@ ease;
   html[data-bg="white"] .collage a.a3, html[data-bg="yellow"] .collage a.a3 { --sk-bg: #3A0F9E; --sk-ink: #E8FF3A; --sk-f: url(#sk-ink-Y); --sk-fh: url(#sk-ink-V); }
   html[data-bg="white"] .collage a.a9, html[data-bg="yellow"] .collage a.a9 { --sk-bg: #FF3B21; --sk-ink: #E8FF3A; --sk-f: url(#sk-ink-Y); --sk-fh: url(#sk-ink-R); }
   html[data-bg="white"] .collage a.a10, html[data-bg="yellow"] .collage a.a10 { --sk-bg: #1FD66A; --sk-ink: #E8FF3A; --sk-f: url(#sk-ink-Y); --sk-fh: url(#sk-ink-G); }
+  html[data-pal="earth"] .collage a.a1 { --sk-bg: #FF8AD8; --sk-ink: #A24B2A; --sk-f: url(#sk-ink-H); --sk-fh: url(#sk-ink-P); }
+  html[data-pal="earth"][data-skin="outline"] .collage a.a1 { --sk-ring: #FF8AD8; }
+  html[data-pal="earth"][data-skin="both"] .collage a.a1 { --sk-ring: #E8FF3A; }
+  html[data-pal="earth"] .collage a.a2 { --sk-bg: #FF3B21; --sk-ink: #E8FF3A; --sk-f: url(#sk-ink-Y); --sk-fh: url(#sk-ink-R); }
+  html[data-pal="earth"][data-skin="outline"] .collage a.a2 { --sk-ring: #FF3B21; }
+  html[data-pal="earth"][data-skin="both"] .collage a.a2 { --sk-ring: #FF8AD8; }
+  html[data-pal="earth"] .collage a.a3 { --sk-bg: #E8FF3A; --sk-ink: #A24B2A; --sk-f: url(#sk-ink-H); --sk-fh: url(#sk-ink-Y); }
+  html[data-pal="earth"][data-skin="outline"] .collage a.a3 { --sk-ring: #E8FF3A; }
+  html[data-pal="earth"][data-skin="both"] .collage a.a3 { --sk-ring: #FF3B21; }
+  html[data-pal="earth"] .collage a.a4 { --sk-bg: #7C8A2E; --sk-ink: #E8FF3A; --sk-f: url(#sk-ink-Y); --sk-fh: url(#sk-ink-O); }
+  html[data-pal="earth"][data-skin="outline"] .collage a.a4 { --sk-ring: #7C8A2E; }
+  html[data-pal="earth"][data-skin="both"] .collage a.a4 { --sk-ring: #FF8AD8; }
+  html[data-pal="earth"] .collage a.a5 { --sk-bg: #2F5BFF; --sk-ink: #E8FF3A; --sk-f: url(#sk-ink-Y); --sk-fh: url(#sk-ink-B); }
+  html[data-pal="earth"][data-skin="outline"] .collage a.a5 { --sk-ring: #2F5BFF; }
+  html[data-pal="earth"][data-skin="both"] .collage a.a5 { --sk-ring: #7C8A2E; }
+  html[data-pal="earth"] .collage a.a6 { --sk-bg: #7C8A2E; --sk-ink: #E8FF3A; --sk-f: url(#sk-ink-Y); --sk-fh: url(#sk-ink-O); }
+  html[data-pal="earth"][data-skin="outline"] .collage a.a6 { --sk-ring: #7C8A2E; }
+  html[data-pal="earth"][data-skin="both"] .collage a.a6 { --sk-ring: #FF3B21; }
+  html[data-pal="earth"] .collage a.a7 { --sk-bg: #2F5BFF; --sk-ink: #E8FF3A; --sk-f: url(#sk-ink-Y); --sk-fh: url(#sk-ink-B); }
+  html[data-pal="earth"][data-skin="outline"] .collage a.a7 { --sk-ring: #2F5BFF; }
+  html[data-pal="earth"][data-skin="both"] .collage a.a7 { --sk-ring: #E8FF3A; }
+  html[data-pal="earth"] .collage a.a8 { --sk-bg: #A24B2A; --sk-ink: #E8FF3A; --sk-f: url(#sk-ink-Y); --sk-fh: url(#sk-ink-H); }
+  html[data-pal="earth"][data-skin="outline"] .collage a.a8 { --sk-ring: #FF8AD8; }
+  html[data-pal="earth"][data-skin="both"] .collage a.a8 { --sk-ring: #7C8A2E; }
+  html[data-pal="earth"] .collage a.a9 { --sk-bg: #E8FF3A; --sk-ink: #A24B2A; --sk-f: url(#sk-ink-H); --sk-fh: url(#sk-ink-Y); }
+  html[data-pal="earth"][data-skin="outline"] .collage a.a9 { --sk-ring: #E8FF3A; }
+  html[data-pal="earth"][data-skin="both"] .collage a.a9 { --sk-ring: #FF8AD8; }
+  html[data-pal="earth"] .collage a.a10 { --sk-bg: #E8FF3A; --sk-ink: #FF3B21; --sk-f: url(#sk-ink-R); --sk-fh: url(#sk-ink-Y); }
+  html[data-pal="earth"][data-skin="outline"] .collage a.a10 { --sk-ring: #E8FF3A; }
+  html[data-pal="earth"][data-skin="both"] .collage a.a10 { --sk-ring: #2F5BFF; }
+  html[data-pal="earth"] .collage a.a11 { --sk-bg: #FF3B21; --sk-ink: #E8FF3A; --sk-f: url(#sk-ink-Y); --sk-fh: url(#sk-ink-R); }
+  html[data-pal="earth"][data-skin="outline"] .collage a.a11 { --sk-ring: #2F5BFF; }
+  html[data-pal="earth"][data-skin="both"] .collage a.a11 { --sk-ring: #E8FF3A; }
+  html[data-pal="earth"] .collage a.a12 { --sk-bg: #FF8AD8; --sk-ink: #A24B2A; --sk-f: url(#sk-ink-H); --sk-fh: url(#sk-ink-P); }
+  html[data-pal="earth"][data-skin="outline"] .collage a.a12 { --sk-ring: #FF8AD8; }
+  html[data-pal="earth"][data-skin="both"] .collage a.a12 { --sk-ring: #7C8A2E; }
   @supports (color: color(display-p3 1 1 1)) {
     .collage a.a1 { --sk-bg: color(display-p3 1.0000 0.5412 0.8471); --sk-ink: color(display-p3 0.2275 0.0588 0.6196); }
     html[data-skin="outline"] .collage a.a1 { --sk-ring: color(display-p3 1.0000 0.5412 0.8471); }
@@ -870,6 +907,18 @@ ease;
     html[data-bg="white"] .collage a.a3, html[data-bg="yellow"] .collage a.a3 { --sk-bg: color(display-p3 0.2275 0.0588 0.6196); --sk-ink: color(display-p3 0.9098 1.0000 0.2275); }
     html[data-bg="white"] .collage a.a9, html[data-bg="yellow"] .collage a.a9 { --sk-bg: color(display-p3 1.0000 0.2314 0.1294); --sk-ink: color(display-p3 0.9098 1.0000 0.2275); }
     html[data-bg="white"] .collage a.a10, html[data-bg="yellow"] .collage a.a10 { --sk-bg: color(display-p3 0.1216 0.8392 0.4157); --sk-ink: color(display-p3 0.9098 1.0000 0.2275); }
+    html[data-pal="earth"] .collage a.a1 { --sk-bg: color(display-p3 1.0000 0.5412 0.8471); --sk-ink: color(display-p3 0.6353 0.2941 0.1647); }
+    html[data-pal="earth"] .collage a.a2 { --sk-bg: color(display-p3 1.0000 0.2314 0.1294); --sk-ink: color(display-p3 0.9098 1.0000 0.2275); }
+    html[data-pal="earth"] .collage a.a3 { --sk-bg: color(display-p3 0.9098 1.0000 0.2275); --sk-ink: color(display-p3 0.6353 0.2941 0.1647); }
+    html[data-pal="earth"] .collage a.a4 { --sk-bg: color(display-p3 0.4863 0.5412 0.1804); --sk-ink: color(display-p3 0.9098 1.0000 0.2275); }
+    html[data-pal="earth"] .collage a.a5 { --sk-bg: color(display-p3 0.1843 0.3569 1.0000); --sk-ink: color(display-p3 0.9098 1.0000 0.2275); }
+    html[data-pal="earth"] .collage a.a6 { --sk-bg: color(display-p3 0.4863 0.5412 0.1804); --sk-ink: color(display-p3 0.9098 1.0000 0.2275); }
+    html[data-pal="earth"] .collage a.a7 { --sk-bg: color(display-p3 0.1843 0.3569 1.0000); --sk-ink: color(display-p3 0.9098 1.0000 0.2275); }
+    html[data-pal="earth"] .collage a.a8 { --sk-bg: color(display-p3 0.6353 0.2941 0.1647); --sk-ink: color(display-p3 0.9098 1.0000 0.2275); }
+    html[data-pal="earth"] .collage a.a9 { --sk-bg: color(display-p3 0.9098 1.0000 0.2275); --sk-ink: color(display-p3 0.6353 0.2941 0.1647); }
+    html[data-pal="earth"] .collage a.a10 { --sk-bg: color(display-p3 0.9098 1.0000 0.2275); --sk-ink: color(display-p3 1.0000 0.2314 0.1294); }
+    html[data-pal="earth"] .collage a.a11 { --sk-bg: color(display-p3 1.0000 0.2314 0.1294); --sk-ink: color(display-p3 0.9098 1.0000 0.2275); }
+    html[data-pal="earth"] .collage a.a12 { --sk-bg: color(display-p3 1.0000 0.5412 0.8471); --sk-ink: color(display-p3 0.6353 0.2941 0.1647); }
   }
   html[data-skin] .collage a { isolation: isolate; --sk-w: clamp(5px, 0.55vw, 9px); }
   html[data-skin] .collage a::before, html[data-skin] .collage a::after {
@@ -906,7 +955,7 @@ ease;
 </style>
 </head>
 <body class="homepage-page nt-sale-page">
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="sk-ink-Y" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0.9098  0 0 0 0 1.0000  0 0 0 0 0.2275  -0.2126 -0.7152 -0.0722 1 0"/></filter><filter id="sk-ink-R" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 1.0000  0 0 0 0 0.2314  0 0 0 0 0.1294  -0.2126 -0.7152 -0.0722 1 0"/></filter><filter id="sk-ink-G" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0.1216  0 0 0 0 0.8392  0 0 0 0 0.4157  -0.2126 -0.7152 -0.0722 1 0"/></filter><filter id="sk-ink-B" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0.1843  0 0 0 0 0.3569  0 0 0 0 1.0000  -0.2126 -0.7152 -0.0722 1 0"/></filter><filter id="sk-ink-P" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 1.0000  0 0 0 0 0.5412  0 0 0 0 0.8471  -0.2126 -0.7152 -0.0722 1 0"/></filter><filter id="sk-ink-V" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0.2275  0 0 0 0 0.0588  0 0 0 0 0.6196  -0.2126 -0.7152 -0.0722 1 0"/></filter></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="sk-ink-Y" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0.9098  0 0 0 0 1.0000  0 0 0 0 0.2275  -0.2126 -0.7152 -0.0722 1 0"/></filter><filter id="sk-ink-R" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 1.0000  0 0 0 0 0.2314  0 0 0 0 0.1294  -0.2126 -0.7152 -0.0722 1 0"/></filter><filter id="sk-ink-G" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0.1216  0 0 0 0 0.8392  0 0 0 0 0.4157  -0.2126 -0.7152 -0.0722 1 0"/></filter><filter id="sk-ink-B" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0.1843  0 0 0 0 0.3569  0 0 0 0 1.0000  -0.2126 -0.7152 -0.0722 1 0"/></filter><filter id="sk-ink-P" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 1.0000  0 0 0 0 0.5412  0 0 0 0 0.8471  -0.2126 -0.7152 -0.0722 1 0"/></filter><filter id="sk-ink-V" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0.2275  0 0 0 0 0.0588  0 0 0 0 0.6196  -0.2126 -0.7152 -0.0722 1 0"/></filter><filter id="sk-ink-O" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0.4863  0 0 0 0 0.5412  0 0 0 0 0.1804  -0.2126 -0.7152 -0.0722 1 0"/></filter><filter id="sk-ink-H" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0.6353  0 0 0 0 0.2941  0 0 0 0 0.1647  -0.2126 -0.7152 -0.0722 1 0"/></filter></svg>
 
   <!-- SEO: Semantic H1 for Google (visually hidden, design unchanged) -->
   <h1 class="sr-only">Nomad Type — Independent Multilingual Type Foundry designing Arabic, Hebrew, and Latin typefaces</h1>
