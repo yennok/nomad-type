@@ -1433,11 +1433,12 @@
   <script>
   (function(){
     var MOD = 154/1500, LSB = 162/1500;
+    var D = 3;   /* Nir 11-28: the small 3px diodes (the first version) look better than 3 per letter pixel */
     function px(el){ return parseFloat(getComputedStyle(el).fontSize) }
     function place(){
       var ct = document.querySelector('.cover-title'), la = document.querySelector('.cover-title > div:nth-child(2)');
       if (ct && la) {
-        var d = px(la) * MOD / 3;
+        var d = D;
         var mk = la.querySelector(':scope > .led-mark');
         if (!mk) { mk = document.createElement('span'); mk.className = 'led-mark'; mk.setAttribute('aria-hidden', 'true');
           mk.style.cssText = 'display:inline-block;width:0;height:0;vertical-align:baseline'; la.prepend(mk) }
@@ -1447,7 +1448,7 @@
       }
       /* the carousel: the diodes stay put and the letters slide across them, like a real sign */
       var mc = document.querySelector('.marquee-container'), mt = document.querySelector('.marquee-text');
-      if (mc && mt) mc.style.setProperty('--diode', (px(mt) * MOD / 3) + 'px');
+      if (mc && mt) mc.style.setProperty('--diode', D + 'px');
     }
     var t; addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(place, 120) });
     (document.fonts ? document.fonts.ready : Promise.resolve()).then(function(){ place(); setTimeout(place, 500); setTimeout(place, 1500) });
