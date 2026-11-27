@@ -94,7 +94,8 @@
     /* ====== PAGE COLORS (one button, Nir 11-15) ======
        Ported from cover-monet/index-all.html, stripped to four pages. A tap on the round button in the
        Buy Now / Download Trial bar moves to the next page: BLACK, WHITE, ORANGE, HAZE, then BLACK again.
-       The button shows the NEXT color (its background with a dot in its text color), so it says what a tap will do.
+       The button shows the NEXT color as two halves cut on the diagonal (its background and its text color, Nir 11-27),
+       so it says what a tap will do.
        BLACK is the site's own body.negative, WHITE is the plain page, ORANGE and HAZE use the two-color filter. */
 
     /* styles.css body.negative hides Buy (Dear AI is not sold). Techno will be, so on BLACK the Buy buttons
@@ -117,23 +118,22 @@
     body.techno-page .mobile-hamburger-circle:not(.solid) { filter: url(#cover-ink); }
 
     /* The button. 44px tap target; the circle is drawn inside it (30px, 36px on a phone). The negative margin keeps
-       the bar at its own height, so the Trial and Buy buttons do not stretch. */
+       the bar at its own height, so the Trial and Buy buttons do not stretch, and the side margin equals the inset,
+       so the gap between Buy and the drawn circle is the bar's own gap, same as Trial to Buy (Nir 11-27). */
     .color-dots { display: flex; align-items: center; flex: none; }
-    .color-dots button { width: 44px; height: 44px; margin: -6px 0; padding: 0; border: 0; border-radius: 50%; background: none;
+    .color-dots button { width: 44px; height: 44px; margin: -6px -7px; padding: 0; border: 0; border-radius: 50%; background: none;
       cursor: pointer; position: relative; -webkit-tap-highlight-color: transparent; }
     .color-dots button::before { content: ""; position: absolute; inset: 7px; box-sizing: border-box; border-radius: 50%;
-      border: 1px solid var(--dot-line, #000); background: var(--dot-bg); }
-    .color-dots button::after { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; margin: -5px 0 0 -5px;
-      border-radius: 50%; background: var(--dot-fg); }
+      border: 1px solid var(--dot-line, #000);
+      background: linear-gradient(135deg, var(--dot-bg) 50%, var(--dot-fg) 50%); }
     .color-dots button:focus-visible { outline: 2px solid var(--dot-line, #000); outline-offset: 0; }
     /* BLACK: the whole bar is inverted by styles.css, so the button is inverted back to show its true colors */
     body.negative .color-dots { filter: invert(1); --dot-line: #fff; }
     body.page-duo .color-dots { --dot-line: var(--page-fg); }
     @media (max-width: 768px) {
-      .cover-buttons { gap: 12px !important; }
       .cover-buttons .btn { white-space: nowrap; }
+      .color-dots button { margin: -6px -4px; }
       .color-dots button::before { inset: 4px; }
-      .color-dots button::after { width: 12px; height: 12px; margin: -6px 0 0 -6px; }
     }
 
     /* ORANGE and HAZE: text gets the color, the black-on-white parts are recolored by a two-color filter. */
