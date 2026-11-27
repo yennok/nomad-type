@@ -176,11 +176,10 @@
     /* Nir 11-28: the LED look only on the cover and the weights carousel; the type testers stay plain */
     body.fx-led .cover-title, body.fx-led .marquee-container {
       text-shadow: 0 0 12px rgba(255, 90, 31, .55);
-      /* diode grid tied to the letter: a Techno pixel is 154 units of 1500 = 0.1027em, so 0.03422em = 3 diodes per
-         letter pixel; never under 3px, or small lines on a phone turn to dust */
-      --diode: max(3px, 0.03422em);
-      -webkit-mask: radial-gradient(circle at center, #000 44%, transparent 48%) 0 0 / var(--diode) var(--diode);
-      mask: radial-gradient(circle at center, #000 44%, transparent 48%) 0 0 / var(--diode) var(--diode);
+      /* 3 diodes per letter pixel: --diode and --diode-pos are measured by LED_JS from the letters themselves
+         (a Techno pixel is 154 units of 1500); the cover grid sits on the TECHNO baseline and the edge of its T */
+      -webkit-mask: radial-gradient(circle at center, #000 44%, transparent 48%) var(--diode-pos, 0 0) / var(--diode, 4px) var(--diode, 4px);
+      mask: radial-gradient(circle at center, #000 44%, transparent 48%) var(--diode-pos, 0 0) / var(--diode, 4px) var(--diode, 4px);
     }
     body.page-duo .char-cell:hover { background: #000; color: #fff; }
     /* Photos: a two-color duotone in the page's pair (ORANGE) or its negative (HAZE). The duotone also draws only its
@@ -1427,6 +1426,31 @@
     }
     var t; addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(place, 120) });
     (document.fonts ? document.fonts.ready : Promise.resolve()).then(function(){ place(); setTimeout(place, 400); setTimeout(place, 1500) });
+    addEventListener('load', place);
+  })();
+  </script>
+  <!-- LED versions: diode size and grid measured from the real letters (3 diodes per Techno pixel). -->
+  <script>
+  (function(){
+    var MOD = 154/1500, LSB = 162/1500;
+    function px(el){ return parseFloat(getComputedStyle(el).fontSize) }
+    function place(){
+      var ct = document.querySelector('.cover-title'), la = document.querySelector('.cover-title > div:nth-child(2)');
+      if (ct && la) {
+        var d = px(la) * MOD / 3;
+        var mk = la.querySelector(':scope > .led-mark');
+        if (!mk) { mk = document.createElement('span'); mk.className = 'led-mark'; mk.setAttribute('aria-hidden', 'true');
+          mk.style.cssText = 'display:inline-block;width:0;height:0;vertical-align:baseline'; la.prepend(mk) }
+        var r = ct.getBoundingClientRect(), m = mk.getBoundingClientRect();
+        var x = ((m.left + px(la) * LSB - r.left) % d + d) % d, y = ((m.top - r.top) % d + d) % d;
+        ct.style.setProperty('--diode', d + 'px'); ct.style.setProperty('--diode-pos', x + 'px ' + y + 'px');
+      }
+      /* the carousel: the diodes stay put and the letters slide across them, like a real sign */
+      var mc = document.querySelector('.marquee-container'), mt = document.querySelector('.marquee-text');
+      if (mc && mt) mc.style.setProperty('--diode', (px(mt) * MOD / 3) + 'px');
+    }
+    var t; addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(place, 120) });
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(function(){ place(); setTimeout(place, 500); setTimeout(place, 1500) });
     addEventListener('load', place);
   })();
   </script>
