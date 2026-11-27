@@ -780,13 +780,7 @@ ease;
     body.nt-sale-page .main-container { padding-top: var(--nt-sale-h); }
   }
 </style>
-<!-- DEMO: the bar shows on phones too, at the top (rules above), plus the badge. -->
-<style>
-  @media (max-width: 768px) {
-    body.nt-sale-page { --nt-sale-h: 33px; }
-    body.nt-sale-page .nt-sale-bar { display: flex; }
-  }
-</style>
+<!-- Phones: badge only, like Dolomit (Nir 11-27). -->
 <!-- ============ SALE SKIN (demo) ============
      Colors and outlines only; the collage layout is the live one. Variant from ?v= (fill | outline | both).
      Tile layers, back to front: ::before = background (CSS color, masked to the tile's shape),
