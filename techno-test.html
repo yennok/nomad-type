@@ -1330,7 +1330,7 @@
         if (shut) { list.style.display = 'block'; list.style.visibility = 'hidden'; }
         if (t.scrollWidth > t.clientWidth + 1) {
           var fs = parseFloat(getComputedStyle(t).fontSize);
-          t.style.fontSize = (Math.floor(fs * t.clientWidth / t.scrollWidth * 10) / 10) + 'px';
+          t.style.fontSize = (Math.floor(fs * t.clientWidth / t.scrollWidth * 0.97 * 10) / 10) + 'px';
         }
         if (shut) { list.style.display = ''; list.style.visibility = ''; }
       });
