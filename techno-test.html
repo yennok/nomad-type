@@ -160,6 +160,18 @@
     /* LED+ NEGATIVE (Nir 11-28): the page turns orange, the sign (cover) stays dark and lit; on the page the letters are
        dark diodes, so no orange glow there */
     body.fx-led-neg .marquee-container { text-shadow: none; }
+    /* LED GLOW: brighter, fuller diodes; the glow sits on the parent, outside the dot mask, so it spreads past the dots
+       like light on a real sign */
+    body.fx-glow .cover-title div:nth-child(1), body.fx-glow .cover-title div:nth-child(2) { color: #FF8A3D !important; }
+    body.fx-glow .cover-title, body.fx-glow .marquee-container {
+      text-shadow: 0 0 2px #FFC08A;
+      -webkit-mask-image: radial-gradient(circle at center, #000 50%, transparent 55%);
+      mask-image: radial-gradient(circle at center, #000 50%, transparent 55%);
+    }
+    body.fx-glow .cover-header .parallax-content, body.fx-glow:not(.fx-glow-neg) .multilingual-marquee {
+      filter: drop-shadow(0 0 4px rgba(255, 140, 60, .9)) drop-shadow(0 0 14px rgba(255, 100, 30, .75)) drop-shadow(0 0 34px rgba(255, 80, 20, .5));
+    }
+    body.fx-glow:not(.fx-glow-neg) .marquee-text { color: #FF8A3D !important; }
     body.fx-led .cover-title div:nth-child(1), body.fx-led .cover-title div:nth-child(2) { color: #FF5A1F !important; }
     /* Nir 11-28: the LED look only on the cover and the weights carousel; the type testers stay plain */
     body.fx-led .cover-title, body.fx-led .marquee-container {
@@ -333,10 +345,12 @@
       brown:['#33261E','#FF4F2E','BROWN'], led:['#120804','#FF5A1F','LED'], ledfx:['#0B0B0C','#FF5A1F','LED+'],
       /* their negatives (Nir 11-28), the way ORANGE is the negative of HAZE */
       brownneg:['#FF4F2E','#33261E','BROWN NEGATIVE'], ledneg:['#FF5A1F','#120804','LED NEGATIVE'],
-      ledfxneg:['#FF5A1F','#120804','LED+ NEGATIVE']};
+      ledfxneg:['#FF5A1F','#120804','LED+ NEGATIVE'],
+      /* LED GLOW (Nir 11-28): LED+ with brighter diodes and a real glow around them */
+      ledglow:['#0B0B0C','#FF7A2E','LED GLOW'], ledglowneg:['#FF7A2E','#120804','LED GLOW NEGATIVE']};
     var ORDER = ['orange','haze','black','white'];  // Nir 11-27: orange, gray+orange, black, white, again
     /* ?alt=brown|led|ledfx puts that version in the gray (HAZE) slot, for comparing */
-    try { var alt = new URLSearchParams(location.search).get('alt'); if (PAGES[alt] && ['brown','led','ledfx'].indexOf(alt) > -1) { ORDER[1] = alt; if (PAGES[alt + 'neg']) ORDER[0] = alt + 'neg' } } catch(e){}
+    try { var alt = new URLSearchParams(location.search).get('alt'); if (PAGES[alt] && ['brown','led','ledfx','ledglow'].indexOf(alt) > -1) { ORDER[1] = alt; if (PAGES[alt + 'neg']) ORDER[0] = alt + 'neg' } } catch(e){}
     var CON = 70;   // photo contrast: grey backgrounds sink toward the dark color
     var KEY = 'techno-page-color';
     /* ?color=orange|haze|black|white forces a color (for checking and screenshots) and is not remembered.
@@ -345,7 +359,7 @@
     var saved = null; try { saved = localStorage.getItem(KEY) } catch(e){}
     var page = PAGES[forced] ? forced : ORDER.indexOf(saved) > -1 ? saved : ORDER[0];
     /* HAZE shows the photos as a negative duotone, ORANGE as a duotone; BLACK and WHITE keep the photos as they are */
-    function imgFor(k){ return ['orange','brownneg','ledneg','ledfxneg'].indexOf(k) > -1 ? 'duo' : 'neg' }  /* dark grounds show the photos as a negative */
+    function imgFor(k){ return ['orange','brownneg','ledneg','ledfxneg','ledglowneg'].indexOf(k) > -1 ? 'duo' : 'neg' }  /* dark grounds show the photos as a negative */
     function el(id){ return document.getElementById(id) }
 
     /* On a wide-gamut screen (Mac, iPhone) the filter's output reaches the screen without color correction, so it looks more
@@ -358,7 +372,7 @@
       for (var i = 0; i <= 16; i++){ var t = Math.max(0, Math.min(1, (i/16 - lo)/(hi - lo))); a.push(Math.pow(t, g).toFixed(4)) } return a.join(' ') }
 
     function setPage(k){ page = k; var c = PAGES[k], b = document.body, img = imgFor(k), duo = k !== 'black' && k !== 'white';
-      b.classList.toggle('negative', k === 'black'); b.classList.toggle('page-duo', duo); b.classList.toggle('fx-led', k === 'ledfx' || k === 'ledfxneg'); b.classList.toggle('fx-led-neg', k === 'ledfxneg');
+      b.classList.toggle('negative', k === 'black'); b.classList.toggle('page-duo', duo); var gl = k === 'ledglow' || k === 'ledglowneg'; b.classList.toggle('fx-led', k === 'ledfx' || k === 'ledfxneg' || gl); b.classList.toggle('fx-led-neg', k === 'ledfxneg' || k === 'ledglowneg'); b.classList.toggle('fx-glow', gl); b.classList.toggle('fx-glow-neg', k === 'ledglowneg');
       b.style.setProperty('--page-bg', css(c[0])); b.style.setProperty('--page-fg', css(c[1]));
       /* photo duotone: shadows take the darker of the pair, highlights the lighter; the negative swaps them */
       var L = function(h){ return 0.2126*hexv(h,0) + 0.7152*hexv(h,1) + 0.0722*hexv(h,2) }, dk = L(c[0]) < L(c[1]) ? c[0] : c[1], lt = dk === c[0] ? c[1] : c[0];
