@@ -157,6 +157,9 @@
     /* the nav and the phone menu circle sit on the sign: lit orange, not the page color */
     body.fx-led .sticky-nav .nav-brand, body.fx-led .sticky-nav .nav-brand a, body.fx-led .sticky-nav .nav-link { color: #FF5A1F; }
     body.fx-led .mobile-hamburger-circle:not(.solid) { filter: url(#page-duo); }
+    /* LED+ NEGATIVE (Nir 11-28): the page turns orange, the sign (cover) stays dark and lit; on the page the letters are
+       dark diodes, so no orange glow there */
+    body.fx-led-neg .type-area, body.fx-led-neg .marquee-container { text-shadow: none; }
     body.fx-led .cover-title div:nth-child(1), body.fx-led .cover-title div:nth-child(2) { color: #FF5A1F !important; }
     body.fx-led .cover-title, body.fx-led .type-area, body.fx-led .marquee-container {
       text-shadow: 0 0 12px rgba(255, 90, 31, .55);
@@ -328,7 +331,8 @@
          LED = the LED-sign colors of techno-references.html direction 2, LED+ = the same sign with diode dots and glow */
       brown:['#33261E','#FF4F2E','BROWN'], led:['#120804','#FF5A1F','LED'], ledfx:['#0B0B0C','#FF5A1F','LED+'],
       /* their negatives (Nir 11-28), the way ORANGE is the negative of HAZE */
-      brownneg:['#FF4F2E','#33261E','BROWN NEGATIVE'], ledneg:['#FF5A1F','#120804','LED NEGATIVE']};
+      brownneg:['#FF4F2E','#33261E','BROWN NEGATIVE'], ledneg:['#FF5A1F','#120804','LED NEGATIVE'],
+      ledfxneg:['#FF5A1F','#120804','LED+ NEGATIVE']};
     var ORDER = ['orange','haze','black','white'];  // Nir 11-27: orange, gray+orange, black, white, again
     /* ?alt=brown|led|ledfx puts that version in the gray (HAZE) slot, for comparing */
     try { var alt = new URLSearchParams(location.search).get('alt'); if (PAGES[alt] && ['brown','led','ledfx'].indexOf(alt) > -1) { ORDER[1] = alt; if (PAGES[alt + 'neg']) ORDER[0] = alt + 'neg' } } catch(e){}
@@ -340,7 +344,7 @@
     var saved = null; try { saved = localStorage.getItem(KEY) } catch(e){}
     var page = PAGES[forced] ? forced : ORDER.indexOf(saved) > -1 ? saved : ORDER[0];
     /* HAZE shows the photos as a negative duotone, ORANGE as a duotone; BLACK and WHITE keep the photos as they are */
-    function imgFor(k){ return ['orange','brownneg','ledneg'].indexOf(k) > -1 ? 'duo' : 'neg' }  /* dark grounds show the photos as a negative */
+    function imgFor(k){ return ['orange','brownneg','ledneg','ledfxneg'].indexOf(k) > -1 ? 'duo' : 'neg' }  /* dark grounds show the photos as a negative */
     function el(id){ return document.getElementById(id) }
 
     /* On a wide-gamut screen (Mac, iPhone) the filter's output reaches the screen without color correction, so it looks more
@@ -353,7 +357,7 @@
       for (var i = 0; i <= 16; i++){ var t = Math.max(0, Math.min(1, (i/16 - lo)/(hi - lo))); a.push(Math.pow(t, g).toFixed(4)) } return a.join(' ') }
 
     function setPage(k){ page = k; var c = PAGES[k], b = document.body, img = imgFor(k), duo = k !== 'black' && k !== 'white';
-      b.classList.toggle('negative', k === 'black'); b.classList.toggle('page-duo', duo); b.classList.toggle('fx-led', k === 'ledfx');
+      b.classList.toggle('negative', k === 'black'); b.classList.toggle('page-duo', duo); b.classList.toggle('fx-led', k === 'ledfx' || k === 'ledfxneg'); b.classList.toggle('fx-led-neg', k === 'ledfxneg');
       b.style.setProperty('--page-bg', css(c[0])); b.style.setProperty('--page-fg', css(c[1]));
       /* photo duotone: shadows take the darker of the pair, highlights the lighter; the negative swaps them */
       var L = function(h){ return 0.2126*hexv(h,0) + 0.7152*hexv(h,1) + 0.0722*hexv(h,2) }, dk = L(c[0]) < L(c[1]) ? c[0] : c[1], lt = dk === c[0] ? c[1] : c[0];
