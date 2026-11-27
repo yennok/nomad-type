@@ -393,14 +393,14 @@
       <div class="multilingual-marquee">
         <div class="marquee-container">
           <div class="marquee-content">
-            <span class="marquee-text techno-m" style="font-family: 'Techno'; font-weight: 700;">Techno Bold</span>
-            <span class="marquee-text techno-m" style="font-family: 'Techno Slanted'; font-weight: 700;">Techno Slanted Bold</span>
-            <span class="marquee-text techno-m" style="font-family: 'Techno Extended'; font-weight: 700;">Techno Extended Bold</span>
-            <span class="marquee-text techno-m" style="font-family: 'Techno Extended Slanted'; font-weight: 700;">Techno Extended Slanted Bold</span>
-            <span class="marquee-text techno-m" style="font-family: 'Techno'; font-weight: 700;">Techno Bold</span>
-            <span class="marquee-text techno-m" style="font-family: 'Techno Slanted'; font-weight: 700;">Techno Slanted Bold</span>
-            <span class="marquee-text techno-m" style="font-family: 'Techno Extended'; font-weight: 700;">Techno Extended Bold</span>
-            <span class="marquee-text techno-m" style="font-family: 'Techno Extended Slanted'; font-weight: 700;">Techno Extended Slanted Bold</span>
+            <span class="marquee-text techno-m" style="font-family: 'Techno'; font-weight: 700;">BOLD</span>
+            <span class="marquee-text techno-m" style="font-family: 'Techno Slanted'; font-weight: 700;">SLANTED BOLD</span>
+            <span class="marquee-text techno-m" style="font-family: 'Techno Extended'; font-weight: 700;">EXTENDED BOLD</span>
+            <span class="marquee-text techno-m" style="font-family: 'Techno Extended Slanted'; font-weight: 700;">EXTENDED SLANTED BOLD</span>
+            <span class="marquee-text techno-m" style="font-family: 'Techno'; font-weight: 700;">BOLD</span>
+            <span class="marquee-text techno-m" style="font-family: 'Techno Slanted'; font-weight: 700;">SLANTED BOLD</span>
+            <span class="marquee-text techno-m" style="font-family: 'Techno Extended'; font-weight: 700;">EXTENDED BOLD</span>
+            <span class="marquee-text techno-m" style="font-family: 'Techno Extended Slanted'; font-weight: 700;">EXTENDED SLANTED BOLD</span>
           </div>
         </div>
       </div>
@@ -1298,10 +1298,22 @@
        wider than its box is shrunk to fit, on load and on rotate. Moving the Size slider still wins. -->
   <style>@media (max-width: 768px) {
     .type-area.techno-word[data-fit] { font-size: var(--fit) !important; }
-    /* font menu: one line per name; "Techno Extended Slanted Bold" (28 monospace characters) is shrunk to fit */
+    /* font menu (Nir 11-27): full size, one line; on phones the longest name reads "Techno Ext. Slanted Bold" (script below) */
     .techno-page .select-value, .techno-page .select-option { white-space: nowrap; overflow: hidden; min-width: 0; }
-    .techno-page .select-value { flex: 1 1 auto; margin-right: 8px; }
-  }</style>
+    .techno-page .select-value { flex: 1 1 auto; margin-right: 4px; }
+    .techno-page .custom-select .select-header { padding-left: 8px; padding-right: 8px; }
+  }
+  /* desktop: this page's menu is wider than the site's 220px so "Techno Extended Slanted Bold" fits whole */
+  @media (min-width: 769px) {
+    .techno-page .custom-select .select-header { min-width: 290px; }
+  }
+  /* the top frame (corner curves + band) that content scrolls under: the color filter turns their white see-through,
+     so here they are painted in the page color through the same svg shapes, like the white frame on every other page */
+  body.page-duo .sticky-top-section > .svg-shape.left,
+  body.page-duo .sticky-top-section > .svg-shape.right { filter: none; background: var(--page-bg); }
+  body.page-duo .sticky-top-section > .svg-shape.left { -webkit-mask: url('assets/top-left.svg') center / contain no-repeat; mask: url('assets/top-left.svg') center / contain no-repeat; }
+  body.page-duo .sticky-top-section > .svg-shape.right { -webkit-mask: url('assets/top-right.svg') center / contain no-repeat; mask: url('assets/top-right.svg') center / contain no-repeat; }
+  </style>
   <script>
   (function(){
     function fit(){
@@ -1322,22 +1334,17 @@
         var sec = e.target.closest('section'); var a = sec && sec.querySelector('.type-area.techno-word'); if (a) a.dataset.userSized = '1';
       }
     }, true);
+    var LONG = 'Techno Extended Slanted Bold', SHORT = 'Techno Ext. Slanted Bold';
     function fitMenus(){
-      if (innerWidth > 768) return;
-      document.querySelectorAll('.techno-page .select-value, .techno-page .select-option').forEach(function(t){
-        t.style.fontSize = '';
-        var list = t.closest('.select-options'), shut = list && getComputedStyle(list).display === 'none';
-        if (shut) { list.style.display = 'block'; list.style.visibility = 'hidden'; }
-        if (t.scrollWidth > t.clientWidth + 1) {
-          var fs = parseFloat(getComputedStyle(t).fontSize);
-          t.style.fontSize = (Math.floor(fs * t.clientWidth / t.scrollWidth * 0.97 * 10) / 10) + 'px';
-        }
-        if (shut) { list.style.display = ''; list.style.visibility = ''; }
+      var phone = innerWidth <= 768;
+      document.querySelectorAll('.techno-page .select-option[data-value="' + LONG + '"]').forEach(function(o){ o.textContent = phone ? SHORT : LONG; });
+      document.querySelectorAll('.techno-page .select-value').forEach(function(v){
+        if (v.textContent === LONG || v.textContent === SHORT) v.textContent = phone ? SHORT : LONG;
       });
     }
     /* the menu header changes when a style is picked */
     document.addEventListener('click', function(e){ if (e.target.closest && e.target.closest('.select-option')) setTimeout(fitMenus, 50); });
-    window.addEventListener('load', function(){ setTimeout(fit, 300); setTimeout(fit, 1200); setTimeout(fitMenus, 300); });
+    fitMenus(); window.addEventListener('load', function(){ setTimeout(fit, 300); setTimeout(fit, 1200); fitMenus(); });
     var t; window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(function(){ fit(); fitMenus(); }, 250); });
   })();
   </script>
