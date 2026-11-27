@@ -169,7 +169,7 @@
       mask-image: radial-gradient(circle at center, #000 50%, transparent 55%);
     }
     body.fx-glow .cover-header .parallax-content, body.fx-glow:not(.fx-glow-neg) .multilingual-marquee {
-      filter: drop-shadow(0 0 4px rgba(255, 140, 60, .9)) drop-shadow(0 0 14px rgba(255, 100, 30, .75)) drop-shadow(0 0 34px rgba(255, 80, 20, .5));
+      filter: drop-shadow(0 0 3px rgba(255, 140, 60, .6)) drop-shadow(0 0 10px rgba(255, 100, 30, .35));  /* toned down (Nir 11-28) */
     }
     body.fx-glow:not(.fx-glow-neg) .marquee-text { color: #FF8A3D !important; }
     body.fx-led .cover-title div:nth-child(1), body.fx-led .cover-title div:nth-child(2) { color: #FF5A1F !important; }
@@ -346,7 +346,7 @@
       brownneg:['#FF4F2E','#33261E','BROWN NEGATIVE'], ledneg:['#FF5A1F','#120804','LED NEGATIVE'],
       ledfxneg:['#FF5A1F','#120804','LED+ NEGATIVE'],
       /* LED GLOW (Nir 11-28): LED+ with brighter diodes and a real glow around them */
-      ledglow:['#0B0B0C','#FF7A2E','LED GLOW'], ledglowneg:['#FF7A2E','#120804','LED GLOW NEGATIVE']};
+      ledglow:['#0B0B0C','#FF7A2E','LED GLOW'], ledglowneg:['#FF5A1F','#120804','LED GLOW NEGATIVE']};
     var ORDER = ['orange','haze','black','white'];  // Nir 11-27: orange, gray+orange, black, white, again
     /* ?alt=brown|led|ledfx puts that version in the gray (HAZE) slot, for comparing */
     try { var alt = new URLSearchParams(location.search).get('alt'); if (PAGES[alt] && ['brown','led','ledfx','ledglow'].indexOf(alt) > -1) { ORDER[1] = alt; if (PAGES[alt + 'neg']) ORDER[0] = alt + 'neg' } } catch(e){}
