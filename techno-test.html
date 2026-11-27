@@ -159,13 +159,14 @@
     body.fx-led .mobile-hamburger-circle:not(.solid) { filter: url(#page-duo); }
     /* LED+ NEGATIVE (Nir 11-28): the page turns orange, the sign (cover) stays dark and lit; on the page the letters are
        dark diodes, so no orange glow there */
-    body.fx-led-neg .type-area, body.fx-led-neg .marquee-container { text-shadow: none; }
+    body.fx-led-neg .marquee-container { text-shadow: none; }
     body.fx-led .cover-title div:nth-child(1), body.fx-led .cover-title div:nth-child(2) { color: #FF5A1F !important; }
-    body.fx-led .cover-title, body.fx-led .type-area, body.fx-led .marquee-container {
+    /* Nir 11-28: the LED look only on the cover and the weights carousel; the type testers stay plain */
+    body.fx-led .cover-title, body.fx-led .marquee-container {
       text-shadow: 0 0 12px rgba(255, 90, 31, .55);
-      /* diode grid tied to the letter: a Techno pixel is 0.154em, so 0.0513em = 3 diodes per letter pixel;
-         never under 4px, or small lines on a phone turn to dust */
-      --diode: max(3px, 0.0513em);
+      /* diode grid tied to the letter: a Techno pixel is 154 units of 1500 = 0.1027em, so 0.03422em = 3 diodes per
+         letter pixel; never under 3px, or small lines on a phone turn to dust */
+      --diode: max(3px, 0.03422em);
       -webkit-mask: radial-gradient(circle at center, #000 44%, transparent 48%) 0 0 / var(--diode) var(--diode);
       mask: radial-gradient(circle at center, #000 44%, transparent 48%) 0 0 / var(--diode) var(--diode);
     }
@@ -1375,10 +1376,11 @@
   })();
   </script>
   <!-- ====== PAINTING BACKGROUNDS (Nir 11-28, test only): ?bg=<name> puts a cover-monet still behind the cover title.
-       Desktop gets the 1/8-pixel image, phones (under 1024px) the 1/4-pixel one, as decided 14.11. Title #FF3D00. -->
+       Every painting cell is exactly 1/8 of a Techno letter pixel on desktop and 1/4 on phones (Nir 11-14 / 11-28), and the
+       grid is locked to the TECHNO baseline and the left edge of its T, like the live cover: a letter edge always falls on
+       a cell line. The images hold one pixel per cell (assets/techno-bg/*-cells.png) and are drawn pixelated, centered. -->
   <style>
-    body.bg-painting .cover-header { background: #000 var(--bg-desk) center / cover no-repeat !important; image-rendering: pixelated; }
-    @media (max-width: 1023px) { body.bg-painting .cover-header { background-image: var(--bg-phone) !important; } }
+    body.bg-painting .cover-header { background-color: #000 !important; background-repeat: no-repeat !important; image-rendering: pixelated; }
     body.bg-painting .cover-title div:nth-child(1), body.bg-painting .cover-title div:nth-child(2) { color: #FF3D00 !important; }
     body.bg-painting .sticky-nav .nav-brand, body.bg-painting .sticky-nav .nav-brand a, body.bg-painting .sticky-nav .nav-link { color: #FF3D00; }
   </style>
@@ -1388,10 +1390,30 @@
                  'starry-pink-tone','starry-blue','starry-bright','starry-soft'];
     var k = null; try { k = new URLSearchParams(location.search).get('bg') } catch(e){}
     if (NAMES.indexOf(k) < 0) return;
-    var b = document.body;
-    b.classList.add('bg-painting');
-    b.style.setProperty('--bg-desk', "url('assets/techno-bg/" + k + "-desktop.png')");
-    b.style.setProperty('--bg-phone', "url('assets/techno-bg/" + k + "-phone.png')");
+    document.body.classList.add('bg-painting');
+    var MOD = 154/1500, LSB = 162/1500;       /* Techno: a letter pixel is 154 units of 1500; the T starts 162 units in */
+    var imgs = {};
+    function load(dev){ if (!imgs[dev]) { var i = new Image(); i.onload = place; i.src = 'assets/techno-bg/' + k + '-' + dev + '-cells.png'; imgs[dev] = i } return imgs[dev] }
+    function place(){
+      var h = document.querySelector('.cover-header'), la = document.querySelector('.cover-title > div:nth-child(2)');
+      if (!h || !la) return;
+      var dev = innerWidth >= 1024 ? 'desktop' : 'phone', img = load(dev);
+      if (!img.complete || !img.naturalWidth) return;
+      var fs = parseFloat(getComputedStyle(la).fontSize), c = fs * MOD / (dev === 'desktop' ? 8 : 4);
+      var mk = la.querySelector(':scope > .bg-mark');
+      if (!mk) { mk = document.createElement('span'); mk.className = 'bg-mark'; mk.setAttribute('aria-hidden', 'true');
+        mk.style.cssText = 'display:inline-block;width:0;height:0;vertical-align:baseline'; la.prepend(mk) }
+      var hr = h.getBoundingClientRect(), m = mk.getBoundingClientRect();
+      var x0 = m.left + fs * LSB - hr.left, y0 = m.top - hr.top;      /* a grid point: left edge of T, on the baseline */
+      var w = img.naturalWidth * c, hh = img.naturalHeight * c;
+      var left = x0 + Math.round(((hr.width - w) / 2 - x0) / c) * c, top = y0 + Math.round(((hr.height - hh) / 2 - y0) / c) * c;
+      h.style.setProperty('background-image', "url('" + img.src + "')", 'important');
+      h.style.setProperty('background-size', w + 'px ' + hh + 'px', 'important');
+      h.style.setProperty('background-position', left + 'px ' + top + 'px', 'important');
+    }
+    var t; addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(place, 120) });
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(function(){ place(); setTimeout(place, 400); setTimeout(place, 1500) });
+    addEventListener('load', place);
   })();
   </script>
 </body>
