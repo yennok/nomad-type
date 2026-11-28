@@ -401,10 +401,10 @@
     var dotsEl = document.createElement('div'); dotsEl.className = 'color-dots';
     var dotB = document.createElement('button'); dotB.type = 'button'; dotsEl.appendChild(dotB);
     function nextPage(){ return ORDER[(ORDER.indexOf(page) + 1) % ORDER.length] }
-    /* Nir 11-28 (picked from circle-options.png): the circle shows the colors of the pair you are in, not the next state:
-       a colored state shows its orange first and its dark second, BLACK shows white/black, WHITE shows black/white */
-    function dotPair(k){ var c = PAGES[k]; if (k === 'black' || k === 'white') return [c[1], c[0]];
-      var L = function(h){ return 0.2126*hexv(h,0) + 0.7152*hexv(h,1) + 0.0722*hexv(h,2) }; return L(c[0]) > L(c[1]) ? [c[0], c[1]] : [c[1], c[0]] }
+    /* Nir 11-28 (picked screen by screen, circle-test/): the circle is the screen you are on. Top half = the cover's color
+       (the rounded rectangle), bottom half = the page's color (and its text). The LED sign states have a #120804 cover. */
+    function dotPair(k){ var c = PAGES[k], sign = ['ledfx','ledfxneg','ledglow','ledglowneg'].indexOf(k) > -1;
+      return [sign ? '#120804' : c[1], c[0]] }
     function markDot(){ var k = nextPage(), d = dotPair(page); dotB.style.setProperty('--dot-bg', css(d[0])); dotB.style.setProperty('--dot-fg', css(d[1]));
       dotB.setAttribute('aria-label', 'Page color: ' + PAGES[page][2] + '. Next: ' + PAGES[k][2]); dotB.title = PAGES[k][2] }
     dotB.onclick = function(){ var k = nextPage(); setPage(k); try { localStorage.setItem(KEY, k) } catch(e){} };
