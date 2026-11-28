@@ -151,6 +151,25 @@
     body.page-duo .sticky-top-section > .svg-shape.center { filter: none; background: var(--page-bg); }
     body.page-duo .select-options { background: var(--page-bg); border-color: var(--page-fg); }
     body.page-duo .controls { border-color: var(--page-fg); }
+    /* Two-color pages (Nir 11-28): every page of a version is two colors, so the site's own white and red parts take the
+       pair too. Page color = --page-bg, ink = --page-fg (the cover color).
+       Phone: the fixed Trial / Buy bar is the page color with an ink line on top (the buttons are already ink-filtered). */
+    @media (max-width: 768px) {
+      body.page-duo .cover-buttons { background: var(--page-bg); border-top-color: var(--page-fg); }
+    }
+    /* the round "Nomad Type" button top left (desktop and phone) and its hover menu */
+    body.page-duo .sticky-green-circle { background: var(--page-bg); border-color: var(--page-fg); color: var(--page-fg); }
+    body.page-duo .circle-hamburger { filter: url(#page-duo); }
+    body.page-duo .menu-background { background: var(--page-fg); }
+    body.page-duo .menu-item { color: var(--page-bg); }
+    /* phone menu circle once it turns solid, and the phone menu itself (ink ground, page-color text and lines) */
+    body.page-duo .mobile-hamburger-circle.solid { background: var(--page-bg); border-color: var(--page-fg); }
+    body.page-duo .mobile-hamburger-circle.solid::before { filter: url(#page-duo); }
+    body.page-duo .mobile-overlay { background: var(--page-fg); }
+    body.page-duo .mobile-overlay-content { filter: url(#cover-ink); }
+    /* the Download Trial and Buy panels: page color ground, everything inside drawn in ink */
+    body.page-duo .overlay { background: var(--page-bg); border-left-color: var(--page-fg); }
+    body.page-duo .overlay-content { filter: url(#page-duo); }
     /* LED+ (Nir 11-28, techno-references.html direction 2): the cover is the sign (#120804 on a #0B0B0C club-black page),
        letters are lit diodes on a 6px dot grid with an orange glow; the type testers and the marquee light up the same way */
     body.fx-led .cover-header { background: #120804; }
@@ -159,22 +178,22 @@
     body.fx-led .mobile-hamburger-circle:not(.solid) { filter: url(#page-duo); }
     /* LED+ NEGATIVE (Nir 11-28): the page turns orange, the sign (cover) stays dark and lit; on the page the letters are
        dark diodes, so no orange glow there */
-    body.fx-led-neg .marquee-container { text-shadow: none; }
+    body.fx-led-neg .multilingual-marquee:not(.image-marquee) .marquee-container { text-shadow: none; }
     /* LED GLOW: brighter, fuller diodes; the glow sits on the parent, outside the dot mask, so it spreads past the dots
        like light on a real sign */
     body.fx-glow .cover-title div:nth-child(1), body.fx-glow .cover-title div:nth-child(2) { color: #FF8A3D !important; }
-    body.fx-glow .cover-title, body.fx-glow .marquee-container {
+    body.fx-glow .cover-title, body.fx-glow .multilingual-marquee:not(.image-marquee) .marquee-container {
       text-shadow: 0 0 2px #FFC08A;
       -webkit-mask-image: radial-gradient(circle at center, #000 50%, transparent 55%);
       mask-image: radial-gradient(circle at center, #000 50%, transparent 55%);
     }
-    body.fx-glow .cover-header .parallax-content, body.fx-glow:not(.fx-glow-neg) .multilingual-marquee {
+    body.fx-glow .cover-header .parallax-content, body.fx-glow:not(.fx-glow-neg) .multilingual-marquee:not(.image-marquee) {
       filter: drop-shadow(0 0 3px rgba(255, 140, 60, .6)) drop-shadow(0 0 10px rgba(255, 100, 30, .35));  /* toned down (Nir 11-28) */
     }
-    body.fx-glow:not(.fx-glow-neg) .marquee-text { color: #FF8A3D !important; }
+    body.fx-glow:not(.fx-glow-neg) .multilingual-marquee:not(.image-marquee) .marquee-text { color: #FF8A3D !important; }
     body.fx-led .cover-title div:nth-child(1), body.fx-led .cover-title div:nth-child(2) { color: #FF5A1F !important; }
     /* Nir 11-28: the LED look only on the cover and the weights carousel; the type testers stay plain */
-    body.fx-led .cover-title, body.fx-led .marquee-container {
+    body.fx-led .cover-title, body.fx-led .multilingual-marquee:not(.image-marquee) .marquee-container {
       text-shadow: 0 0 12px rgba(255, 90, 31, .55);
       /* 3 diodes per letter pixel: --diode and --diode-pos are measured by LED_JS from the letters themselves
          (a Techno pixel is 154 units of 1500); the cover grid sits on the TECHNO baseline and the edge of its T */
@@ -182,7 +201,7 @@
       mask: radial-gradient(circle at center, #000 44%, transparent 48%) var(--diode-pos, 0 0) / var(--diode, 4px) var(--diode, 4px);
     }
     /* LED GLOW OFF: the same diode grid, unlit (dark dots on the orange sign), no glow */
-    body.fx-off .cover-title, body.fx-off .marquee-container {
+    body.fx-off .cover-title, body.fx-off .multilingual-marquee:not(.image-marquee) .marquee-container {
       -webkit-mask: radial-gradient(circle at center, #000 44%, transparent 48%) var(--diode-pos, 0 0) / var(--diode, 4px) var(--diode, 4px);
       mask: radial-gradient(circle at center, #000 44%, transparent 48%) var(--diode-pos, 0 0) / var(--diode, 4px) var(--diode, 4px);
     }
