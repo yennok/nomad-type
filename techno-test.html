@@ -120,6 +120,8 @@
     /* The button. 44px tap target; the circle is drawn inside it (30px, 36px on a phone). The negative margin keeps
        the bar at its own height, so the Trial and Buy buttons do not stretch, and the side margin equals the inset,
        so the gap between Buy and the drawn circle is the bar's own gap, same as Trial to Buy (Nir 11-27). */
+    /* Nir 11-28: tapping the circle fast zoomed the phone screen in. No double-tap zoom on this page (pinch zoom still works). */
+    html, .color-dots button, .cover-buttons .btn { touch-action: manipulation; }
     .color-dots { display: flex; align-items: center; flex: none; }
     .color-dots button { width: 44px; height: 44px; margin: -6px -7px; padding: 0; border: 0; border-radius: 50%; background: none;
       cursor: pointer; position: relative; -webkit-tap-highlight-color: transparent; }
